@@ -1,0 +1,147 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}
+    Accueil
+{% endblock %}
+
+{% block body %}
+<div class="cr">
+    <div class="ct">
+        <div class="mg_v10 mg_h5 home_info">
+            <div class="home_sl_info">
+                <div class="home_item_ct">
+                    <div class="mg_10">
+                        <div class="illustration">
+                            <a class="link" href="{{ path('school_home') }}"><img src="{{ asset('image/logo_sl.png')  }}" /></a>
+                        </div>
+                        <div class="label">
+                            <div style="">
+                                <a class="link" href="{{ path('school_home') }}">{{ allSchools | length }} établissements</a> repartis sur <a href="{{ path('school_categories') }}">{{ allCategories | length }} catégories</a>
+                            </div>
+                            <div style="">
+                                {{ evaluatedSchools | length }} établissements évalués - {{ allEvaluations | length }} évaluations
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--
+            --><div class="home_pm_info">
+                <div class="home_item_ct">
+                    <div class="mg_10">
+                        <div class="illustration">
+                            <a class="link" href="{{ path('blog') }}"><img src="{{ asset('image/icon_gl.png')  }}" /></a>
+                        </div>
+                        <div class="label">
+                            <div style="">
+                                {% set posts = getValidPosts() %}
+                                <a href="{{ path('blog') }}">{{ posts | length }} articles déjà publiés.</a>
+                            </div>
+                            <div style="">
+                                Et beaucoup d'autres à publier dans le futur.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--
+            --><div class="home_fm_info">
+                <div class="home_item_ct">
+                    <div class="mg_10">
+                        <div class="illustration">
+                            <img src="{{ asset('image/icon_user_gl.png')  }}" />
+                        </div>
+                        <div class="label">
+                            <div style="">
+                                {% set users = getActiveUsers() %}
+                                {{ users | length }} utilisateurs toujours prêts à partager leur expériences -
+                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                    <a href="{{ path('user_profile', {'username': app.user.username}) }}">Mon espace client</a>
+                                {% else %}
+                                    <a href="{{ path("user_login") }}">Mon espace client</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="both"></div>
+        </div>
+    </div>
+</div>
+
+<div class="cr">
+    <div class="ct">
+        <div style="margin:20px 10px; font-size:16px;text-align:justify">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci alias, aliquid animi architecto assumenda beatae blanditiis commodi consequatur debitis deserunt distinctio eligendi enim explicabo facilis illum incidunt nam natus nemo neque nostrum nulla optio placeat porro quaerat quam quasi quibusdam quos reiciendis repellat suscipit vel vero voluptatum? Aperiam commodi cum cumque deserunt facilis ipsa maxime, natus neque non possimus repellat repudiandae sed suscipit? Accusantium autem commodi debitis magnam obcaecati reprehenderit ut. Architecto dicta doloremque facere minima velit.
+        </div>
+    </div>
+</div>
+
+{# twig extension #}
+{% set school = getSchoolOfTheDay() %}
+{% if school %}
+    <div class="cr">
+        <div class="ct">
+            <div id="sl_oftheday_title">
+                <span>L'établissement du jour</span>
+            </div>
+            <div id="sl_oftheday_desc">
+                {{ school.shortDescription }}
+            </div>
+            <div id="sl_oftheday_wrap">
+                {{ include("school/include/school_of_the_day.html.twig") }}
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+<div class="cr">
+    <div class="ct">
+        <div style="margin:20px 10px; font-size:16px;text-align:justify">
+            Excogitatum est super his, ut homines quidam ignoti, vilitate ipsa parum cavendi ad colligendos rumores per Antiochiae latera cuncta destinarentur relaturi quae audirent. hi peragranter et dissimulanter honoratorum circulis adsistendo pervadendoque divites domus egentium habitu quicquid noscere poterant vel audire latenter intromissi per posticas in regiam nuntiabant, id observantes conspiratione concordi, ut fingerent quaedam et cognita duplicarent in peius, laudes vero supprimerent Caesaris, quas invitis conpluribus formido malorum inpendentium exprimebat.
+        </div>
+    </div>
+</div>
+
+{#last added schools#}
+{# twig extension #}
+{% set lastAddedSchools = getLastAddedSchools(5) %}
+{% if lastAddedSchools %}
+    <div class="cr">
+        <div class="ct">
+            <div style="margin:10px;font-weight:bold; background:#eee; border:1px solid #ddd; padding:5px">
+                Les nouveaux établissements sur la plateforme.
+            </div>
+            <div class="sl_related" style="text-align:center;"><!--
+                {% for school in lastAddedSchools %}
+                    -->{{ include("school/school_item.html.twig") }}<!--
+                {% endfor %}
+            --></div>
+        </div>
+    </div>
+{% endif %}
+
+
+<div class="cr">
+    <div class="ct">
+        <div style="margin:20px 10px; font-size:16px;text-align:justify">
+            Excogitatum est super his, ut homines quidam ignoti, vilitate ipsa parum cavendi ad colligendos rumores per Antiochiae latera cuncta destinarentur relaturi quae audirent. hi peragranter et dissimulanter honoratorum circulis adsistendo pervadendoque divites domus egentium habitu quicquid noscere poterant vel audire latenter intromissi per posticas in regiam nuntiabant, id observantes conspiratione concordi, ut fingerent quaedam et cognita duplicarent in peius, laudes vero supprimerent Caesaris, quas invitis conpluribus formido malorum inpendentium exprimebat.
+        </div>
+    </div>
+</div>
+
+<div class="cr">
+    <div class="ct">
+        <div style="margin:20px 0px;">
+            <div class="sl_list_cat">
+                {% for category in categories %}
+                    {{ include("school/include/school_category_item.html.twig") }}
+                {% endfor %}
+                <div class="both"></div>
+                <div style="text-align:center; margin:10px 0">
+                    <a href="{{ path('school_categories') }}" class="standar_button">Afficher toute les catégories</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

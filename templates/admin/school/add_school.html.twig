@@ -1,0 +1,76 @@
+{% extends "back.html.twig" %}
+
+{% block title %}
+  Ajout d'un nouvel établissement
+{% endblock %}
+
+{% block body_header %}
+	<div class="bc">
+		<span class="bc1"><a href="{{ path('admin_school') }}"><img src="{{ asset('image/sl_icon.png') }}" style="width:14px; height:auto" /> <span>Etablissements</span></a> </span>
+		<span class="dd">
+			<span href="#" class="dd_src">
+				<span class="bcdd"></span>
+			</span>
+			{{ include("admin/school/include/school_principal_action.html.twig") }}
+		</span> 
+		<span class="bc1"><a href="{{ path('admin_school_add') }}">Nouvel établissement</a></span>
+	</div>
+	<div style="padding:8px;float:right">
+		<span><a href="{{ path('admin_school_add') }}"><img src="{{ asset('image/add_icon.png') }}" /> <span>Nouvel établissement</span></a></span>
+	</div>
+{% endblock %}
+
+{% block content_body %}
+	<div style="background:#ddd; padding: 5px; margin:5px; border:1px solid #bbb">
+		Ajout d'un nouvel établissement
+	</div>
+	
+	<div style="padding:5px">
+	<div style="margin: 10px 0">
+		Nam ultrices nibh sapien, vel cursus leo tempus eu. Curabitur laoreet varius malesuada. Nullam lacinia felis nisi, ut varius ipsum luctus non. Pellentesque ex magna, euismod sit amet ultricies consequat, eleifend eu purus. Nullam odio nisl, accumsan tristique elit sit amet, finibus rhoncus ipsum. Nunc ultricies ac arcu vitae elementum. 
+	</div>
+	<div class="">
+
+		{#
+        {{ form_start(formInitSchool) }}
+        {{ form_widget(formInitSchool) }}
+        {{ form_end(formInitSchool) }}
+		#}
+
+		<form name="" method="post">
+
+			<div>                
+				<div><label for="name" class="required">Nom de l'établissement * : </label></div>
+				<div><input type="text" id="name" name="name" required="required"  class="default_input" /></div>
+			</div>
+			
+			<div>
+				<div><label for="shortName" class="required">Sigle : </label></div>
+				<div><input type="text" id="shortName" name="shortName" required="required" class="default_input"  /></div>
+			</div>
+			<div>
+				<div><label class="required" for="password_first">Type de l'établissement :</label></div>
+				<div>
+					<span>
+						<input id="typepublic" name="typeId" value="1" type="radio">
+						<label class="" for="typepublic">Publique</label>
+					</span>
+					<span>
+						<input id="typeprivate" name="typeId" value="2" type="radio" checked>
+						<label class="" for="typeprivate">Privé</label>
+					</span>
+				</div>
+			</div>
+			
+			<div style="padding:10px 0">
+				<button type="submit" id="ajouter" name="add" class="standar_button">Ajouter</button>
+			</div>
+		</form>
+
+	</div>
+	<div style="margin: 10px 0">
+		Sed non erat in neque mollis ultricies. Nam ultrices nibh sapien, vel cursus leo tempus eu. Curabitur laoreet varius malesuada. Nullam lacinia felis nisi, ut varius ipsum luctus non. Pellentesque ex magna, euismod sit amet ultricies consequat, eleifend eu purus. Nullam odio nisl, accumsan tristique elit sit amet, finibus rhoncus ipsum. Nunc ultricies ac arcu vitae elementum. 
+	</div>
+	</div>
+{% endblock %}
+

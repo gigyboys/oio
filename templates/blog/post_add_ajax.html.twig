@@ -1,0 +1,35 @@
+<div style="background:#fff;">
+	<div style="border-bottom:1px solid #ddd; padding: 10px;  height:24px; ">
+		<div style="float:left">
+			Je crée mon article
+		</div>
+		<div style="float:right;cursor: pointer; " class="button_closable">
+			<img src="{{ asset('image/close_icon.png') }}" style="width:16px; height:auto" alt="x" />
+		</div>
+	</div>
+
+	<form name="form_add_post" method="post" action="{{ path('blog_manager_doadd_post') }}">
+		<div style="background:#fff; padding: 5px; ">
+			<div style="padding:5px">
+				<div style="margin: 5px 0">
+					Nam ultrices nibh sapien, vel cursus leo tempus eu. Curabitur laoreet varius malesuada. Nullam lacinia felis nisi, ut varius ipsum luctus non.
+				</div>
+				<div class="">
+					<div>
+						<div><label for="title" class="required">Titre * : </label></div>
+						<div><input type="text" id="title" name="title" required pattern=".*\S+.*" title="Ce champ est requis" class="default_input" /></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div style="border-top:1px solid #ddd;">
+			<div style="padding:10px; text-align:right">
+				<span class="standar_button button_closable">Annuller</span>
+				<button type="submit" id="add" name="add" class="standar_button">Creer mon article</button>
+				{#
+				<span id="add_field_ajax_btn_submit" class="standar_button" onclick="javascript:document.form_add_post.submit()">{{ 'Creer' | trans }}</span>
+				#}
+			</div>
+		</div>
+	</form>
+</div>

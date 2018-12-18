@@ -1,0 +1,27 @@
+<div style="background:#fff;">
+	<div style="border-bottom:1px solid #ddd; padding: 10px;  height:24px; ">
+		<div style="float:left">
+			Je crée mon article
+		</div>
+		<div style="float:right;cursor: pointer; " class="button_closable">
+			<img src="{{ asset('image/close_icon.png') }}" style="width:16px; height:auto" alt="x" />
+		</div>
+	</div>
+	
+	<div style="background:#fff; padding: 5px; ">
+		<div style="padding:5px">
+			<div style="margin: 5px 0">
+				Nam ultrices nibh sapien, vel cursus leo tempus eu. Curabitur laoreet varius malesuada. Nullam lacinia felis nisi, ut varius ipsum luctus non.
+			</div>
+			<div class="">
+				Nam ultrices nibh sapien, vel cursus leo tempus eu. Curabitur laoreet varius malesuada. Nullam lacinia felis nisi, ut varius ipsum luctus non.
+
+			</div>
+		</div>
+	</div>
+	<div class="sep"></div>
+	<div class="taright pd_b10 pd_r10">
+		<span class="standar_button button_closable">Annuller</span>
+		<a class="standar_button" href="{{ path('blog_manager_dotovalid_post', {'post_id' : post.id}) }}">Confirmer la soumission</a>
+	</div>
+</div>

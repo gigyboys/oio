@@ -1,0 +1,34 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}
+	Etablissement du jour
+{% endblock %}
+
+{% block body %}
+	<div class="cr">
+		<div class="ct">
+            {% if school %}
+				<h1 id="sl_oftheday_title" class="taleft">
+					<span>L'établissement du jour : <a href="{{ path("school_view", {'slug' : school.slug}) }}" alt="{{ school.shortName }} - {{ school.name }}">{{ school.shortName }} - {{ school.name }}</a></span>
+				</h1>
+                {#
+                <div class="mg_10"><div class="sep"></div></div>
+                <div class="mg_10" style="text-align: justify">
+                    {{ school.shortDescription }}
+                </div>
+                #}
+				<div id="sl_oftheday_wrap">
+					{{ include("school/include/school_of_the_day.html.twig") }}
+				</div>
+				<div class="mg_10" style="text-align: justify">
+                    {{ school.shortDescription }}
+				</div>
+                {#
+                <div class="mg_10">
+                    {{ school.description | raw }}
+                </div>
+                #}
+            {% endif %}
+		</div>
+	</div>
+{% endblock %}

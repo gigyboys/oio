@@ -1,0 +1,50 @@
+{% extends "back.html.twig" %}
+
+{% block title %}
+  Ajout d'un nouvel article
+{% endblock %}
+
+{% block body_header %}
+	<div class="bc">
+		<span class="bc1"><a href="{{ path('admin_blog_post') }}"><img src="{{ asset('image/bg_icon.png') }}" style="width:14px; height:auto" /> <span>{{ 'Blog' | trans }}</span></a> </span>
+		<span class="dd">
+			<span href="#" class="dd_src">
+				<span class="bcdd"></span>
+			</span>
+            {{ include("admin/blog/include/blog_principal_action.html.twig") }}
+		</span>
+		<span class="bc1"><a href="{{ path('admin_blog_post_add') }}">Ajout d'un article</a></span>
+	</div>
+	<div style="padding:8px;float:right">
+		<span><a href="{{ path('admin_blog_post_add') }}"><img src="{{ asset('image/add_icon.png') }}" /> <span>Nouvel Article</span></a></span>
+	</div>
+{% endblock %}
+
+{% block content_body %}
+	<div style="background:#ddd; padding: 5px; margin:5px; border:1px solid #bbb">
+		Ajout d'un article
+	</div>
+	
+	<div style="padding:5px">
+	<div style="margin: 10px 0">
+		Nam ultrices nibh sapien, vel cursus leo tempus eu. Curabitur laoreet varius malesuada. Nullam lacinia felis nisi, ut varius ipsum luctus non. Pellentesque ex magna, euismod sit amet ultricies consequat, eleifend eu purus. Nullam odio nisl, accumsan tristique elit sit amet, finibus rhoncus ipsum. Nunc ultricies ac arcu vitae elementum. 
+	</div>
+	<div class="">
+		<form name="" method="post">
+
+			<div>                
+				<div><label for="defaultTitle" class="required">Titre * : </label></div>
+				<div><input type="text" id="title" name="title" required="required"  class="default_input" /></div>
+			</div>
+			
+			<div style="padding:10px 0">
+				<button type="submit" id="ajouter" name="add" class="standar_button">{{ 'Ajouter' | trans }}</button>
+			</div>
+		</form>
+	</div>
+	<div style="margin: 10px 0">
+		Sed non erat in neque mollis ultricies. Nam ultrices nibh sapien, vel cursus leo tempus eu. Curabitur laoreet varius malesuada. Nullam lacinia felis nisi, ut varius ipsum luctus non. Pellentesque ex magna, euismod sit amet ultricies consequat, eleifend eu purus. Nullam odio nisl, accumsan tristique elit sit amet, finibus rhoncus ipsum. Nunc ultricies ac arcu vitae elementum. 
+	</div>
+	</div>
+{% endblock %}
+

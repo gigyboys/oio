@@ -1,0 +1,22 @@
+<div data-commentid="{{ comment.id }}" class="fm_msg_item">
+	<div style="margin:10px;">
+		<div class="topic_illustration" style="float:left; width:60px">
+			{% set avatar = userAvatar(comment.user) %}
+			
+			<img style="width: 60px; height: 60px; border-radius: 50%" src="{{ avatar | imagine_filter('60x60') }}" alt="{{ comment.user.username }}" />
+		</div>
+		<div style="margin-left:70px">
+			<div>
+				{# twig extension #}
+				{% set userInfo = getLinkUserInfo(comment.user, comment.user.name) %}
+				Ecrit par {{ userInfo | raw }}
+				  Le {{ comment.date | date('Y-m-d à H:i:s') }}
+			</div>
+			<div>
+				{{ comment.comment | nl2br   }}
+			</div>
+		</div>
+		<div class="both"></div>
+	</div>
+	<div class="sp mg_v10"></div>
+</div>

@@ -1,0 +1,69 @@
+{% extends "front.html.twig" %}
+
+{% block title %}
+    Contacter l'équipe oio
+{% endblock %}
+
+
+{% block body %}
+    <div class="cr">
+        <div class="ct">
+            <div class="mg_h10">
+                <div class="label_title">
+                    <span style="font-weight:bold">Contacter l'équipe {{ dns }}</span>
+                </div>
+                <div class="pm_bloc">
+                    <div class="pm_form">
+
+                        {#
+                        {{ form_start(formContact) }}
+                        {{ form_widget(formContact) }}
+                        {{ form_end(formContact) }}
+                        #}
+
+
+                        <form name="" method="post" action="" id="form-inscription">
+                            <div class="pm_form_wrap">
+                                {% if msg %}
+                                    <div>{{ msg | raw }}</div>
+                                {% endif %}
+
+                                <div class="mg_b5">
+                                    <div><label for="name" class="required">Nom *:</label></div>
+                                    <div><input type="text" id="name" name="name" required="required" value="{{ contact.name }}" class="default_input" /></div>
+                                </div>
+
+                                <div class="mg_b5">
+                                    <div><label for="email" class="required">Email *:</label></div>
+                                    <div><input type="email" id="email" name="email" required="required" value="{{ contact.email }}" class="default_input" /></div>
+                                </div>
+
+                                <div class="mg_b5">
+                                    <div><label for="contact_phone" class="required">Téléphone *:</label></div>
+                                    <div><input type="text" id="phone" name="phone" required="required" value="{{ contact.phone }}" class="default_input" /></div>
+                                </div>
+
+                                <div class="mg_b5">
+                                    <div><label for="message" class="required">Votre message *:</label></div>
+                                    <div><textarea id="message" class="default_textarea_2" name="message"  required="required">{{ contact.message }}</textarea></div>
+                                </div>
+                                <div style="margin-top : 10px">
+                                    <button type="submit" id="Inscription" name="Envoyer" class="standar_button">{{ 'Envoyer' | trans }}</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="pm_desc">
+                        <h1>
+                            Duplexque isdem diebus acciderat malum lorem ipsum?
+                        </h1>
+                        <p>Vivamus purus erat, lobortis et turpis ut, blandit egestas eros. Aliquam non nisi a felis sodales rutrum. Vivamus eget scelerisque nibh. </p>
+                        <p>Nulla pulvinar a velit sit amet aliquet. Aliquam erat volutpat. Suspendisse molestie rhoncus velit a elementum. Maecenas eleifend, lectus sit amet cursus porttitor, metus turpis luctus mauris, sit amet convallis felis turpis eget neque. Vestibulum metus nulla, tincidunt in convallis vel, molestie at orci. Ut aliquet volutpat rhoncus.</p>
+                    </div>
+                </div>
+                <div class="both"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

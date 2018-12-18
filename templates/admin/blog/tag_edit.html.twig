@@ -1,0 +1,93 @@
+{% extends "back.html.twig" %}
+
+{% block title %}
+	Edition du tag {{ tag.name }}
+{% endblock %}
+
+{% block body_header %}
+	<div class="bc">
+		<span class="bc1"><a href="{{ path('admin_blog_post') }}"><img src="{{ asset('image/bg_icon.png') }}" style="width:14px; height:auto" /> <span>Blog</span></a> </span>
+		<span class="dd">
+			<span href="#" class="dd_src">
+				<span class="bcdd"></span>
+			</span>
+            {{ include("admin/blog/include/blog_principal_action.html.twig") }}
+		</span>
+		<span class="bc1"><a href="{{ path('admin_blog_tags') }}">Tags</a></span>
+		<span class="dd">
+			<span href="#" class="dd_src">
+				<span class="bcdd"></span>
+			</span>
+			<span class="dd_target dd_tdfault">
+				<a class="link dd_item" href="{{ path('admin_blog_tag_add') }}">
+					<span class="icon"><img src="{{ asset('image/add_icon.png') }}" /></span><span class="label">Nouveau tag</span>
+				</a>
+			</span>
+		</span>
+		<span class="bc1"><a href="{{ path('admin_blog_tag_edit', {'tag_id' :  tag.id}) }}">{{ tag.name }}</a></span>
+	</div>
+	<div style="padding:8px; float:right">
+		<div style="float:left">
+
+		</div>
+	</div>
+{% endblock %}
+
+{% block content_body %}
+	<div style="background:#ddd; padding: 5px; margin:5px; border:1px solid #bbb">
+		Edition du tag <strong>{{ tag.name }}</strong>
+	</div>
+
+	<div style="padding:5px">
+		<div style="">
+			<div class="bloc_editable">
+				<div class="bloc_view">
+					<table style="width: 100%">
+						<tr>
+							<td style="width: 0.1%">Nom</td>
+							<td style="width: 0.1%">:</td>
+							<td style="padding:5px"><span id="bgtag_view_name">{{ tag.name }}</span></td>
+						</tr>
+						<tr>
+							<td>Slug</td>
+							<td>:</td>
+							<td style="padding:5px"><span id="bgtag_view_slug">{{ tag.slug }}</span></td>
+						</tr>
+					</table>
+				</div>
+				<div class="bloc_edit" style="display:none">
+					<table style="width: 100%">
+						<tr>
+							<td style="width: 0.1%">Nom</td>
+							<td style="width: 0.1%">:</td>
+							<td style="padding:5px"><input type="text" id="bgtag_input_name" class="default_input" value="{{ tag.name }}" /></td>
+						</tr>
+						<tr>
+							<td>Slug</td>
+							<td>:</td>
+							<td style="padding:5px"><input type="text" id="bgtag_input_slug" class="default_input" value="{{ tag.slug }}" /></td>
+						</tr>
+					</table>
+				</div>
+				<div class="separator"></div>
+				<div class="bloc_action" style="margin:5px">
+					<span class="btn_edit standar_button">Modifier</span>
+					<span class="btn_save standar_button" id="btn_doedit_tag" data-target="{{ path('admin_blog_tag_doedit', {'tag_id': tag.id}) }}" style="display:none">Enregistrer</span>
+					<span class="btn_reset standar_button" style="display:none">Annuler</span>
+					<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;"><img src="{{ asset('image/load.gif') }}" />Chargement...</span>
+				</div>
+			</div>
+		</div>
+		<div class="both"></div>
+	</div>
+{% endblock %}
+
+{% block body_footer %}
+	<span style="display:inline-block; margin-top:6px; margin-left:6px">
+		{#
+		{% set schools = getAllSchoolByCategory(category) %}
+        {{ schools | length }} Tags
+        #}
+	</span>
+{% endblock %}
+

@@ -1,0 +1,68 @@
+
+{#
+<div style="background: #fff">
+	<div class="pd_10">
+		<form name="" action="{{ path('user_login_ajax_check') }}" method="post" id="form_login_ajax">
+			<div class="pm_form_wrap">
+				<div>
+					<div><label for="username" class="required">Email :</label></div>
+					<div><input type="email" id="username" name="_username" required="required" value="{{ last_username }}" class="default_input" /></div>
+				</div>
+
+				<div>
+					<div><label for="password" class="required">Mot de passe :</label></div>
+					<div><input type="password" id="password" name="_password" required="required" class="default_input" /></div>
+				</div>
+
+				<div style="margin-top : 10px">
+					<button type="submit" id="Inscription" name="Inscription" class="standar_button">{{ 'connexion' | trans }}</button>
+				</div>
+				{% if error %}
+					<div style="color:#d55;font-weight:bold;margin:10px 0">Verifiez bien votre email ou mot de passe.</div>
+				{% endif %}
+				{% if msgActivation is defined %}
+					<div class="mg_10"><strong>{{ msgActivation | raw }}</strong></div>
+				{% endif %}
+				<div class="mg_v10">
+					 <a href="{{ path('user_set_new_password') }}">Vous avez oubliez votre mot de passe?</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+#}
+
+<div style="background:#fff;">
+	<div style="border-bottom:1px solid #ddd; padding: 10px;  height:24px; ">
+		<div style="float:left">
+			Connexion
+		</div>
+		<div style="float:right;cursor: pointer; " class="button_closable">
+			<img src="{{ asset('image/close_icon.png') }}" style="width:16px; height:auto" alt="x" />
+		</div>
+	</div>
+
+	<form action="{{ path('user_login_ajax_check') }}" method="post" id="form_login_ajax">
+		<div style="background:#fff; padding: 5px; ">
+			<div style="padding:5px">
+				<div class="">
+					<div>
+						<div><label for="username" class="required">Pseudo ou Email *:</label></div>
+						<div><input type="text" id="username" name="_username" required="required" value="{{ last_username }}" class="default_input" /></div>
+					</div>
+					<div>
+						<div><label for="password" class="required">Mot de passe *:</label></div>
+						<div><input type="password" id="password" name="_password" required="required" class="default_input" /></div>
+					</div>
+				</div>
+			</div>
+			<div id="login_msg" class="mg_5"></div>
+		</div>
+		<div style="border-top:1px solid #ddd;">
+			<div style="padding:10px; text-align:right">
+				<span class="standar_button button_closable">Annuller</span>
+				<button type="submit" id="login" name="login" class="standar_button">Connexion</button>
+			</div>
+		</div>
+	</form>
+</div>

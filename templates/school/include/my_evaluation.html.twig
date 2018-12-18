@@ -1,0 +1,82 @@
+<form action="" name="" method="post" id="">
+	{% if myEvaluation %}
+		<div class="bloc_editable">
+			<div class="bloc_view">
+				{% set evaluation = myEvaluation %}
+				{{ include("school/include/evaluation_item.html.twig") }}
+			</div>
+			<div class="bloc_edit" style="display:none">
+				<div class="mg_b5">
+				{{ app.user.name }} :
+				</div>
+				<div style="width:50px;float:left">
+					{% set avatar = userAvatar(app.user) %}
+					<span style="display:block;float:left;width:32px"><img style="width:50px; height: 50px; border-radius: 50%" src="{{ avatar | imagine_filter('50x50') }}" alt="{{ app.user.username }}" /></span>
+				</div>
+				<div style="margin-left:60px">
+					<div class="pd_v5">
+						<div style="float:left; padding-top:2px">Notes : </div>
+						
+						{% set mark = evaluation.mark/20 %}
+						{% for i in 1..5 %}
+							{% set markTmp = i*20 %}
+							{% if i <= mark %}
+								<div class="left pd_5"><div class="eval_star_item selected" data-value="{{ markTmp }}"></div></div>
+							{% else %}
+								<div class="left pd_5"><div class="eval_star_item" data-value="{{ markTmp }}"></div></div>
+							{% endif %}
+						{% endfor %}
+						
+						<input type="hidden" id="sl_evaluation_mark" class="" value="80" />
+					</div>
+					<textarea class="default_textarea" id="sl_evaluation_comment" placeholder="Votre commentaire" style="min-height:60px">{{ evaluation.comment }}</textarea>
+					<div id="add_evaluation_error"></div>
+				</div>
+				<div class="both"></div>
+			</div>
+			<div class="bloc_action" style="margin-top:5px; border:1px solid transparent">
+				<span class="btn_edit standar_button">Modifier</span> 
+				<span class="btn_save standar_button" id="btn_eval_sl" data-target="{{ path('school_add_evaluation', {'id': school.id}) }}" style="display:none">Evaluer</span>
+				<span class="btn_reset standar_button" style="display:none">Annuler</span> 
+				<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;">Chargement...</span> 
+			</div>
+		</div>
+	{% else %}
+		<div class="bloc_editable">
+			<div class="sep"></div>
+			<div class="bloc_view">
+				Vous n'avez pas encore donner votre évaluation sur cet établissement
+			</div>
+			<div class="bloc_edit" style="display:none">
+				<div class="mg_b5">
+				{{ app.user.name }} :
+				</div>
+				<div style="width:50px;float:left">
+					{% set avatar = userAvatar(app.user) %}
+					<span style="display:block;float:left;width:32px"><img style="width:50px; height: 50px; border-radius: 50%" src="{{ avatar | imagine_filter('50x50') }}" alt="{{ app.user.username }}" /></span>
+				</div>
+				<div style="margin-left:60px">
+					<div class="pd_v5">
+						<div style="float:left; padding-top:2px">Notes : </div>
+						<div class="left pd_5"><div class="eval_star_item selected" data-value="20"></div></div>
+						<div class="left pd_5"><div class="eval_star_item selected" data-value="40"></div></div>
+						<div class="left pd_5"><div class="eval_star_item selected" data-value="60"></div></div>
+						<div class="left pd_5"><div class="eval_star_item selected" data-value="80"></div></div>
+						<div class="left pd_5"><div class="eval_star_item" data-value="100"></div></div>
+						<input type="hidden" id="sl_evaluation_mark" class="" value="80" />
+					</div>
+					<textarea class="default_textarea" id="sl_evaluation_comment" placeholder="Votre commentaire" style="min-height:60px"></textarea>
+					<div id="add_evaluation_error"></div>
+				</div>
+				<div class="both"></div>
+			</div>
+			<div class="bloc_action" style="margin-top:5px; border:1px solid transparent">
+				<span class="btn_edit standar_button">Je donne mon évaluation</span> 
+				<span class="btn_save standar_button" id="btn_eval_sl" data-target="{{ path('school_add_evaluation', {'id': school.id}) }}" style="display:none">Evaluer</span>
+				<span class="btn_reset standar_button" style="display:none">Annuler</span> 
+				<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;">Chargement...</span> 
+			</div>
+		</div>
+		<div class="both"></div>
+	{% endif %}
+</form>

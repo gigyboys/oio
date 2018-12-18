@@ -1,0 +1,202 @@
+<div id="navigation" class="cr">
+    <div id="navigation_content" class="ct">
+        <div id="" class="ct10">
+            <div id="nav_left">
+                <ul>
+                    <li>
+                        <a href="{{ path('platform_home') }}" title="{{ dns }}">
+                            <img src="{{ asset('image/oio.svg') }}" style="width:24px; height:24px;display: inline-block; vertical-align: middle;" />
+                        </a>
+                    </li>
+                    <li>
+                        <div class="dd nav_responsive">
+                            <span href="#" class="dd_src" style="cursor: pointer">
+                                <img src="{{ asset('image/sl_logo_nav.png')  }}" style="display: inline-block;width: 20px; height: 20px; margin-top: -3px" />
+                            </span>
+                            <div class="dd_target" data-display="block" id="locale_choice">
+                                <div class="link_wrap">
+                                    <a class="link" href="{{ path('school_home') }}" title="Tous établissements">
+                                        <span>Tout Etablissements</span>
+                                    </a>
+                                    <a class="link" href="{{ path('school_home', {'typeslug':'private'}) }}" title="Etablissements privés">
+                                        <span>Etablissements privés</span>
+                                    </a>
+                                    <a class="link" href="{{ path('school_home', {'typeslug':'public'}) }}" title="Etablissements publics">
+                                        <span>Etablissements publics</span>
+                                    </a>
+                                    <a class="link" href="{{ path('school_categories') }}" title="Les catégories d'établissements">
+                                        <span>Catégories</span>
+                                    </a>
+                                    <a class="link" href="{{ path('school_of_the_day') }}" title="Etablissement du jour">
+                                        <span>Etablissement du jour</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dd nav_responsive">
+                            <span href="#" class="dd_src" style="cursor: pointer">
+                                <span class="normal"></span>
+                                <span class="transparent"></span>
+                                <span class="normal"></span>
+                                <span class="transparent"></span>
+                                <span class="normal"></span>
+                            </span>
+                            <div class="dd_target" data-display="block" id="locale_choice">
+                                <div class="link_wrap">
+                                    <a class="link" href="{{ path('blog') }}">
+                                        <span>Blog</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="nav_not_responsive">
+                    <li class="dd">
+                        <a href="{{ path('school_home') }}" class="dd_src">
+                            <span style="display: inline-block; vertical-align: middle;">Etablissements</span>
+                        </a>
+                        <div class="dd_target" data-display="block" style="display: none;position: absolute;background: #fff;border: 1px solid #aaa;">
+                            <div class="link_wrap">
+                                <a class="link" href="{{ path('school_home') }}" title="Tous établissements">
+                                    <span>Tout Etablissements</span>
+                                </a>
+                                <a class="link" href="{{ path('school_home', {'typeslug':'private'}) }}" title="Etablissements privés">
+                                    <span>Etablissements privés</span>
+                                </a>
+                                <a class="link" href="{{ path('school_home', {'typeslug':'public'}) }}" title="Etablissements publics">
+                                    <span>Etablissements publics</span>
+                                </a>
+                                <a class="link" href="{{ path('school_categories') }}" title="Les catégories d'établissements">
+                                    <span>Catégories</span>
+                                </a>
+                                <a class="link" href="{{ path('school_of_the_day') }}" title="Etablissement du jour">
+                                    <span>Etablissement du jour</span>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    {#
+                    <li>
+                        <a href="{{ path('school_home') }}" class="" title="Les établissements sur la plateforme">
+                            <span style="display: inline-block; vertical-align: middle;">Etablissements</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('school_categories') }}" class="" title="Les catégories d'établissements">
+                            <span style="display: inline-block; vertical-align: middle;">Catégories</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('school_of_the_day') }}" class="" title="Etablissement du jour">
+                            <span style="display: inline-block; vertical-align: middle;">Etablissement du jour</span>
+                        </a>
+                    </li>
+                    #}
+                    <li>
+                        <a href="{{ path('blog') }}" class="">
+                            <span style="display: inline-block; vertical-align: middle;">Blog</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="nav_right">
+                <div id="user">
+                    <div class="dd">
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            {% set avatar = userAvatar(app.user) %}
+                            <div class="dd_src">
+								<span class="connected">
+									<table>
+										<tr>
+											<td class="user_avatar">
+												<span class="wrap">
+													<img id="avatar_banner" style="width:30px; height: 30px" src="{{ avatar | imagine_filter('32x32') }}" alt="{{ app.user.username }}" />
+												</span>
+											</td>
+											<td class="user_name" title="{{ app.user.name }}">
+												<span class="wrap">
+													<span id="nav_src_ur_name">{{ app.user.name }}</span>
+												</span>
+											</td>
+										</tr>
+									</table>
+								</span>
+                            </div>
+                        {% else %}
+                            <div class="dd_src">
+							<span class="not_connected">
+								<img src="{{ asset('image/icon_user_not.png')  }}" style="width:22px; height:22px;display: inline-block; vertical-align: middle;" />
+								<span>Mon espace client</span>
+							</span>
+                            </div>
+                        {% endif %}
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            {% set avatar = userAvatar(app.user) %}
+                            <div class="dd_target connected" data-display="block">
+                                <div id="user_info_header">
+                                    <div class="avatar_wrap">
+                                        <img id="avatar_banner_target" src="{{ avatar | imagine_filter('50x50') }}" alt="{{ app.user.username }}" />
+                                    </div>
+                                    <div class="info_wrap">
+                                        <a class="link" id="ur_profil_link" href="{{ path('user_profile', {'username': app.user.username}) }}">
+                                            <span id="nav_target_ur_username">{{ app.user.username }}</span><br />
+                                            <span id="nav_target_ur_name">{{ app.user.name }}</span><br />
+                                            <span id="nav_target_ur_email">{{ app.user.email }}</span>
+                                        </a>
+                                    </div>
+                                    <div class="both"></div>
+                                </div>
+                                <div class="link_wrap">
+                                    <a class="link" id="ur_setting_link" href="{{ path('user_profile', {'username': app.user.username, 'type': 'setting'}) }}">
+                                        <span>Paramètres</span>
+                                    </a>
+                                </div>
+
+                                <div class="link_wrap">
+                                    <a class="link" id="ur_setting_link" href="{{ path('user_profile', {'username': app.user.username, 'type': 'contribution'}) }}">
+                                        <span>Contributions</span>
+                                    </a>
+                                </div>
+                                <div class="link_wrap">
+                                    <div class="pd_10">
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <a class="link standar_button pd_5" target="_blank" href="{{ path('admin_home') }}" style="padding:5px; display:block; float: left">
+                                                <span>Tableau de bord</span>
+                                            </a>
+                                        {% endif %}
+
+                                        <a class="link standar_button pd_5 mg_r0" href="{{ path('user_logout') }}" style="padding:5px; display:block; float: right; ">
+                                            <span>Déconnexion</span>
+                                        </a>
+                                        <span class="both"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="dd_target not_connected" data-display="block">
+                                <ul>
+                                    <li style="display: block;width: 137px;padding: 5px;">
+                                        <a style='display: block' class="link" href="{{ path("user_login") }}">
+                                            <span> Se connecter </span>
+                                        </a>
+                                    </li>
+                                    <li style="display: block;width: 137px;padding: 5px;">
+                                        <a style='display: block' class="link" href="{{ path('user_register') }}">
+                                            <span> S'inscrire </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="both"></div>
+            </div>
+
+        </div>
+    </div>
+</div>

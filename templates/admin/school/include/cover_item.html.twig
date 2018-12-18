@@ -1,0 +1,4 @@
+<div class="cover_item {{ classActive }}">
+	<span class="delete_cover" data-type="cover" data-target="{{ path('admin_school_delete_cover', {'school_id': school.id, 'cover_id': cover.id}) }}"><img src="{{ asset('image/cross_icon.png') }}" alt="x" style="width:8px;height:8px;display:block;margin:auto"/></span>
+	<img class="cover_popup" data-type="cover" data-target="{{ path('admin_school_select_cover', {'school_id': school.id, 'cover_id': cover.id}) }}" src="{{ cover.webPath | imagine_filter('116x116') }}" alt="" />
+</div>

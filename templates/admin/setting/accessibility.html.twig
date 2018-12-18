@@ -1,0 +1,80 @@
+{% extends "back.html.twig" %}
+
+{% block title %}
+  Paramètres - Accessibilité
+{% endblock %}
+
+{% block body_header %}
+	<div class="bc">
+		<span class="bc1"><a href="{{ path('admin_setting_accessibility') }}"><img src="{{ asset('image/default_icon.png') }}" style="width:14px; height:auto" /> <span>Paramètres</span></a> </span>
+	</div>
+{% endblock %}
+
+{% block content_body %}
+	<div style="background:#ddd; padding: 5px; margin:5px; border:1px solid #bbb">
+		Accessibilité
+	</div>
+		
+	<div style="padding:5px">
+		<div style="">
+			<div class="bloc_editable">
+				<div class="bloc_view">
+					<table>
+						<tr>
+							<td>Nombre de catégories en index</td>
+							<td>:</td>
+							<td style="padding:5px"><span id="sg_view_catindex">{{ categories_index }}</span></td>
+						</tr>
+						<tr>
+							<td>Nombre d'établissements par page</td>
+							<td>:</td>
+							<td style="padding:5px"><span id="sg_view_slbypage">{{ schools_by_page }}</span></td>
+						</tr>
+						<tr>
+							<td>Nombre d'articles par page</td>
+							<td>:</td>
+							<td style="padding:5px"><span id="sg_view_postsbypage">{{ posts_by_page }}</span></td>
+						</tr>
+					</table>
+				</div>
+				<div class="bloc_edit" style="display:none">
+					<table>
+						<tr>
+							<td>Nombre de catégories en index</td>
+							<td>:</td>
+							<td style="padding:5px"><input type="number" id="sg_input_catindex" class="default_input" value="{{ categories_index }}" /></td>
+							<td style="padding:5px">(2-24)</td>
+						</tr>
+						<tr>
+							<td>Nombre d'établissements par page</td>
+							<td>:</td>
+							<td style="padding:5px"><input type="number" id="sg_input_slbypage" class="default_input" value="{{ schools_by_page }}" /></td>
+							<td style="padding:5px">(2-24)</td>
+						</tr>
+						<tr>
+							<td>Nombre d'articles par page</td>
+							<td>:</td>
+							<td style="padding:5px"><input type="number" id="sg_input_postsbypage" class="default_input" value="{{ posts_by_page }}" /></td>
+							<td style="padding:5px">(2-24)</td>
+						</tr>
+					</table>
+				</div>
+				<div class="separator"></div>
+				<div class="bloc_action" style="margin:5px">
+					<span class="btn_edit standar_button">Modifier</span> 
+					<span class="btn_save standar_button" id="btn_save_accessibility" data-target="" style="display:none">Enregistrer</span>
+					<span class="btn_reset standar_button" style="display:none">Annuler</span> 
+					<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;"><img src="{{ asset('image/tail-spin.svg') }}" style="width: 20px; height: auto"/>Chargement...</span>
+				</div>
+			</div>
+		</div>
+		<div class="both"></div>
+	</div>
+{% endblock %}
+
+{% block body_footer %}
+	<div style="padding-top: 8px">
+		Paramètres
+	</div>
+{% endblock %}
+

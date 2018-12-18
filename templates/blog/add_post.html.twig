@@ -1,0 +1,50 @@
+{% extends "front.html.twig" %}
+
+{% block title %}
+  Je crée mon article
+{% endblock %}
+
+
+{% block body %}
+	<div class="cr">
+		<div class="ct">
+			<div class="mg_10">
+				<div class="label_title">
+					<span style="font-weight:bold">Création d'un article</span>
+				</div>
+				<div class="pm_bloc">
+					<div class="pm_form">
+						{% if msg is defined %}
+						<div>{{ msg | raw }}</div>
+						{% endif %}
+						<div class="mg_v10">
+
+                            {{ form_start(form) }}
+							<div class="pm_form_wrap">
+								<div class="mg_b10">
+									<div>{{ form_label(form.title, 'Titre *:') }}</div>
+									<div>{{ form_widget(form.title, { 'attr': {'class': 'default_input'} }) }}</div>
+								</div>
+
+								<div style="margin-top : 10px">
+                                    {{ form_widget(form.add, { 'attr': {'class': 'standar_button'} }) }}
+								</div>
+                                {{ form_widget(form) }}
+							</div>
+                            {{ form_end(form) }}
+						</div>
+					</div>
+					<div class="pm_desc">
+						<h1>
+							Création d'un article
+						</h1>
+						<p>Nam ultrices nibh sapien, vel cursus leo tempus eu. Curabitur laoreet varius malesuada. Nullam lacinia felis nisi, ut varius ipsum luctus non. </p>
+
+					</div>
+					<div class="both"></div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+{% endblock %}

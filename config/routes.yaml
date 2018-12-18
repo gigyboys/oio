@@ -1,0 +1,287 @@
+#lipp route
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.yaml"
+#admin
+admin:
+    resource: routes/admin/routes.yaml
+    prefix: /admin
+#platform
+platform_home:
+    path: /
+    controller: App\Controller\HomeController::index
+platform_about:
+    path:     /about
+    defaults:
+        _controller: App\Controller\AboutController::index
+platform_team:
+    path:     /team
+    defaults:
+        _controller: App\Controller\AboutController::team
+platform_notice:
+    path:     /legal-notice
+    defaults:
+        _controller: App\Controller\AboutController::notice
+
+platform_contact:
+    path:     /contact
+    controller: App\Controller\ContactController::index
+platform_newsletter:
+    path:     /newsletter
+    defaults:
+        _controller: App\Controller\NewsletterController::index
+platform_search:
+    path:     /search/{page}
+    defaults:
+        _controller: App\Controller\SearchController:index
+        page: 1
+platform_search_single_school:
+    path:     /search-single-school
+    defaults:
+        _controller: App\Controller\SearchController:getSingleSchool
+
+#user
+user_login:
+    path:     /login
+    controller: App\Controller\UserController::login
+
+user_login_ajax:
+    path:     /login-ajax
+    controller: App\Controller\UserController::loginAjax
+user_login_ajax_check:
+    path:     /login-ajax-check
+    controller: App\Controller\UserController::loginAjaxCheck
+user_register:
+    path:     /register
+    controller: App\Controller\UserController::register
+user_register_activation:
+    path:     /register/activation/{token}
+    controller: App\Controller\UserController::registerActivation
+user_set_new_password:
+    path:     /set-new-password
+    defaults:
+        _controller: App\Controller\UserController::setNewPassword
+user_set_new_password_token:
+    path:     /set-new-password/{user_id}/{token}
+    defaults:
+        _controller: App\Controller\UserController::sendNewPassword
+
+user_logout:
+    path: /logout
+
+user_edit:
+    path:     /user/edit
+    defaults:
+        _controller: App\Controller\UserController::editUser
+user_modify_biography:
+    path:     /user/modify-biography
+    defaults:
+        _controller: App\Controller\UserController::editUserBiography
+user_modify_password:
+    path:     /user/edit-password
+    defaults:
+         _controller: App\Controller\UserController::editUserPassword
+user_modify_avatar_popup:
+    path:     /user/modify-avatar-popup
+    defaults:
+        _controller: App\Controller\UserController::modifyAvatarPopup
+user_modify_avatar:
+    path:     /user/modify-avatar
+    defaults:
+        _controller: App\Controller\UserController::modifyAvatar
+user_delete_avatar:
+    path:     /user/delete-avatar/{id}
+    defaults:
+        _controller: App\Controller\UserController::deleteAvatar
+user_select_avatar:
+    path:     /user/select-avatar/{id}
+    defaults:
+        _controller: App\Controller\UserController::selectAvatar
+
+user_info_popup:
+    path:     /user/info-popup/{id}
+    defaults:
+        _controller: App\Controller\UserController::infoPopup
+user_profile_byid:
+    path:     /user/id/{user_id}/{type}
+    defaults:
+        _controller: App\Controller\UserController::profileById
+        type: profile
+user_profile:
+    path:     /user/{username}/{type}
+    defaults:
+        _controller: App\Controller\UserController::profile
+        type: profile
+
+#blog_manager
+blog_manager_add_post_ajax:
+    path:     /blog-manager/add-post-ajax
+    defaults:
+        _controller: App\Controller\BlogManagerController::addPostAjax
+blog_manager_doadd_post:
+    path:     /blog-manager/add-post
+    defaults:
+        _controller: App\Controller\BlogManagerController::doAddPost
+blog_manager_edit_post:
+    path:     /blog-manager/edit-post/{post_id}
+    defaults:
+        _controller: App\Controller\BlogManagerController::editPost
+blog_manager_tovalid_post_ajax:
+    path:     /blog-manager/tovalid-post-ajax/{post_id}
+    defaults:
+        _controller: App\Controller\BlogManagerController::ToValidPostAjax
+blog_manager_dotovalid_post:
+    path:     /blog-manager/dotovalid_post/{post_id}
+    defaults:
+        _controller: App\Controller\BlogManagerController::doToValidPost
+blog_manager_post_tags:
+    path:     /blog-manager/edit-post/{post_id}/tags
+    defaults:
+        _controller: App\Controller\BlogManagerController::postTags
+blog_manager_post_toogle_tag:
+    path:     /blog-manager/edit-post/{post_id}/toogle-tag/{tag_id}
+    defaults:
+        _controller: App\Controller\BlogManagerController::toogleTag
+blog_manager_post_schools:
+    path:     /blog-manager/edit-post/{post_id}/schools
+    defaults:
+        _controller: App\Controller\BlogManagerController::postSchools
+blog_manager_post_toogle_school:
+    path:     /blog-manager/edit-post/{post_id}/toogle-school/{school_id}
+    defaults:
+        _controller: App\Controller\BlogManagerController::toogleSchool
+
+blog_manager_post_toogle_show_author:
+    path:     /blog-manager/post/{post_id}/toogle-show-author
+    defaults:
+        _controller: App\Controller\BlogManagerController::toogleShowAuthor
+blog_manager_post_toogle_active_comment:
+    path:     /blog-manager/post/{post_id}/toogle-active-comment
+    defaults:
+        _controller: App\Controller\BlogManagerController::toogleActiveComment
+blog_manager_post_toogle_publication:
+    path:     /blog-manager/post/{post_id}/toogle-publication
+    defaults:
+        _controller: App\Controller\BlogManagerController::tooglePublication
+blog_manager_post_toogle_validation:
+    path:     /blog-manager/post/{post_id}/toogle-validation
+    defaults:
+        _controller: App\Controller\BlogManagerController::toogleValidation
+blog_manager_post_toogle_deletion:
+    path:     /blog-manager/post/{post_id}/toogle-deletion
+    defaults:
+        _controller: App\Controller\BlogManagerController::toogleDeletion
+blog_manager_post_doedit:
+    path:     /blog-manager/post/{post_id}/doedit
+    defaults:
+        _controller: App\Controller\BlogManagerController::doEditPost
+blog_manager_post_doedit_content:
+    path:     /blog-manager/post/{post_id}/doedit-content
+    defaults:
+        _controller: App\Controller\BlogManagerController::doEditContentPost
+blog_manager_post_illustration_popup:
+    path:     /blog-manager/post/{post_id}/edit-illustration-popup
+    defaults:
+        _controller: App\Controller\BlogManagerController::editIllustrationPopup
+blog_manager_post_upload_illustration:
+    path:     /blog-manager/post/{post_id}/upload-illustration
+    defaults:
+        _controller: App\Controller\BlogManagerController::uploadIllustration
+blog_manager_post_select_illustration:
+    path:     /blog-manager/post/{post_id}/select-illustration/{illustration_id}
+    defaults:
+        _controller: App\Controller\BlogManagerController::selectIllustration
+blog_manager_post_delete_illustration:
+    path:     /blog-manager/post/{post_id}/delete-illustration/{illustration_id}
+    defaults:
+        _controller: App\Controller\BlogManagerController::deleteIllustration
+
+#blog
+blog:
+    path:     /blog
+    defaults:
+        _controller: App\Controller\BlogController::index
+blog_post_viewbyid:
+    path:     /blog/id/{id}
+    defaults:
+        _controller: App\Controller\BlogController::viewById
+blog_post_view:
+    path:     /blog/{slug}
+    defaults:
+        _controller: App\Controller\BlogController::view
+blog_load_posts:
+    path:     /blog/load-post/{post_id}
+    defaults:
+        _controller: App\Controller\BlogController::loadPosts
+blog_post_load_comment:
+    path:     /blog/post/{post_id}/load-comment/{comment_id}
+    defaults:
+        _controller: App\Controller\BlogController::loadComments
+blog_post_new_comment:
+    path:     /blog/post/{post_id}/new-comment
+    defaults:
+        _controller: App\Controller\BlogController::newComment
+
+#school
+school_categories:
+    path:     /school/categories
+    defaults:
+        _controller: App\Controller\SchoolController::categories
+school_of_the_day:
+    path:     /school/school-of-the-day
+    defaults:
+        _controller: App\Controller\SchoolController::schoolOfTheDay
+school_category_viewbyid:
+    path:     /school/category/id/{id}
+    defaults:
+        _controller: App\Controller\SchoolController::viewCategoryById
+school_category_view:
+    path:     /school/category/{slug}/{page<\d+>}
+    defaults:
+        _controller: App\Controller\SchoolController::viewCategory
+        page: 1
+
+school_toggle_subscription:
+    path:     /school/{school_id}/toggle-subscription
+    defaults:
+        _controller: App\Controller\SchoolController::toogleSubscription
+
+school_viewbyid:
+    path:     /school/id/{id}
+    defaults:
+        _controller: App\Controller\SchoolController::viewById
+school_home:
+    path:     /school/{typeslug}/{page<\d+>}
+    defaults:
+        _controller: App\Controller\SchoolController::index
+        typeslug: all
+        page: 1
+school_add_evaluation:
+    path:     /add-evaluation/{id}
+    defaults:
+        _controller: App\Controller\SchoolController::addEvaluation
+school_get_map_coordonnees:
+    path:     /{slug}/get-map-coordonnees
+    defaults:
+        _controller: App\Controller\SchoolController::getMapCoordonnees
+school_document_download:
+    path:     /{slug}/download-document/{document_id}
+    defaults:
+        _controller: App\Controller\SchoolController::downloadDocument
+school_document_status:
+    path:     /download-status/{document_id}
+    defaults:
+        _controller: App\Controller\SchoolController::documentStatus
+school_get_map_coordonnees_contact:
+    path:     /{slug}/get-map-coordonnees-contact/{contact_id}
+    defaults:
+        _controller: App\Controller\SchoolController::getMapCoordonneesContact
+school_view:
+    path:     /{slug}/{type}
+    defaults:
+        _controller: App\Controller\SchoolController::view
+        type: about
+platform_404:
+    path:     /{all<(.*)>}
+    defaults:
+        _controller: App\Controller\PlatformController::pageNotFound
+

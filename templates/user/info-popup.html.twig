@@ -1,0 +1,47 @@
+<div style="float:left; width:80px">
+	{% set avatar = userAvatar(user) %}
+	<img style="width: 80px; height: 80px; border-radius: 50%" src="{{ avatar | imagine_filter('80x80') }}" alt="{{ user.username }}" />
+</div>
+<div style="margin-left: 90px">
+	<div style="margin-bottom:2px">
+		<a style="font-weight:bold" class="link" href="{{ path('user_profile_byid', {'user_id': user.id}) }}">
+			{{ user.name }}
+		</a>
+	</div>
+
+	<div style="margin-bottom:2px">
+		<span style="display:inline-block"><img src="{{ asset('image/ur_icon.png')  }}" style="width:12px; height:12px;" /> {{ user.username }}</span>
+		{% if user.location and user.location | trim != "" %}
+			<span style="display:inline-block"><img src="{{ asset('image/location_icon.png')  }}" style="width:12px; height:12px;" /> {{ user.location }}</span>
+		{% endif %}
+	</div>
+	{#
+	<div style="margin-bottom:2px">
+		{% if user.sex == 1 %}
+			Homme
+		{% elseif user.sex == 2 %}
+			Femme
+		{% else %}
+			Sexe indeterminé
+		{% endif %}
+	</div>
+	#}
+	<div>
+		{{ user.email }}
+	</div>
+	<div>
+		Inscrit Depuis {{ user.date | date('Y-m-d') }}
+	</div>
+</div>
+<div class="both"></div>
+
+{% if user.biography is not empty %}
+	<div class="sep mg_v10"></div>
+	<div class="tajustify">
+		{{ substrSpace(user.biography, 300) }}
+	</div>
+{% endif %}
+
+
+
+

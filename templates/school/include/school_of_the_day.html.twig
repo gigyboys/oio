@@ -1,0 +1,40 @@
+<div class="sl_oftheday">
+
+	{% set cover = schoolCover(school) %}
+	<div class="cover_box" style="background: rgba(255, 255, 255, 1) url('{{ cover | imagine_filter('1200x300') }}') no-repeat scroll center center / cover ;">
+	
+		<div class="label">
+			<a title="{{ school.name }}" href="{{ path('school_view', {'slug': school.slug}) }}">
+				{{ school.name }}
+				
+				{% if school.shortName | trim != "" %}
+					<br />
+					{{ school.shortName }}
+				{% endif %}
+			</a>
+		</div>
+	
+	</div>
+	
+	{# twig extension #}
+	{% set logo = schoolLogo(school) %}
+	<div class="logo_box">
+		<img src="{{ logo | imagine_filter('160x160') }}" alt="img sl" />
+	</div>
+	<div class="link_box">
+		<span class="link_item">
+			<a href="{{ path('school_view', {'slug': school.slug, 'type': 'about'}) }}"><img src="{{ logo | imagine_filter('20x20') }}" alt="AU" /></a>
+		</span><!--
+		--><span class="link_item">
+			<a href="{{ path('school_view', {'slug': school.slug, 'type': 'post'}) }}"><img src="{{ asset('image/sl_bg_icon.png') }}" alt="BG" /></a>
+		</span><!--
+		--><span class="link_item">
+			<a href="{{ path('school_view', {'slug': school.slug, 'type': 'evaluation'}) }}"><img src="{{ asset('image/sl_star_icon.png') }}" alt="EV" /></a>
+		</span><!--
+		--><span class="link_item">
+			<a href="{{ path('school_view', {'slug': school.slug, 'type': 'document'}) }}"><img src="{{ asset('image/sl_document_icon.png') }}" alt="DC" /></a>
+		</span>
+	</div>
+	<div class="both"></div>
+	<!--<div class="under"></div>-->
+</div>

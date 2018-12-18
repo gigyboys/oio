@@ -1,0 +1,55 @@
+{% extends "back.html.twig" %}
+
+{% block title %}
+	Aperçu contact {{ contact.id }}
+{% endblock %}
+
+{% block body_header %}
+	<div class="bc">
+		<span class="bc1"><a href="{{ path('admin_platform_contact') }}"><img src="{{ asset('image/sl_contact_icon.png') }}" style="width:14px; height:auto" /> <span>Contacts</span></a></span>
+	</div>
+	<div style="padding:8px;right:0px; position: absolute;">
+		{# right #}
+	</div>
+{% endblock %}
+
+{% block content_body %}
+	<div style="background:#ddd; padding: 5px; margin:5px; border:1px solid #bbb">
+		<div style="float: left">Aperçu contact {{ contact.id }}</div>
+		<div class="both"></div>
+	</div>
+	
+	<div>
+		<table>
+			<tr>
+				<td>Nom</td>
+				<td> : </td>
+				<td>{{ contact.name }}</td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td> : </td>
+				<td>{{ contact.email }}</td>
+			</tr>
+			<tr>
+				<td>Téléphone</td>
+				<td> : </td>
+				<td>{{ contact.phone }}</td>
+			</tr>
+			<tr>
+				<td>Message</td>
+				<td> : </td>
+				<td>{{ contact.message }}</td>
+			</tr>
+		</table>
+	</div>
+{% endblock %}
+
+{% block body_footer %}
+    {#
+    <span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_contacts">{{ contacts | length }}</span> Contacts</span>|
+    <span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_active_users">{{ activeUsers | length }}</span> actifs</span> |
+    <span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_not_active_users">{{ inactiveUsers | length }}</span> non actifs</span>
+    #}
+{% endblock %}
+

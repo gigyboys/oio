@@ -1,0 +1,44 @@
+<div class="sl_item" style="">
+    <div class="sl_header">
+        <div class="sl_logo">
+            {# twig extension #}
+            {% set cover = schoolCover(school) %}
+            <img style="" src="{{ cover | imagine_filter('218x140') }}" alt="img sl" />
+        </div>
+        <div class="sl_category" style="height: 140px;position: absolute;text-align: center;width: 218px;z-index: 4;background:rgba(255,255,255,0.25)">
+            {# twig extension #}
+            {% set categories=getCategoriesBySchool(school, 6, true) %}
+            {% for category in categories %}
+                <div style="width:100%; text-align:right; color:#000;text-shadow: 1px 1px 2px #fff;box-sizing:border-box; padding:0 4px; margin-bottom:1px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ category.name }}</div>
+            {% endfor %}
+        </div>
+        <div class="sl_short_description">
+            {{ substrSpace(school.shortDescription, 165) }}
+        </div>
+    </div>
+    <div class="sl_label">
+        <a title="{{ school.name }}" href="{{ path('school_view', {'slug': school.slug}) }}">
+            {% if school.shortName | trim != "" %}
+                <span class="sl_shortname">{{ school.shortName }}</span>
+                <br />
+            {% endif %}
+            <span class="sl_name">{{ school.name }}</span>
+        </a>
+    </div>
+    <div class="sl_action">
+        <div class="sl_action_about">
+            {# twig extension #}
+            {% set logo = schoolLogo(school) %}
+            <a href="{{ path('school_view', {'slug': school.slug, 'type': 'about'}) }}"><img style="display:inline-block; width:20px; height:20px; border-radius: 3px; border: 1px solid #bbb" src="{{ logo | imagine_filter('20x20') }}" alt="AU" /></a>
+        </div>
+        <div class="sl_action_bg">
+            <a href="{{ path('school_view', {'slug': school.slug, 'type': 'post'}) }}"><img src="{{ asset('image/sl_bg_icon.png') }}" alt="BG" /></a>
+        </div>
+        <div class="sl_action_evaluation">
+            <a href="{{ path('school_view', {'slug': school.slug, 'type': 'evaluation'}) }}"><img src="{{ asset('image/sl_star_icon.png') }}" alt="EV" /></a>
+        </div>
+        <div class="sl_action_doc">
+            <a href="{{ path('school_view', {'slug': school.slug, 'type': 'document'}) }}"><img src="{{ asset('image/sl_document_icon.png') }}" alt="DC" /></a>
+        </div>
+    </div>
+</div>

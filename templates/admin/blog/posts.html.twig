@@ -1,0 +1,154 @@
+{% extends "back.html.twig" %}
+
+{% block title %}
+	Liste des articles
+{% endblock %}
+
+{% block body_header %}
+	<div class="bc">
+		<span class="bc1"><a href="{{ path('admin_blog_post') }}"><img src="{{ asset('image/bg_icon.png') }}" style="width:14px; height:auto" /> <span>Blog</span></a></span>
+	</div>
+	<div style="padding:8px;float:right">
+		<span><a href="{{ path('admin_blog_post_add') }}"><img src="{{ asset('image/add_icon.png') }}" /> <span>Nouvel Article</span></a></span>
+	</div>
+{% endblock %}
+
+{% block content_body %}
+	<div style="background:#ddd; padding: 5px; margin:5px; border:1px solid #bbb">
+		<span><img src="{{ asset('image/list_icon.png') }}" style="width:12px; height:auto" /> Liste des articles</span>
+		<div style="float: right"><a target="_blank" href="{{ path('blog') }}"><img src="{{ asset('image/view_icon.png') }}" style="width: 12px; height: auto"/> Aperçu</a></div>
+		<div class="both"></div>
+	</div>
+	
+	<div class="a_datatable">
+		<div class="a_datatable_head">
+			<div class="a_datatable_head_left">
+				<span style="display:inline-block; margin-top:5px; margin-left:6px"> Rechercher :
+					<input type="text" class="default_input a_list_search_input" data-target-id="list_posts"/><!--
+					--><span class="a_list_search_reset"><img src="{{ asset('image/cross_icon.png') }}" style="width:12px; height:auto" /></span>
+				</span>
+			</div>
+			<div class="a_datatable_head_right">
+                {#right#}
+			</div>
+		</div>
+		
+		<div class="a_datatable_body">
+			<table class="a_table" id="list_posts">
+				<tr class="a_table_head">
+					<th class="a_table_cell_id" style="width: 50px; text-align:center">Id</th>
+					<th class="taleft">Titre</th>
+					<th class="taleft">Auteur</th>
+					<th class="tacenter">Publié</th>
+					<th class="tacenter">Valide</th>
+					{#<th class="tacenter">Supprimé</th>#}
+					<th class="a_table_cell_action tacenter">Actions</th>
+				</tr>
+				{% for post in posts %}
+				<tr class="a_table_line" id="post_{{ post.id }}" data-text="{{ post.title }}" style="display:table-row">
+					<td class="a_table_cell_id" style="width: 50px; text-align:center">{{ post.id }}</td>
+					<td>					
+						{# twig extension #}
+						{% set illustration = postIllustration(post) %}
+						<a href="{{ path('admin_blog_post_edit', {'post_id': post.id}) }}" style="display:block;">
+							<span style="display:block;float:left;width:32px; margin:1px"><img id="post_illustration" style="width: 32px; height: 32px;display:block" src="{{ illustration | imagine_filter('32x32') }}" alt="img post" /></span>
+							<span style="display:block;margin-left:36px;padding-top:6px" title="{{ post.title }}">{{ substrSpace(post.title, 60) }}</span>
+							<span class="both"></span>
+						</a>
+					</td>
+					{#
+						{% set avatar = userAvatar(post.user) %}
+						
+						<td>
+							<span style="display:block;float:left;width:32px"><img vatar_banner" style="width:30px; height: 30px; border-radius: 50%" src="{{ avatar | imagine_filter('32x32') }}" alt="{{ post.user.username }}" /></span>
+							<span style="display:block;margin-left:36px;padding-top:6px">{{ post.user.name }}</span>
+							<span class="both"></span>
+						</td>
+					#}
+					<td>
+						<span>
+							<span class="toggle_case" data-target="{{ path('blog_manager_post_toogle_show_author', {'post_id': post.id}) }}">
+								{% if post.showAuthor %}
+									<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
+									<span class="redstate"><span class="redpastille"></span></span>
+								{% else %}
+									<span class="greenstate"><span class="greenpastille"></span></span>
+									<span class="redstate" style="display:none"><span class="redpastille"></span></span>
+								{% endif %}
+							</span><span class="state_loading" style="display:none">
+								<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" />
+							</span>
+							<span>{{ post.user.name }}</span>
+						</span>
+					</td>
+					<td class="tacenter">
+						<span class="toggle_case" data-entity="post" data-target="{{ path('blog_manager_post_toogle_publication', {'post_id': post.id}) }}">
+							{% if post.published %}
+								<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
+								<span class="redstate"><span class="redpastille"></span></span>
+							{% else %}
+								<span class="greenstate"><span class="greenpastille"></span></span>
+								<span class="redstate" style="display:none"><span class="redpastille"></span></span>
+							{% endif %}
+						</span><span class="state_loading" style="display:none">
+							<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" />
+						</span>
+					</td>
+					<td class="tacenter">
+						{% if post.tovalid %}
+						<span class="toggle_case" data-entity="post" data-target="{{ path('blog_manager_post_toogle_validation', {'post_id': post.id}) }}">
+							{% if post.valid %}
+								<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
+								<span class="redstate"><span class="redpastille"></span></span>
+							{% else %}
+								<span class="greenstate"><span class="greenpastille"></span></span>
+								<span class="redstate" style="display:none"><span class="redpastille"></span></span>
+							{% endif %}
+						</span><span class="state_loading" style="display:none">
+							<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" />
+						</span>
+						{% endif %}
+					</td>
+					{#
+					<td class="tacenter">
+						<span class="toggle_case" data-target="{{ path('blog_manager_post_toogle_deletion', {'post_id': post.id}) }}">
+							{% if post.deleted %}
+								<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
+								<span class="redstate"><span class="redpastille"></span></span>
+							{% else %}
+								<span class="greenstate"><span class="greenpastille"></span></span>
+								<span class="redstate" style="display:none"><span class="redpastille"></span></span>
+							{% endif %}
+						</span><span class="state_loading" style="display:none">
+							<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" />
+						</span>
+					</td>
+					#}
+					<td class="a_table_cell_action tacenter">
+						<a href="{{ path('admin_blog_post_edit', {'post_id': post.id}) }}" data-name="{{ post.title }}" style="cursor:pointer"><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /></a>
+						<span class="delete_post" data-id="{{ post.id }}" data-target="{{ path('admin_blog_post_dodelete', {'post_id': post.id}) }}" data-title="{{ post.title }}" style="cursor:pointer"><img src="{{ asset('image/delete_icon.png') }}" style="width:12px; height:auto" /></span>
+					</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+		
+		<div class="a_datatable_foot">
+			<div class="a_datatable_foot_left">
+				<span style="display:inline-block; margin-top:6px; margin-left:6px" class="result_state">{{ posts | length }} resultat(s)</span>
+			</div>
+			<div class="a_datatable_foot_right">
+				{#
+				<span>right</span>
+				#}
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block body_footer %}
+	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_posts">{{ posts | length }}</span> article(s)</span> |
+	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_published_posts">{{ publishedPosts | length }}</span> publié(s)</span> |
+	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_not_published_posts">{{ notPublishedPosts | length }}</span> non publié(s)</span>
+{% endblock %}
+

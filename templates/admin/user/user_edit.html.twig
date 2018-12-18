@@ -1,0 +1,110 @@
+{% extends "back.html.twig" %}
+
+{% block title %}
+  Edition de l'utilisateur #{{ user.id }}
+{% endblock %}
+
+{% block body_header %}
+	<div class="bc">
+		<span class="bc1"><a href="{{ path('admin_user') }}"><img src="{{ asset('image/ur_icon.png') }}" style="width:14px; height:auto" /> <span>Utilisateurs</span></a> </span>
+		<span class="dd">
+			<span href="#" class="dd_src">
+				<span class="bcdd"></span>
+			</span>
+		</span> 
+		<span class="bc1"><a href="{{ path('admin_user_edit', {'user_id': user.id}) }}">{{ user.name }}</a></span>
+	</div>
+	<div style="padding:8px; float:right">
+		<div style="float:left">
+			{# right #}
+		</div>
+	</div>
+{% endblock %}
+
+{% block content_body %}
+	<div style="background:#ddd; padding: 5px; margin:5px; border:1px solid #bbb">
+		<span><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /> Edition de l'utilisateur #{{ user.id }}</span>
+	</div>
+	
+	<div style="">
+		<div id="change_avatar_admin" data-target="{#{{ path('admin_school_modify_logo_popup', {'school_id': school.id})}}#}" style="float:left; height: 122px;margin:5px;/*cursor:pointer*/">
+			{# twig extension #}
+			{% set avatar = userAvatar(user) %}
+			<img id="user_avatar_admin" style="width: 116px; height: 116px" src="{{ avatar | imagine_filter('116x116') }}" alt="img sl" />
+		</div>
+		<div style="margin-left: 136px;">
+			
+			<div class="bloc_editable">
+				<div class="bloc_view">
+					<table>
+						<tr>
+							<td>Nom</td>
+							<td>:</td>
+							<td style="padding:5px"><span id="sl_view_name">{{ user.name }}</span></td>
+						</tr>
+						<tr>
+							<td>Username</td>
+							<td>:</td>
+							<td style="padding:5px"><span id="sl_view_shortname">{{ user.username }}</span></td>
+						</tr>
+						<tr>
+							<td>Email</td>
+							<td>:</td>
+							<td style="padding:5px"><span id="sl_view_shortname">{{ user.email }}</span></td>
+						</tr>
+						<tr>
+							<td>Location</td>
+							<td>:</td>
+							<td style="padding:5px"><span id="sl_view_slug">{{ user.location }}</span></td>
+						</tr>
+						<tr>
+							<td>Biographie</td>
+							<td>:</td>
+							<td style="padding:5px"><span id="sl_view_slogan">{{ user.biography }}</span></td>
+						</tr>
+					</table>
+				</div>
+				{#
+					<div class="bloc_edit" style="display:none">
+						<table>
+							<tr>
+								<td>Nom</td>
+								<td>:</td>
+								<td style="padding:5px"><input type="text" id="sl_input_name" class="default_input" value="{{ user.name }}" /></td>
+							</tr>
+						</table>
+					</div>
+					<div class="separator"></div>
+					<div class="bloc_action" style="margin:5px">
+						<span class="btn_edit standar_button">Modifier</span>
+						<span class="btn_save standar_button" id="btn_sl_doedit" data-target="{{ path('admin_school_doedit', {'id': school.id}) }}" style="display:none">Enregistrer</span>
+						<span class="btn_reset standar_button" style="display:none">Annuler</span>
+						<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;"><img src="{{ asset('image/load.gif') }}" />Chargement...</span>
+					</div>
+				#}
+			</div>
+		</div>
+		<div class="both"></div>
+	</div>
+
+{% endblock %}
+
+{% block body_footer %}
+	<div style="padding-top: 8px">
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
+            {% if user.isSuperAdmin == false %}
+				<span class="toggle_case" data-entity="admin-state" data-target="{{ path('admin_user_toogle_adminstate', {'user_id': user.id}) }}">
+					{% if user.isAdmin %}
+						<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Assigner le rôle d'administrateur</span></span>
+						<span class="redstate"><span class="redpastille"></span> <span>Annuler le rôle d'administrateur</span></span>
+					{% else %}
+						<span class="greenstate"><span class="greenpastille"></span> <span>Assigner le rôle d'administrateur</span></span>
+						<span class="redstate" style="display:none"><span class="redpastille"></span> <span>Annuler le rôle d'administrateur</span></span>
+					{% endif %}
+				</span><span class="state_loading" style="display:none">
+					<img src="{{ asset('image/loading.svg')  }}" style="width:20px; height:20px;display: inline-block; vertical-align: middle;" /> Chargement...
+				</span>
+            {% endif %}
+		{% endif %}
+	</div> 
+{% endblock %}

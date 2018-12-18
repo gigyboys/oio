@@ -1,0 +1,248 @@
+{% extends "back.html.twig" %}
+
+{% block title %}
+  Edition du contact {{ contact.name }}
+{% endblock %}
+
+{% block body_header %}
+	<div class="bc">
+		<span class="bc1"><a href="{{ path('admin_school') }}"><img src="{{ asset('image/sl_icon.png') }}" style="width:14px; height:auto" /> <span>Etablissement</span></a> </span>
+		<span class="dd">
+			<span href="#" class="dd_src">
+				<span class="bcdd"></span>
+			</span>
+			{{ include("admin/school/include/school_principal_action.html.twig") }}
+		</span> 
+		<span class="bc1"><a href="{{ path('admin_school_edit', {'id': school.id}) }}">{% if school.shortName != "" %}{{ school.shortName }}{% else %}{{ school.name }}{% endif %}</a></span>
+		<span class="dd">
+			<span href="#" class="dd_src">
+				<span class="bcdd"></span>
+			</span>
+			{{ include("admin/school/include/school_other_action.html.twig") }}
+		</span> 
+		<span class="bc1"><a href="{{ path('admin_school_contact', {'school_id': school.id}) }}"><span>Contacts</span></a> </span>
+		<span class="dd">
+			<span href="#" class="dd_src">
+				<span class="bcdd"></span>
+			</span>
+			<span class="dd_target dd_tdfault">
+				<a class="link dd_item" href="{{ path('admin_school_contact_add', {'school_id': school.id}) }}">
+					<span class="icon"><img src="{{ asset('image/add_icon.png') }}" /></span><span class="label">Nouveau contact</span>
+				</a>
+                {% for contact in contacts %}
+					<a class="link dd_item" href="{{ path('admin_school_contact_edit', {'school_id': school.id, 'contact_id': contact.id}) }}">
+						<span class="icon"><img src="{{ asset('image/default_icon.png') }}" /></span><span class="label">{{ contact.name }}</span>
+					</a>
+                {% endfor %}
+			</span>
+		</span> 
+		<span class="bc1"><a href="{{ path('admin_school_contact_edit', {'school_id': school.id, 'contact_id': contact.id}) }}">{{ contact.name }}</a></span>
+	</div>
+	<div style="padding:8px; float:right">
+		<div style="float:left">
+			<span class="dd" style="display:inline-block;">
+				<span href="#" class="dd_src" style="cursor:pointer">
+					Autres actions
+				</span>
+				{{ include("admin/school/include/school_other_action.html.twig") }}
+			</span> 
+		</div>
+	</div>
+{% endblock %}
+
+{% block content_body %}
+	<div style="">
+		<div style="float:left; height: 86px;margin:5px">
+			{# twig extension #}
+			{% set logo = schoolLogo(school) %}
+			<img id="school_logo" style="width: 80px; height: 80px" src="{{ logo | imagine_filter('80x80') }}" alt="img sl" />
+		</div>
+		<div style="margin-left: 90px;">
+			<div>
+				<table>
+					<tr>
+						<td>Name</td>
+						<td>:</td>
+						<td style="padding:5px"><span id="sl_view_name">{{ school.name }}</span></td>
+					</tr>
+					<tr>
+						<td>ShortName</td>
+						<td>:</td>
+						<td style="padding:5px"><span id="sl_view_shortname">{{ school.shortName }}</span></td>
+					</tr>
+					<tr>
+						<td>Slug</td>
+						<td>:</td>
+						<td style="padding:5px"><span id="sl_view_slug">{{ school.slug }}</span></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="both"></div>
+	</div>
+	
+	<div style="background:#ddd; padding: 5px; margin:5px; border:1px solid #bbb">
+		<span><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /> Edition du contact <strong>{{ contact.name }}</strong></span>
+		<span class="add_contact_btn" data-target="{{ path('admin_school_contact_add_ajax', {'school_id': school.id}) }}" style="cursor:pointer; display: inline-block; float: right"> <img src="{{ asset('image/add_icon.png') }}" style="width:12px; height:auto" />  Nouveau contact</span>
+	</div>
+	
+	<div style="">
+		<div style="">
+			<div style="padding:5px">
+				<div class="bloc_editable">
+					<div class="bloc_view">
+						<table style="width: 100%">
+							<tr>
+								<td style="width: 0.1%">Nom</td>
+								<td style="width: 0.1%">:</td>
+								<td style="padding:5px"><span id="contact_view_name">{{ contact.name }}</span></td>
+							</tr>
+							<tr>
+								<td>Slug</td>
+								<td>:</td>
+								<td style="padding:5px"><span id="contact_view_slug">{{ contact.slug }}</span></td>
+							</tr>
+							<tr>
+								<td>Adresse</td>
+								<td>:</td>
+								<td style="padding:5px"><span id="contact_view_address">{{ contact.address }}</span></td>
+							</tr>
+							<tr>
+								<td>Email</td>
+								<td>:</td>
+								<td style="padding:5px"><span id="contact_view_email">{{ contact.email }}</span></td>
+							</tr>
+							<tr>
+								<td>Téléphone</td>
+								<td>:</td>
+								<td style="padding:5px"><span id="contact_view_phone">{{ contact.phone }}</span></td>
+							</tr>
+							<tr>
+								<td>Site web</td>
+								<td>:</td>
+								<td style="padding:5px"><span id="contact_view_website">{{ contact.website }}</span></td>
+							</tr>
+							<tr>
+								<td>Latitude</td>
+								<td>:</td>
+								<td style="padding:5px"><span id="contact_view_latitude">{{ contact.latitude }}</span></td>
+							</tr>
+							<tr>
+								<td>Longitude</td>
+								<td>:</td>
+								<td style="padding:5px"><span id="contact_view_longitude">{{ contact.longitude }}</span></td>
+							</tr>
+							<tr>
+								<td class="vatop">Description</td>
+								<td class="vatop">:</td>
+								<td style="padding:5px">
+									<div id="contact_view_description" style="padding:5px;background:#fff; border-radius:4px;border:1px solid #eee">
+                                        {{ contact.description | raw }}
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="bloc_edit" style="display:none">
+
+
+
+						<table style="width: 100%">
+							<tr>
+								<td style="width: 0.1%">nom</td>
+								<td style="width: 0.1%">:</td>
+								<td style="padding:5px"><input type="text" id="contact_input_name" class="default_input" value="{{ contact.name }}" /></td>
+							</tr>
+							<tr>
+								<td>Slug</td>
+								<td>:</td>
+								<td style="padding:5px"><input type="text" id="contact_input_slug" class="default_input" value="{{ contact.slug }}" /></td>
+							</tr>
+							<tr>
+								<td>Adresse</td>
+								<td>:</td>
+								<td style="padding:5px"><input type="text" id="contact_input_address" class="default_input" value="{{ contact.address }}" /></td>
+							</tr>
+							<tr>
+								<td>Email</td>
+								<td>:</td>
+								<td style="padding:5px"><input type="text" id="contact_input_email" class="default_input" value="{{ contact.email }}" /></td>
+							</tr>
+							<tr>
+								<td>Téléphone</td>
+								<td>:</td>
+								<td style="padding:5px"><input type="text" id="contact_input_phone" class="default_input" value="{{ contact.phone }}" /></td>
+							</tr>
+							<tr>
+								<td>Site web</td>
+								<td>:</td>
+								<td style="padding:5px"><input type="text" id="contact_input_website" class="default_input" value="{{ contact.website }}" /></td>
+							</tr>
+							{#
+							<tr>
+								<td></td>
+								<td></td>
+								<td style="padding:5px">
+									<div id="map" style="height: 200px; border: 5px solid #ddd">
+									</div>
+								</td>
+							</tr>
+							#}
+							<tr>
+								<td>Latitude</td>
+								<td>:</td>
+								<td style="padding:5px">
+									<input type="text" id="contact_input_latitude" class="default_input" value="{{ contact.latitude }}" />
+									<span class="get-coords" style="cursor: pointer"><img src="{{ asset('image/location_icon.png') }}" style="width:12px; height:auto" /> map</span>
+								</td>
+							</tr>
+							<tr>
+								<td>Longitude</td>
+								<td>:</td>
+								<td style="padding:5px">
+									<input type="text" id="contact_input_longitude" class="default_input" value="{{ contact.longitude }}" />
+									<span class="get-coords" style="cursor: pointer"><img src="{{ asset('image/location_icon.png') }}" style="width:12px; height:auto" /> map</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="vatop">Description</td>
+								<td class="vatop">:</td>
+								<td style="padding:5px">
+									<div>
+										<textarea id="" class="contact_input_description default_textarea tinymce" data-theme="advanced">{{ contact.description | raw }}</textarea>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="separator"></div>
+					<div class="bloc_action" style="margin:5px">
+						<span class="btn_edit standar_button"><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /> Modifier</span>
+						<span class="btn_save standar_button" id="btn_save_contact_common" data-target="{{ path('admin_school_contact_doedit', {'school_id': school.id, 'contact_id': contact.id}) }}" style="display:none"><img src="{{ asset('image/save_icon.png') }}" style="width:12px; height:auto" /> Enregistrer</span>
+						<span class="btn_reset standar_button" style="display:none"><img src="{{ asset('image/reset_icon.png') }}" style="width:12px; height:auto" /> Annuler</span>
+						<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;"><img src="{{ asset('image/load.gif') }}" />Chargement...</span>
+					</div>
+				</div>
+			</div>
+			<div class="both"></div>
+		</div>
+
+	</div>
+{% endblock %}
+
+{% block body_footer %}
+	<div style="padding-top: 8px">
+		<span class="toggle_publishState" data-target="{{ path('admin_school_contact_toogle_publication', {'school_id': school.id, 'contact_id': contact.id}) }}">
+			{% if contact.published %}
+				<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Publier</span></span>
+				<span class="redstate"><span class="redpastille"></span> <span>Ne pas publier</span></span>
+			{% else %}
+				<span class="greenstate"><span class="greenpastille"></span> <span>Publier</span></span>
+				<span class="redstate" style="display:none"><span class="redpastille"></span> <span>Ne pas publier</span></span>
+			{% endif %}
+		</span><span class="state_loading" style="display:none">
+			<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" /> Chargement...
+		</span>
+	</div> 
+{% endblock %}
+

@@ -1,0 +1,60 @@
+<div id="footer_navigation" class="cr">
+	<div id="footer_navigation_content" class="ct">
+		<div>
+			<ul>
+				<li>
+					<a href="{{ path('platform_about') }}">
+						<span>{{ 'A propos' | trans }}</span>
+					</a>
+				</li>
+				<li>
+					<a href="{{ path('platform_team') }}">
+						<span>{{ 'Equipe' | trans }}</span>
+					</a>
+				</li>
+				<li>
+					<a href="{{ path('platform_notice') }}">
+						<span>{{ 'Mentions légales' | trans }}</span>
+					</a>
+				</li>
+				<li><!--
+					<span id="contact2">nous contacter</span>
+					-->
+					<a href="{{ path('platform_contact') }}">
+						<span>{{ 'Nous contacter' | trans }}</span>
+					</a>
+					
+				</li>
+				<li>
+					<a href="{{ path('platform_newsletter') }}">
+						<span>{{ 'Newsletter' | trans }}</span>
+					</a>
+				</li>
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+					<li>
+						<span class="dd" style="display:inline-block;">
+							<span href="#" class="dd_src" style="cursor:pointer">
+								<strong>Je contribue</strong>
+							</span>
+							<span class="dd_target dd_tdfault">
+								<span class="create_post dd_item" data-target="{{ path('blog_manager_add_post_ajax')}}">
+									<span class="icon"><img src="{{ asset('image/add_icon.png') }}" /></span><span class="label">Creer un article</span>
+								</span>
+							</span>
+						</span>
+						{#
+						<span class="create_post" style="cursor: pointer" data-target="{{ path('blog_manager_add_post_ajax')}}"><img src="{{ asset('image/add_icon.png') }}" style="width:12px; height:auto"> Creer mon propre article</span>
+						#}
+					</li>
+                {% endif %}
+			</ul>
+		</div>
+		<div style="text-align:justify; margin: 10px">
+
+			{% set categories = getCategoriesWithPublishedSchool(0) %}
+			{% for category in categories %}
+				{{ include("school/include/school_category_footer_item.html.twig") }}
+			{% endfor %}
+		</div>
+	</div>
+</div>

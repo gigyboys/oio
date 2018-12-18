@@ -1,0 +1,38 @@
+<div class="mg_10">
+	{% if is_granted("IS_AUTHENTICATED_REMEMBERED") and isSubscribed(school, app.user) == false and documentsSubscribed | length > 0 %}
+		<div>
+			D'autres documents sont disponibles si vous êtes abonné à l'établissement.
+		</div>
+	{% endif %}
+	{% if is_granted("IS_AUTHENTICATED_REMEMBERED") == false and documentsConnected | length > 0 %}
+		<div>
+			<a class="login_ajax" href="{{ path('user_login_ajax') }}">D'autres documents sont disponibles si vous êtes connecté.</a>
+		</div>
+	{% endif %}
+	{% if is_granted("IS_AUTHENTICATED_REMEMBERED") == false and documentsConnected | length == 0 and documentsSubscribed | length > 0 %}
+		<div>
+			<a class="login_ajax" href="{{ path('user_login_ajax') }}">D'autres documents sont disponibles si vous êtes connecté et abonné à l'établissement.</a>
+		</div>
+	{% endif %}
+	{% if documents | length == 0 %}
+		<div id="document_empty" class="mg_v10">
+			Aucun document à afficher
+		</div>
+	{% else %}
+		<div id="document_list">
+			<div class="mg_v10">
+                {% set countDocuments = documents | length %}
+                {% if countDocuments > 1 %}
+				<div id="document_empty" class="mg_v10">
+                    {{ countDocuments }} documents disponibles
+				</div>
+                {% else %}
+                    {{ countDocuments }} document disponible
+                {% endif %}
+			</div>
+			{% for document in documents %}
+				{{ include("school/include/document_item.html.twig") }}
+			{% endfor %}
+		</div>
+	{% endif %}
+</div>

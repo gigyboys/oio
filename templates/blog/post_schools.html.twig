@@ -1,0 +1,68 @@
+{% extends "front.html.twig" %}
+
+{% block title %}
+  Article #{{ post.id }} - Etablissements
+{% endblock %}
+
+{% block body %}
+	<div class="cr">
+		<div class="ct">
+			<div class="mg_10">
+                {{ include("blog/include/header_post_edit.html.twig") }}
+
+				<div class="meta_info mg_v10">
+					<div class="meta_illustration" id="change_illustration_fix">
+                        {# twig extension #}
+                        {% set illustration = postIllustration(post) %}
+						<label>
+							<img id="post_illustration_fix" class="600x250" src="{{ illustration | imagine_filter('600x250') }}" alt="img post" />
+						</label>
+					</div>
+
+					<div class="meta_title">
+						<div class="pd_l5"><strong>Titre :</strong></div>
+						<div style="padding:5px"><span id="post_view_title">{{ post.title }}</span></div>
+						<div class="pd_l5"><strong>Slug :</strong></div>
+						<div style="padding:5px"><span id="post_view_slug">{{ post.slug }}</span></div>
+					</div>
+					<div class="both"></div>
+				</div>
+
+				<div style="background:#ddd; padding: 5px; margin:5px 0; border:1px solid #ccc">
+					<span><img src="{{ asset('image/list_icon.png') }}" style="width:12px; height:auto" /> Liste des établissements</span>
+				</div>
+				<div class="mg_5">
+					<span><img src="{{ asset('image/info_icon.png') }}" style="width:12px; height:auto" /> Les établissements affichés ici sont ceux sur lesquels vous êtes abonnés.</span>
+				</div>
+				<div class="mg_v10 list_school">
+					{% for school in schools %}
+						<span class="school_item">
+							<span class="tacenter">
+								<span class="toggle_case" data-entity="tag" data-target="{{ path('blog_manager_post_toogle_school', {'post_id': post.id, 'school_id': school.id }) }}">
+									{% set isSchool = isSchoolPost(post, school) %}
+									{% if isSchool %}
+										<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
+										<span class="redstate"><span class="redpastille"></span></span>
+									{% else %}
+										<span class="greenstate"><span class="greenpastille"></span></span>
+										<span class="redstate" style="display:none"><span class="redpastille"></span></span>
+									{% endif %}
+								</span><span class="state_loading" style="display:none">
+									<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" />
+								</span>
+							</span>
+							<span>
+								{{ school.shortName }} -
+								{{ school.name }}
+							</span>
+						</span><br />
+					{% endfor %}
+				</div>
+
+				<div class="sep"></div>
+
+                {{ include("blog/include/footer_post_edit.html.twig") }}
+			</div>
+		</div>
+	</div>
+{% endblock %}

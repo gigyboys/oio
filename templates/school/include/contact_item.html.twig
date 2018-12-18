@@ -1,0 +1,39 @@
+<div class="contact_item mg_b10">
+	<div class="sp mg_v5"></div>
+	<div class="">
+		<div class="mg_b5">
+			<div><strong>{{ schoolContact.name }}</strong></div>
+			<div style="">
+				{% if schoolContact.address | trim != "" %}
+					<div>Adresse : {{ schoolContact.address }}</div>
+				{% endif %}
+				{% if schoolContact.email | trim != "" %}
+					<div>Email : {{ schoolContact.email }}</div>
+				{% endif %}
+				{% if schoolContact.phone | trim != "" %}
+					<div>Téléphone : {{ schoolContact.phone }}</div>
+				{% endif %}
+				{% if schoolContact.website | trim != "" %}
+					<div>Site web : <a target="_blank" href="http://{{ schoolContact.website }}">{{ schoolContact.website }}</a></div>
+				{% endif %}
+				
+				{#
+				{% if schoolContact.latitude | trim != "" and schoolContact.longitude | trim != "" %}
+					<div>longitude : {{ schoolContact.longitude }} latitude : {{ schoolContact.latitude }}</div>
+				{% endif %}
+				#}
+
+				{% if schoolContact.description | trim != "" %}
+					<div class="pd_5 mg_v5" style="border:1px solid #eee; background:#eff6ff; border-radius:3px">{{ schoolContact.description }}</div>
+				{% endif %}
+			</div>
+			{% if schoolContact.latitude | trim != "" and schoolContact.longitude | trim != "" %}
+				<div class="btn_show_map standar_button" data-target="{{ path('school_get_map_coordonnees_contact', {'slug': school.slug, 'contact_id': schoolContact.id}) }}" style="cursor:pointer; margin: 5px 0" >
+					<img src="{{ asset('image/location_icon.png') }}" style="width:12px; height:12px;" />
+					Afficher sur une carte
+				</div>
+			{% endif %}
+				
+		</div>
+	</div>
+</div>

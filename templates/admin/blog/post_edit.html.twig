@@ -1,0 +1,243 @@
+{% extends "back.html.twig" %}
+
+{% block title %}
+	Edition de l'article #{{ post.id }}
+{% endblock %}
+
+{% block body_header %}
+	<div class="bc">
+		<span class="bc1"><a href="{{ path('admin_blog_post') }}"><img src="{{ asset('image/bg_icon.png') }}" style="width:14px; height:auto" /> <span>{{ 'Blog' | trans }}</span></a> </span>
+		<span class="dd">
+			<span href="#" class="dd_src">
+				<span class="bcdd"></span>
+			</span>
+            {{ include("admin/blog/include/blog_principal_action.html.twig") }}
+		</span>
+		<span class="bc1"><a href="{{ path('admin_blog_post_edit', {'post_id': post.id}) }}">{{ post.title }}</a></span>
+	</div>
+	<div style="padding:8px; float:right">
+		<div style="float:left">
+			<span class="dd" style="display:inline-block;">
+				<span href="#" class="dd_src" style="cursor:pointer">
+					Autres actions
+				</span>
+                {{ include("admin/blog/include/post_other_action.html.twig") }}
+			</span> 
+		</div>
+	</div>
+{% endblock %}
+
+{% block content_body %}
+	<div style="background:#ddd; padding: 5px; margin:5px; border:1px solid #bbb">
+		<span><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /> Edition de l'article #{{ post.id }}</span>
+		|
+		<span class="dd" style="display:inline-block;">
+			<span href="#" class="dd_src" style="cursor:pointer">
+				info
+			</span>
+			<span class="dd_target" style="display:block; padding: 5px; text-align: left; margin-top: 4px; position: absolute; display: none; background: #eee; padding: 4px; border: 1px solid #aaa; border-radius: 4px;">
+				<span>Auteur : {{ post.user.name }}</span><br />
+				<span>Date d'ajout : {{ post.date | date('Y-m-d H:i:s') }}</span><br />
+				<span>Nombre de vues : {#{{ post.viewNumber }}#}</span><br />
+			</span>
+		</span>
+	</div>
+	
+	<div style="padding:5px">
+		<div id="change_illustration" data-target="{{ path('blog_manager_post_illustration_popup', {'post_id' : post.id})}}" style="float:left; height: 122px;margin:5px">
+			{# twig extension #}
+			{% set illustration = postIllustration(post) %}
+			<label>
+				<img id="post_illustration" style="width: 116px; height: 116px;cursor: pointer" src="{{ illustration | imagine_filter('116x116') }}" alt="img post" />
+			</label>
+			{#<input style="display:none" id="illustrationfile" name="file" class="ajax_post_illustration" type="file" accept="image/*" data-target="{#{{ path('blog_manager_post_change_illustration', {'id': post.id}) }}" />#}
+		</div>
+		<div style="margin-left: 136px;">
+			<div class="bloc_editable">
+				<div class="bloc_view">
+					<table>
+						<tr>
+							<td>Titre</td>
+							<td>:</td>
+							<td style="padding:5px"><span id="post_view_title">{{ post.title }}</span></td>
+						</tr>
+						<tr>
+							<td>Slug</td>
+							<td>:</td>
+							<td style="padding:5px"><span id="post_view_slug">{{ post.slug }}</span></td>
+						</tr>
+					</table>
+				</div>
+				<div class="bloc_edit" style="display:none">
+					<table>
+						<tr>
+							<td>Titre</td>
+							<td>:</td>
+							<td style="padding:5px"><input type="text" id="post_input_title" class="default_input" value="{{ post.title }}" /></td>
+						</tr>
+						<tr>
+							<td>Slug</td>
+							<td>:</td>
+							<td style="padding:5px"><input type="text" id="post_input_slug" class="default_input" value="{{ post.slug }}" /></td>
+						</tr>
+					</table>
+				</div>
+				<div class="separator"></div>
+				<div class="bloc_action" style="margin:5px">
+					<span class="btn_edit standar_button">Modifier</span> 
+					<span class="btn_save standar_button" id="btn_doedit_post" data-target="{{ path('blog_manager_post_doedit', {'post_id': post.id}) }}" style="display:none">Enregistrer</span>
+					<span class="btn_reset standar_button" style="display:none">Annuler</span> 
+					<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;"><img src="{{ asset('image/load.gif') }}" />Chargement...</span> 
+				</div>
+			</div>
+		</div>
+		<div class="both"></div>
+	</div>
+
+	<div id="a_content_tab">
+		<div class="a_content_tab_header">
+			<div class="a_content_tab_header_content">
+				<div class="a_content_tab_header_item selected" id="tab_description">
+					<div class="a_content_tab_header_item_text">
+						Description
+					</div>
+				</div>
+			</div>
+			<div class="a_content_tab_header_sep">
+				<div class="a_content_tab_header_sep_slide">
+				</div>
+			</div>
+		</div>
+		<div class="a_content_tab_content">
+			<div class="a_content_tab_content_item selected" id="content_tab_description" style="">
+				<div class="bloc_editable">
+					<div class="bloc_view">
+						<div style="">
+							<div style="margin: 5px 0;">
+								Introduction :
+							</div>
+							<div id="" class="post_view_introduction" style="padding:5px;background:#fff; border-radius:4px;border:1px solid #eee">
+								{{ post.introduction }}
+							</div>
+						</div>
+
+						<div style="">
+							<div style="margin: 5px 0;">
+								Contenu :
+							</div>
+							<div id="" class="post_view_content" style="padding:5px;background:#fff; border-radius:4px;border:1px solid #eee">
+								{{ post.content | raw }}
+							</div>
+						</div>
+					</div>
+					<div class="bloc_edit" style="display:none">
+						<div style="">
+							<div style="margin: 5px 0;">
+								Introduction :
+							</div>
+							<div>
+								<textarea id="" class="post_input_introduction default_textarea">{{ post.introduction }}</textarea>
+							</div>
+						</div>
+						<div style="">
+							<div style="margin: 5px 0;">
+								Contenu :
+							</div>
+							<div>
+								<textarea id="post_input_content" class="post_input_content default_textarea tinymce">{{ post.content | raw }}</textarea>
+							</div>
+
+							<script type="text/javascript">
+                                var CKEDITOR_BASEPATH = "/bundles/fosckeditor/";
+							</script>
+							<script type="text/javascript" src="/bundles/fosckeditor/ckeditor.js"></script>
+							<script type="text/javascript">
+                                if (CKEDITOR.instances["post_input_content"]) {
+                                    CKEDITOR.instances["post_input_content"].destroy(true);
+                                    delete CKEDITOR.instances["post_input_content"];
+                                }
+                                CKEDITOR.replace("post_input_content", {"uiColor":"#eeeeee","language":"en"});
+							</script>
+						</div>
+					</div>
+					<div class="separator"></div>
+					<div class="bloc_action" style="margin:5px">
+						<span class="btn_edit standar_button">Modifier</span>
+						<span class="btn_doedit_content_post btn_save standar_button" id="" data-target="{{ path('blog_manager_post_doedit_content', {'post_id': post.id}) }}" style="display:none">Enregistrer</span>
+						<span class="btn_reset standar_button" style="display:none">Annuler</span>
+						<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;"><img src="{{ asset('image/load.gif') }}" />Chargement...</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block body_footer %}
+	<div style="padding-top: 8px">
+		<span class="toggle_case" data-target="{{ path('blog_manager_post_toogle_publication', {'post_id': post.id}) }}">
+			{% if post.published %}
+				<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Publier</span></span>
+				<span class="redstate"><span class="redpastille"></span> <span>Ne pas publier</span></span>
+			{% else %}
+				<span class="greenstate"><span class="greenpastille"></span> <span>Publier</span></span>
+				<span class="redstate" style="display:none"><span class="redpastille"></span> <span>Ne pas publier</span></span>
+			{% endif %}
+		</span><span class="state_loading" style="display:none">
+			<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" /> Chargement...
+		</span>
+		|
+		<span class="toggle_case" data-target="{{ path('blog_manager_post_toogle_show_author', {'post_id': post.id}) }}">
+			{% if post.showAuthor %}
+				<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Afficher l'auteur</span></span>
+				<span class="redstate"><span class="redpastille"></span> <span>Ne pas afficher l'auteur</span></span>
+			{% else %}
+				<span class="greenstate"><span class="greenpastille"></span> <span>Afficher l'auteur</span></span>
+				<span class="redstate" style="display:none"><span class="redpastille"></span> <span>Ne pas afficher l'auteur</span></span>
+			{% endif %}
+		</span><span class="state_loading" style="display:none">
+			<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" /> Chargement...
+		</span>
+		|
+		<span class="toggle_case" data-target="{{ path('blog_manager_post_toogle_active_comment', {'post_id': post.id}) }}">
+			{% if post.activeComment %}
+				<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Activer les commentaires</span></span>
+				<span class="redstate"><span class="redpastille"></span> <span>Désactiver les commentaires</span></span>
+			{% else %}
+				<span class="greenstate"><span class="greenpastille"></span> <span>Activer les commentaires</span></span>
+				<span class="redstate" style="display:none"><span class="redpastille"></span> <span>Désactiver les commentaires</span></span>
+			{% endif %}
+		</span><span class="state_loading" style="display:none">
+			<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" /> Chargement...
+		</span>
+        {% if post.tovalid %}
+			|
+		<span class="toggle_case" data-target="{{ path('blog_manager_post_toogle_validation', {'post_id': post.id}) }}">
+			{% if post.valid %}
+				<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Valider</span></span>
+				<span class="redstate"><span class="redpastille"></span> <span>Ne pas valider</span></span>
+			{% else %}
+				<span class="greenstate"><span class="greenpastille"></span> <span>Valider</span></span>
+				<span class="redstate" style="display:none"><span class="redpastille"></span> <span>Ne pas valider</span></span>
+			{% endif %}
+		</span><span class="state_loading" style="display:none">
+			<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" /> Chargement...
+		</span>
+		{% endif %}
+		{#
+		 |
+		<span class="toggle_case" data-target="{{ path('blog_manager_post_toogle_deletion', {'post_id': post.id}) }}">
+			{% if post.deleted %}
+				<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Supprimer</span></span>
+				<span class="redstate"><span class="redpastille"></span> <span>Ne pas supprimer</span></span>
+			{% else %}
+				<span class="greenstate"><span class="greenpastille"></span> <span>Supprimer</span></span>
+				<span class="redstate" style="display:none"><span class="redpastille"></span> <span>Ne pas supprimer</span></span>
+			{% endif %}
+		</span><span class="state_loading" style="display:none">
+			<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" /> Chargement...
+		</span>
+		#}
+	</div> 
+{% endblock %}
+

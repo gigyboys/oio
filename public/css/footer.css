@@ -1,0 +1,44 @@
+footer{
+}
+
+#footer_navigation{
+	background:#eee;
+	min-height: 120px;
+}
+
+#footer_navigation_content{
+	padding: 10px 0;
+}
+
+
+#footer_navigation_content ul{
+	padding: 0px;
+	margin:0px;
+	text-align:center
+}
+
+
+#footer_navigation_content ul li{
+	list-style-type: none;
+	display: inline;
+	padding:0 8px
+}
+
+#newsletter{
+	background:#bbb;
+	min-height: 100px;
+}
+
+#newsletter_content{
+	width: 1200px;
+	margin: auto;
+}
+
+#copyright{
+	background:#fff;
+	min-height: 30px;
+	padding:16px 0;
+}
+
+#copyright_content{
+}

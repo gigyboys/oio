@@ -1,0 +1,14 @@
+<span class="dd_target dd_tdfault">
+	<a class="link dd_item" target="_blank" href="{{ path('blog_post_viewbyid', {'id': post.id}) }}">
+		<span class="icon"><img src="{{ asset('image/view_icon.png') }}" /></span><span class="label">Aperçu</span>
+	</a>
+	<a class="link dd_item" href="{{ path('blog_manager_edit_post', {'post_id': post.id}) }}">
+		<span class="icon"><img src="{{ asset('image/edit_icon.png') }}" /></span><span class="label">Editer</span>
+	</a>
+	<a class="link dd_item" href="{{ path('blog_manager_post_tags', {'post_id': post.id}) }}">
+		<span class="icon"><img src="{{ asset('image/list_icon.png') }}" /></span><span class="label">Tags</span>
+	</a>
+    <a class="link dd_item" href="{{ path('blog_manager_post_schools', {'post_id': post.id}) }}">
+        <span class="icon"><img src="{{ asset('image/list_icon.png') }}" /></span><span class="label">Etablissements</span>
+    </a>
+</span>

@@ -1,0 +1,43 @@
+<div class="pd_5">
+	<span><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /> Edition de l'article :
+		<a href="{{ path('blog_manager_edit_post', {'post_id': post.id}) }}">
+			<strong class="sl_title_{{ post.id }}">{{ post.title }}</strong>
+		</a>
+	</span>
+</div>
+<div style="background:#f5f5f5; padding: 5px; border:1px solid #ddd">
+	<div class="left">
+		<span class="dd" style="display:inline-block;">
+			<span href="#" class="dd_src" style="cursor:pointer">
+				info
+			</span>
+			<span class="dd_target" data-display="block" style="text-align: left; margin-top: 4px; position: absolute; display: none; background: #f9f9f9; border: 1px solid #aaa; border-radius: 2px;">
+				<span class="mg_5" style="display: block">
+					<span><img src="{{ asset('image/ur_icon.png') }}" style="width:12px; height:auto" /> {{ getLinkUserInfo(post.user, post.user.name) | raw }}</span><br />
+					<span><img src="{{ asset('image/calendar_icon.png') }}" style="width:12px; height:auto" /> {{ post.date | date('Y-m-d H:i:s') }}</span><br />
+					<span><img src="{{ asset('image/view_icon.png') }}" style="width:12px; height:auto" /> {{ post.views | length }}</span><br />
+					<span><img src="{{ asset('image/comment_icon.png') }}" style="width:12px; height:auto" /> {{ getValidComments(post) | length }}</span><br />
+				</span>
+			</span>
+		</span>
+	</div>
+	<div class="right">
+        {% if post.tovalid == false %}
+			<span class="create_post" style="cursor: pointer" data-target="{{ path('blog_manager_tovalid_post_ajax', {'post_id' : post.id})}}"><img src="{{ asset('image/valid_icon.png') }}" style="width:12px; height:auto" />
+				<span> Soumettre à une validation</span>
+			</span>
+        {% elseif post.tovalid and post.valid == false %}
+			En attente de validation
+        {% elseif post.valid %}
+			Article validé
+        {% endif %}
+		|
+		<span class="dd" style="display:inline-block;">
+			<span href="#" class="dd_src" style="cursor:pointer">
+				Actions
+			</span>
+            {{ include("blog/include/post_other_action.html.twig") }}
+		</span>
+	</div>
+	<div class="both"></div>
+</div>

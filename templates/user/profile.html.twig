@@ -1,0 +1,355 @@
+{% extends "front.html.twig" %}
+
+{% block title %}
+	{{ user.name }} - profil
+{% endblock %}
+
+
+{% block body %}
+	<div id="ur_gl" class="cr">
+		<div class="ct">
+			<div style="margin:0 10px">
+				<div style="float:left">
+					{# twig extension #}
+					{% set avatar = userAvatar(user) %}
+					{% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.id == user.id %}
+						<div id="change_avatar" data-target="{{ path('user_modify_avatar_popup')}}">
+							<div id="change_avatar_label">
+								<span>Modifier</span>
+							</div>
+							<div id="avatar_wrapper">
+								<img id="user_avatar" src="{{ avatar | imagine_filter('116x116') }}" alt="img ur" />
+							</div>
+						</div>
+					{% else %}
+						<div id="avatar_wrapper">
+							<img id="user_avatar" src="{{ avatar | imagine_filter('116x116') }}" alt="img ur" />
+						</div>
+					{% endif %}
+				</div>
+				<div style="margin-left: 130px; min-height:70px; margin-top: 0px; padding:1px 0">
+					{% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.id == user.id %}
+						<div class="bloc_editable" style="margin-bottom:1px">
+							<div class="bloc_view">
+								<div>
+									<span id="ur_view_name" style="font-weight:bold">{{ user.name }}</span>
+								</div>
+								<div>
+									<span><img src="{{ asset('image/ur_icon.png')  }}" style="width:12px; height:12px;" /> <span id="ur_view_username">{{ user.username }}</span></span>
+									{% if user.location and user.location | trim != "" %}
+										 {% set displayLocation = "inline" %}
+									{% else %}
+										 {% set displayLocation = "none" %}
+									{% endif %}
+									<span style="display: {{ displayLocation }}" id="ur_view_location_wrap"><img src="{{ asset('image/location_icon.png')  }}" style="width:12px; height:12px;" /><span id="ur_view_location">{{ user.location }}</span></span>
+								</div>
+								<div>
+									<span id="ur_view_email">{{ user.email }}</span>
+								</div>
+								<div>
+									{#{% set lastVisit = getLastVisit(user) %}#}
+									<span id="ur_view_last_activity">Dernière activité : {{ user.lastActivity | date('Y-m-d à H:i:s') }}</span>
+								</div>
+							</div>
+							<div class="bloc_edit" style="display:none">
+								<form action="" name="form_ur_common" method="post" id="form_ur_common">
+									<div style="margin-bottom:2px">
+										<div><label for="ur_input_name" class="required">Nom * : <span id="ur_input_name_error"></span></label></div>
+										<div><input type="text" id="ur_input_name" class="default_input" value="{{ user.name }}" /></div>
+									</div>
+									<div style="margin-bottom:2px">
+										<div><label for="ur_input_username" class="required">Nom d'utilisateur * : <span id="ur_input_username_error"></span></label></div>
+										<div><input type="text" id="ur_input_username" class="default_input" value="{{ user.username }}" /></div>
+									</div>
+									<div style="margin-bottom:2px">
+										<div><label for="ur_input_location">Location : <span id="ur_input_location_error"></span></label></div>
+										<div><input type="text" id="ur_input_location" class="default_input" value="{{ user.location }}" /></div>
+									</div>
+									<div style="margin-bottom:2px">
+										<div><label for="ur_input_email" class="required">Email * : <span id="ur_input_email_error"></span></label></div>
+										<input type="text" id="ur_input_email" class="default_input" value="{{ user.email }}" />
+									</div>
+									<input type="submit" style="display:none" value="Enregistrer" />
+								</form>
+							</div>
+							<div class="bloc_action" style="margin-top:5px; border:1px solid transparent">
+								<span class="btn_edit standar_button">Modifier</span> 
+								<span class="btn_save standar_button" id="btn_save_ur_common" data-target="{{ path('user_edit') }}" style="display:none">Enregistrer</span>
+								<span class="btn_reset standar_button" style="display:none">Annuler</span> 
+								<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;">Chargement...</span> 
+							</div>
+						</div>
+					{% else %}
+						<div>
+							<div>
+								<span id="ur_view_name" style="font-weight:bold">{{ user.name }}</span>
+							</div>
+							<div>
+								<span><img src="{{ asset('image/ur_icon.png')  }}" style="width:12px; height:12px;" /> <span id="ur_view_username">{{ user.username }}</span></span>
+								{% if user.location and user.location | trim != "" %}
+									 {% set displayLocation = "inline" %}
+								{% else %}
+									 {% set displayLocation = "none" %}
+								{% endif %}
+								<span style="display: {{ displayLocation }}" id="ur_view_location_wrap"><img src="{{ asset('image/location_icon.png')  }}" style="width:12px; height:12px;" /><span id="ur_view_location">{{ user.location }}</span></span>
+							</div>
+							<div>
+								<span id="ur_view_email">{{ user.email }}</span>
+							</div>
+							<div>
+								<span id="ur_view_last_activity">Dernière activité : {{ user.lastActivity | date('Y-m-d à H:i:s') }}</span>
+							</div>
+						</div>
+					{% endif %}
+				</div>
+				<div class="both"></div>
+			</div>
+		</div>
+	</div>
+	<div id="ur_dl">
+		<div id="ur_onglet_head" style="">
+			<div class="cr">
+				<div class="ct">
+					<div style="margin:0 10px">
+						<span class="tab_ur_item{% if type == 'profile' %} selected{% endif %}" id="tab_ur_about" data-title="{{ user.name }} - profil" data-link="{{ path('user_profile', {'username': user.username}) }}" style="">A propos</span>
+						{#
+						<span class="tab_ur_item{% if type == 'subscription' %} selected{% endif %}" id="tab_ur_school" data-title="schools" data-link="{{ path('com_user_profile', {'username': user.username, 'type' : 'subscription'}) }}" style="">Schools</span>
+						#}
+						<span class="tab_ur_item{% if type == 'contribution' %} selected{% endif %}" id="tab_ur_contribution" data-title="{{ user.name }} - contributions" data-link="{{ path('user_profile', {'username': user.username, 'type' : 'contribution'}) }}" style="">Contributions</span>
+						{% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.id == user.id %}
+							<span class="tab_ur_item{% if type == 'setting' %} selected{% endif %}" id="tab_ur_setting" data-title="{{ user.name }} - paramètres" data-link="{{ path('user_profile', {'username': user.username, 'type' : 'setting'}) }}" style="">Paramètres</span>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="content_tab_ur_item{% if type is not defined or type == 'profile' %} selected{% endif %}" id="content_tab_ur_about">
+			<div class="cr">
+				<div class="ct">
+					<div class="pd_10" style="min-height:100px">
+						<div class="pd_t10">Inscrit depuis {{ user.date | date('Y-m-d') }}</div>
+						{% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.id == user.id %}
+							<div class="sp mg_v5"></div>
+							<div><strong>Biographie</strong> <span id="msg_biography"></span></div>
+							<div class="sp mg_v5"></div>
+							<div class="bloc_editable" style="margin-bottom:1px">
+							<div class="bloc_view">
+								<div id="ur_view_biography">{{ user.biography }}</div>
+							</div>
+							<div class="bloc_edit" style="display:none">
+								<form action="" name="form_ur_biography" method="post" id="form_ur_biography">
+									<div><textarea class="default_textarea" id="ur_area_biography" style="min-height:50px">{{ user.biography }}</textarea></div>
+									<input type="submit" style="display:none" value="Enregistrer" />
+								</form>
+							</div>
+							<div class="bloc_action" style="margin-top:5px; border:1px solid transparent">
+								<span class="btn_edit standar_button">Modifier</span> 
+								<span class="btn_save standar_button" id="btn_save_ur_biography" data-target="{{ path('user_modify_biography') }}" style="display:none">Enregistrer</span>
+								<span class="btn_reset standar_button" style="display:none">Annuler</span> 
+								<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;">Chargement...</span> 
+							</div>
+						</div>
+						{% else %}
+							{% if user.biography | trim != "" %}
+								<div class="sp mg_v5"></div>
+								<div><strong>Biographie</strong></div>
+								<div class="sp mg_v5"></div>
+								<div>{{ user.biography }}</div>
+							{% endif %}
+						{% endif %}
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		{#
+		<div class="content_tab_ur_item" id="content_tab_ur_school" style = "{% if type != 'subscription' %}display:none{% endif %}">
+			<div class="cr">
+				<div class="ct">
+					<div class="pd_10"  style="min-height:80px">
+						<div style="">
+						Ecoles suivies
+						</div>
+
+						<div>
+							<div class="sp mg_v5"></div>
+							<div style="">
+								Aucune Ecole suivie
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		#}
+		<div class="content_tab_ur_item{% if type == 'contribution' %} selected{% endif %}" id="content_tab_ur_contribution">
+			<div class="cr">
+				<div class="ct">	
+					<div class="">
+						<div id="content_tab">
+							<div class="content_tab_header mg_h10">
+								<div class="content_tab_header_content">
+									<div class="content_tab_header_item selected" id="tab_post">
+										<div class="content_tab_header_item_text">
+											Articles
+										</div>
+									</div>
+									<div class="content_tab_header_item" id="tab_comment">
+										<div class="content_tab_header_item_text">
+											Commentaires
+										</div>
+									</div>
+									<div class="content_tab_header_item" id="tab_evaluation">
+										<div class="content_tab_header_item_text">
+											Evaluations
+										</div>
+									</div>
+									{#
+									<div class="content_tab_header_item" id="tab_advert">
+										<div class="content_tab_header_item_text">
+											{{ 'advert' | trans }}
+										</div>
+									</div>
+									#}
+								</div>
+								<div class="content_tab_header_sep">
+									<div class="content_tab_header_sep_slide">
+									</div>
+								</div>
+							</div>
+							<div class="content_tab_content">
+								<div class="content_tab_content_item selected" id="content_tab_post">
+									{% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.id == user.id %}
+										<div class="pd_10">
+											<span class="create_post standar_button" style="cursor: pointer" data-target="{{ path('blog_manager_add_post_ajax')}}"><img src="{{ asset('image/add_icon.png') }}" style="width:12px; height:auto"> Proposer un article</span>
+										</div>
+										<div class="mg_h10">
+											<div class="sp"></div>
+										</div>
+									{% endif %}
+
+									{% if posts | length == 0 %}
+										<div class="mg_10">
+											Aucun article à afficher
+										</div>
+									{% else %}
+										<div id="list_post" class=""><!--
+											{% for post in posts %}
+												-->{{ include("blog/include/post_item.html.twig") }}<!--
+											{% endfor %}
+										--></div>
+									{% endif %}
+								</div>
+								<div class="content_tab_content_item" id="content_tab_comment">
+									<div id="list_comment" class="mg_t5">
+										<div class="mg_10">
+											{% if comments | length == 0%}
+												<div class="mg_10">
+													Aucun commentaire à afficher
+												</div>
+											{% else %}
+												<div class="">{{ comments | length }} {% if comments | length > 1 %}commentaires{% else %}commentaire{% endif %}.</div>
+												{% for comment in comments %}
+													<div class="sep"></div>
+													<div class="mg_v10">
+														<div class="mg_b5">Ecrit le {{ comment.date | date('Y-m-d à H:i:s')}} sur <a href="{{ path('blog_post_view', {'slug': comment.post.slug}) }}"><strong>{{ comment.post.title }}</strong></a></div>
+														<div>{{ comment.comment}}</div>
+													</div>
+												{% endfor %}
+                                            {% endif %}
+										</div>
+									</div>
+								</div>
+								<div class="content_tab_content_item" id="content_tab_evaluation">
+									<div id="list_comment" class="mg_t5">
+										<div class="mg_10">
+											{% if evaluations | length == 0%}
+												<div class="mg_10">
+													Aucune évaluation à afficher
+												</div>
+											{% else %}
+												<div class="">{{ evaluations | length }} {% if evaluations | length > 1 %}évaluations{% else %}évaluation{% endif %}.</div>
+												{% for evaluation in evaluations %}
+													<div class="sep"></div>
+													<div class="mg_v10">
+														<div class="mg_b5">Ecrit le {{ evaluation.date | date('Y-m-d à H:i:s')}} sur <a href="{{ path('school_view', {'slug': evaluation.school.slug, 'type': 'evaluation'}) }}"><strong>{{ evaluation.school.name }}</strong></a></div>
+														<div>
+															<div style="width:50px;float:left">
+                                                                {% set logo = schoolLogo(evaluation.school) %}
+																<span style="display:block;float:left;width:32px"><img style="width:50px; height: 50px; border-radius: 5px" src="{{ logo | imagine_filter('50x50') }}" alt="{{ evaluation.school.shortName }}" /></span>
+															</div>
+															<div style="margin-left:60px">
+																<div style="height:26px">
+																	<div class="left" style="padding-top:2px">Notes : </div>
+                                                                    {% set mark = evaluation.mark/20 %}
+                                                                    {% for i in 1..5 %}
+                                                                        {% if i <= mark %}
+																			<div class="left pd_5"><div class="eval_star_view_item selected" data-value="20"></div></div>
+                                                                        {% else %}
+																			<div class="left pd_5"><div class="eval_star_view_item" data-value="100"></div></div>
+                                                                        {% endif %}
+                                                                    {% endfor %}
+																</div>
+																<div class="mg_b5">
+                                                                    {{ evaluation.comment | nl2br  }}
+																</div>
+															</div>
+														</div>
+													</div>
+												{% endfor %}
+                                            {% endif %}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.id == user.id %}
+			<div class="content_tab_ur_item{% if type == 'setting' %} selected{% endif %}" id="content_tab_ur_setting">
+				<div class="cr">
+					<div class="ct">
+						<div class="pd_10" style="min-height:100px">
+							<div>
+								Gérer votre mot de passe. <span id="msg_password"></span>
+							</div>
+
+							<div class="bloc_editable" style="margin-bottom:1px">
+								<div class="bloc_view">
+
+								</div>
+								<div class="bloc_edit" style="display:none;">
+									<form action="" name="form_ur_password" method="post" id="password">
+										<div>
+											<div><label for="name" class="required">Mot de passe actuel *: </label></div>
+											<div><input type="password" id="ur_input_current_password" class="default_input" value="" /></div>
+										</div>
+										<div>
+											<div><label for="name" class="required">Nouveau mot de passe *: </label></div>
+											<div><input type="password" id="ur_input_new_password" class="default_input" value="" /></div>
+										</div>
+										<div>
+											<div><label for="name" class="required">Confirmer la saisie *: </label></div>
+											<div><input type="password" id="ur_input_repeat_password" class="default_input" value="" /></div>
+										</div>
+										<input type="submit" style="display:none" value="Enregistrer" />
+									</form>
+								</div>
+								<div class="bloc_action" style="margin:5px 0; border:1px solid transparent">
+									<span class="btn_edit standar_button">Modifier</span>
+									<span class="btn_save standar_button" id="btn_save_ur_password" data-target="{{ path('user_modify_password') }}" style="display:none">Enregistrer</span>
+									<span class="btn_reset standar_button" style="display:none">Annuler</span>
+									<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;">Chargement...</span>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+        {% endif %}
+	</div>
+{% endblock %}

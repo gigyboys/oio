@@ -1,0 +1,45 @@
+{% extends "back.html.twig" %}
+
+{% block title %}
+	Ordre d'affichage des établissements
+{% endblock %}
+
+{% block body_header %}
+	<div class="bc">
+		<span class="bc1"><a href="{{ path('admin_school') }}"><img src="{{ asset('image/sl_icon.png') }}" style="width:14px; height:auto" /> <span>Etablissements</span></a></span>
+	</div>
+	<div style="padding:8px;right:0px; position: absolute;">
+		<span><a href="{{ path('admin_school_position') }}"><img src="{{ asset('image/default_icon.png') }}" style="width: 14px"/> <span>Ordre d'affichage</span></a></span>
+		<span><a href="{{ path('admin_school_add') }}"><img src="{{ asset('image/add_icon.png') }}" style="width: 14px"/> <span>Nouvel établissement</span></a></span>
+	</div>
+{% endblock %}
+
+{% block content_body %}
+	<div style="background:#ddd; padding: 5px; margin:5px; border:1px solid #bbb">
+		<div style="float: left">Ordre d'affichage des établissements</div>
+		<div style="float: right"><a target="_blank" href="{{ path('school_home') }}"><img src="{{ asset('image/view_icon.png') }}" style="width: 12px; height: auto"/> Aperçu</a></div>
+		<div class="both"></div>
+	</div>
+	
+	<div class="list_sl_position" data-target="{{ path('admin_school_save_position') }}"><!--
+        {% for school in schools %}
+			{# twig extension #}
+			{% set logo = schoolLogo(school) %}
+			--><div class="sl_item" title="{{ school.shortName }} - {{ school.name }}" data-id="{{ school.id }}">
+				<div class="logo">
+					<img src="{{ logo | imagine_filter('60x60') }}" alt="img sl" />
+				</div>
+				<div class="name">
+					<strong>{{ school.shortName }}</strong>
+				</div>
+			</div><!--
+        {% endfor %}
+	--></div>
+{% endblock %}
+
+{% block body_footer %}
+	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_schools">{{ schools | length }}</span> établissements</span> |
+	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_published_schools">{{ publishedSchools | length }}</span> publiés</span> |
+	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_not_published_schools">{{ notPublishedSchools | length }}</span> non publiés</span>
+{% endblock %}
+

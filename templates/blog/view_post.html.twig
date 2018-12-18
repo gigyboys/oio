@@ -1,0 +1,125 @@
+{% extends "front.html.twig" %}
+
+{% block title %}
+	Blog - {{ post.title }}
+{% endblock %}
+
+
+{% block body %}
+	<div class="cr">
+		<div class="mg_v10">
+			<div class="ct">
+
+				<div class="mg_10" style="font-weight:bold;">
+					<span style=" font-size:18px; color:#555">{{ post.title }}</span>
+				</div>
+				<div class="mg_10" style="text-align:justify; font-weight:bold">
+                    {{ post.introduction }}
+				</div>
+
+                {% if tags | length > 0 %}
+					<div class="mg_10">
+                        {% for tag in tags %}
+							<span style="display: inline-block; background: #bbb; padding: 2px 6px; margin: 4px; border-radius: 6px; vertical-align:middle">{{ tag.name }}</span>
+                        {% endfor %}
+					</div>
+                {% endif %}
+
+                {# twig extension #}
+                {% set illustration = postIllustration(post) %}
+				<div class="mg_10">
+					<img id="post_illustration" style="display:block; max-width: 100%; height: auto; margin: auto" src="{{ illustration | imagine_filter('1200x500') }}" alt="img post" />
+				</div>
+				<div class="mg_10">
+
+                    {% if post.showAuthor %}
+						<strong>Par</strong>
+                        {# twig extension #}
+                        {% set userInfo = getLinkUserInfo(post.user, post.user.name) %}
+                        {{ userInfo | raw }}
+                    {% endif %}
+					<strong>Le {{ post.date | date('Y-m-d') }}</strong>
+				</div>
+				<div class="mg_10" style="overflow: auto;">
+                    {{ post.content | raw }}
+				</div>
+
+				<div class="mg_10">
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        {% if post.user.id == app.user.id %}
+							<a class="standar_button" href="{{ path('blog_manager_edit_post', {'post_id': post.id}) }}">Editer</a>
+                        {% endif %}
+                    {% endif %}
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and is_granted('ROLE_ADMIN') %}
+						<a href="{{ path('admin_blog_post_edit', {'post_id': post.id}) }}" target="_blank"><span class="standar_button">Administrer</span></a>
+                    {% endif %}
+				</div>
+
+
+				<div class="sp mg_v10"></div>
+				<div id="info_comment" class="mg_h10">
+                    {{ allComments | length }}
+                    {% if allComments | length == 0 or allComments | length == 1 %}
+						Commentaire
+                    {% else %}
+						Commentaires
+                    {% endif %}
+				</div>
+
+                {% if previousComment %}
+					<div id="bg_load_comment_action">
+						<div class="sp mg_v10"></div>
+						<div id="load_comment" data-target="{{ path('blog_post_load_comment', {'post_id': post.id, 'comment_id': previousComment.id}) }}" data-previous-cmt="{{ previousComment.id }}" class="mg_h10" style="text-align:center; cursor:pointer">
+							Afficher les commentaires précédents...
+						</div>
+						<div class="btn_loading" style="text-align:center;display:none;">Chargement...</div>
+					</div>
+                {% endif %}
+				<div class="sp mg_v10"></div>
+
+				<div>
+					<div id="bg_post_list_cmt">
+                        {% for comment in comments %}
+                            {{ include("blog/include/comment_item.html.twig") }}
+                        {% endfor %}
+					</div>
+					<div class="both"></div>
+                    {% if post.activeComment %}
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
+							<div class="mg_10">
+								<form action="" name="" method="post" id="">
+									<div class="mg_b5">
+                                        {{ app.user.name }} :
+									</div>
+									<div style="width:60px;float:left">
+                                        {% set avatar = userAvatar(app.user) %}
+										<span style="display:block;float:left;"><img style="width:60px; height: 60px; border-radius: 50%" src="{{ avatar | imagine_filter('60x60') }}" alt="{{ app.user.username }}" /></span>
+									</div>
+									<div style="margin-left:70px">
+										<textarea class="default_textarea" id="bg_post_cmt_message" style="min-height:120px"></textarea>
+										<div id="bg_add_comment_error"></div>
+										<div id="bg_add_comment_action" class="mg_t10">
+											<span class="btn_save standar_button btn_bg_post_new_cmt" data-target="{{ path('blog_post_new_comment', {'post_id': post.id}) }}">Ajouter mon commentaire</span>
+											<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;">Chargement...</span>
+										</div>
+									</div>
+									<div class="both"></div>
+								</form>
+							</div>
+                        {% else %}
+							<div class="mg_10 tacenter">
+                                {#<a class="link" href="{{ path('user_login') }}">Connectez-vous pour pouvoir ecrire votre commentaire</a>#}
+								<a class="login_ajax" href="{{ path('user_login_ajax') }}">Connectez-vous pour pouvoir ecrire votre commentaire</a>
+							</div>
+                        {% endif %}
+                    {% else %}
+						<div class="mg_10 tacenter">
+							Les commentaires sont fermés pour cet article.
+						</div>
+                    {% endif %}
+				</div>
+
+			</div>
+		</div>
+	</div>
+{% endblock %}

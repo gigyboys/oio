@@ -1,0 +1,71 @@
+/************** style forum ***************/
+.fm_list_topic{
+	margin:auto;
+	width:100%;
+	margin-bottom:10px;
+}
+.fm_topic_item{
+	border:1px solid #ddd; 
+	margin:8px; 
+	width:270px;
+	float:left; 
+	border-radius:3px; 
+	padding: 4px
+}
+.fm_topic_item_left{
+	float:left; 
+	width:60px
+}
+.topic_illustration img{
+	width: 60px; 
+	height: 60px
+}
+.fm_topic_item_subject{
+	text-align:center
+}
+.fm_topic_item_manage{
+	text-align:center;margin-top:16px
+}
+.fm_topic_item_right{
+	margin-left:70px
+}
+.fm_topic_item_name{
+	font-weight:bold
+}
+.fm_topic_item_desc{
+	height: 57px
+}
+.fm_topic_item_right_sep{
+	background:#ccc; 
+	height:1px; 
+	width:100%; 
+	margin:12px 0
+}
+.fm_topic_item_link{
+	display:block; 
+	width:auto; 
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 1200px)
+{
+    .fm_list_topic{
+		width:900px;
+	}
+}
+
+@media screen and (max-width: 900px)
+{
+    .fm_list_topic{
+		width:600px;
+	}
+}
+
+@media screen and (max-width: 600px)
+{
+    .fm_list_topic{
+		width:300px;
+	}
+}

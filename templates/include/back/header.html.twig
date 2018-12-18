@@ -1,0 +1,75 @@
+<div id="a_header_left">
+	<div style=" background:#aaa; width:40px; height: 40px;float:left; text-align:center; font-size:30px">
+		BS
+	</div>
+	<div style="margin-left:40px; height:40px; text-align:center">
+		<span style="padding-top:10px; display:inline-block;">
+			<a href="{{ path('admin_home') }}">
+				<span>BootSchoDa 1.0</span>
+			</a>
+		</span>
+	</div>
+</div>
+
+<div id="a_header_right">
+	<div style="float:left; background:#789">
+		
+	</div>
+	<div style="float:right; padding-top: 4px">
+		<div style="float: left">
+			<a href="{{ path('platform_home') }}" target="_blank" style="display: inline-block;margin-right: 16px;height: 32px;box-sizing: border-box;padding-top: 4px;">
+				<img src="{{ asset('image/web_icon.png') }}" style="width:16px; height:auto; display: inline-block; vertical-align: middle" />
+				<span style="display: inline-block; vertical-align: middle">{{ dns }}</span>
+			</a>
+		</div>
+		<div id="user" style="display: block; margin-right: 10px; float:left">
+			<div class="dd" style="display:block; margin:0px;">
+				{% set avatar = userAvatar(app.user) %}
+				<div class="dd_src" style="cursor:pointer">
+					<span style="display:block; border-radius:3px;border:1px solid #aaa;overflow:hidden">
+						<table style="border-collapse: collapse;border:0px solid #999; padding:0px; margin:0px">
+							<tr>
+								<td style="padding:0px">
+									<span class="" style="display:block; background:#ccc; height:30px">
+										<img id="avatar_banner" style="width:30px; height: 30px" src="{{ avatar | imagine_filter('32x32') }}" alt="{{ app.user.username }}" />
+									</span>
+								</td>
+								<td style=" padding:0px" class="user_name">
+									<span style="display:block; background:#ccc; height:26px; padding-left:5px; padding-right:5px ; padding-top:4px">
+										<span>{{ app.user.name }}</span>
+									</span>
+								</td>
+							</tr>
+						</table>
+					</span>
+				</div>
+				<div class="dd_target" data-display="block" style="margin-top: 4px; position: absolute; display: none; border: 1px solid #aaa; border-radius: 0 0 4px 4px;background:#fff">
+					<div>
+						<div style="float:left;width:70px;height:70px">
+							<img id="avatar_banner" style="width:50px; height: 50px; margin:10px;" src="{{ avatar | imagine_filter('50x50') }}" alt="{{ app.user.username }}" />
+						</div>
+						<div style="margin-left:70px;width: 150px;min-height:70px; padding:5px 0">
+							<a class="link" id="profil_link" href="{{ path('user_profile', {'username': app.user.username}) }}">
+								{{ app.user.username }}<br />
+								{{ app.user.name }}<br />
+								{{ app.user.email }}<br />
+							</a>
+						</div>
+						<div class="both"></div>
+					</div>
+					<div style="border-top:1px solid #ddd; text-align:center;">
+						<a class="link" href="{{ path('user_profile', {'username': app.user.username, 'type':'setting'}) }}" style="display:block;padding:5px 0">
+							<span>Paramètres</span>
+						</a>
+					</div>
+					<div style="border-top:1px solid #ddd; text-align:center;">
+						<a class="link" href="{{ path('user_logout') }}" style="display:block;padding:5px 0">
+							<span>Déconnexion</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="both"></div>
+	</div> 
+</div>

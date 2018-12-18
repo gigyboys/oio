@@ -1,0 +1,105 @@
+{% extends "back.html.twig" %}
+
+{% block title %}
+	Liste des administrateurs
+{% endblock %}
+
+{% block body_header %}
+	<div class="bc">
+		<span class="bc1"><a href="{{ path('admin_user') }}"><img src="{{ asset('image/ur_icon.png') }}" style="width:14px; height:auto" /> <span>Utilisateurs</span></a> </span>
+		<span class="dd">
+			<span href="#" class="dd_src">
+				<span class="bcdd"></span>
+			</span>
+		</span>
+		<span class="bc1"><a href="{{ path('admin_user_admin') }}">Administrateurs</a></span>
+	</div>
+	<div style="padding:8px;right:0px; position: absolute;">
+		{# right #}
+	</div>
+{% endblock %}
+
+{% block content_body %}
+	<div style="background:#ddd; padding: 5px; margin:5px; border:1px solid #bbb">
+		<div style="float: left">Liste des administrateurs</div>
+		<div class="both"></div>
+	</div>
+	
+	<div class="a_datatable">
+		<div class="a_datatable_head">
+			<div class="a_datatable_head_left">
+				<span style="display:inline-block; margin-top:5px; margin-left:6px"> Rechercher :
+                    <input type="text" class="default_input a_list_search_input" data-target-id="list_users" /><!--
+					--><span class="a_list_search_reset"><img src="{{ asset('image/cross_icon.png') }}" style="width:12px; height:auto" /></span>
+                </span>
+			</div>
+			<div class="a_datatable_head_right">
+				{#right#}
+			</div>
+		</div>
+		
+		
+		<div class="a_datatable_body">
+			<table class="a_table" id="list_users">
+				<tr class="a_table_head">
+					<th class="a_table_cell_id" style="width: 50px; text-align:center">Id</th>
+					<th style="width: 36px" >Avatar</th>
+					<th class="taleft">Nom</th>
+					<th class="taleft">Username</th>
+					<th class="taleft">Email</th>
+					<th style="text-align:center">Activé</th>
+					<th class="a_table_cell_action">Actions</th>
+				</tr>
+				{% for user in users %}
+					<tr class="a_table_line" data-text="{{ user.username }} {{ user.name }} {{ user.email }}" style="display:table-row">
+						<td class="a_table_cell_id" style="width: 50px; text-align:center">{{ user.id }}</td>
+						<td class="">
+							{# twig extension #}
+							{% set avatar = userAvatar(user) %}
+							<img id="" style="display:block;width: 32px; height: 32px; margin:1px" src="{{ avatar | imagine_filter('32x32') }}" alt="img sl" />
+						</td>
+						<td><a href="{{ path('admin_user_edit', {'user_id': user.id}) }}">{{ user.name }}</a></td>
+						<td>{{ user.username }}</td>
+						<td>{{ user.email }}</td>
+						<td style="text-align:center">
+							<span class="toggle_case_fix" data-entity="school" data-target="{#{{ path('admin_school_toogle_publication', {'school_id': school.id}) }}#}">
+								{% if user.enabled %}
+									<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
+									<span class="redstate"><span class="redpastille"></span></span>
+								{% else %}
+									<span class="greenstate"><span class="greenpastille"></span></span>
+									<span class="redstate" style="display:none"><span class="redpastille"></span></span>
+								{% endif %}
+							</span><span class="state_loading" style="display:none">
+								<img src="{{ asset('image/loading.svg')  }}" style="width:20px; height:20px;display: inline-block; vertical-align: middle;" />
+							</span>
+						</td>
+						<td class="a_table_cell_action tacenter">
+							<a href="{{ path('admin_user_edit', {'user_id': user.id}) }}" data-name="{{ user.name }}" style="cursor:pointer"><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /></a>
+							<a target="_blank" href="{{ path('user_profile_byid', {'user_id': user.id}) }}" data-name="{{ user.name }}"><img src="{{ asset('image/view_icon.png') }}" style="width:12px; height:auto" /></a>
+						</td>
+					</tr>
+				{% endfor %}
+			</table>
+		</div>
+		
+		<div class="a_datatable_foot">
+			<div class="a_datatable_foot_left">
+				<span style="display:inline-block; margin-top:6px; margin-left:6px" class="result_state">{{ users | length }} resultat(s)</span>
+			</div>
+			<div class="a_datatable_foot_right">
+				{#
+				<span>right</span> 
+				<span>1</span> 
+				<span>2</span> 
+				<span>3</span> 
+				#}
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block body_footer %}
+	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_admins">{{ users | length }}</span> Administrateurs</span>
+{% endblock %}
+

@@ -1,0 +1,54 @@
+{% extends "front.html.twig" %}
+
+{% block title %}
+	Newsletter
+{% endblock %}
+
+
+{% block body %}
+	<div class="cr">
+		<div class="ct">
+			<div class="mg_10">
+				<div class="label_title">
+					<span style="font-weight:bold">Newsletter</span>
+				</div>
+				<div class="pm_bloc">
+					<div class="pm_form">
+						<div>{{ msg | raw }}</div>
+						<div class="mg_v10">
+                            {{ form_start(form) }}
+								<div class="pm_form_wrap">
+									<div class="mg_b10">
+										<div>{{ form_label(form.email, 'Email *:') }}</div>
+										<div>{{ form_widget(form.email, { 'attr': {'class': 'default_input'} }) }}</div>
+									</div>
+									<div class="mg_b10">
+                                        {% for child in form.active %}
+											<div>
+                                                {{ form_widget(child) }}
+                                                {{ form_label(child) }}
+											</div>
+                                        {% endfor %}
+									</div>
+
+									<div style="margin-top : 10px">
+                                        {{ form_widget(form.Envoyer, { 'attr': {'class': 'standar_button'} }) }}
+									</div>
+									{{ form_widget(form) }}
+								</div>
+                            {{ form_end(form) }}
+						</div>
+					</div>
+					<div class="pm_desc">
+						<h1>
+							S'abonner ou se désinscrire à la newsletter
+						</h1>
+						<p>La newsletter est un e-mail au format texte et html envoyé à intervalles humains (entre 2 et 3 mois) pour annoncer de grandes nouveautés. </p>
+						<p>Votre boîte aux lettres ne sera pas spammée, votre adresse restera strictement confidentielle et vous pourrez vous désinscrire à tout moment sur cette page. </p>
+					</div>
+				</div>
+				<div class="both"></div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

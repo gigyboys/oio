@@ -1,0 +1,78 @@
+{% extends "front.html.twig" %}
+
+{% block title %}
+	Inscription
+{% endblock %}
+
+
+{% block body %}
+	<div class="cr">
+		<div class="ct">
+			<div class="mg_h10">
+                {% if mailActivation is defined and mailActivation %}
+                    <div class="tacenter mg_v10">
+						<div class="mg_v10">
+                            {# twig extension #}
+                            {% set avatar = userAvatar(user) %}
+							<img id="user_avatar" src="{{ avatar | imagine_filter('116x116') }}" alt="{{ user.username }}" />
+						</div>
+						<div class="mg_v10">Félicitation {{ user.name }}, Vous êtes inscrit.</div>
+						<div class="mg_v10"><strong>Un mail vous est envoyé permettant d'activer votre compte.</strong></div>
+						<div class="mg_v10">L'équipe vous souhaite une bonne aventure sur
+							<a href="{{ path('platform_home') }}" title="{{ dns }}"><strong>{{ dns }}</strong></a>
+						</div>
+					</div>
+                {% else %}
+					<div class="label_title">
+						<span style="font-weight:bold">Inscription.</span> <a href="{{ path("user_login") }}">Avez-vous déjà un compte?</a>
+					</div>
+					<div class="pm_bloc">
+						<div class="pm_form">
+							{#
+								{{ form_start(form) }}
+								{{ form_widget(form) }}
+								{{ form_end(form) }}
+							#}
+
+							<form name="" method="post" action="" id="form-inscription">
+								<div class="pm_form_wrap">
+									<div>
+										<div><label for="name" class="required">Votre nom * : <span id="ur_register_input_name_error">{#{{ errorName }}#}</span></label></div>
+										<div><input type="text" id="name" name="name" required="required" class="default_input" value="{{ user.name }}"/></div>
+									</div>
+									<div>
+										<div><label for="email" class="required">Votre email * : <span id="ur_register_input_email_error">{#{{ errorEmail }}#}</span></label></div>
+										<div><input type="email" id="email" name="email" required="required" class="default_input" value="{{ user.email }}" /></div>
+                                        {% if errorEmail is defined and errorEmail != ''%}
+											<div class="error">{{ errorEmail | raw }}</div>
+                                        {% endif %}
+									</div>
+
+									<div>
+										<div><label for="password" class="required">Votre mot de passe * : <span id="ur_register_input_password_error">{#{{ errorPassword }}#}</span></label></div>
+										<div><input type="password" id="password" name="password" required="required" class="default_input" value="{{ user.password }}" /></div>
+									</div>
+                                    {% if errorActivation is defined and errorActivation != '' %}
+										<div class="mg_10"><strong>{{ errorActivation | raw }}</strong></div>
+                                    {% endif %}
+									<div style="margin-top : 10px">
+										<button type="submit" id="register" name="register" class="standar_button">S'inscrire</button>
+									</div>
+								</div>
+							</form>
+
+						</div>
+						<div class="pm_desc">
+							<h1>
+								Duplexque isdem diebus acciderat malum lorem ipsum?
+							</h1>
+							<p>Duplexque isdem diebus acciderat malum, quod et Theophilum insontem atrox interceperat casus, et Serenianus dignus exsecratione cunctorum, innoxius, modo non reclamante publico vigore, discessit.</p>
+							<p>Et quia Montius inter dilancinantium manus spiritum efflaturus Epigonum et Eusebium nec professionem nec dignitatem ostendens aliquotiens increpabat, qui sint hi magna quaerebatur industria, et nequid intepesceret, Epigonus e Lycia philosophus ducitur et Eusebius ab Emissa Pittacas cognomento, concitatus orator, cum quaestor non hos sed tribunos fabricarum insimulasset promittentes armorum si novas res agitari conperissent.</p>
+						</div>
+					</div>
+				{% endif %}
+				<div class="both"></div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "front.html.twig" %}
+
+{% block title %}
+  Schools - {{ category.name }}
+{% endblock %}
+
+{% block body %}
+	<div class="cr">
+		<div class="ct">
+			<div id="sl_list">
+				<div class="sll">
+					<div id="sll_load_list" style="display:none;">chargement ...</div>
+					<div class="mg_h10" style="border: 1px solid #ddd; background: #eee;padding: 10px; font-weight: bold; margin-top: 10px">
+					{{ category.name }}
+					</div>
+
+					{% if category.description is not null or category.description != '' %}
+						<div class="category_des mg_10">
+							{{ category.description | raw }}
+						</div>
+					{% endif %}
+
+					<div class="sll_pagination">
+                        {{ include("school/include/pagination_view_category.html.twig") }}
+					</div>
+					<div class="sll_ct" style="">
+						{% for school in schools %}
+							{{ include("school/school_item.html.twig") }}
+						{% endfor %}
+						<div class="both"></div>
+					</div>
+					<div class="sll_pagination">
+						{{ include("school/include/pagination_view_category.html.twig") }}
+					</div>
+				</div>
+
+
+				<div class="slr" style="">
+					<div id="sl_oftheday_right">
+                        {# twig extension #}
+
+                        {#{% set school = getSchoolById(1) %}#}
+                        {% set school = getSchoolOfTheDay() %}
+                        {% if school %}
+							<div class="title">
+								<span>L'établissement du jour</span>
+							</div>
+							<div class="not_resp">
+								<div style="">
+                                    {{ include("school/school_item.html.twig") }}
+								</div>
+								<div class="sl_desc" style="text-align:justify">
+                                    {#{{ substrSpace(schoolTranslate.shortDescription, 165) }}#}
+                                    {{ school.shortDescription }}
+								</div>
+							</div>
+
+							<div class="resp">
+								<div class="sl_oftheday">
+									<div id="sl_oftheday_wrap">
+                                        {{ include("school/include/school_of_the_day.html.twig") }}
+									</div>
+								</div>
+							</div>
+                        {% endif %}
+					</div>
+				</div>
+
+				<div class="both"></div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

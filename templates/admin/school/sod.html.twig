@@ -1,0 +1,127 @@
+{% extends "back.html.twig" %}
+
+{% block title %}
+	Gestion des établissements du jour
+{% endblock %}
+
+{% block body_header %}
+	<div class="bc">
+		<span class="bc1"><a href="{{ path('admin_school') }}"><img src="{{ asset('image/sl_icon.png') }}" style="width:14px; height:auto" /> <span>Etablissements</span></a> </span>
+		<span class="dd">
+			<span href="#" class="dd_src">
+				<span class="bcdd"></span>
+			</span>
+            {{ include("admin/school/include/school_principal_action.html.twig") }}
+		</span>
+		<span class="bc1"><a href="{{ path('admin_school_sod') }}">Etablissement du jour</a></span>
+	</div>
+	<div style="padding:8px;right:0px; position: absolute;">
+		<span><a class="btn_new_sod" href="{{ path('admin_school_sod_assignation') }}"><img src="{{ asset('image/default_icon.png') }}" style="width: 14px"/> <span>Assigner un établissement</span></a></span>
+	</div>
+
+{% endblock %}
+
+{% block content_body %}
+	<div style="background:#ddd; padding: 5px; margin:5px; border:1px solid #bbb">
+		<form method="post" action="" style="display: inline-block">
+			<span>
+				<img src="{{ asset('image/list_icon.png') }}" style="width:12px; height:auto" />
+				De
+				<input type="text" id="datebegin" name="datebegin" value="{{ datebegin | date('d/m/Y') }}"/>
+				à
+				<input type="text" id="dateend" name="dateend" value="{{ dateend | date('d/m/Y') }}" />
+				<input type="submit" name="show" value="afficher"/>
+
+			</span>
+		</form>
+	</div>
+
+	<div class="a_datatable">
+		<div class="a_datatable_head">
+			<div class="a_datatable_head_left">
+				<span style="display:inline-block; margin-top:5px; margin-left:6px"> Rechercher :
+                    <input type="text" class="default_input a_list_search_input" data-target-id="list_days" /><!--
+					--><span class="a_list_search_reset"><img src="{{ asset('image/cross_icon.png') }}" style="width:12px; height:auto" /></span>
+                </span>
+			</div>
+			<div class="a_datatable_head_right">
+                {#right#}
+			</div>
+		</div>
+
+		<div class="a_datatable_body">
+			<table class="a_table" id="list_days">
+				<tr class="a_table_head">
+					<th class="taleft">Date</th>
+					<th style="width: 36px" >Logo</th>
+					<th class="taleft">Etablissements</th>
+					<th class="tacenter">Actions</th>
+				</tr>
+                {% for day in days %}
+                    {% set schoolShortname = "" %}
+                    {% set schoolname = "" %}
+                    {% if day.schoolOfTheDay is not null %}
+                        {% set schoolShortname = day.schoolOfTheDay.school.shortName %}
+                        {% set schoolname = day.schoolOfTheDay.school.name %}
+                    {% endif %}
+					<tr class="a_table_line contact_item" id="" data-text="{{ day.day | date('d/m/Y') }} {{ schoolShortname }} - {{ schoolname }}" style="display:table-row; position:relative:z-index:0">
+						<td>
+                            {{ day.day | date('d/m/Y') }}
+						</td>
+						<td class="">
+                            {% if day.schoolOfTheDay is not null %}
+								{# twig extension #}
+								{% set logo = schoolLogo(day.schoolOfTheDay.school) %}
+								<img id="" style="display:block;width: 32px; height: 32px; margin:1px" src="{{ logo | imagine_filter('32x32') }}" alt="img sl" />
+                            {% endif %}
+						</td>
+						<td class="taleft">
+							{% if day.schoolOfTheDay is not null %}
+								<a href="{{ path('admin_school_edit', {'id': day.schoolOfTheDay.school.id}) }}">
+									{{ day.schoolOfTheDay.school.shortName }} -
+									{{ day.schoolOfTheDay.school.name }}
+								</a>
+							{% endif %}
+						</td>
+						<td class="taright">
+							<form id="form_single_assignation" action="{{ path('admin_school_sod_assignation') }}" name="" method="post">
+								<input type="hidden" class="datebegin_assignation" name="datebegin" value="{{ day.day | date('d/m/Y') }}" />
+								<input type="hidden" class="dateend_assignation" name="dateend" value="{{ day.day | date('d/m/Y') }}" />
+								<select id="" name="schoolId" class="default_input">
+									<option value="0"></option>
+									{% for school in schools %}
+										{% set selected = "" %}
+										{% if day.schoolOfTheDay is not null %}
+											{% if day.schoolOfTheDay.school.id == school.id %}
+												{% set selected = "selected" %}
+											{% endif %}
+										{% endif %}
+											<option value="{{ school.id }}" {{ selected }}>{{ school.shortName }} - {{ school.name }}</option>
+									{% endfor %}
+									{% set selected = "" %}
+								</select>
+								<input type="submit" class="standar_button" value="Modifier" name="add" />
+							</form>
+						</td>
+					</tr>
+                {% endfor %}
+			</table>
+		</div>
+
+		<div class="a_datatable_foot">
+			<div class="a_datatable_foot_left">
+				<span style="display:inline-block; margin-top:6px; margin-left:6px" class="result_state">{{ days | length }} resultat(s)</span>
+			</div>
+			<div class="a_datatable_foot_right">
+                {#
+                right
+                #}
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block body_footer %}
+	<span style="display:inline-block; margin-top:6px; margin-left:6px"><a href="{{ path('admin_school_edit', {'id': schoolToday.id}) }}">Etablissement du jour : {{ schoolToday.shortName }} - {{ schoolToday.name }}</a></span>
+{% endblock %}
+

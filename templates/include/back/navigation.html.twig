@@ -1,0 +1,161 @@
+{% if view is defined %}
+
+{% else %}
+	{% set view = 'school' %}
+{% endif %}
+
+<div id="a_nav_main">
+	<div class="a_nav_item">
+		<div class="a_nav_main_item">
+			<div class="a_nav_main_item_icon"><div><img src="{{ asset('image/dashboard_icon.png') }}" /></div></div>
+			<div class="a_nav_main_item_text"><a href="{{ path('admin_home') }}">Tableau de bord</a></div>
+		</div>
+	</div>
+	<div class="a_nav_item {% if view == 'school' %} open{% endif %}">
+		<div class="a_nav_main_item">
+			<div class="a_nav_main_item_icon"><div><img src="{{ asset('image/sl_icon.png') }}" /></div></div>
+			<div class="a_nav_main_item_text">Etablissements</div>
+		</div>
+		<div class="a_nav_sub_content">
+			<div class="a_nav_sub_item">
+				<div class="a_nav_sub_item_icon"><div><img src="{{ asset('image/list_icon.png') }}" /></div></div>
+				<div class="a_nav_sub_item_text">
+					<a href="{{ path('admin_school') }}">
+						<span>Etablissements</span>
+					</a>
+				</div>
+			</div>
+			<div class="a_nav_sub_item">
+				<div class="a_nav_sub_item_icon"><div><img src="{{ asset('image/list_icon.png') }}" /></div></div>
+				<div class="a_nav_sub_item_text">
+					<a href="{{ path('admin_school_category') }}">
+						<span>Catégories</span>
+					</a>
+				</div>
+			</div>
+			<div class="a_nav_sub_item">
+				<div class="a_nav_sub_item_icon"><div><img src="{{ asset('image/default_icon.png') }}" /></div></div>
+				<div class="a_nav_sub_item_text">
+					<a href="{{ path('admin_school_sod') }}">
+						<span>Etablissement du jour</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="a_nav_item {% if view == 'blog' %} open{% endif %}">
+		<div class="a_nav_main_item">
+			<div class="a_nav_main_item_icon"><div><img src="{{ asset('image/bg_icon.png') }}" /></div></div>
+			<div class="a_nav_main_item_text">Blog</div>
+		</div>
+		<div class="a_nav_sub_content" style="">
+			<div class="a_nav_sub_item">
+				<div class="a_nav_sub_item_icon"><div><img src="{{ asset('image/list_icon.png') }}" /></div></div>
+				<div class="a_nav_sub_item_text">
+					<a href="{{ path('admin_blog_post') }}">
+						<span>Articles</span>
+					</a>
+				</div>
+			</div>
+			<div class="a_nav_sub_item">
+				<div class="a_nav_sub_item_icon"><div><img src="{{ asset('image/list_icon.png') }}" /></div></div>
+				<div class="a_nav_sub_item_text">
+					<a href="{{ path('admin_blog_post_creation') }}">
+						<span>En cours de création</span>
+					</a>
+				</div>
+			</div>
+			<div class="a_nav_sub_item">
+				<div class="a_nav_sub_item_icon"><div><img src="{{ asset('image/list_icon.png') }}" /></div></div>
+				<div class="a_nav_sub_item_text">
+					<a href="{{ path('admin_blog_tags') }}">
+						<span>Tags</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="a_nav_item {% if view == 'extra' %} open{% endif %}">
+		<div class="a_nav_main_item">
+			<div class="a_nav_main_item_icon"><div><img src="{{ asset('image/sl_contact_icon.png') }}" /></div></div>
+			<div class="a_nav_main_item_text">Extra</div>
+		</div>
+		<div class="a_nav_sub_content" style="">
+			<div class="a_nav_sub_item">
+				<div class="a_nav_sub_item_icon"><div><img src="{{ asset('image/list_icon.png') }}" /></div></div>
+				<div class="a_nav_sub_item_text">
+					<a href="{{ path('admin_platform_contact') }}">
+						<span>Contacts</span>
+					</a>
+				</div>
+			</div>
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+				<div class="a_nav_sub_item">
+					<div class="a_nav_sub_item_icon"><div><img src="{{ asset('image/list_icon.png') }}" /></div></div>
+					<div class="a_nav_sub_item_text">
+						<a href="{{ path('admin_platform_newsletter_mail') }}">
+							<span>Emails newsletter</span>
+						</a>
+					</div>
+				</div>
+            {% endif %}
+		</div>
+	</div>
+
+
+	<div class="a_nav_item {% if view == 'user' %} open{% endif %}">
+		<div class="a_nav_main_item">
+			<div class="a_nav_main_item_icon"><div><img src="{{ asset('image/ur_icon.png') }}" /></div></div>
+			<div class="a_nav_main_item_text">Utilisateurs</div>
+		</div>
+		<div class="a_nav_sub_content" style="">
+			<div class="a_nav_sub_item">
+				<div class="a_nav_sub_item_icon"><div><img src="{{ asset('image/list_icon.png') }}" /></div></div>
+				<div class="a_nav_sub_item_text">
+					<a href="{{ path('admin_user') }}">
+						<span>Utilisateurs</span>
+					</a>
+				</div>
+			</div>
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+				<div class="a_nav_sub_item">
+					<div class="a_nav_sub_item_icon"><div><img src="{{ asset('image/list_icon.png') }}" /></div></div>
+					<div class="a_nav_sub_item_text">
+						<a href="{{ path('admin_user_admin') }}">
+							<span>Administrateurs</span>
+						</a>
+					</div>
+				</div>
+            {% endif %}
+		</div>
+	</div>
+
+	<div class="a_nav_item">
+		<div class="a_nav_main_item">
+			<div class="a_nav_main_item_icon"><div><img src="{{ asset('image/setting_icon.png') }}" /></div></div>
+			<div class="a_nav_main_item_text">Paramètres</div>
+		</div>
+		<div class="a_nav_sub_content" style="">
+			<div class="a_nav_sub_item">
+				<div class="a_nav_sub_item_icon"><div><img src="{{ asset('image/default_icon.png') }}" /></div></div>
+				<div class="a_nav_sub_item_text">
+					<a href="{{ path('admin_setting_accessibility') }}">
+						<span>Accessibilité</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="a_nav_foot">
+	<div class="nav_separator"></div>
+
+
+	<div class="a_nav_items">
+		<div class="a_nav_main_item">
+			<div class="a_nav_main_item_icon"><div></div></div>
+			<div class="a_nav_main_item_text" id="popupme">Que tous soit un...</div>
+		</div>
+	</div>
+</div>

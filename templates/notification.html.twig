@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}www.oio.com!{% endblock %}</title>
+
+</head>
+<body>
+    <table style="border: 1px solid #dddddd;margin: auto; width: 750px;border-collapse: collapse;font-family: Calibri; text-decoration: none">
+        <tr style="width: 100%;">
+            <td style="width: 100%;padding: 0px">
+                <table  style="border-collapse: collapse;width: 100%;background: rgba(255, 255, 255, 1) url('{{ absolute_url(asset('image/cover.jpg')) }}') no-repeat scroll center center / cover;">
+                    <tr>
+                        <td style="text-align: center;padding: 60px 10px;">
+                            <a target="_blank" href="{{ absolute_url(path('platform_home')) }}" style="text-decoration: none; color:#233d4e">
+                                <img src="{{ absolute_url(asset('image/oio.svg')) }}" style="width:24px; height:24px;display: inline-block; vertical-align: middle;" /><br />
+                                « Ny fianarana no lova tsara indrindra »
+                            </a>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%; background: rgba(255,255,255,0.7)">
+                        <td style="width: 100%;">
+                            <table style="">
+                                <tr>
+                                    <td style="padding: 7px"><a style="text-decoration: none; color:#233d4e" target="_blank" href="{{ absolute_url(path('platform_home')) }}">Accueil</a></td>
+                                    <td style="padding: 7px"><a style="text-decoration: none; color:#233d4e" target="_blank" href="{{ absolute_url(path('school_home')) }}">Etablissements</a></td>
+                                    <td style="padding: 7px"><a style="text-decoration: none; color:#233d4e" target="_blank" href="{{ absolute_url(path('school_categories')) }}">Catégories</a></td>
+                                    <td style="padding: 7px"><a style="text-decoration: none; color:#233d4e" target="_blank" href="{{ absolute_url(path('blog')) }}">Blog</a></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="height: 100px; padding: 10px">
+                {% block body %}
+                    {% if content is defined %}
+                        {{ content | raw }}
+                    {% endif %}
+                {% endblock %}
+            </td>
+        </tr>
+        <tr style="width: 100%;background: #eee">
+            <td style="text-align: center;">
+                <table style="margin: auto">
+                    <tr>
+                        <td style="padding: 7px"><a style="text-decoration: none; color:#233d4e" target="_blank" href="{{ absolute_url(path('platform_about')) }}">A propos</a></td>
+                        <td style="padding: 7px"><a style="text-decoration: none; color:#233d4e" target="_blank" href="{{ absolute_url(path('platform_notice')) }}">Mentions légales</a></td>
+                        <td style="padding: 7px"><a style="text-decoration: none; color:#233d4e" target="_blank" href="{{ absolute_url(path('platform_contact')) }}">Nous contacter</a></td>
+                        <td style="padding: 7px"><a style="text-decoration: none; color:#233d4e" target="_blank" href="{{ absolute_url(path('platform_newsletter')) }}">Newsletter</a></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <table style="margin: auto; width: 750px;border-collapse: collapse;font-family: Calibri; margin-top: 20px">
+        <tr style="width: 100%">
+            <td style="width: 100%;text-align: center; font-size: 14px">
+                <a style="text-decoration: none; color:#000" target="_blank" href="{{ absolute_url(path('platform_home')) }}">{{ dns }}</a> - copyright 2019
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

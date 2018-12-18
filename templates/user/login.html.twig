@@ -1,0 +1,62 @@
+{% extends "front.html.twig" %}
+
+{% block title %}
+	Connexion
+{% endblock %}
+
+
+{% block body %}
+	<div class="cr">
+		<div class="ct">
+			<div class="mg_h10">
+				<div class="label_title">
+					<span style="font-weight:bold">Connexion.</span> <a href="{{ path('user_register') }}">Vous n'êtes pas encore inscrit?</a>
+				</div>
+				<div class="pm_bloc">
+					<div class="pm_form">
+						<form name="" action="{{ path('user_login') }}" method="post" id="form-inscription">
+							<div class="pm_form_wrap">
+								<div>                
+									<div><label for="username" class="required">Pseudo ou Email *:</label></div>
+									<div><input type="text" id="username" name="_username" required="required" value="{{ last_username }}" class="default_input" /></div>
+								</div>
+								
+								<div>                
+									<div><label for="password" class="required">Mot de passe *:</label></div>
+									<div><input type="password" id="password" name="_password" required="required" class="default_input" /></div>
+								</div>
+
+                                {% if error %}
+                                    {#{ error | raw }#}
+									<div class="mg_v10"><span class="error_msg">Verifiez bien votre email ou mot de passe.</span></div>
+                                {% endif %}
+
+                                {% if msgActivation is defined %}
+									<div class="mg_v10"><span class="success_msg"><strong>{{ msgActivation | raw }}</strong></span></div>
+                                {% endif %}
+
+								<div style="margin-top : 10px">
+									<button type="submit" id="Inscription" name="Inscription" class="standar_button">{{ 'connexion' | trans }}</button>
+								</div>
+								<div class="mg_v10">
+									 <a href="{{ path('user_set_new_password') }}">Vous avez oubliez votre mot de passe?</a>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="pm_desc">
+						<h1>
+							Duplexque isdem diebus acciderat malum lorem ipsum?
+						</h1>
+						<p>Duplexque isdem diebus acciderat malum, quod et Theophilum insontem atrox interceperat casus, et Serenianus dignus exsecratione cunctorum,
+							innoxius, modo non reclamante publico vigore, discessit.</p>
+						<p>Et quia Montius inter dilancinantium manus spiritum efflaturus Epigonum et Eusebium nec professionem nec dignitatem ostendens aliquotiens increpabat,
+							qui sint hi magna quaerebatur industria, et nequid intepesceret, Epigonus e Lycia philosophus ducitur et Eusebius ab Emissa Pittacas cognomento,
+							concitatus orator, cum quaestor non hos sed tribunos fabricarum insimulasset promittentes armorum si novas res agitari conperissent.</p>
+					</div>
+				</div>
+				<div class="both"></div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

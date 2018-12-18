@@ -1,0 +1,154 @@
+<div id="search" class="cr">
+	<div id="search_content"  class="ct">
+		<div id="search_hidden">
+
+		</div>
+		<div id="search_header">
+			
+		</div>
+		<div id="search_bloc">
+			<form action="" name="form_search" method="post" id="form_search">
+				<div id="search_entity">
+					
+					{% set selectedSchool = "selected" %}
+					{% set selectedBlog = "" %}
+					{#{% set selectedAdvert = "" %}#}
+					
+					{% set displaySchool = "block" %}
+					{% set displayBlog = "none" %}
+                    {#{% set displayAdvert = "none" %}#}
+					
+					{% set querySchool = "" %}
+					{% set queryBlog = "" %}
+                    {#{% set queryAdvert = "" %}#}
+					
+					{% if entityView is defined %}
+						{% if entityView == "school" %}
+							{% set selectedSchool = "selected" %}
+							{% set selectedBlog = "" %}
+							{#{% set selectedAdvert = "" %}#}
+							{% set displaySchool = "block" %}
+							{% set displayBlog = "none" %}
+							{% set displayAdvert = "none" %}
+							{% if q is defined %}
+								{% set querySchool = q %}
+							{% endif %}
+						{% elseif entityView == "blog" %} 
+							{% set selectedSchool = "" %}
+							{% set selectedBlog = "selected" %}
+                            {#{% set selectedAdvert = "" %}#}
+							{% set displaySchool = "none" %}
+							{% set displayBlog = "block" %}
+							{% set displayAdvert = "none" %}
+							{% if q is defined %}
+								{% set queryBlog = q %}
+							{% endif %}
+						{% endif %}
+						{#
+						{% if entityView == "advert" %}
+							{% set selectedSchool = "" %}
+							{% set selectedBlog = "" %}
+							{% set selectedAdvert = "selected" %}
+							{% set displaySchool = "none" %}
+							{% set displayBlog = "none" %}
+							{% set displayAdvert = "block" %}
+							{% if q is defined %}
+								{% set queryAdvert = q %}
+							{% endif %}
+						{% endif %}
+						#}
+					{% endif %}
+					
+					<div class="search_entity_item {{ selectedSchool }}" data-entity="sl">
+						Etablissement
+					</div>
+					<div class="search_entity_item {{ selectedBlog }}" data-entity="bg">
+						Blog
+					</div>
+					{#
+					<div class="search_entity_item {{ selectedAdvert }}" data-entity="at">
+						{{ 'advert' | trans }}
+					</div>
+					#}
+					<div class="both"></div>
+				</div>
+				<div id="search_critere">
+					<div class="search_entity_content" id="search_critere_sl" style="display:{{ displaySchool }}">
+						<div class="sl_bloc_query">
+							<input type="text"  autocomplete="off" id="q_sl" data-target="{{ path('platform_search_single_school') }}" placeholder="" value="{{ querySchool }}" />
+						</div>
+						<div class="sl_bloc_cat dd">
+							<div class="dd_src">
+								{% if category is not defined or category is null %}
+									<span id="search_sl_cat_name">Toutes categories</span>
+									<input type="hidden" name="category" id="cat_sl_input_id" value="0" data-slug="all"  />
+								{% else %}
+									<span id="search_sl_cat_name">{{ category.name | capitalize }}</span>
+									<input type="hidden" name="category" id="cat_sl_input_id" value="{{ category.id }}" data-slug="{{ category.slug }}"  />
+								{% endif %}
+							</div>
+							<div class="dd_target search_sl_cat_list" data-display="block">
+								<div style="margin:5px">
+									<span data-category-id="0" title="Toutes categories" data-name="Toutes categories" data-slug="all" class="search_cat_sl_item"><span>Toutes categories</span></span><!--
+									{% set categories = getCategoriesWithPublishedSchool(0) %}
+									{% for category in categories %}
+										--><span data-category-id="{{ category.id }}" data-slug="{{ category.slug }}" title="{{ category.name | capitalize }}" data-name="{{ category.name | capitalize }}" class="search_cat_sl_item"><span>{{ category.name | capitalize }}</span></span><!--
+									{% endfor %}
+								--></div>
+							</div>
+						</div>
+						<div class="sl_bloc_type dd">
+							<div class="dd_src">
+                                {% if typeEntity is not defined or typeEntity is null %}
+									<span id="search_sl_type_name">Touts types</span>
+									<input type="hidden" name="type" id="type_sl_input_id" value="0" data-slug="all"  />
+                                {% else %}
+									<span id="search_sl_type_name">{{ typeEntity.pluralName }}</span>
+									<input type="hidden" name="type" id="type_sl_input_id" value="{{ typeEntity.id }}" data-slug="{{ typeEntity.slug }}"  />
+                                {% endif %}
+							</div>
+							<div class="dd_target search_sl_type_list" data-display="block" style="display:none;">
+								<div style="margin:5px">
+									<span data-type-id="0" title="Touts types" data-slug="all" class="search_type_sl_item" data-name="Touts types">Touts types</span>
+									<span data-type-id="1" title="Publique" data-slug="public" class="search_type_sl_item" data-name="Publics">Publics</span>
+									<span data-type-id="2" title="Privé" data-slug="private" class="search_type_sl_item" data-name="Privés">Privés</span>
+								</div>
+							</div>
+						</div>
+						<div class="both"> 
+						</div>
+					</div>
+					<div class="search_entity_content" id="search_critere_bg" style="display:{{ displayBlog }}">
+						<input type="text" id="q_bg" placeholder=""  value="{{ queryBlog }}" />
+					</div>
+					{#
+					<div class="search_entity_content" id="search_critere_at" style="display:{{ displayAdvert }}">
+						<input type="text" id="q_at" placeholder="Tapez ce que vous voulez recherchez.advert"  value="{{ queryAdvert }}" />
+					</div>
+					#}
+				</div>
+				<div id="search_submit">
+					<div id="search_single_result_sl" class="search_single_result" style="display:{{ displaySchool }}">
+						Tapez le sigle ou l'appelation de l'établissement
+					</div>
+					<div id="search_single_result_bg" class="search_single_result" style="display:{{ displayBlog }}">
+						Faites votre recherche sur notre liste d'articles
+					</div>
+					{#
+					<div id="search_single_result_at" class="search_single_result" style="display:{{ displayAdvert }}">
+						Qu'est-ce que vous voulez recherchez? advert
+					</div>
+					#}
+					<div id="search_submit_button">
+						<div id="btn_search" data-target="{{ path('platform_search') }}" >Rechercher</div>
+						<input type="submit" style="display:none" value="search" />
+					</div>
+					<div class="both"></div>
+				</div>
+			</form>
+		</div>
+		<div id="search_footer">
+			
+		</div>
+	</div>
+</div>

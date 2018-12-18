@@ -1,0 +1,35 @@
+<div class="cat_item" data-text="{{ category.name }}">
+	<div class="cat_item_content">
+		<div>
+			<a href="{{ path('school_category_view', {'slug': category.slug}) }}" class="libelle">
+				{% set schools = getAllSchoolByCategory(category, true) %}
+				{% set schoollabel = 'établissements' %}
+				{% set schoolslength = schools | length %}
+				{% if schoolslength < 2 %}
+					{% set schoollabel = 'établissement' %}
+				{% endif %}
+				{{ category.name | capitalize }} ({{ schoolslength }} {{ schoollabel }})
+			</a>
+		</div>
+		<div class="mg_5">
+			<div class="sp"></div>
+		</div>
+		{% set school = getCurrentSchoolByCategory(category) %}
+		<a title="{{ school.name }}" href="{{ path('school_view', {'slug': school.slug}) }}" class="sl_illustration">
+			<span class="logo">
+				<span class="logo_content">
+					{# twig extension #}
+					{% set logo = schoolLogo(school) %}
+					<img src="{{ logo | imagine_filter('40x40') }}" />
+				</span>
+				<span class="sl_illustration_txt">
+					{% if school.shortName | trim != "" %}
+						<span class="sigle">{{ school.shortName }}</span>
+					{% endif %}
+					<span class="name" title="{{ school.name }}">{{ school.name }}</span>
+				</span>
+				<span class="both"></span>
+			</span>
+		</a>
+	</div>
+</div>

@@ -1,0 +1,16 @@
+<div style="min-height:100px" class="">
+	{% if posts|length == 0 %}
+		<div style="margin:auto; padding-top: 30px; text-align:center; font-weight:bold">
+			Aucune actualité à afficher
+		</div>
+	{% else %}
+		<div id="bg_list" style="overflow:hidden">
+			<div id="list_post" class="mg_t5" style="">
+				{% for post in posts %}
+					{{ include("blog/include/post_item.html.twig") }}
+				{% endfor %}
+			</div>
+			<div class="both"></div>
+		</div>
+	{% endif %}
+</div>

@@ -1,0 +1,319 @@
+.error_msg{
+	display: inline-block;
+	border: 1px solid #aa4e46;
+	padding: 5px;
+	color: #8b2c1e;
+	width: 100%;
+	box-sizing: border-box;
+}
+.success_msg{
+	display: inline-block;
+	border: 1px solid #24862c;
+	padding: 5px;
+	color: #138018;
+	width: 100%;
+	box-sizing: border-box;
+}
+.both{
+	display:block;
+	clear:both;
+}
+.sep{
+	/*
+	background:#ccc;
+	height:1px;*/
+	width:100%;
+	margin:12px 0;
+	border-bottom: 1px solid #ccc;
+	display: block;
+}
+.left{
+	float:left;
+}
+.right{
+	float:right;
+}
+.taleft{
+	text-align:left;
+}
+.tacenter{
+	text-align:center;
+}
+.tajustify{
+	text-align:justify;
+}
+.taright{
+	text-align:right;
+}
+.ct10{
+	margin-left:10px;
+	margin-right:10px
+}
+.sp{
+	/*background:#ccc;
+	height:1px; */
+	width:100%;
+	border-bottom: 1px solid #ccc;
+	display: block;
+}
+/*margin 0*/
+.mg_0{
+	margin:0px;
+}
+.mg_h0{
+	margin-left:0px;
+	margin-right:0px
+}
+.mg_v0{
+	margin-top:0px;
+	margin-bottom:0px
+}
+.mg_t0{
+	margin-top:0px;
+}
+.mg_b0{
+	margin-bottom:0px;
+}
+.mg_r0{
+	margin-right:0px;
+}
+.mg_l0{
+	margin-left:0px;
+}
+/*margin 5*/
+.mg_5{
+	margin:5px;
+}
+.mg_h5{
+	margin-left:5px;
+	margin-right:5px
+}
+.mg_v5{
+	margin-top:5px;
+	margin-bottom:5px
+}
+.mg_t5{
+	margin-top:5px;
+}
+.mg_b5{
+	margin-bottom:5px;
+}
+.mg_r5{
+	margin-right:5px;
+}
+.mg_l5{
+	margin-left:5px;
+}
+/*margin 10*/
+.mg_10{
+	margin:10px;
+}
+.mg_h10{
+	margin-left:10px;
+	margin-right:10px
+}
+.mg_v10{
+	margin-top:10px;
+	margin-bottom:10px
+}
+.mg_t10{
+	margin-top:10px;
+}
+.mg_b10{
+	margin-bottom:10px;
+}
+.mg_r10{
+	margin-right:10px;
+}
+.mg_l10{
+	margin-left:10px;
+}
+/*margin 20*/
+.mg_20{
+	margin:20px;
+}
+.mg_h20{
+	margin-left:20px;
+	margin-right:20px
+}
+.mg_v20{
+	margin-top:20px;
+	margin-bottom:20px
+}
+.mg_t20{
+	margin-top:20px;
+}
+.mg_b20{
+	margin-bottom:20px;
+}
+.mg_r20{
+	margin-right:20px;
+}
+.mg_l20{
+	margin-left:20px;
+}
+/* padding 5 */
+.pd_5{
+	padding:5px;
+}
+.pd_h5{
+	padding-left:5px;
+	padding-right:5px
+}
+.pd_v5{
+	padding-top:5px;
+	padding-bottom:5px
+}
+.pd_t5{
+	padding-top:5px;
+}
+.pd_b5{
+	padding-bottom:5px;
+}
+.pd_r5{
+	padding-right:5px;
+}
+.pd_l5{
+	padding-left:5px;
+}
+/* padding 10 */
+.pd_10{
+	padding:10px;
+}
+.pd_h10{
+	padding-left:10px;
+	padding-right:10px
+}
+.pd_v10{
+	padding-top:10px;
+	padding-bottom:10px
+}
+.pd_t10{
+	padding-top:10px;
+}
+.pd_b10{
+	padding-bottom:10px;
+}
+.pd_r10{
+	padding-right:10px;
+}
+.pd_l10{
+	padding-left:10px;
+}
+
+.vatop{
+	vertical-align: top;
+}
+.vamiddle{
+	vertical-align: middle;
+}
+.vabottom{
+	vertical-align: bottom;
+}
+.op5{
+	opacity: 0.5;
+}
+/* green and red state */
+.toggle_case, .toggle_publishState_post, .toggle_showAuthorState_post, .toggle_validState_post, .toggle_deleteState_post, .toggle_publishState, .toggle_publishState_field , .toggle_publishState_contact {
+	cursor:pointer; 
+	display:inline-block
+}
+.greenpastille{
+	display:inline-block;
+	width:10px;
+	height:10px;
+	border-radius:50% 50%; 
+	background:#c00
+}
+.redpastille{
+	display:inline-block;
+	width:10px;
+	height:10px;
+	border-radius:50% 50%; 
+	background:#0c0
+}
+
+.images_popup_wrapper{
+	height: 267px;
+	overflow: auto;
+	margin: 5px 0;
+	text-align: center;
+}
+
+.image_item{
+	display: inline-block;
+	border: 4px solid #eee;
+	margin: 2px;
+	border-radius: 5px;
+	position: relative;
+}
+
+.image_item.active{
+	border-color: #666;
+}
+
+.image_popup{
+	cursor: pointer;
+	display: block;
+	width: 116px;
+	height: 116px;
+	border-radius: 0px;
+}
+
+.images_popup_wrapper .delete_image{
+	cursor: pointer;
+	display: block;
+	position: absolute;
+	width: 18px;
+	height: 18px;
+	margin-left: 96px;
+	margin-top: 1px;
+	background: #fff;
+	border: 1px solid #666;
+	border-radius: 50% 50%;
+	padding-top: 4px;
+	box-sizing: border-box;}
+
+/*datepicker*/
+#ui-datepicker-div{
+	width: 230px;
+}
+.ui-datepicker th {
+	width: 14.2857%;
+}
+#ui-datepicker-div td{
+	font-size: 14px;
+	font-family: 'calibri';
+}
+.ui-datepicker th {
+	font-size: 14px;
+	font-style: normal;
+	font-weight: normal;
+}
+.ui-datepicker .ui-datepicker-title {
+	font-size: 15px;
+	font-style: normal;
+	font-weight: normal;
+}
+.ui-datepicker table {
+	margin-bottom: 3px;
+}
+
+/*embeded video*/
+.video-container {
+	position: relative;
+	padding-bottom: 56.25%;
+	padding-top: 30px;
+	height: 0;
+	overflow: hidden;
+}
+
+.video-container iframe,
+.video-container object,
+.video-container embed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}

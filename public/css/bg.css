@@ -1,0 +1,162 @@
+/**************liste school***************/
+.bgl{
+	float:left;
+	/*width:900px;*/
+	margin-top:10px;
+}
+/*
+.bgr{
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+}
+*/
+#list_post{
+	display: flex;
+	/*justify-content: space-between;*/
+	flex-wrap: wrap;
+}
+.post_item{
+	margin-bottom:10px;
+	width: 33.333%;
+	padding:10px;
+	box-sizing: border-box;
+}
+.post_item .post_title{
+    font-size: 17px;
+    margin: 0 0 8px;
+	border: 1px solid #ddd; 
+	background:#f8f8f8; 
+	padding: 8px;
+}
+.post_item .post_title a{
+	display:block
+}
+.post_item .meta_info{
+    min-height: 14px;
+	margin-bottom: 10px;
+}
+.post_item .meta_info {
+
+}
+.author_info{
+	float: left;
+}
+.author_info img{
+	display: inline-block;
+	border-radius: 50%;
+	vertical-align: middle;
+}
+.author_info .user_info{
+	display: inline-block;
+	vertical-align: middle;
+}
+.conmment_info{
+	float: right;
+}
+.conmment_info img{
+	display: inline-block;
+	vertical-align: middle;
+}
+.conmment_info strong{
+	display: inline-block;
+	vertical-align: middle;
+}
+.date_info{
+	float: left;
+	margin-top: 10px;
+}
+.date_info img{
+	display: inline-block;
+	vertical-align: middle;
+}
+.date_info strong{
+	display: inline-block;
+	vertical-align: middle;
+}
+.post_action{
+	float: right;
+	margin-top: 5px;
+}
+.post_action a{
+	margin: 0px;
+}
+.post_item .post_image {
+	margin-bottom: 0px;
+	position: relative;
+	overflow: hidden;
+
+}
+.post_item .post_image:before {
+	content: '';
+	display: block;
+	padding-top: 41.666%;
+}
+.post_item .post_image a img {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.post_item .post_image a{
+	display: block;
+}
+
+
+/*edit post front*/
+.meta_info{
+
+}
+.meta_info .meta_illustration{
+	float:left;
+	height: 130px;
+	margin:5px 0
+}
+
+.meta_info .meta_title{
+	margin-left: 310px;
+}
+.meta_info #post_illustration, .meta_info #post_illustration_fix{
+	max-width: 300px;
+	height: 125px;
+}
+
+.list_tag .tag_item:hover{
+	background: #ccc;
+}
+
+@media screen and (max-width: 930px)
+{
+	.post_item {
+		margin-bottom: 16px;
+		width: 50%;
+	}
+}
+
+@media screen and (max-width: 690px)
+{
+	.meta_info .meta_illustration{
+		float:none;
+		height: auto;
+		text-align: center;
+	}
+
+	.meta_info #post_illustration, .meta_info #post_illustration_fix{
+		width: auto;
+		max-width: 100%;
+		height: auto;
+	}
+	.meta_info .meta_title{
+		margin-left: 0px;
+	}
+}
+
+@media screen and (max-width: 530px)
+{
+	.post_item{
+		margin-bottom:16px;
+		width: 100%;
+	}
+}

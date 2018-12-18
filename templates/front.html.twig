@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}Welcome!{% endblock %}</title>
+
+    {% block icon %}
+        <link rel="icon" type="image/png" href="{{ asset('image/oio.svg') }}" />
+    {% endblock %}
+
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/button.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/common.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/container.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/sl.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/ur.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/bg.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/fm.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/popup.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/a_table.css') }}">
+    {% endblock %}
+    {% block styledirect %}
+        <style type="text/css">
+            #search{background: #81b5e2 url('{{ asset('image/cover.jpg') }}') no-repeat scroll center center / cover ;}
+        </style>
+    {% endblock %}
+
+    {% block jsgmap %}
+    {% endblock %}
+</head>
+<body>
+    <header>
+        {{ include("include/front/navigation.html.twig") }}
+        {{ include("include/front/search.html.twig") }}
+    </header>
+
+    <div id="container">
+        {% if entityView is defined and entityView == 'blog' %}
+        <div class="cr">
+            <div class="ct">
+                <div class="mg_l10">
+                    <div style="position: absolute; margin-top: -38px; background: rgba(230,230,230,0.7); padding: 5px; border-radius: 7px">
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <span class="create_post" style="cursor: pointer" data-target="{{ path('blog_manager_add_post_ajax')}}"><img src="{{ asset('image/add_icon.png') }}" style="width:12px; height:auto"> Proposer un article</span>
+                        {% else %}
+                            <a class="login_ajax" href="{{ path('user_login_ajax') }}"><img src="{{ asset('image/add_icon.png') }}" style="width:12px; height:auto"> Proposer un article</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="border-bottom: 1px solid transparent; margin-top: -1px"></div>
+        {% endif %}
+
+        {% block body %}
+            <div>
+                "Ny fianarana no lova tsara indrindra."
+            </div>
+        {% endblock %}
+    </div>
+    <footer>
+        {{ include("include/front/navigation_footer.html.twig") }}
+        {{ include("include/front/copyright.html.twig") }}
+    </footer>
+
+    <script src="{{ asset('build/app.js') }}"></script>
+
+    {% block javascripts %}
+        <script type="text/javascript" src="{{ asset('js/jquery.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/common.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/header.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/button.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/popup.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/sl.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/ur.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/bg.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/manager.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/bg_manage.js') }}"></script>
+    {% endblock %}
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGWXblVkezi69dBRUoKcsjOf3g7I4XwM0&sensor=false"></script>
+</body>
+</html>

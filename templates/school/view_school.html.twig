@@ -1,0 +1,236 @@
+{% extends "front.html.twig" %}
+
+{% block title %}
+    {{ school.shortName }} - {{ school.name }}
+{% endblock %}
+
+{% block styledirect %}
+    {# twig extension #}
+    {% set cover = schoolCover(school) %}
+    <style type="text/css">
+        #search{background: #81b5e2 url('{{ asset(cover) }}') no-repeat scroll center center / cover ;}
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    {# twig extension #}
+    {% set logo = schoolLogo(school) %}
+
+    <div class="cr" id="sl_view_hidden">
+        <div class="ct">
+            <div class="mg_h10">
+                <div class="logo">
+                    <img id="sl_view_logo_hidden" src="{{ logo | imagine_filter('32x32') }}" alt="img sl" />
+                </div>
+                <div class="label">
+                    {% if school.shortName | trim != "" %}
+                        {{ school.shortName }} -
+                    {% endif %}
+                    {{ school.name }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="sl_gl" class="cr">
+        <div class="ct">
+            <div id="sl_view_top">
+                <div class="left">
+                    <img id="sl_view_logo" src="{{ logo | imagine_filter('100x100') }}" alt="logo {{ school.shortName }} - {{ school.name }}" title="logo {{ school.shortName }} - {{ school.name }}" />
+                </div>
+                <div class="sl_view_top_info">
+                    <div id="sl_view_name_category">
+                        <div id="sl_view_name">
+                            <a href="{{ path('school_view', {'slug': school.slug}) }}">
+                                <span class="school_name">
+                                    {% if school.shortName | trim != "" %}
+                                        {{ school.shortName }} -
+                                    {% endif %}
+                                    {{ school.name }}
+                                </span>
+                                <span class="school_nbview">
+                                    ({{ school.views | length }} vues)
+                                </span>
+                            </a>
+                        </div>
+
+                        {% if categories | length != 0 %}
+                            <div id="sl_view_categories">
+                                <a class="all_cat_link" href="{{ path('school_categories') }}">
+                                    <img src="{{ asset('image/category_icon.png')  }}" />
+                                </a><!--
+								{% for category in categories %}
+									--><a class="sl_cat_item" href="{{ path('school_category_view', {'slug': category.slug}) }}">
+                                    {{ category.name }}
+                                </a><!--
+								{% endfor %}
+
+                                {% if school.slogan != "" %}
+                                    --><div class="slogan mg_v5">
+                                        « {{ school.slogan }} »
+                                    </div><!--
+                                {% endif %}
+							  --></div>
+                        {% endif %}
+                    </div>
+                    <div id="sl_view_description">
+                        <div>
+                            {{ school.shortDescription }}
+                        </div>
+                    </div>
+
+                    <div id="sl_view_action">
+                        <div class="left">
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and is_granted('ROLE_ADMIN') %}
+                                <a href="{{ path('admin_school_edit', {'id': school.id}) }}" target="_blank"><span class="standar_button">Administrer</span></a>
+                            {% endif %}
+                        </div>
+                        <div class="right">
+                            <span class="subscription_loading" style="display:none">
+								<img src="{{ asset('image/tail-spin.svg')  }}" style="width:20px; height:20px;display: inline-block; vertical-align: middle;" />
+							</span>
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
+                                <span id="toggle_subscription" data-target="{{ path('school_toggle_subscription', {'school_id': school.id}) }}" style="cursor:pointer">
+                                {% set isSubscribed = isSubscribed(school, app.user) %}
+                                {% if isSubscribed %}
+                                    <span class="subscription_btn" style="display:none">S'abonner</span>
+                                    <span class="unsubscription_btn">Abonné</span>
+                                {% else %}
+                                    <span class="subscription_btn">S'abonner</span>
+                                    <span class="unsubscription_btn" style="display:none;">Abonné</span>
+                                {% endif %}
+                                </span>
+                            {% endif %}
+                        </div>
+                        <div class="both"></div>
+                    </div>
+                </div>
+                <div class="both"></div>
+            </div>
+        </div>
+    </div>
+    <div id="sl_dl">
+        <div>
+            <div id="sl_onglet_head" style="">
+                <div class="cr">
+                    <div class="ct">
+                        <div class="mg_h10">
+							<a class="tab_sl_item{% if type == 'about' %} selected{% endif %}" id="tab_sl_about" data-title="{{ school.name }} - about" href="{{ path('school_view', {'slug': school.slug, 'type': 'about'}) }}" >
+								<span class="wrap"><img class="img logo" src="{{ logo | imagine_filter('20x20') }}" alt="AU" /> <span class="label">A propos</span></span>
+							</a><!--
+							--><a class="tab_sl_item{% if type == 'post' %} selected{% endif %}" id="tab_sl_new" data-title="{{ school.name }} - post" href="{{ path('school_view', {'slug': school.slug, 'type': 'post'}) }}" >
+								<span class="wrap"><img class="img icon" src="{{ asset('image/sl_bg_icon.png') }}" alt="BG" /> <span class="label">Actualités</span></span>
+							</a>{#<!--
+							--><a class="tab_sl_item{% if type == 'advert' %} selected{% endif %}" id="tab_sl_advert" data-title="{{ school.name }} - advert" href="{{ path('school_view', {'slug': school.slug, 'type': 'advert'}) }}">
+								<span class="wrap"><img class="img icon" src="{{ asset('image/sl_at_icon.png') }}" alt="AT" /> <span class="label">Annonces</span></span>
+							</a>#}<!--
+							--><a class="tab_sl_item{% if type == 'evaluation' %} selected{% endif %}" id="tab_sl_evaluation" data-title="{{ school.name }} - evaluations" href="{{ path('school_view', {'slug': school.slug, 'type': 'evaluation'}) }}">
+								<span class="wrap"><img class="img icon" src="{{ asset('image/sl_star_icon.png') }}" alt="BG" /> <span class="label">Evaluations</span></span>
+							</a><!--
+                            --><a class="tab_sl_item{% if type == 'document' %} selected{% endif %}" id="tab_sl_document" data-title="{{ school.name }} - documents" href="{{ path('school_view', {'slug': school.slug, 'type': 'document'}) }}">
+								<span class="wrap"><img class="img icon" src="{{ asset('image/sl_document_icon.png') }}" alt="BG" /> <span class="label">Documents</span></span>
+							</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content_tab_sl_item{% if type is not defined or type == 'about' %} active{% endif %}" id="content_tab_sl_about">
+                <div class="cr">
+                    <div class="ct">
+                        {{ include("school/include/about.html.twig") }}
+                    </div>
+                </div>
+            </div>
+            <div class="content_tab_sl_item{% if type == 'post' %} active{% endif %}" id="content_tab_sl_new">
+                <div class="cr">
+                    <div class="ct">
+                        {{ include("school/include/posts.html.twig") }}
+                    </div>
+                </div>
+            </div>
+            {#
+            <div class="content_tab_sl_item" id="content_tab_sl_advert" style = "{% if type != 'advert' %}display:none{% endif %}">
+                <div class="cr">
+                    <div class="ct">
+                        {{ include("COMSchoolBundle:school:include/advert.html.twig") }}
+                    </div>
+                </div>
+            </div>
+            #}
+            <div class="content_tab_sl_item {% if type == 'evaluation' %} active{% endif %}" id="content_tab_sl_evaluation">
+                <div class="cr">
+                    <div class="ct">
+                        {{ include("school/include/evaluation.html.twig") }}
+                    </div>
+                </div>
+            </div>
+            <div class="content_tab_sl_item{% if type == 'document' %} active{% endif %}" id="content_tab_sl_document">
+                <div class="cr">
+                    <div class="ct" id="document_wrap">
+                        {{ include("school/include/document.html.twig") }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {# next and previous school #}
+        <div class="sep"></div>
+        <div class="cr">
+            <div class="ct">
+                <div class="mg_h10">
+                    <a class="sl_prev_link" href="{{ path('school_view', {'slug': previousSchool.slug}) }}" title="{{ previousSchool.shortName }} - {{ previousSchool.name }}">
+                        <span><span class="direction"></span> Précédent </span><br />
+                        <span>
+                            {% set logo = schoolLogo(previousSchool) %}
+                            <span class="logo"> <img src="{{ logo | imagine_filter('32x32') }}" alt="img sl" /></span>
+                            <span class="label">
+                                <strong>
+                                    {% if previousSchool.shortName is not null or previousSchool.shortName != '' %}
+                                        {{ previousSchool.shortName }}
+                                    {% else %}
+                                        {{ previousSchool.name }}
+                                    {% endif %}
+                                </strong>
+                            </span>
+                        </span>
+                    </a>
+                    <a class="sl_nex_link" href="{{ path('school_view', {'slug': nextSchool.slug}) }}" title="{{ nextSchool.shortName }} - {{ nextSchool.name }}">
+                        <span>Suivant <span class="direction"></span></span><br />
+                        <span>
+                            {% set logo = schoolLogo(nextSchool) %}
+                            <span class="logo"> <img src="{{ logo | imagine_filter('32x32') }}" alt="img sl" /></span>
+                            <span class="label">
+                                <strong>
+                                    {% if nextSchool.shortName is not null or nextSchool.shortName != '' %}
+                                        {{ nextSchool.shortName }}
+                                    {% else %}
+                                        {{ nextSchool.name }}
+                                    {% endif %}
+                                </strong>
+                            </span>
+                        </span>
+                    </a>
+                    <div class="both"></div>
+                </div>
+            </div>
+        </div>
+
+        {#related schools#}
+        {# twig extension #}
+        {% set relatedSchools = getRelatedSchools(school, 5) %}
+        {% if relatedSchools %}
+            <div class="cr">
+                <div class="ct">
+                    <div class="sl_related_label">
+                        Autres établissements qui peuvent vous interesser ...
+                    </div>
+                    <div class="sl_related tacenter"><!--
+						{% for school in relatedSchools %}
+							-->{{ include("school/school_item.html.twig") }}<!--
+						{% endfor %}
+					--></div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

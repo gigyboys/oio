@@ -1,0 +1,20 @@
+{% set nbAllSchools = allSchools | length %}
+{% set nbPagesFormat = ((nbAllSchools / limit) - 0.5) | number_format  %}
+
+{% if (nbAllSchools / limit) == nbPagesFormat%}
+	{% set nbPages = nbPagesFormat %}
+{% else %}
+	{% set nbPages = nbPagesFormat + 1 %}
+{% endif %}
+
+{% for page in 1..nbPages %}
+	{% if currentpage == page%}
+		<a class="sll_pagination_item active" title="page {{ page }}" href="{{ path('school_category_view', {'slug':category.slug, 'page': page }) }}">
+			{{ page }}  
+		</a>
+	{% else %}
+		<a class="sll_pagination_item" title="page {{ page }}" href="{{ path('school_category_view', {'slug':category.slug, 'page': page }) }}">
+			{{ page }}  
+		</a>
+	{% endif %}
+{% endfor %}

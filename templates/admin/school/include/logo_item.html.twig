@@ -1,0 +1,4 @@
+<div class="logo_item {{ classActive }}">
+	<span class="delete_logo" data-type="logo" data-target="{{ path('admin_school_delete_logo', {'school_id': school.id, 'logo_id': logo.id}) }}"><img src="{{ asset('image/cross_icon.png') }}" alt="x" style="width:8px;height:8px;display:block;margin:auto"/></span>
+	<img class="logo_popup" data-type="logo" data-target="{{ path('admin_school_select_logo', {'school_id': school.id, 'logo_id': logo.id}) }}" src="{{ logo.webPath | imagine_filter('116x116') }}" alt="" />
+</div>

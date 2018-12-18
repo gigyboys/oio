@@ -1,0 +1,38 @@
+<div style="background:#fff;">
+	<div style="border-bottom:1px solid #ddd; padding: 10px;  height:24px; ">
+		<div style="float:left">
+			Edition de l'image de couverture de l'établissement
+		</div>
+		<div style="float:right;cursor: pointer; " class="button_closable">
+			<img src="{{ asset('image/close_icon.png') }}" style="width:16px; height:auto" alt="x" />
+		</div>
+	</div>
+	
+	<div style="background:#fff; padding: 5px; ">
+		<div style="padding:5px">
+			{% set classDefault = '' %}
+			{% if current is null %}
+				{% set classDefault = 'active' %}
+			{% endif %}
+			<div id="covers_wrapper"><!--
+				--><div class="cover_item {{ classDefault }}" id="default_cover">
+						<img class="cover_popup default" data-type="cover" data-target="{{ path('admin_school_select_cover', {'school_id': school.id, 'cover_id': 0}) }}" src="{{ 'default/images/school/cover/default.jpeg' | imagine_filter('116x116') }}" alt="" />
+					</div><!--
+				{% for cover in covers %}
+					{% set classActive = '' %}
+					{% if cover.current %}
+						{% set classActive = 'active' %}
+					{% endif %}
+					-->{{ include("admin/school/include/cover_item.html.twig") }}<!--
+				{% endfor %}
+			--></div>
+		</div>
+	</div>
+	<div style="border-top:1px solid #ddd;padding:10px; text-align:center">
+		<label for="coverfile" style="cursor:pointer">télécharger une image ...</label>
+		<input style="display: none"  data-type="cover" id="coverfile" name="file" class="ajax_school_cover" type="file" accept="image/*" data-target="{{ path('admin_school_modify_cover', {'school_id': school.id}) }}" />
+	</div>
+	<div style="border-top:1px solid #ddd;padding:10px; text-align:center">
+		<img src="{{ asset('image/info_icon.png') }}" style="width:20px; height:20px; display: inline-block; vertical-align: middle" alt="i" /> Cliquer sur l'image ou télécharger un nouveau pour changer la couverture.
+	</div>
+</div>

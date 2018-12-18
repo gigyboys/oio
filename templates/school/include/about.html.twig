@@ -1,0 +1,53 @@
+<div style="min-height:100px" class="mg_v5 mg_10">	
+	<div id="content_tab">
+		<div class="content_tab_header">
+			<div class="content_tab_header_content">
+				<div class="content_tab_header_item selected" id="tab_about">
+					<div class="content_tab_header_item_text">
+						Présentation
+					</div>
+				</div>
+				<div class="content_tab_header_item" id="tab_field">
+					<div class="content_tab_header_item_text">
+						{{ school.option.pluralName | capitalize }}
+					</div>
+				</div>
+				<div class="content_tab_header_item" id="tab_contact">
+					<div class="content_tab_header_item_text">
+						Contacts
+					</div>
+				</div>
+			</div>
+			<div class="content_tab_header_sep">
+				<div class="content_tab_header_sep_slide">
+				</div>
+			</div>
+		</div>
+		<div class="content_tab_content">
+			<div class="mg_v10" style="">
+				<div class="content_tab_content_item selected" id="content_tab_about" style="">
+					{{ school.description | raw}}
+				</div>
+			</div>
+			<div class="content_tab_content_item" id="content_tab_field" style="">
+				{# fields #}
+				{% if fields %}
+					{% for field in fields %}
+						<div style="margin: 10px 0 20px">
+							<div style="font-weight:bold">
+								{{ field.name }}
+							</div>
+							<div class="sep mg_v5"></div>
+							<div style="display:block">
+								{{ field.description | raw }}
+							</div>
+						</div>
+					{% endfor %}
+				{% endif %}
+			</div>
+			<div class="content_tab_content_item" id="content_tab_contact" style="">
+				{{ include("school/include/contact.html.twig") }}
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,37 @@
+<div class="mg_v10" style="background:#f5f5f5; padding: 5px; border:1px solid #ddd;">
+	<span class="toggle_case" data-target="{{ path('blog_manager_post_toogle_publication', {'post_id': post.id}) }}">
+		{% if post.published %}
+			<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Publier</span></span>
+			<span class="redstate"><span class="redpastille"></span> <span>Ne pas publier</span></span>
+		{% else %}
+			<span class="greenstate"><span class="greenpastille"></span> <span>Publier</span></span>
+			<span class="redstate" style="display:none"><span class="redpastille"></span> <span>Ne pas publier</span></span>
+		{% endif %}
+	</span><span class="state_loading" style="display:none">
+		<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" /> Chargement...
+	</span>
+	|
+	<span class="toggle_case" data-target="{{ path('blog_manager_post_toogle_show_author', {'post_id': post.id}) }}">
+		{% if post.showAuthor %}
+			<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Afficher l'auteur</span></span>
+			<span class="redstate"><span class="redpastille"></span> <span>Ne pas afficher l'auteur</span></span>
+		{% else %}
+			<span class="greenstate"><span class="greenpastille"></span> <span>Afficher l'auteur</span></span>
+			<span class="redstate" style="display:none"><span class="redpastille"></span> <span>Ne pas afficher l'auteur</span></span>
+		{% endif %}
+	</span><span class="state_loading" style="display:none">
+		<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" /> Chargement...
+	</span>
+	|
+	<span class="toggle_case" data-target="{{ path('blog_manager_post_toogle_active_comment', {'post_id': post.id}) }}">
+		{% if post.activeComment %}
+			<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Activer les commentaires</span></span>
+			<span class="redstate"><span class="redpastille"></span> <span>Désactiver les commentaires</span></span>
+		{% else %}
+			<span class="greenstate"><span class="greenpastille"></span> <span>Activer les commentaires</span></span>
+			<span class="redstate" style="display:none"><span class="redpastille"></span> <span>Désactiver les commentaires</span></span>
+		{% endif %}
+	</span><span class="state_loading" style="display:none">
+		<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" /> Chargement...
+	</span>
+</div>

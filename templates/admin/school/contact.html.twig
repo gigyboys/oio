@@ -1,0 +1,140 @@
+{% extends "back.html.twig" %}
+
+{% block title %}
+  {{ school.name }} - Contacts
+{% endblock %}
+
+{% block body_header %}
+	<div class="bc">
+		<span class="bc1"><a href="{{ path('admin_school') }}"><img src="{{ asset('image/sl_icon.png') }}" style="width:14px; height:auto"  /> <span>Etablissements</span></a> </span>
+		<span class="dd">
+			<span href="#" class="dd_src">
+				<span class="bcdd"></span>
+			</span>
+			{{ include("admin/school/include/school_principal_action.html.twig") }}
+		</span> 
+		<span class="bc1"><a href="{{ path('admin_school_edit', {'id': school.id}) }}">{% if school.shortName != "" %}{{ school.shortName }}{% else %}{{ school.name }}{% endif %}</a></span>
+		<span class="dd">
+			<span href="#" class="dd_src">
+				<span class="bcdd"></span>
+			</span>
+			{{ include("admin/school/include/school_other_action.html.twig") }}
+		</span> 
+		<span class="bc1"><a href="{{ path('admin_school_contact', {'school_id': school.id}) }}"><span>Contacts</span></a> </span>
+	</div>
+	<div style="padding:8px; float:right">
+		<div style="float:left">
+			<span class="dd" style="display:inline-block;">
+				<span href="#" class="dd_src" style="cursor:pointer">
+					Autres actions
+				</span>
+				{{ include("admin/school/include/school_other_action.html.twig") }}
+			</span> 
+		</div>
+	</div>
+{% endblock %}
+
+{% block content_body %}
+	<div style="">
+		<div style="float:left; height: 86px;margin:5px">
+			{# twig extension #}
+			{% set logo = schoolLogo(school) %}
+
+			<img id="school_logo" style="width: 80px; height: 80px" src="{{ logo | imagine_filter('80x80') }}" alt="img sl" />
+		</div>
+		<div style="margin-left: 90px;">
+			<div>
+				<table>
+					<tr>
+						<td>Name</td>
+						<td>:</td>
+						<td style="padding:5px"><span id="sl_view_name">{{ school.name }}</span></td>
+					</tr>
+					<tr>
+						<td>ShortName</td>
+						<td>:</td>
+						<td style="padding:5px"><span id="sl_view_shortname">{{ school.shortName }}</span></td>
+					</tr>
+					<tr>
+						<td>Slug</td>
+						<td>:</td>
+						<td style="padding:5px"><span id="sl_view_slug">{{ school.slug }}</span></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="both"></div>
+	</div>
+	
+	<div style="background:#ddd; padding: 5px; margin:5px; border:1px solid #bbb">
+		<span><img src="{{ asset('image/list_icon.png') }}" style="width:12px; height:auto" /> Liste des contact</span>
+		<span class="add_contact_btn" data-target="{{ path('admin_school_contact_add_ajax', {'school_id': school.id}) }}" style="cursor:pointer;display:inline-block; float:right"> <img src="{{ asset('image/add_icon.png') }}" style="width:12px; height:auto" /> Nouveau contact</span>
+	</div>
+	
+	<div class="a_datatable">
+		<div class="a_datatable_head">
+			<div class="a_datatable_head_left">
+				<span style="display:inline-block; margin-top:5px; margin-left:6px"> Rechercher :
+					<input type="text" class="default_input a_list_search_input" data-target-id="list_contacts"/><!--
+					--><span class="a_list_search_reset"><img src="{{ asset('image/cross_icon.png') }}" style="width:12px; height:auto" /></span>
+				</span>
+			</div>
+			<div class="a_datatable_head_right">
+				{#right#}
+			</div>
+		</div>
+		
+		<div class="a_datatable_body">
+			<table class="a_table" id="list_contacts">
+				<tr class="a_table_head">
+					<th class="a_table_cell_id" style="text-align:center">id</th>
+					<th class="taleft">Nom</th>
+					<th class="tacenter">Publié</th>
+					<th class="a_table_cell_action tacenter">Actions</th>
+				</tr>
+				{% for contact in contacts %}
+					<tr class="a_table_line contact_item" id="contact_{{ contact.id }}" data-text="{{ contact.name }}" style="display:table-row; position:relative:z-index:0">
+						<td class="a_table_cell_id" style="height:30px; width: 50px; text-align:center">
+							<div>{{ contact.id }}</div>
+						</td>
+						<td>
+							<a href="{{ path('admin_school_contact_edit', {'school_id': school.id, 'contact_id': contact.id}) }}">{{ contact.name }}</a>
+						</td>
+						<td style="text-align:center">
+							<span class="toggle_case" data-entity="contact" data-target="{{ path('admin_school_contact_toogle_publication', {'school_id': school.id, 'contact_id': contact.id}) }}">
+								{% if contact.published %}
+									<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
+									<span class="redstate"><span class="redpastille"></span></span>
+								{% else %}
+									<span class="greenstate"><span class="greenpastille"></span></span>
+									<span class="redstate" style="display:none"><span class="redpastille"></span></span>
+								{% endif %}
+							</span><span class="state_loading" style="display:none">
+								<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" />
+							</span>
+						</td>
+						<td class="a_table_cell_action tacenter">
+							<a href="{{ path('admin_school_contact_edit', {'school_id': school.id, 'contact_id': contact.id}) }}" data-name="{{ contact.name }}" style="cursor:pointer"><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /></a>
+							<span class="delete_contact" data-id="{{ contact.id }}" data-target="{{ path('admin_school_contact_delete', {'school_id': school.id, 'contact_id': contact.id}) }}" data-name="{{ contact.name }}" style="cursor:pointer"><img src="{{ asset('image/delete_icon.png') }}" style="width:12px; height:auto" /></span>
+						</td>
+					</tr>
+				{% endfor %}
+			</table>
+		</div>
+		
+		<div class="a_datatable_foot">
+			<div class="a_datatable_foot_left">
+				<span style="display:inline-block; margin-top:6px; margin-left:6px" class="result_state">{{ contacts | length }} resultat(s)</span>
+			</div>
+			<div class="a_datatable_foot_right">
+				{#<span>right</span>#}
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block body_footer %}
+	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_contacts">{{ contacts | length }}</span> contact </span> |
+	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_published_contacts">{{ publishedContacts | length }}</span> publiées</span> |
+	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_not_published_contacts">{{ notPublishedContacts | length }}</span> non publiées</span>
+{% endblock %}

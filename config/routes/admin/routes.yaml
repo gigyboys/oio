@@ -1,0 +1,309 @@
+admin_home:
+    path:     /
+    defaults:
+        _controller: App\Controller\Admin\DashboardController::index
+
+#user
+admin_user:
+    path:     /user
+    defaults:
+        _controller: App\Controller\Admin\UserController::index
+admin_user_admin:
+    path:     /user/admin
+    defaults:
+        _controller: App\Controller\Admin\UserController::admin
+admin_user_edit:
+    path:     /user/edit-user/{user_id}
+    defaults:
+        _controller: App\Controller\Admin\UserController::editUser
+admin_user_toogle_adminstate:
+    path:     /user/admin/{user_id}/toggle-adminstate
+    defaults:
+        _controller: App\Controller\Admin\UserController::toogleAdminState
+
+#school
+admin_school:
+    path:     /school
+    defaults:
+        _controller: App\Controller\Admin\SchoolController::index
+admin_school_position:
+    path:     /school/position
+    defaults:
+        _controller: App\Controller\Admin\SchoolController::position
+admin_school_save_position:
+    path:     /school/save-position
+    defaults:
+        _controller: App\Controller\Admin\SchoolController::savePosition
+admin_school_edit:
+    path:     /school/edit-school/{id}
+    defaults:
+        _controller: App\Controller\Admin\SchoolController::editSchool
+admin_school_add:
+    path:     /school/add
+    defaults:
+        _controller: App\Controller\Admin\SchoolController::addSchool
+admin_school_toogle_publication:
+    path:     /school/doedit/{school_id}/toogle-publication
+    defaults:
+        _controller: App\Controller\Admin\SchoolController::tooglePublication
+admin_school_doedit:
+    path:     /school/doedit/{id}
+    defaults:
+        _controller: App\Controller\Admin\SchoolController::doEditSchool
+admin_school_doedit_description:
+    path:     /school/doedit-description/{id}
+    defaults:
+        _controller: App\Controller\Admin\SchoolController::doEditSchoolDescription
+admin_school_categories:
+    path:     /school/doedit/{school_id}/categories
+    defaults:
+        _controller: App\Controller\Admin\SchoolController::categories
+admin_school_toogle_category:
+    path:     /school/doedit/{school_id}/toogle-category/{category_id}
+    defaults:
+        _controller: App\Controller\Admin\SchoolController::toogleCategory
+admin_school_modify_logo_popup:
+    path:     /school/modify-logo-popup/{school_id}
+    defaults:
+        _controller: App\Controller\Admin\SchoolController::modifyLogoPopup
+admin_school_modify_logo:
+    path:     /school/doedit/{school_id}/modify-logo
+    defaults:
+        _controller: App\Controller\Admin\SchoolController::modifyLogo
+admin_school_delete_logo:
+    path:     /school/doedit/{school_id}/delete-logo/{logo_id}
+    defaults:
+        _controller: App\Controller\Admin\SchoolController::deleteLogo
+admin_school_select_logo:
+    path:     /school/doedit/{school_id}/select-logo/{logo_id}
+    defaults:
+        _controller: App\Controller\Admin\SchoolController::selectLogo
+admin_school_modify_cover_popup:
+    path:     /school/doedit/{school_id}/modify-cover-popup
+    defaults:
+        _controller: App\Controller\Admin\SchoolController::modifyCoverPopup
+admin_school_modify_cover:
+    path:     /school/doedit/{school_id}/modify-cover
+    defaults:
+        _controller: App\Controller\Admin\SchoolController::modifyCover
+admin_school_select_cover:
+    path:     /school/doedit/{school_id}/select-cover/{cover_id}
+    defaults:
+        _controller: App\Controller\Admin\SchoolController::selectCover
+admin_school_delete_cover:
+    path:     /school/doedit/{school_id}/delete-cover/{cover_id}
+    defaults:
+        _controller: App\Controller\Admin\SchoolController::deleteCover
+
+#school field
+admin_school_field:
+    path:     /school/edit/{school_id}/fields
+    defaults:
+        _controller: App\Controller\Admin\FieldController::index
+admin_school_field_toogle_publication:
+    path:     /school/edit/{school_id}/toogle-publication-field/{field_id}
+    defaults:
+        _controller: App\Controller\Admin\FieldController::tooglePublicationField
+admin_school_field_add_ajax:
+    path:     /school/edit/{school_id}/field/add-ajax
+    defaults:
+        _controller: App\Controller\Admin\FieldController::addFieldAjax
+admin_school_field_add:
+    path:     /school/edit/{school_id}/field/add
+    defaults:
+        _controller: App\Controller\Admin\FieldController::addField
+admin_school_field_edit:
+    path:     /school/edit/{school_id}/edit-field/{field_id}
+    defaults:
+        _controller: App\Controller\Admin\FieldController::editField
+admin_school_field_delete:
+    path:     /school/edit/{school_id}/delete-field/{id}
+    defaults:
+        _controller: App\Controller\Admin\FieldController::deleteField
+admin_school_field_doedit:
+    path:     /school/edit/{school_id}/doedit-field/{field_id}
+    defaults:
+        _controller: App\Controller\Admin\FieldController::doEditField
+
+#school document
+admin_school_document:
+    path:     /school/edit/{school_id}/documents
+    defaults:
+        _controller: App\Controller\Admin\DocumentController::index
+admin_school_document_toogle_publication:
+    path:     /school/edit/{school_id}/toogle-publication-document/{document_id}
+    defaults:
+        _controller: App\Controller\Admin\DocumentController::tooglePublicationDocument
+admin_school_document_download:
+    path:     /school/edit/{school_id}/download-document/{document_id}
+    defaults:
+        _controller: App\Controller\Admin\DocumentController::downloadDocument
+#admin_school_field_add_ajax:
+#    path:     /school/edit/{school_id}/field/add-ajax
+#    defaults:
+#        _controller: App\Controller\Admin\FieldController::addFieldAjax
+admin_school_document_add:
+    path:     /school/edit/{school_id}/document/add
+    defaults:
+        _controller: App\Controller\Admin\DocumentController::addDocument
+admin_school_document_edit:
+    path:     /school/edit/{school_id}/edit-document/{document_id}
+    defaults:
+        _controller: App\Controller\Admin\DocumentController::editDocument
+#admin_school_field_delete:
+#    path:     /school/edit/{school_id}/delete-field/{id}
+#    defaults:
+#        _controller: App\Controller\Admin\FieldController::deleteField
+admin_school_document_doedit:
+    path:     /school/edit/{school_id}/doedit-document/{document_id}
+    defaults:
+        _controller: App\Controller\Admin\DocumentController::doEditDocument
+
+#school contact
+admin_school_contact:
+    path:     /school/doedit/{school_id}/contacts
+    defaults:
+        _controller: App\Controller\Admin\SchoolContactController::index
+admin_school_contact_toogle_publication:
+    path:     /school/doedit/{school_id}/toogle-publication-contact/{contact_id}
+    defaults:
+        _controller: App\Controller\Admin\SchoolContactController::tooglePublicationContact
+admin_school_contact_add_ajax:
+    path:     /school/doedit/{school_id}/contact/add-ajax
+    defaults:
+        _controller: App\Controller\Admin\SchoolContactController::addContactAjax
+admin_school_contact_add:
+    path:     /school/doedit/{school_id}/contact/add
+    defaults:
+        _controller: App\Controller\Admin\SchoolContactController::addContact
+admin_school_contact_edit:
+    path:     /school/doedit/{school_id}/edit-contact/{contact_id}
+    defaults:
+        _controller: App\Controller\Admin\SchoolContactController::editContact
+admin_school_contact_delete:
+    path:     /school/doedit/{school_id}/delete-contact/{contact_id}
+    defaults:
+        _controller: App\Controller\Admin\SchoolContactController::deleteContact
+admin_school_contact_doedit:
+    path:     /school/doedit/{school_id}/doedit-contact/{contact_id}
+    defaults:
+        _controller: App\Controller\Admin\SchoolContactController::doEditContact
+
+#school category
+admin_school_category:
+    path:     /school/category
+    defaults:
+        _controller: App\Controller\Admin\SchoolController::category
+admin_school_category_add:
+    path:     /school/add-category
+    defaults:
+        _controller: App\Controller\Admin\SchoolController::addCategory
+admin_school_category_edit:
+    path:     /school/edit-category/{category_id}
+    defaults:
+        _controller: App\Controller\Admin\SchoolController::editCategory
+admin_school_category_doedit:
+    path:     /school/doedit-category/{category_id}
+    defaults:
+        _controller: App\Controller\Admin\SchoolController::doEditCategory
+admin_school_category_delete:
+    path:     /school/delete-category/{category_id}
+    defaults:
+        _controller: App\Controller\Admin\SchoolController::deleteCategory
+admin_school_category_edit_schools:
+    path:     /school/edit-category/{category_id}/schools
+    defaults:
+        _controller: App\Controller\Admin\SchoolController::editCategorySchools
+admin_school_category_edit_removeschool:
+    path:     /school/edit-category/{category_id}/remove-school/{school_id}
+    defaults:
+        _controller: App\Controller\Admin\SchoolController::editCategoryRemoveSchool
+admin_school_category_edit_setdefaultschool:
+    path:     /school/edit-category/{category_id}/set-default-school/{school_id}
+    defaults:
+        _controller: App\Controller\Admin\SchoolController::editCategorySetDefaultSchool
+
+#school_of_the_day
+admin_school_sod:
+    path:     /school/sod
+    defaults:
+        _controller: App\Controller\Admin\SchoolController::sod
+admin_school_sod_assignation:
+    path:     /school/sod/assignation
+    defaults:
+        _controller: App\Controller\Admin\SchoolController::sodAssignation
+
+#blog
+admin_blog_post:
+    path:     /blog/post
+    defaults:
+        _controller: App\Controller\Admin\BlogController::post
+admin_blog_post_creation:
+    path:     /blog/post/creation
+    defaults:
+        _controller: App\Controller\Admin\BlogController::postCreation
+admin_blog_post_add:
+    path:     /blog/add-post
+    defaults:
+        _controller: App\Controller\Admin\BlogController::addPost
+admin_blog_post_edit:
+    path:     /blog/edit-post/{post_id}
+    defaults:
+        _controller: App\Controller\Admin\BlogController::editPost
+admin_blog_post_dodelete:
+    path:     /blog/post/{post_id}/delete
+    defaults:
+        _controller: App\Controller\Admin\BlogController::deletePost
+admin_blog_tags:
+    path:     /blog/tags
+    defaults:
+        _controller: App\Controller\Admin\BlogController::tags
+admin_blog_tag_add:
+    path:     /blog/add-tag
+    defaults:
+        _controller: App\Controller\Admin\BlogController::addTag
+admin_blog_tag_edit:
+    path:     /blog/edit-tag/{tag_id}
+    defaults:
+        _controller: App\Controller\Admin\BlogController::editTag
+admin_blog_tag_doedit:
+    path:     /blog/doedit-tag/{tag_id}
+    defaults:
+        _controller: App\Controller\Admin\BlogController::doEditTag
+admin_blog_post_tags:
+    path:     /blog/post/{post_id}/tags
+    defaults:
+        _controller: App\Controller\Admin\BlogController::postTags
+admin_blog_post_toogle_tag:
+    path:     /blog/post/{post_id}/toogle-tag/{tag_id}
+    defaults:
+        _controller: App\Controller\Admin\BlogController::toogleTag
+admin_blog_post_schools:
+    path:     /blog/post/{post_id}/schools
+    defaults:
+        _controller: App\Controller\Admin\BlogController::postSchools
+admin_blog_post_toogle_school:
+    path:     /blog/post/{post_id}/toogle-school/{school_id}
+    defaults:
+        _controller: App\Controller\Admin\BlogController::toogleSchool
+
+#setting
+admin_setting_accessibility:
+    path:     /setting/accessibility
+    defaults:
+        _controller: App\Controller\Admin\SettingController::accessibility
+
+
+#platform
+admin_platform_contact:
+    path:     /platform/contact
+    defaults:
+        _controller: App\Controller\Admin\ContactController::contacts
+admin_platform_contact_view:
+    path:     /platform/contact/{contact_id}
+    defaults:
+        _controller: App\Controller\Admin\ContactController::viewContact
+admin_platform_newsletter_mail:
+    path:     /platform/newsletter/emails
+    defaults:
+        _controller: App\Controller\Admin\NewsletterController::emails

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Admin!{% endblock %}</title>
+		
+		{% block icon %}
+			<link rel="icon" type="image/png" href="{{ asset('image/oio.svg') }}" />
+		{% endblock %}
+
+        {% block stylesheets %}
+			<link rel="stylesheet"  href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.12.1/themes/smoothness/jquery-ui.css" />
+			<link rel="stylesheet" href="{{ asset('css/common.css') }}">
+			<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+			<link rel="stylesheet" href="{{ asset('css/a_style.css') }}">
+			<link rel="stylesheet" href="{{ asset('css/a_tab.css') }}">
+			<link rel="stylesheet" href="{{ asset('css/a_table.css') }}">
+			<link rel="stylesheet" href="{{ asset('css/mcs.css') }}">
+			<link rel="stylesheet" href="{{ asset('css/button.css') }}">
+			<link rel="stylesheet" href="{{ asset('css/popup.css') }}">
+        {% endblock %}
+    </head>
+    <body>
+		<header id="a_header" style="position:relative;z-index:5">
+			{{ include("include/back/header.html.twig") }}
+		</header>
+		
+		<div id="a_content_wrap">
+			<nav id="a_nav">
+				{{ include("include/back/navigation.html.twig") }}
+			</nav>
+			
+			<div id="a_content">
+				{% block body %}
+                    {% block body_header_wrap %}
+						<div id="a_content_header" >
+                            {% block body_header %}
+								<div style="padding:8px">
+									<span>Dashboard</span>
+								</div>
+                            {% endblock %}
+						</div>
+                    {% endblock %}
+
+					<div id="a_content_body" class="{% block content_body_class %}{% endblock %}">
+                        {% block content_body %}
+							<div style="padding:5px">
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. In semper pulvinar nulla, vitae ornare felis tempus non. Nunc tellus magna, fermentum et nisi at, venenatis mattis felis. Etiam purus libero, varius non libero eu, volutpat porta nisi. Morbi luctus, lorem sed tristique consectetur, urna risus convallis est, vitae ultrices mi odio ac diam. Sed sit amet mauris massa. Nullam lorem odio, vulputate quis euismod sit amet, placerat vel elit. Quisque euismod sagittis nulla, nec hendrerit velit cursus rutrum. Donec tortor nulla, sagittis et accumsan nec, scelerisque sit amet nibh. Vestibulum eget lorem accumsan, dignissim justo non, elementum ligula. Pellentesque rhoncus purus cursus ante elementum interdum. Pellentesque augue arcu, posuere eget erat in, porttitor placerat turpis. Nam porta purus vitae neque efficitur elementum.
+								<br />
+								<br />
+								Aliquam sit amet lorem porttitor, feugiat sapien nec, malesuada justo. Nunc dignissim ligula in hendrerit dignissim. Proin pellentesque nulla at lacus dapibus suscipit. Donec placerat augue risus, viverra molestie libero ultricies eu. Suspendisse leo urna, varius eu nunc vel, dignissim consequat ligula. Donec mollis tincidunt ex, eu sagittis lectus aliquet eget. Aenean ligula ex, dapibus vel magna non, imperdiet semper nisi. Fusce id cursus nulla. Aenean facilisis porta metus eget vulputate. Sed nisi arcu, gravida vel sollicitudin eget, lobortis dapibus leo. Etiam eu est consequat, dapibus enim at, fringilla eros. Fusce id ullamcorper nibh. Nam eget tortor et turpis semper consectetur. Fusce elementum venenatis quam rhoncus porttitor.
+								<br />
+								<br />
+								Donec vel eros risus. Praesent mollis sapien porttitor molestie convallis. Morbi nibh ipsum, aliquam ut magna eu, sagittis laoreet enim. In hac habitasse platea dictumst. Ut malesuada augue vel mauris venenatis posuere non sit amet dui. Sed volutpat orci euismod purus tempus, quis commodo leo molestie. Aliquam vel placerat arcu, vel sagittis sem. In facilisis viverra rutrum. Quisque ipsum tellus, fringilla vel mattis id, pretium eget leo. Duis sit amet lacinia nunc, non mattis erat. Morbi mauris leo, facilisis vitae dignissim ac, mollis in ligula. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus eu quam a dolor placerat aliquet sed ut ligula. Curabitur pulvinar molestie ultricies. Aenean id rutrum est.
+								<br />
+								<br />
+								Sed non erat in neque mollis ultricies. Nam ultrices nibh sapien, vel cursus leo tempus eu. Curabitur laoreet varius malesuada. Nullam lacinia felis nisi, ut varius ipsum luctus non. Pellentesque ex magna, euismod sit amet ultricies consequat, eleifend eu purus. Nullam odio nisl, accumsan tristique elit sit amet, finibus rhoncus ipsum. Nunc ultricies ac arcu vitae elementum. Morbi tincidunt dapibus libero, sed tincidunt leo ultricies a. Suspendisse porta elit quis semper ullamcorper. Phasellus nec lectus ut magna aliquet placerat.
+								<br />
+								<br />
+								In feugiat at velit in egestas. Morbi condimentum nisl quis odio suscipit imperdiet. Etiam aliquet arcu lorem, id interdum nunc commodo at. Sed malesuada ac turpis a sagittis. Donec at diam vulputate, fermentum magna sed, fermentum urna. Proin non sapien egestas, malesuada dui ut, tristique dui. Fusce vestibulum eget metus ac sollicitudin. Aliquam erat volutpat. Proin est diam, semper quis molestie non, finibus sit amet sapien. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam fermentum massa aliquet diam luctus rhoncus. Praesent diam dui, ullamcorper sit amet pharetra sit amet, tempor vel mi.
+							</div>
+                        {% endblock %}
+					</div>
+
+                    {% block body_footer_wrap %}
+						<div id="a_content_footer" style="padding-left:5px">
+                            {% block body_footer %}
+								body footer
+                            {% endblock %}
+						</div>
+                    {% endblock %}
+				{% endblock %}
+			</div>
+			
+			<div id="a_footer">
+				Ny fianarana no lova tsara indrindra. &copy; copyright 2018.
+			</div>
+		</div>
+
+        {% block javascripts %}
+			<script type="text/javascript" src="{{ asset('js/jquery.js') }}"></script>
+			<script  src='https://ajax.aspnetcdn.com/ajax/jquery.ui/1.12.1/jquery-ui.min.js'></script>
+			<script type="text/javascript" src="{{ asset('js/common.js') }}"></script>
+			<script type="text/javascript" src="{{ asset('js/a_script.js') }}"></script>
+			<script type="text/javascript" src="{{ asset('js/a_tab.js') }}"></script>
+			<script type="text/javascript" src="{{ asset('js/a_sl.js') }}"></script>
+			<script type="text/javascript" src="{{ asset('js/a_bg.js') }}"></script>
+			<script type="text/javascript" src="{{ asset('js/manager.js') }}"></script>
+			<script type="text/javascript" src="{{ asset('js/bg_manage.js') }}"></script>
+			<script type="text/javascript" src="{{ asset('js/a_at.js') }}"></script>
+			<script type="text/javascript" src="{{ asset('js/a_fm.js') }}"></script>
+			<script type="text/javascript" src="{{ asset('js/a_setting.js') }}"></script>
+			<script type="text/javascript" src="{{ asset('js/button.js') }}"></script>
+			<script type="text/javascript" src="{{ asset('js/popup.js') }}"></script>
+			<script type="text/javascript" src="{{ asset('js/mcs.js') }}"></script>
+			<script type="text/javascript" src="{{ asset('js/jquery.dragsort.js') }}"></script>
+        {% endblock %}
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGWXblVkezi69dBRUoKcsjOf3g7I4XwM0&sensor=false"></script>
+    </body>
+</html>

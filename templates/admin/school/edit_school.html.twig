@@ -1,0 +1,291 @@
+{% extends "back.html.twig" %}
+
+{% block title %}
+  Edition de l'établissement #{{ school.id }}
+{% endblock %}
+
+{% block body_header %}
+	<div class="bc">
+		<span class="bc1"><a href="{{ path('admin_school') }}"><img src="{{ asset('image/sl_icon.png') }}" style="width:14px; height:auto" /> <span>Etablissements</span></a> </span>
+		<span class="dd">
+			<span href="#" class="dd_src">
+				<span class="bcdd"></span>
+			</span>
+			{{ include("admin/school/include/school_principal_action.html.twig") }}
+		</span> 
+		<span class="bc1"><a href="{{ path('admin_school_edit', {'id': school.id}) }}">{% if school.shortName != "" %}{{ school.shortName }}{% else %}{{ school.name }}{% endif %}</a></span>
+	</div>
+	<div style="padding:8px; float:right">
+		<div style="float:left">
+			<span class="dd" style="display:inline-block;">
+				<span href="#" class="dd_src" style="cursor:pointer">
+					Autres actions
+				</span>
+				{{ include("admin/school/include/school_other_action.html.twig") }}
+			</span> 
+		</div>
+	</div>
+{% endblock %}
+
+{% block content_body %}
+	<div style="background:#ddd; padding: 5px; margin:5px; border:1px solid #bbb">
+		<span><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /> Edition de l'établissement #{{ school.id }}</span>
+	</div>
+	
+	<div style="">
+		<div id="change_logo" data-target="{{ path('admin_school_modify_logo_popup', {'school_id': school.id})}}" style="float:left; height: 122px;margin:5px;cursor:pointer">
+			{# twig extension #}
+			{% set logo = schoolLogo(school) %}
+			<img id="school_logo" style="width: 116px; height: 116px" src="{{ logo | imagine_filter('116x116') }}" alt="img sl" />
+		</div>
+		<div style="margin-left: 136px;">
+		
+			<div style="border:1px solid transparent; margin:5px; border-radius:4px">
+				<div>
+					<label for="coverfile2">
+						<span id="change_cover" data-target="{{ path('admin_school_modify_cover_popup', {'school_id': school.id})}}" style="cursor:pointer">Editer l'image de couverture ...</span>
+					</label>
+					<input style="display:none" id="coverfile" name="file" class="ajax_school_cover" type="file" accept="image/*" data-target="{#{{ path('com_admin_school_add_cover', {'school_id': school.id}) }}#}" />
+				</div>
+				<div id="cover_box_wrap">
+					<div id="cover_box" style="width:300px; height:100px">
+						{# twig extension #}
+						{% set cover = schoolCover(school) %}
+						<img  id="school_cover" src="{{ cover | imagine_filter('300x100') }}" style="display:block;width:300px;height:100px" />
+					</div>
+				</div>
+			</div>
+			
+			<div class="bloc_editable">
+				<div class="bloc_view">
+					<table>
+						<tr>
+							<td>Nom</td>
+							<td>:</td>
+							<td style="padding:5px"><span id="sl_view_name">{{ school.name }}</span></td>
+						</tr>
+						<tr>
+							<td>Sigle</td>
+							<td>:</td>
+							<td style="padding:5px"><span id="sl_view_shortname">{{ school.shortName }}</span></td>
+						</tr>
+						<tr>
+							<td>Slug</td>
+							<td>:</td>
+							<td style="padding:5px"><span id="sl_view_slug">{{ school.slug }}</span></td>
+						</tr>
+						<tr>
+							<td>Slogan</td>
+							<td>:</td>
+							<td style="padding:5px"><span id="sl_view_slogan">{{ school.slogan }}</span></td>
+						</tr>
+						<tr>
+							{#{% set type = getType(school) %}#}
+							<td>Type</td>
+							<td>:</td>
+							<td style="padding:5px">
+								<span id="sl_view_type">
+                                    {{ school.type.name }}
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<td>Option</td>
+							<td>:</td>
+							<td style="padding:5px">
+								<span id="sl_view_option">
+									{{ school.option.name }}
+								</span>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="bloc_edit" style="display:none">
+					<table>
+						<tr>
+							<td>Nom</td>
+							<td>:</td>
+							<td style="padding:5px"><input type="text" id="sl_input_name" class="default_input" value="{{ school.name }}" /></td>
+						</tr>
+						<tr>
+							<td>Sigle</td>
+							<td>:</td>
+							<td style="padding:5px"><input type="text" id="sl_input_shortname" class="default_input" value="{{ school.shortName }}" /></td>
+						</tr>
+						<tr>
+							<td>Slug</td>
+							<td>:</td>
+							<td style="padding:5px"><input type="text" id="sl_input_slug" class="default_input" value="{{ school.slug }}" /></td>
+						</tr>
+						<tr>
+							<td>Slogan</td>
+							<td>:</td>
+							<td style="padding:5px"><input type="text" id="sl_input_slogan" class="default_input" value="{{ school.slogan }}" /></td>
+						</tr>
+						<tr>
+							<td>Type</td>
+							<td>:</td>
+							<td style="padding:5px">
+                                {#
+                                {% if type is not null and type.id == 1 %}
+									<span>
+										<input id="typepublic" name="typeId" value="1" type="radio" checked>
+										<label class="" for="typepublic">Publique</label>
+									</span>
+									<span>
+										<input id="typeprivate" name="typeId" value="2" type="radio">
+										<label class="" for="typeprivate">Privé</label>
+										</span>
+								{% else %}
+									<span>
+										<input id="typepublic" name="typeId" value="1" type="radio">
+										<label class="" for="typepublic">Publique</label>
+									</span>
+									<span>
+										<input id="typeprivate" name="typeId" value="2" type="radio" checked>
+										<label class="" for="typeprivate">Privé</label>
+									</span>
+								{% endif %}
+								#}
+                                {% for type in types %}
+                                    {% set checkedType = "" %}
+                                    {% if school.type.id == type.id %}
+                                        {% set checkedType = "checked" %}
+                                    {% endif %}
+                                    <span>
+										<input id="type_{{ type.id }}" name="typeId" value="{{ type.id }}" type="radio" {{ checkedType }}>
+										<label class="" for="type_{{ type.id }}">{{ type.name }}</label>
+									</span>
+                                {% endfor %}
+							</td>
+						</tr>
+						<tr>
+							<td>Option</td>
+							<td>:</td>
+							<td style="padding:5px">
+								{% for option in options %}
+									{% set checkedOption = "" %}
+									{% if school.option.id == option.id %}
+                                        {% set checkedOption = "checked" %}
+									{% endif %}
+									<span>
+										<input id="option_{{ option.id }}" name="optionId" value="{{ option.id }}" type="radio" {{ checkedOption }}>
+										<label class="" for="option_{{ option.id }}">{{ option.name }}</label>
+									</span>
+								{% endfor %}
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="separator"></div>
+				<div class="bloc_action" style="margin:5px">
+					<span class="btn_edit standar_button">Modifier</span> 
+					<span class="btn_save standar_button" id="btn_sl_doedit" data-target="{{ path('admin_school_doedit', {'id': school.id}) }}" style="display:none">Enregistrer</span>
+					<span class="btn_reset standar_button" style="display:none">Annuler</span> 
+					<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;"><img src="{{ asset('image/load.gif') }}" />Chargement...</span>
+				</div>
+			</div>
+		</div>
+		<div class="both"></div>
+	</div>
+	
+	<div id="a_content_tab">
+		<div class="a_content_tab_header">
+			<div class="a_content_tab_header_content">
+					<div class="a_content_tab_header_item selected" id="tab_description">
+						<div class="a_content_tab_header_item_text">
+							Description
+						</div>
+					</div>
+			</div>
+			<div class="a_content_tab_header_sep">
+				<div class="a_content_tab_header_sep_slide">
+				</div>
+			</div>
+		</div>
+		{#
+        {{ form_start(formDesc) }}
+        {{ form_widget(formDesc) }}
+        {{ form_end(formDesc) }}
+        #}
+		<div class="a_content_tab_content">
+			<div class="a_content_tab_content_item selected" id="content_tab_description" style="">
+				<div class="bloc_editable">
+					<div class="bloc_view">
+						<div style="">
+							<div style="margin: 5px 0;">
+								Courte description :
+							</div>
+							<div id="" class="slt_view_shortdescription" style="padding:5px;background:#fff; border-radius:4px;border:1px solid #eee">
+								{{ school.shortDescription }}
+							</div>
+						</div>
+
+						<div style="">
+							<div style="margin: 5px 0;">
+								Description :
+							</div>
+							<div id="" class="slt_view_description" style="padding:5px;background:#fff; border-radius:4px;border:1px solid #eee">
+								{{ school.description | raw }}
+							</div>
+						</div>
+					</div>
+					<div class="bloc_edit" style="display:none">
+						<div style="">
+							<div style="margin: 5px 0;">
+								Courte description :
+							</div>
+							<div>
+								<textarea id="" class="slt_input_shortdescription default_textarea">{{ school.shortDescription }}</textarea>
+							</div>
+						</div>
+						<div style="">
+							<div style="margin: 5px 0;">
+								Description :
+							</div>
+							<div>
+								<textarea id="sl_input_description" class="default_textarea tinymce" data-theme="advanced">{{ school.description | raw }}</textarea>
+							</div>
+
+							<script type="text/javascript">
+                                var CKEDITOR_BASEPATH = "/bundles/fosckeditor/";
+							</script>
+							<script type="text/javascript" src="/bundles/fosckeditor/ckeditor.js"></script>
+							<script type="text/javascript">
+                                if (CKEDITOR.instances["sl_input_description"]) {
+                                    CKEDITOR.instances["sl_input_description"].destroy(true);
+                                    delete CKEDITOR.instances["sl_input_description"];
+                                }
+                                CKEDITOR.replace("sl_input_description", {"uiColor":"#eeeeee","language":"fr"});
+							</script>
+						</div>
+					</div>
+					<div class="separator"></div>
+					<div class="bloc_action" style="margin:5px">
+						<span class="btn_edit standar_button">Modifier</span>
+						<span class="btn_save standar_button" id="btn_sl_doedit_desc" data-target="{{ path('admin_school_doedit_description', {'id': school.id}) }}" style="display:none">Enregistrer</span>
+						<span class="btn_reset standar_button" style="display:none">Annuler</span>
+						<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;">Chargement...</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block body_footer %}
+	<div style="padding-top: 8px">
+		<span class="toggle_publishState" data-target="{{ path('admin_school_toogle_publication', {'school_id': school.id}) }}">
+			{% if school.published %}
+				<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Publier</span></span>
+				<span class="redstate"><span class="redpastille"></span> <span>Ne pas publier</span></span>
+			{% else %}
+				<span class="greenstate"><span class="greenpastille"></span> <span>Publier</span></span>
+				<span class="redstate" style="display:none"><span class="redpastille"></span> <span>Ne pas publier</span></span>
+			{% endif %}
+		</span><span class="state_loading" style="display:none">
+			<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" /> Chargement...
+		</span>
+
+	</div> 
+{% endblock %}

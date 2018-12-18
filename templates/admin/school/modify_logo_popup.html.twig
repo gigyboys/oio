@@ -1,0 +1,38 @@
+<div style="background:#fff;">
+	<div style="border-bottom:1px solid #ddd; padding: 10px;  height:24px; ">
+		<div style="float:left">
+			Edition du Logo de l'établissement
+		</div>
+		<div style="float:right;cursor: pointer; " class="button_closable">
+			<img src="{{ asset('image/close_icon.png') }}" style="width:16px; height:auto" alt="x" />
+		</div>
+	</div>
+	
+	<div style="background:#fff; padding: 5px; ">
+		<div style="padding:5px">
+			{% set classDefault = '' %}
+			{% if currentLogo is null %}
+				{% set classDefault = 'active' %}
+			{% endif %}
+			<div id="logos_wrapper"><!--
+				--><div class="logo_item {{ classDefault }}" id="default_logo">
+						<img class="logo_popup default" data-type="logo" data-target="{{ path('admin_school_select_logo', {'school_id': school.id, 'logo_id': 0}) }}" src="{{ 'default/images/school/logo/default.jpeg' | imagine_filter('116x116') }}" alt="" />
+					</div><!--
+				{% for logo in logos %}
+					{% set classActive = '' %}
+					{% if logo.current %}
+						{% set classActive = 'active' %}
+					{% endif %}
+					-->{{ include("admin/school/include/logo_item.html.twig") }}<!--
+				{% endfor %}
+			--></div>
+		</div>
+	</div>
+	<div style="border-top:1px solid #ddd;padding:10px; text-align:center">
+		<label for="logofile" style="cursor:pointer">télécharger une image ...</label>
+		<input style="display: none" data-type="logo" id="logofile" name="file" class="ajax_school_logo" type="file" accept="image/*" data-target="{{ path('admin_school_modify_logo', {'school_id': school.id}) }}" />
+	</div>
+	<div style="border-top:1px solid #ddd;padding:10px; text-align:center">
+		<img src="{{ asset('image/info_icon.png') }}" style="width:20px; height:20px; display: inline-block; vertical-align: middle" alt="i" /> Cliquer sur l'image ou télécharger un nouveau pour changer le logo.
+	</div>
+</div>

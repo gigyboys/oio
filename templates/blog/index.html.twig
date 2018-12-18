@@ -1,0 +1,32 @@
+{% extends "front.html.twig" %}
+
+{% block title %}
+  Blog
+{% endblock %}
+
+
+{% block body %}
+	<div class="cr">
+		<div class="ct">
+			<div id="bg_list" style="overflow:hidden">
+				<div id="list_post" class=""><!--
+					{% for post in posts %}
+						-->{{ include("blog/include/post_item.html.twig") }}<!--
+					{% endfor %}
+				--></div>
+				{% if previousPost %}
+					<div id="bg_load_post_action" class="mg_b10" style="margin-bottom: 10px;background: #fff;padding: 10px;border-top: 5px solid #ddd;">
+						<div id="bg_load_post" data-target="{{ path('blog_load_posts', {'post_id': previousPost.id}) }}" data-previous-post="{{ previousPost.id }}" class="mg_h10" style="text-align:center; cursor:pointer; height: 20px">
+							Afficher plus d'articles
+						</div>
+						<div class="btn_loading" style="text-align:center;display:none;height: 15px;">
+							<div style="margin-top: 5px"></div>
+							<img src="{{ asset('image/three-dots.svg')  }}" style=";height:10px; width:auto;display: block; margin: auto" />
+						</div>
+					</div>
+				{% endif %}
+				<div class="both"></div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

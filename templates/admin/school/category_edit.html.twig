@@ -1,0 +1,135 @@
+{% extends "back.html.twig" %}
+
+{% block title %}
+	Edit school category {{ category.id }}
+{% endblock %}
+
+{% block body_header %}
+	<div class="bc">
+		<span class="bc1"><a href="{{ path('admin_school') }}"><img src="{{ asset('image/sl_icon.png') }}" style="width:14px; height:auto" /> <span>Etablissements</span></a> </span>
+		<span class="dd">
+			<span href="#" class="dd_src">
+				<span class="bcdd"></span>
+			</span>
+            {{ include("admin/school/include/school_principal_action.html.twig") }}
+		</span>
+		<span class="bc1"><a href="{{ path('admin_school_category') }}">Catégories</a></span>
+		<span class="dd">
+			<span href="#" class="dd_src">
+				<span class="bcdd"></span>
+			</span>
+			<span class="dd_target dd_tdfault">
+				<a class="link dd_item" href="{{ path('admin_school_category_add') }}">
+					<span class="icon"><img src="{{ asset('image/add_icon.png') }}" /></span><span class="label">Nouvelle catégorie</span>
+				</a>
+			</span>
+		</span>
+		<span class="bc1"><a href="{{ path('admin_school_category_edit', {'category_id' :  category.id}) }}">{{ category.name }}</a></span>
+	</div>
+	<div style="padding:8px; float:right">
+		<div style="float:left">
+			<span class="dd" style="display:inline-block;">
+				<span href="#" class="dd_src" style="cursor:pointer">
+					Autres actions
+				</span>
+				<span class="dd_target dd_tdfault">
+					<a class="link dd_item" target="_blank" href="{{ path('school_category_viewbyid', {'id': category.id}) }}">
+						<span class="icon"><img src="{{ asset('image/view_icon.png') }}" /></span><span class="label">Aperçu</span>
+					</a>
+					<a class="link dd_item" href="{{ path('admin_school_category_edit_schools', {'category_id': category.id}) }}">
+						<span class="icon"><img src="{{ asset('image/add_icon.png') }}" /></span><span class="label">Etablissements</span>
+					</a>
+				</span>
+			</span>
+		</div>
+	</div>
+{% endblock %}
+
+{% block content_body %}
+	<div style="background:#ddd; padding: 5px; margin:5px; border:1px solid #bbb">
+		Edition de la catégorie <strong>{{ category.name }}</strong>
+	</div>
+
+	<div style="padding:5px">
+		<div style="">
+			<div class="bloc_editable">
+				<div class="bloc_view">
+					<table style="width: 100%">
+						<tr>
+							<td style="width: 0.1%">Nom</td>
+							<td style="width: 0.1%">:</td>
+							<td style="padding:5px"><span id="slcat_view_name">{{ category.name }}</span></td>
+						</tr>
+						<tr>
+							<td>Slug</td>
+							<td>:</td>
+							<td style="padding:5px"><span id="slcat_view_slug">{{ category.slug }}</span></td>
+						</tr>
+						<tr>
+							<td class="vatop">Description</td>
+							<td class="vatop">:</td>
+							<td style="padding:5px">
+								<div id="slcat_view_description" style="padding:5px;background:#fff; border-radius:4px;border:1px solid #eee">
+                                    {% if category.description is not null %}
+                                        {{ category.description | raw }}
+                                    {% endif %}
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="bloc_edit" style="display:none">
+					<table style="width: 100%">
+						<tr>
+							<td style="width: 0.1%">Nom</td>
+							<td style="width: 0.1%">:</td>
+							<td style="padding:5px"><input type="text" id="slcat_input_name" class="default_input" value="{{ category.name }}" /></td>
+						</tr>
+						<tr>
+							<td>Slug</td>
+							<td>:</td>
+							<td style="padding:5px"><input type="text" id="slcat_input_slug" class="default_input" value="{{ category.slug }}" /></td>
+						</tr>
+						<tr>
+							<td class="vatop">Description</td>
+							<td class="vatop">:</td>
+							<td style="padding:5px">
+								<div>
+									<textarea id="slcat_input_description" class="default_textarea">{% if category.description is not null %}{{ category.description }}{% endif %}</textarea>
+								</div>
+
+								<script type="text/javascript">
+                                    var CKEDITOR_BASEPATH = "/bundles/fosckeditor/";
+								</script>
+								<script type="text/javascript" src="/bundles/fosckeditor/ckeditor.js"></script>
+								<script type="text/javascript">
+                                    if (CKEDITOR.instances["slcat_input_description"]) {
+                                        CKEDITOR.instances["slcat_input_description"].destroy(true);
+                                        delete CKEDITOR.instances["slcat_input_description"];
+                                    }
+                                    CKEDITOR.replace("slcat_input_description", {"uiColor":"#eeeeee","language":"en"});
+								</script>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="separator"></div>
+				<div class="bloc_action" style="margin:5px">
+					<span class="btn_edit standar_button">Modifier</span>
+					<span class="btn_save standar_button" id="btn_doedit_slcat" data-target="{{ path('admin_school_category_doedit', {'category_id': category.id}) }}" style="display:none">Enregistrer</span>
+					<span class="btn_reset standar_button" style="display:none">Annuler</span>
+					<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;"><img src="{{ asset('image/load.gif') }}" />Chargement...</span>
+				</div>
+			</div>
+		</div>
+		<div class="both"></div>
+	</div>
+{% endblock %}
+
+{% block body_footer %}
+	<span style="display:inline-block; margin-top:6px; margin-left:6px">
+		{% set schools = getAllSchoolByCategory(category) %}
+        {{ schools | length }} Etablissements
+	</span>
+{% endblock %}
+

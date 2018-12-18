@@ -1,0 +1,59 @@
+.standar_button{
+	padding:5px;
+	background: #eee;
+	border:1px solid #ccc;
+	cursor:pointer;
+	margin: 0px 5px 0px 0px;
+	border-radius: 3px;
+	display:inline-block;
+	font-size: 16px;
+	font-family: calibri;
+}
+
+.menu_deroulant_liste{
+	box-shadow: 1px 1px 5px #999;
+}
+.dd_tdfault{
+	text-align: left; 
+	margin-top: 4px; 
+	position: absolute; 
+	display: none; 
+	background: #f8f8f8; 
+	border: 1px solid #ccc; 
+	border-radius: 4px;
+	box-shadow: 1px 1px 5px #ccc;
+	z-index: 1;
+}
+
+.dd_item{
+	display:block;
+	border:1px solid transparent;
+	margin:2px;
+	border-radius: 3px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding:5px;
+	cursor:pointer
+}
+.dd_item:hover{
+	border:1px solid #ccc;
+	background:#eee;
+	color:#299;
+}
+.dd_item .icon{
+	display:inline-block;
+	width:18px; 
+	height:14px;
+	vertical-align:middle;
+}
+.dd_item .icon img{
+	width:14px; 
+	height:14px;
+	display:inline-block;
+	vertical-align:top;
+}
+.dd_item .label{
+	display:inline-block;
+	vertical-align:middle;
+}

@@ -1,0 +1,9 @@
+<span class="sl_type_item {% if typeslug != 'private' and typeslug != 'public' %}active{% endif %}">
+	<a href="{{ path('school_home') }}"><span>Tous</span> <span class="hidden_480">Etablissements</span></a>
+</span>
+<span class="sl_type_item {% if typeslug == 'private' %}active{% endif %}">
+	<a href="{{ path('school_home', {'typeslug':'private'}) }}"><span class="hidden_480">Etablissements</span> <span>Privés</span></a>
+</span>
+<span class="sl_type_item {% if typeslug == 'public' %}active{% endif %}">
+	<a href="{{ path('school_home', {'typeslug':'public'}) }}"><span class="hidden_480">Etablissements</span> <span>Publics</span></a>
+</span>

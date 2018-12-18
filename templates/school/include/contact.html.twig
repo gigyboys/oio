@@ -1,0 +1,22 @@
+<div style="">
+	{% if schoolContacts|length == 0 %}
+		<div id="" class="mg_10">
+			Aucun contact à afficher
+		</div>
+	{% else %}
+		<div id="" class="mg_5">
+			{{ schoolContacts|length }} {% if schoolContacts|length > 1 %}Contacts{% else %}Contact{% endif %}
+			{% if coords|length != 0 %}
+				- 
+				<span id="btn_show_map_contacts" style="cursor:pointer" data-target="{{ path('school_get_map_coordonnees', {'slug': school.slug}) }}">
+					<img src="{{ asset('image/location_icon.png') }}" style="width:12px; height:12px;" /> Tout afficher sur une carte
+				</span>
+			{% endif %}
+		</div>
+		<div id="contact_list">
+			{% for schoolContact in schoolContacts %}
+				{{ include("school/include/contact_item.html.twig") }}
+			{% endfor %}
+		</div>
+	{% endif %}
+</div>

@@ -1,0 +1,33 @@
+<div class="evaluation_item mg_b10">
+	<div class="sp mg_v10"></div>
+	<div class="mg_b5">
+	Par :
+	{# twig extension #}
+	{% set userInfo = getLinkUserInfo(evaluation.user, evaluation.user.name) %}
+
+		{#{% set userInfo = evaluation.user.name %}#}
+	{{ userInfo | raw }} le {{ evaluation.date | date('Y-m-d à H:i:s') }}
+	</div>
+	<div style="width:50px;float:left">
+
+		{% set avatar = userAvatar(evaluation.user) %}
+		<span style="display:block;float:left;width:32px"><img style="width:50px; height: 50px; border-radius: 50%" src="{{ avatar | imagine_filter('50x50') }}" alt="{{ evaluation.user.username }}" /></span>
+	</div>
+	<div style="margin-left:60px">
+		<div style="height:26px">
+			<div class="left" style="padding-top:2px">Notes : </div>
+			{% set mark = evaluation.mark/20 %}
+			{% for i in 1..5 %}
+				{% if i <= mark %}
+					<div class="left pd_5"><div class="eval_star_view_item selected" data-value="20"></div></div>
+				{% else %}
+					<div class="left pd_5"><div class="eval_star_view_item" data-value="100"></div></div>
+				{% endif %}
+			{% endfor %}			
+		</div>
+		<div class="mg_b5">
+			{{ evaluation.comment | nl2br  }}
+		</div>
+	</div>
+	<div class="both"></div>
+</div>
