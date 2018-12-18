@@ -152,7 +152,6 @@ class BlogController extends AbstractController {
     public function editPost($post_id)
     {
         $post = $this->postRepository->find($post_id);
-        //$postSchools = $this->postSchoolRepository->findBy(array('post' => $post));
 
         return $this->render('admin/blog/post_edit.html.twig', array(
             'post' => $post,
@@ -378,8 +377,6 @@ class BlogController extends AbstractController {
         $response->headers->set('Content-Type', 'application/json');
         return $response;
     }
-
-
 
     /*
      * confirm delete post

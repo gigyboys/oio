@@ -12,6 +12,7 @@ namespace App\Service;
 use App\Entity\Category;
 use App\Entity\Document;
 use App\Entity\Download;
+use App\Entity\Event;
 use App\Entity\Post;
 use App\Entity\School;
 use App\Entity\SchoolOfTheDay;
@@ -24,6 +25,7 @@ use App\Repository\AvatarRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\CategorySchoolRepository;
 use App\Repository\CoverRepository;
+use App\Repository\EventRepository;
 use App\Repository\LogoRepository;
 use App\Repository\ParameterRepository;
 use App\Repository\PostRepository;
@@ -48,6 +50,7 @@ class PlatformService
         ParameterRepository $parameterRepository,
         AvatarRepository $avatarRepository,
         PostRepository $postRepository,
+        EventRepository $eventRepository,
         EntityManagerInterface $em,
         \Swift_Mailer $mailer,
         EngineInterface $templating,
@@ -59,6 +62,7 @@ class PlatformService
         $this->parameterRepository = $parameterRepository;
         $this->avatarRepository = $avatarRepository;
         $this->postRepository = $postRepository;
+        $this->eventRepository = $eventRepository;
         $this->em = $em;
         $this->templating = $templating;
         $this->mailer = $mailer;
@@ -118,6 +122,7 @@ class PlatformService
             "school",
             "blog",
             "event",
+            "events",
             "advert",
             "forum",
             "about",
@@ -147,6 +152,11 @@ class PlatformService
             }
             elseif ($entity instanceof Post){
                 $entitytmp = $this->postRepository->findOneBy(array(
+                    'slug' => $slugtmp
+                ));
+            }
+            elseif ($entity instanceof Event){
+                $entitytmp = $this->eventRepository->findOneBy(array(
                     'slug' => $slugtmp
                 ));
             }

@@ -195,6 +195,38 @@ blog_manager_post_delete_illustration:
     defaults:
         _controller: App\Controller\BlogManagerController::deleteIllustration
 
+#event_manager
+
+event_manager_toogle_show_author:
+    path:     /event-manager/event/{event_id}/toogle-show-author
+    defaults:
+        _controller: App\Controller\EventManagerController::toogleShowAuthor
+
+event_manager_toogle_active_comment:
+    path:     /event-manager/event/{event_id}/toogle-active-comment
+    defaults:
+        _controller: App\Controller\EventManagerController::toogleActiveComment
+event_manager_toogle_publication:
+    path:     /event-manager/event/{event_id}/toogle-publication
+    defaults:
+        _controller: App\Controller\EventManagerController::tooglePublication
+event_manager_toogle_validation:
+    path:     /event-manager/event/{event_id}/toogle-validation
+    defaults:
+        _controller: App\Controller\EventManagerController::toogleValidation
+event_manager_toogle_deletion:
+    path:     /event-manager/event/{event_id}/toogle-deletion
+    defaults:
+        _controller: App\Controller\EventManagerController::toogleDeletion
+event_manager_doedit:
+    path:     /event-manager/event/{event_id}/doedit
+    defaults:
+        _controller: App\Controller\EventManagerController::doEditEvent
+event_manager_doedit_content:
+    path:     /event-manager/event/{event_id}/doedit-content
+    defaults:
+        _controller: App\Controller\EventManagerController::doEditContentEvent
+
 #blog
 blog:
     path:     /blog

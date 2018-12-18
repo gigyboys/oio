@@ -1,0 +1,134 @@
+{% extends "back.html.twig" %}
+
+{% block title %}
+	Liste des évènements
+{% endblock %}
+
+{% block body_header %}
+	<div class="bc">
+		<span class="bc1"><a href="{{ path('admin_event') }}"><img src="{{ asset('image/default_icon.png') }}" style="width:14px; height:auto" /> <span>Evènements</span></a></span>
+	</div>
+	<div style="padding:8px;float:right">
+		<span><a href="{{ path('admin_event_add') }}"><img src="{{ asset('image/add_icon.png') }}" /> <span>Nouvel évènement</span></a></span>
+	</div>
+{% endblock %}
+
+{% block content_body %}
+	<div style="background:#ddd; padding: 5px; margin:5px; border:1px solid #bbb">
+		<span><img src="{{ asset('image/list_icon.png') }}" style="width:12px; height:auto" /> Liste des évènements</span>
+		<div style="float: right"><a target="_blank" href="{{ path('blog') }}"><img src="{{ asset('image/view_icon.png') }}" style="width: 12px; height: auto"/> Aperçu</a></div>
+		<div class="both"></div>
+	</div>
+	
+	<div class="a_datatable">
+		<div class="a_datatable_head">
+			<div class="a_datatable_head_left">
+				<span style="display:inline-block; margin-top:5px; margin-left:6px"> Rechercher :
+					<input type="text" class="default_input a_list_search_input" data-target-id="list_events"/><!--
+					--><span class="a_list_search_reset"><img src="{{ asset('image/cross_icon.png') }}" style="width:12px; height:auto" /></span>
+				</span>
+			</div>
+			<div class="a_datatable_head_right">
+                {#right#}
+			</div>
+		</div>
+		
+		<div class="a_datatable_body">
+			<table class="a_table" id="list_events">
+				<tr class="a_table_head">
+					<th class="a_table_cell_id" style="width: 50px; text-align:center">Id</th>
+					<th class="taleft">Titre</th>
+					<th class="taleft">Auteur</th>
+					<th class="tacenter">Publié</th>
+					<th class="tacenter">Valide</th>
+					<th class="a_table_cell_action tacenter">Actions</th>
+				</tr>
+				{% for event in events %}
+				<tr class="a_table_line" id="event_{{ event.id }}" data-text="{{ event.title }}" style="display:table-row">
+					<td class="a_table_cell_id" style="width: 50px; text-align:center">{{ event.id }}</td>
+					<td>					
+						{# twig extension #}
+						{#
+						{% set illustration = postIllustration(post) %}
+
+						#}
+						<a href="{{ path('admin_event_edit', {'event_id': event.id}) }}" data-name="{{ event.title }}" style="display:block;">
+							{#<span style="display:block;float:left;width:32px; margin:1px"><img style="width: 32px; height: 32px;display:block" src="{{ illustration | imagine_filter('32x32') }}" alt="img post" /></span>#}
+							<span style="display:block;margin-left:36px;padding-top:6px" title="{{ event.title }}">{{ substrSpace(event.title, 60) }}</span>
+							<span class="both"></span>
+						</a>
+					</td>
+
+					<td>
+						<span>
+							<span class="toggle_case" data-target="{{ path('event_manager_toogle_show_author', {'event_id': event.id}) }}">
+								{% if event.showAuthor %}
+									<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
+									<span class="redstate"><span class="redpastille"></span></span>
+								{% else %}
+									<span class="greenstate"><span class="greenpastille"></span></span>
+									<span class="redstate" style="display:none"><span class="redpastille"></span></span>
+								{% endif %}
+							</span><span class="state_loading" style="display:none">
+								<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" />
+							</span>
+							<span>{{ event.user.name }}</span>
+						</span>
+					</td>
+					<td class="tacenter">
+						<span class="toggle_case" data-entity="event" data-target="{{ path('event_manager_toogle_publication', {'event_id': event.id}) }}#}">
+							{% if event.published %}
+								<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
+								<span class="redstate"><span class="redpastille"></span></span>
+							{% else %}
+								<span class="greenstate"><span class="greenpastille"></span></span>
+								<span class="redstate" style="display:none"><span class="redpastille"></span></span>
+							{% endif %}
+						</span><span class="state_loading" style="display:none">
+							<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" />
+						</span>
+					</td>
+					<td class="tacenter">
+						{% if event.tovalid %}
+						<span class="toggle_case" data-entity="event" data-target="{{ path('event_manager_toogle_validation', {'event_id': event.id}) }}">
+							{% if event.valid %}
+								<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
+								<span class="redstate"><span class="redpastille"></span></span>
+							{% else %}
+								<span class="greenstate"><span class="greenpastille"></span></span>
+								<span class="redstate" style="display:none"><span class="redpastille"></span></span>
+							{% endif %}
+						</span><span class="state_loading" style="display:none">
+							<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" />
+						</span>
+						{% endif %}
+					</td>
+
+					<td class="a_table_cell_action tacenter">
+						<a href="{{ path('admin_event_edit', {'event_id': event.id}) }}" data-name="{{ event.title }}" style="cursor:pointer"><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /></a>
+						<span class="delete_event" data-id="{{ event.id }}" data-target="{{ path('admin_event_dodelete', {'event_id': event.id}) }}" data-title="{{ event.title }}" style="cursor:pointer"><img src="{{ asset('image/delete_icon.png') }}" style="width:12px; height:auto" /></span>
+					</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+		
+		<div class="a_datatable_foot">
+			<div class="a_datatable_foot_left">
+				<span style="display:inline-block; margin-top:6px; margin-left:6px" class="result_state">{{ events | length }} resultat(s)</span>
+			</div>
+			<div class="a_datatable_foot_right">
+				{#
+				<span>right</span>
+				#}
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block body_footer %}
+	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_events">{{ events | length }}</span> évènement(s)</span> |
+	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_published_events">{{ publishedEvents | length }}</span> publié(s)</span> |
+	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_not_published_events">{{ notPublishedEvents | length }}</span> non publié(s)</span>
+{% endblock %}
+

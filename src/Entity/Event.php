@@ -44,6 +44,19 @@ class Event
     private $date;
 
     /**
+     * @ORM\Column(type="datetime")
+     */
+    private $datebegin;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dateend;
+
+    private $datebeginText;
+    private $dateendText;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $introduction;
@@ -165,6 +178,30 @@ class Event
         return $this;
     }
 
+    public function getDatebegin(): ?\DateTimeInterface
+    {
+        return $this->datebegin;
+    }
+
+    public function setDatebegin(\DateTimeInterface $datebegin): self
+    {
+        $this->datebegin = $datebegin;
+
+        return $this;
+    }
+
+    public function getDateend(): ?\DateTimeInterface
+    {
+        return $this->dateend;
+    }
+
+    public function setDateend(\DateTimeInterface $dateend): self
+    {
+        $this->dateend = $dateend;
+
+        return $this;
+    }
+
     public function getIntroduction(): ?string
     {
         return $this->introduction;
@@ -259,5 +296,26 @@ class Event
     public function getDeleted()
     {
         return $this->deleted;
+    }
+
+
+    public function getDatebeginText()
+    {
+        return $this->datebeginText;
+    }
+
+    public function setDatebeginText($datebeginText): void
+    {
+        $this->datebeginText = $datebeginText;
+    }
+
+    public function getDateendText()
+    {
+        return $this->dateendText;
+    }
+
+    public function setDateendText($dateendText): void
+    {
+        $this->dateendText = $dateendText;
     }
 }

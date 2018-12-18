@@ -2,11 +2,13 @@
 namespace App\Twig;
 
 use App\Entity\Category;
+use App\Entity\Event;
 use App\Entity\Post;
 use App\Entity\School;
 use App\Entity\Tag;
 use App\Entity\User;
 use App\Service\BlogService;
+use App\Service\EventService;
 use App\Service\PlatformService;
 use App\Service\SchoolService;
 use App\Service\UserService;
@@ -19,12 +21,14 @@ class AppExtension extends AbstractExtension
         SchoolService $schoolService,
         UserService $userService,
         PlatformService $platformService,
+        EventService $eventService,
         BlogService $blogService
     )
     {
         $this->schoolService = $schoolService;
         $this->userService = $userService;
         $this->platformService = $platformService;
+        $this->eventService = $eventService;
         $this->blogService = $blogService;
     }
 
@@ -60,6 +64,8 @@ class AppExtension extends AbstractExtension
             new TwigFunction('getActiveUsers', array($this, 'getActiveUsers')),
             new TwigFunction('getValidPosts', array($this, 'getValidPosts')),
             new TwigFunction('getLastVisit', array($this, 'getLastVisit')),
+            /*event*/
+            new TwigFunction('eventIllustration', array($this, 'eventIllustration')),
         );
     }
 
@@ -179,5 +185,12 @@ class AppExtension extends AbstractExtension
 
     public function getLastVisit(User $user) {
         return $this->userService->getLastVisit($user);
+    }
+
+    /*
+     * event
+     */
+    public function eventIllustration(Event $event) {
+        return $this->eventService->getIllustrationPath($event);
     }
 }

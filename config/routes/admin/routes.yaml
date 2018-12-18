@@ -287,6 +287,25 @@ admin_blog_post_toogle_school:
     defaults:
         _controller: App\Controller\Admin\BlogController::toogleSchool
 
+
+#event
+admin_event:
+    path:     /event
+    defaults:
+        _controller: App\Controller\Admin\EventController::event
+admin_event_add:
+    path:     /event/add-event
+    defaults:
+        _controller: App\Controller\Admin\EventController::addEvent
+admin_event_edit:
+    path:     /event/edit-event/{event_id}
+    defaults:
+        _controller: App\Controller\Admin\EventController::editEvent
+admin_event_dodelete:
+    path:     /event/{event_id}/delete
+    defaults:
+        _controller: App\Controller\Admin\EventController::deleteEvent
+
 #setting
 admin_setting_accessibility:
     path:     /setting/accessibility

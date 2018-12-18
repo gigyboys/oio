@@ -1,0 +1,248 @@
+{% extends "back.html.twig" %}
+
+{% block title %}
+	Edition de l'évènement #{{ event.id }}
+{% endblock %}
+
+{% block body_header %}
+	<div class="bc">
+		<span class="bc1"><a href="{{ path('admin_event') }}"><img src="{{ asset('image/default_icon.png') }}" style="width:14px; height:auto" /> <span>Evènements</span></a> </span>
+		<span class="dd">
+			<span href="#" class="dd_src">
+				<span class="bcdd"></span>
+			</span>
+            {{ include("admin/event/include/event_principal_action.html.twig") }}
+		</span>
+		<span class="bc1"><a href="{{ path('admin_event_edit', {'event_id': event.id}) }}">{{ event.title }}</a></span>
+	</div>
+	<div style="padding:8px; float:right">
+		<div style="float:left">
+			<span class="dd" style="display:inline-block;">
+				<span href="#" class="dd_src" style="cursor:pointer">
+					Autres actions
+				</span>
+				{#{{ include("admin/blog/include/post_other_action.html.twig") }}#}
+			</span> 
+		</div>
+	</div>
+{% endblock %}
+
+{% block content_body %}
+	<div style="background:#ddd; padding: 5px; margin:5px; border:1px solid #bbb">
+		<span><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /> Edition de l'évènement #{{ event.id }}</span>
+		|
+		<span class="dd" style="display:inline-block;">
+			<span href="#" class="dd_src" style="cursor:pointer">
+				info
+			</span>
+			<span class="dd_target" style="display:block; padding: 5px; text-align: left; margin-top: 4px; position: absolute; display: none; background: #eee; padding: 4px; border: 1px solid #aaa; border-radius: 4px;">
+				<span>Auteur : {{ event.user.name }}</span><br />
+				<span>Date d'ajout : {{ event.date | date('Y-m-d H:i:s') }}</span><br />
+				<span>Nombre de vues : xxx{#{{ post.viewNumber }}#}</span><br />
+			</span>
+		</span>
+	</div>
+	
+	<div style="padding:5px">
+		<div id="change_event_illustration" data-target="{#{{ path('blog_manager_post_illustration_popup', {'event_id' : event.id})}}#}" style="float:left; height: 122px;margin:5px">
+			{# twig extension #}
+			{% set illustration = eventIllustration(event) %}
+			<label>
+				<img id="event_illustration" style="width: 116px; height: 116px;cursor: pointer" src="{{ illustration | imagine_filter('116x116') }}" alt="img event" />
+			</label>
+		</div>
+		<div style="margin-left: 136px;">
+			<div class="bloc_editable">
+				<div class="bloc_view">
+					<table>
+						<tr>
+							<td>Titre</td>
+							<td>:</td>
+							<td style="padding:5px"><span id="event_view_title">{{ event.title }}</span></td>
+						</tr>
+						<tr>
+							<td>Slug</td>
+							<td>:</td>
+							<td style="padding:5px"><span id="event_view_slug">{{ event.slug }}</span></td>
+						</tr>
+						<tr>
+							<td>Date début</td>
+							<td>:</td>
+							<td style="padding:5px"><span id="event_view_datebegin">{{ event.datebegin | date('d/m/Y à H:i') }}</span></td>
+						</tr>
+						<tr>
+							<td>Date fin</td>
+							<td>:</td>
+							<td style="padding:5px"><span id="event_view_dateend">{{ event.dateend | date('d/m/Y à H:i') }}</span></td>
+						</tr>
+					</table>
+				</div>
+				<div class="bloc_edit" style="display:none">
+					<table>
+						<tr>
+							<td>Titre</td>
+							<td>:</td>
+							<td style="padding:5px"><input type="text" id="event_input_title" class="default_input" value="{{ event.title }}" /></td>
+						</tr>
+						<tr>
+							<td>Slug</td>
+							<td>:</td>
+							<td style="padding:5px"><input type="text" id="event_input_slug" class="default_input" value="{{ event.slug }}" /></td>
+						</tr>
+						<tr>
+							<td>Date début</td>
+							<td>:</td>
+							<td style="padding:5px"><input type="text" id="event_input_datebegin" class="default_input" value="{{ event.datebegin | date('d/m/Y à H:i') }}" /></td>
+						</tr>
+						<tr>
+							<td>Date fin</td>
+							<td>:</td>
+							<td style="padding:5px"><input type="text" id="event_input_dateend" class="default_input" value="{{ event.dateend | date('d/m/Y à H:i') }}" /></td>
+						</tr>
+					</table>
+				</div>
+				<div class="separator"></div>
+				<div class="bloc_action" style="margin:5px">
+					<span class="btn_edit standar_button">Modifier</span> 
+					<span class="btn_save standar_button" id="btn_doedit_event" data-target="{{ path('event_manager_doedit', {'event_id': event.id}) }}" style="display:none">Enregistrer</span>
+					<span class="btn_reset standar_button" style="display:none">Annuler</span> 
+					<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;"><img src="{{ asset('image/tail-spin.svg') }}" style="width: 20px;height: 20px"/>Chargement...</span>
+				</div>
+			</div>
+		</div>
+		<div class="both"></div>
+	</div>
+
+	<div id="a_content_tab">
+		<div class="a_content_tab_header">
+			<div class="a_content_tab_header_content">
+				<div class="a_content_tab_header_item selected" id="tab_description">
+					<div class="a_content_tab_header_item_text">
+						Description
+					</div>
+				</div>
+			</div>
+			<div class="a_content_tab_header_sep">
+				<div class="a_content_tab_header_sep_slide">
+				</div>
+			</div>
+		</div>
+		<div class="a_content_tab_content">
+			<div class="a_content_tab_content_item selected" id="content_tab_description" style="">
+				<div class="bloc_editable">
+					<div class="bloc_view">
+						<div style="">
+							<div style="margin: 5px 0;">
+								Introduction :
+							</div>
+							<div id="" class="event_view_introduction" style="padding:5px;background:#fff; border-radius:4px;border:1px solid #eee">
+								{{ event.introduction }}
+							</div>
+						</div>
+
+						<div style="">
+							<div style="margin: 5px 0;">
+								Contenu :
+							</div>
+							<div id="" class="event_view_content" style="padding:5px;background:#fff; border-radius:4px;border:1px solid #eee">
+								{{ event.content | raw }}
+							</div>
+						</div>
+					</div>
+					<div class="bloc_edit" style="display:none">
+						<div style="">
+							<div style="margin: 5px 0;">
+								Introduction :
+							</div>
+							<div>
+								<textarea id="" class="event_input_introduction default_textarea">{{ event.introduction }}</textarea>
+							</div>
+						</div>
+						<div style="">
+							<div style="margin: 5px 0;">
+								Contenu :
+							</div>
+							<div>
+								<textarea id="event_input_content" class="event_input_content default_textarea tinymce">{{ event.content | raw }}</textarea>
+							</div>
+
+							<script type="text/javascript">
+                                var CKEDITOR_BASEPATH = "/bundles/fosckeditor/";
+							</script>
+							<script type="text/javascript" src="/bundles/fosckeditor/ckeditor.js"></script>
+							<script type="text/javascript">
+                                if (CKEDITOR.instances["event_input_content"]) {
+                                    CKEDITOR.instances["event_input_content"].destroy(true);
+                                    delete CKEDITOR.instances["event_input_content"];
+                                }
+                                CKEDITOR.replace("event_input_content", {"uiColor":"#eeeeee","language":"en"});
+							</script>
+						</div>
+					</div>
+					<div class="separator"></div>
+					<div class="bloc_action" style="margin:5px">
+						<span class="btn_edit standar_button">Modifier</span>
+						<span class="btn_doedit_content_event btn_save standar_button" id="" data-target="{{ path('event_manager_doedit_content', {'event_id': event.id}) }}" style="display:none">Enregistrer</span>
+						<span class="btn_reset standar_button" style="display:none">Annuler</span>
+						<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;"><img src="{{ asset('image/tail-spin.svg') }}" style="width: 20px;height: 20px"/>Chargement...</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block body_footer %}
+	<div style="padding-top: 8px">
+		<span class="toggle_case" data-target="{{ path('event_manager_toogle_publication', {'event_id': event.id}) }}">
+			{% if event.published %}
+				<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Publier</span></span>
+				<span class="redstate"><span class="redpastille"></span> <span>Ne pas publier</span></span>
+			{% else %}
+				<span class="greenstate"><span class="greenpastille"></span> <span>Publier</span></span>
+				<span class="redstate" style="display:none"><span class="redpastille"></span> <span>Ne pas publier</span></span>
+			{% endif %}
+		</span><span class="state_loading" style="display:none">
+			<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" /> Chargement...
+		</span>
+		|
+		<span class="toggle_case" data-target="{{ path('event_manager_toogle_show_author', {'event_id': event.id}) }}">
+			{% if event.showAuthor %}
+				<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Afficher l'auteur</span></span>
+				<span class="redstate"><span class="redpastille"></span> <span>Ne pas afficher l'auteur</span></span>
+			{% else %}
+				<span class="greenstate"><span class="greenpastille"></span> <span>Afficher l'auteur</span></span>
+				<span class="redstate" style="display:none"><span class="redpastille"></span> <span>Ne pas afficher l'auteur</span></span>
+			{% endif %}
+		</span><span class="state_loading" style="display:none">
+			<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" /> Chargement...
+		</span>
+		|
+		<span class="toggle_case" data-target="{{ path('event_manager_toogle_active_comment', {'event_id': event.id}) }}">
+			{% if event.activeComment %}
+				<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Activer les commentaires</span></span>
+				<span class="redstate"><span class="redpastille"></span> <span>Désactiver les commentaires</span></span>
+			{% else %}
+				<span class="greenstate"><span class="greenpastille"></span> <span>Activer les commentaires</span></span>
+				<span class="redstate" style="display:none"><span class="redpastille"></span> <span>Désactiver les commentaires</span></span>
+			{% endif %}
+		</span><span class="state_loading" style="display:none">
+			<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" /> Chargement...
+		</span>
+        {% if event.tovalid %}
+			|
+		<span class="toggle_case" data-target="{{ path('event_manager_toogle_validation', {'event_id': event.id}) }}">
+			{% if event.valid %}
+				<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Valider</span></span>
+				<span class="redstate"><span class="redpastille"></span> <span>Ne pas valider</span></span>
+			{% else %}
+				<span class="greenstate"><span class="greenpastille"></span> <span>Valider</span></span>
+				<span class="redstate" style="display:none"><span class="redpastille"></span> <span>Ne pas valider</span></span>
+			{% endif %}
+		</span><span class="state_loading" style="display:none">
+			<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" /> Chargement...
+		</span>
+		{% endif %}
+	</div> 
+{% endblock %}
+

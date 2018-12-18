@@ -298,6 +298,12 @@
 .ui-datepicker table {
 	margin-bottom: 3px;
 }
+.ui-timepicker-div dl {
+	font-size: 14px;
+}
+.ui-datepicker .ui-datepicker-buttonpane button {
+	font-size: 13px;
+}
 
 /*embeded video*/
 .video-container {
