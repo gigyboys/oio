@@ -184,6 +184,14 @@ class UserController extends AbstractController {
                     $userTeam = new UserTeam();
                     $userTeam->setUser($user);
                     $userTeam->setPublished(true);
+                    
+                    $lastUserTeam = $this->userTeamRepository->findLastUserTeam('position');
+                    $position = 0;
+                    if($lastUserTeam){
+                        $position = $lastUserTeam->getPosition() + 1;
+                    }
+                    $userTeam->setPosition($position);
+                    
                     $this->em->persist($userTeam);
                 }
             }
@@ -193,6 +201,7 @@ class UserController extends AbstractController {
             $response->setContent(json_encode(array(
                 'state' => 1,
                 'case' => $this->userService->isUserTeam($user),
+                'position' => $userTeam->getPosition()
             )));
         }
 

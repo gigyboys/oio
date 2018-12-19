@@ -47,7 +47,7 @@ $(function() {
 		});	
     });
 	
-	$('.btn_at_new_cmt').on('click', function(){
+	$('body').on('click','.btn_at_new_cmt',function(e){
         var $this = $(this);
         var target = $this.data('target');
 		if($.trim($("#at_cmt_message").val()) != ""){
@@ -87,7 +87,7 @@ $(function() {
 		}	
     });
 	
-	$('.not_school_advert').live('click', function(e){
+	$('body').on('click','.not_school_advert',function(e){
 		var $this = $(this);
         var target = $this.data('target');
 		var data = {

@@ -322,8 +322,8 @@ $(function() {
 	var content_tab_header_content = $('.content_tab_header_content');
 	var content_tab_header_sep_slide = $('.content_tab_header_sep_slide');
 	
-	content_tab_header_item.live('click', function(e) {
-        content_tab_header_item.removeClass('selected');
+	$('body').on('click','.content_tab_header_item',function(e){
+        $('.content_tab_header_item').removeClass('selected');
         $(this).addClass('selected');
 		var this_id = $(this).attr('id');
 		var content = $("#content_"+this_id);

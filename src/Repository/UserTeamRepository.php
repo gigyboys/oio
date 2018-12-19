@@ -37,4 +37,23 @@ class UserTeamRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+
+    public function findLastUserTeam($fied = 'position', $published = null) {
+
+        $qb = $this->createQueryBuilder('userTeam');
+
+        if($published != null){
+        $qb
+            ->where('userTeam.published = :published')
+            ->setParameter('published', $published);
+        }
+
+        $qb
+            ->orderBy('userTeam.'.$fied, 'DESC')
+            ->setMaxResults(1);
+
+
+        $userTeam = $qb->getQuery()->getOneOrNullResult();
+        return $userTeam;
+    }
 }

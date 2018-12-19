@@ -45,7 +45,7 @@ function popup(content, width, closable = true, background = 'rgba(0,0,0,0.5)'){
 }
 
 $(function() {
-    $('.otherpopup').live('click', function() {
+	$('body').on('click','.otherpopup',function(e){
 		var content = '<div style="padding:5px; width:auto; background:#fff""><div style="text-align:center"> other popup apert<br /> ok...</div><div style="text-align:center">	<span class="button_closable" style="background:#888; border-radius: 3px; cursor:pointer; display:inline-block; margin:auto; padding:5px;">	Confirmer	</span></div></div>';
         popup(content, 300, false);
     });
@@ -56,14 +56,14 @@ $(function() {
 		popup(content, 500, true, bg);
     });
 
-    popup_content_closable.live('click', function(e) {
+	$('body').on('click','.popup_content_closable',function(e){
         $(this).remove();
         if($('.popup_content').length == 0){
             $('html').css('overflow-y', 'auto');
 		}
     });
-
-    button_closable.live('click', function(e) {
+	
+	$('body').on('click','.button_closable',function(e){
 		/*e.stopPropagation();
         //popup_content_closable.trigger('click');
 		$(document).trigger({ 
@@ -76,7 +76,7 @@ $(function() {
         }
     });
 
-    popupw.live('click', function(e) {
+	$('body').on('click','.popup',function(e){
         e.stopPropagation();
     });
     

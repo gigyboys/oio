@@ -126,8 +126,8 @@ class SchoolRepository extends ServiceEntityRepository
             ->setMaxResults(1);
 
 
-        $schools = $qb->getQuery()->getOneOrNullResult();
-        return $schools;
+        $school = $qb->getQuery()->getOneOrNullResult();
+        return $school;
     }
 
     public function findNextSchool(School $school, $field = 'position') {

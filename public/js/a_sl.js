@@ -574,7 +574,7 @@ $(function() {
 		setAdmin($this);
     });
 	
-	$('.remove_school_admin').live('click', function(ed){
+	$('.remove_school_admin').on('click', '.item_user', function(ed){
 		var $this = $(this);
 		var target = $this.data('target');
 		var data = {
@@ -603,7 +603,7 @@ $(function() {
 		$("#view_result_wrap").hide();
     });
 	
-	$("#view_result_wrap").live('click', function(e) {
+	$('body').on('click','#view_result_wrap',function(e){
         e.stopPropagation(); 
         return false;      
     });
@@ -851,7 +851,7 @@ $(function() {
 	
 	
 	//setDefaultSchool
-	$('.cat_sl_item').live('click', function() {
+	$('body').on('click','.cat_sl_item',function(e){
 		var $this = $(this);
         var target = $this.data('target');
 		var data = {

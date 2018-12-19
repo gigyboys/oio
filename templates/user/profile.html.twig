@@ -93,9 +93,11 @@
 								{% endif %}
 								<span style="display: {{ displayLocation }}" id="ur_view_location_wrap"><img src="{{ asset('image/location_icon.png')  }}" style="width:12px; height:12px;" /><span id="ur_view_location">{{ user.location }}</span></span>
 							</div>
+							{#
 							<div>
 								<span id="ur_view_email">{{ user.email }}</span>
 							</div>
+							#}
 							<div>
 								<span id="ur_view_last_activity">Dernière activité : {{ user.lastActivity | date('Y-m-d à H:i:s') }}</span>
 							</div>

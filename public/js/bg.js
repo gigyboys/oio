@@ -141,7 +141,7 @@ $(function() {
 	/*
 	*load calendar
 	*/
-	$('.bg_month_btn').live('click', function(e){
+	$('body').on('click','.bg_month_btn',function(e){
 		var $this = $(this);
         var target = $this.data('target');
 		var data = {

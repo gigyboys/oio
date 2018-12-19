@@ -37,8 +37,8 @@ $(function() {
         });
 	}
 	
-	search_entity_item.live('click', function(e) {
-        search_entity_item.removeClass('selected');
+	$('body').on('click','.search_entity_item',function(e){
+        $('.search_entity_item').removeClass('selected');
         $(this).addClass('selected');
 		
 		search_entity_content.css('display','none');
