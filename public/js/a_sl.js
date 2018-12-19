@@ -58,7 +58,7 @@ $(function() {
     //});
 
     /*
-     * position des articles
+     * position des établissements
      */
 	if($(".list_sl_position").length == 1){
         $(".list_sl_position").dragsort({

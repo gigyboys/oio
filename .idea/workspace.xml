@@ -2,17 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2403aa85-f617-4ae8-bba4-2601537fd2f4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes/admin/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes/admin/routes.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AboutController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AboutController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Admin/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Admin/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/UserService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/UserService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Twig/AppExtension.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Twig/AppExtension.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/user/user_edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/user/user_edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/include/back/navigation.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/include/back/navigation.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/platform/team.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/platform/team.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/info-popup.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/info-popup.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../eventmanager/.env" beforeDir="false" afterPath="$PROJECT_DIR$/../eventmanager/.env" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -66,7 +55,7 @@
     <session id="-35490915">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="34" />
+          <entry key="project.closed" value="35" />
           <entry key="project.open.time.106" value="1" />
           <entry key="project.open.time.117" value="1" />
           <entry key="project.open.time.129" value="1" />
@@ -81,6 +70,7 @@
           <entry key="project.open.time.41" value="4" />
           <entry key="project.open.time.42" value="1" />
           <entry key="project.open.time.43" value="1" />
+          <entry key="project.open.time.430" value="1" />
           <entry key="project.open.time.44" value="1" />
           <entry key="project.open.time.45" value="1" />
           <entry key="project.open.time.46" value="1" />
@@ -95,7 +85,7 @@
           <entry key="project.open.time.65" value="1" />
           <entry key="project.open.time.69" value="1" />
           <entry key="project.open.time.70" value="1" />
-          <entry key="project.opened" value="39" />
+          <entry key="project.opened" value="40" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -208,7 +198,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4794">
+            <state relative-caret-position="623">
               <caret line="282" column="18" selection-start-line="282" selection-start-column="18" selection-end-line="282" selection-end-column="18" />
             </state>
           </provider>
@@ -480,6 +470,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -491,7 +482,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -560,11 +550,12 @@
       <workItem from="1545043997099" duration="14852000" />
       <workItem from="1545111381332" duration="22960000" />
       <workItem from="1545148016738" duration="679000" />
+      <workItem from="1545195377631" duration="11000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="706941000" />
+    <option name="totallyTimeSpent" value="706952000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -577,8 +568,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20872483" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21140939" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -963,7 +955,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4794">
+        <state relative-caret-position="623">
           <caret line="282" column="18" selection-start-line="282" selection-start-column="18" selection-end-line="282" selection-end-column="18" />
         </state>
       </provider>

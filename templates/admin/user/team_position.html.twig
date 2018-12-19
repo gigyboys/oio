@@ -1,0 +1,54 @@
+{% extends "back.html.twig" %}
+
+{% block title %}
+	Ordre d'affichage des équipes
+{% endblock %}
+
+{% block body_header %}
+	<div class="bc">
+		<span class="bc1"><a href="{{ path('admin_user') }}"><img src="{{ asset('image/ur_icon.png') }}" style="width:14px; height:auto" /> <span>Utilisateurs</span></a></span>
+	</div>
+	<div style="padding:8px;right:0px; position: absolute;">
+		<span><a href="{{ path('admin_user_team_position') }}"><img src="{{ asset('image/default_icon.png') }}" style="width: 14px"/> <span>Ordre d'affichage</span></a></span>
+	</div>
+{% endblock %}
+
+{% block content_body %}
+	<div style="background:#ddd; padding: 5px; margin:5px; border:1px solid #bbb">
+		<div style="float: left">Ordre d'affichage des équipes</div>
+		<div style="float: right"><a target="_blank" href="{{ path('platform_team') }}"><img src="{{ asset('image/view_icon.png') }}" style="width: 12px; height: auto"/> Aperçu</a></div>
+		<div class="both"></div>
+	</div>
+	
+	<div class="list_ur_team_position" data-target="{{ path('admin_user_team_save_position') }}"><!--
+		{% for userTeam in users %}
+		 	{% set user = userTeam.user %}
+			{# twig extension #}
+			{% set avatar = userAvatar(user) %}
+			--><div class="ur_team_item" title="{{ user.name }}" data-id="{{ userTeam.id }}">
+				<div class="avatar">
+					<img src="{{ avatar | imagine_filter('60x60') }}" alt="img ur" />
+				</div>
+				<div class="name">
+						<span class="toggle_case" data-entity="userTeam" data-target="{{ path('admin_user_team_toogle_publication', {'userTeam_id': userTeam.id}) }}">
+							{% if userTeam.published %}
+								<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
+								<span class="redstate"><span class="redpastille"></span></span>
+							{% else %}
+								<span class="greenstate"><span class="greenpastille"></span></span>
+								<span class="redstate" style="display:none"><span class="redpastille"></span></span>
+							{% endif %}
+						</span><span class="state_loading" style="display:none">
+							<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" />
+						</span>
+						<strong>{{ user.name }}</strong>
+				</div>
+			</div><!--
+        {% endfor %}
+	--></div>
+{% endblock %}
+
+{% block body_footer %}
+	<span style="display:inline-block; margin-top:6px; margin-left:6px"> Position dans l'affichage de la page Equipe</span>
+{% endblock %}
+

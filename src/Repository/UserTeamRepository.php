@@ -19,32 +19,22 @@ class UserTeamRepository extends ServiceEntityRepository
         parent::__construct($registry, UserTeam::class);
     }
 
-    // /**
-    //  * @return UserTeam[] Returns an array of UserTeam objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    
+    public function findOrderBy($field = 'position', $order = 'ASC', $published = null)
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
+        $qb = $this->createQueryBuilder('userTeam');
+
+        if($published != null){
+            $qb
+                ->andWhere('userTeam.published = :published')
+                ->setParameter('published', $published);
+        }
+
+        $qb->orderBy('userTeam.'.$field, $order);
+
+        return $qb
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?UserTeam
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

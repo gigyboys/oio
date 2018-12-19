@@ -332,6 +332,8 @@ a:hover{
 #logos_wrapper .delete_logo:hover, #covers_wrapper .delete_cover:hover{
 	background:#aaa;
 }
+
+/*school position*/
 .list_sl_position{
 	margin: 10px;
 	box-sizing: border-box;
@@ -355,6 +357,42 @@ a:hover{
 	display:block;margin:auto;width: 60px; height: 60px;
 }
 .list_sl_position .sl_item .name{
+	text-align: center;
+	height: 25px;
+	box-sizing: border-box;
+	padding-top: 3px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding: 0 3px;
+}
+
+/*userTeam position*/
+.list_ur_team_position{
+	margin: 10px;
+	box-sizing: border-box;
+	text-align: center;
+}
+.list_ur_team_position .ur_team_item{
+	display: inline-block;
+	width: 120px;
+	margin: 10px;
+	border:1px solid #aaa;
+	text-align: center;
+	vertical-align: top;
+}
+.list_ur_team_position .ur_team_item .avatar{
+	text-align: center;
+	height: 70px;
+	box-sizing: border-box;
+	padding-top: 5px;
+
+}
+.list_ur_team_position .ur_team_item .avatar img{
+	display:block;margin:auto;width: 60px; height: 60px;
+	border-radius: 50%
+}
+.list_ur_team_position .ur_team_item .name{
 	text-align: center;
 	height: 25px;
 	box-sizing: border-box;

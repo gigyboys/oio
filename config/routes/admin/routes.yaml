@@ -32,6 +32,22 @@ admin_user_team_toogle_show:
     path:     /user/team/{user_id}/toogle-show-team
     defaults:
         _controller: App\Controller\Admin\UserController::toogleShowTeam
+admin_user_team_position:
+    path:     /user/team/position
+    defaults:
+        _controller: App\Controller\Admin\UserController::teamPosition
+admin_user_team_save_position:
+    path:     /user/team/save-position
+    defaults:
+        _controller: App\Controller\Admin\UserController::savePositionTeam
+admin_user_team_edit:
+    path:     /user/team/edit/{userTeam_id}
+    defaults:
+        _controller: App\Controller\Admin\UserController::editUserTeam
+admin_user_team_doedit:
+    path:     /user/team/doedit/{userTeam_id}
+    defaults:
+        _controller: App\Controller\Admin\UserController::doEditUserTeam
 
 #school
 admin_school:

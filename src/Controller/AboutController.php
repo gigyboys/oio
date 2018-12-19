@@ -41,9 +41,7 @@ class AboutController extends AbstractController {
 
     public function team()
     {
-        $users = $this->userTeamRepository->findBy(array(
-            'published' => true,
-        ));
+        $users = $this->userTeamRepository->findOrderBy('position', 'ASC', true);
         return $this->render('platform/team.html.twig', array(
             'users' => $users
         ));

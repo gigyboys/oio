@@ -1,0 +1,150 @@
+{% extends "back.html.twig" %}
+{% set user = userTeam.user %}
+
+{% block title %}
+  Edition de la situation de l'utilisateur dans l'équipe
+{% endblock %}
+
+{% block body_header %}
+	<div class="bc">
+		<span class="bc1"><a href="{{ path('admin_user') }}"><img src="{{ asset('image/ur_icon.png') }}" style="width:14px; height:auto" /> <span>Utilisateurs</span></a> </span>
+		<span class="dd">
+			<span href="#" class="dd_src">
+				<span class="bcdd"></span>
+			</span>
+		</span> 
+		<span class="bc1"><a href="{{ path('admin_user_edit', {'user_id': user.id}) }}">{{ user.name }}</a></span>
+	</div>
+	<div style="padding:8px; float:right">
+		<div style="float:left">
+			{# right #}
+		</div>
+	</div>
+{% endblock %}
+
+{% block content_body %}
+	<div style="background:#ddd; padding: 5px; margin:5px; border:1px solid #bbb">
+		<span><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /> Edition de l'utilisateur #{{ user.id }}</span>
+	</div>
+	
+	<div style="">
+		<div style="float:left; height: 80px;margin:5px;/*cursor:pointer*/">
+			{# twig extension #}
+			{% set avatar = userAvatar(user) %}
+			<img id="user_avatar_admin" style="width: 80px; height: 80px; border-radius:50%" src="{{ avatar | imagine_filter('116x116') }}" alt="img sl" />
+		</div>
+		<div style="margin-left: 90px;">
+			
+			<div class="bloc_editable">
+				<div class="bloc_view">
+					<table>
+						<tr>
+							<td>Nom</td>
+							<td>:</td>
+							<td style="padding:5px"><span id="sl_view_name">{{ user.name }}</span></td>
+						</tr>
+						<tr>
+							<td>Username</td>
+							<td>:</td>
+							<td style="padding:5px"><span id="sl_view_shortname">{{ user.username }}</span></td>
+						</tr>
+						<tr>
+							<td>Email</td>
+							<td>:</td>
+							<td style="padding:5px"><span id="sl_view_shortname">{{ user.email }}</span></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="both"></div>
+	</div>
+
+	<div class="sep"></div>
+
+	<div style="">
+		<div style="">
+			<div style="padding:5px">
+				<div class="bloc_editable">
+					<div class="bloc_view">
+						<table style="width: 100%">
+							<tr>
+								<td style="width: 0.1%">Fonction</td>
+								<td style="width: 0.1%">:</td>
+								<td style="padding:5px"><span id="urt_view_role">{{ userTeam.role }}</span></td>
+							</tr>
+							<tr>
+								<td class="vatop1">Description</td>
+								<td class="vatop1">:</td>
+								<td style="padding:5px">
+									<div id="urt_view_description" style="padding:5px;background:#fff; border-radius:4px;">
+										{{ userTeam.description | raw }}
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="bloc_edit" style="display:none">
+						<table style="width: 100%">
+							<tr>
+								<td style="width: 0.1%">Fonction</td>
+								<td style="width: 0.1%">:</td>
+								<td style="padding:5px"><input type="text" id="urt_input_role" class="default_input" value="{{ userTeam.role }}" /></td>
+							</tr>
+							<tr>
+								<td class="vatop">Description</td>
+								<td class="vatop">:</td>
+								<td style="padding:5px">
+									<div>
+										<textarea id="urt_input_description" class="urt_input_description default_textarea tinymce" data-theme="advanced">{{ userTeam.description | raw }}</textarea>
+									</div>
+								</td>
+
+								<script type="text/javascript">
+									var CKEDITOR_BASEPATH = "/bundles/fosckeditor/";
+								</script>
+								<script type="text/javascript" src="/bundles/fosckeditor/ckeditor.js"></script>
+								<script type="text/javascript">
+									if (CKEDITOR.instances["urt_input_description"]) {
+										CKEDITOR.instances["urt_input_description"].destroy(true);
+										delete CKEDITOR.instances["urt_input_description"];
+									}
+									CKEDITOR.replace("urt_input_description", {"uiColor":"#eeeeee","language":"fr"});
+								</script>
+							</tr>
+						</table>
+					</div>
+					<div class="separator"></div>
+					<div class="bloc_action mg_v10">
+						<span class="btn_edit standar_button"><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /> Modifier</span>
+						<span class="btn_save standar_button" id="btn_save_user_team" data-target="{{ path('admin_user_team_doedit', {'userTeam_id': userTeam.id}) }}" style="display:none"><img src="{{ asset('image/save_icon.png') }}" style="width:12px; height:auto" /> Enregistrer</span>
+						<span class="btn_reset standar_button" style="display:none"><img src="{{ asset('image/reset_icon.png') }}" style="width:12px; height:auto" /> Annuler</span>
+						<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;"><img src="{{ asset('image/tail-spin.svg') }}" style="width:20px; height:20px"/>Chargement...</span>
+					</div>
+				</div>
+			</div>
+			<div class="both"></div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block body_footer %}
+	<div style="padding-top: 8px">
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
+            {% if user.isSuperAdmin == false %}
+				<span class="toggle_case" data-entity="admin-state" data-target="{{ path('admin_user_toogle_adminstate', {'user_id': user.id}) }}">
+					{% if user.isAdmin %}
+						<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Assigner le rôle d'administrateur</span></span>
+						<span class="redstate"><span class="redpastille"></span> <span>Annuler le rôle d'administrateur</span></span>
+					{% else %}
+						<span class="greenstate"><span class="greenpastille"></span> <span>Assigner le rôle d'administrateur</span></span>
+						<span class="redstate" style="display:none"><span class="redpastille"></span> <span>Annuler le rôle d'administrateur</span></span>
+					{% endif %}
+				</span><span class="state_loading" style="display:none">
+					<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" /> Chargement...
+				</span> 
+            {% endif %}
+		{% endif %}
+	</div> 
+{% endblock %}

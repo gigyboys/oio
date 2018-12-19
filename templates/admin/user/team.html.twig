@@ -9,13 +9,14 @@
 		<span class="bc1"><a href="{{ path('admin_user') }}"><img src="{{ asset('image/ur_icon.png') }}" style="width:14px; height:auto" /> <span>Utilisateurs</span></a></span>
 	</div>
 	<div style="padding:8px;right:0px; position: absolute;">
-		{# right #}
+		<span><a href="{{ path('admin_user_team_position') }}"><img src="{{ asset('image/default_icon.png') }}" style="width: 14px"/> <span>Ordre d'affichage</span></a></span>
 	</div>
 {% endblock %}
 
 {% block content_body %}
 	<div style="background:#ddd; padding: 5px; margin:5px; border:1px solid #bbb">
 		<div style="float: left">Liste des utilisateurs dans l'équipe</div>
+		<div style="float: right"><a target="_blank" href="{{ path('platform_team') }}"><img src="{{ asset('image/view_icon.png') }}" style="width: 12px; height: auto"/> Aperçu</a></div>
 		<div class="both"></div>
 	</div>
 	
@@ -71,7 +72,7 @@
 							</span>
 						</td>
 						<td class="a_table_cell_action tacenter">
-							<a href="{{ path('admin_user_edit', {'user_id': userTeam.user.id}) }}" data-name="{{ userTeam.user.name }}" style="cursor:pointer"><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /></a>
+							<a href="{{ path('admin_user_team_edit', {'userTeam_id': userTeam.id}) }}" data-name="{{ userTeam.user.name }}" style="cursor:pointer"><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /></a>
 							<a target="_blank" href="{{ path('user_profile_byid', {'user_id': userTeam.user.id}) }}" data-name="{{ userTeam.user.name }}"><img src="{{ asset('image/view_icon.png') }}" style="width:12px; height:auto" /></a>
 						</td>
 					</tr>

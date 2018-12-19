@@ -1,10 +1,9 @@
 <?php
 namespace App\Controller\Admin;
 
-use App\Entity\TypeSchool;
 use App\Entity\UserTeam;
+use App\Form\UserTeamEditType;
 use App\Repository\ParameterRepository;
-use App\Repository\TypeSchoolRepository;
 use App\Repository\UserRepository;
 use App\Repository\UserTeamRepository;
 use App\Service\PlatformService;
@@ -103,7 +102,8 @@ class UserController extends AbstractController {
 
     public function team(): Response
     {
-        $users = $this->userTeamRepository->findAll();
+        //$users = $this->userTeamRepository->findAll();
+        $users = $this->userTeamRepository->findOrderBy();
         $publishedUsers = $this->userTeamRepository->findBy(array(
             'published' => true
         ));
@@ -196,6 +196,84 @@ class UserController extends AbstractController {
             )));
         }
 
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    public function teamPosition(): Response
+    {
+        $users = $this->userTeamRepository->findOrderBy();
+
+        return $this->render('admin/user/team_position.html.twig', array(
+            'users' => $users,
+            'view' => 'user',
+        ));
+    }
+
+    public function savePositionTeam(Request $request): Response
+    {
+        $order = $request->query->get('order');
+
+        $ids = explode("-", $order);
+        $position = 0;
+        foreach ($ids as $id){
+            $userTeam = $this->userTeamRepository->find($id);
+            if($userTeam){
+                $position++;
+                $userTeam->setPosition($position);
+            }
+            $this->em->flush();
+        }
+
+        $response = new Response();
+
+        $response->setContent(json_encode(array(
+            'state' => 1,
+            'order' => $order,
+        )));
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    public function editUserTeam($userTeam_id)
+    {
+        $userTeam = $this->userTeamRepository->find($userTeam_id);
+
+        return $this->render('admin/user/team_user_edit.html.twig', array(
+            'userTeam' => $userTeam,
+            'view' => 'user',
+        ));
+    }
+
+    /*
+     * doEdit userTeam
+     */
+    public function doEditUserTeam($userTeam_id, Request $request)
+    {
+        $userTeam = $this->userTeamRepository->find($userTeam_id);
+
+        $userTeamTemp = new UserTeam();
+        $form = $this->createForm(UserTeamEditType::class, $userTeamTemp);
+        $form->handleRequest($request);
+        $response = new Response();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $userTeam->setRole($userTeamTemp->getRole());
+            $userTeam->setDescription($userTeamTemp->getDescription());
+
+            $this->em->persist($userTeam);
+            $this->em->flush();
+
+            $response->setContent(json_encode(array(
+                'state' => 1,
+                'role' => $userTeam->getRole(),
+                'description' => $userTeam->getDescription(),
+            )));
+        }else{
+            $response->setContent(json_encode(array(
+                'state' => 0,
+            )));
+        }
         $response->headers->set('Content-Type', 'application/json');
         return $response;
     }
