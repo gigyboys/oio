@@ -102,9 +102,21 @@
 						<span class="redstate" style="display:none"><span class="redpastille"></span> <span>Annuler le rôle d'administrateur</span></span>
 					{% endif %}
 				</span><span class="state_loading" style="display:none">
-					<img src="{{ asset('image/loading.svg')  }}" style="width:20px; height:20px;display: inline-block; vertical-align: middle;" /> Chargement...
-				</span>
+					<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" /> Chargement...
+				</span> |
             {% endif %}
+			<span class="toggle_case" data-entity="admin-state" data-target="{{ path('admin_user_team_toogle_show', {'user_id': user.id}) }}">
+				{% set isUserTeam = isUserTeam(user) %}
+				{% if isUserTeam %}
+					<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Publier dans l'équipe</span></span>
+					<span class="redstate"><span class="redpastille"></span> <span>Ne pas publier dans l'équipe</span></span>
+				{% else %}
+					<span class="greenstate"><span class="greenpastille"></span> <span>Publier dans l'équipe</span></span>
+					<span class="redstate" style="display:none"><span class="redpastille"></span> <span>Ne pas publier dans l'équipe</span></span>
+				{% endif %}
+			</span><span class="state_loading" style="display:none">
+				<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" /> Chargement...
+			</span>
 		{% endif %}
 	</div> 
 {% endblock %}

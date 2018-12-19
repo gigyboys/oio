@@ -23,6 +23,7 @@ use App\Repository\SchoolContactRepository;
 use App\Repository\SchoolOfTheDayRepository;
 use App\Repository\SchoolRepository;
 use App\Repository\UserRepository;
+use App\Repository\UserTeamRepository;
 use App\Repository\VisitRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -41,6 +42,7 @@ class UserService
         AvatarRepository $avatarRepository,
         VisitRepository $visitRepository,
         UserRepository $userRepository,
+        UserTeamRepository $userTeamRepository,
         EntityManagerInterface $em,
         EngineInterface $templating
     )
@@ -50,6 +52,7 @@ class UserService
         $this->avatarRepository = $avatarRepository;
         $this->visitRepository = $visitRepository;
         $this->userRepository = $userRepository;
+        $this->userTeamRepository = $userTeamRepository;
         $this->em = $em;
         $this->templating = $templating;
     }
@@ -103,6 +106,7 @@ class UserService
     public function isAdmin(User $user) {
         return $user->isAdmin();
     }
+
     public function getLastVisit(User $user) {
         $visit = $this->visitRepository->getLastVisit($user);
         return $visit;
@@ -114,4 +118,17 @@ class UserService
         ));
         return $users;
     }
+
+    public function isUserTeam(User $user, $published = true) {
+        $userTeam = $this->userTeamRepository->findOneBy(array(
+            'user' => $user,
+        ));
+        if(!$userTeam){
+            return false;
+        }elseif(!$userTeam->getPublished() && $published){
+            return false;
+        }
+        return true;
+    }
+
 }

@@ -8,11 +8,34 @@
 {% block body %}
 	<div class="cr">
 		<div class="ct">
-			<div>
-				L'équipe.
-			</div>
-			<div>
-				Lorem ipsum
+			<div class="">
+				<div class="label_title mg_t10 mg_h10">
+					L'équipe.
+				</div>
+				<div class="team_user_list">
+                    {% for userTeam in users %}
+						{% set user = userTeam.user %}
+						<div class="userteam_item_wrap">
+							<div class="userteam_item">
+								<div class="avatar">
+									{% set avatar = userAvatar(user) %}
+									<img src="{{ avatar | imagine_filter('116x116') }}" alt="img ur" />
+								</div>
+								<div>
+                                    {% set userInfo = getLinkUserInfo(user, user.name) %}
+									<span class="user_info">{{ userInfo | raw }}</span>
+								</div>
+								<div>
+									{{ userTeam.role }}
+								</div>
+								<div>
+									{{ userTeam.description | raw }}
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+					<div class="both"></div>
+				</div>
 			</div>
 		</div>
 	</div>

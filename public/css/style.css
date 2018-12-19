@@ -209,8 +209,45 @@ a:hover{
 #spinnerloading div {height:40px}
 #spinnerloading div span {height:30px;}
 
+/* team page */
+.team_user_list{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.team_user_list .userteam_item_wrap{
+	width: 25%;
+	padding: 10px;
+	box-sizing: border-box;
+	margin-bottom: 10px;
+}
+
+.team_user_list .userteam_item_wrap .userteam_item{
+	/*border: 1px solid #ddd;*/
+	text-align: center;
+	height: 100%;
+}
+
+.team_user_list .userteam_item_wrap .userteam_item .avatar{
+	width: 116px;
+	height: 116px;
+	margin: auto;
+	border: 5px solid #eee;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+@media screen and (max-width: 1050px)
+{
+	.team_user_list .userteam_item_wrap{
+		width: 33.33%;
+	}
+
+}
+
 @media screen and (max-width: 790px)
 {
+
 	.home_sl_info{
 		width:100%;
 		margin: 0 0 10px 0;
@@ -227,6 +264,10 @@ a:hover{
 
 @media screen and (max-width: 780px)
 {
+	.team_user_list .userteam_item_wrap{
+		width: 50%;
+	}
+	
     .pm_form{
 		float:none;
 		width:auto;
@@ -246,6 +287,14 @@ a:hover{
 		margin-top:10px;
 		margin-left:0px
 	}
+}
+
+@media screen and (max-width: 500px)
+{
+	.team_user_list .userteam_item_wrap{
+		width: 100%;
+	}
+
 }
 
 @media screen and (max-width: 450px)

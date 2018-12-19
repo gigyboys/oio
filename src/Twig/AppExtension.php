@@ -64,6 +64,7 @@ class AppExtension extends AbstractExtension
             new TwigFunction('getActiveUsers', array($this, 'getActiveUsers')),
             new TwigFunction('getValidPosts', array($this, 'getValidPosts')),
             new TwigFunction('getLastVisit', array($this, 'getLastVisit')),
+            new TwigFunction('isUserTeam', array($this, 'isUserTeam')),
             /*event*/
             new TwigFunction('eventIllustration', array($this, 'eventIllustration')),
         );
@@ -173,6 +174,10 @@ class AppExtension extends AbstractExtension
 
     public function isAdmin(User $user) {
         return $this->userService->isAdmin($user);
+    }
+
+    public function isUserTeam(User $user, $published = true) {
+        return $this->userService->isUserTeam($user, $published);
     }
 
     public function getActiveUsers() {

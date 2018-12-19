@@ -20,6 +20,18 @@ admin_user_toogle_adminstate:
     path:     /user/admin/{user_id}/toggle-adminstate
     defaults:
         _controller: App\Controller\Admin\UserController::toogleAdminState
+admin_user_team:
+    path:     /user/team
+    defaults:
+        _controller: App\Controller\Admin\UserController::team
+admin_user_team_toogle_publication:
+    path:     /user/team/{userTeam_id}/toogle-publication
+    defaults:
+        _controller: App\Controller\Admin\UserController::tooglePublicationTeam
+admin_user_team_toogle_show:
+    path:     /user/team/{user_id}/toogle-show-team
+    defaults:
+        _controller: App\Controller\Admin\UserController::toogleShowTeam
 
 #school
 admin_school:

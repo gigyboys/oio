@@ -2,10 +2,13 @@
 namespace App\Controller\Admin;
 
 use App\Entity\TypeSchool;
+use App\Entity\UserTeam;
 use App\Repository\ParameterRepository;
 use App\Repository\TypeSchoolRepository;
 use App\Repository\UserRepository;
+use App\Repository\UserTeamRepository;
 use App\Service\PlatformService;
+use App\Service\UserService;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,13 +19,17 @@ class UserController extends AbstractController {
     public function __construct(
         ParameterRepository $parameterRepository,
         UserRepository $userRepository,
+        UserTeamRepository $userTeamRepository,
         PlatformService $platformService,
+        UserService $userService,
         ObjectManager $em
     )
     {
         $this->parameterRepository = $parameterRepository;
         $this->platformService = $platformService;
         $this->userRepository = $userRepository;
+        $this->userTeamRepository = $userTeamRepository;
+        $this->userService = $userService;
         $this->em = $em;
     }
 
@@ -90,6 +97,105 @@ class UserController extends AbstractController {
                 'case' => $user->isAdmin(),
             )));
         }
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    public function team(): Response
+    {
+        $users = $this->userTeamRepository->findAll();
+        $publishedUsers = $this->userTeamRepository->findBy(array(
+            'published' => true
+        ));
+        $notPublishedUsers = $this->userTeamRepository->findBy(array(
+            'published' => false
+        ));
+
+        return $this->render('admin/user/team.html.twig', array(
+            'users' => $users,
+            'publishedUsers' => $publishedUsers,
+            'notPublishedUsers' => $notPublishedUsers,
+            'view' => 'user',
+        ));
+    }
+
+    public function tooglePublicationTeam($userTeam_id, Request $request)
+    {
+        $userTeam = $this->userTeamRepository->find($userTeam_id);
+
+        $response = new Response();
+        $response->setContent(json_encode(array(
+            'state' => 0,
+        )));
+        if ($userTeam) {
+            if($userTeam->getPublished() == true){
+                $userTeam->setPublished(false) ;
+            }else{
+                $userTeam->setPublished(true) ;
+            }
+
+            $this->em->persist($userTeam);
+            $this->em->flush();
+
+            $users = $this->userTeamRepository->findAll();
+            $publishedUsers = $this->userTeamRepository->findBy(array(
+                'published' => true
+            ));
+            $notPublishedUsers = $this->userTeamRepository->findBy(array(
+                'published' => false
+            ));
+
+            $response->setContent(json_encode(array(
+                'state' => 1,
+                'case' => $userTeam->getPublished(),
+                'users' => $users,
+                'publishedUsers' => $publishedUsers,
+                'notPublishedUsers' => $notPublishedUsers,
+            )));
+        }
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    public function toogleShowTeam($user_id, Request $request)
+    {
+        $user = $this->userRepository->find($user_id);
+
+        $response = new Response();
+        $response->setContent(json_encode(array(
+            'state' => 0,
+        )));
+        if ($user) {
+            if($this->userService->isUserTeam($user)){
+                $userTeam = $this->userTeamRepository->findOneBy(array(
+                    'user' => $user,
+                ));
+                $userTeam->setPublished(false);
+                $this->em->persist($userTeam);
+            }else{
+                $userTeam = $this->userTeamRepository->findOneBy(array(
+                    'user' => $user,
+                ));
+                if($userTeam){
+                    $userTeam->setPublished(true);
+                    $this->em->persist($userTeam);
+                }else{
+                    $userTeam = new UserTeam();
+                    $userTeam->setUser($user);
+                    $userTeam->setPublished(true);
+                    $this->em->persist($userTeam);
+                }
+            }
+            $this->em->persist($userTeam);
+            $this->em->flush();
+
+            $response->setContent(json_encode(array(
+                'state' => 1,
+                'case' => $this->userService->isUserTeam($user),
+            )));
+        }
+
         $response->headers->set('Content-Type', 'application/json');
         return $response;
     }

@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Entity\Contact;
 use App\Form\ContactType;
 use App\Repository\ParameterRepository;
+use App\Repository\UserTeamRepository;
 use App\Service\PlatformService;
 use App\Service\SchoolService;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -19,12 +20,14 @@ class AboutController extends AbstractController {
     public function __construct(
         ParameterRepository $parameterRepository,
         PlatformService $platformService,
+        UserTeamRepository $userTeamRepository,
         ObjectManager $em,
         \Swift_Mailer $mailer
     )
     {
         $this->parameterRepository = $parameterRepository;
         $this->platformService = $platformService;
+        $this->userTeamRepository = $userTeamRepository;
         $this->mailer = $mailer;
         $this->em = $em;
 
@@ -38,7 +41,12 @@ class AboutController extends AbstractController {
 
     public function team()
     {
-        return $this->render('platform/team.html.twig');
+        $users = $this->userTeamRepository->findBy(array(
+            'published' => true,
+        ));
+        return $this->render('platform/team.html.twig', array(
+            'users' => $users
+        ));
     }
 
     public function notice()
