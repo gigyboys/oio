@@ -370,7 +370,10 @@ $(function() {
 			markers[index] = new google.maps.Marker({
 				position: myLatLng,
 				title: coord.label,
-				url:coord.url
+				url: coord.url,
+				icon: {
+					url:coord.icon
+				}
 			});
 			//markers[i].setIcon(coord.icon);
 			markers[index].setMap(map);

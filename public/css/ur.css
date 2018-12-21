@@ -1,3 +1,13 @@
+.popup_user_info{
+	box-shadow: 1px 1px 5px #999;
+	position:absolute;
+	border-radius:3px; 
+	border:1px solid #eee; 
+	background:#fff; 
+	padding:10px 10px;
+	z-index:10
+}
+
 #ur_gl{
 	background:#ddd;
 	padding-top:6px;

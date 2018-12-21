@@ -53,43 +53,51 @@
 			{#<input style="display:none" id="illustrationfile" name="file" class="ajax_post_illustration" type="file" accept="image/*" data-target="{#{{ path('blog_manager_post_change_illustration', {'id': post.id}) }}" />#}
 		</div>
 		<div style="margin-left: 136px;">
-			<div class="bloc_editable">
-				<div class="bloc_view">
-					<table>
-						<tr>
-							<td>Titre</td>
-							<td>:</td>
-							<td style="padding:5px"><span id="post_view_title">{{ post.title }}</span></td>
-						</tr>
-						<tr>
-							<td>Slug</td>
-							<td>:</td>
-							<td style="padding:5px"><span id="post_view_slug">{{ post.slug }}</span></td>
-						</tr>
-					</table>
+			<form id="form_post_edit" action="{{ path('blog_manager_post_doedit', {'post_id': post.id}) }}">
+				<div class="bloc_editable">
+					<div class="bloc_view">
+						<table>
+							<tr>
+								<td>Titre</td>
+								<td>:</td>
+								<td style="padding:5px"><span id="post_view_title">{{ post.title }}</span></td>
+							</tr>
+							<tr>
+								<td>Slug</td>
+								<td>:</td>
+								<td style="padding:5px"><span id="post_view_slug">{{ post.slug }}</span></td>
+							</tr>
+						</table>
+					</div>
+					<div class="bloc_edit" style="display:none">
+						<table>
+							<tr>
+								<td>Titre *</td>
+								<td>:</td>
+								<td style="padding:5px">
+									<input type="text" id="post_input_title" class="default_input" name="title" value="{{ post.title }}" />
+									<span class="error_title error_txt"></span>
+								</td>
+							</tr>
+							<tr>
+								<td>Slug *</td>
+								<td>:</td>
+								<td style="padding:5px">
+									<input type="text" id="post_input_slug" class="default_input" name="slug" value="{{ post.slug }}" />
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="separator"></div>
+					<div class="bloc_action" style="margin:5px">
+						<span class="btn_edit standar_button">Modifier</span> 
+						{#<span class="btn_save standar_button" id="btn_doedit_post" data-target="{{ path('blog_manager_post_doedit', {'post_id': post.id}) }}" style="display:none">Enregistrer</span>#}
+						<button class="btn_save standar_button" id="btn_doedit_post" type="submit" form="form_post_edit" value="Submit" style="display:none">Enregistrer</button>
+						<span class="btn_reset standar_button" style="display:none">Annuler</span> 
+						<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;"><img src="{{ asset('image/tail-spin.svg') }}" style="width:20px;height:20px" />Chargement...</span> 
+					</div>
 				</div>
-				<div class="bloc_edit" style="display:none">
-					<table>
-						<tr>
-							<td>Titre</td>
-							<td>:</td>
-							<td style="padding:5px"><input type="text" id="post_input_title" class="default_input" value="{{ post.title }}" /></td>
-						</tr>
-						<tr>
-							<td>Slug</td>
-							<td>:</td>
-							<td style="padding:5px"><input type="text" id="post_input_slug" class="default_input" value="{{ post.slug }}" /></td>
-						</tr>
-					</table>
-				</div>
-				<div class="separator"></div>
-				<div class="bloc_action" style="margin:5px">
-					<span class="btn_edit standar_button">Modifier</span> 
-					<span class="btn_save standar_button" id="btn_doedit_post" data-target="{{ path('blog_manager_post_doedit', {'post_id': post.id}) }}" style="display:none">Enregistrer</span>
-					<span class="btn_reset standar_button" style="display:none">Annuler</span> 
-					<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;"><img src="{{ asset('image/load.gif') }}" />Chargement...</span> 
-				</div>
-			</div>
+			</form>
 		</div>
 		<div class="both"></div>
 	</div>

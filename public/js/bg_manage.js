@@ -67,38 +67,49 @@ $(function() {
         });
     });
 	
-    $('#btn_doedit_post').on('click', function(){
+    $('#form_post_edit').on('submit', function(e){
+        e.preventDefault();
         var $this = $(this);
-		var bloc_editable = $this.closest(".bloc_editable");
-        var target = $this.data('target');
-		var data = {
-			title : bloc_editable.find("#post_input_title").val(),
-			slug : bloc_editable.find("#post_input_slug").val(),
-		};
-		loadBlocEdit(bloc_editable);
-        $.ajax({
-            type: 'POST',
-            url: target,
-            data: data,
-            dataType : 'json',
-            success: function(data){
-				if(data.state){
-					bloc_editable.find("#post_view_title").text(data.title);
-					bloc_editable.find("#post_view_slug").text(data.slug);
-					$(".sl_title_"+data.postId).text(data.title);
-					resetBlocEdit(bloc_editable);
-				}
-				else{
-					alert("une erreur est survenue");
-				}
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-				console.log(jqXHR.status);
-				console.log(textStatus);
-				console.log(errorThrown);
-			}
-        });
-		
+		var bloc_editable = $this.find(".bloc_editable");
+        var target = $this.attr('action');
+        var title = bloc_editable.find("#post_input_title").val().trim();
+        if(title == ""){
+            var title_error_msg = "Veuillez fournir un titre à votre article";
+            if($('.error_title').length > 0){
+                $('.error_title').show().html(title_error_msg);
+            }
+        }else{
+            if($('.error_title').length > 0){
+                $('.error_title').hide().html("");
+            }
+            var data = {
+                title : title,
+                slug : bloc_editable.find("#post_input_slug").val(),
+            };
+            loadBlocEdit(bloc_editable);
+            $.ajax({
+                type: 'POST',
+                url: target,
+                data: data,
+                dataType : 'json',
+                success: function(data){
+                    if(data.state){
+                        bloc_editable.find("#post_view_title").text(data.title);
+                        bloc_editable.find("#post_view_slug").text(data.slug);
+                        $(".sl_title_"+data.postId).text(data.title);
+                        resetBlocEdit(bloc_editable);
+                    }
+                    else{
+                        alert("une erreur est survenue");
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR.status);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            });
+        }
     });
 	
     $('.btn_doedit_content_post').on('click', function(){

@@ -21,15 +21,18 @@
 	<script>{#
 		#}var bloc = "sl_map";{#
 		#}var coords = [ {#
-			#}{% for contact in contacts %} {#
+			#}{% for contact in contacts %} 
+			{% set logo = schoolLogo(contact.school) %}
+			{#
 				#} { {#					
 					#}id : {{ contact.id }},{#
 					#}latitude : {{ contact.latitude }},{#
 					#}longitude : {{ contact.longitude }},{#
-					#}label : '{{ contact.name }} : {{ contact.school.shortName }} - {{ contact.school.name | e('js') | raw }}',{#
+					#}label : '{{ contact.name | e('js') | raw }} : {{ contact.school.shortName | e('js') | raw }} - {{ contact.school.name | e('js') | raw }}',{#
 					#}url : '{{ path('school_view', {'slug': contact.school.slug}) }}',{#
-					#}typeId : {{ contact.school.type.id }}{#
-				#} }, {#
+					#}typeId : {{ contact.school.type.id }},
+					icon : '{{ absolute_url(logo | imagine_filter('22x22')) }}'
+				 }, {#
 			#} {% endfor %}  {#
 		#} ];{#
 	#}</script>

@@ -6,6 +6,9 @@
 	width: 100%;
 	box-sizing: border-box;
 }
+.error_txt{
+	color: #8b2c1e;
+}
 .success_msg{
 	display: inline-block;
 	border: 1px solid #24862c;

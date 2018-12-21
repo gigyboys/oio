@@ -195,7 +195,8 @@ $(function() {
     });
 	
 	$('body').on('mouseover','.user_hover_info',function(){
-        var $this = $(this);
+		var $this = $(this);
+		var thisHeight = $this.height();
 		if(!$this.hasClass("ishover")){
 			$this.addClass("ishover");
 			var nbElementIsHover = $(".ishover").length;
@@ -212,7 +213,7 @@ $(function() {
 				if($(window).width() - 40 < 360){
                     popupWidth =$(window).width() - 40 ;
 				}
-				var htmlprepend = '<div data-userinfoid="'+ userinfoid +'" data-userid="'+ userid +'" class="popup_user_info" style="box-shadow: 1px 1px 5px #999;position:absolute; margin-top:20px; border-radius:3px; border:1px solid #eee; background:#fff; padding:10px 10px; width:'+popupWidth+'px; z-index:10">';
+				var htmlprepend = '<div data-userinfoid="'+ userinfoid +'" data-userid="'+ userid +'" class="popup_user_info" style="margin-top:'+thisHeight+'px; width:'+popupWidth+'px;">';
 				htmlprepend += 'Informations sur '+ name;
 				htmlprepend += '</div>';
 				$this.prepend(htmlprepend);
@@ -274,7 +275,6 @@ $(function() {
 		}, 270);
 		clearTimeout(timeOutIdEnterArray[userinfoid]);
 	});
-	
 	
 	//change avatar open popup
 	$('body').on('click','#change_avatar',function(event){

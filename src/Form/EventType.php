@@ -16,6 +16,8 @@ class EventType extends AbstractType
             ->add('slug')
             ->add('datebeginText')
             ->add('dateendText')
+            ->add('location')
+            ->add('city')
         ;
     }
 

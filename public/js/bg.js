@@ -133,7 +133,7 @@ $(function() {
 				}
 			});		
 		}else{
-			var errorHtml = '<div style="color:#d22">Veuillez bien remplir le champ</div>';
+			var errorHtml = '<div class="error_txt">Veuillez bien remplir le champ</div>';
 			$("#bg_add_comment_error").html(errorHtml);
 		}	
     });

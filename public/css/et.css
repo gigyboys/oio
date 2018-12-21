@@ -1,0 +1,37 @@
+/**************liste school***************/
+
+#et_list{
+	display: flex;
+	flex-wrap: wrap;
+}
+.event_item{
+	margin-bottom:10px;
+	width: 33.333%;
+	padding:10px;
+	box-sizing: border-box;
+}
+
+
+
+/*edit post front*/
+
+
+.list_tag .tag_item:hover{
+	background: #ccc;
+}
+
+@media screen and (max-width: 930px)
+{
+	.event_item {
+		margin-bottom: 16px;
+		width: 50%;
+	}
+}
+
+
+@media screen and (max-width: 530px)
+{
+	.event_item{
+		width: 100%;
+	}
+}

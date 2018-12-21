@@ -2,7 +2,7 @@
 {% if event.tovalid == false or event.valid == false or event.published == false or event.deleted %}
     {% set published = false %}
 {% endif %}
-<div class="event_item pd_10" style="width:33.33%;box-sizing:border-box">
+<div class="event_item pd_10">
 	<div class="event_image {% if published == false %}op5{% endif %}">
         {# twig extension #}
         {% set illustration = eventIllustration(event) %}
@@ -12,7 +12,7 @@
 	
 	{% if event.showAuthor %}
 		{% set avatar = userAvatar(event.user) %}
-		<div style="position:relative;z-index:2;text-align:center; margin:auto; margin-top:-70px; width: 80px; height: 80px;border-radius:50%; border: 5px solid #fff; ">
+		<div style="position:relative;text-align:center; margin:auto; margin-top:-70px; width: 80px; height: 80px;border-radius:50%; border: 5px solid #fff; ">
 			{% set userInfo = getLinkUserInfo(event.user, '<img src="'~ avatar | imagine_filter("80x80") ~'" style="width: 80px; height: 80px;border-radius:50%;" />' ) %}
 			{{ userInfo | raw }}
 			{#<img src="{{ avatar | imagine_filter('80x80') }}" style="width: 80px; height: 80px;" />#}

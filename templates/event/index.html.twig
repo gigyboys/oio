@@ -20,7 +20,7 @@
 					<div class="et_pagination mg_h10 tacenter">
 						{{ include("event/include/pagination_list_event.html.twig") }}
 					</div>
-					<div class="et_list" style="display: flex;flex-wrap: wrap;">
+					<div id="et_list">
 						{% for event in events %}
 							{{ include("event/include/event_item.html.twig") }}
 						{% endfor %}

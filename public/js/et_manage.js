@@ -78,6 +78,8 @@ $(function() {
 			slug : bloc_editable.find("#event_input_slug").val(),
 			datebeginText : bloc_editable.find("#event_input_datebegin").val(),
 			dateendText : bloc_editable.find("#event_input_dateend").val(),
+			location : bloc_editable.find("#event_input_location").val(),
+			city : bloc_editable.find("#event_input_city").val(),
 		};
 		loadBlocEdit(bloc_editable);
         $.ajax({
@@ -91,6 +93,8 @@ $(function() {
 					bloc_editable.find("#event_view_slug").text(data.slug);
 					bloc_editable.find("#event_view_datebegin").text(data.datebegin);
 					bloc_editable.find("#event_view_dateend").text(data.dateend);
+					bloc_editable.find("#event_view_location").text(data.location);
+					bloc_editable.find("#event_view_city").text(data.city);
 					$(".et_title_"+data.eventId).text(data.title);
 					resetBlocEdit(bloc_editable);
 				}
