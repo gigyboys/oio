@@ -1,0 +1,38 @@
+{% extends "front.html.twig" %}
+
+{% block title %}
+  Evènements
+{% endblock %}
+
+{% block body %}
+	<div class="cr">
+		<div class="ct">
+			<div id="et_list_wrap">
+				<div id="et_load_list" style="display:none;">chargement ...</div>
+					<div class="mg_10">
+						<div class="sl_type">
+							{{ include("event/include/event_type_link.html.twig") }}
+						</div>
+						<div class="sl_type_btm"></div>
+					</div>
+
+				{% if events | length > 0 %}
+					<div class="et_pagination mg_h10 tacenter">
+						{{ include("event/include/pagination_list_event.html.twig") }}
+					</div>
+					<div class="et_list" style="display: flex;flex-wrap: wrap;">
+						{% for event in events %}
+							{{ include("event/include/event_item.html.twig") }}
+						{% endfor %}
+						<div class="both"></div>
+					</div>
+					<div class="et_pagination mg_h10 tacenter">
+							{{ include("event/include/pagination_list_event.html.twig") }}
+					</div>
+				{% endif %}
+				
+				<div class="both"></div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

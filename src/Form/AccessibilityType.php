@@ -19,6 +19,7 @@ class AccessibilityType extends AbstractType
             ->add('categoriesIndex', IntegerType::class)
             ->add('schoolsByPage', IntegerType::class)
             ->add('postsByPage', IntegerType::class)
+            ->add('eventsByPage', IntegerType::class)
         ;
     }
 

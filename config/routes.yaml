@@ -196,7 +196,6 @@ blog_manager_post_delete_illustration:
         _controller: App\Controller\BlogManagerController::deleteIllustration
 
 #event_manager
-
 event_manager_toogle_show_author:
     path:     /event-manager/event/{event_id}/toogle-show-author
     defaults:
@@ -253,11 +252,23 @@ blog_post_new_comment:
     defaults:
         _controller: App\Controller\BlogController::newComment
 
+#event
+event:
+    path:     /event/{typeslug}/{page}
+    defaults:
+        _controller: App\Controller\EventController::index
+        typeslug: upcoming
+        page: 1
+
 #school
 school_categories:
     path:     /school/categories
     defaults:
         _controller: App\Controller\SchoolController::categories
+school_map:
+    path:     /school/map
+    defaults:
+        _controller: App\Controller\SchoolController::schoolMap
 school_of_the_day:
     path:     /school/school-of-the-day
     defaults:

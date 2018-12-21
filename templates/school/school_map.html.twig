@@ -1,0 +1,36 @@
+{% extends "front.html.twig" %}
+
+{% block title %}
+  Carte des établissements
+{% endblock %}
+
+{% block body %}
+	<div class="cr">
+		<div>
+			<div class="nav_sl_map_cr">
+				<div class="nav_sl_map">
+					<span class="link_in_map active" data-type-id="0">Tous</span> 
+					<span class="link_in_map" data-type-id="2">privés</span> 
+					<span class="link_in_map" data-type-id="1">publics</span>
+				</div>
+			</div>
+			<div id="sl_map">
+			</div>
+		</div>
+	</div>
+	<script>{#
+		#}var bloc = "sl_map";{#
+		#}var coords = [ {#
+			#}{% for contact in contacts %} {#
+				#} { {#					
+					#}id : {{ contact.id }},{#
+					#}latitude : {{ contact.latitude }},{#
+					#}longitude : {{ contact.longitude }},{#
+					#}label : '{{ contact.name }} : {{ contact.school.shortName }} - {{ contact.school.name | e('js') | raw }}',{#
+					#}url : '{{ path('school_view', {'slug': contact.school.slug}) }}',{#
+					#}typeId : {{ contact.school.type.id }}{#
+				#} }, {#
+			#} {% endfor %}  {#
+		#} ];{#
+	#}</script>
+{% endblock %}

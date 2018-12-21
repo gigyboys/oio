@@ -19,32 +19,28 @@ class SchoolContactRepository extends ServiceEntityRepository
         parent::__construct($registry, SchoolContact::class);
     }
 
-    // /**
-    //  * @return SchoolContact[] Returns an array of SchoolContact objects
-    //  */
-    /*
-    public function findByExampleField($value)
+
+    //search
+    public function getContactsMap()
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
+        $qb = $this->createQueryBuilder('contact');
+
+        $qb/*
+            ->andWhere('contact.school.published = :published')
+            ->setParameter('published', true)*/
+            ->andWhere('contact.published = :published')
+            ->setParameter('published', true)
+            ->andWhere('contact.longitude != :longitude')
+            ->setParameter('longitude', '')
+            ->andWhere('contact.latitude != :latitude')
+            ->setParameter('latitude', '')
+        ;
+
+        //$qb->orderBy('contact.is', 'ASC');
+
+        return $qb
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?SchoolContact
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

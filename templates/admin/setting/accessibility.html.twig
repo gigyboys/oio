@@ -35,6 +35,11 @@
 							<td>:</td>
 							<td style="padding:5px"><span id="sg_view_postsbypage">{{ posts_by_page }}</span></td>
 						</tr>
+						<tr>
+							<td>Nombre d'évènements par page</td>
+							<td>:</td>
+							<td style="padding:5px"><span id="sg_view_eventsbypage">{{ events_by_page }}</span></td>
+						</tr>
 					</table>
 				</div>
 				<div class="bloc_edit" style="display:none">
@@ -55,6 +60,12 @@
 							<td>Nombre d'articles par page</td>
 							<td>:</td>
 							<td style="padding:5px"><input type="number" id="sg_input_postsbypage" class="default_input" value="{{ posts_by_page }}" /></td>
+							<td style="padding:5px">(2-24)</td>
+						</tr>
+						<tr>
+							<td>Nombre d'évènements par page</td>
+							<td>:</td>
+							<td style="padding:5px"><input type="number" id="sg_input_eventsbypage" class="default_input" value="{{ events_by_page }}" /></td>
 							<td style="padding:5px">(2-24)</td>
 						</tr>
 					</table>

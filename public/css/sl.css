@@ -15,24 +15,24 @@
 	width:960px
 }
 
-.sl_type_item{
+.sl_type_item, .et_type_item{
 	display: inline-block;
 	margin-right: 10px
 }
 
-.sl_type_item a{
+.sl_type_item a, .et_type_item a{
 	color:#999;
 }
 
-.sl_type_item a:active, .sl_type_item a:focus {
+.sl_type_item a.sl_type_item a:active, .sl_type_item a:focus, .et_type_item a.et_type_item a:active, .et_type_item a:focus {
 	outline:none;
 }
 
-.sl_type_item a:hover{
+.sl_type_item a:hover, .et_type_item a:hover{
 	color:#555;
 }
 
-.sl_type_item.active a{
+.sl_type_item.active a, .et_type_item.active a{
 	color:#000;
 }
 
@@ -203,7 +203,7 @@
 	margin:10px 0;
 	text-align:center
 }
-.sll_pagination_item{
+.sll_pagination_item, .pagination_item{
 	display:inline-block;
 	box-sizing:border-box;
 	min-width:40px;
@@ -214,10 +214,10 @@
 	border : 1px solid #ddd; 
 	margin-bottom: 3px;
 }
-.sll_pagination_item:hover{
+.sll_pagination_item:hover, .pagination_item:hover{
 	border : 1px solid #aaa; 
 }
-.sll_pagination_item.active{
+.sll_pagination_item.active, .pagination_item.active{
 	background:#eee
 }
 .slr{
@@ -705,6 +705,39 @@
 	background:#2a2;
 }
 
+/* school map */
+.nav_sl_map_cr{
+	position:absolute;
+	width:100%; 
+	text-align:center
+}
+.nav_sl_map{
+	display:inline-block; 
+	margin:auto; 
+	margin-top: 10px; 
+	border-radius: 6px; 
+	background:rgba(255,255,255,0.85);
+	padding:5px;
+	position: relative;
+	z-index: 1;
+}
+#sl_map{
+	height:520px; 
+	background:#ddd;
+	resize: vertical
+}
+.link_in_map{
+	cursor:pointer;
+	padding: 5px 10px;
+	display:inline-block;
+	border-radius: 4px 
+}
+.link_in_map:hover{
+	background: #ddd;
+}
+.link_in_map.active{
+	background: #bbb;
+}
 
 @media screen and (max-width: 1200px)
 {
@@ -747,6 +780,13 @@
 	}
 	#sl_oftheday_right .resp{
 		display:block;
+	}
+}
+
+@media screen and (max-width: 530px)
+{
+	.hidden_530{
+		display: none;
 	}
 }
 

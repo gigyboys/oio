@@ -39,4 +39,83 @@ class EventRepository extends ServiceEntityRepository
     }
 
 
+    public function getEventOffsetLimit($offset, $limit, $published = null, $typeslug = 'upcoming') {
+
+        $currentDate = new \Datetime();
+        $qb = $this->createQueryBuilder('event');
+
+        if($published != null){
+            $qb
+                ->andWhere('event.published = :published')
+                ->setParameter('published', $published);
+        }
+        $qb
+            ->andWhere('event.deleted = :deleted')
+            ->setParameter('deleted', false);
+
+        if($typeslug == 'upcoming'){
+            $qb
+                ->andWhere('event.dateend > :currentDate')
+                ->setParameter('currentDate', $currentDate);
+            $qb
+                ->orderBy('event.datebegin', 'ASC')
+            ;
+        }elseif($typeslug == 'passed'){
+            $qb
+                ->andWhere('event.dateend < :currentDate')
+                ->setParameter('currentDate', $currentDate);
+            $qb
+                ->orderBy('event.dateend', 'DESC')
+            ;
+        }else{
+            $qb
+                ->orderBy('event.datebegin', 'DESC')
+            ;
+        }
+
+        $qb
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+        ;
+
+        $events = $qb->getQuery()->getResult();
+        return $events;
+    }
+
+    public function getEventsByType($typeslug = 'upcoming') {
+
+        $currentDate = new \Datetime();
+        $qb = $this->createQueryBuilder('event');
+
+        $qb
+            ->andWhere('event.published = :published')
+            ->setParameter('published', true);
+        $qb
+        ->andWhere('event.deleted = :deleted')
+        ->setParameter('deleted', false);
+        
+        if($typeslug == 'upcoming'){
+            $qb
+                ->andWhere('event.dateend > :currentDate')
+                ->setParameter('currentDate', $currentDate);
+            $qb
+                ->orderBy('event.datebegin', 'ASC')
+            ;
+        }elseif($typeslug == 'passed'){
+            $qb
+                ->andWhere('event.dateend < :currentDate')
+                ->setParameter('currentDate', $currentDate);
+            $qb
+                ->orderBy('event.dateend', 'DESC')
+            ;
+        }else{
+            $qb
+                ->orderBy('event.datebegin', 'DESC')
+            ;
+        }
+
+        $events = $qb->getQuery()->getResult();
+        return $events;
+    }
+
 }

@@ -334,7 +334,81 @@ $(function() {
     });
     initTabsl();
 	
-	
+	if($('#sl_map').length == 1 && typeof coords != 'undefined'){
+		showSchoolMap(coords, bloc);
+	}
+
+	function showSchoolMap(coords, bloc) {
+		var centerLat = 0;
+		var centerLng = 0;
+		var zoom = 13;
+		var coordsLength = coords.length;
+		
+		if(coordsLength > 1){
+			zoom = 5.6;
+		}
+		
+		for(var i = 0; i < coordsLength; i++ ){
+			var coord = coords[i];
+			centerLat += coord.latitude / coordsLength;
+			centerLng += coord.longitude / coordsLength;
+		}
+		
+		var mapOptions = {
+			zoom: zoom,
+			center: new google.maps.LatLng(centerLat,centerLng),
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		}
+		var map = new google.maps.Map(document.getElementById(bloc), mapOptions);
+
+		var markers = [];
+		
+		initMap(map, typeId = 0);
+
+		function setMapOnMarker(map, coord, markers, index) {
+			var myLatLng = new google.maps.LatLng(coord.latitude,coord.longitude);
+			markers[index] = new google.maps.Marker({
+				position: myLatLng,
+				title: coord.label,
+				url:coord.url
+			});
+			//markers[i].setIcon(coord.icon);
+			markers[index].setMap(map);
+			markers[index].addListener('click', function(event) {
+				window.location.href = this.url;
+			});
+		}
+
+		function initMap(map, typeId = 0) {
+			console.log(markers);
+			for (var i = 0; i < markers.length; i++) {
+				markers[i].setMap(null);
+			}
+			markers = [];
+			var countMarker = 0;
+			for(var i = 0; i < coordsLength; i++ ){
+				var coord = coords[i];
+				if(typeId == 0){
+					setMapOnMarker(map, coord, markers, countMarker);
+					countMarker++;
+				}else{
+					if(coord.typeId == typeId){
+						setMapOnMarker(map, coord, markers, countMarker);
+						countMarker++;
+					}
+				}
+			}
+		}
+
+		$('body').on('click','.link_in_map',function(e){
+			e.preventDefault(true);
+			$(".link_in_map").removeClass('active');
+			$(this).addClass('active');
+			var typeId = $(this).attr('data-type-id');
+			initMap(map, typeId);
+		});
+	}
+		
 	function showMapContact(coords, bloc) {
 		var centerLat = 0;
 		var centerLng = 0;

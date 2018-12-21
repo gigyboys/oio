@@ -9,6 +9,7 @@ $(function() {
 			categoriesIndex : bloc_editable.find("#sg_input_catindex").val(),
 			schoolsByPage : bloc_editable.find("#sg_input_slbypage").val(),
 			postsByPage : bloc_editable.find("#sg_input_postsbypage").val(),
+			eventsByPage : bloc_editable.find("#sg_input_eventsbypage").val(),
 		};
 		loadBlocEdit(bloc_editable);
         $.ajax({
@@ -22,9 +23,11 @@ $(function() {
 					bloc_editable.find("#sg_view_catindex").text(data.categoriesIndex);
 					bloc_editable.find("#sg_view_slbypage").text(data.schoolsByPage);
 					bloc_editable.find("#sg_view_postsbypage").text(data.postsByPage);
+					bloc_editable.find("#sg_view_eventsbypage").text(data.eventsByPage);
 					bloc_editable.find("#sg_input_catindex").val(data.categoriesIndex);
 					bloc_editable.find("#sg_input_slbypage").val(data.schoolsByPage);
 					bloc_editable.find("#sg_input_postsbypage").val(data.postsByPage);
+					bloc_editable.find("#sg_input_eventsbypage").val(data.eventsByPage);
 					resetBlocEdit(bloc_editable);
 				}
 				else{

@@ -7,6 +7,7 @@ class Accessibility
 	private $categoriesIndex;
 	private $schoolsByPage;
 	private $postsByPage;
+	private $eventsByPage;
 	
 	
 	//categoriesIndex
@@ -46,5 +47,18 @@ class Accessibility
     public function getPostsByPage()
     {
         return $this->postsByPage;
+    }
+	
+	//eventsByPage
+	public function setEventsByPage($eventsByPage)
+    {
+        $this->eventsByPage = $eventsByPage;
+
+        return $this;
+    }
+
+    public function getEventsByPage()
+    {
+        return $this->eventsByPage;
     }
 }

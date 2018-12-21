@@ -65,6 +65,15 @@ class SettingController extends AbstractController {
                 }
                 $this->em->persist($posts_by_page);
 
+                $events_by_page = $this->parameterRepository->findOneBy(array(
+                    'parameter' => 'events_by_page'
+                ));
+                $events_by_page->setValue($accessibility->getEventsByPage());
+                if(!($events_by_page->getValue()>=2 && $events_by_page->getValue()<=24)){
+                    $events_by_page->setValue($default);
+                }
+                $this->em->persist($events_by_page);
+
                 $this->em->flush();
 
                 $response->setContent(json_encode(array(
@@ -72,6 +81,7 @@ class SettingController extends AbstractController {
                     'categoriesIndex' => $categories_index->getValue(),
                     'schoolsByPage' => $schools_by_page->getValue(),
                     'postsByPage' => $posts_by_page->getValue(),
+                    'eventsByPage' => $events_by_page->getValue(),
                 )));
             }else{
                 $response->setContent(json_encode(array(
@@ -88,11 +98,15 @@ class SettingController extends AbstractController {
             $posts_by_page = $this->parameterRepository->findOneBy(array(
                 'parameter' => 'posts_by_page'
             ));
+            $events_by_page = $this->parameterRepository->findOneBy(array(
+                'parameter' => 'events_by_page'
+            ));
 
             $response = $this->render('admin/setting/accessibility.html.twig', array(
                 'categories_index' => $categories_index->getValue(),
                 'schools_by_page' => $schools_by_page->getValue(),
                 'posts_by_page' => $posts_by_page->getValue(),
+                'events_by_page' => $events_by_page->getValue(),
             ));
         }
         return $response;

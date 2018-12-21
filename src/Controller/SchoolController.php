@@ -169,6 +169,23 @@ class SchoolController extends AbstractController{
 
     }
 
+    public function schoolMap(Request $request)
+    {
+        $limit = 0;
+        $contactTemps = $this->schoolContactRepository->getContactsMap();
+
+        $contacts = array();
+        foreach($contactTemps as $contact){
+            if($contact->getSchool()->getPublished()){
+                array_push($contacts, $contact);
+            }
+        }
+        return $this->render('school/school_map.html.twig', array(
+            'contacts' => $contacts,
+        ));
+
+    }
+
     public function schoolOfTheDay(Request $request)
     {
         $school = $this->schoolService->getSchoolOfTheDay();

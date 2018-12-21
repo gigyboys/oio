@@ -1,0 +1,63 @@
+{% set published = true %}
+{% if event.tovalid == false or event.valid == false or event.published == false or event.deleted %}
+    {% set published = false %}
+{% endif %}
+<div class="event_item pd_10" style="width:33.33%;box-sizing:border-box">
+	<div class="event_image {% if published == false %}op5{% endif %}">
+        {# twig extension #}
+        {% set illustration = eventIllustration(event) %}
+
+		<a href="{#{{ path('blog_event_view', {'slug': event.slug}) }}#}" ><img style="width: 100%; height: auto" src="{{ illustration | imagine_filter('600x250') }}?v=001" alt="{{ event.title }}" /></a>
+	</div>
+	
+	{% if event.showAuthor %}
+		{% set avatar = userAvatar(event.user) %}
+		<div style="position:relative;z-index:2;text-align:center; margin:auto; margin-top:-70px; width: 80px; height: 80px;border-radius:50%; border: 5px solid #fff; ">
+			{% set userInfo = getLinkUserInfo(event.user, '<img src="'~ avatar | imagine_filter("80x80") ~'" style="width: 80px; height: 80px;border-radius:50%;" />' ) %}
+			{{ userInfo | raw }}
+			{#<img src="{{ avatar | imagine_filter('80x80') }}" style="width: 80px; height: 80px;" />#}
+		</div>
+	{% endif %}
+	<div class="event_title tacenter {% if published == false %}op5{% endif %}">
+		<a href="{#{{ path('blog_event_view', {'slug': event.slug}) }}#}"><strong>{{ event.title }}</strong></a>
+	</div>
+	{#
+	<div class="event_ct {% if published == false %}op5{% endif %}">
+		<div class="event_ct_desc tajustify" style="margin:10px 0">
+            {{ substrSpace(event.introduction, 275) }}
+		</div>
+	</div>
+	#}
+
+	<div class="meta_info">
+		{#
+        {% if event.showAuthor %}
+            {% set avatar = userAvatar(event.user) %}
+            {% set userInfo = getLinkUserInfo(event.user, event.user.name) %}
+			<div class="author_info"><img src="{{ avatar | imagine_filter('20x20') }}" style="width: 20px; width: 20px" /> <span class="user_info">{{ userInfo | raw }}</span></div>
+		{% endif %}
+		#}
+		{# extension #}
+		{#
+        {% set comments =  getValidComments(event) %}
+		<div class="conmment_info"><img src="{{ asset('image/comment_icon.png')  }}" style="width:20px; height:20px;" /> <strong>{{ comments | length }}</strong></div>
+		#}
+		<div class="both"></div>
+
+		<div class="et_date_info tacenter mg_v5"><img src="{{ asset('image/calendar_icon.png')  }}" style="width:14px; height:14px;" /> 
+			<strong>{{ event.datebegin | date('Y-m-d') }}</strong> - 
+			<strong>{{ event.dateend | date('Y-m-d') }}</strong>
+		</div>
+		<div class="event_action tacenter mg_v5">
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+				{% if event.user.id == app.user.id %}
+					<a class="standar_button" href="{#{{ path('blog_manager_edit_event', {'event_id': event.id}) }}#}">Editer</a>
+            	{% endif %}
+            {% endif %}
+
+			<a class="standar_button" href="{#{{ path('blog_event_view', {'slug': event.slug}) }}#}">Voir l'évènement</a>
+		</div>
+		<div class="both"></div>
+	</div>
+	<div class="mg_v10"></div>
+</div>

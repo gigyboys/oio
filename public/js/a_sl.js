@@ -11,8 +11,6 @@ $(function() {
     });
 
 	// test map
-
-
     $('.get-coords').on('click', function(){
         var content = '<div style="padding:5px; width:auto; background:#fff;"><div id="map" style="height: 400px"></div> </div>';
         popup(content, 600, true);
