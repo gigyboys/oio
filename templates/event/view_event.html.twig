@@ -1,0 +1,144 @@
+{% extends "front.html.twig" %}
+
+{% block title %}
+	Evènement - {{ event.title }}
+{% endblock %}
+
+
+{% block body %}
+	<div class="cr">
+		<div class="mg_v10">
+			<div class="ct">
+
+				<div class="mg_10" style="text-align:justify; font-weight:bold">
+                    {{ event.introduction }}
+				</div>
+
+
+                {# twig extension #}
+                {% set illustration = eventIllustration(event) %}
+				<div class="mg_10">
+					<div style="background:#999; height:240px; width: calc( 100% - 420px ); overflow:hidden; float:left;position:relative;
+					background: #81b5e2 url('{{ illustration | imagine_filter('1200x500') }}') no-repeat scroll center center / cover ;">
+						{#
+						<img id="event_illustration" style="display:block; max-width: 100%; height: auto; margin: auto" src="{{ illustration | imagine_filter('1200x500') }}" alt="img event" />
+						#}
+						<div style="position: absolute;bottom:0px;background:rgba(255,255,255,0.5);width:100%;padding:16px;box-sizing:border-box">
+								<span style=" font-size:18px; color:#222">{{ event.title }}</span>
+						</div>
+						<div style="text-align:right">
+							<div style="padding: 10px 10px 0px">
+								<span>Du {{ event.datebegin | date('Y-m-d à H:i') }}</span>
+							</div>
+							<div style="padding: 10px 10px 0px">
+								<span>Au {{ event.dateend | date('Y-m-d à H:i') }}</span>
+							</div>
+						</div>
+					</div>
+					<div style="margin-left: calc( 100% - 400px ); background:#789;height:240px;position: relative;">
+						<div style="position: absolute;background:#bbb;width:100%;height:50px">
+							Informations sur les participants
+						</div>
+						<div style="position: absolute;background:#eee;width:100%;height:140px;margin-top:50px">
+							Liste des participants
+						</div>
+						<div style="position: absolute;background:#bbb;width:100%;height:50px;margin-top:190px">
+							Actions des participants
+						</div>
+					</div>
+					<div class="both"></div>
+				</div>
+				<div class="mg_10">
+
+                    {% if event.showAuthor %}
+						<strong>Par</strong>
+                        {# twig extension #}
+                        {% set userInfo = getLinkUserInfo(event.user, event.user.name) %}
+                        {{ userInfo | raw }}
+                    {% endif %}
+					<strong>Le {{ event.date | date('Y-m-d') }}</strong>
+				</div>
+				<div class="mg_10" style="overflow: auto;">
+                    {{ event.content | raw }}
+				</div>
+
+				<div class="mg_10">
+					{#
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        {% if event.user.id == app.user.id %}
+							<a class="standar_button" href="{{ path('event_manager_edit_post', {'post_id': post.id}) }}">Editer</a>
+                        {% endif %}
+                    {% endif %}
+					#}
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and is_granted('ROLE_ADMIN') %}
+						<a href="{{ path('admin_event_edit', {'event_id': event.id}) }}" target="_blank"><span class="standar_button">Administrer</span></a>
+                    {% endif %}
+				</div>
+
+				{#
+				<div class="sp mg_v10"></div>
+				<div id="info_comment" class="mg_h10">
+                    {{ allComments | length }}
+                    {% if allComments | length == 0 or allComments | length == 1 %}
+						Commentaire
+                    {% else %}
+						Commentaires
+                    {% endif %}
+				</div>
+
+                {% if previousComment %}
+					<div id="bg_load_comment_action">
+						<div class="sp mg_v10"></div>
+						<div id="load_comment" data-target="{{ path('blog_post_load_comment', {'post_id': post.id, 'comment_id': previousComment.id}) }}" data-previous-cmt="{{ previousComment.id }}" class="mg_h10" style="text-align:center; cursor:pointer">
+							Afficher les commentaires précédents...
+						</div>
+						<div class="btn_loading" style="text-align:center;display:none;">Chargement...</div>
+					</div>
+                {% endif %}
+				<div class="sp mg_v10"></div>
+
+				<div>
+					<div id="bg_post_list_cmt">
+                        {% for comment in comments %}
+                            {{ include("blog/include/comment_item.html.twig") }}
+                        {% endfor %}
+					</div>
+					<div class="both"></div>
+                    {% if post.activeComment %}
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
+							<div class="mg_10">
+								<form action="" name="" method="post" id="">
+									<div class="mg_b5">
+                                        {{ app.user.name }} :
+									</div>
+									<div style="width:60px;float:left">
+                                        {% set avatar = userAvatar(app.user) %}
+										<span style="display:block;float:left;"><img style="width:60px; height: 60px; border-radius: 50%" src="{{ avatar | imagine_filter('60x60') }}" alt="{{ app.user.username }}" /></span>
+									</div>
+									<div style="margin-left:70px">
+										<textarea class="default_textarea" id="bg_post_cmt_message" style="min-height:120px"></textarea>
+										<div id="bg_add_comment_error"></div>
+										<div id="bg_add_comment_action" class="mg_t10">
+											<span class="btn_save standar_button btn_bg_post_new_cmt" data-target="{{ path('blog_post_new_comment', {'post_id': post.id}) }}">Ajouter mon commentaire</span>
+											<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;">Chargement...</span>
+										</div>
+									</div>
+									<div class="both"></div>
+								</form>
+							</div>
+                        {% else %}
+							<div class="mg_10 tacenter">
+								<a class="login_ajax" href="{{ path('user_login_ajax') }}">Connectez-vous pour pouvoir ecrire votre commentaire</a>
+							</div>
+                        {% endif %}
+                    {% else %}
+						<div class="mg_10 tacenter">
+							Les commentaires sont fermés pour cet article.
+						</div>
+                    {% endif %}
+				</div>
+				#}
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -254,11 +254,19 @@ blog_post_new_comment:
 
 #event
 event:
-    path:     /event/{typeslug}/{page}
+    path:     /events/{typeslug}/{page}
     defaults:
         _controller: App\Controller\EventController::index
         typeslug: upcoming
         page: 1
+event_viewbyid:
+    path:     /event/id/{id}
+    defaults:
+        _controller: App\Controller\EventController::viewById
+event_view:
+    path:     /event/{slug}
+    defaults:
+        _controller: App\Controller\EventController::view
 
 #school
 school_categories:

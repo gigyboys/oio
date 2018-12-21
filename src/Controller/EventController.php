@@ -148,4 +148,60 @@ class EventController extends AbstractController{
     }
 
 
+
+    public function viewById($id, Request $request)
+    {
+        $event = $this->eventRepository->find($id);
+        if($event){
+            return $this->redirectToRoute('event_view', array('slug' => $post->getSlug()));
+        }else{
+            return $this->redirectToRoute('event');
+        }
+    }
+
+    public function view($slug, Request $request): Response
+    {
+
+        $user = $this->getUser();
+
+        $event = $this->eventRepository->findOneBy(array(
+            'slug' => $slug,
+        ));
+
+        $showEvent = false;
+        if($event && !$event->getDeleted() && $event->getPublished() && $event->getValid()){
+            $showEvent = true;
+        }
+        if($event && ( $showEvent || $this->isGranted('ROLE_ADMIN') || $event->getUser() == $user)){
+
+            //view
+            $this->platformService->registerView($event, $user, $request);
+
+            /*
+            $allComments = $this->blogService->getValidComments($post);
+
+            $limit = 10;
+            $type = "post";
+            $order = "DESC";
+            $comments = $this->commentRepository->getCommentsLimit($type, $post, $limit, $order);
+
+            $previousComment = null;
+            if(count($comments)>0){
+                $firstComment = $comments[0];
+                $previousComment = $this->commentRepository->getSinceComment($firstComment, $type, $post);
+            }
+            */
+            return $this->render('event/view_event.html.twig', [
+                'event' => $event,
+                /*
+                'comments' => $comments,
+                'allComments' => $allComments,
+                'previousComment' => $previousComment,
+                */
+                'entityView' => 'event',
+            ]);
+        }else{
+            return $this->redirectToRoute('event');
+        }
+    }
 }

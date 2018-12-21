@@ -55,7 +55,7 @@
             	{% endif %}
             {% endif %}
 
-			<a class="standar_button" href="{#{{ path('blog_event_view', {'slug': event.slug}) }}#}">Voir l'évènement</a>
+			<a class="standar_button" href="{{ path('event_view', {'slug': event.slug}) }}">Voir l'évènement</a>
 		</div>
 		<div class="both"></div>
 	</div>

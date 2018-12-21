@@ -190,6 +190,8 @@ class PlatformService
             $view->setSchool($entity);
         }else if($entity instanceof Post){
             $view->setPost($entity);
+        }else if($entity instanceof Event){
+            $view->setEvent($entity);
         }
 
         $user = $this->token->getToken()->getUser();
