@@ -18,6 +18,8 @@ class EventType extends AbstractType
             ->add('dateendText')
             ->add('location')
             ->add('city')
+            ->add('latitude')
+            ->add('longitude')
         ;
     }
 

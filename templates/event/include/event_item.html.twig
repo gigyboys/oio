@@ -7,7 +7,7 @@
         {# twig extension #}
         {% set illustration = eventIllustration(event) %}
 
-		<a href="{#{{ path('blog_event_view', {'slug': event.slug}) }}#}" ><img style="width: 100%; height: auto" src="{{ illustration | imagine_filter('600x250') }}?v=001" alt="{{ event.title }}" /></a>
+		<a href="{{ path('event_view', {'slug': event.slug}) }}" ><img style="width: 100%; height: auto" src="{{ illustration | imagine_filter('600x250') }}?v=001" alt="{{ event.title }}" /></a>
 	</div>
 	
 	{% if event.showAuthor %}
@@ -19,7 +19,7 @@
 		</div>
 	{% endif %}
 	<div class="event_title tacenter {% if published == false %}op5{% endif %}">
-		<a href="{#{{ path('blog_event_view', {'slug': event.slug}) }}#}"><strong>{{ event.title }}</strong></a>
+		<a href="{{ path('event_view', {'slug': event.slug}) }}"><strong>{{ event.title }}</strong></a>
 	</div>
 	{#
 	<div class="event_ct {% if published == false %}op5{% endif %}">

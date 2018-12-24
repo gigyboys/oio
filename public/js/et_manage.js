@@ -1,7 +1,52 @@
 
 $(function() {
-    //change illustration event open popup
     
+
+	// map : getting coord event
+    $('.get-coords-event').on('click', function(){
+        var content = '<div style="padding:10px; width:auto; background:#fff;"><div id="map" style="height: 400px"></div> </div>';
+        popup(content, 600, true);
+
+        var myLatlng = {lat: -18.90329215475846, lng: 47.5195606651306};
+        if($('#event_input_latitude').val().trim() != "" && $('#event_input_longitude').val().trim() != ""){
+            myLatlng = {lat: Number($('#event_input_latitude').val().trim()), lng: Number($('#event_input_longitude').val().trim())};
+        }
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 9,
+            center: myLatlng
+        });
+
+        var marker = new google.maps.Marker({
+            draggable:true,
+            position: myLatlng,
+            map: map,
+            title: 'Position'
+        });
+
+        map.addListener('click', function(event) {
+            var latitude = event.latLng.lat();
+            var longitude = event.latLng.lng();
+            console.log( latitude + ', ' + longitude );
+            marker.setPosition({lat: latitude, lng: longitude});
+            setCoordonneesEvent(latitude, longitude);
+        });
+
+        marker.addListener('dragend', function(event) {
+            var latitude = event.latLng.lat();
+            var longitude = event.latLng.lng();
+            console.log( latitude + ', ' + longitude );
+            setCoordonneesEvent(latitude, longitude);
+        });
+    });
+
+
+    function setCoordonneesEvent(lat, lng) {
+		$('#event_input_latitude').val(lat);
+		$('#event_input_longitude').val(lng);
+    }
+
+    //change illustration event open popup
     $('body').on('click','#change_event_illustration',function(event){
         var target = $(this).data("target");
 
@@ -203,9 +248,11 @@ $(function() {
             title : title,
             slug : bloc_editable.find("#event_input_slug").val(),
             datebeginText : datebeginText,
-            dateendText : bloc_editable.find("#event_input_dateend").val(),
+            dateendText : dateendText,
             location : bloc_editable.find("#event_input_location").val(),
             city : bloc_editable.find("#event_input_city").val(),
+            latitude : bloc_editable.find("#event_input_latitude").val(),
+            longitude : bloc_editable.find("#event_input_longitude").val(),
         };
         if(hasNotError){
             loadBlocEdit(bloc_editable);

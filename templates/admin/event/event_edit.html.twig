@@ -132,6 +132,22 @@
 								<td>:</td>
 								<td style="padding:5px"><input type="text" id="event_input_city" class="default_input" value="{{ event.city }}" /></td>
 							</tr>
+							<tr>
+								<td>Latitude</td>
+								<td>:</td>
+								<td style="padding:5px">
+									<input type="text" id="event_input_latitude" class="default_input" value="{{ event.latitude }}" />
+									<span class="get-coords-event" style="cursor: pointer"><img src="{{ asset('image/location_icon.png') }}" style="width:12px; height:auto" /> map</span>
+								</td>
+							</tr>
+							<tr>
+								<td>Longitude</td>
+								<td>:</td>
+								<td style="padding:5px">
+									<input type="text" id="event_input_longitude" class="default_input" value="{{ event.longitude }}" />
+									<span class="get-coords-event" style="cursor: pointer"><img src="{{ asset('image/location_icon.png') }}" style="width:12px; height:auto" /> map</span>
+								</td>
+							</tr>
 						</table>
 					</div>
 					<div class="separator"></div>

@@ -286,6 +286,9 @@ class EventManagerController extends AbstractController {
                     $event->setLocation($eventTemp->getLocation());
                     $event->setCity($eventTemp->getCity());
 
+                    $event->setLatitude($eventTemp->getLatitude());
+                    $event->setLongitude($eventTemp->getLongitude());
+
                     $this->em->persist($event);
                     $this->em->flush();
 
@@ -298,6 +301,8 @@ class EventManagerController extends AbstractController {
                         'dateend' => $event->getDateend()->format('m/d/Y H:i'),
                         'location' => $event->getLocation(),
                         'city' => $event->getCity(),
+                        'latitude' => $event->getLatitude(),
+                        'longitude' => $event->getLongitude(),
                     )));
                 }
             }

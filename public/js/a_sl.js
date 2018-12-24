@@ -10,9 +10,9 @@ $(function() {
         minDate: 0
     });
 
-	// test map
+	// map : getting coord contact
     $('.get-coords').on('click', function(){
-        var content = '<div style="padding:5px; width:auto; background:#fff;"><div id="map" style="height: 400px"></div> </div>';
+        var content = '<div style="padding:10px; width:auto; background:#fff;"><div id="map" style="height: 400px"></div> </div>';
         popup(content, 600, true);
 
         var myLatlng = {lat: -18.90329215475846, lng: 47.5195606651306};
@@ -53,7 +53,6 @@ $(function() {
 		$('#contact_input_latitude').val(lat);
 		$('#contact_input_longitude').val(lng);
     }
-    //});
 
     /*
      * position des établissements

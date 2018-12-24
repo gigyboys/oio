@@ -23,15 +23,20 @@
 						{#
 						<img id="event_illustration" style="display:block; max-width: 100%; height: auto; margin: auto" src="{{ illustration | imagine_filter('1200x500') }}" alt="img event" />
 						#}
-						<div style="position: absolute;bottom:0px;background:rgba(255,255,255,0.5);width:100%;padding:16px;box-sizing:border-box">
-								<span style=" font-size:18px; color:#222">{{ event.title }}</span>
+						<div id="map_event" style="position:absolute;width:100%;height:100%; background:#bbb;display:none">
+							
 						</div>
-						<div style="text-align:right">
-							<div style="padding: 10px 10px 0px">
-								<span>Du {{ event.datebegin | date('Y-m-d à H:i') }}</span>
-							</div>
-							<div style="padding: 10px 10px 0px">
-								<span>Au {{ event.dateend | date('Y-m-d à H:i') }}</span>
+						<div style="position: absolute;top:0px;background:rgba(255,255,255,0.7);width:100%;padding:16px;box-sizing:border-box">
+							<span style=" font-size:18px; color:#000">{{ event.title }}</span>
+						</div>
+						<div style="text-align:right;background:rgba(255,255,255,0.7);position: absolute;width:100%;bottom:0px">
+							<div style="padding: 10px">
+								{% if event.latitude | trim != "" and event.longitude | trim != "" %}
+									<span id="show_map_event" data-latitude="{{ event.latitude }}" data-longitude="{{ event.longitude }}" style="display:inline-block; float:left;cursor:pointer"><i class="fas fa-map-marker-alt"></i></span>
+									<span id="hide_map_event" style="display:inline-block; float:left;cursor:pointer;display:none"><i class="fas fa-undo"></i></span>
+								{% endif %}
+								<span style="display:inline-block; float:right">{{ event.location }}</span>
+								<span class="both"></span>
 							</div>
 						</div>
 					</div>
@@ -58,6 +63,13 @@
                     {% endif %}
 					<strong>Le {{ event.date | date('Y-m-d') }}</strong>
 				</div>
+				
+				<div style="">
+					<div style="padding: 10px 10px 0px">
+						<span>Du {{ event.datebegin | date('Y-m-d à H:i') }}</span> <span>Au {{ event.dateend | date('Y-m-d à H:i') }}</span>
+					</div>
+				</div>
+
 				<div class="mg_10" style="overflow: auto;">
                     {{ event.content | raw }}
 				</div>
