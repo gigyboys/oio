@@ -8,6 +8,7 @@ use App\Entity\Event;
 use App\Entity\Logo;
 use App\Entity\Post;
 use App\Entity\SchoolPost;
+use App\Entity\SchoolEvent;
 use App\Entity\Tag;
 use App\Entity\TagPost;
 use App\Entity\TypeSchool;
@@ -31,6 +32,7 @@ use App\Repository\LogoRepository;
 use App\Repository\ParameterRepository;
 use App\Repository\PostRepository;
 use App\Repository\SchoolPostRepository;
+use App\Repository\SchoolEventRepository;
 use App\Repository\TagPostRepository;
 use App\Repository\TagRepository;
 use App\Repository\TypeRepository;
@@ -61,6 +63,7 @@ class EventController extends AbstractController {
         TagRepository $tagRepository,
         TagPostRepository $tagPostRepository,
         SchoolPostRepository $schoolPostRepository,
+        SchoolEventRepository $schoolEventRepository,
         EventRepository $eventRepository,
         ObjectManager $em
     )
@@ -79,6 +82,7 @@ class EventController extends AbstractController {
         $this->tagRepository = $tagRepository;
         $this->tagPostRepository = $tagPostRepository;
         $this->schoolPostRepository = $schoolPostRepository;
+        $this->schoolEventRepository = $schoolEventRepository;
         $this->eventRepository = $eventRepository;
         $this->em = $em;
     }
@@ -200,6 +204,56 @@ class EventController extends AbstractController {
             )));
         }
 
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    public function eventSchools($event_id)
+    {
+        $event = $this->eventRepository->find($event_id);
+        $schools = $this->schoolRepository->findAll();
+
+        return $this->render('admin/event/event_schools.html.twig', array(
+            'event' => $event,
+            'schools' => $schools
+        ));
+    }
+
+    public function toogleSchool($event_id, $school_id, Request $request)
+    {
+        $event = $this->eventRepository->find($event_id);
+        $school = $this->schoolRepository->find($school_id);
+
+        $response = new Response();
+
+        if ($event && $school) {
+            $schoolEvent = $this->schoolEventRepository->findOneBy(array(
+                'event' => $event,
+                'school' => $school,
+            ));
+
+            if($schoolEvent){
+                $this->em->remove($schoolEvent);
+                $isSchool = false;
+            }else{
+                $schoolEvent = new SchoolEvent();
+                $schoolEvent->setEvent($event);
+                $schoolEvent->setSchool($school);
+
+                $this->em->persist($schoolEvent);
+                $isSchool = true;
+            }
+            $this->em->flush();
+
+            $response->setContent(json_encode(array(
+                'state' => 1,
+                'case' => $isSchool,
+            )));
+        }else{
+            $response->setContent(json_encode(array(
+                'state' => 0,
+            )));
+        }
         $response->headers->set('Content-Type', 'application/json');
         return $response;
     }

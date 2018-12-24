@@ -30,6 +30,7 @@ use App\Repository\PostRepository;
 use App\Repository\SchoolContactRepository;
 use App\Repository\SchoolOfTheDayRepository;
 use App\Repository\SchoolPostRepository;
+use App\Repository\SchoolEventRepository;
 use App\Repository\SchoolRepository;
 use App\Repository\TagPostRepository;
 use App\Repository\TypeSchoolRepository;
@@ -50,6 +51,7 @@ class EventService
         PostIllustrationRepository $postIllustrationRepository,
         TagPostRepository $tagPostRepository,
         SchoolPostRepository $schoolPostRepository,
+        SchoolEventRepository $schoolEventRepository,
         CommentRepository $commentRepository,
         PostRepository $postRepository,
         EventRepository $eventRepository,
@@ -68,6 +70,7 @@ class EventService
         $this->postIllustrationRepository = $postIllustrationRepository;
         $this->tagPostRepository = $tagPostRepository;
         $this->schoolPostRepository = $schoolPostRepository;
+        $this->schoolEventRepository = $schoolEventRepository;
         $this->commentRepository = $commentRepository;
         $this->postRepository = $postRepository;
         $this->eventRepository = $eventRepository;
@@ -87,6 +90,21 @@ class EventService
         else{
             return 'default/images/event/illustration/default.jpeg';
         }
+    }
+
+    public function isSchoolEvent(Event $event, School $school) {
+        $schoolEvent = $this->schoolEventRepository->findOneBy(array(
+            'event' => $event,
+            'school' => $school,
+        ));
+
+        if($schoolEvent){
+            $isSchool = true;
+        }else{
+            $isSchool = false;
+        }
+
+        return $isSchool;
     }
 
 }

@@ -67,6 +67,7 @@ class AppExtension extends AbstractExtension
             new TwigFunction('isUserTeam', array($this, 'isUserTeam')),
             /*event*/
             new TwigFunction('eventIllustration', array($this, 'eventIllustration')),
+            new TwigFunction('isSchoolEvent', array($this, 'isSchoolEvent')),
         );
     }
 
@@ -197,5 +198,9 @@ class AppExtension extends AbstractExtension
      */
     public function eventIllustration(Event $event) {
         return $this->eventService->getIllustrationPath($event);
+    }
+
+    public function isSchoolEvent(Event $event, School $school) {
+        return $this->eventService->isSchoolEvent($event, $school);
     }
 }

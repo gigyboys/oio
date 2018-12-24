@@ -153,7 +153,7 @@ class EventController extends AbstractController{
     {
         $event = $this->eventRepository->find($id);
         if($event){
-            return $this->redirectToRoute('event_view', array('slug' => $post->getSlug()));
+            return $this->redirectToRoute('event_view', array('slug' => $event->getSlug()));
         }else{
             return $this->redirectToRoute('event');
         }

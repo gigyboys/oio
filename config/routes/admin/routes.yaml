@@ -333,6 +333,14 @@ admin_event_dodelete:
     path:     /event/{event_id}/delete
     defaults:
         _controller: App\Controller\Admin\EventController::deleteEvent
+admin_event_schools:
+    path:     /event/{event_id}/schools
+    defaults:
+        _controller: App\Controller\Admin\EventController::eventSchools
+admin_event_toogle_school:
+    path:     /event/{event_id}/toogle-school/{school_id}
+    defaults:
+        _controller: App\Controller\Admin\EventController::toogleSchool
 
 #setting
 admin_setting_accessibility:

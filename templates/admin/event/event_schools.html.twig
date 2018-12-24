@@ -1,26 +1,26 @@
 {% extends "back.html.twig" %}
 
 {% block title %}
-  Article #{{ post.id }} - Etablissements
+  Evènement #{{ event.id }} - Etablissements
 {% endblock %}
 
 {% block body_header %}
 	<div class="bc">
-		<span class="bc1"><a href="{{ path('admin_blog_post') }}"><img src="{{ asset('image/bg_icon.png') }}" style="width:14px; height:auto" /> <span>{{ 'Blog' | trans }}</span></a> </span>
+			<span class="bc1"><a href="{{ path('admin_event') }}"><img src="{{ asset('image/default_icon.png') }}" style="width:14px; height:auto" /> <span>Evènements</span></a> </span>
+			<span class="dd">
+				<span href="#" class="dd_src">
+					<span class="bcdd"></span>
+				</span>
+				{{ include("admin/event/include/event_principal_action.html.twig") }}
+			</span>
+			<span class="bc1"><a href="{{ path('admin_event_edit', {'event_id': event.id}) }}">{{ event.title }}</a></span>
 		<span class="dd">
 			<span href="#" class="dd_src">
 				<span class="bcdd"></span>
 			</span>
-            {{ include("admin/blog/include/blog_principal_action.html.twig") }}
-		</span>
-		<span class="bc1"><a href="{{ path('admin_blog_post_edit', {'post_id': post.id}) }}">{{ post.title }}</a></span>
-		<span class="dd">
-			<span href="#" class="dd_src">
-				<span class="bcdd"></span>
-			</span>
-            {{ include("admin/blog/include/post_other_action.html.twig") }}
+            {{ include("admin/event/include/event_other_action.html.twig") }}
 		</span> 
-		<span class="bc1"><a href="{{ path('admin_blog_post_schools', {'post_id': post.id}) }}"><span>Etablissements</span></a> </span>
+		<span class="bc1"><a href="{{ path('admin_event_schools', {'event_id': event.id}) }}"><span>Etablissements</span></a> </span>
 	</div>
 	<div style="padding:8px; float:right">
 		<div style="float:left">
@@ -28,7 +28,7 @@
 				<span href="#" class="dd_src" style="cursor:pointer">
 					Autres actions
 				</span>
-                {{ include("admin/blog/include/post_other_action.html.twig") }}
+				{{ include("admin/event/include/event_other_action.html.twig") }}
 			</span> 
 		</div>
 	</div>
@@ -38,21 +38,21 @@
 	<div style="">
 		<div style="float:left; height: 86px;margin:5px">
 			{# twig extension #}
-			{% set illustration = postIllustration(post) %}
-			<img id="post_illustration" style="width: 80px; height: 80px" src="{{ illustration | imagine_filter('80x80') }}" alt="img sl" />
+			{% set illustration = eventIllustration(event) %}
+			<img id="event_illustration" style="width: 80px; height: 80px" src="{{ illustration | imagine_filter('80x80') }}" alt="img sl" />
 		</div>
 		<div style="margin-left: 90px;">
 			<div>
 				<table>
 					<tr>
-						<td>Name</td>
+						<td>Titre</td>
 						<td>:</td>
-						<td style="padding:5px"><span id="sl_view_name">{{ post.title }}</span></td>
+						<td style="padding:5px"><span id="sl_view_name">{{ event.title }}</span></td>
 					</tr>
 					<tr>
 						<td>Slug</td>
 						<td>:</td>
-						<td style="padding:5px"><span id="sl_view_slug">{{ post.slug }}</span></td>
+						<td style="padding:5px"><span id="sl_view_slug">{{ event.slug }}</span></td>
 					</tr>
 				</table>
 			</div>
@@ -61,7 +61,7 @@
 	</div>
 	
 	<div style="background:#ddd; padding: 5px; margin:5px; border:1px solid #bbb">
-		<span><img src="{{ asset('image/list_icon.png') }}" style="width:12px; height:auto" /> Liste des évènements</span>
+		<span><img src="{{ asset('image/list_icon.png') }}" style="width:12px; height:auto" /> Liste des établissements</span>
 	</div>
 	
 	<div class="a_datatable">
@@ -99,8 +99,8 @@
 							<a href="{{ path('admin_school_edit', {'id': school.id}) }}">{{ school.shortName }}</a>
 						</td>
 						<td style="text-align:center">
-							<span class="toggle_case" data-entity="tag" data-target="{{ path('admin_blog_post_toogle_school', {'post_id': post.id, 'school_id': school.id }) }}">
-								{% set isSchool = isSchoolPost(post, school) %}
+							<span class="toggle_case" data-entity="tag" data-target="{{ path('admin_event_toogle_school', {'event_id': event.id, 'school_id': school.id }) }}">
+								{% set isSchool = isSchoolEvent(event, school) %}
 								{% if isSchool %}
 									<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
 									<span class="redstate"><span class="redpastille"></span></span>
@@ -109,7 +109,7 @@
 									<span class="redstate" style="display:none"><span class="redpastille"></span></span>
 								{% endif %}
 							</span><span class="state_loading" style="display:none">
-								<img src="{{ asset('image/loading.svg')  }}" style="width:20px; height:20px;display: inline-block; vertical-align: middle;" />
+								<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" />
 							</span>
 						</td>
 						<td class="a_table_cell_action tacenter">
