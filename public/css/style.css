@@ -237,6 +237,27 @@ a:hover{
 	overflow: hidden;
 }
 
+/*visibility password register*/
+#password{
+	padding-right: 30px
+}
+.v_pwd_wrap{
+	cursor: pointer;
+	margin-left: -30px
+}
+.v_pwd img{
+	width:18px; 
+	height:18px;
+	display: inline-block; 
+	vertical-align: middle;
+}
+.show_pwd.v_pwd{
+	display: inline-block;
+}
+.hide_pwd.v_pwd{
+	display: none;
+}
+
 @media screen and (max-width: 1050px)
 {
 	.team_user_list .userteam_item_wrap{

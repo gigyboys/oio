@@ -1,5 +1,32 @@
 
 $(function() {
+	/*
+	* visibility_password
+	*/
+	if($('#password').length > 0 && $('.show_pwd').length > 0 && $('.hide_pwd').length > 0){
+		if($('#password').attr('type') != 'text'){
+			$('#password').prop('type', 'password');
+			$('.show_pwd').show();
+			$('.hide_pwd').hide();
+
+		}
+
+		$('body').on('click','.show_pwd',function(e){
+			$('#password').prop('type', 'text');
+			$('.show_pwd').hide();
+			$('.hide_pwd').show();
+		});
+
+		$('body').on('click','.hide_pwd',function(e){
+			$('#password').prop('type', 'password');
+			$('.show_pwd').show();
+			$('.hide_pwd').hide();
+		});
+	}
+
+	/*
+	* user_info_popup
+	*/
 	var tab_ur_item = $('.tab_ur_item');
 	var content_tab_ur_item = $('.content_tab_ur_item');
 	var timeOutIdEnterArray = []; 
