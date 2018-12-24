@@ -156,7 +156,7 @@
 	background:#f8f8f8;
 	text-align:center;
 }
-.sl_action_about, .sl_action_bg, .sl_action_at, .sl_action_evaluation, .sl_action_doc{
+.sl_action_about, .sl_action_bg, .sl_action_at, .sl_action_evaluation, .sl_action_doc, .sl_action_et{
 	display:inline-block;
 	width: 39px;
 	height:32px;
@@ -165,15 +165,15 @@
 	vertical-align: top;
 	box-sizing:border-box;
 }
-.sl_action_about:hover, .sl_action_bg:hover, .sl_action_at:hover, .sl_action_evaluation:hover, .sl_action_contact:hover, .sl_action_doc:hover{
+.sl_action_about:hover, .sl_action_bg:hover, .sl_action_at:hover, .sl_action_evaluation:hover, .sl_action_contact:hover, .sl_action_doc:hover, .sl_action_et:hover{
 	background: #ffffff;
 	border: 1px solid #ddd;
 }
-.sl_action_about a, .sl_action_bg a, .sl_action_at a, .sl_action_evaluation a, .sl_action_contact a, .sl_action_doc a{
+.sl_action_about a, .sl_action_bg a, .sl_action_at a, .sl_action_evaluation a, .sl_action_contact a, .sl_action_doc a, .sl_action_et a{
 	display:block;
 	padding-top:4px
 }
-.sl_action_bg a img, .sl_action_at a img, .sl_action_evaluation a img, .sl_action_contact a img, .sl_action_doc a img{
+.sl_action_bg a img, .sl_action_at a img, .sl_action_evaluation a img, .sl_action_contact a img, .sl_action_doc a img, .sl_action_et a img{
 	filter: brightness(100%);
 	-webkit-filter: brightness(100%);
 	-moz-filter: brightness(100%);

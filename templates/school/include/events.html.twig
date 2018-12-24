@@ -1,0 +1,14 @@
+<div style="min-height:100px" class="">
+	{% if events | length == 0 %}
+		<div style="margin:auto; padding-top: 30px; text-align:center; font-weight:bold">
+			Aucun évènement à afficher
+		</div>
+	{% else %}
+		<div id="et_list">
+			{% for event in events %}
+				{{ include("event/include/event_item.html.twig") }}
+			{% endfor %}
+			<div class="both"></div>
+		</div>
+	{% endif %}
+</div>

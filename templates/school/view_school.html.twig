@@ -120,10 +120,10 @@
 							</a><!--
 							--><a class="tab_sl_item{% if type == 'post' %} selected{% endif %}" id="tab_sl_new" data-title="{{ school.name }} - post" href="{{ path('school_view', {'slug': school.slug, 'type': 'post'}) }}" >
 								<span class="wrap"><img class="img icon" src="{{ asset('image/sl_bg_icon.png') }}" alt="BG" /> <span class="label">Actualités</span></span>
-							</a>{#<!--
-							--><a class="tab_sl_item{% if type == 'advert' %} selected{% endif %}" id="tab_sl_advert" data-title="{{ school.name }} - advert" href="{{ path('school_view', {'slug': school.slug, 'type': 'advert'}) }}">
-								<span class="wrap"><img class="img icon" src="{{ asset('image/sl_at_icon.png') }}" alt="AT" /> <span class="label">Annonces</span></span>
-							</a>#}<!--
+							</a><!--
+							--><a class="tab_sl_item{% if type == 'event' %} selected{% endif %}" id="tab_sl_event" data-title="{{ school.name }} - event" href="{{ path('school_view', {'slug': school.slug, 'type': 'event'}) }}">
+								<span class="wrap"><img class="img icon" src="{{ asset('image/sl_at_icon.png') }}" alt="AT" /> <span class="label">Evènements</span></span>
+							</a><!--
 							--><a class="tab_sl_item{% if type == 'evaluation' %} selected{% endif %}" id="tab_sl_evaluation" data-title="{{ school.name }} - evaluations" href="{{ path('school_view', {'slug': school.slug, 'type': 'evaluation'}) }}">
 								<span class="wrap"><img class="img icon" src="{{ asset('image/sl_star_icon.png') }}" alt="BG" /> <span class="label">Evaluations</span></span>
 							</a><!--
@@ -148,15 +148,13 @@
                     </div>
                 </div>
             </div>
-            {#
-            <div class="content_tab_sl_item" id="content_tab_sl_advert" style = "{% if type != 'advert' %}display:none{% endif %}">
+            <div class="content_tab_sl_item content_tab_sl_item{% if type == 'event' %} active{% endif %}" id="content_tab_sl_event">
                 <div class="cr">
                     <div class="ct">
-                        {{ include("COMSchoolBundle:school:include/advert.html.twig") }}
+                        {{ include("school/include/events.html.twig") }}
                     </div>
                 </div>
             </div>
-            #}
             <div class="content_tab_sl_item {% if type == 'evaluation' %} active{% endif %}" id="content_tab_sl_evaluation">
                 <div class="cr">
                     <div class="ct">

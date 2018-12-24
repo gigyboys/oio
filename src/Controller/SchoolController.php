@@ -10,6 +10,7 @@ use App\Repository\DocumentRepository;
 use App\Repository\FieldRepository;
 use App\Repository\PostRepository;
 use App\Repository\SchoolPostRepository;
+use App\Repository\SchoolEventRepository;
 use App\Repository\SubscriptionRepository;
 use App\Repository\TypeRepository;
 use App\Service\PlatformService;
@@ -42,6 +43,7 @@ class SchoolController extends AbstractController{
         FieldRepository $fieldRepository,
         PostRepository $postRepository,
         SchoolPostRepository $schoolPostRepository,
+        SchoolEventRepository $schoolEventRepository,
         DocumentRepository $documentRepository,
         SubscriptionRepository $subscriptionRepository,
         ObjectManager $em
@@ -59,6 +61,7 @@ class SchoolController extends AbstractController{
         $this->fieldRepository = $fieldRepository;
         $this->postRepository = $postRepository;
         $this->schoolPostRepository = $schoolPostRepository;
+        $this->schoolEventRepository = $schoolEventRepository;
         $this->documentRepository = $documentRepository;
         $this->subscriptionRepository = $subscriptionRepository;
         $this->em = $em;
@@ -366,6 +369,22 @@ class SchoolController extends AbstractController{
                 return $b->getId() - $a->getId();
             });
 
+            //events
+            $schoolEvents = $this->schoolEventRepository->findBy(array(
+                'school' => $school,
+            ));
+
+            $events = array();
+            foreach ($schoolEvents as $schoolEvent) {
+                $event = $schoolEvent->getEvent();
+                if($event->getValid() && $event->getPublished() && !$event->getDeleted()){
+                    array_push($events, $event);
+                }
+            }
+            usort($events, function($a, $b) {
+                return $b->getId() - $a->getId();
+            });
+
             //visibles documents by visitors
             $documents = $this->schoolService->getDocumentsByUser($user, $school);
             //documents with status connected
@@ -382,7 +401,7 @@ class SchoolController extends AbstractController{
             //previousSchool
             $previousSchool = $this->schoolService->getPreviousSchool($school);
 
-            $types = array("about", "post", "advert", "evaluation", "document");
+            $types = array("about", "post", "event", "evaluation", "document");
             if (!in_array($type, $types)) {
                 $type = "about";
             }
@@ -398,6 +417,7 @@ class SchoolController extends AbstractController{
                 'categories' 		=> $categories,
                 'fields' 			=> $fields,
                 'posts' 			=> $posts,
+                'events' 			=> $events,
                 'documents' 		=> $documents,
                 'documentsConnected' => $documentsConnected,
                 'documentsSubscribed' => $documentsSubscribed,

@@ -215,7 +215,8 @@ class EventController extends AbstractController {
 
         return $this->render('admin/event/event_schools.html.twig', array(
             'event' => $event,
-            'schools' => $schools
+            'schools' => $schools,
+            'view' => 'event',
         ));
     }
 
