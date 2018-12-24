@@ -71,7 +71,7 @@ $(function() {
         e.preventDefault();
         var $this = $(this);
 		var bloc_editable = $this.find(".bloc_editable");
-        var target = $this.attr('action');
+        var target = $this.data('target');
         var title = bloc_editable.find("#post_input_title").val().trim();
         if(title == ""){
             var title_error_msg = "Veuillez fournir un titre à votre article";

@@ -52,83 +52,100 @@
 			</label>
 		</div>
 		<div style="margin-left: 136px;">
-			<div class="bloc_editable">
-				<div class="bloc_view">
-					<table>
-						<tr>
-							<td>Titre</td>
-							<td>:</td>
-							<td style="padding:5px"><span id="event_view_title">{{ event.title }}</span></td>
-						</tr>
-						<tr>
-							<td>Slug</td>
-							<td>:</td>
-							<td style="padding:5px"><span id="event_view_slug">{{ event.slug }}</span></td>
-						</tr>
-						<tr>
-							<td>Date début</td>
-							<td>:</td>
-							<td style="padding:5px"><span id="event_view_datebegin">{{ event.datebegin | date('d/m/Y à H:i') }}</span></td>
-						</tr>
-						<tr>
-							<td>Date fin</td>
-							<td>:</td>
-							<td style="padding:5px"><span id="event_view_dateend">{{ event.dateend | date('d/m/Y à H:i') }}</span></td>
-						</tr>
-						<tr>
-							<td>Lieu</td>
-							<td>:</td>
-							<td style="padding:5px"><span id="event_view_location">{{ event.location }}</span></td>
-						</tr>
-						<tr>
-							<td>Ville</td>
-							<td>:</td>
-							<td style="padding:5px"><span id="event_view_city">{{ event.city }}</span></td>
-						</tr>
-					</table>
+			<form id="form_event_edit" action="{{ path('event_manager_doedit', {'event_id': event.id}) }}">
+				<div class="bloc_editable">
+					<div class="bloc_view">
+						<table>
+							<tr>
+								<td>Titre</td>
+								<td>:</td>
+								<td style="padding:5px"><span id="event_view_title">{{ event.title }}</span></td>
+							</tr>
+							<tr>
+								<td>Slug</td>
+								<td>:</td>
+								<td style="padding:5px"><span id="event_view_slug">{{ event.slug }}</span></td>
+							</tr>
+							<tr>
+								<td>Date début</td>
+								<td>:</td>
+								<td style="padding:5px"><span id="event_view_datebegin">{{ event.datebegin | date('d/m/Y à H:i') }}</span></td>
+							</tr>
+							<tr>
+								<td>Date fin</td>
+								<td>:</td>
+								<td style="padding:5px"><span id="event_view_dateend">{{ event.dateend | date('d/m/Y à H:i') }}</span></td>
+							</tr>
+							<tr>
+								<td>Lieu</td>
+								<td>:</td>
+								<td style="padding:5px"><span id="event_view_location">{{ event.location }}</span></td>
+							</tr>
+							<tr>
+								<td>Ville</td>
+								<td>:</td>
+								<td style="padding:5px"><span id="event_view_city">{{ event.city }}</span></td>
+							</tr>
+						</table>
+					</div>
+					<div class="bloc_edit" style="display:none">
+						<table>
+							<tr>
+								<td>Titre *</td>
+								<td>:</td>
+								<td style="padding:5px">
+									<input type="text" id="event_input_title" class="default_input" required="required" value="{{ event.title }}" />
+									<span class="error_title error_txt"></span>
+								</td>
+							</tr>
+							<tr>
+								<td>Slug</td>
+								<td>:</td>
+								<td style="padding:5px"><input type="text" id="event_input_slug" class="default_input" value="{{ event.slug }}" /></td>
+							</tr>
+							<tr>
+								<td>Date début *</td>
+								<td>:</td>
+								<td style="padding:5px">
+									<input type="text" id="event_input_datebegin" class="default_input" required="required" value="{{ event.datebegin | date('d/m/Y à H:i') }}" />
+									<span class="error_datebegin error_txt"></span>
+								</td>
+							</tr>
+							<tr>
+								<td>Date fin *</td>
+								<td>:</td>
+								<td style="padding:5px">
+									<input type="text" id="event_input_dateend" class="default_input" required="required" value="{{ event.dateend | date('d/m/Y à H:i') }}" />
+									<span class="error_dateend error_txt"></span>
+								</td>
+							</tr>
+							<tr>
+								<td>Lieu *</td>
+								<td>:</td>
+								<td style="padding:5px">
+									<input type="text" id="event_input_location" class="default_input" required="required" value="{{ event.location }}" />
+									<span class="error_location error_txt"></span>
+								</td>
+							</tr>
+							<tr>
+								<td>Ville</td>
+								<td>:</td>
+								<td style="padding:5px"><input type="text" id="event_input_city" class="default_input" value="{{ event.city }}" /></td>
+							</tr>
+						</table>
+					</div>
+					<div class="separator"></div>
+					<div class="bloc_action" style="margin:5px">
+						<span class="btn_edit standar_button">Modifier</span> 
+						{#
+						<span class="btn_save standar_button" id="btn_doedit_event" data-target="{{ path('event_manager_doedit', {'event_id': event.id}) }}" style="display:none">Enregistrer</span>
+						#}
+						<button class="btn_save standar_button" id="btn_doedit_event" type="submit" form="form_event_edit" value="Submit" style="display:none">Enregistrer</button>
+						<span class="btn_reset standar_button" style="display:none">Annuler</span> 
+						<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;"><img src="{{ asset('image/tail-spin.svg') }}" style="width: 20px;height: 20px"/>Chargement...</span>
+					</div>
 				</div>
-				<div class="bloc_edit" style="display:none">
-					<table>
-						<tr>
-							<td>Titre</td>
-							<td>:</td>
-							<td style="padding:5px"><input type="text" id="event_input_title" class="default_input" value="{{ event.title }}" /></td>
-						</tr>
-						<tr>
-							<td>Slug</td>
-							<td>:</td>
-							<td style="padding:5px"><input type="text" id="event_input_slug" class="default_input" value="{{ event.slug }}" /></td>
-						</tr>
-						<tr>
-							<td>Date début</td>
-							<td>:</td>
-							<td style="padding:5px"><input type="text" id="event_input_datebegin" class="default_input" value="{{ event.datebegin | date('d/m/Y à H:i') }}" /></td>
-						</tr>
-						<tr>
-							<td>Date fin</td>
-							<td>:</td>
-							<td style="padding:5px"><input type="text" id="event_input_dateend" class="default_input" value="{{ event.dateend | date('d/m/Y à H:i') }}" /></td>
-						</tr>
-						<tr>
-							<td>Lieu</td>
-							<td>:</td>
-							<td style="padding:5px"><input type="text" id="event_input_location" class="default_input" value="{{ event.location }}" /></td>
-						</tr>
-						<tr>
-							<td>Ville</td>
-							<td>:</td>
-							<td style="padding:5px"><input type="text" id="event_input_city" class="default_input" value="{{ event.city }}" /></td>
-						</tr>
-					</table>
-				</div>
-				<div class="separator"></div>
-				<div class="bloc_action" style="margin:5px">
-					<span class="btn_edit standar_button">Modifier</span> 
-					<span class="btn_save standar_button" id="btn_doedit_event" data-target="{{ path('event_manager_doedit', {'event_id': event.id}) }}" style="display:none">Enregistrer</span>
-					<span class="btn_reset standar_button" style="display:none">Annuler</span> 
-					<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;"><img src="{{ asset('image/tail-spin.svg') }}" style="width: 20px;height: 20px"/>Chargement...</span>
-				</div>
-			</div>
+			</form>
 		</div>
 		<div class="both"></div>
 	</div>

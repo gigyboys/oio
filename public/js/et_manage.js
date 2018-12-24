@@ -69,46 +69,109 @@ $(function() {
         });
     });
 	*/
-    $('#btn_doedit_event').on('click', function(){
+    $('#form_event_edit').on('submit', function(e){
+        e.preventDefault();
         var $this = $(this);
-		var bloc_editable = $this.closest(".bloc_editable");
-        var target = $this.data('target');
+		var bloc_editable = $this.find(".bloc_editable");
+        var target = $this.attr('action');
+        
+        var hasNotError = true;
+        
+        //title
+        var title = $("#event_input_title").val().trim();
+        if(title == ""){
+            var title_error_msg = "Veuillez fournir un titre à votre évènement";
+            if($('.error_title').length > 0){
+                $('.error_title').show().html(title_error_msg);
+            }
+            hasNotError = false;
+        }else{
+            if($('.error_title').length > 0){
+                $('.error_title').hide().html("");
+            }
+        }
+
+        //location
+        var location = $("#event_input_location").val().trim();
+        if(location == ""){
+            var location_error_msg = "Veuillez fournir Le lieu ou se déroule l'évènement";
+            if($('.error_location').length > 0){
+                $('.error_location').show().html(location_error_msg);
+            }
+            hasNotError = false;
+        }else{
+            if($('.error_location').length > 0){
+                $('.error_location').hide().html("");
+            }
+        }
+
+        //datebegin
+        var datebeginText = $("#event_input_datebegin").val().trim();
+        console.log(datebeginText);
+        if(!isValidDate(datebeginText)){
+            var datebegin_error_msg = 'La date et heure debut doit être de la forme "dd/mm/yyyy hh:mm"';
+            if($('.error_datebegin').length > 0){
+                $('.error_datebegin').show().html(datebegin_error_msg);
+            }
+            hasNotError = false;
+        }else{
+            if($('.error_datebegin').length > 0){
+                $('.error_datebegin').hide().html("");
+            }
+        }
+
+        //dateend
+        var dateendText = $("#event_input_dateend").val().trim();
+        console.log(dateendText);
+        if(!isValidDate(dateendText)){
+            var dateend_error_msg = 'La date et heure fin doit être de la forme "dd/mm/yyyy hh:mm"';
+            if($('.error_dateend').length > 0){
+                $('.error_dateend').show().html(dateend_error_msg);
+            }
+            hasNotError = false;
+        }else{
+            if($('.error_dateend').length > 0){
+                $('.error_dateend').hide().html("");
+            }
+        }
+        
 		var data = {
-			title : bloc_editable.find("#event_input_title").val(),
+			title : title,
 			slug : bloc_editable.find("#event_input_slug").val(),
-			datebeginText : bloc_editable.find("#event_input_datebegin").val(),
+			datebeginText : datebeginText,
 			dateendText : bloc_editable.find("#event_input_dateend").val(),
 			location : bloc_editable.find("#event_input_location").val(),
 			city : bloc_editable.find("#event_input_city").val(),
-		};
-		loadBlocEdit(bloc_editable);
-        $.ajax({
-            type: 'POST',
-            url: target,
-            data: data,
-            dataType : 'json',
-            success: function(data){
-				if(data.state){
-					bloc_editable.find("#event_view_title").text(data.title);
-					bloc_editable.find("#event_view_slug").text(data.slug);
-					bloc_editable.find("#event_view_datebegin").text(data.datebegin);
-					bloc_editable.find("#event_view_dateend").text(data.dateend);
-					bloc_editable.find("#event_view_location").text(data.location);
-					bloc_editable.find("#event_view_city").text(data.city);
-					$(".et_title_"+data.eventId).text(data.title);
-					resetBlocEdit(bloc_editable);
-				}
-				else{
-					alert("une erreur est survenue");
-				}
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-				console.log(jqXHR.status);
-				console.log(textStatus);
-				console.log(errorThrown);
-			}
-        });
-		
+        };
+        if(hasNotError){
+            loadBlocEdit(bloc_editable);
+            $.ajax({
+                type: 'POST',
+                url: target,
+                data: data,
+                dataType : 'json',
+                success: function(data){
+                    if(data.state){
+                        bloc_editable.find("#event_view_title").text(data.title);
+                        bloc_editable.find("#event_view_slug").text(data.slug);
+                        bloc_editable.find("#event_view_datebegin").text(data.datebegin);
+                        bloc_editable.find("#event_view_dateend").text(data.dateend);
+                        bloc_editable.find("#event_view_location").text(data.location);
+                        bloc_editable.find("#event_view_city").text(data.city);
+                        $(".et_title_"+data.eventId).text(data.title);
+                        resetBlocEdit(bloc_editable);
+                    }
+                    else{
+                        alert("une erreur est survenue");
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR.status);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            });
+        }
     });
 
     $('.btn_doedit_content_event').on('click', function(){
