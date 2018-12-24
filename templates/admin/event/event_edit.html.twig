@@ -44,7 +44,7 @@
 	</div>
 	
 	<div style="padding:5px">
-		<div id="change_event_illustration" data-target="{#{{ path('blog_manager_post_illustration_popup', {'event_id' : event.id})}}#}" style="float:left; height: 122px;margin:5px">
+		<div id="change_event_illustration" data-target="{{ path('event_manager_illustration_popup', {'event_id' : event.id})}}" style="float:left; height: 122px;margin:5px">
 			{# twig extension #}
 			{% set illustration = eventIllustration(event) %}
 			<label>

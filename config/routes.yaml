@@ -225,6 +225,22 @@ event_manager_doedit_content:
     path:     /event-manager/event/{event_id}/doedit-content
     defaults:
         _controller: App\Controller\EventManagerController::doEditContentEvent
+event_manager_illustration_popup:
+    path:     /event-manager/event/{event_id}/edit-illustration-popup
+    defaults:
+        _controller: App\Controller\EventManagerController::editIllustrationPopup
+event_manager_upload_illustration:
+    path:     /event-manager/event/{event_id}/upload-illustration
+    defaults:
+        _controller: App\Controller\EventManagerController::uploadIllustration
+event_manager_select_illustration:
+    path:     /event-manager/event/{event_id}/select-illustration/{illustration_id}
+    defaults:
+        _controller: App\Controller\EventManagerController::selectIllustration
+event_manager_delete_illustration:
+    path:     /event-manager/event/{event_id}/delete-illustration/{illustration_id}
+    defaults:
+        _controller: App\Controller\EventManagerController::deleteIllustration
 
 #blog
 blog:

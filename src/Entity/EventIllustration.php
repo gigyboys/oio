@@ -68,14 +68,14 @@ class EventIllustration
 
     public function setEvent($event)
     {
-        $this->post = $event;
+        $this->event = $event;
 
         return $this;
     }
 
     public function getEvent()
     {
-        return $this->post;
+        return $this->event;
     }
 
     public function getName(): ?string

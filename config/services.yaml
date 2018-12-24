@@ -10,6 +10,7 @@ parameters:
     document_directory: '%kernel.project_dir%/uploads/documents'
     cover_directory: '%kernel.project_dir%/public/uploads/images/school/cover'
     illustration_directory: '%kernel.project_dir%/public/uploads/images/post/illustration'
+    event_illustration_directory: '%kernel.project_dir%/public/uploads/images/event/illustration'
     dns: 'www.notresite.com'
 
 services:

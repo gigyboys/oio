@@ -1,0 +1,4 @@
+<div class="image_item event_illustration_item {{ classActive }}">
+	<span class="delete_image delete_event_illustration" data-type="event_illustration" data-target="{{ path('event_manager_delete_illustration', {'event_id': event.id, 'illustration_id': illustration.id}) }}"><img src="{{ asset('image/cross_icon.png') }}" alt="x" style="width:8px;height:8px;display:block;margin:auto"/></span>
+	<img class="image_popup event_illustration_popup" data-type="event_illustration" data-target="{{ path('event_manager_select_illustration', {'event_id': event.id, 'illustration_id': illustration.id}) }}" src="{{ illustration.webPath | imagine_filter('116x116') }}" alt="" />
+</div>
