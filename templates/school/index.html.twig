@@ -46,10 +46,11 @@
 								<div>
 									{{ include("school/school_item.html.twig") }}
 								</div>
+								{#
 								<div class="sl_desc" style="text-align:justify">
-									{#{{ substrSpace(schoolTranslate.shortDescription, 165) }}#}
 									{{ school.shortDescription }}
 								</div>
+								#}
 							</div>
 
 							<div class="resp">
@@ -60,6 +61,17 @@
 								</div>
 							</div>
                         {% endif %}
+					</div>
+
+
+					<div class="slr_list_cat">
+						<div class="title">
+							<span><a href="{{ path('school_categories') }}">Catégories</a></span>
+						</div>
+
+						{% for category in categories %}
+							{{ include("school/include/school_category_item.html.twig") }}
+						{% endfor %}
 					</div>
 				</div>
 				<div class="both"></div>

@@ -429,7 +429,7 @@
 }
 /***********end school of the day ********************/
 /*********** begin school of the day right list********************/
-#sl_oftheday_right .title{
+#sl_oftheday_right .title, .slr_list_cat .title{
 	font-size: 18px; 
 	margin:10px 10px 0px 10px ; 
 	font-weight:bold; 
@@ -610,14 +610,18 @@
 	padding: 10px
 }
 
-.sl_list_cat .cat_item .cat_item_content{
+.slr_list_cat .cat_item{
+	margin:10px 
+}
+
+.cat_item .cat_item_content{
 	border:1px solid #ddd;
 	text-align:center;
 	border-radius:3px;
 	background: #f8f8f8
 }
 
-.sl_list_cat .libelle{
+.cat_item .libelle{
 	display:block;
 	padding: 10px 5px;
 	overflow: hidden;
@@ -625,23 +629,23 @@
 	white-space: nowrap;
 }
 
-.sl_list_cat .sl_illustration{
+.cat_item .sl_illustration{
 	display:block;
 }
 
-.sl_list_cat .sl_illustration .logo{
+.cat_item .sl_illustration .logo{
 	height:52px;
 	display:block
 }
 
-.sl_list_cat .sl_illustration .logo .logo_content{
+.cat_item .sl_illustration .logo .logo_content{
 	width: 40px;
 	height:40px;
 	float:left;
 	display:block
 }
 
-.sl_list_cat .sl_illustration .logo .logo_content img{
+.cat_item .sl_illustration .logo .logo_content img{
 	width:40px;
 	height:40px;
 	margin:5px;
@@ -649,14 +653,14 @@
 	display:inline-block
 }
 
-.sl_list_cat .sl_illustration .sl_illustration_txt{
+.cat_item .sl_illustration .sl_illustration_txt{
 	margin-left: 52px;
 	margin-right: 5px;
 	text-align:left;
 	display:block
 }
 
-.sl_list_cat .sl_illustration .sl_illustration_txt .sigle{
+.cat_item .sl_illustration .sl_illustration_txt .sigle{
 	padding-top: 4px;
 	font-weight:bold;
 	white-space: nowrap;
@@ -666,7 +670,7 @@
 	text-align: left;
 }
 
-.sl_list_cat .sl_illustration .sl_illustration_txt .name{
+.cat_item .sl_illustration .sl_illustration_txt .name{
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -783,6 +787,35 @@
 	}
 }
 
+@media screen and (max-width: 600px)
+{
+
+	#sl_onglet_head .tab_sl_item{
+		width: 20%;
+		box-sizing:border-box;
+		border-radius:0px;
+		padding: 4px 2px;
+		font-size: 15px;
+	}
+
+	#sl_onglet_head .tab_sl_item .wrap{
+		text-align:center;
+		width:100%
+	}
+
+	#sl_onglet_head .tab_sl_item .img{
+		display:block;
+		margin:auto;
+	}
+
+	#sl_onglet_head .tab_sl_item .label{
+		display:block;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+}
+
 @media screen and (max-width: 530px)
 {
 	.hidden_530{
@@ -805,31 +838,6 @@
 
 	.sll_pagination_item{
 		min-width:32px;
-	}
-
-	#sl_onglet_head .tab_sl_item{
-		width: 25%;
-		box-sizing:border-box;
-		border-radius:0px;
-		padding: 4px 2px;
-		font-size: 15px;
-	}
-
-	#sl_onglet_head .tab_sl_item .wrap{
-		text-align:center;
-		width:100%
-	}
-
-	#sl_onglet_head .tab_sl_item .img{
-		display:block;
-		margin:auto;
-	}
-
-	#sl_onglet_head .tab_sl_item .label{
-		display:block;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
 	}
 
 	.search_cat_input_left{

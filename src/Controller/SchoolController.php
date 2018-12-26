@@ -99,6 +99,27 @@ class SchoolController extends AbstractController{
                 "type" => $type
             ));
         }
+
+        //$categories
+        $allCategories = $this->schoolService->getCategoriesWithPublishedSchool(0);
+        shuffle($allCategories);
+
+        $limitCategories = 5;
+        if($limitCategories > 0){
+            $categoriesLimit = array();
+            if(count($allCategories) < $limitCategories){
+                $end = count($allCategories);
+            }else{
+                $end = $limitCategories;
+            }
+
+            for ($i=0; $i<$end; $i++) {
+                array_push($categoriesLimit, $allCategories[$i]);
+            }
+
+            $categories = $categoriesLimit;
+        }
+
         $response = new Response();
         if ($request->isXmlHttpRequest()){
             //listSchool
@@ -150,6 +171,7 @@ class SchoolController extends AbstractController{
             $response = $this->render('school/index.html.twig', [
                 'allSchools' => $allSchools,
                 'schools' => $schools,
+                'categories' => $categories,
                 'currentpage' => $page,
                 'typeslug' => $typeslug,
                 'limit' => $limit,
