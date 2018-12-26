@@ -87,40 +87,40 @@ class EventController extends AbstractController{
             
         $response = new Response();
         if ($request->isXmlHttpRequest()){
-            //listSchool
-            $listSchools = array();
-            foreach($schools as $school){
-                $school_view = $this->renderView('school/school_item.html.twig', array(
-                    'school' => $school,
+            //listEvent
+            $listEvents = array();
+            foreach($events as $event){
+                $event_view = $this->renderView('event/include/event_item.html.twig', array(
+                    'event' => $event,
                 ));
-                array_push($listSchools, array(
-                    "school_id" 	=> $school->getId(),
-                    "school_view" 	=> $school_view,
+                array_push($listEvents, array(
+                    "event_id" 	=> $event->getId(),
+                    "event_view" 	=> $event_view,
                 ));
             }
 
             //pagination
-            $pagination = $this->renderView('school/include/pagination_list_school.html.twig', array(
-                'allSchools' => $allSchools,
-                'schools' => $schools,
+            $pagination = $this->renderView('event/include/pagination_list_event.html.twig', array(
+                'allEvents' => $allEvents,
+                'events' => $events,
                 'limit' => $limit,
                 'currentpage' => $page,
                 'typeslug' => $typeslug,
             ));
 
             //type_links
-            $typeLinks = $this->renderView('school/include/school_type_link.html.twig', array(
+            $typeLinks = $this->renderView('event/include/event_type_link.html.twig', array(
                 'typeslug' => $typeslug,
             ));
 
-            $currentUrl = $this->get('router')->generate('school_home', array(
+            $currentUrl = $this->get('router')->generate('event', array(
                 'typeslug' => $typeslug,
                 'page' => $page
             ));
 
             $response->setContent(json_encode(array(
                 'state' => 1,
-                'schools' => $listSchools,
+                'events' => $listEvents,
                 'currentpage' => $page,
                 'pagination' => $pagination,
                 'typeLinks' => $typeLinks,
@@ -128,11 +128,10 @@ class EventController extends AbstractController{
                 'page' => $page,
             )));
         }else{
-            if(!$events){/*
-                return $this->redirectToRoute('school_home', array(
+            if(!$events){
+                return $this->redirectToRoute('event', array(
                     'typeslug' => $typeslug
-                ));*/
-                return $this->redirectToRoute('platform_home');
+                ));
             }
             $response = $this->render('event/index.html.twig', [
                 'allEvents' => $allEvents,

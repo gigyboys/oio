@@ -12,6 +12,15 @@
 }
 
 
+#et_load_list{
+	background:rgba(255,255,255,0.8);
+	font-size:25px; 
+	position:absolute;
+	z-index:10;
+	box-sizing:border-box; 
+	padding-top:50px;
+	text-align:center
+}
 
 /*edit post front*/
 
