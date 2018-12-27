@@ -109,7 +109,7 @@ class Event
     private $deleted;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $location;
 

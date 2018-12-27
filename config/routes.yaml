@@ -196,6 +196,19 @@ blog_manager_post_delete_illustration:
         _controller: App\Controller\BlogManagerController::deleteIllustration
 
 #event_manager
+
+event_manager_add_ajax:
+    path:     /event-manager/add-event-ajax
+    defaults:
+        _controller: App\Controller\EventManagerController::addEventAjax
+event_manager_doadd_event:
+    path:     /event-manager/add-event
+    defaults:
+        _controller: App\Controller\EventManagerController::doAddEvent
+event_manager_edit:
+    path:     /event-manager/edit-event/{event_id}
+    defaults:
+        _controller: App\Controller\EventManagerController::editEvent
 event_manager_toogle_show_author:
     path:     /event-manager/event/{event_id}/toogle-show-author
     defaults:

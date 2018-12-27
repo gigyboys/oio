@@ -34,7 +34,7 @@ $(function() {
 					$(".et_pagination").html(data.pagination);
 					$(".et_type").html(data.typeLinks);
 					history.pushState('', 'Evènements - page '+data.page, data.currentUrl);
-					var target = $('.et_pagination').first();
+					var target = $('.et_type').first();
 					$('html, body').stop().animate({scrollTop: - 50 + target.offset().top}, 500);
 				}
 				else{
@@ -47,6 +47,47 @@ $(function() {
 				console.log(errorThrown);
 			}
         });
+    });
+	
+	//add new event
+	$('body').on('click','.create_event',function(event){
+		var target = $(this).data("target");
+		
+		var content = "<div style='text-align:center;padding:10px; color:#fff'>Chargement ...</div>";
+		popup(content, 500, true);
+		$.ajax({
+			type: 'POST',
+			url: target,
+			dataType : 'json',
+			success: function(data){
+				if(data.state){
+					content = data.content;
+					$(".popup").html(content);
+					centerBloc($('.popup_content'), $('.popup'));
+					
+					if($("#datebegin_event").length > 0 && $("#dateend_event").length > 0){
+						var startDate = $('#datebegin_event');
+						var endDate = $('#dateend_event');
+
+						$.timepicker.datetimeRange(
+							startDate,
+							endDate,
+							{
+								minInterval: (1000*60*60), // 1hr
+								dateFormat: 'dd/mm/yy',
+								timeFormat: 'HH:mm',
+								start: {}, // start picker options
+								end: {} // end picker options
+							}
+						);
+					}
+				}else{
+					
+				}
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+			}
+		});
     });
 	
 });

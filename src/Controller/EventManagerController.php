@@ -8,6 +8,7 @@ use App\Entity\EventIllustration;
 //use App\Entity\SchoolPost;
 //use App\Entity\TagPost;
 use App\Form\EvaluationType;
+use App\Form\EventInitType;
 use App\Form\EventContentType;
 use App\Form\EventType;
 //use App\Form\PostContentType;
@@ -68,6 +69,94 @@ class EventManagerController extends AbstractController {
         $this->platformService->registerVisit();
     }
 
+
+    public function addEventAjax()
+    {
+        $user = $this->getUser();
+        $response = new Response();
+        $response->setContent(json_encode(array(
+            'state' => 0,
+        )));
+
+        if($user){
+            $content = $this->renderView('event/event_add_ajax.html.twig', array(
+
+            ));
+
+            $response->setContent(json_encode(array(
+                'state' => 1,
+                'content' => $content,
+            )));
+        }
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    public function doAddEvent(Request $request)
+    {
+        $event = new Event();
+        $form = $this->createForm(EventInitType::class, $event);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) { 
+            if(trim($event->getTitle())){
+                $event->setIntroduction('Introduction '.$event->getTitle());
+                $event->setContent('Contenu '.$event->getTitle());
+
+                $slug = $this->platformService->getSlug($event->getTitle(), $event);
+                $event->setSlug($slug);
+                $event->setDate(new \DateTime());
+
+                //datebegin
+                $datebegin = $this->platformService->getDate($event->getDatebeginText(), 'd/m/y h:i');
+                //dateend
+                $dateend = $this->platformService->getDate($event->getDateendText(), 'd/m/y h:i');
+
+                $event->setDatebegin($datebegin);
+                $event->setDateend($dateend);
+
+                $event->setPublished(false);
+                $event->setValid(false);
+                $event->setDeleted(false);
+                $user = $this->getUser();
+                $event->setUser($user);
+                $event->setShowAuthor(true);
+                $event->setActiveComment(true);
+                $event->setTovalid(false);
+
+                $this->em->persist($event);
+
+                $this->em->flush();
+
+                return $this->redirectToRoute('event_manager_edit', array(
+                    'event_id' => $event->getId()
+                ));
+
+            }else{
+                return $this->render('event/add_event.html.twig', array(
+                    'form' => $form->createView(),
+                ));
+            }
+        }
+
+        return $this->render('event/add_event.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
+    public function editEvent($event_id)
+    {
+        $user = $this->getUser();
+        $event = $this->eventRepository->find($event_id);
+        if($event && $user && $event->getUser()->getId() == $user->getId() ){
+            return $this->render('event/event_edit.html.twig', array(
+                'event' => $event,
+                'entityView' => 'event',
+            ));
+        }else{
+            return $this->redirectToRoute('event');
+        }
+    }
 
     public function toogleShowAuthor($event_id, Request $request)
     {

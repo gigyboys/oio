@@ -22,7 +22,11 @@
 	text-align:center
 }
 
-/*edit post front*/
+/*edit event front*/
+.meta_info #event_illustration, .meta_info #event_illustration_fix {
+    max-width: 300px;
+    height: 125px;
+}
 
 
 .list_tag .tag_item:hover{

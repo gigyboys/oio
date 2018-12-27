@@ -309,7 +309,7 @@ $(function() {
 					$(".sl_type").html(data.typeLinks);
 					history.pushState('', 'School - page '+data.page, data.currentUrl);
 					truncateSchoolLabel();
-					var target = $('.sll_pagination').first();
+					var target = $('.sl_type').first();
 					$('html, body').stop().animate({scrollTop: - 50 + target.offset().top}, 500);
 				}
 				else{

@@ -45,15 +45,20 @@
 								<span class="create_post dd_item" data-target="{{ path('blog_manager_add_post_ajax')}}">
 									<span class="icon"><img src="{{ asset('image/add_icon.png') }}" /></span><span class="label">Creer un article</span>
 								</span>
+								<span class="create_event dd_item" data-target="{{ path('event_manager_add_ajax')}}">
+									<span class="icon"><img src="{{ asset('image/add_icon.png') }}" /></span><span class="label">Creer un évènement</span>
+								</span>
 							</span>
 						</span>
-						{#
-						<span class="create_post" style="cursor: pointer" data-target="{{ path('blog_manager_add_post_ajax')}}"><img src="{{ asset('image/add_icon.png') }}" style="width:12px; height:auto"> Creer mon propre article</span>
-						#}
 					</li>
                 {% endif %}
 			</ul>
 		</div>
+
+		<div class="mg_10">
+			<div class="sp"></div>
+		</div>	
+
 		<div style="text-align:justify; margin: 10px">
 
 			{% set categories = getCategoriesWithPublishedSchool(0) %}

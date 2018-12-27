@@ -7,7 +7,6 @@
 }
 /**************liste school***************/
 #sl_list{
-	padding:10px 0;
 	overflow:hidden
 }
 .sll{
@@ -579,7 +578,7 @@
     cursor: pointer;
     float: left;
     height: 32px;
-    padding: 0 12px;
+    padding: 0 8px;
 	color:#666;
 }
 .content_tab_header_item.selected{

@@ -17,7 +17,6 @@ class EventInitType extends AbstractType
             ->add('title')
             ->add('datebeginText')
             ->add('dateendText')
-            ->add('location')
             ->add('add', SubmitType::class, array(
                 'label' => 'Creer un évènement',
             ))
