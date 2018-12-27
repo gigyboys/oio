@@ -26,6 +26,7 @@
         <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
         <link rel="stylesheet" href="{{ asset('css/popup.css') }}">
         <link rel="stylesheet" href="{{ asset('css/a_table.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/mcs.css') }}">
     {% endblock %}
     {% block styledirect %}
         <style type="text/css">
@@ -74,7 +75,8 @@
     <script src="{{ asset('build/app.js') }}"></script>
 
     {% block javascripts %}
-        <script type="text/javascript" src="{{ asset('js/jquery.js') }}"></script>
+        {#<script type="text/javascript" src="{{ asset('js/jquery.js') }}"></script>#}
+        <script  src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
         <script type="text/javascript" src="{{ asset('js/common.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/header.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/button.js') }}"></script>
@@ -86,6 +88,9 @@
         <script type="text/javascript" src="{{ asset('js/manager.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/bg_manage.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/et_manage.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/mcs.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/dragscroll.js') }}"></script>
+        {#<script src="http://asvd.github.io/dragscroll/dragscroll.js"></script>#}
     {% endblock %}
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGWXblVkezi69dBRUoKcsjOf3g7I4XwM0&sensor=false"></script>
 </body>

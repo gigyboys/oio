@@ -1,5 +1,13 @@
 
 $(function() {
+	/*
+	$(".sl_related").mCustomScrollbar({
+		theme:"minimal-dark",
+		animationSpeed:0,
+		axis:'x',
+		advanced:{autoExpandHorizontalScroll:true}
+	});
+*/
 	$('body').on('click','.tab_sl_item',function(e){
         e.preventDefault(true);
         $('.tab_sl_item').removeClass('selected');

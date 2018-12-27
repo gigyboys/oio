@@ -111,11 +111,15 @@
             <div style="margin:10px;font-weight:bold; background:#eee; border:1px solid #ddd; padding:5px">
                 Les nouveaux établissements sur la plateforme.
             </div>
-            <div class="sl_related" style="text-align:center;"><!--
-                {% for school in lastAddedSchools %}
-                    -->{{ include("school/school_item.html.twig") }}<!--
-                {% endfor %}
-            --></div>
+            <div class="sl_listh_cr tacenter ">
+                <div class="gdl"></div>
+                <div class="gdr"></div>
+                <div class="sl_listh_ct horizontal dragscroll">{#
+                    #}{% for school in lastAddedSchools %}{#
+                        #}{{ include("school/school_item.html.twig") }}{#
+                    #}{% endfor %}
+                </div>
+            </div>
         </div>
     </div>
 {% endif %}

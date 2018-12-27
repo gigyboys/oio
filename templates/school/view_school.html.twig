@@ -215,18 +215,22 @@
 
         {#related schools#}
         {# twig extension #}
-        {% set relatedSchools = getRelatedSchools(school, 5) %}
+        {% set relatedSchools = getRelatedSchools(school, 10) %}
         {% if relatedSchools %}
             <div class="cr">
                 <div class="ct">
                     <div class="sl_related_label">
                         Autres établissements qui peuvent vous interesser ...
                     </div>
-                    <div class="sl_related tacenter"><!--
-						{% for school in relatedSchools %}
-							-->{{ include("school/school_item.html.twig") }}<!--
-						{% endfor %}
-					--></div>
+                    <div class="sl_listh_cr tacenter ">
+                        <div class="gdl"></div>
+                        <div class="gdr"></div>
+                        <div class="sl_listh_ct horizontal dragscroll">{#
+                            #}{% for school in relatedSchools %}{#
+                                #}{{ include("school/school_item.html.twig") }}{#
+                            #}{% endfor %}
+                        </div>
+                    </div>
                 </div>
             </div>
         {% endif %}

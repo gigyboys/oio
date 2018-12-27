@@ -5,11 +5,11 @@
             {% set cover = schoolCover(school) %}
             <img style="" src="{{ cover | imagine_filter('218x140') }}" alt="img sl" />
         </div>
-        <div class="sl_category" style="height: 140px;position: absolute;text-align: center;width: 218px;z-index: 4;background:rgba(255,255,255,0.25)">
+        <div class="sl_category">
             {# twig extension #}
             {% set categories=getCategoriesBySchool(school, 6, true) %}
             {% for category in categories %}
-                <div style="width:100%; text-align:right; color:#000;text-shadow: 1px 1px 2px #fff;box-sizing:border-box; padding:0 4px; margin-bottom:1px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ category.name }}</div>
+                <div class="sl_category_item">{{ category.name }}</div>
             {% endfor %}
         </div>
         <div class="sl_short_description">
