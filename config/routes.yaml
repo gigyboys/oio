@@ -203,7 +203,6 @@ blog_manager_post_delete_illustration:
         _controller: App\Controller\BlogManagerController::deleteIllustration
 
 #event_manager
-
 event_manager_add_ajax:
     path:     /event-manager/add-event-ajax
     defaults:
@@ -233,14 +232,30 @@ event_manager_toogle_validation:
     path:     /event-manager/event/{event_id}/toogle-validation
     defaults:
         _controller: App\Controller\EventManagerController::toogleValidation
+event_manager_tovalid_ajax:
+    path:     /event-manager/tovalid-ajax/{event_id}
+    defaults:
+        _controller: App\Controller\EventManagerController::ToValidEventAjax
 event_manager_toogle_deletion:
     path:     /event-manager/event/{event_id}/toogle-deletion
     defaults:
         _controller: App\Controller\EventManagerController::toogleDeletion
+event_manager_dotovalid:
+    path:     /event-manager/dotovalid/{event_id}
+    defaults:
+        _controller: App\Controller\EventManagerController::doToValidEvent
 event_manager_doedit:
     path:     /event-manager/event/{event_id}/doedit
     defaults:
         _controller: App\Controller\EventManagerController::doEditEvent
+event_manager_doedit_date:
+    path:     /event-manager/event/{event_id}/doedit-date
+    defaults:
+        _controller: App\Controller\EventManagerController::doEditDateEvent
+event_manager_doedit_location:
+    path:     /event-manager/event/{event_id}/doedit-location
+    defaults:
+        _controller: App\Controller\EventManagerController::doEditLocationEvent
 event_manager_doedit_content:
     path:     /event-manager/event/{event_id}/doedit-content
     defaults:

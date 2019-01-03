@@ -75,13 +75,12 @@
 				</div>
 
 				<div class="mg_10">
-					{#
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         {% if event.user.id == app.user.id %}
-							<a class="standar_button" href="{{ path('event_manager_edit_post', {'post_id': post.id}) }}">Editer</a>
+							<a class="standar_button" href="{{ path('event_manager_edit', {'event_id': event.id}) }}">Editer</a>
                         {% endif %}
                     {% endif %}
-					#}
+					
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and is_granted('ROLE_ADMIN') %}
 						<a href="{{ path('admin_event_edit', {'event_id': event.id}) }}" target="_blank"><span class="standar_button">Administrer</span></a>
                     {% endif %}

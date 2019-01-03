@@ -24,7 +24,7 @@
 	</div>
 	<div class="right">
         {% if event.tovalid == false %}
-			<span class="create_event" style="cursor: pointer" data-target="{#{{ path('event_manager_tovalid_ajax', {'event_id' : event.id})}}#}">
+			<span class="create_event" style="cursor: pointer" data-target="{{ path('event_manager_tovalid_ajax', {'event_id' : event.id})}}">
 				<i class="far fa-check-circle"></i>
 				<span> Soumettre à une validation</span>
 			</span>

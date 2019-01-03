@@ -11,6 +11,8 @@ use App\Form\EvaluationType;
 use App\Form\EventInitType;
 use App\Form\EventContentType;
 use App\Form\EventType;
+use App\Form\EventDateType;
+use App\Form\EventLocationType;
 //use App\Form\PostContentType;
 use App\Form\EventIllustrationType;
 //use App\Form\PostInitType;
@@ -364,6 +366,45 @@ class EventManagerController extends AbstractController {
                     $slug = $this->platformService->getSlug($eventTemp->getSlug(), $event);
                     $event->setSlug($slug);
 
+                    $this->em->persist($event);
+                    $this->em->flush();
+
+                    $response->setContent(json_encode(array(
+                        'state' => 1,
+                        'eventId' => $event->getId(),
+                        'title' => $event->getTitle(),
+                        'slug' => $event->getSlug(),
+                    )));
+                }
+            }
+        }
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+
+    /*
+    * edit datebegin dateend
+    */
+    public function doEditDateEvent($event_id, Request $request)
+    {
+        $user = $this->getUser();
+        $event = $this->eventRepository->find($event_id);
+
+        $response = new Response();
+        //set state 0 in error case
+        $response->setContent(json_encode(array(
+            'state' => 0,
+        )));
+
+        if($event){
+            if ($this->isGranted('ROLE_ADMIN') || $event->getUser() == $user){
+                $eventTemp = new Event();
+                $form = $this->createForm(EventDateType::class, $eventTemp);
+                $form->handleRequest($request);
+                if ($form->isSubmitted() && $form->isValid()) {
+
                     //datebegin
                     $datebegin = $this->platformService->getDate($eventTemp->getDatebeginText(), 'd/m/y h:i');
                     //dateend
@@ -371,6 +412,44 @@ class EventManagerController extends AbstractController {
 
                     $event->setDatebegin($datebegin);
                     $event->setDateend($dateend);
+
+                    $this->em->persist($event);
+                    $this->em->flush();
+
+                    $response->setContent(json_encode(array(
+                        'state' => 1,
+                        'eventId' => $event->getId(),
+                        'datebegin' => $event->getDatebegin()->format('d/m/Y H:i'),
+                        'dateend' => $event->getDateend()->format('d/m/Y H:i'),
+                    )));
+                }
+            }
+        }
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+    
+    /*
+    * edit location
+    */
+    public function doEditLocationEvent($event_id, Request $request)
+    {
+        $user = $this->getUser();
+        $event = $this->eventRepository->find($event_id);
+
+        $response = new Response();
+        //set state 0 in error case
+        $response->setContent(json_encode(array(
+            'state' => 0,
+        )));
+
+        if($event){
+            if ($this->isGranted('ROLE_ADMIN') || $event->getUser() == $user){
+                $eventTemp = new Event();
+                $form = $this->createForm(EventLocationType::class, $eventTemp);
+                $form->handleRequest($request);
+                if ($form->isSubmitted() && $form->isValid()) {
 
                     $event->setLocation($eventTemp->getLocation());
                     $event->setCity($eventTemp->getCity());
@@ -384,10 +463,6 @@ class EventManagerController extends AbstractController {
                     $response->setContent(json_encode(array(
                         'state' => 1,
                         'eventId' => $event->getId(),
-                        'title' => $event->getTitle(),
-                        'slug' => $event->getSlug(),
-                        'datebegin' => $event->getDatebegin()->format('m/d/Y H:i'),
-                        'dateend' => $event->getDateend()->format('m/d/Y H:i'),
                         'location' => $event->getLocation(),
                         'city' => $event->getCity(),
                         'latitude' => $event->getLatitude(),
@@ -400,7 +475,6 @@ class EventManagerController extends AbstractController {
         $response->headers->set('Content-Type', 'application/json');
         return $response;
     }
-
 
     public function doEditContentEvent($event_id, Request $request)
     {
@@ -647,5 +721,38 @@ class EventManagerController extends AbstractController {
 
         $response->headers->set('Content-Type', 'application/json');
         return $response;
+    }
+
+    public function ToValidEventAjax($event_id)
+    {
+        $response = new Response();
+        $event = $this->eventRepository->find($event_id);
+        $content = $this->renderView('event/event_tovalid_ajax.html.twig', array(
+            'event' => $event
+        ));
+
+        $response->setContent(json_encode(array(
+            'state' => 1,
+            'content' => $content,
+        )));
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    public function doToValidEvent($event_id, Request $request)
+    {
+        $event = $this->eventRepository->find($event_id);
+        $user = $this->getUser();
+
+        if($event && $user && !$event->getTovalid() && $event->getUser()->getId() == $user->getId()){
+            $event->setTovalid(true);
+            $this->em->persist($event);
+            $this->em->flush();
+            return $this->redirectToRoute('event_manager_edit', array(
+                'event_id' => $event->getId()
+            ));
+        }
+        return $this->redirectToRoute('event');
     }
 }
