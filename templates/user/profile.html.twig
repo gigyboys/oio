@@ -196,6 +196,11 @@
 											Articles
 										</div>
 									</div>
+									<div class="content_tab_header_item" id="tab_event">
+										<div class="content_tab_header_item_text">
+											Evènements
+										</div>
+									</div>
 									<div class="content_tab_header_item" id="tab_comment">
 										<div class="content_tab_header_item_text">
 											Commentaires
@@ -238,6 +243,28 @@
 										<div id="list_post" class=""><!--
 											{% for post in posts %}
 												-->{{ include("blog/include/post_item.html.twig") }}<!--
+											{% endfor %}
+										--></div>
+									{% endif %}
+								</div>
+								<div class="content_tab_content_item" id="content_tab_event">
+									{% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.id == user.id %}
+										<div class="pd_10">
+											<span class="create_event standar_button" style="cursor: pointer" data-target="{{ path('event_manager_add_ajax')}}"><img src="{{ asset('image/add_icon.png') }}" style="width:12px; height:auto"> Proposer un évènement</span>
+										</div>
+										<div class="mg_h10">
+											<div class="sp"></div>
+										</div>
+									{% endif %}
+
+									{% if events | length == 0 %}
+										<div class="mg_10">
+											Aucun évènement à afficher
+										</div>
+									{% else %}
+										<div id="et_list" class=""><!--
+											{% for event in events %}
+												-->{{ include("event/include/event_item.html.twig") }}<!--
 											{% endfor %}
 										--></div>
 									{% endif %}

@@ -13,6 +13,7 @@ use App\Model\MailMessage;
 use App\Model\UserPassword;
 use App\Repository\AvatarRepository;
 use App\Repository\PostRepository;
+use App\Repository\EventRepository;
 use App\Service\BlogService;
 use App\Service\PlatformService;
 use App\Service\SchoolService;
@@ -39,6 +40,7 @@ class UserController extends AbstractController {
         UserRepository $userRepository,
         AvatarRepository $avatarRepository,
         PostRepository $postRepository,
+        EventRepository $eventRepository,
         PlatformService $platformService,
         UserService $userService,
         BlogService $blogService,
@@ -52,6 +54,7 @@ class UserController extends AbstractController {
         $this->userRepository = $userRepository;
         $this->avatarRepository = $avatarRepository;
         $this->postRepository = $postRepository;
+        $this->eventRepository = $eventRepository;
         $this->platformService = $platformService;
         $this->userService = $userService;
         $this->blogService = $blogService;
@@ -316,6 +319,22 @@ class UserController extends AbstractController {
                 ));
             }
 
+            //events
+            if($connectedUser && $connectedUser->getId() == $user->getId()){
+                $events = $this->eventRepository->findBy(array(
+                    'user' => $user,
+                    'deleted' => false,
+                ));
+            }else{
+                $events = $this->eventRepository->findBy(array(
+                    'user' => $user,
+                    'published' => true,
+                    'valid' => true,
+                    'deleted' => false,
+                    'showAuthor' => true,
+                ));
+            }
+
             //comments
             $comments = $this->blogService->getValidCommentsByUser($user);
 
@@ -326,6 +345,7 @@ class UserController extends AbstractController {
                 'user'      => $user,
                 'type'      => $type,
                 'posts'     => $posts,
+                'events'    => $events,
                 'comments'  => $comments,
                 'evaluations'  => $evaluations,
             ));

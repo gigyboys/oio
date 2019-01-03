@@ -51,7 +51,7 @@
 		<div class="event_action tacenter mg_v5">
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 				{% if event.user.id == app.user.id %}
-					<a class="standar_button" href="{#{{ path('blog_manager_edit_event', {'event_id': event.id}) }}#}">Editer</a>
+					<a class="standar_button" href="{{ path('event_manager_edit', {'event_id': event.id}) }}">Editer</a>
             	{% endif %}
             {% endif %}
 

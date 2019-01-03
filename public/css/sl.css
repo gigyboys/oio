@@ -575,11 +575,19 @@
     width: auto;
 }
 .content_tab_header_item{
+	box-sizing: border-box;
+	max-width: 25%;
     cursor: pointer;
     float: left;
     height: 32px;
     padding: 0 8px;
 	color:#666;
+}
+.content_tab_header_item .content_tab_header_item_text{
+	max-width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 .content_tab_header_item.selected{
 	color:#000
