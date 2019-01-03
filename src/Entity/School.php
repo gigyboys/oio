@@ -86,6 +86,16 @@ class School
      */
     private $subscription;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $date;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $datemodif;
+
     public function __construct()
     {
         $this->subscription = new ArrayCollection();
@@ -277,6 +287,30 @@ class School
                 $subscription->setSchool(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getDatemodif(): ?\DateTimeInterface
+    {
+        return $this->datemodif;
+    }
+
+    public function setDatemodif(\DateTimeInterface $datemodif): self
+    {
+        $this->datemodif = $datemodif;
 
         return $this;
     }

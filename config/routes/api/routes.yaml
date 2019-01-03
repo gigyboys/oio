@@ -1,0 +1,10 @@
+
+#school
+api_schools_state:
+    path:     /schools-state
+    defaults:
+        _controller: App\Controller\API\SchoolController::schoolsState
+api_school_info:
+    path:     /school-info/{school_id}
+    defaults:
+        _controller: App\Controller\API\SchoolController::schoolInfo

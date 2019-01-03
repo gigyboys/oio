@@ -186,6 +186,11 @@ class SchoolController extends AbstractController {
                 $school->setType($type);
             }
 
+            //date
+            $currentDate = new \Datetime();
+            $school->setDate($currentDate);
+            $school->setDatemodif($currentDate);
+
             $this->em->persist($school);
             $this->em->flush();
 
@@ -208,6 +213,10 @@ class SchoolController extends AbstractController {
             }else{
                 $school->setPublished(true) ;
             }
+
+            //date
+            $currentDate = new \Datetime();
+            $school->setDatemodif($currentDate);
 
             $this->em->persist($school);
             $this->em->flush();
@@ -268,6 +277,10 @@ class SchoolController extends AbstractController {
                 $school->setType($type);
             }
 
+            //date
+            $currentDate = new \Datetime();
+            $school->setDatemodif($currentDate);
+
             $this->em->persist($school);
 
             $this->em->flush();
@@ -304,7 +317,13 @@ class SchoolController extends AbstractController {
         if ($formSchool->isSubmitted() && $formSchool->isValid()) {
             $school->setShortDescription($schoolTemp->getShortDescription());
             $school->setDescription($schoolTemp->getDescription());
+
+            //date
+            $currentDate = new \Datetime();
+            $school->setDatemodif($currentDate);
+
             $this->em->persist($school);
+
             $this->em->flush();
 
             $response->setContent(json_encode(array(
@@ -357,6 +376,13 @@ class SchoolController extends AbstractController {
                 $this->em->persist($categorySchool);
                 $isCategory = true;
             }
+
+            //date
+            $currentDate = new \Datetime();
+            $school->setDatemodif($currentDate);
+            
+            $this->em->persist($school);
+
             $this->em->flush();
 
             $response->setContent(json_encode(array(
@@ -439,6 +465,12 @@ class SchoolController extends AbstractController {
                 $logo->setSchool($school);
 
                 $this->em->persist($logo);
+
+                //date
+                $currentDate = new \Datetime();
+                $school->setDatemodif($currentDate);
+                
+                $this->em->persist($school);
                 $this->em->flush();
             } catch (FileException $e) {
                 // ... handle exception if something happens during file upload
@@ -478,6 +510,13 @@ class SchoolController extends AbstractController {
             if($school->getId() == $logo->getSchool()->getId()){
                 $logoId = $logo->getId();
                 $this->em->remove($logo);
+
+                //date
+                $currentDate = new \Datetime();
+                $school->setDatemodif($currentDate);
+                
+                $this->em->persist($school);
+
                 $this->em->flush();
 
                 $currentLogo = $this->logoRepository->findOneBy(array(
@@ -528,7 +567,6 @@ class SchoolController extends AbstractController {
                     $logo->setCurrent(false);
                     $this->em->persist($logo);
                 }
-                $this->em->flush();
 
                 $defaultLogoPath = 'default/images/school/logo/default.jpeg';
                 $logoPath = $defaultLogoPath;
@@ -548,10 +586,17 @@ class SchoolController extends AbstractController {
                     $logo->setCurrent(true);
 
                     $this->em->persist($logo);
-                    $this->em->flush();
                     $logoPath = $logo->getWebPath();
                 }
             }
+
+            //date
+            $currentDate = new \Datetime();
+            $school->setDatemodif($currentDate);
+            
+            $this->em->persist($school);
+
+            $this->em->flush();
 
             $logo116x116 = $this->platformService->imagineFilter($logoPath, '116x116');
 
@@ -632,6 +677,13 @@ class SchoolController extends AbstractController {
                 $cover->setSchool($school);
 
                 $this->em->persist($cover);
+
+                //date
+                $currentDate = new \Datetime();
+                $school->setDatemodif($currentDate);
+                
+                $this->em->persist($school);
+
                 $this->em->flush();
             } catch (FileException $e) {
                 // ... handle exception if something happens during file upload
@@ -679,7 +731,6 @@ class SchoolController extends AbstractController {
                     $cover->setCurrent(false);
                     $this->em->persist($cover);
                 }
-                $this->em->flush();
 
                 $defaultCoverPath = 'default/images/school/cover/default.jpeg';
                 $coverPath = $defaultCoverPath;
@@ -699,10 +750,17 @@ class SchoolController extends AbstractController {
                     $cover->setCurrent(true);
 
                     $this->em->persist($cover);
-                    $this->em->flush();
                     $coverPath = $cover->getWebPath();
                 }
             }
+
+            //date
+            $currentDate = new \Datetime();
+            $school->setDatemodif($currentDate);
+            
+            $this->em->persist($school);
+
+            $this->em->flush();
 
             $cover116x116 = $this->platformService->imagineFilter($coverPath, '116x116');
             $cover300x100 = $this->platformService->imagineFilter($coverPath, '300x100');
@@ -732,6 +790,13 @@ class SchoolController extends AbstractController {
             if($school->getId() == $cover->getSchool()->getId()){
                 $coverId = $cover->getId();
                 $this->em->remove($cover);
+
+                //date
+                $currentDate = new \Datetime();
+                $school->setDatemodif($currentDate);
+                
+                $this->em->persist($school);
+
                 $this->em->flush();
 
                 $current = $this->coverRepository->findOneBy(array(

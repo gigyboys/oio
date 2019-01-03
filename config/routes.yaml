@@ -1,10 +1,17 @@
 #lipp route
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.yaml"
+
 #admin
 admin:
     resource: routes/admin/routes.yaml
     prefix: /admin
+
+#api
+api:
+    resource: routes/api/routes.yaml
+    prefix: /api
+
 #platform
 platform_home:
     path: /
