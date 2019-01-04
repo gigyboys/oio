@@ -252,6 +252,13 @@
 	width: 50px;
 }
 */
+.category_title, .search_title{
+	border: 1px solid #ddd; 
+	background: #eee;
+	padding: 10px; 
+	font-weight: bold; 
+	margin-top: 10px
+}
 .sll_pagination{
 	margin:10px 0;
 	text-align:center

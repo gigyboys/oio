@@ -3,7 +3,7 @@
 {% set maybeParticipations = getMaybeParticipations(event) %}
 <div class="participation_ct">
     <div class="header">
-        Qui sera là?
+        Qui sont les participants?
     </div>
     <div class="body">
         <div class="list">
@@ -13,7 +13,6 @@
                     {% if isGoingParticipation(event, app.user) %}
                         {% set user = app.user %}
                         {% set avatar = userAvatar(user) %}
-                        {#<img src="{{ avatar | imagine_filter('50x50') }}" alt="img ur" style="border-radius:50%"/>#}
                         {% set userInfo = getLinkUserInfo(user, '<img src="'~ avatar | imagine_filter("50x50") ~'" />' ) %}
                         {{ userInfo | raw }}
                         {% set countParticipation = countParticipation + 1 %}
@@ -24,7 +23,6 @@
                     {% set user = participation.user %}
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and user.id != app.user.id and countParticipation < limit %}
                         {% set avatar = userAvatar(user) %}
-                        {#<img src="{{ avatar | imagine_filter('50x50') }}" alt="img ur" style="border-radius:50%"/>#}
                         {% set userInfo = getLinkUserInfo(user, '<img src="'~ avatar | imagine_filter("50x50") ~'" />' ) %}
                         {{ userInfo | raw }}
                         {% set countParticipation = countParticipation + 1 %}
@@ -61,11 +59,19 @@
             <div>
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
                     {% if isGoingParticipation(event, app.user) %}
-                        Vous participez à l'évènement
+                        {% if event.dateend | date('Y-m-d H:i:s') > "now" | date('Y-m-d H:i:s') %}
+                            Vous participez à l'évènement
+                        {% else %}
+                            Vous avez participé à l'évènement
+                        {% endif %}
                     {% elseif isMaybeParticipation(event, app.user) %}
-                        Vous participez peut être à l'évènement
+                        {% if event.dateend | date('Y-m-d H:i:s') > "now" | date('Y-m-d H:i:s') %}
+                            Vous participez peut être à l'évènement
+                        {% endif %}
                     {% else %}
-                        Vous ne participez pas à l'évènement
+                        {% if event.dateend | date('Y-m-d H:i:s') > "now" | date('Y-m-d H:i:s') %}
+                            Vous ne participez pas à l'évènement
+                        {% endif %}
                     {% endif %}
                 {% endif %}
             </div>
@@ -92,7 +98,7 @@
                 <a class="login_ajax" href="{{ path('user_login_ajax') }}"><span class="standar_button">Reagir à l'évènement</span></a>
             {% endif %}
         {% else %}
-            Cet évènement à déjà eu lieu
+            Cet évènement a déjà eu lieu
         {% endif %}
     </div>
 </div>
