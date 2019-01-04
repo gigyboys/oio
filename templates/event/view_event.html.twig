@@ -22,16 +22,18 @@
 							<div class="title">
 								<h1>{{ event.title }}</h1>
 							</div>
-							<div class="location_wrap" style="">
-								<div>
-									{% if event.latitude | trim != "" and event.longitude | trim != "" %}
-										<span id="show_map_event" data-latitude="{{ event.latitude }}" data-longitude="{{ event.longitude }}"><i class="fas fa-map-marker-alt"></i></span>
-										<span id="hide_map_event"><i class="fas fa-undo"></i></span>
-									{% endif %}
-									<span class="location">{{ event.location }}{% if event.city | trim != "" %}, {{ event.city }}{% endif %}</span>
-									<span class="both"></span>
+							{% if event.location | trim != "" or event.city | trim != "" or ( event.latitude | trim != "" and event.longitude | trim != "" ) %}
+								<div class="location_wrap">
+									<div>
+										{% if event.latitude | trim != "" and event.longitude | trim != "" %}
+											<span id="show_map_event" data-latitude="{{ event.latitude }}" data-longitude="{{ event.longitude }}"><i class="fas fa-map-marker-alt"></i></span>
+											<span id="hide_map_event"><i class="fas fa-undo"></i></span>
+										{% endif %}
+										<span class="location">{{ event.location }}{% if event.city | trim != "" %}, {{ event.city }}{% endif %}</span>
+										<span class="both"></span>
+									</div>
 								</div>
-							</div>
+							{% endif %}
 						</div>
 						<div class="participation_block">
 							{{ include("event/include/participation.html.twig") }}

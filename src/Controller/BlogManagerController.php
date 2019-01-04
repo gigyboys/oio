@@ -705,9 +705,9 @@ class BlogManagerController extends AbstractController {
     {
         $user = $this->getUser();
         $post = $this->postRepository->find($post_id);
-        $schools = $this->schoolService->findSchoolsSubscription($user);
 
         if($post && $user && $post->getUser()->getId() == $user->getId() ){
+            $schools = $this->schoolService->findSchoolsSubscription($user);
             return $this->render('blog/post_schools.html.twig', array(
                 'post' => $post,
                 'schools' => $schools,

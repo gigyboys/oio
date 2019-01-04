@@ -276,6 +276,14 @@ event_manager_delete_illustration:
     path:     /event-manager/event/{event_id}/delete-illustration/{illustration_id}
     defaults:
         _controller: App\Controller\EventManagerController::deleteIllustration
+event_manager_schools:
+    path:     /event-manager/event/{event_id}/schools
+    defaults:
+        _controller: App\Controller\EventManagerController::eventSchools
+event_manager_toogle_school:
+    path:     /event-manager/event/{event_id}/toogle-school/{school_id}
+    defaults:
+        _controller: App\Controller\EventManagerController::toogleSchool
 
 #blog
 blog:

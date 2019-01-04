@@ -5,7 +5,7 @@ use App\Entity\Evaluation;
 use App\Entity\Event;
 //use App\Entity\Post;
 use App\Entity\EventIllustration;
-//use App\Entity\SchoolPost;
+use App\Entity\SchoolEvent;
 //use App\Entity\TagPost;
 use App\Form\EvaluationType;
 use App\Form\EventInitType;
@@ -23,7 +23,7 @@ use App\Repository\EventRepository;
 use App\Repository\FieldRepository;
 use App\Repository\EventIllustrationRepository;
 //use App\Repository\PostRepository;
-//use App\Repository\SchoolPostRepository;
+use App\Repository\SchoolEventRepository;
 //use App\Repository\TagPostRepository;
 use App\Repository\TagRepository;
 use App\Service\PlatformService;
@@ -50,7 +50,7 @@ class EventManagerController extends AbstractController {
         EventIllustrationRepository $eventIllustrationRepository,
         TagRepository $tagRepository,
         //TagPostRepository $tagPostRepository,
-        //SchoolPostRepository $schoolPostRepository,
+        SchoolEventRepository $schoolEventRepository,
         EventRepository $eventRepository,
         ObjectManager $em
     )
@@ -63,7 +63,7 @@ class EventManagerController extends AbstractController {
         $this->eventIllustrationRepository = $eventIllustrationRepository;
         $this->tagRepository = $tagRepository;
         //$this->tagPostRepository = $tagPostRepository;
-        //$this->schoolPostRepository = $schoolPostRepository;
+        $this->schoolEventRepository = $schoolEventRepository;
         $this->eventRepository = $eventRepository;
         $this->eventRepository = $eventRepository;
         $this->em = $em;
@@ -754,5 +754,60 @@ class EventManagerController extends AbstractController {
             ));
         }
         return $this->redirectToRoute('event');
+    }
+
+    public function eventSchools($event_id)
+    {
+        $user = $this->getUser();
+        $event = $this->eventRepository->find($event_id);
+
+        if($event && $user && $event->getUser()->getId() == $user->getId() ){
+            $schools = $this->schoolService->findSchoolsSubscription($user);
+            return $this->render('event/event_schools.html.twig', array(
+                'event' => $event,
+                'schools' => $schools,
+                'entityView' => 'event',
+            ));
+        }
+        return $this->redirectToRoute('event');
+    }
+
+    public function toogleSchool($event_id, $school_id, Request $request)
+    {
+        $event = $this->eventRepository->find($event_id);
+        $school = $this->schoolRepository->find($school_id);
+
+        $response = new Response();
+
+        if ($event && $school) {
+            $schoolEvent = $this->schoolEventRepository->findOneBy(array(
+                'event' => $event,
+                'school' => $school,
+            ));
+
+            if($schoolEvent){
+                $this->em->remove($schoolEvent);
+                $isSchool = false;
+            }else{
+                $schoolEvent = new schoolEvent();
+                $schoolEvent->setEvent($event);
+                $schoolEvent->setSchool($school);
+
+                $this->em->persist($schoolEvent);
+                $isSchool = true;
+            }
+            $this->em->flush();
+
+            $response->setContent(json_encode(array(
+                'state' => 1,
+                'case' => $isSchool,
+            )));
+        }else{
+            $response->setContent(json_encode(array(
+                'state' => 0,
+            )));
+        }
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
 }
