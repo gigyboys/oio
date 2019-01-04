@@ -1,0 +1,98 @@
+{% set participations = getGoingParticipations(event) %}
+{% set limit = 5 %}
+{% set maybeParticipations = getMaybeParticipations(event) %}
+<div class="participation_ct">
+    <div class="header">
+        Qui sera là?
+    </div>
+    <div class="body">
+        <div class="list">
+            {% if participations | length > 0 %}
+                {% set countParticipation = 0 %}
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    {% if isGoingParticipation(event, app.user) %}
+                        {% set user = app.user %}
+                        {% set avatar = userAvatar(user) %}
+                        {#<img src="{{ avatar | imagine_filter('50x50') }}" alt="img ur" style="border-radius:50%"/>#}
+                        {% set userInfo = getLinkUserInfo(user, '<img src="'~ avatar | imagine_filter("50x50") ~'" />' ) %}
+                        {{ userInfo | raw }}
+                        {% set countParticipation = countParticipation + 1 %}
+                    {% endif %}
+                {% endif %}
+            
+                {% for participation in participations %}
+                    {% set user = participation.user %}
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and user.id != app.user.id and countParticipation < limit %}
+                        {% set avatar = userAvatar(user) %}
+                        {#<img src="{{ avatar | imagine_filter('50x50') }}" alt="img ur" style="border-radius:50%"/>#}
+                        {% set userInfo = getLinkUserInfo(user, '<img src="'~ avatar | imagine_filter("50x50") ~'" />' ) %}
+                        {{ userInfo | raw }}
+                        {% set countParticipation = countParticipation + 1 %}
+                    {% endif %}
+                {% endfor %}
+
+                {% if participations | length > limit %}
+                    {% set overflowParticipations = participations | length - limit %}
+                    <span class="bound_participations">+{{ overflowParticipations }}</span>
+                {% endif %}
+            {% else %}
+                <div>
+                    {% if event.dateend | date('Y-m-d H:i:s') > "now" | date('Y-m-d H:i:s') %}
+                        <span class="going_btn" style="cursor:pointer" data-target="{{ path('event_going_participation', {'event_id': event.id}) }}">
+                            Soyez le premier à participer
+                        </span>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+        <div class="resume">
+            <div>
+                <div class="going">
+                    <strong>{{ participations | length }}</strong>
+                    <br> 
+                    participant{% if participations | length > 1 %}s{% endif %}
+                </div>
+                <div class="maybe">
+                    <strong>{{ maybeParticipations | length }}</strong>
+                    <br> 
+                    peut être
+                </div>
+            </div>
+            <div>
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
+                    {% if isGoingParticipation(event, app.user) %}
+                        Vous participez à l'évènement
+                    {% elseif isMaybeParticipation(event, app.user) %}
+                        Vous participez peut être à l'évènement
+                    {% else %}
+                        Vous ne participez pas à l'évènement
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        {% if event.dateend | date('Y-m-d H:i:s') > "now" | date('Y-m-d H:i:s') %}
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
+                <div class="btn_list">
+                    {% if isGoingParticipation(event, app.user) %}
+                    {% else %}
+                        <span class="standar_button going_btn" data-target="{{ path('event_going_participation', {'event_id': event.id}) }}" >Participer</span>
+                    {% endif %}
+                    
+                    {% if isMaybeParticipation(event, app.user) %}
+                    {% else %}
+                        <span class="standar_button maybe_btn" data-target="{{ path('event_maybe_participation', {'event_id': event.id}) }}" >Peut être</span>
+                    {% endif %}
+                </div> 
+                <div class="loading">
+                    <img src="{{ asset('image/tail-spin.svg') }}" />Chargement ...
+                </div>
+            {% else %}
+                <a class="login_ajax" href="{{ path('user_login_ajax') }}"><span class="standar_button">Reagir à l'évènement</span></a>
+            {% endif %}
+        {% else %}
+            Cet évènement à déjà eu lieu
+        {% endif %}
+    </div>
+</div>

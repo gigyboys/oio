@@ -9,81 +9,65 @@
 	<div class="cr">
 		<div class="mg_v10">
 			<div class="ct">
+				<div id="et_view">
+					<div class="mg_10 introduction">
+						{{ event.introduction }}
+					</div>
 
-				<div class="mg_10" style="text-align:justify; font-weight:bold">
-                    {{ event.introduction }}
-				</div>
-
-
-                {# twig extension #}
-                {% set illustration = eventIllustration(event) %}
-				<div class="mg_10">
-					<div style="background:#999; height:240px; width: calc( 100% - 420px ); overflow:hidden; float:left;position:relative;
-					background: #81b5e2 url('{{ illustration | imagine_filter('1200x500') }}') no-repeat scroll center center / cover ;">
-						{#
-						<img id="event_illustration" style="display:block; max-width: 100%; height: auto; margin: auto" src="{{ illustration | imagine_filter('1200x500') }}" alt="img event" />
-						#}
-						<div id="map_event" style="position:absolute;width:100%;height:100%; background:#bbb;display:none">
-							
-						</div>
-						<div style="position: absolute;top:0px;background:rgba(255,255,255,0.7);width:100%;padding:16px;box-sizing:border-box">
-							<span style=" font-size:18px; color:#000">{{ event.title }}</span>
-						</div>
-						<div style="text-align:right;background:rgba(255,255,255,0.7);position: absolute;width:100%;bottom:0px">
-							<div style="padding: 10px">
-								{% if event.latitude | trim != "" and event.longitude | trim != "" %}
-									<span id="show_map_event" data-latitude="{{ event.latitude }}" data-longitude="{{ event.longitude }}" style="display:inline-block; float:left;cursor:pointer"><i class="fas fa-map-marker-alt"></i></span>
-									<span id="hide_map_event" style="display:inline-block; float:left;cursor:pointer;display:none"><i class="fas fa-undo"></i></span>
-								{% endif %}
-								<span style="display:inline-block; float:right">{{ event.location }}</span>
-								<span class="both"></span>
+					{# twig extension #}
+					{% set illustration = eventIllustration(event) %}
+					<div class="mg_10">
+						<div class="cover" style="background: #81b5e2 url('{{ illustration | imagine_filter('1200x500') }}') no-repeat scroll center center / cover ;">
+							<div id="map_event"></div>
+							<div class="title">
+								<h1>{{ event.title }}</h1>
+							</div>
+							<div class="location_wrap" style="">
+								<div>
+									{% if event.latitude | trim != "" and event.longitude | trim != "" %}
+										<span id="show_map_event" data-latitude="{{ event.latitude }}" data-longitude="{{ event.longitude }}"><i class="fas fa-map-marker-alt"></i></span>
+										<span id="hide_map_event"><i class="fas fa-undo"></i></span>
+									{% endif %}
+									<span class="location">{{ event.location }}{% if event.city | trim != "" %}, {{ event.city }}{% endif %}</span>
+									<span class="both"></span>
+								</div>
 							</div>
 						</div>
+						<div class="participation_block">
+							{{ include("event/include/participation.html.twig") }}
+						</div>
+						<div class="both"></div>
 					</div>
-					<div style="margin-left: calc( 100% - 400px ); background:#789;height:240px;position: relative;">
-						<div style="position: absolute;background:#bbb;width:100%;height:50px">
-							Informations sur les participants
-						</div>
-						<div style="position: absolute;background:#eee;width:100%;height:140px;margin-top:50px">
-							Liste des participants
-						</div>
-						<div style="position: absolute;background:#bbb;width:100%;height:50px;margin-top:190px">
-							Actions des participants
-						</div>
-					</div>
-					<div class="both"></div>
-				</div>
-				<div class="mg_10">
+					<div class="mg_10">
 
-                    {% if event.showAuthor %}
-						<strong>Par</strong>
-                        {# twig extension #}
-                        {% set userInfo = getLinkUserInfo(event.user, event.user.name) %}
-                        {{ userInfo | raw }}
-                    {% endif %}
-					<strong>Le {{ event.date | date('Y-m-d') }}</strong>
-				</div>
-				
-				<div style="">
+						{% if event.showAuthor %}
+							<strong>Par</strong>
+							{# twig extension #}
+							{% set userInfo = getLinkUserInfo(event.user, event.user.name) %}
+							{{ userInfo | raw }}
+						{% endif %}
+						<strong>Le {{ event.date | date('Y-m-d') }}</strong>
+					</div>
+					
 					<div style="padding: 10px 10px 0px">
 						<span>Du {{ event.datebegin | date('Y-m-d à H:i') }}</span> <span>Au {{ event.dateend | date('Y-m-d à H:i') }}</span>
 					</div>
-				</div>
 
-				<div class="mg_10" style="overflow: auto;">
-                    {{ event.content | raw }}
-				</div>
+					<div class="mg_10" style="overflow: auto;">
+						{{ event.content | raw }}
+					</div>
 
-				<div class="mg_10">
-                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        {% if event.user.id == app.user.id %}
-							<a class="standar_button" href="{{ path('event_manager_edit', {'event_id': event.id}) }}">Editer</a>
-                        {% endif %}
-                    {% endif %}
-					
-                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and is_granted('ROLE_ADMIN') %}
-						<a href="{{ path('admin_event_edit', {'event_id': event.id}) }}" target="_blank"><span class="standar_button">Administrer</span></a>
-                    {% endif %}
+					<div class="mg_10">
+						{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+							{% if event.user.id == app.user.id %}
+								<a class="standar_button" href="{{ path('event_manager_edit', {'event_id': event.id}) }}">Editer</a>
+							{% endif %}
+						{% endif %}
+						
+						{% if is_granted("IS_AUTHENTICATED_REMEMBERED") and is_granted('ROLE_ADMIN') %}
+							<a href="{{ path('admin_event_edit', {'event_id': event.id}) }}" target="_blank"><span class="standar_button">Administrer</span></a>
+						{% endif %}
+					</div>
 				</div>
 
 				{#

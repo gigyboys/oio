@@ -5,7 +5,8 @@
 	border:1px solid #eee; 
 	background:#fff; 
 	padding:10px 10px;
-	z-index:10
+	z-index:10;
+	white-space: normal;
 }
 
 #ur_gl{

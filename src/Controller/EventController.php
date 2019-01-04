@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Entity\Evaluation;
 use App\Entity\Subscription;
+use App\Entity\Participation;
 use App\Form\EvaluationType;
 use App\Repository\EventRepository;
 use App\Repository\CategoryRepository;
@@ -26,6 +27,7 @@ use App\Repository\SchoolRepository;
 use App\Repository\ParameterRepository;
 use App\Repository\SchoolContactRepository;
 use App\Repository\EvaluationRepository;
+use App\Repository\ParticipationRepository;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class EventController extends AbstractController{
@@ -46,6 +48,7 @@ class EventController extends AbstractController{
         SchoolPostRepository $schoolPostRepository,
         DocumentRepository $documentRepository,
         SubscriptionRepository $subscriptionRepository,
+        ParticipationRepository $participationRepository,
         ObjectManager $em
     )
     {
@@ -64,6 +67,7 @@ class EventController extends AbstractController{
         $this->schoolPostRepository = $schoolPostRepository;
         $this->documentRepository = $documentRepository;
         $this->subscriptionRepository = $subscriptionRepository;
+        $this->participationRepository = $participationRepository;
         $this->em = $em;
 
         $this->platformService->registerVisit();
@@ -202,5 +206,105 @@ class EventController extends AbstractController{
         }else{
             return $this->redirectToRoute('event');
         }
+    }
+
+    public function goingParticipation($event_id, Request $request)
+    {
+        $event = $this->eventRepository->find($event_id);
+        $user = $this->getUser();
+
+        $response = new Response();
+        $response->setContent(json_encode(array(
+            'state' => 0,
+        )));
+        if ($user) {
+            if ($event) {
+                $participations = $this->participationRepository->findBy(array(
+                    'user' => $user,
+                    'event' => $event,
+                ));
+
+                foreach ($participations as $participationTemp) {
+                    $this->em->remove($participationTemp);
+                }
+
+                $participation = new Participation();
+                $participation->setEvent($event);
+                $participation->setUser($user);
+                $participation->setStatus(1);
+                $participation->setDate(new \DateTime());
+
+                $this->em->persist($participation);
+                $this->em->flush();
+
+                $participationHtml = $this->renderView('event/include/participation.html.twig', array(
+                    'event'   => $event,
+                    'user'    => $user,
+                ));
+
+                $response->setContent(json_encode(array(
+                    'state'         => 1,
+                    'participationHtml'  => $participationHtml,
+                )));
+            }
+        }else{
+            $response->setContent(json_encode(array(
+                'state' => 3,
+                'message' => 'Authentification requise',
+            )));
+        }
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    public function maybeParticipation($event_id, Request $request)
+    {
+        $event = $this->eventRepository->find($event_id);
+        $user = $this->getUser();
+
+        $response = new Response();
+        $response->setContent(json_encode(array(
+            'state' => 0,
+        )));
+        if ($user) {
+            if ($event) {
+                $participations = $this->participationRepository->findBy(array(
+                    'user' => $user,
+                    'event' => $event,
+                ));
+
+                foreach ($participations as $participationTemp) {
+                    $this->em->remove($participationTemp);
+                }
+
+                $participation = new Participation();
+                $participation->setEvent($event);
+                $participation->setUser($user);
+                $participation->setStatus(2);
+                $participation->setDate(new \DateTime());
+
+                $this->em->persist($participation);
+                $this->em->flush();
+
+                $participationHtml = $this->renderView('event/include/participation.html.twig', array(
+                    'event'   => $event,
+                    'user'    => $user,
+                ));
+
+                $response->setContent(json_encode(array(
+                    'state'         => 1,
+                    'participationHtml'  => $participationHtml,
+                )));
+            }
+        }else{
+            $response->setContent(json_encode(array(
+                'state' => 3,
+                'message' => 'Authentification requise',
+            )));
+        }
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
 }

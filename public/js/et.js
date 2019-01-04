@@ -88,6 +88,33 @@ $(function() {
 			error: function(jqXHR, textStatus, errorThrown) {
 			}
 		});
+	});
+	
+	//going_btn, maybe_btn
+	$('body').on('click','.going_btn, .maybe_btn',function(){
+        var $this = $(this);
+        var target = $this.data('target');
+        $('.actions .btn_list').hide();
+        $('.actions .loading').show();
+        $.ajax({
+            type: 'POST',
+            url: target,
+            dataType : 'json',
+            success: function(data){
+				if(data.state == 1){
+					$(".participation_block").html(data.participationHtml);
+				}else if(data.state == 3){
+                    processLogin();
+				}
+				$('.actions .btn_list').show();
+				$('.actions .loading').hide();
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+				console.log(jqXHR.status);
+				console.log(textStatus);
+				console.log(errorThrown);
+			}
+        });		
     });
 	
 });

@@ -68,6 +68,10 @@ class AppExtension extends AbstractExtension
             /*event*/
             new TwigFunction('eventIllustration', array($this, 'eventIllustration')),
             new TwigFunction('isSchoolEvent', array($this, 'isSchoolEvent')),
+            new TwigFunction('getGoingParticipations', array($this, 'getGoingParticipations')),
+            new TwigFunction('getMaybeParticipations', array($this, 'getMaybeParticipations')),
+            new TwigFunction('isGoingParticipation', array($this, 'isGoingParticipation')),
+            new TwigFunction('isMaybeParticipation', array($this, 'isMaybeParticipation')),
         );
     }
 
@@ -202,5 +206,21 @@ class AppExtension extends AbstractExtension
 
     public function isSchoolEvent(Event $event, School $school) {
         return $this->eventService->isSchoolEvent($event, $school);
+    }
+
+    public function getGoingParticipations(Event $event) {
+        return $this->eventService->getGoingParticipations($event);
+    }
+
+    public function getMaybeParticipations(Event $event) {
+        return $this->eventService->getMaybeParticipations($event);
+    }
+
+    public function isGoingParticipation(Event $event, User $user) {
+        return $this->eventService->isGoingParticipation($event, $user);
+    }
+
+    public function isMaybeParticipation(Event $event, User $user) {
+        return $this->eventService->isMaybeParticipation($event, $user);
     }
 }

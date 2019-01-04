@@ -318,6 +318,14 @@ event_view:
     path:     /event/{slug}
     defaults:
         _controller: App\Controller\EventController::view
+event_going_participation:
+    path:     /event/{event_id}/going-participation
+    defaults:
+        _controller: App\Controller\EventController::goingParticipation
+event_maybe_participation:
+    path:     /event/{event_id}/maybe-participation
+    defaults:
+        _controller: App\Controller\EventController::maybeParticipation
 
 #school
 school_categories:

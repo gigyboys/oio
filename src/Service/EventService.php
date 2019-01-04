@@ -34,6 +34,7 @@ use App\Repository\SchoolEventRepository;
 use App\Repository\SchoolRepository;
 use App\Repository\TagPostRepository;
 use App\Repository\TypeSchoolRepository;
+use App\Repository\ParticipationRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -55,6 +56,7 @@ class EventService
         CommentRepository $commentRepository,
         PostRepository $postRepository,
         EventRepository $eventRepository,
+        ParticipationRepository $participationRepository,
         EventIllustrationRepository $eventIllustrationRepository,
         EntityManagerInterface $em
     )
@@ -75,6 +77,7 @@ class EventService
         $this->postRepository = $postRepository;
         $this->eventRepository = $eventRepository;
         $this->eventIllustrationRepository = $eventIllustrationRepository;
+        $this->participationRepository = $participationRepository;
         $this->em = $em;
     }
 
@@ -105,6 +108,50 @@ class EventService
         }
 
         return $isSchool;
+    }
+
+    public function getGoingParticipations(Event $event) {
+        $participations = $this->participationRepository->findBy(array(
+            'event' => $event,
+            'status' => 1,
+        ));
+
+        return $participations;
+    }
+
+    public function getMaybeParticipations(Event $event) {
+        $participations = $this->participationRepository->findBy(array(
+            'event' => $event,
+            'status' => 2,
+        ));
+
+        return $participations;
+    }
+
+    public function isGoingParticipation(Event $event, User $user) {
+        $participation = $this->participationRepository->findOneBy(array(
+            'event'  => $event,
+            'user'   => $user,
+            'status' => 1,
+        ));
+
+        if($participation){
+            return true;
+        }
+        return false;
+    }
+
+    public function isMaybeParticipation(Event $event, User $user) {
+        $participation = $this->participationRepository->findOneBy(array(
+            'event'  => $event,
+            'user'   => $user,
+            'status' => 2,
+        ));
+
+        if($participation){
+            return true;
+        }
+        return false;
     }
 
 }
