@@ -31,6 +31,12 @@ class Comment
     private $post;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Event")
+     * @ORM\JoinColumn(name="event_id", nullable=true)
+     */
+    private $event;
+
+    /**
      * @ORM\Column(type="text")
      */
     private $comment;
@@ -89,6 +95,18 @@ class Comment
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getEvent(): ?Event
+    {
+        return $this->event;
+    }
+
+    public function setEvent(?Event $event): self
+    {
+        $this->event = $event;
 
         return $this;
     }

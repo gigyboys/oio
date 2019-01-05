@@ -4,7 +4,9 @@ namespace App\Controller;
 use App\Entity\Evaluation;
 use App\Entity\Subscription;
 use App\Entity\Participation;
+use App\Entity\Comment;
 use App\Form\EvaluationType;
+use App\Form\CommentType;
 use App\Repository\EventRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\CategorySchoolRepository;
@@ -14,8 +16,10 @@ use App\Repository\PostRepository;
 use App\Repository\SchoolPostRepository;
 use App\Repository\SubscriptionRepository;
 use App\Repository\TypeRepository;
+use App\Repository\CommentRepository;
 use App\Service\PlatformService;
 use App\Service\SchoolService;
+use App\Service\EventService;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\File;
@@ -42,6 +46,7 @@ class EventController extends AbstractController{
         CategoryRepository $categoryRepository,
         CategorySchoolRepository $categorySchoolRepository,
         SchoolService $schoolService,
+        EventService $eventService,
         PlatformService $platformService,
         FieldRepository $fieldRepository,
         PostRepository $postRepository,
@@ -49,6 +54,7 @@ class EventController extends AbstractController{
         DocumentRepository $documentRepository,
         SubscriptionRepository $subscriptionRepository,
         ParticipationRepository $participationRepository,
+        CommentRepository $commentRepository,
         ObjectManager $em
     )
     {
@@ -61,6 +67,7 @@ class EventController extends AbstractController{
         $this->categoryRepository = $categoryRepository;
         $this->categorySchoolRepository = $categorySchoolRepository;
         $this->schoolService = $schoolService;
+        $this->eventService = $eventService;
         $this->platformService = $platformService;
         $this->fieldRepository = $fieldRepository;
         $this->postRepository = $postRepository;
@@ -68,6 +75,7 @@ class EventController extends AbstractController{
         $this->documentRepository = $documentRepository;
         $this->subscriptionRepository = $subscriptionRepository;
         $this->participationRepository = $participationRepository;
+        $this->commentRepository = $commentRepository;
         $this->em = $em;
 
         $this->platformService->registerVisit();
@@ -180,27 +188,27 @@ class EventController extends AbstractController{
             //view
             $this->platformService->registerView($event, $user, $request);
 
-            /*
-            $allComments = $this->blogService->getValidComments($post);
+            /* comments */
+            $allComments = $this->eventService->getValidComments($event);
 
             $limit = 10;
-            $type = "post";
+            $type = "event";
             $order = "DESC";
-            $comments = $this->commentRepository->getCommentsLimit($type, $post, $limit, $order);
+            $comments = $this->commentRepository->getCommentsLimit($type, $event, $limit, $order);
 
             $previousComment = null;
             if(count($comments)>0){
                 $firstComment = $comments[0];
-                $previousComment = $this->commentRepository->getSinceComment($firstComment, $type, $post);
+                $previousComment = $this->commentRepository->getSinceComment($firstComment, $type, $event);
             }
-            */
+            
             return $this->render('event/view_event.html.twig', [
                 'event' => $event,
-                /*
+                
                 'comments' => $comments,
                 'allComments' => $allComments,
                 'previousComment' => $previousComment,
-                */
+                
                 'entityView' => 'event',
             ]);
         }else{
@@ -301,6 +309,116 @@ class EventController extends AbstractController{
             $response->setContent(json_encode(array(
                 'state' => 3,
                 'message' => 'Authentification requise',
+            )));
+        }
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    public function newComment($event_id, Request $request)
+    {
+        $comment = new Comment();
+        $event = $this->eventRepository->find($event_id);
+        $user = $this->getUser();
+        $form = $this->createForm(CommentType::class, $comment);
+
+        $response = new Response();
+        $response->setContent(json_encode(array(
+            'state' => 0,
+        )));
+
+        if($user){
+            if($event && $user && $event->getActiveComment()){
+                $form->handleRequest($request);
+                if ($form->isSubmitted() && $form->isValid()) {
+                    //creation message
+                    $comment->setEvent($event);
+                    $comment->setUser($user);
+                    $comment->setDate(new \DateTime());
+
+                    $this->em->persist($comment);
+
+                    $this->em->flush();
+
+                    $comments = $this->eventService->getValidComments($event);
+
+                    $commentItem = $this->renderView('event/include/comment_item.html.twig', array(
+                        'comment' => $comment
+                    ));
+
+                    $infoComment = "";
+                    if(count($comments) < 2){
+                        $infoComment = count($comments)." Commentaire" ;
+                    }else{
+                        $infoComment = count($comments)." Commentaires";
+                    }
+                    $response->setContent(json_encode(array(
+                        'state' => 1,
+                        'commentItem' => $commentItem,
+                        'infoComment' => $infoComment,
+                    )));
+                }
+            }
+        }else{
+            $response->setContent(json_encode(array(
+                'state' => 3,
+                'message' => 'Authentification requise',
+            )));
+        }
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    public function loadComments($event_id, $comment_id, Request $request)
+    {
+        $event = $this->eventRepository->find($event_id);
+        $lastComment = $this->commentRepository->find($comment_id);
+
+        $response = new Response();
+        if($event && $lastComment){
+            $limit = 10;
+            $type = "event";
+            $order = "DESC";
+            $comments = $this->commentRepository->getCommentsSince($lastComment, $type, $event, $limit, $order);
+
+            $listComments = array();
+            foreach($comments as $comment){
+                $commentItem = $this->renderView('event/include/comment_item.html.twig', array(
+                    'comment' => $comment
+                ));
+                array_push($listComments, array(
+                    "id" 			=> $comment->getId(),
+                    "commentItem" 	=> $commentItem,
+                ));
+            }
+
+            $previousComment = null;
+            $previousCommentId = 0;
+            $urlLoadComment = null;
+
+            if($comments[0]){
+                $firstComment = $comments[0];
+                $previousComment = $this->commentRepository->getSinceComment($firstComment, $type, $event, $order);
+            }
+            if ($previousComment){
+                $previousCommentId = $previousComment->getId();
+                $urlLoadComment = $this->generateUrl('event_load_comment', array(
+                    'event_id' => $event->getId(),
+                    'comment_id' => $previousCommentId,
+                ));
+            }
+
+            $response->setContent(json_encode(array(
+                'state' => 1,
+                'comments' => $listComments,
+                'previousCommentId' => $previousCommentId,
+                'urlLoadComment' => $urlLoadComment,
+            )));
+        }else{
+            $response->setContent(json_encode(array(
+                'state' => 0,
             )));
         }
 

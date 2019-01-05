@@ -334,6 +334,14 @@ event_maybe_participation:
     path:     /event/{event_id}/maybe-participation
     defaults:
         _controller: App\Controller\EventController::maybeParticipation
+event_new_comment:
+    path:     /event/{event_id}/new-comment
+    defaults:
+        _controller: App\Controller\EventController::newComment
+event_load_comment:
+    path:     /event/{event_id}/load-comment/{comment_id}
+    defaults:
+        _controller: App\Controller\EventController::loadComments
 
 #school
 school_categories:

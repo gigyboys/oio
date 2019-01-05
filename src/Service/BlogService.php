@@ -122,22 +122,6 @@ class BlogService
         return $comments;
     }
 
-    public function getValidCommentsByUser(User $user) {
-        $comments = array();
-
-        $commentTemps = $this->commentRepository->getValidCommentsByUser($user);
-
-        $comments = array();
-        foreach($commentTemps as $comment){
-            $post = $comment->getPost();
-            if($post->getPublished() && $post->getTovalid() && $post->getValid() && !$post->getDeleted()){
-                array_push($comments, $comment);
-            }
-        }
-
-        return $comments;
-    }
-
     public function getValidPosts() {
 
         $posts = $this->postRepository->getValidPosts();

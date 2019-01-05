@@ -336,7 +336,7 @@ class UserController extends AbstractController {
             }
 
             //comments
-            $comments = $this->blogService->getValidCommentsByUser($user);
+            $comments = $this->platformService->getValidCommentsByUser($user);
 
             //evaluations
             $evaluations = $this->schoolService->getValidEvaluationsByUser($user);

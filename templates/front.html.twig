@@ -50,11 +50,11 @@
             <div class="cr">
                 <div class="ct">
                     <div class="mg_l10">
-                        <div style="position: absolute; margin-top: -38px;  padding: 5px; border-radius: 0px">
+                        <div class="contribution_link">
                             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                <span class="create_post" style="cursor: pointer;text-shadow: 0px 1px 2px #ffffff;" data-target="{{ path('blog_manager_add_post_ajax')}}"><img src="{{ asset('image/add_icon.png') }}" style="width:12px; height:auto"> Proposer un article</span>
+                                <span class="create_post link2" data-target="{{ path('blog_manager_add_post_ajax')}}"><i class="fas fa-plus-circle"></i> Proposer un article</span>
                             {% else %}
-                                <a class="login_ajax" href="{{ path('user_login_ajax') }}"><img src="{{ asset('image/add_icon.png') }}" style="width:12px; height:auto"> Proposer un article</a>
+                                <a class="login_ajax link2" href="{{ path('user_login_ajax') }}"><i class="fas fa-plus-circle"></i> Proposer un article</a>
                             {% endif %}
                         </div>
                     </div>
@@ -66,11 +66,11 @@
             <div class="cr">
                 <div class="ct">
                     <div class="mg_l10">
-                        <div style="position: absolute; margin-top: -38px; padding: 5px; border-radius: 0px">
+                        <div class="contribution_link">
                             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                <span class="create_event" style="cursor: pointer;text-shadow: 0px 1px 2px #ffffff;" data-target="{{ path('event_manager_add_ajax')}}"><img src="{{ asset('image/add_icon.png') }}" style="width:12px; height:auto"> Proposer un évènement</span>
+                                <span class="create_event link2" data-target="{{ path('event_manager_add_ajax')}}"><i class="fas fa-plus-circle"></i> Proposer un évènement</span>
                             {% else %}
-                                <a class="login_ajax" href="{{ path('user_login_ajax') }}"><img src="{{ asset('image/add_icon.png') }}" style="width:12px; height:auto"> Proposer un évènement</a>
+                                <a class="login_ajax link2" href="{{ path('user_login_ajax') }}"><i class="fas fa-plus-circle"></i> Proposer un évènement</a>
                             {% endif %}
                         </div>
                     </div>

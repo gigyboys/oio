@@ -279,11 +279,20 @@
 											{% else %}
 												<div class="">{{ comments | length }} {% if comments | length > 1 %}commentaires{% else %}commentaire{% endif %}.</div>
 												{% for comment in comments %}
-													<div class="sep"></div>
-													<div class="mg_v10">
-														<div class="mg_b5">Ecrit le {{ comment.date | date('Y-m-d à H:i:s')}} sur <a href="{{ path('blog_post_view', {'slug': comment.post.slug}) }}"><strong>{{ comment.post.title }}</strong></a></div>
-														<div>{{ comment.comment}}</div>
-													</div>
+													{% if comment.post %}
+														<div class="sep"></div>
+														<div class="mg_v10">
+															<div class="mg_b5">Ecrit le {{ comment.date | date('Y-m-d à H:i:s')}} sur <a href="{{ path('blog_post_view', {'slug': comment.post.slug}) }}"><strong>{{ comment.post.title }}</strong></a></div>
+															<div>{{ comment.comment}}</div>
+														</div>
+													{% endif %}
+													{% if comment.event %}
+														<div class="sep"></div>
+														<div class="mg_v10">
+															<div class="mg_b5">Ecrit le {{ comment.date | date('Y-m-d à H:i:s')}} sur <a href="{{ path('event_view', {'slug': comment.event.slug}) }}"><strong>{{ comment.event.title }}</strong></a></div>
+															<div>{{ comment.comment}}</div>
+														</div>
+													{% endif %}
 												{% endfor %}
                                             {% endif %}
 										</div>

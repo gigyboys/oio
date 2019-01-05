@@ -38,7 +38,7 @@
 					{% for school in schools %}
 						<span class="school_item">
 							<span class="tacenter">
-								<span class="toggle_case" data-entity="tag" data-target="{{ path('', {'post_id': post.id, 'school_id': school.id }) }}">
+								<span class="toggle_case" data-entity="tag" data-target="{{ path('blog_manager_post_toogle_school', {'post_id': post.id, 'school_id': school.id }) }}">
 									{% set isSchool = isSchoolPost(post, school) %}
 									{% if isSchool %}
 										<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>

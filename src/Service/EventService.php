@@ -156,9 +156,42 @@ class EventService
 
     public function getValidEvents() {
 
-        $posts = $this->eventRepository->getValidEvents();
+        $events = $this->eventRepository->getValidEvents();
 
-        return $posts;
+        return $events;
+    }
+
+    public function getValidComments(Event $event) {
+        $comments = array();
+
+        $comments = $this->commentRepository->findBy(array(
+            'event' => $event
+        ));
+
+        return $comments;
+    }
+
+    public function getValidCommentsByUser(User $user) {
+        $comments = array();
+
+        $commentTemps = $this->commentRepository->getValidCommentsByUser($user);
+
+        $comments = array();
+        foreach($commentTemps as $comment){
+            if($comment->getPost()){
+                $post = $comment->getPost();
+                if($post->getPublished() && $post->getTovalid() && $post->getValid() && !$post->getDeleted()){
+                    array_push($comments, $comment);
+                }
+            }elseif($comment->getEvent()){
+                $event = $comment->getEvent();
+                if($event->getPublished() && $event->getTovalid() && $event->getValid() && !$event->getDeleted()){
+                    array_push($comments, $comment);
+                }
+            }
+        }
+
+        return $comments;
     }
 
 }

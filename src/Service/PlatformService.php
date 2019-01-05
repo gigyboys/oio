@@ -22,6 +22,7 @@ use App\Entity\View;
 use App\Entity\Visit;
 use App\Model\MailMessage;
 use App\Repository\AvatarRepository;
+use App\Repository\CommentRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\CategorySchoolRepository;
 use App\Repository\CoverRepository;
@@ -51,6 +52,7 @@ class PlatformService
         AvatarRepository $avatarRepository,
         PostRepository $postRepository,
         EventRepository $eventRepository,
+        CommentRepository $commentRepository,
         EntityManagerInterface $em,
         \Swift_Mailer $mailer,
         EngineInterface $templating,
@@ -63,6 +65,7 @@ class PlatformService
         $this->avatarRepository = $avatarRepository;
         $this->postRepository = $postRepository;
         $this->eventRepository = $eventRepository;
+        $this->commentRepository = $commentRepository;
         $this->em = $em;
         $this->templating = $templating;
         $this->mailer = $mailer;
@@ -432,5 +435,28 @@ class PlatformService
         $this->em->persist($sentMail);
         $this->em->flush();
 
+    }
+
+    public function getValidCommentsByUser(User $user) {
+        $comments = array();
+
+        $commentTemps = $this->commentRepository->getValidCommentsByUser($user);
+
+        $comments = array();
+        foreach($commentTemps as $comment){
+            if($comment->getPost()){
+                $post = $comment->getPost();
+                if($post->getPublished() && $post->getTovalid() && $post->getValid() && !$post->getDeleted()){
+                    array_push($comments, $comment);
+                }
+            }elseif($comment->getEvent()){
+                $event = $comment->getEvent();
+                if($event->getPublished() && $event->getTovalid() && $event->getValid() && !$event->getDeleted()){
+                    array_push($comments, $comment);
+                }
+            }
+        }
+
+        return $comments;
     }
 }
