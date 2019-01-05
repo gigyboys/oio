@@ -929,7 +929,7 @@
 }
 
 
-@media screen and (max-width: 400px)
+@media screen and (max-width: 450px)
 {
 	#sl_onglet_head {
 		text-align: center;
@@ -938,19 +938,27 @@
 		min-height: 240px;
 	}
 	.sl_oftheday .logo_box {
-		 width: 140px;
+		 width: 130px;
 	 }
 	.sl_oftheday .logo_box img {
 		width: 110px;
 		height: 110px;
 		margin-top: -77px;
+		margin-left: 8px;
 	}
 	.sl_oftheday .label {
-		margin-left: 133px;
+		margin-left: 125px;
 		margin-top: 158px;
 	}
 	.sl_oftheday .link_box {
 		margin-left: 135px;
+		padding: 0;
+	}
+	.sl_oftheday .link_box .link_item{
+		margin-left: 2px;
+	}
+	.sl_oftheday .link_box .link_item a{
+		padding: 5px 8px;
 	}
 	#sl_view_categories{
 		margin-left: 0px;

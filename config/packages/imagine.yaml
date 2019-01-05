@@ -109,6 +109,10 @@ liip_imagine:
       quality: 100
       filters:
         thumbnail: { size: [960, 240], mode: outbound }
+    700x290:
+      quality: 100
+      filters:
+        thumbnail: { size: [600, 250], mode: outbound }
     600x250:
       quality: 100
       filters:

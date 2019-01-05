@@ -154,4 +154,11 @@ class EventService
         return false;
     }
 
+    public function getValidEvents() {
+
+        $posts = $this->eventRepository->getValidEvents();
+
+        return $posts;
+    }
+
 }

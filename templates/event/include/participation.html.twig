@@ -21,11 +21,20 @@
             
                 {% for participation in participations %}
                     {% set user = participation.user %}
-                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and user.id != app.user.id and countParticipation < limit %}
-                        {% set avatar = userAvatar(user) %}
-                        {% set userInfo = getLinkUserInfo(user, '<img src="'~ avatar | imagine_filter("50x50") ~'" />' ) %}
-                        {{ userInfo | raw }}
-                        {% set countParticipation = countParticipation + 1 %}
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        {% if user.id != app.user.id and countParticipation < limit %}
+                            {% set avatar = userAvatar(user) %}
+                            {% set userInfo = getLinkUserInfo(user, '<img src="'~ avatar | imagine_filter("50x50") ~'" />' ) %}
+                            {{ userInfo | raw }}
+                            {% set countParticipation = countParticipation + 1 %}
+                        {% endif %}
+                    {% else %}
+                        {% if countParticipation < limit %}
+                            {% set avatar = userAvatar(user) %}
+                            {% set userInfo = getLinkUserInfo(user, '<img src="'~ avatar | imagine_filter("50x50") ~'" />' ) %}
+                            {{ userInfo | raw }}
+                            {% set countParticipation = countParticipation + 1 %}
+                        {% endif %}
                     {% endif %}
                 {% endfor %}
 

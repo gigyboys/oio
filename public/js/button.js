@@ -6,6 +6,12 @@ $(function() {
         dd_target.hide();
 		$(".popup_user_info").remove();
 		$("view_result_wrap").hide();
+
+        if($('.toggler_target').is(':visible')){
+            $('.toggler_src').addClass('open');
+        }else{
+            $('.toggler_src').removeClass('open');
+        }
 		
     });
 
@@ -39,6 +45,12 @@ $(function() {
         }else{
             dd_target.hide();
             dd_target_to.hide();
+        }
+
+        if($('.toggler_target').is(':visible')){
+            $('.toggler_src').addClass('open');
+        }else{
+            $('.toggler_src').removeClass('open');
         }
     });
 

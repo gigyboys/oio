@@ -36,7 +36,7 @@
 				info
 			</span>
 			<span class="dd_target" style="display:block; padding: 5px; text-align: left; margin-top: 4px; position: absolute; display: none; background: #eee; padding: 4px; border: 1px solid #aaa; border-radius: 4px;">
-				<span>Auteur : {{ post.user.name }}</span><br />
+				<span>Auteur : <a class="link" href="{{ path('admin_user_edit', {'user_id': post.user.id}) }}">{{ post.user.name }}</a></span><br />
 				<span>Date d'ajout : {{ post.date | date('Y-m-d H:i:s') }}</span><br />
 				<span>Nombre de vues : {#{{ post.viewNumber }}#}</span><br />
 			</span>

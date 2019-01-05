@@ -118,4 +118,27 @@ class EventRepository extends ServiceEntityRepository
         return $events;
     }
 
+    public function getValidEvents($field = 'id', $order = 'DESC') {
+
+        $qb = $this->createQueryBuilder('event');
+
+        $qb
+            ->andWhere('event.tovalid = :tovalid')
+            ->setParameter('tovalid', true)
+            ->andWhere('event.valid = :valid')
+            ->setParameter('valid', true)
+            ->andWhere('event.published = :published')
+            ->setParameter('published', true)
+            ->andWhere('event.deleted = :deleted')
+            ->setParameter('deleted', false)
+        ;
+        $qb
+            ->orderBy('event.'.$field, $order)
+        ;
+
+        $events = $qb->getQuery()->getResult();
+
+        return $events;
+    }
+
 }

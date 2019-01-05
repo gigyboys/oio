@@ -34,7 +34,10 @@
                         <div class="label">
                             <div style="">
                                 {% set posts = getValidPosts() %}
-                                <a href="{{ path('blog') }}">{{ posts | length }} articles déjà publiés.</a>
+                                {% set events = getValidEvents() %}
+                                <a href="{{ path('blog') }}">{{ posts | length }} articles</a>, 
+                                <a href="{{ path('event') }}">{{ events | length }} évènements</a> 
+                                    déjà publiés.
                             </div>
                             <div style="">
                                 Et beaucoup d'autres à publier dans le futur.
@@ -52,7 +55,7 @@
                         <div class="label">
                             <div style="">
                                 {% set users = getActiveUsers() %}
-                                {{ users | length }} utilisateurs toujours prêts à partager leur expériences -
+                                {{ users | length }} {# Des #} utilisateurs toujours prêts à partager leur expériences -
                                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                                     <a href="{{ path('user_profile', {'username': app.user.username}) }}">Mon espace client</a>
                                 {% else %}

@@ -8,38 +8,51 @@
 {% block body %}
 	<div class="cr">
 		<div class="mg_v10">
-			<div class="ct">
+			<div class="ct bg_view">
 
-				<div class="mg_10" style="font-weight:bold;">
-					<span style=" font-size:18px; color:#555">{{ post.title }}</span>
-				</div>
-				<div class="mg_10" style="text-align:justify; font-weight:bold">
+				<div class="mg_10 introduction">
                     {{ post.introduction }}
 				</div>
 
-                {% if tags | length > 0 %}
-					<div class="mg_10">
-                        {% for tag in tags %}
-							<span style="display: inline-block; background: #bbb; padding: 2px 6px; margin: 4px; border-radius: 6px; vertical-align:middle">{{ tag.name }}</span>
-                        {% endfor %}
+				{# twig extension #}
+				{% set illustration = postIllustration(post) %}
+
+				<div class="view_info">
+					<div class="cover" style="background: #81b5e2 url('{{ illustration | imagine_filter('1200x500') }}') no-repeat scroll center center / cover ;"></div>
+					<div class="content">
+						<div class="mg_10 title">
+							<h1>{{ post.title }}</h1>
+						</div>
+
+						{% if post.showAuthor %}
+							{% set avatar = userAvatar(post.user) %}
+							<div class="author_avatar">
+								<img src="{{ avatar | imagine_filter('100x100') }}" alt="img ur" />
+							</div>
+						{% endif %}
+
+						<div class="mg_10">
+							Publié 
+							{% if post.showAuthor %}
+								<span>par</span>
+								{# twig extension #}
+								{% set userInfo = getLinkUserInfo(post.user, post.user.name) %}
+								{{ userInfo | raw }}
+							{% endif %}
+							<span>le {{ post.date | date('Y-m-d') }}</span>
+						</div>
+
+						{% if tags | length > 0 %}
+							<div class="mg_10 list_tags">
+								{% for tag in tags %}
+									<span class="tag_item">{{ tag.name }}</span>
+								{% endfor %}
+							</div>
+						{% endif %}
+						
 					</div>
-                {% endif %}
-
-                {# twig extension #}
-                {% set illustration = postIllustration(post) %}
-				<div class="mg_10">
-					<img id="post_illustration" style="display:block; max-width: 100%; height: auto; margin: auto" src="{{ illustration | imagine_filter('1200x500') }}" alt="img post" />
 				</div>
-				<div class="mg_10">
 
-                    {% if post.showAuthor %}
-						<strong>Par</strong>
-                        {# twig extension #}
-                        {% set userInfo = getLinkUserInfo(post.user, post.user.name) %}
-                        {{ userInfo | raw }}
-                    {% endif %}
-					<strong>Le {{ post.date | date('Y-m-d') }}</strong>
-				</div>
 				<div class="mg_10" style="overflow: auto;">
                     {{ post.content | raw }}
 				</div>
@@ -108,7 +121,6 @@
 							</div>
                         {% else %}
 							<div class="mg_10 tacenter">
-                                {#<a class="link" href="{{ path('user_login') }}">Connectez-vous pour pouvoir ecrire votre commentaire</a>#}
 								<a class="login_ajax" href="{{ path('user_login_ajax') }}">Connectez-vous pour pouvoir ecrire votre commentaire</a>
 							</div>
                         {% endif %}

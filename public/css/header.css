@@ -462,7 +462,8 @@ header{
 	display:block; 
 	height: 3px;
 	width:20px; 
-	background:#777
+	background:#333;
+	transition: transform 0.4s, background 0.3s, transform-origin 0.3s;
 }
 .nav_responsive .dd_src .transparent{
 	display:block; 
@@ -470,6 +471,21 @@ header{
 	width:20px; 
 	background:transparent
 }
+
+.nav_responsive .toggler_src.open .bar1{
+	transform: rotate(40deg);
+	transform-origin: 0px 0;
+}
+
+.nav_responsive .toggler_src.open .bar2{
+	background: transparent;
+}
+
+.nav_responsive .toggler_src.open .bar3{
+	transform: rotate(-39deg);
+	transform-origin: 0 2px;
+}
+
 .nav_responsive .dd_target{
 	text-align: left; 
 	margin-top: 0px; 
