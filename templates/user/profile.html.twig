@@ -280,17 +280,39 @@
 												<div class="">{{ comments | length }} {% if comments | length > 1 %}commentaires{% else %}commentaire{% endif %}.</div>
 												{% for comment in comments %}
 													{% if comment.post %}
-														<div class="sep"></div>
-														<div class="mg_v10">
-															<div class="mg_b5">Ecrit le {{ comment.date | date('Y-m-d à H:i:s')}} sur <a href="{{ path('blog_post_view', {'slug': comment.post.slug}) }}"><strong>{{ comment.post.title }}</strong></a></div>
-															<div>{{ comment.comment}}</div>
+														<div class="user_comment_item">
+															<div class="sep"></div>
+															<div class="mg_v10">
+																<div class="illustration_wrap">
+																	{% set illustration = postIllustration(comment.post) %}
+																	<a href="{{ path('blog_post_view', {'slug': comment.post.slug}) }}">
+																		<img src="{{ illustration | imagine_filter('60x60') }}" />
+																	</a>
+																</div>
+																<div class="comment_wrap">
+																	<div class="mg_b5">Ecrit le {{ comment.date | date('Y-m-d à H:i:s')}} sur l'article <a href="{{ path('blog_post_view', {'slug': comment.post.slug}) }}"><strong>{{ comment.post.title }}</strong></a></div>
+																	<div>{{ comment.comment}}</div>
+																</div>
+																<div class="both"></div>
+															</div>
 														</div>
 													{% endif %}
 													{% if comment.event %}
-														<div class="sep"></div>
-														<div class="mg_v10">
-															<div class="mg_b5">Ecrit le {{ comment.date | date('Y-m-d à H:i:s')}} sur <a href="{{ path('event_view', {'slug': comment.event.slug}) }}"><strong>{{ comment.event.title }}</strong></a></div>
-															<div>{{ comment.comment}}</div>
+														<div class="user_comment_item">
+															<div class="sep"></div>
+															<div class="mg_v10">
+																<div class="illustration_wrap">
+																	{% set illustration = eventIllustration(comment.event) %}
+																	<a href="{{ path('event_view', {'slug': comment.event.slug}) }}">
+																		<img src="{{ illustration | imagine_filter('60x60') }}" />
+																	</a>
+																</div>
+																<div class="comment_wrap">
+																	<div class="mg_b5">Ecrit le {{ comment.date | date('Y-m-d à H:i:s')}} sur l'évènement <a href="{{ path('event_view', {'slug': comment.event.slug}) }}"><strong>{{ comment.event.title }}</strong></a></div>
+																	<div>{{ comment.comment}}</div>
+																</div>
+																<div class="both"></div>
+															</div>
 														</div>
 													{% endif %}
 												{% endfor %}

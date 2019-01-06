@@ -24,12 +24,12 @@
 			</div>
 		</div>
 		<div class="content_tab_content">
-			<div class="mg_v10" style="">
-				<div class="content_tab_content_item selected" id="content_tab_about" style="">
+			<div class="mg_v10">
+				<div class="content_tab_content_item selected" id="content_tab_about">
 					{{ school.description | raw}}
 				</div>
 			</div>
-			<div class="content_tab_content_item" id="content_tab_field" style="">
+			<div class="content_tab_content_item" id="content_tab_field">
 				{# fields #}
 				{% if fields %}
 					{% for field in fields %}
@@ -45,7 +45,7 @@
 					{% endfor %}
 				{% endif %}
 			</div>
-			<div class="content_tab_content_item" id="content_tab_contact" style="">
+			<div class="content_tab_content_item" id="content_tab_contact">
 				{{ include("school/include/contact.html.twig") }}
 			</div>
 		</div>

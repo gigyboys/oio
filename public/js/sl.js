@@ -244,10 +244,11 @@ $(function() {
     });
 	
 	//toogleSubscription school
-	$('body').on('click','#toggle_subscription',function(){
+	$('body').on('click','.toggle_subscription',function(){
         var $this = $(this);
         var target = $this.data('target');
         $('.subscription_loading').show();
+        $('.toggle_subscription').hide();
         $.ajax({
             type: 'POST',
             url: target,
@@ -267,11 +268,14 @@ $(function() {
                     processLogin();
 				}
                 $('.subscription_loading').hide();
+				$('.toggle_subscription').css('display', 'inline-block');
             },
             error: function(jqXHR, textStatus, errorThrown) {
 				console.log(jqXHR.status);
 				console.log(textStatus);
 				console.log(errorThrown);
+                $('.subscription_loading').hide();
+				$('.toggle_subscription').css('display', 'inline-block');
 			}
         });		
     });

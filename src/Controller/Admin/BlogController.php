@@ -101,7 +101,6 @@ class BlogController extends AbstractController {
         ));
     }
 
-
     public function postCreation()
     {
         $posts = $this->postRepository->findBy(array(

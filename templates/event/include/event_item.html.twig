@@ -12,10 +12,9 @@
 	
 	{% if event.showAuthor %}
 		{% set avatar = userAvatar(event.user) %}
-		<div style="position:relative;text-align:center; margin:auto; margin-top:-70px; width: 80px; height: 80px;border-radius:50%; border: 5px solid #fff; ">
-			{% set userInfo = getLinkUserInfo(event.user, '<img src="'~ avatar | imagine_filter("80x80") ~'" style="width: 80px; height: 80px;border-radius:50%;" />' ) %}
+		<div class="avatar_wrap">
+			{% set userInfo = getLinkUserInfo(event.user, '<img src="'~ avatar | imagine_filter("80x80") ~'" />' ) %}
 			{{ userInfo | raw }}
-			{#<img src="{{ avatar | imagine_filter('80x80') }}" style="width: 80px; height: 80px;" />#}
 		</div>
 	{% endif %}
 	<div class="event_title tacenter {% if published == false %}op5{% endif %}">
@@ -30,13 +29,6 @@
 	#}
 
 	<div class="meta_info">
-		{#
-        {% if event.showAuthor %}
-            {% set avatar = userAvatar(event.user) %}
-            {% set userInfo = getLinkUserInfo(event.user, event.user.name) %}
-			<div class="author_info"><img src="{{ avatar | imagine_filter('20x20') }}" style="width: 20px; width: 20px" /> <span class="user_info">{{ userInfo | raw }}</span></div>
-		{% endif %}
-		#}
 		{# extension #}
 		{#
         {% set comments =  getValidComments(event) %}

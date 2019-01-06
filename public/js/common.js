@@ -85,6 +85,10 @@ $(function() {
         let data = JSON.stringify(datafull);
 
         $("#login_msg").html('');
+
+        $("#username, #password").prop('disabled', true);
+        $(".loading_wrap").show();
+        $(".btn_wrap").hide();
         $.ajax({
             type: 'POST',
             contentType: "application/json",
@@ -106,12 +110,18 @@ $(function() {
                 }else{
                     $("#login_msg").html('<span class="error_msg">Veuillez bien verifier votre email et mot de passe.</span>');
                 }
+                $("#username, #password").prop('disabled', false);
+                $(".loading_wrap").hide();
+                $(".btn_wrap").show();
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR.status);
                 console.log(textStatus);
                 console.log(errorThrown);
                 $("#login_msg").html('<span class="error_msg">Veuillez bien verifier votre email et mot de passe.</span>');
+                $("#username, #password").prop('disabled', false);
+                $(".loading_wrap").hide();
+                $(".btn_wrap").show();
             }
         });
     });

@@ -130,3 +130,23 @@
 #avatars_wrapper .delete_avatar:hover{
 	background:#aaa;
 }
+
+.user_hover_info{
+	display:inline-block; 
+	position: relative;
+}
+
+.user_comment_item .illustration_wrap{
+	width:60px; 
+	height:60px;
+	float:left
+}
+
+.user_comment_item .illustration_wrap img{
+	width:60px;
+	height:60px
+}
+
+.user_comment_item .comment_wrap{
+	margin-left:70px
+}

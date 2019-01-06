@@ -24,6 +24,16 @@ footer{
 	padding:0 8px
 }
 
+#footer_navigation .list_cat{
+	text-align:justify; 
+	margin: 10px
+}
+
+#footer_navigation .list_cat a{
+	display:inline-block; 
+	margin: 0 2px
+}
+
 #newsletter{
 	background:#bbb;
 	min-height: 100px;
@@ -41,4 +51,12 @@ footer{
 }
 
 #copyright_content{
+}
+
+
+@media screen and (max-width: 600px)
+{
+	#footer_navigation .list_cat{
+		text-align:center; 
+	}
 }

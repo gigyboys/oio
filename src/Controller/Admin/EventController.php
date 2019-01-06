@@ -110,6 +110,18 @@ class EventController extends AbstractController {
         ));
     }
 
+    public function eventCreation()
+    {
+        $events = $this->postRepository->findBy(array(
+            'tovalid' => false
+        ));
+
+        return $this->render('admin/event/events_creation.html.twig', array(
+            'events' => $events,
+            'view' => 'event',
+        ));
+    }
+
     public function addEvent(Request $request)
     {
         $event = new Event();

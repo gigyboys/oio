@@ -15,10 +15,10 @@
                             <a class="link" href="{{ path('school_home') }}"><img src="{{ asset('image/logo_sl.png')  }}" /></a>
                         </div>
                         <div class="label">
-                            <div style="">
+                            <div>
                                 <a class="link" href="{{ path('school_home') }}">{{ allSchools | length }} établissements</a> repartis sur <a href="{{ path('school_categories') }}">{{ allCategories | length }} catégories</a>
                             </div>
-                            <div style="">
+                            <div>
                                 {{ evaluatedSchools | length }} établissements évalués - {{ allEvaluations | length }} évaluations
                             </div>
                         </div>
@@ -32,14 +32,14 @@
                             <a class="link" href="{{ path('blog') }}"><img src="{{ asset('image/icon_gl.png')  }}" /></a>
                         </div>
                         <div class="label">
-                            <div style="">
+                            <div>
                                 {% set posts = getValidPosts() %}
                                 {% set events = getValidEvents() %}
                                 <a href="{{ path('blog') }}">{{ posts | length }} articles</a>, 
                                 <a href="{{ path('event') }}">{{ events | length }} évènements</a> 
                                     déjà publiés.
                             </div>
-                            <div style="">
+                            <div>
                                 Et beaucoup d'autres à publier dans le futur.
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                             <img src="{{ asset('image/icon_user_gl.png')  }}" />
                         </div>
                         <div class="label">
-                            <div style="">
+                            <div>
                                 {% set users = getActiveUsers() %}
                                 {{ users | length }} {# Des #} utilisateurs toujours prêts à partager leur expériences -
                                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}

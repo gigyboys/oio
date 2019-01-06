@@ -86,19 +86,19 @@
                             {% endif %}
                         </div>
                         <div class="right">
-                            <span class="subscription_loading" style="display:none">
-								<img src="{{ asset('image/tail-spin.svg')  }}" style="width:20px; height:20px;display: inline-block; vertical-align: middle;" />
+                            <span class="subscription_loading">
+								<img src="{{ asset('image/tail-spin.svg')  }}" /> Chargement...
 							</span>
                             {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
-                                <span id="toggle_subscription" data-target="{{ path('school_toggle_subscription', {'school_id': school.id}) }}" style="cursor:pointer">
-                                {% set isSubscribed = isSubscribed(school, app.user) %}
-                                {% if isSubscribed %}
-                                    <span class="subscription_btn" style="display:none">S'abonner</span>
-                                    <span class="unsubscription_btn">Abonné</span>
-                                {% else %}
-                                    <span class="subscription_btn">S'abonner</span>
-                                    <span class="unsubscription_btn" style="display:none;">Abonné</span>
-                                {% endif %}
+                                <span class="toggle_subscription" data-target="{{ path('school_toggle_subscription', {'school_id': school.id}) }}">
+                                    {% set isSubscribed = isSubscribed(school, app.user) %}
+                                    {% if isSubscribed %}
+                                        <span class="subscription_btn" style="display:none">S'abonner</span>
+                                        <span class="unsubscription_btn">Abonné</span>
+                                    {% else %}
+                                        <span class="subscription_btn">S'abonner</span>
+                                        <span class="unsubscription_btn" style="display:none;">Abonné</span>
+                                    {% endif %}
                                 </span>
                             {% endif %}
                         </div>

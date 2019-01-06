@@ -6,7 +6,14 @@
 
 {% block body_header %}
 	<div class="bc">
-		<span class="bc1"><a href="{{ path('admin_blog_post') }}"><img src="{{ asset('image/bg_icon.png') }}" style="width:14px; height:auto" /> <span>Blog</span></a></span>
+		<span class="bc1"><a href="{{ path('admin_blog_post') }}"><img src="{{ asset('image/bg_icon.png') }}" style="width:14px; height:auto" /> <span>{{ 'Blog' | trans }}</span></a> </span>
+		<span class="dd">
+			<span href="#" class="dd_src">
+				<span class="bcdd"></span>
+			</span>
+			{{ include("admin/blog/include/blog_principal_action.html.twig") }}
+		</span>
+		<span class="bc1"><a href="{{ path('admin_blog_post_creation') }}">En cours de création</a></span>
 	</div>
 	<div style="padding:8px;float:right">
 		<span><a href="{{ path('admin_blog_post_add') }}"><img src="{{ asset('image/add_icon.png') }}" /> <span>Nouvel Article</span></a></span>
@@ -16,7 +23,7 @@
 {% block content_body %}
 	<div style="background:#ddd; padding: 5px; margin:5px; border:1px solid #bbb">
 		<span><img src="{{ asset('image/list_icon.png') }}" style="width:12px; height:auto" /> Liste des articles en cours de création</span>
-		<div style="float: right"><a target="_blank" href="{{ path('blog') }}"><img src="{{ asset('image/view_icon.png') }}" style="width: 12px; height: auto"/> Aperçu</a></div>
+		{#<div style="float: right"><a target="_blank" href="{{ path('blog') }}"><img src="{{ asset('image/view_icon.png') }}" style="width: 12px; height: auto"/> Aperçu</a></div>#}
 		<div class="both"></div>
 	</div>
 	

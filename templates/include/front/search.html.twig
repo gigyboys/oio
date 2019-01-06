@@ -88,13 +88,13 @@
 								{% endif %}
 							</div>
 							<div class="dd_target search_sl_cat_list" data-display="block">
-								<div style="margin:5px">
-									<span data-category-id="0" title="Toutes categories" data-name="Toutes categories" data-slug="all" class="search_cat_sl_item"><span>Toutes categories</span></span><!--
-									{% set categories = getCategoriesWithPublishedSchool(0) %}
-									{% for category in categories %}
-										--><span data-category-id="{{ category.id }}" data-slug="{{ category.slug }}" title="{{ category.name | capitalize }}" data-name="{{ category.name | capitalize }}" class="search_cat_sl_item"><span>{{ category.name | capitalize }}</span></span><!--
-									{% endfor %}
-								--></div>
+								<div class="mg_5">
+									<span data-category-id="0" title="Toutes categories" data-name="Toutes categories" data-slug="all" class="search_cat_sl_item"><span>Toutes categories</span></span>{#
+									#}{% set categories = getCategoriesWithPublishedSchool(0) %}{#
+									#}{% for category in categories %}{#
+										#}<span data-category-id="{{ category.id }}" data-slug="{{ category.slug }}" title="{{ category.name | capitalize }}" data-name="{{ category.name | capitalize }}" class="search_cat_sl_item"><span>{{ category.name | capitalize }}</span></span>{#
+									#}{% endfor %}{#
+								#}</div>
 							</div>
 						</div>
 						<div class="sl_bloc_type dd">
@@ -108,7 +108,7 @@
                                 {% endif %}
 							</div>
 							<div class="dd_target search_sl_type_list" data-display="block" style="display:none;">
-								<div style="margin:5px">
+								<div class="mg_5">
 									<span data-type-id="0" title="Touts types" data-slug="all" class="search_type_sl_item" data-name="Touts types">Touts types</span>
 									<span data-type-id="1" title="Publique" data-slug="public" class="search_type_sl_item" data-name="Publics">Publics</span>
 									<span data-type-id="2" title="Privé" data-slug="private" class="search_type_sl_item" data-name="Privés">Privés</span>

@@ -556,6 +556,24 @@
 	margin-top:10px
 }
 
+#sl_view_action .subscription_loading{
+	display:none;  
+	height: 30px; 
+	vertical-align:middle;
+	padding-top:6px
+}
+
+#sl_view_action .subscription_loading img{
+	width:20px; 
+	height:20px;
+	display: inline-block; 
+	vertical-align: middle;
+}
+
+#sl_view_action .toggle_subscription{
+	cursor:pointer
+}
+
 #sl_view_action .subscription_btn{
 	color:#2981c5;
 	border:1px solid #2981c5;

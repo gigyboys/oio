@@ -321,6 +321,10 @@ admin_event:
     path:     /event
     defaults:
         _controller: App\Controller\Admin\EventController::event
+admin_event_creation:
+    path:     /event/creation
+    defaults:
+        _controller: App\Controller\Admin\EventController::eventCreation
 admin_event_add:
     path:     /event/add-event
     defaults:

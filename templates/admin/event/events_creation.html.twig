@@ -1,12 +1,19 @@
 {% extends "back.html.twig" %}
 
 {% block title %}
-	Liste des évènements
+	Liste des évènements en cours de création
 {% endblock %}
 
 {% block body_header %}
 	<div class="bc">
-		<span class="bc1"><a href="{{ path('admin_event') }}"><img src="{{ asset('image/default_icon.png') }}" style="width:14px; height:auto" /> <span>Evènements</span></a></span>
+		<span class="bc1"><a href="{{ path('admin_event') }}"><img src="{{ asset('image/default_icon.png') }}" style="width:14px; height:auto" /> <span>Evènements</span></a> </span>
+		<span class="dd">
+			<span href="#" class="dd_src">
+				<span class="bcdd"></span>
+			</span>
+			{{ include("admin/event/include/event_principal_action.html.twig") }}
+		</span>
+		<span class="bc1"><a href="{{ path('admin_event_creation') }}">En cours de création</a></span>
 	</div>
 	<div style="padding:8px;float:right">
 		<span><a href="{{ path('admin_event_add') }}"><img src="{{ asset('image/add_icon.png') }}" /> <span>Nouvel évènement</span></a></span>
@@ -15,8 +22,8 @@
 
 {% block content_body %}
 	<div style="background:#ddd; padding: 5px; margin:5px; border:1px solid #bbb">
-		<span><img src="{{ asset('image/list_icon.png') }}" style="width:12px; height:auto" /> Liste des évènements</span>
-		<div style="float: right"><a target="_blank" href="{{ path('event') }}"><img src="{{ asset('image/view_icon.png') }}" style="width: 12px; height: auto"/> Aperçu</a></div>
+		<span><img src="{{ asset('image/list_icon.png') }}" style="width:12px; height:auto" /> Liste des évènements en cours de création</span>
+		{#<div style="float: right"><a target="_blank" href="{{ path('event') }}"><img src="{{ asset('image/view_icon.png') }}" style="width: 12px; height: auto"/> Aperçu</a></div>#}
 		<div class="both"></div>
 	</div>
 	
@@ -39,8 +46,8 @@
 					<th class="a_table_cell_id" style="width: 50px; text-align:center">Id</th>
 					<th class="taleft">Titre</th>
 					<th class="taleft">Auteur</th>
+					<th class="tacenter">Date création</th>
 					<th class="tacenter">Publié</th>
-					<th class="tacenter">Valide</th>
 					<th class="a_table_cell_action tacenter">Actions</th>
 				</tr>
 				{% for event in events %}
@@ -76,6 +83,9 @@
 						</span>
 					</td>
 					<td class="tacenter">
+						{{ event.date | date("Y-m-d") }}
+					</td>
+					<td class="tacenter">
 						<span class="toggle_case" data-entity="event" data-target="{{ path('event_manager_toogle_publication', {'event_id': event.id}) }}">
 							{% if event.published %}
 								<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
@@ -87,21 +97,6 @@
 						</span><span class="state_loading" style="display:none">
 							<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" />
 						</span>
-					</td>
-					<td class="tacenter">
-						{% if event.tovalid %}
-						<span class="toggle_case" data-entity="event" data-target="{{ path('event_manager_toogle_validation', {'event_id': event.id}) }}">
-							{% if event.valid %}
-								<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
-								<span class="redstate"><span class="redpastille"></span></span>
-							{% else %}
-								<span class="greenstate"><span class="greenpastille"></span></span>
-								<span class="redstate" style="display:none"><span class="redpastille"></span></span>
-							{% endif %}
-						</span><span class="state_loading" style="display:none">
-							<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" />
-						</span>
-						{% endif %}
 					</td>
 
 					<td class="a_table_cell_action tacenter">
@@ -127,8 +122,6 @@
 {% endblock %}
 
 {% block body_footer %}
-	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_events">{{ events | length }}</span> évènement(s)</span> |
-	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_published_events">{{ publishedEvents | length }}</span> publié(s)</span> |
-	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_not_published_events">{{ notPublishedEvents | length }}</span> non publié(s)</span>
+	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_events">{{ events | length }}</span> évènement(s)</span>
 {% endblock %}
 

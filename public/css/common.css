@@ -48,6 +48,9 @@
 .taright{
 	text-align:right;
 }
+.cp{
+	cursor: pointer;
+}
 .ct10{
 	margin-left:10px;
 	margin-right:10px
