@@ -33,7 +33,7 @@ $(function() {
     });
 	
 	
-	//tooglePublishState advert
+	//togglePublishState advert
     $('#toggle_publishState_advert').on('click', function(){
         var $this = $(this);
         var target = $this.data('target');

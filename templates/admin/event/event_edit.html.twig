@@ -240,7 +240,7 @@
 
 {% block body_footer %}
 	<div style="padding-top: 8px">
-		<span class="toggle_case" data-target="{{ path('event_manager_toogle_publication', {'event_id': event.id}) }}">
+		<span class="toggle_case" data-target="{{ path('event_manager_toggle_publication', {'event_id': event.id}) }}">
 			{% if event.published %}
 				<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Publier</span></span>
 				<span class="redstate"><span class="redpastille"></span> <span>Ne pas publier</span></span>
@@ -252,7 +252,7 @@
 			<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" /> Chargement...
 		</span>
 		|
-		<span class="toggle_case" data-target="{{ path('event_manager_toogle_show_author', {'event_id': event.id}) }}">
+		<span class="toggle_case" data-target="{{ path('event_manager_toggle_show_author', {'event_id': event.id}) }}">
 			{% if event.showAuthor %}
 				<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Afficher l'auteur</span></span>
 				<span class="redstate"><span class="redpastille"></span> <span>Ne pas afficher l'auteur</span></span>
@@ -264,7 +264,7 @@
 			<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" /> Chargement...
 		</span>
 		|
-		<span class="toggle_case" data-target="{{ path('event_manager_toogle_active_comment', {'event_id': event.id}) }}">
+		<span class="toggle_case" data-target="{{ path('event_manager_toggle_active_comment', {'event_id': event.id}) }}">
 			{% if event.activeComment %}
 				<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Activer les commentaires</span></span>
 				<span class="redstate"><span class="redpastille"></span> <span>Désactiver les commentaires</span></span>
@@ -277,7 +277,7 @@
 		</span>
         {% if event.tovalid %}
 			|
-		<span class="toggle_case" data-target="{{ path('event_manager_toogle_validation', {'event_id': event.id}) }}">
+		<span class="toggle_case" data-target="{{ path('event_manager_toggle_validation', {'event_id': event.id}) }}">
 			{% if event.valid %}
 				<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Valider</span></span>
 				<span class="redstate"><span class="redpastille"></span> <span>Ne pas valider</span></span>

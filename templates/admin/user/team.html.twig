@@ -59,7 +59,7 @@
 						<td>{{ userTeam.user.email }}</td>
 						<td>{{ userTeam.role }}</td>
 						<td style="text-align:center">
-							<span class="toggle_case" data-entity="userTeam" data-target="{{ path('admin_user_team_toogle_publication', {'userTeam_id': userTeam.id}) }}">
+							<span class="toggle_case" data-entity="userTeam" data-target="{{ path('admin_user_team_toggle_publication', {'userTeam_id': userTeam.id}) }}">
 								{% if userTeam.published %}
 									<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
 									<span class="redstate"><span class="redpastille"></span></span>

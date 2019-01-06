@@ -100,7 +100,7 @@ class DocumentController extends AbstractController {
     }
 
 
-    public function tooglePublicationDocument($school_id, $document_id, Request $request)
+    public function togglePublicationDocument($school_id, $document_id, Request $request)
     {
         $document = $this->documentRepository->find($document_id);
 

@@ -95,7 +95,7 @@
 							<a href="{#{{ path('com_admin_school_category_edit', {'id': category.id}) }}#}">{{ tag.name }}</a>
 						</td>
 						<td style="text-align:center">
-							<span class="toggle_case" data-entity="tag" data-target="{{ path('admin_blog_post_toogle_tag', {'post_id': post.id, 'tag_id': tag.id }) }}">
+							<span class="toggle_case" data-entity="tag" data-target="{{ path('admin_blog_post_toggle_tag', {'post_id': post.id, 'tag_id': tag.id }) }}">
 								{% set isTag = isTagPost(post, tag) %}
 								{% if isTag %}
 									<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>

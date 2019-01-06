@@ -101,7 +101,7 @@
 							<a href="{{ path('admin_school_field_edit', {'school_id': school.id, 'field_id': field.id}) }}">{{ field.name }}</a>
 						</td>
 						<td style="text-align:center">
-							<span class="toggle_case" data-entity="field" data-target="{{ path('admin_school_field_toogle_publication', {'school_id': school.id, 'field_id': field.id}) }}">
+							<span class="toggle_case" data-entity="field" data-target="{{ path('admin_school_field_toggle_publication', {'school_id': school.id, 'field_id': field.id}) }}">
 								{% if field.published %}
 									<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
 									<span class="redstate"><span class="redpastille"></span></span>

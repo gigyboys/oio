@@ -127,7 +127,7 @@
 						<td><a href="{{ path('admin_school_edit', {'id': school.id}) }}">{{ school.name }}</a></td>
 						<td>{{ school.shortName }}</td>
 						<td class="tacenter">
-							<span class="toggle_publishState" data-entity="school" data-target="{{ path('admin_school_toogle_publication', {'school_id': school.id}) }}">
+							<span class="toggle_publishState" data-entity="school" data-target="{{ path('admin_school_toggle_publication', {'school_id': school.id}) }}">
 								{% if school.published %}
 									<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
 									<span class="redstate"><span class="redpastille"></span></span>

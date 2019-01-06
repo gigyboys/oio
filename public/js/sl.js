@@ -173,7 +173,7 @@ $(function() {
     });
 	
 	/*
-	* toogle school of the day description
+	* toggle school of the day description
 	*/
 	$('body').on('click','#sl_oftheday_title',function(){
         $('#sl_oftheday_desc').toggle();
@@ -243,7 +243,7 @@ $(function() {
 		});
     });
 	
-	//toogleSubscription school
+	//toggleSubscription school
 	$('body').on('click','.toggle_subscription',function(){
         var $this = $(this);
         var target = $this.data('target');

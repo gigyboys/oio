@@ -816,7 +816,7 @@ $(function() {
     });
 	
 	
-	//toogleCategory sl
+	//toggleCategory sl
     $('.a_sl_toggle_cat').on('click', function(){
         var $this = $(this);
         var target = $this.data('target');

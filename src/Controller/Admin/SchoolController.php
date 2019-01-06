@@ -202,7 +202,7 @@ class SchoolController extends AbstractController {
         ));
     }
 
-    public function tooglePublication($school_id, Request $request)
+    public function togglePublication($school_id, Request $request)
     {
         $school = $this->schoolRepository->find($school_id);
         $response = new Response();
@@ -351,7 +351,7 @@ class SchoolController extends AbstractController {
         ));
     }
 
-    public function toogleCategory($school_id, $category_id, Request $request)
+    public function toggleCategory($school_id, $category_id, Request $request)
     {
         $school = $this->schoolRepository->find($school_id);
         $category = $this->categoryRepository->find($category_id);

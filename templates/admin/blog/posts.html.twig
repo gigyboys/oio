@@ -67,7 +67,7 @@
 					#}
 					<td>
 						<span>
-							<span class="toggle_case" data-target="{{ path('blog_manager_post_toogle_show_author', {'post_id': post.id}) }}">
+							<span class="toggle_case" data-target="{{ path('blog_manager_post_toggle_show_author', {'post_id': post.id}) }}">
 								{% if post.showAuthor %}
 									<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
 									<span class="redstate"><span class="redpastille"></span></span>
@@ -82,7 +82,7 @@
 						</span>
 					</td>
 					<td class="tacenter">
-						<span class="toggle_case" data-entity="post" data-target="{{ path('blog_manager_post_toogle_publication', {'post_id': post.id}) }}">
+						<span class="toggle_case" data-entity="post" data-target="{{ path('blog_manager_post_toggle_publication', {'post_id': post.id}) }}">
 							{% if post.published %}
 								<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
 								<span class="redstate"><span class="redpastille"></span></span>
@@ -96,7 +96,7 @@
 					</td>
 					<td class="tacenter">
 						{% if post.tovalid %}
-						<span class="toggle_case" data-entity="post" data-target="{{ path('blog_manager_post_toogle_validation', {'post_id': post.id}) }}">
+						<span class="toggle_case" data-entity="post" data-target="{{ path('blog_manager_post_toggle_validation', {'post_id': post.id}) }}">
 							{% if post.valid %}
 								<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
 								<span class="redstate"><span class="redpastille"></span></span>
@@ -111,7 +111,7 @@
 					</td>
 					{#
 					<td class="tacenter">
-						<span class="toggle_case" data-target="{{ path('blog_manager_post_toogle_deletion', {'post_id': post.id}) }}">
+						<span class="toggle_case" data-target="{{ path('blog_manager_post_toggle_deletion', {'post_id': post.id}) }}">
 							{% if post.deleted %}
 								<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
 								<span class="redstate"><span class="redpastille"></span></span>

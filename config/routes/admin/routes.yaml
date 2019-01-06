@@ -16,22 +16,22 @@ admin_user_edit:
     path:     /user/edit-user/{user_id}
     defaults:
         _controller: App\Controller\Admin\UserController::editUser
-admin_user_toogle_adminstate:
+admin_user_toggle_adminstate:
     path:     /user/admin/{user_id}/toggle-adminstate
     defaults:
-        _controller: App\Controller\Admin\UserController::toogleAdminState
+        _controller: App\Controller\Admin\UserController::toggleAdminState
 admin_user_team:
     path:     /user/team
     defaults:
         _controller: App\Controller\Admin\UserController::team
-admin_user_team_toogle_publication:
-    path:     /user/team/{userTeam_id}/toogle-publication
+admin_user_team_toggle_publication:
+    path:     /user/team/{userTeam_id}/toggle-publication
     defaults:
-        _controller: App\Controller\Admin\UserController::tooglePublicationTeam
-admin_user_team_toogle_show:
-    path:     /user/team/{user_id}/toogle-show-team
+        _controller: App\Controller\Admin\UserController::togglePublicationTeam
+admin_user_team_toggle_show:
+    path:     /user/team/{user_id}/toggle-show-team
     defaults:
-        _controller: App\Controller\Admin\UserController::toogleShowTeam
+        _controller: App\Controller\Admin\UserController::toggleShowTeam
 admin_user_team_position:
     path:     /user/team/position
     defaults:
@@ -70,10 +70,10 @@ admin_school_add:
     path:     /school/add
     defaults:
         _controller: App\Controller\Admin\SchoolController::addSchool
-admin_school_toogle_publication:
-    path:     /school/doedit/{school_id}/toogle-publication
+admin_school_toggle_publication:
+    path:     /school/doedit/{school_id}/toggle-publication
     defaults:
-        _controller: App\Controller\Admin\SchoolController::tooglePublication
+        _controller: App\Controller\Admin\SchoolController::togglePublication
 admin_school_doedit:
     path:     /school/doedit/{id}
     defaults:
@@ -86,10 +86,10 @@ admin_school_categories:
     path:     /school/doedit/{school_id}/categories
     defaults:
         _controller: App\Controller\Admin\SchoolController::categories
-admin_school_toogle_category:
-    path:     /school/doedit/{school_id}/toogle-category/{category_id}
+admin_school_toggle_category:
+    path:     /school/doedit/{school_id}/toggle-category/{category_id}
     defaults:
-        _controller: App\Controller\Admin\SchoolController::toogleCategory
+        _controller: App\Controller\Admin\SchoolController::toggleCategory
 admin_school_modify_logo_popup:
     path:     /school/modify-logo-popup/{school_id}
     defaults:
@@ -128,10 +128,10 @@ admin_school_field:
     path:     /school/edit/{school_id}/fields
     defaults:
         _controller: App\Controller\Admin\FieldController::index
-admin_school_field_toogle_publication:
-    path:     /school/edit/{school_id}/toogle-publication-field/{field_id}
+admin_school_field_toggle_publication:
+    path:     /school/edit/{school_id}/toggle-publication-field/{field_id}
     defaults:
-        _controller: App\Controller\Admin\FieldController::tooglePublicationField
+        _controller: App\Controller\Admin\FieldController::togglePublicationField
 admin_school_field_add_ajax:
     path:     /school/edit/{school_id}/field/add-ajax
     defaults:
@@ -158,10 +158,10 @@ admin_school_document:
     path:     /school/edit/{school_id}/documents
     defaults:
         _controller: App\Controller\Admin\DocumentController::index
-admin_school_document_toogle_publication:
-    path:     /school/edit/{school_id}/toogle-publication-document/{document_id}
+admin_school_document_toggle_publication:
+    path:     /school/edit/{school_id}/toggle-publication-document/{document_id}
     defaults:
-        _controller: App\Controller\Admin\DocumentController::tooglePublicationDocument
+        _controller: App\Controller\Admin\DocumentController::togglePublicationDocument
 admin_school_document_download:
     path:     /school/edit/{school_id}/download-document/{document_id}
     defaults:
@@ -192,10 +192,10 @@ admin_school_contact:
     path:     /school/doedit/{school_id}/contacts
     defaults:
         _controller: App\Controller\Admin\SchoolContactController::index
-admin_school_contact_toogle_publication:
-    path:     /school/doedit/{school_id}/toogle-publication-contact/{contact_id}
+admin_school_contact_toggle_publication:
+    path:     /school/doedit/{school_id}/toggle-publication-contact/{contact_id}
     defaults:
-        _controller: App\Controller\Admin\SchoolContactController::tooglePublicationContact
+        _controller: App\Controller\Admin\SchoolContactController::togglePublicationContact
 admin_school_contact_add_ajax:
     path:     /school/doedit/{school_id}/contact/add-ajax
     defaults:
@@ -302,18 +302,18 @@ admin_blog_post_tags:
     path:     /blog/post/{post_id}/tags
     defaults:
         _controller: App\Controller\Admin\BlogController::postTags
-admin_blog_post_toogle_tag:
-    path:     /blog/post/{post_id}/toogle-tag/{tag_id}
+admin_blog_post_toggle_tag:
+    path:     /blog/post/{post_id}/toggle-tag/{tag_id}
     defaults:
-        _controller: App\Controller\Admin\BlogController::toogleTag
+        _controller: App\Controller\Admin\BlogController::toggleTag
 admin_blog_post_schools:
     path:     /blog/post/{post_id}/schools
     defaults:
         _controller: App\Controller\Admin\BlogController::postSchools
-admin_blog_post_toogle_school:
-    path:     /blog/post/{post_id}/toogle-school/{school_id}
+admin_blog_post_toggle_school:
+    path:     /blog/post/{post_id}/toggle-school/{school_id}
     defaults:
-        _controller: App\Controller\Admin\BlogController::toogleSchool
+        _controller: App\Controller\Admin\BlogController::toggleSchool
 
 
 #event
@@ -341,10 +341,10 @@ admin_event_schools:
     path:     /event/{event_id}/schools
     defaults:
         _controller: App\Controller\Admin\EventController::eventSchools
-admin_event_toogle_school:
-    path:     /event/{event_id}/toogle-school/{school_id}
+admin_event_toggle_school:
+    path:     /event/{event_id}/toggle-school/{school_id}
     defaults:
-        _controller: App\Controller\Admin\EventController::toogleSchool
+        _controller: App\Controller\Admin\EventController::toggleSchool
 
 #setting
 admin_setting_accessibility:

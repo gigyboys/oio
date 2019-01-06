@@ -162,7 +162,7 @@
 
 {% block body_footer %}
 	<div style="padding-top: 8px">
-		<span class="toggle_case" data-target="{{ path('admin_school_document_toogle_publication', {'school_id': school.id, 'document_id': document.id}) }}">
+		<span class="toggle_case" data-target="{{ path('admin_school_document_toggle_publication', {'school_id': school.id, 'document_id': document.id}) }}">
 			{% if document.published %}
 				<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Publier</span></span>
 				<span class="redstate"><span class="redpastille"></span> <span>Ne pas publier</span></span>

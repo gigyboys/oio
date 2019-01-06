@@ -287,7 +287,7 @@ class BlogController extends AbstractController {
         ));
     }
 
-    public function toogleTag($post_id, $tag_id, Request $request)
+    public function toggleTag($post_id, $tag_id, Request $request)
     {
         $post = $this->postRepository->find($post_id);
         $tag = $this->tagRepository->find($tag_id);
@@ -338,7 +338,7 @@ class BlogController extends AbstractController {
         ));
     }
 
-    public function toogleSchool($post_id, $school_id, Request $request)
+    public function toggleSchool($post_id, $school_id, Request $request)
     {
         $post = $this->postRepository->find($post_id);
         $school = $this->schoolRepository->find($school_id);

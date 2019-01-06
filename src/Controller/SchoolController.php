@@ -656,7 +656,7 @@ class SchoolController extends AbstractController{
 
     }
 
-    public function toogleSubscription($school_id, Request $request)
+    public function toggleSubscription($school_id, Request $request)
     {
         $school = $this->schoolRepository->find($school_id);
         $user = $this->getUser();

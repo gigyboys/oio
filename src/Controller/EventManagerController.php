@@ -160,7 +160,7 @@ class EventManagerController extends AbstractController {
         }
     }
 
-    public function toogleShowAuthor($event_id, Request $request)
+    public function toggleShowAuthor($event_id, Request $request)
     {
         $user = $this->getUser();
         $event = $this->eventRepository->find($event_id);
@@ -193,7 +193,7 @@ class EventManagerController extends AbstractController {
     }
 
 
-    public function toogleActiveComment($event_id, Request $request)
+    public function toggleActiveComment($event_id, Request $request)
     {
         $user = $this->getUser();
         $event = $this->eventRepository->find($event_id);
@@ -225,7 +225,7 @@ class EventManagerController extends AbstractController {
         return $response;
     }
 
-    public function tooglePublication($event_id, Request $request)
+    public function togglePublication($event_id, Request $request)
     {
         $user = $this->getUser();
         $event = $this->eventRepository->find($event_id);
@@ -273,7 +273,7 @@ class EventManagerController extends AbstractController {
         return $response;
     }
 
-    public function toogleValidation($event_id, Request $request)
+    public function toggleValidation($event_id, Request $request)
     {
         $user = $this->getUser();
         $event = $this->eventRepository->find($event_id);
@@ -307,7 +307,7 @@ class EventManagerController extends AbstractController {
         return $response;
     }
 
-    public function toogleDeletion($event_id, Request $request)
+    public function toggleDeletion($event_id, Request $request)
     {
         $user = $this->getUser();
         $event = $this->eventRepository->find($event_id);
@@ -772,7 +772,7 @@ class EventManagerController extends AbstractController {
         return $this->redirectToRoute('event');
     }
 
-    public function toogleSchool($event_id, $school_id, Request $request)
+    public function toggleSchool($event_id, $school_id, Request $request)
     {
         $event = $this->eventRepository->find($event_id);
         $school = $this->schoolRepository->find($school_id);

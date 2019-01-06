@@ -87,7 +87,7 @@ class FieldController extends AbstractController {
         ));
     }
 
-    public function tooglePublicationField($school_id, $field_id, Request $request)
+    public function togglePublicationField($school_id, $field_id, Request $request)
     {
         $field = $this->fieldRepository->find($field_id);
 

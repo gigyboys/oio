@@ -61,7 +61,7 @@
 
 					<td>
 						<span>
-							<span class="toggle_case" data-target="{{ path('event_manager_toogle_show_author', {'event_id': event.id}) }}">
+							<span class="toggle_case" data-target="{{ path('event_manager_toggle_show_author', {'event_id': event.id}) }}">
 								{% if event.showAuthor %}
 									<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
 									<span class="redstate"><span class="redpastille"></span></span>
@@ -76,7 +76,7 @@
 						</span>
 					</td>
 					<td class="tacenter">
-						<span class="toggle_case" data-entity="event" data-target="{{ path('event_manager_toogle_publication', {'event_id': event.id}) }}">
+						<span class="toggle_case" data-entity="event" data-target="{{ path('event_manager_toggle_publication', {'event_id': event.id}) }}">
 							{% if event.published %}
 								<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
 								<span class="redstate"><span class="redpastille"></span></span>
@@ -90,7 +90,7 @@
 					</td>
 					<td class="tacenter">
 						{% if event.tovalid %}
-						<span class="toggle_case" data-entity="event" data-target="{{ path('event_manager_toogle_validation', {'event_id': event.id}) }}">
+						<span class="toggle_case" data-entity="event" data-target="{{ path('event_manager_toggle_validation', {'event_id': event.id}) }}">
 							{% if event.valid %}
 								<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
 								<span class="redstate"><span class="redpastille"></span></span>

@@ -130,7 +130,7 @@
 							{{ document.downloads | length }}
 						</td>
 						<td style="text-align:center">
-							<span class="toggle_case" data-entity="document" data-target="{{ path('admin_school_document_toogle_publication', {'school_id': school.id, 'document_id': document.id}) }}">
+							<span class="toggle_case" data-entity="document" data-target="{{ path('admin_school_document_toggle_publication', {'school_id': school.id, 'document_id': document.id}) }}">
 								{% if document.published %}
 									<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
 									<span class="redstate"><span class="redpastille"></span></span>

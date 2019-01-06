@@ -232,7 +232,7 @@ class EventController extends AbstractController {
         ));
     }
 
-    public function toogleSchool($event_id, $school_id, Request $request)
+    public function toggleSchool($event_id, $school_id, Request $request)
     {
         $event = $this->eventRepository->find($event_id);
         $school = $this->schoolRepository->find($school_id);

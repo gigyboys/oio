@@ -144,39 +144,39 @@ blog_manager_post_tags:
     path:     /blog-manager/edit-post/{post_id}/tags
     defaults:
         _controller: App\Controller\BlogManagerController::postTags
-blog_manager_post_toogle_tag:
-    path:     /blog-manager/edit-post/{post_id}/toogle-tag/{tag_id}
+blog_manager_post_toggle_tag:
+    path:     /blog-manager/edit-post/{post_id}/toggle-tag/{tag_id}
     defaults:
-        _controller: App\Controller\BlogManagerController::toogleTag
+        _controller: App\Controller\BlogManagerController::toggleTag
 blog_manager_post_schools:
     path:     /blog-manager/edit-post/{post_id}/schools
     defaults:
         _controller: App\Controller\BlogManagerController::postSchools
-blog_manager_post_toogle_school:
-    path:     /blog-manager/edit-post/{post_id}/toogle-school/{school_id}
+blog_manager_post_toggle_school:
+    path:     /blog-manager/edit-post/{post_id}/toggle-school/{school_id}
     defaults:
-        _controller: App\Controller\BlogManagerController::toogleSchool
+        _controller: App\Controller\BlogManagerController::toggleSchool
 
-blog_manager_post_toogle_show_author:
-    path:     /blog-manager/post/{post_id}/toogle-show-author
+blog_manager_post_toggle_show_author:
+    path:     /blog-manager/post/{post_id}/toggle-show-author
     defaults:
-        _controller: App\Controller\BlogManagerController::toogleShowAuthor
-blog_manager_post_toogle_active_comment:
-    path:     /blog-manager/post/{post_id}/toogle-active-comment
+        _controller: App\Controller\BlogManagerController::toggleShowAuthor
+blog_manager_post_toggle_active_comment:
+    path:     /blog-manager/post/{post_id}/toggle-active-comment
     defaults:
-        _controller: App\Controller\BlogManagerController::toogleActiveComment
-blog_manager_post_toogle_publication:
-    path:     /blog-manager/post/{post_id}/toogle-publication
+        _controller: App\Controller\BlogManagerController::toggleActiveComment
+blog_manager_post_toggle_publication:
+    path:     /blog-manager/post/{post_id}/toggle-publication
     defaults:
-        _controller: App\Controller\BlogManagerController::tooglePublication
-blog_manager_post_toogle_validation:
-    path:     /blog-manager/post/{post_id}/toogle-validation
+        _controller: App\Controller\BlogManagerController::togglePublication
+blog_manager_post_toggle_validation:
+    path:     /blog-manager/post/{post_id}/toggle-validation
     defaults:
-        _controller: App\Controller\BlogManagerController::toogleValidation
-blog_manager_post_toogle_deletion:
-    path:     /blog-manager/post/{post_id}/toogle-deletion
+        _controller: App\Controller\BlogManagerController::toggleValidation
+blog_manager_post_toggle_deletion:
+    path:     /blog-manager/post/{post_id}/toggle-deletion
     defaults:
-        _controller: App\Controller\BlogManagerController::toogleDeletion
+        _controller: App\Controller\BlogManagerController::toggleDeletion
 blog_manager_post_doedit:
     path:     /blog-manager/post/{post_id}/doedit
     defaults:
@@ -215,31 +215,31 @@ event_manager_edit:
     path:     /event-manager/edit-event/{event_id}
     defaults:
         _controller: App\Controller\EventManagerController::editEvent
-event_manager_toogle_show_author:
-    path:     /event-manager/event/{event_id}/toogle-show-author
+event_manager_toggle_show_author:
+    path:     /event-manager/event/{event_id}/toggle-show-author
     defaults:
-        _controller: App\Controller\EventManagerController::toogleShowAuthor
+        _controller: App\Controller\EventManagerController::toggleShowAuthor
 
-event_manager_toogle_active_comment:
-    path:     /event-manager/event/{event_id}/toogle-active-comment
+event_manager_toggle_active_comment:
+    path:     /event-manager/event/{event_id}/togogle-active-comment
     defaults:
-        _controller: App\Controller\EventManagerController::toogleActiveComment
-event_manager_toogle_publication:
-    path:     /event-manager/event/{event_id}/toogle-publication
+        _controller: App\Controller\EventManagerController::toggleActiveComment
+event_manager_toggle_publication:
+    path:     /event-manager/event/{event_id}/toggle-publication
     defaults:
-        _controller: App\Controller\EventManagerController::tooglePublication
-event_manager_toogle_validation:
-    path:     /event-manager/event/{event_id}/toogle-validation
+        _controller: App\Controller\EventManagerController::togglePublication
+event_manager_toggle_validation:
+    path:     /event-manager/event/{event_id}/toggle-validation
     defaults:
-        _controller: App\Controller\EventManagerController::toogleValidation
+        _controller: App\Controller\EventManagerController::toggleValidation
 event_manager_tovalid_ajax:
     path:     /event-manager/tovalid-ajax/{event_id}
     defaults:
         _controller: App\Controller\EventManagerController::ToValidEventAjax
-event_manager_toogle_deletion:
-    path:     /event-manager/event/{event_id}/toogle-deletion
+event_manager_toggle_deletion:
+    path:     /event-manager/event/{event_id}/toggle-deletion
     defaults:
-        _controller: App\Controller\EventManagerController::toogleDeletion
+        _controller: App\Controller\EventManagerController::toggleDeletion
 event_manager_dotovalid:
     path:     /event-manager/dotovalid/{event_id}
     defaults:
@@ -280,10 +280,10 @@ event_manager_schools:
     path:     /event-manager/event/{event_id}/schools
     defaults:
         _controller: App\Controller\EventManagerController::eventSchools
-event_manager_toogle_school:
-    path:     /event-manager/event/{event_id}/toogle-school/{school_id}
+event_manager_toggle_school:
+    path:     /event-manager/event/{event_id}/toggle-school/{school_id}
     defaults:
-        _controller: App\Controller\EventManagerController::toogleSchool
+        _controller: App\Controller\EventManagerController::toggleSchool
 
 #blog
 blog:
@@ -369,7 +369,7 @@ school_category_view:
 school_toggle_subscription:
     path:     /school/{school_id}/toggle-subscription
     defaults:
-        _controller: App\Controller\SchoolController::toogleSubscription
+        _controller: App\Controller\SchoolController::toggleSubscription
 
 school_viewbyid:
     path:     /school/id/{id}

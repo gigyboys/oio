@@ -76,7 +76,7 @@ class SchoolContactController extends AbstractController {
         ));
     }
 
-    public function tooglePublicationContact($school_id, $contact_id, Request $request)
+    public function togglePublicationContact($school_id, $contact_id, Request $request)
     {
         $contact = $this->schoolContactRepository->find($contact_id);
 

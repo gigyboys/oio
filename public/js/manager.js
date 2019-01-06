@@ -40,7 +40,7 @@ $(function() {
         );
     }
 
-    //tooglePublishState
+    //togglePublishState
     $('body').on('click','.toggle_publishState, .toggle_case',function(e){
         e.stopPropagation();
         var $this = $(this);

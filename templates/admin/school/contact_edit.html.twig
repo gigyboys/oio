@@ -229,7 +229,7 @@
 
 {% block body_footer %}
 	<div style="padding-top: 8px">
-		<span class="toggle_publishState" data-target="{{ path('admin_school_contact_toogle_publication', {'school_id': school.id, 'contact_id': contact.id}) }}">
+		<span class="toggle_publishState" data-target="{{ path('admin_school_contact_toggle_publication', {'school_id': school.id, 'contact_id': contact.id}) }}">
 			{% if contact.published %}
 				<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Publier</span></span>
 				<span class="redstate"><span class="redpastille"></span> <span>Ne pas publier</span></span>

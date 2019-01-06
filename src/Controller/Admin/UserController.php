@@ -70,7 +70,7 @@ class UserController extends AbstractController {
         ));
     }
 
-    public function toogleAdminState($user_id, Request $request)
+    public function toggleAdminState($user_id, Request $request)
     {
         $user = $this->userRepository->find($user_id);
         $response = new Response();
@@ -119,7 +119,7 @@ class UserController extends AbstractController {
         ));
     }
 
-    public function tooglePublicationTeam($userTeam_id, Request $request)
+    public function togglePublicationTeam($userTeam_id, Request $request)
     {
         $userTeam = $this->userTeamRepository->find($userTeam_id);
 
@@ -158,7 +158,7 @@ class UserController extends AbstractController {
         return $response;
     }
 
-    public function toogleShowTeam($user_id, Request $request)
+    public function toggleShowTeam($user_id, Request $request)
     {
         $user = $this->userRepository->find($user_id);
 

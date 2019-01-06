@@ -62,7 +62,7 @@ class BlogManagerController extends AbstractController {
     }
 
 
-    public function toogleShowAuthor($post_id, Request $request)
+    public function toggleShowAuthor($post_id, Request $request)
     {
         $user = $this->getUser();
         $post = $this->postRepository->find($post_id);
@@ -95,7 +95,7 @@ class BlogManagerController extends AbstractController {
     }
 
 
-    public function toogleActiveComment($post_id, Request $request)
+    public function toggleActiveComment($post_id, Request $request)
     {
         $user = $this->getUser();
         $post = $this->postRepository->find($post_id);
@@ -127,7 +127,7 @@ class BlogManagerController extends AbstractController {
         return $response;
     }
 
-    public function tooglePublication($post_id, Request $request)
+    public function togglePublication($post_id, Request $request)
     {
         $user = $this->getUser();
         $post = $this->postRepository->find($post_id);
@@ -173,7 +173,7 @@ class BlogManagerController extends AbstractController {
         return $response;
     }
 
-    public function toogleValidation($post_id, Request $request)
+    public function toggleValidation($post_id, Request $request)
     {
         $user = $this->getUser();
         $post = $this->postRepository->find($post_id);
@@ -207,7 +207,7 @@ class BlogManagerController extends AbstractController {
         return $response;
     }
 
-    public function toogleDeletion($post_id, Request $request)
+    public function toggleDeletion($post_id, Request $request)
     {
         $user = $this->getUser();
         $post = $this->postRepository->find($post_id);
@@ -661,7 +661,7 @@ class BlogManagerController extends AbstractController {
     }
 
 
-    public function toogleTag($post_id, $tag_id, Request $request)
+    public function toggleTag($post_id, $tag_id, Request $request)
     {
         $post = $this->postRepository->find($post_id);
         $tag = $this->tagRepository->find($tag_id);
@@ -717,7 +717,7 @@ class BlogManagerController extends AbstractController {
         return $this->redirectToRoute('blog');
     }
 
-    public function toogleSchool($post_id, $school_id, Request $request)
+    public function toggleSchool($post_id, $school_id, Request $request)
     {
         $post = $this->postRepository->find($post_id);
         $school = $this->schoolRepository->find($school_id);

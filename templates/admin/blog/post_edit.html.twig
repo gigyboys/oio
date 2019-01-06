@@ -183,7 +183,7 @@
 
 {% block body_footer %}
 	<div style="padding-top: 8px">
-		<span class="toggle_case" data-target="{{ path('blog_manager_post_toogle_publication', {'post_id': post.id}) }}">
+		<span class="toggle_case" data-target="{{ path('blog_manager_post_toggle_publication', {'post_id': post.id}) }}">
 			{% if post.published %}
 				<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Publier</span></span>
 				<span class="redstate"><span class="redpastille"></span> <span>Ne pas publier</span></span>
@@ -195,7 +195,7 @@
 			<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" /> Chargement...
 		</span>
 		|
-		<span class="toggle_case" data-target="{{ path('blog_manager_post_toogle_show_author', {'post_id': post.id}) }}">
+		<span class="toggle_case" data-target="{{ path('blog_manager_post_toggle_show_author', {'post_id': post.id}) }}">
 			{% if post.showAuthor %}
 				<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Afficher l'auteur</span></span>
 				<span class="redstate"><span class="redpastille"></span> <span>Ne pas afficher l'auteur</span></span>
@@ -207,7 +207,7 @@
 			<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" /> Chargement...
 		</span>
 		|
-		<span class="toggle_case" data-target="{{ path('blog_manager_post_toogle_active_comment', {'post_id': post.id}) }}">
+		<span class="toggle_case" data-target="{{ path('blog_manager_post_toggle_active_comment', {'post_id': post.id}) }}">
 			{% if post.activeComment %}
 				<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Activer les commentaires</span></span>
 				<span class="redstate"><span class="redpastille"></span> <span>Désactiver les commentaires</span></span>
@@ -220,7 +220,7 @@
 		</span>
         {% if post.tovalid %}
 			|
-		<span class="toggle_case" data-target="{{ path('blog_manager_post_toogle_validation', {'post_id': post.id}) }}">
+		<span class="toggle_case" data-target="{{ path('blog_manager_post_toggle_validation', {'post_id': post.id}) }}">
 			{% if post.valid %}
 				<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Valider</span></span>
 				<span class="redstate"><span class="redpastille"></span> <span>Ne pas valider</span></span>
@@ -234,7 +234,7 @@
 		{% endif %}
 		{#
 		 |
-		<span class="toggle_case" data-target="{{ path('blog_manager_post_toogle_deletion', {'post_id': post.id}) }}">
+		<span class="toggle_case" data-target="{{ path('blog_manager_post_toggle_deletion', {'post_id': post.id}) }}">
 			{% if post.deleted %}
 				<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Supprimer</span></span>
 				<span class="redstate"><span class="redpastille"></span> <span>Ne pas supprimer</span></span>

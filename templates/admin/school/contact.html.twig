@@ -101,7 +101,7 @@
 							<a href="{{ path('admin_school_contact_edit', {'school_id': school.id, 'contact_id': contact.id}) }}">{{ contact.name }}</a>
 						</td>
 						<td style="text-align:center">
-							<span class="toggle_case" data-entity="contact" data-target="{{ path('admin_school_contact_toogle_publication', {'school_id': school.id, 'contact_id': contact.id}) }}">
+							<span class="toggle_case" data-entity="contact" data-target="{{ path('admin_school_contact_toggle_publication', {'school_id': school.id, 'contact_id': contact.id}) }}">
 								{% if contact.published %}
 									<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
 									<span class="redstate"><span class="redpastille"></span></span>

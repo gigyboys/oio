@@ -56,7 +56,7 @@
 						<td>{{ user.username }}</td>
 						<td>{{ user.email }}</td>
 						<td style="text-align:center">
-							<span class="toggle_case_fix" data-entity="school" data-target="{#{{ path('admin_school_toogle_publication', {'school_id': school.id}) }}#}">
+							<span class="toggle_case_fix" data-entity="school" data-target="{#{{ path('admin_school_toggle_publication', {'school_id': school.id}) }}#}">
 								{% if user.enabled %}
 									<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
 									<span class="redstate"><span class="redpastille"></span></span>

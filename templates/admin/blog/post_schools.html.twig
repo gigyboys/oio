@@ -99,7 +99,7 @@
 							<a href="{{ path('admin_school_edit', {'id': school.id}) }}">{{ school.shortName }}</a>
 						</td>
 						<td style="text-align:center">
-							<span class="toggle_case" data-entity="tag" data-target="{{ path('admin_blog_post_toogle_school', {'post_id': post.id, 'school_id': school.id }) }}">
+							<span class="toggle_case" data-entity="tag" data-target="{{ path('admin_blog_post_toggle_school', {'post_id': post.id, 'school_id': school.id }) }}">
 								{% set isSchool = isSchoolPost(post, school) %}
 								{% if isSchool %}
 									<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>

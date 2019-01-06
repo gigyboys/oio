@@ -38,7 +38,7 @@
                 {% for tag in tags %}
 						<span class="tag_item">
 							<span>
-								<span class="toggle_case" data-entity="tag" data-target="{{ path('blog_manager_post_toogle_tag', {'post_id': post.id, 'tag_id': tag.id }) }}">
+								<span class="toggle_case" data-entity="tag" data-target="{{ path('blog_manager_post_toggle_tag', {'post_id': post.id, 'tag_id': tag.id }) }}">
 									{% set isTag = isTagPost(post, tag) %}
 									{% if isTag %}
 										<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>

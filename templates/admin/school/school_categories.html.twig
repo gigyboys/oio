@@ -101,7 +101,7 @@
 						</td>
 						{#
 						<td>
-							<span class="a_sl_toggle_cat" data-target="{{ path('admin_school_toogle_category', {'school_id': school.id, 'category_id': category.id }) }}" style="cursor:pointer; margin-top:8px; display:inline-block">
+							<span class="a_sl_toggle_cat" data-target="{{ path('admin_school_toggle_category', {'school_id': school.id, 'category_id': category.id }) }}" style="cursor:pointer; margin-top:8px; display:inline-block">
 								{% set isCategory = isCategorySchool(school, category) %}
 								{% if isCategory %}
 									<span class="is_cat_btn" style="display:none"><span style="display:inline-block;width:10px;height:10px;border-radius:50% 50%; background:#c00"></span></span>
@@ -114,7 +114,7 @@
 						</td>
 						#}
 						<td style="text-align:center">
-							<span class="toggle_publishState" data-entity="" data-target="{{ path('admin_school_toogle_category', {'school_id': school.id, 'category_id': category.id }) }}">
+							<span class="toggle_publishState" data-entity="" data-target="{{ path('admin_school_toggle_category', {'school_id': school.id, 'category_id': category.id }) }}">
 								{% set isCategory = isCategorySchool(school, category) %}
 								{% if isCategory %}
 									<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>

@@ -93,7 +93,7 @@
 	<div style="padding-top: 8px">
         {% if is_granted('ROLE_SUPER_ADMIN') %}
             {% if user.isSuperAdmin == false %}
-				<span class="toggle_case" data-entity="admin-state" data-target="{{ path('admin_user_toogle_adminstate', {'user_id': user.id}) }}">
+				<span class="toggle_case" data-entity="admin-state" data-target="{{ path('admin_user_toggle_adminstate', {'user_id': user.id}) }}">
 					{% if user.isAdmin %}
 						<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Assigner le rôle d'administrateur</span></span>
 						<span class="redstate"><span class="redpastille"></span> <span>Annuler le rôle d'administrateur</span></span>
@@ -105,7 +105,7 @@
 					<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" /> Chargement...
 				</span> |
             {% endif %}
-			<span class="toggle_case" data-entity="admin-state" data-target="{{ path('admin_user_team_toogle_show', {'user_id': user.id}) }}">
+			<span class="toggle_case" data-entity="admin-state" data-target="{{ path('admin_user_team_toggle_show', {'user_id': user.id}) }}">
 				{% set isUserTeam = isUserTeam(user) %}
 				{% if isUserTeam %}
 					<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Publier dans l'équipe</span></span>
