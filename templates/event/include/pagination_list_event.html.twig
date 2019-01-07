@@ -6,7 +6,7 @@
 {% set nbAll = allEvents | length %}
 {% set nbPagesFormat = ((nbAll / limit) - 0.5) | number_format  %}
 
-{% if (nbAll / limit) == nbPagesFormat%}
+{% if (nbAll / limit) == nbPagesFormat %}
 	{% set nbPages = nbPagesFormat %}
 {% else %}
 	{% set nbPages = nbPagesFormat + 1 %}

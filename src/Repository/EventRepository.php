@@ -50,6 +50,8 @@ class EventRepository extends ServiceEntityRepository
                 ->setParameter('published', $published);
         }
         $qb
+            ->andWhere('event.valid = :valid')
+            ->setParameter('valid', true)
             ->andWhere('event.deleted = :deleted')
             ->setParameter('deleted', false);
 
@@ -91,8 +93,10 @@ class EventRepository extends ServiceEntityRepository
             ->andWhere('event.published = :published')
             ->setParameter('published', true);
         $qb
-        ->andWhere('event.deleted = :deleted')
-        ->setParameter('deleted', false);
+            ->andWhere('event.valid = :valid')
+            ->setParameter('valid', true)
+            ->andWhere('event.deleted = :deleted')
+            ->setParameter('deleted', false);
         
         if($typeslug == 'upcoming'){
             $qb
