@@ -48,6 +48,10 @@ admin_user_team_doedit:
     path:     /user/team/doedit/{userTeam_id}
     defaults:
         _controller: App\Controller\Admin\UserController::doEditUserTeam
+admin_user_team_dodelete:
+    path:     /user/team/delete-userteam/{userTeam_id}
+    defaults:
+        _controller: App\Controller\Admin\UserController::deleteUserTeam
 
 #school
 admin_school:

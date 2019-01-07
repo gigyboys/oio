@@ -986,7 +986,6 @@ $(function() {
 		content += '</div>';
         
 		popup(content, 500, true);
-		
     });
 	
 	//confirm delete contact

@@ -137,20 +137,20 @@ class UserController extends AbstractController {
             $this->em->persist($userTeam);
             $this->em->flush();
 
-            $users = $this->userTeamRepository->findAll();
-            $publishedUsers = $this->userTeamRepository->findBy(array(
-                'published' => true
+            $userTeams = $this->userTeamRepository->findAll();
+            $publishedUserTeams = $this->userTeamRepository->findBy(array(
+                'published' => true,
             ));
-            $notPublishedUsers = $this->userTeamRepository->findBy(array(
-                'published' => false
+            $notPublishedUserTeams = $this->userTeamRepository->findBy(array(
+                'published' => false,
             ));
 
             $response->setContent(json_encode(array(
-                'state' => 1,
-                'case' => $userTeam->getPublished(),
-                'users' => $users,
-                'publishedUsers' => $publishedUsers,
-                'notPublishedUsers' => $notPublishedUsers,
+                'state'                 => 1,
+                'case'                  => $userTeam->getPublished(),
+                'userTeams'             => $userTeams,
+                'publishedUserTeams'    => $publishedUserTeams,
+                'notPublishedUserTeams' => $notPublishedUserTeams,
             )));
         }
 
@@ -277,6 +277,42 @@ class UserController extends AbstractController {
                 'state' => 1,
                 'role' => $userTeam->getRole(),
                 'description' => $userTeam->getDescription(),
+            )));
+        }else{
+            $response->setContent(json_encode(array(
+                'state' => 0,
+            )));
+        }
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    /*
+     * User Team delete
+     */
+    public function deleteUserTeam($userTeam_id, Request $request)
+    {
+        $userTeam = $this->userTeamRepository->find($userTeam_id);
+
+        $response = new Response();
+        if ($userTeam) {
+            $this->em->remove($userTeam);
+            $this->em->flush();
+
+            $userTeams = $this->userTeamRepository->findAll();
+            $publishedUserTeams = $this->userTeamRepository->findBy(array(
+                'published' => true,
+            ));
+            $notPublishedUserTeams = $this->userTeamRepository->findBy(array(
+                'published' => false,
+            ));
+
+            $response->setContent(json_encode(array(
+                'state' => 1,
+                'id' => $userTeam_id,
+                'userTeams' => $userTeams,
+                'publishedUserTeams' => $publishedUserTeams,
+                'notPublishedUserTeams' => $notPublishedUserTeams,
             )));
         }else{
             $response->setContent(json_encode(array(

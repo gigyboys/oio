@@ -47,7 +47,7 @@
 					<th class="a_table_cell_action">Actions</th>
 				</tr>
 				{% for userTeam in users %}
-					<tr class="a_table_line" data-text="{{ userTeam.user.id }} {{ userTeam.user.username }} {{ userTeam.user.name }} {{ userTeam.user.email }}" style="display:table-row">
+					<tr id="user_team_{{ userTeam.id }}" class="a_table_line" data-text="{{ userTeam.user.id }} {{ userTeam.user.username }} {{ userTeam.user.name }} {{ userTeam.user.email }}" style="display:table-row">
 						<td class="a_table_cell_id" style="width: 50px; text-align:center">{{ userTeam.id }}</td>
 						<td class="">
 							{# twig extension #}
@@ -73,6 +73,7 @@
 						</td>
 						<td class="a_table_cell_action tacenter">
 							<a href="{{ path('admin_user_team_edit', {'userTeam_id': userTeam.id}) }}" data-name="{{ userTeam.user.name }}" style="cursor:pointer"><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /></a>
+							<span class="delete_user_team" data-id="{{ userTeam.id }}" data-target="{{ path('admin_user_team_dodelete', {'userTeam_id': userTeam.id}) }}" data-name="{{ userTeam.user.name }}" style="cursor:pointer"><img src="{{ asset('image/delete_icon.png') }}" style="width:12px; height:auto" /></span>
 							<a target="_blank" href="{{ path('user_profile_byid', {'user_id': userTeam.user.id}) }}" data-name="{{ userTeam.user.name }}"><img src="{{ asset('image/view_icon.png') }}" style="width:12px; height:auto" /></a>
 						</td>
 					</tr>
@@ -97,8 +98,8 @@
 {% endblock %}
 
 {% block body_footer %}
-	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_users">{{ users | length }}</span> Utilisateurs</span> |
-	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_published_users">{{ publishedUsers | length }}</span> publiés</span> |
-	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_not_published_users">{{ notPublishedUsers | length }}</span> non publiés</span>
+	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_userteams">{{ users | length }}</span> Utilisateurs</span> |
+	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_published_userteams">{{ publishedUsers | length }}</span> publiés</span> |
+	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_not_published_userteams">{{ notPublishedUsers | length }}</span> non publiés</span>
 {% endblock %}
 

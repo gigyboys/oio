@@ -97,6 +97,11 @@ $(function() {
                                 $(".nb_published_events").html(data.publishedEvents.length);
                                 $(".nb_not_published_events").html(data.notPublishedEvents.length);
                                 break;
+                            case 'userTeam':
+                                $(".nb_userteams").html(data.userTeams.length);
+                                $(".nb_published_userteams").html(data.publishedUserTeams.length);
+                                $(".nb_not_published_userteams").html(data.notPublishedUserTeams.length);
+                                break;
                         }
                     }
                 }
