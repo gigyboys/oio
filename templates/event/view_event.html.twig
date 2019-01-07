@@ -138,4 +138,39 @@
 			</div>
 		</div>
 	</div>
+	
+
+	{# next and previous post #}
+	<div class="sep"></div>
+	<div class="cr">
+		<div class="ct">
+			<div class="mg_h10">
+				<a class="prev_link" href="{{ path('event_view', {'slug': previousEvent.slug}) }}" title="{{ previousEvent.title }}">
+					<span><span class="direction"></span> Précédent </span><br />
+					<span>
+						{% set illustration = eventIllustration(previousEvent) %}
+						<span class="logo"> <img src="{{ illustration | imagine_filter('32x32') }}" alt="img post" /></span>
+						<span class="label post">
+							<strong>
+								{{ previousEvent.title }}
+							</strong>
+						</span>
+					</span>
+				</a>
+				<a class="next_link" href="{{ path('event_view', {'slug': nextEvent.slug}) }}" title="{{ nextEvent.title }}">
+					<span>Suivant <span class="direction"></span></span><br />
+					<span>
+						{% set illustration = eventIllustration(nextEvent) %}
+						<span class="logo"> <img src="{{ illustration | imagine_filter('32x32') }}" alt="img post" /></span>
+						<span class="label post">
+							<strong>
+								{{ nextEvent.title }}
+							</strong>
+						</span>
+					</span>
+				</a>
+				<div class="both"></div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

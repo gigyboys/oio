@@ -60,7 +60,8 @@ class EventRepository extends ServiceEntityRepository
                 ->andWhere('event.dateend > :currentDate')
                 ->setParameter('currentDate', $currentDate);
             $qb
-                ->orderBy('event.datebegin', 'ASC')
+                ->addOrderBy('event.datebegin', 'ASC')
+                ->addOrderBy('event.id', 'ASC')
             ;
         }elseif($typeslug == 'passed'){
             $qb
@@ -143,6 +144,93 @@ class EventRepository extends ServiceEntityRepository
         $events = $qb->getQuery()->getResult();
 
         return $events;
+    }
+
+    public function findFirstEvent() {
+        $fied = 'datebegin';
+        $qb = $this->createQueryBuilder('event');
+
+        $qb
+            ->andWhere('event.valid = :valid')
+            ->setParameter('valid', true)
+            ->andWhere('event.published = :published')
+            ->setParameter('published', true)
+            ->andWhere('event.deleted = :deleted')
+            ->setParameter('deleted', false);
+
+        $qb
+            ->addOrderBy('event.'.$fied, 'ASC')
+            ->addOrderBy('event.id', 'ASC')
+            ->setMaxResults(1);
+
+        $event = $qb->getQuery()->getOneOrNullResult();
+        return $event;
+    }
+
+    public function findLastEvent() {
+        $fied = 'datebegin';
+        $qb = $this->createQueryBuilder('event');
+        
+        $qb
+            ->andWhere('event.valid = :valid')
+            ->setParameter('valid', true)
+            ->andWhere('event.published = :published')
+            ->setParameter('published', true)
+            ->andWhere('event.deleted = :deleted')
+            ->setParameter('deleted', false);
+
+        $qb
+            ->addOrderBy('event.'.$fied, 'DESC')
+            ->addOrderBy('event.id', 'DESC')
+            ->setMaxResults(1);
+
+
+        $event = $qb->getQuery()->getOneOrNullResult();
+        return $event;
+    }
+
+    public function findNextEvent(Event $event) {
+        $qb = $this->createQueryBuilder('event');
+
+        $qb
+            ->andWhere('event.valid = :valid')
+            ->setParameter('valid', true)
+            ->andWhere('event.published = :published')
+            ->setParameter('published', true)
+            ->andWhere('event.deleted = :deleted')
+            ->setParameter('deleted', false)
+            ->andWhere('event.datebegin > :datebegin OR (event.datebegin = :datebegin AND event.id > :id)')
+            ->setParameter('datebegin', $event->getDatebegin())
+            ->andWhere('event.id != :id')
+            ->setParameter('id', $event->getId())
+            ->addOrderBy('event.datebegin', 'ASC')
+            ->addOrderBy('event.id', 'ASC')
+            ->setMaxResults(1);
+
+        $event = $qb->getQuery()->getOneOrNullResult();
+        return $event;
+    }
+
+    public function findPreviousEvent(Event $event) {
+        $qb = $this->createQueryBuilder('event');
+
+        $qb
+            ->andWhere('event.valid = :valid')
+            ->setParameter('valid', true)
+            ->andWhere('event.published = :published')
+            ->setParameter('published', true)
+            ->andWhere('event.deleted = :deleted')
+            ->setParameter('deleted', false)
+            ->andWhere('event.datebegin < :datebegin OR (event.datebegin = :datebegin AND event.id < :id)')
+            ->setParameter('datebegin', $event->getDatebegin())
+            ->andWhere('event.id != :id')
+            ->setParameter('id', $event->getId())
+            ->addOrderBy('event.datebegin', 'DESC')
+            ->addOrderBy('event.id', 'DESC')
+            ->setMaxResults(1);
+
+        $event = $qb->getQuery()->getOneOrNullResult();
+        return $event;
     }
 
 }

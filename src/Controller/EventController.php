@@ -201,15 +201,21 @@ class EventController extends AbstractController{
                 $firstComment = $comments[0];
                 $previousComment = $this->commentRepository->getSinceComment($firstComment, $type, $event);
             }
-            
+
+            //nextEvent
+            $nextEvent = $this->eventService->getNextEvent($event);
+
+            //previousEvent
+            $previousEvent = $this->eventService->getPreviousEvent($event);
+
             return $this->render('event/view_event.html.twig', [
-                'event' => $event,
-                
-                'comments' => $comments,
-                'allComments' => $allComments,
-                'previousComment' => $previousComment,
-                
-                'entityView' => 'event',
+                'event'             => $event,
+                'comments'          => $comments,
+                'allComments'       => $allComments,
+                'previousComment'   => $previousComment,
+                'nextEvent'         => $nextEvent,
+                'previousEvent'     => $previousEvent,
+                'entityView'        => 'event',
             ]);
         }else{
             return $this->redirectToRoute('event');

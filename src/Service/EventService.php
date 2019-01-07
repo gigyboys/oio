@@ -194,4 +194,20 @@ class EventService
         return $comments;
     }
 
+    public function getNextEvent(Event $event) {//By 'datebegin'
+        $nextEvent = $this->eventRepository->findNextEvent($event);
+        if(!$nextEvent){
+            $nextEvent = $this->eventRepository->findFirstEvent(); 
+        }
+        return $nextEvent;
+    }
+
+    public function getPreviousEvent(Event $event) {//By 'datebegin'
+        $previousEvent = $this->eventRepository->findPreviousEvent($event);
+        if(!$previousEvent){
+            $previousEvent = $this->eventRepository->findLastEvent();
+        }
+        return $previousEvent;
+    }
+
 }
