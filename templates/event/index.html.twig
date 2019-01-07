@@ -7,27 +7,27 @@
 {% block body %}
 	<div class="cr">
 		<div class="ct">
-			<div id="et_list_wrap">
-				<div id="et_load_list" style="display:none;">chargement ...</div>
-					<div class="mg_10">
-						<div class="et_type">
-							{{ include("event/include/event_type_link.html.twig") }}
-						</div>
-						<div class="sl_type_btm"></div>
+			<div id="et_list_wrap" class="p_cr" data-type="event">
+				<div class="p_load" id="et_load_list" style="display:none;">chargement ...</div>
+				<div class="mg_10">
+					<div class="et_type p_stop">
+						{{ include("event/include/event_type_link.html.twig") }}
 					</div>
+					<div class="sl_type_btm"></div>
+				</div>
 
 				{% if events | length > 0 %}
-					<div class="et_pagination mg_h10 tacenter">
+					<div class="pagination et_pagination mg_h10 tacenter">
 						{{ include("event/include/pagination_list_event.html.twig") }}
 					</div>
-					<div id="et_list">
+					<div id="et_list" class="p_list">
 						{% for event in events %}
 							{{ include("event/include/event_item.html.twig") }}
 						{% endfor %}
 						<div class="both"></div>
 					</div>
-					<div class="et_pagination mg_h10 tacenter">
-							{{ include("event/include/pagination_list_event.html.twig") }}
+					<div class="pagination et_pagination mg_h10 tacenter">
+						{{ include("event/include/pagination_list_event.html.twig") }}
 					</div>
 				{% endif %}
 				

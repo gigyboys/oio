@@ -126,16 +126,15 @@ class SearchController extends AbstractController {
                         'q' 			=> $q,
                         'catSlug'		=> $catSlug,
                         'typeSlug'		=> $typeSlug,
-                        'allSchools' => $schoolsArray,
-                        'schools' => $resultList,
-                        'limit' => $limit,
-                        'currentpage' => $page,
+                        'allSchools'    => $schoolsArray,
+                        'schools'       => $resultList,
+                        'limit'         => $limit,
+                        'currentpage'   => $page,
                     ));
 
                     $currentUrl = $this->get('router')->generate('platform_search', array(
                         'page' => $page,
                         'entity' => $entity,
-                        'page' => $page,
                         'q' => $q,
                         'category' => $catSlug,
                         'type' => $typeSlug
@@ -156,27 +155,87 @@ class SearchController extends AbstractController {
                         'catSlug'		=> $catSlug,
                         'category'		=> $category,
                         'typeSlug'		=> $typeSlug,
-                        'typeEntity'		    => $typeEntity,
+                        'typeEntity'    => $typeEntity,
                         'resultList' 	=> $resultList,
                         'allSchools' 	=> $schoolsArray,
                         'limit' 		=> $limit,
-                        'currentpage' => $page,
+                        'currentpage'   => $page,
                         'entityView'	=> $entityView,
                     ));
                 }
                 return $response;
                 break ;
             case "post":
-                $posts = $this->postRepository->getPostSearch($q);
-                $resultList = $posts;
+                $allPosts = $this->postRepository->getPostSearch($q);
+                
                 $entityView = "blog";
 
-                return $this->render('search/search.html.twig', array(
-                    'entity' 		=> $entity,
-                    'q' 			=> $q,
-                    'resultList' 	=> $resultList,
-                    'entityView'	=> $entityView,
+                $parameter = $this->parameterRepository->findOneBy(array(
+                    'parameter' => 'posts_by_page',
                 ));
+                $limit = $parameter->getValue();
+                $offset = ($page-1) * $limit;
+
+                if(count($allPosts) < $limit+$offset){
+                    $end = count($allPosts);
+                }else{
+                    $end = $limit+$offset;
+                }
+                $resultList = array();
+                for ($i=$offset; $i<$end; $i++) {
+                    array_push($resultList, $allPosts[$i]);
+                }
+
+                $response = new Response();
+                if ($request->isXmlHttpRequest()){
+                    //listPost
+                    $listPosts = array();
+                    foreach($resultList as $post){
+                        $post_view = $this->renderView('blog/include/post_item.html.twig', array(
+                            'post' => $post,
+                        ));
+                        array_push($listPosts, array(
+                            "post_id" 	=> $post->getId(),
+                            "post_view" => $post_view,
+                        ));
+                    }
+
+                    //pagination
+                    $pagination = $this->renderView('blog/include/pagination_list_post_search.html.twig', array(
+                        'entity' 		=> $entity,
+                        'q' 			=> $q,
+                        'allPosts'      => $allPosts,
+                        'posts'         => $resultList,
+                        'limit'         => $limit,
+                        'currentpage'   => $page,
+                    ));
+
+                    $currentUrl = $this->get('router')->generate('platform_search', array(
+                        'page'      => $page,
+                        'entity'    => $entity,
+                        'q'         => $q,
+                    ));
+
+                    $response->setContent(json_encode(array(
+                        'state'         => 1,
+                        'posts'         => $listPosts,
+                        'currentpage'   => $page,
+                        'pagination'    => $pagination,
+                        'currentUrl'    => $currentUrl,
+                        'page'          => $page,
+                    )));
+                }else{
+                    $response = $this->render('search/search.html.twig', array(
+                        'entity' 		=> $entity,
+                        'q' 			=> $q,
+                        'allPosts' 	    => $allPosts,
+                        'resultList' 	=> $resultList,
+                        'entityView'	=> $entityView,
+                        'limit' 		=> $limit,
+                        'currentpage'   => $page,
+                    ));
+                }
+                return $response;
                 break ;
             /*
         case "advert":

@@ -7,27 +7,27 @@
 {% block body %}
 	<div class="cr">
 		<div class="ct">
-			<div id="sl_list">
-				<div class="sll">
-					<div id="sll_load_list" style="display:none;">chargement ...</div>
-						<div class="mg_10 mg_b20">
-							<div class="sl_type">
-								{{ include("school/include/school_type_link.html.twig") }}
-							</div>
-							<div class="sl_type_btm"></div>
+			<div>
+				<div id="sl_list" class="sll p_cr" data-type="school">
+					<div class="p_load" id="sll_load_list" style="display:none;">chargement ...</div>
+					<div class="mg_10 mg_b20">
+						<div class="sl_type p_stop">
+							{{ include("school/include/school_type_link.html.twig") }}
 						</div>
+						<div class="sl_type_btm"></div>
+					</div>
 
                     {% if schools | length > 0 %}
-						<div class="sll_pagination">
+						<div class="pagination">
 							{{ include("school/include/pagination_list_school.html.twig") }}
 						</div>
-						<div class="sll_ct">
+						<div class="sll_ct p_list">
 							{% for school in schools %}
 								{{ include("school/school_item.html.twig") }}
 							{% endfor %}
 							<div class="both"></div>
 						</div>
-						<div class="sll_pagination">
+						<div class="pagination">
 							{{ include("school/include/pagination_list_school.html.twig") }}
 						</div>
                     {% endif %}
@@ -62,7 +62,6 @@
 							</div>
                         {% endif %}
 					</div>
-
 
 					<div class="slr_list_cat">
 						<div class="title">

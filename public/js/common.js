@@ -125,6 +125,83 @@ $(function() {
             }
         });
     });
+    
+	
+	/*
+	* Navigation pagination ajax
+	*/
+	$('body').on('click','a.pagination_item, .sl_type_item a, .et_type_item a',function(e){
+        e.preventDefault(true);
+		var $this = $(this);
+        var target = $this.attr("href");
+        var p_cr = $this.closest(".p_cr");
+        var p_type = p_cr.attr("data-type");
+		var p_cr_height = p_cr.height();
+		var p_cr_width = p_cr.width();
+		p_cr.find(".p_load").css("height",p_cr_height);
+		p_cr.find(".p_load").css("width",p_cr_width);
+		p_cr.find(".p_load").css("display","block");
+		p_cr.find(".p_load").css("padding-top",(p_cr_height/2) - 40);
+		
+        $.ajax({
+            type: 'POST',
+            url: target,
+            dataType : 'json',
+            success: function(data){
+				if(data.state){
+                    p_cr.find(".p_load").css("display","none");
+                    switch (p_type) {
+                        case 'school':
+                            var htmlappend = '';
+                            for(var i = 0; i <data.schools.length; i++ ){
+                                var school = data.schools[i];
+                                htmlappend += school.school_view;
+                            }
+                            htmlappend += '<div class="both"></div>';
+                            p_cr.find(".p_list").html(htmlappend);
+                            p_cr.find(".pagination").html(data.pagination);
+                            p_cr.find(".sl_type").html(data.typeLinks);
+                            history.pushState('', 'School - page '+data.page, data.currentUrl);
+                            truncateSchoolLabel();
+                            break;
+                        case 'event':
+                            var htmlappend = '';
+                            for(var i = 0; i <data.events.length; i++ ){
+                                var event = data.events[i];
+                                htmlappend += event.event_view;
+                            }
+                            htmlappend += '<div class="both"></div>';
+                            $(".p_list").html(htmlappend);
+                            $(".pagination").html(data.pagination);
+                            $(".et_type").html(data.typeLinks);
+                            history.pushState('', 'Evènements - page '+data.page, data.currentUrl);
+                            break;
+                        case 'post_search':
+                            var htmlappend = '';
+                            for(var i = 0; i <data.posts.length; i++ ){
+                                var post = data.posts[i];
+                                htmlappend += post.post_view;
+                            }
+                            htmlappend += '<div class="both"></div>';
+                            $(".p_list").html(htmlappend);
+                            $(".pagination").html(data.pagination);
+                            history.pushState('', 'Articles - page '+data.page, data.currentUrl);
+                            break;
+                    }
+					var p_stop = p_cr.find('.p_stop').first();
+					$('html, body').stop().animate({scrollTop: - 50 + p_stop.offset().top}, 500);
+				}
+				else{
+					alert("une erreur est survenue");
+				}
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+				console.log(jqXHR.status);
+				console.log(textStatus);
+				console.log(errorThrown);
+			}
+        });
+    });
 
 });
 

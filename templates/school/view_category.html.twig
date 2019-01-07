@@ -7,11 +7,11 @@
 {% block body %}
 	<div class="cr">
 		<div class="ct">
-			<div id="sl_list">
-				<div class="sll">
-					<div id="sll_load_list" style="display:none;">chargement ...</div>
-					<div class="category_title mg_h10">
-					{{ category.name }}
+			<div>
+				<div id="sl_list_category" class="sll p_cr" data-type="school">
+					<div class="p_load" id="sll_load_list" style="display:none;">chargement ...</div>
+					<div class="category_title mg_h10 p_stop">
+						{{ category.name }}
 					</div>
 
 					{% if category.description is not null or category.description != '' %}
@@ -20,26 +20,22 @@
 						</div>
 					{% endif %}
 
-					<div class="sll_pagination">
+					<div class="pagination">
                         {{ include("school/include/pagination_view_category.html.twig") }}
 					</div>
-					<div class="sll_ct" style="">
+					<div class="sll_ct p_list">
 						{% for school in schools %}
 							{{ include("school/school_item.html.twig") }}
 						{% endfor %}
 						<div class="both"></div>
 					</div>
-					<div class="sll_pagination">
+					<div class="pagination">
 						{{ include("school/include/pagination_view_category.html.twig") }}
 					</div>
 				</div>
 
-
-				<div class="slr" style="">
+				<div class="slr">
 					<div id="sl_oftheday_right">
-                        {# twig extension #}
-
-                        {#{% set school = getSchoolById(1) %}#}
                         {% set school = getSchoolOfTheDay() %}
                         {% if school %}
 							<div class="title">

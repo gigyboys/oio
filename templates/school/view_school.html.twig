@@ -57,7 +57,7 @@
                         {% if categories | length != 0 %}
                             <div id="sl_view_categories">
                                 <a class="all_cat_link" href="{{ path('school_categories') }}">
-                                    <img src="{{ asset('image/category_icon.png')  }}" />
+                                    <i class="fas fa-tag"></i>
                                 </a><!--
 								{% for category in categories %}
 									--><a class="sl_cat_item" href="{{ path('school_category_view', {'slug': category.slug}) }}">

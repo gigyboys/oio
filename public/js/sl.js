@@ -280,54 +280,6 @@ $(function() {
         });		
     });
 	
-	/*
-	* Navigation pagination ajax
-	*/
-	$('body').on('click','a.sll_pagination_item, .sl_type_item a',function(e){
-        e.preventDefault(true);
-		var $this = $(this);
-		//alert($this.attr("href"));
-		var target = $this.attr("href");
-		var sll_height = $(".sll").height();
-		var sll_width = $(".sll").width();
-		$("#sll_load_list").css("height",sll_height);
-		$("#sll_load_list").css("width",sll_width);
-		$("#sll_load_list").css("display","block");
-		$("#sll_load_list").css("padding-top",(sll_height/2) - 40);
-		
-        $.ajax({
-            type: 'POST',
-            url: target,
-            dataType : 'json',
-            success: function(data){
-				if(data.state){
-					$("#sll_load_list").css("display","none");
-					var htmlappend = '';
-					for(var i = 0; i <data.schools.length; i++ ){
-						var school = data.schools[i];
-						htmlappend += school.school_view;
-					}
-					htmlappend += '<div class="both"></div>';
-					$(".sll_ct").html(htmlappend);
-					$(".sll_pagination").html(data.pagination);
-					$(".sl_type").html(data.typeLinks);
-					history.pushState('', 'School - page '+data.page, data.currentUrl);
-					truncateSchoolLabel();
-					var target = $('.sl_type, .category_title, .search_title').first();
-					$('html, body').stop().animate({scrollTop: - 50 + target.offset().top}, 500);
-				}
-				else{
-					alert("une erreur est survenue");
-				}
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-				console.log(jqXHR.status);
-				console.log(textStatus);
-				console.log(errorThrown);
-			}
-        });
-    });
-	
 	//tab sl about
 	var content_tab_header_item = $('.content_tab_header_item');
 	var content_tab_content_item = $('.content_tab_content_item');

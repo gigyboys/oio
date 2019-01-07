@@ -24,20 +24,21 @@
 	{% if entity == 'school' %}
 		<div class="cr">
 			<div class="ct">
-				<div id="sl_list">
-					<div class="sll">
+				<div>
+					<div id="sl_list_search" class="sll p_cr" data-type="school">
+						<div class=""></div>
 						{% if resultList | length > 0 %}
-							<div id="sll_load_list" style="display:none;">chargement ...</div>
-							<div class="sll_pagination">
+							<div class="p_load" id="sll_load_list" style="display:none;">chargement ...</div>
+							<div class="pagination p_stop">
                                 {{ include("school/include/pagination_list_school_search.html.twig") }}
 							</div>
-							<div class="sll_ct" style="">
+							<div class="sll_ct p_list">
 								{% for school in resultList %}
 									{{ include("school/school_item.html.twig") }}
 								{% endfor %}
 								<div class="both"></div>
 							</div>
-							<div class="sll_pagination">
+							<div class="pagination">
 								{{ include("school/include/pagination_list_school_search.html.twig") }}
 							</div>
 						{% else %}
@@ -46,7 +47,8 @@
 							</div>
 						{% endif %}
 					</div>
-					<div class="slr" style="">
+
+					<div class="slr">
 						<div id="sl_oftheday_right">
                             {# twig extension #}
 
@@ -78,11 +80,21 @@
 		<div class="cr mg_v10">
 			<div class="ct">
 				<div>
-					<div id="list_post">
+					<div id="post_list_search" class="p_cr" data-type="post_search">
 						{% if resultList | length > 0 %}
-							{% for post in resultList %}
-								{{ include("blog/include/post_item.html.twig") }}
-							{% endfor %}
+							<div class="p_load" id="sll_load_list" style="display:none;">chargement ...</div>
+							<div class="pagination p_stop">
+								{{ include("blog/include/pagination_list_post_search.html.twig") }}
+							</div>
+							<div id="list_post" class="p_list">
+								{% for post in resultList %}
+									{{ include("blog/include/post_item.html.twig") }}
+								{% endfor %}
+								<div class="both"></div>
+							</div>
+							<div class="pagination">
+								{{ include("blog/include/pagination_list_post_search.html.twig") }}
+							</div>
 						{% else %}
 							<div class="mg_10 tacenter">
 								<strong>Aucun article trouvé</strong>

@@ -7,7 +7,7 @@
 }
 /**************liste school***************/
 #sl_list{
-	overflow:hidden
+	/*overflow:hidden*/
 }
 .sll{
 	float:left;
@@ -259,7 +259,7 @@
 	font-weight: bold; 
 	margin-top: 10px
 }
-.sll_pagination{
+.pagination{
 	margin:10px 0;
 	text-align:center
 }
@@ -535,16 +535,19 @@
 	background: #bbb;
 	padding: 2px 6px;
 	margin: 4px;
-	border-radius: 6px;
+	border-radius: 3px;
 	vertical-align:middle
 }
 
-#sl_view_categories a.all_cat_link img{
-	width:22px;
-	height:22px;
+#sl_view_categories a.all_cat_link{
+	text-decoration: none;
 	display: inline-block;
-	margin-right:4px;
-	vertical-align:middle
+	vertical-align: middle;
+}
+
+#sl_view_categories a.all_cat_link i{
+	color: #777;
+	font-size: 16px;
 }
 
 #sl_view_description{
