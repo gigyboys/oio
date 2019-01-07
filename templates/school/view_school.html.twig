@@ -176,7 +176,7 @@
         <div class="cr">
             <div class="ct">
                 <div class="mg_h10">
-                    <a class="sl_prev_link" href="{{ path('school_view', {'slug': previousSchool.slug}) }}" title="{{ previousSchool.shortName }} - {{ previousSchool.name }}">
+                    <a class="prev_link" href="{{ path('school_view', {'slug': previousSchool.slug}) }}" title="{{ previousSchool.shortName }} - {{ previousSchool.name }}">
                         <span><span class="direction"></span> Précédent </span><br />
                         <span>
                             {% set logo = schoolLogo(previousSchool) %}
@@ -192,7 +192,7 @@
                             </span>
                         </span>
                     </a>
-                    <a class="sl_nex_link" href="{{ path('school_view', {'slug': nextSchool.slug}) }}" title="{{ nextSchool.shortName }} - {{ nextSchool.name }}">
+                    <a class="next_link" href="{{ path('school_view', {'slug': nextSchool.slug}) }}" title="{{ nextSchool.shortName }} - {{ nextSchool.name }}">
                         <span>Suivant <span class="direction"></span></span><br />
                         <span>
                             {% set logo = schoolLogo(nextSchool) %}

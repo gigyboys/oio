@@ -273,6 +273,66 @@ a:hover{
 	display: none;
 }
 
+/* prev next link */
+
+/*prev next link*/
+.prev_link{
+	display:block;
+	float: left;
+	text-align: left;
+	max-width: 50%;
+}
+.prev_link .direction{
+	display: inline-block;
+	border-right: 8px solid #444;
+	border-top: 5px solid transparent;
+	border-bottom: 5px solid transparent;
+	border-left: 0px solid transparent;
+}
+.prev_link .logo{
+	display: block;
+	float: left
+}
+.prev_link .logo img{
+	border : 1px solid #ddd
+}
+.prev_link .label{
+	display: block;
+	margin-left: 37px;
+	margin-top: 8px;
+}
+.prev_link .label.post{
+	margin-top: -2px;
+}
+.next_link{
+	display:block;
+	float: right;
+	text-align: right;
+	max-width: 50%;
+}
+.next_link .direction{
+	display: inline-block;
+	border-left: 8px solid #444;
+	border-top: 5px solid transparent;
+	border-bottom: 5px solid transparent;
+	border-right: 0px solid transparent;
+}
+.next_link .logo{
+	display: block;
+	float: right
+}
+.next_link .logo img{
+	border : 1px solid #ddd
+}
+.next_link .label{
+	display: block;
+	margin-right: 37px;
+	margin-top: 8px;
+}
+.next_link .label.post{
+	margin-top: -2px;
+}
+
 @media screen and (max-width: 1050px)
 {
 	.team_user_list .userteam_item_wrap{

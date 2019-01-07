@@ -181,4 +181,98 @@ class PostRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+
+    public function findFirstPost($fied = 'id') {
+
+        $qb = $this->createQueryBuilder('post');
+
+        $qb
+            ->andWhere('post.valid = :valid')
+            ->setParameter('valid', true)
+            ->andWhere('post.published = :published')
+            ->setParameter('published', true)
+            ->andWhere('post.deleted = :deleted')
+            ->setParameter('deleted', false);
+
+        $qb
+            ->orderBy('post.'.$fied, 'ASC')
+            ->setMaxResults(1);
+
+
+        $post = $qb->getQuery()->getOneOrNullResult();
+        return $post;
+    }
+
+    public function findLastPost($fied = 'id') {
+
+        $qb = $this->createQueryBuilder('post');
+        
+        $qb
+            ->andWhere('post.valid = :valid')
+            ->setParameter('valid', true)
+            ->andWhere('post.published = :published')
+            ->setParameter('published', true)
+            ->andWhere('post.deleted = :deleted')
+            ->setParameter('deleted', false);
+
+        $qb
+            ->orderBy('post.'.$fied, 'DESC')
+            ->setMaxResults(1);
+
+
+        $post = $qb->getQuery()->getOneOrNullResult();
+        return $post;
+    }
+
+    public function findNextPost(Post $post, $field = 'id') {
+        $id = $post->getId();
+        switch ($field){
+            case 'id':
+                $id = $post->getId();
+        }
+
+        $qb = $this->createQueryBuilder('post');
+
+        $qb
+            ->andWhere('post.valid = :valid')
+            ->setParameter('valid', true)
+            ->andWhere('post.published = :published')
+            ->setParameter('published', true)
+            ->andWhere('post.deleted = :deleted')
+            ->setParameter('deleted', false)
+            ->andWhere('post.'.$field.' > :field')
+            ->setParameter('field', $id)
+            ->orderBy('post.'.$field, 'ASC')
+            ->setMaxResults(1);
+
+
+        $post = $qb->getQuery()->getOneOrNullResult();
+        return $post;
+    }
+
+    public function findPreviousPost(Post $post, $field = 'id') {
+        $id = $post->getId();
+        switch ($field){
+            case 'id':
+                $id = $post->getId();
+        }
+
+        $qb = $this->createQueryBuilder('post');
+
+        $qb
+            ->andWhere('post.valid = :valid')
+            ->setParameter('valid', true)
+            ->andWhere('post.published = :published')
+            ->setParameter('published', true)
+            ->andWhere('post.deleted = :deleted')
+            ->setParameter('deleted', false)
+            ->andWhere('post.'.$field.' < :field')
+            ->setParameter('field', $id)
+            ->orderBy('post.'.$field, 'DESC')
+            ->setMaxResults(1);
+
+
+        $post = $qb->getQuery()->getOneOrNullResult();
+        return $post;
+    }
 }

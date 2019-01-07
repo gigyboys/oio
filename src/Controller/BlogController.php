@@ -123,13 +123,21 @@ class BlogController extends AbstractController {
                 $previousComment = $this->commentRepository->getSinceComment($firstComment, $type, $post);
             }
 
+            //nextPost
+            $nextPost = $this->blogService->getNextPost($post);
+
+            //previousPost
+            $previousPost = $this->blogService->getPreviousPost($post);
+
             return $this->render('blog/view_post.html.twig', [
-                'post' => $post,
-                'tags' 			=> $tags,
-                'comments' => $comments,
-                'allComments' => $allComments,
-                'previousComment' => $previousComment,
-                'entityView' => 'blog',
+                'post'              => $post,
+                'tags' 			    => $tags,
+                'comments'          => $comments,
+                'allComments'       => $allComments,
+                'previousComment'   => $previousComment,
+                'nextPost'          => $nextPost,
+                'previousPost'      => $previousPost,
+                'entityView'        => 'blog',
             ]);
         }else{
             return $this->redirectToRoute('blog');

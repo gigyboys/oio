@@ -129,4 +129,20 @@ class BlogService
         return $posts;
     }
 
+    public function getNextPost(Post $post) {
+        $nextPost = $this->postRepository->findNextPost($post);
+        if(!$nextPost){
+            $nextPost = $this->postRepository->findFirstPost('id');
+        }
+        return $nextPost;
+    }
+
+    public function getPreviousPost(Post $post) {
+        $previousPost = $this->postRepository->findPreviousPost($post);
+        if(!$previousPost){
+            $previousPost = $this->postRepository->findLastPost('id');
+        }
+        return $previousPost;
+    }
+
 }

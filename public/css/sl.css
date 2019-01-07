@@ -341,58 +341,6 @@
 	display: block;
 }
 
-/*prev next link*/
-.sl_prev_link{
-	display:block;
-	width: 50%;
-	float: left;
-	text-align: left
-}
-.sl_prev_link .direction{
-	display: inline-block;
-	border-right: 8px solid #444;
-	border-top: 5px solid transparent;
-	border-bottom: 5px solid transparent;
-	border-left: 0px solid transparent;
-}
-.sl_prev_link .logo{
-	display: block;
-	float: left
-}
-.sl_prev_link .logo img{
-	border : 1px solid #ddd
-}
-.sl_prev_link .label{
-	display: block;
-	margin-left: 37px;
-	margin-top: 8px;
-}
-.sl_nex_link{
-	display:block;
-	width: 50%;
-	float: left;
-	text-align: right
-}
-.sl_nex_link .direction{
-	display: inline-block;
-	border-left: 8px solid #444;
-	border-top: 5px solid transparent;
-	border-bottom: 5px solid transparent;
-	border-right: 0px solid transparent;
-}
-.sl_nex_link .logo{
-	display: block;
-	float: right
-}
-.sl_nex_link .logo img{
-	border : 1px solid #ddd
-}
-.sl_nex_link .label{
-	display: block;
-	margin-right: 37px;
-	margin-top: 8px;
-}
-
 .sl_related_label{
 	margin:10px;
 	font-weight:bold;

@@ -107,8 +107,8 @@ class SchoolRepository extends ServiceEntityRepository
             ->setMaxResults(1);
 
 
-        $schools = $qb->getQuery()->getOneOrNullResult();
-        return $schools;
+        $school = $qb->getQuery()->getOneOrNullResult();
+        return $school;
     }
 
     public function findLastSchool($fied = 'position', $published = null) {
@@ -148,8 +148,8 @@ class SchoolRepository extends ServiceEntityRepository
             ->setMaxResults(1);
 
 
-        $schools = $qb->getQuery()->getOneOrNullResult();
-        return $schools;
+        $school = $qb->getQuery()->getOneOrNullResult();
+        return $school;
     }
 
     public function findPreviousSchool(School $school, $field = 'position') {
@@ -170,8 +170,8 @@ class SchoolRepository extends ServiceEntityRepository
             ->setMaxResults(1);
 
 
-        $schools = $qb->getQuery()->getOneOrNullResult();
-        return $schools;
+        $school = $qb->getQuery()->getOneOrNullResult();
+        return $school;
     }
 
     //search
