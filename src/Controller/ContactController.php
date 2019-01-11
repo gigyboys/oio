@@ -56,12 +56,14 @@ class ContactController extends AbstractController {
                 $error = true;
                 $msg .= "<div>Le champ <strong>email</strong> est obligatoire.</div>";
             }
-
+            
+            /*
             if(trim($contact->getPhone()) == ""){
                 $error = true;
                 $msg .= "<div>Le champ <strong>téléphone</strong> est obligatoire.</div>";
             }
-
+            */
+            
             if(trim($contact->getMessage()) == ""){
                 $error = true;
                 $msg .= "<div>Le champ message est obligatoire.</div>";

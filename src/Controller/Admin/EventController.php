@@ -37,6 +37,7 @@ use App\Repository\TagPostRepository;
 use App\Repository\TagRepository;
 use App\Repository\TypeRepository;
 use App\Repository\UserRepository;
+use App\Repository\CommentRepository;
 use App\Service\PlatformService;
 use App\Service\SchoolService;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -65,6 +66,7 @@ class EventController extends AbstractController {
         SchoolPostRepository $schoolPostRepository,
         SchoolEventRepository $schoolEventRepository,
         EventRepository $eventRepository,
+        CommentRepository $commentRepository,
         ObjectManager $em
     )
     {
@@ -84,6 +86,7 @@ class EventController extends AbstractController {
         $this->schoolPostRepository = $schoolPostRepository;
         $this->schoolEventRepository = $schoolEventRepository;
         $this->eventRepository = $eventRepository;
+        $this->commentRepository = $commentRepository;
         $this->em = $em;
     }
 
@@ -112,7 +115,7 @@ class EventController extends AbstractController {
 
     public function eventCreation()
     {
-        $events = $this->postRepository->findBy(array(
+        $events = $this->eventRepository->findBy(array(
             'tovalid' => false
         ));
 
@@ -261,6 +264,56 @@ class EventController extends AbstractController {
             $response->setContent(json_encode(array(
                 'state' => 1,
                 'case' => $isSchool,
+            )));
+        }else{
+            $response->setContent(json_encode(array(
+                'state' => 0,
+            )));
+        }
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    /*
+    * Event comment
+    */
+    public function eventComments($event_id)
+    {
+        $event = $this->eventRepository->find($event_id);
+        $comments = $this->commentRepository->findBy(array(
+            'event' => $event,
+            'deleted' => false,
+        ));
+        return $this->render('admin/event/event_comments.html.twig', array(
+            'event' => $event,
+            'comments' => $comments
+        ));
+    }
+
+
+    /*
+     * Event Comment delete
+     */
+    public function deleteComment($event_id, $id, Request $request)
+    {
+        $comment = $this->commentRepository->find($id);
+        $event = $this->eventRepository->find($event_id);
+
+        $response = new Response();
+        if ($comment) {
+            $comment->setDeleted(true);
+            $this->em->persist($comment);
+            $this->em->flush();
+
+            $comments = $this->commentRepository->findBy(array(
+                'event' => $event,
+                'deleted' => false,
+            ));
+
+            $response->setContent(json_encode(array(
+                'state' => 1,
+                'id' => $id,
+                'comments' => $comments,
             )));
         }else{
             $response->setContent(json_encode(array(

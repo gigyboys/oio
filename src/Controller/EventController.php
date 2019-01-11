@@ -341,6 +341,7 @@ class EventController extends AbstractController{
                     //creation message
                     $comment->setEvent($event);
                     $comment->setUser($user);
+                    $comment->setDeleted(false);
                     $comment->setDate(new \DateTime());
 
                     $this->em->persist($comment);

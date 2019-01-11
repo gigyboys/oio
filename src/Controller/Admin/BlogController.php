@@ -29,6 +29,7 @@ use App\Repository\ParameterRepository;
 use App\Repository\PostRepository;
 use App\Repository\SchoolPostRepository;
 use App\Repository\TagPostRepository;
+use App\Repository\CommentRepository;
 use App\Repository\TagRepository;
 use App\Repository\TypeRepository;
 use App\Repository\UserRepository;
@@ -58,6 +59,7 @@ class BlogController extends AbstractController {
         TagRepository $tagRepository,
         TagPostRepository $tagPostRepository,
         SchoolPostRepository $schoolPostRepository,
+        CommentRepository $commentRepository,
         ObjectManager $em
     )
     {
@@ -75,6 +77,7 @@ class BlogController extends AbstractController {
         $this->tagRepository = $tagRepository;
         $this->tagPostRepository = $tagPostRepository;
         $this->schoolPostRepository = $schoolPostRepository;
+        $this->commentRepository = $commentRepository;
         $this->em = $em;
     }
 
@@ -408,6 +411,56 @@ class BlogController extends AbstractController {
                 'posts' => $posts,
                 'publishedPosts' => $publishedPosts,
                 'notPublishedPosts' => $notPublishedPosts,
+            )));
+        }else{
+            $response->setContent(json_encode(array(
+                'state' => 0,
+            )));
+        }
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    /*
+    * Post comment
+    */
+    public function postComments($post_id)
+    {
+        $post = $this->postRepository->find($post_id);
+        $comments = $this->commentRepository->findBy(array(
+            'post' => $post,
+            'deleted' => false,
+        ));
+        return $this->render('admin/blog/post_comments.html.twig', array(
+            'post' => $post,
+            'comments' => $comments
+        ));
+    }
+
+
+    /*
+     * Post Comment delete
+     */
+    public function deleteComment($post_id, $id, Request $request)
+    {
+        $comment = $this->commentRepository->find($id);
+        $post = $this->postRepository->find($post_id);
+
+        $response = new Response();
+        if ($comment) {
+            $comment->setDeleted(true);
+            $this->em->persist($comment);
+            $this->em->flush();
+
+            $comments = $this->commentRepository->findBy(array(
+                'post' => $post,
+                'deleted' => false,
+            ));
+
+            $response->setContent(json_encode(array(
+                'state' => 1,
+                'id' => $id,
+                'comments' => $comments,
             )));
         }else{
             $response->setContent(json_encode(array(

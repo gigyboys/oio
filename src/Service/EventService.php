@@ -165,7 +165,8 @@ class EventService
         $comments = array();
 
         $comments = $this->commentRepository->findBy(array(
-            'event' => $event
+            'event' => $event,
+            'deleted' => false
         ));
 
         return $comments;

@@ -15,10 +15,10 @@
 	<a class="link dd_item" href="{{ path('admin_school_document', {'school_id': school.id}) }}">
 		<span class="icon"><img src="{{ asset('image/list_icon.png') }}" /></span><span class="label">Documents</span>
 	</a>
-	{#
-	<a class="link dd_item" href="{{ path('com_admin_school_admin', {'school_id': school.id}) }}">
-		<span class="icon"><img src="{{ asset('assets/image/ur_icon.png') }}" /></span><span class="label">{{ 'Admin' | trans }}</span>
+	<a class="link dd_item" href="{{ path('admin_school_evaluation', {'school_id': school.id}) }}">
+		<span class="icon"><img src="{{ asset('image/list_icon.png') }}" /></span><span class="label">Evaluations</span>
 	</a>
+	{#
 	<a class="link dd_item" href="{{ path('com_admin_school_categories', {'school_id': school.id}) }}">
 		<span class="icon"><img src="{{ asset('assets/image/list_icon.png') }}" /></span><span class="label">{{ 'Categories' | trans }}</span>
 	</a>

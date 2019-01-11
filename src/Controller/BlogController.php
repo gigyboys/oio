@@ -274,6 +274,7 @@ class BlogController extends AbstractController {
                     //creation message
                     $comment->setPost($post);
                     $comment->setUser($user);
+                    $comment->setDeleted(false);
                     $comment->setDate(new \DateTime());
 
                     $this->em->persist($comment);

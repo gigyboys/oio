@@ -46,6 +46,13 @@ class Comment
      */
     private $date;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="deleted", type="boolean", options={"default"=0})
+     */
+    private $deleted;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -109,5 +116,17 @@ class Comment
         $this->event = $event;
 
         return $this;
+    }
+
+    public function setDeleted($deleted)
+    {
+        $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    public function getDeleted()
+    {
+        return $this->deleted;
     }
 }

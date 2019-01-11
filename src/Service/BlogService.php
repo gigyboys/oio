@@ -116,7 +116,8 @@ class BlogService
         $comments = array();
 
         $comments = $this->commentRepository->findBy(array(
-            'post' => $post
+            'post' => $post,
+            'deleted' => false
         ));
 
         return $comments;

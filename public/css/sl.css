@@ -263,7 +263,7 @@
 	margin:10px 0;
 	text-align:center
 }
-.sll_pagination_item, .pagination_item{
+.pagination_item{
 	display:inline-block;
 	box-sizing:border-box;
 	min-width:40px;
@@ -274,10 +274,10 @@
 	border : 1px solid #ddd; 
 	margin-bottom: 3px;
 }
-.sll_pagination_item:hover, .pagination_item:hover{
+.pagination_item:hover, .pagination_item:hover{
 	border : 1px solid #aaa; 
 }
-.sll_pagination_item.active, .pagination_item.active{
+.pagination_item.active, .pagination_item.active{
 	background:#eee
 }
 .slr{
@@ -873,7 +873,7 @@
 @media screen and (max-width: 500px)
 {
 
-	.sll_pagination_item{
+	.pagination_item{
 		min-width:32px;
 	}
 

@@ -394,6 +394,23 @@ $(function() {
         
 		popup(content, 500, true);
     });
+	
+	//delete evaluation
+	$('body').on('click','.delete_evaluation',function(e){
+		var id = $(this).data("id");
+		var target = $(this).data("target");
+		
+		var content = "";
+		content += '<div style="padding:10px; width:auto; background:#fff; border-radius:3px">';
+			content += '<div style="text-align:center;padding:10px 0"> Voulez vous retirer cette évaluation de la liste?</div>';
+			content += '<div style="text-align:center">	';
+				content += '<span class="button_closable" style="background:#bbb; border-radius: 3px; cursor:pointer; display:inline-block; margin:auto; padding:5px;margin:5px">	Annuler	</span>';
+				content += '<span class="confirm_delete_evaluation button_closable" data-entity="evaluation" data-id="'+id+'" data-target="'+target+'" style="background:#bbb; border-radius: 3px; cursor:pointer; display:inline-block; margin:auto; padding:5px;margin:5px">	Confirmer	</span>	';
+			content += '</div>';
+		content += '</div>';
+        
+		popup(content, 500, true);
+    });
 
 	//delete contact
 	$('body').on('click','.delete_contact',function(e){
@@ -606,7 +623,7 @@ $(function() {
     });
 	
 	//confirm delete
-	$('body').on('click','.confirm_delete_field, .confirm_delete_contact, .confirm_delete_sl_category',function(e){
+	$('body').on('click','.confirm_delete_field, .confirm_delete_contact, .confirm_delete_sl_category, .confirm_delete_evaluation',function(e){
 		var $this = $(this);
 		var id = $this.data("id");
         var target = $this.data('target');
@@ -641,6 +658,10 @@ $(function() {
                             $( "#sl_category_"+data.id ).remove();
                             $(".nb_categories").html(data.categories.length);
                             break;
+						case 'evaluation':
+							$( "#evaluation_"+data.id ).remove();
+							$(".nb_evaluations").html(data.evaluations.length);
+							break;
                     }
                     $( ".a_list_search_input" ).trigger( "keyup" );
 				}else{

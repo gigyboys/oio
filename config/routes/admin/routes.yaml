@@ -157,6 +157,16 @@ admin_school_field_doedit:
     defaults:
         _controller: App\Controller\Admin\FieldController::doEditField
 
+#school evaluation
+admin_school_evaluation:
+    path:     /school/edit/{school_id}/evaluations
+    defaults:
+        _controller: App\Controller\Admin\EvaluationController::index
+admin_school_evaluation_delete:
+    path:     /school/edit/{school_id}/delete-evaluation/{id}
+    defaults:
+        _controller: App\Controller\Admin\EvaluationController::deleteEvaluation
+
 #school document
 admin_school_document:
     path:     /school/edit/{school_id}/documents
@@ -182,10 +192,6 @@ admin_school_document_edit:
     path:     /school/edit/{school_id}/edit-document/{document_id}
     defaults:
         _controller: App\Controller\Admin\DocumentController::editDocument
-#admin_school_field_delete:
-#    path:     /school/edit/{school_id}/delete-field/{id}
-#    defaults:
-#        _controller: App\Controller\Admin\FieldController::deleteField
 admin_school_document_doedit:
     path:     /school/edit/{school_id}/doedit-document/{document_id}
     defaults:
@@ -318,6 +324,14 @@ admin_blog_post_toggle_school:
     path:     /blog/post/{post_id}/toggle-school/{school_id}
     defaults:
         _controller: App\Controller\Admin\BlogController::toggleSchool
+admin_blog_post_comments:
+    path:     /blog/post/{post_id}/comments
+    defaults:
+        _controller: App\Controller\Admin\BlogController::postComments
+admin_blog_post_comment_delete:
+    path:     /blog/post/{post_id}/delete-comment/{id}
+    defaults:
+        _controller: App\Controller\Admin\BlogController::deleteComment
 
 
 #event
@@ -349,6 +363,14 @@ admin_event_toggle_school:
     path:     /event/{event_id}/toggle-school/{school_id}
     defaults:
         _controller: App\Controller\Admin\EventController::toggleSchool
+admin_event_comments:
+    path:     /event/{event_id}/comments
+    defaults:
+        _controller: App\Controller\Admin\EventController::eventComments
+admin_event_comment_delete:
+    path:     /event/{event_id}/delete-comment/{id}
+    defaults:
+        _controller: App\Controller\Admin\EventController::deleteComment
 
 #setting
 admin_setting_accessibility:

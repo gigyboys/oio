@@ -27,6 +27,8 @@ class CommentRepository extends ServiceEntityRepository
         $qb
             ->where('comment.'.$type.' =:'.$type)
             ->setParameter($type, $entity)
+            ->andWhere('comment.deleted =:deleted')
+            ->setParameter('deleted', false)
             ->setMaxResults($limit)
             ->orderBy('comment.id', 'DESC')
         ;
@@ -51,7 +53,9 @@ class CommentRepository extends ServiceEntityRepository
 
         $qb
             ->where('comment.'.$type.' =:'.$type)
-            ->setParameter($type, $entity);
+            ->setParameter($type, $entity)
+            ->andWhere('comment.deleted =:deleted')
+            ->setParameter('deleted', false);
 
         $qb->andWhere('comment.id <= :idComment');
 
@@ -81,7 +85,9 @@ class CommentRepository extends ServiceEntityRepository
 
         $qb
             ->where('comment.'.$type.' =:'.$type)
-            ->setParameter($type, $entity);
+            ->setParameter($type, $entity)
+            ->andWhere('comment.deleted =:deleted')
+            ->setParameter('deleted', false);
 
         $qb->andWhere('comment.id < :idComment');
 
@@ -103,7 +109,9 @@ class CommentRepository extends ServiceEntityRepository
 
         $qb
             ->where('comment.user =:user')
-            ->setParameter('user', $user);
+            ->setParameter('user', $user)
+            ->andWhere('comment.deleted =:deleted')
+            ->setParameter('deleted', false);
         $qb
             ->orderBy('comment.date', 'DESC')
         ;
