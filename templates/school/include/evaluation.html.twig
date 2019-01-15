@@ -7,7 +7,7 @@
 		</div>
     {% else %}
 		<div class="mark_empty mg_v10">
-			Aucune note attribuée pour le moment
+			Aucune note attribuée à l'établissement : {{ school.name }}
 		</div>
 		<div id="pass_mark_wrap" style="display: none">
 			<div>
@@ -30,9 +30,11 @@
 	{% if evaluations|length == 0 and myEvaluation is null %}
 		<div id="evaluation_list" class="mg_v10">
 		</div>
+		{#
 		<div id="evaluation_empty" class="mg_v10">
 			Aucune évaluation sur l'établissement : {{ school.name }}
 		</div>
+		#}
 	{% else %}
 		<div id="evaluation_list">
 			{% for evaluation in evaluations %}

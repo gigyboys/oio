@@ -140,11 +140,6 @@ class EventController extends AbstractController{
                 'page' => $page,
             )));
         }else{
-            if(!$events){
-                return $this->redirectToRoute('event', array(
-                    'typeslug' => $typeslug
-                ));
-            }
             $response = $this->render('event/index.html.twig', [
                 'allEvents' => $allEvents,
                 'events' => $events,

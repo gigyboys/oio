@@ -163,10 +163,8 @@ class SchoolController extends AbstractController{
                 'page' => $page,
             )));
         }else{
-            if(!$schools){
-                return $this->redirectToRoute('school_home', array(
-                    'typeslug' => $typeslug
-                ));
+            if(!$schools && $typeslug != 'all'){
+                return $this->redirectToRoute('platform_home');
             }
             $response = $this->render('school/index.html.twig', [
                 'allSchools' => $allSchools,
@@ -283,10 +281,6 @@ class SchoolController extends AbstractController{
                     'page' => $page,
                 )));
             }else{
-                if(!$schools){
-                    $url = $this->get('router')->generate('platform_home');
-                    return new RedirectResponse($url);
-                }
                 $response = $this->render('school/view_category.html.twig', array(
                     'category' => $category,
                     'allSchools' => $allSchools,

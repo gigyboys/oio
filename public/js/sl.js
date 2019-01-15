@@ -157,7 +157,7 @@ $(function() {
 				success: function(data){
 					if(data.state == 1){
 						$("#my_evaluation").html(data.myEvaluationItem);
-						$("#evaluation_empty").remove();
+						//$("#evaluation_empty").remove();
 
 						if(data.passMark){
 							$("#pass_mark").html(data.passMark);

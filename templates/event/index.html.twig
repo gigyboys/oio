@@ -29,6 +29,10 @@
 					<div class="pagination et_pagination mg_h10 tacenter">
 						{{ include("event/include/pagination_list_event.html.twig") }}
 					</div>
+				{% else %}
+					<div class="mg_v20 tacenter">
+						<strong>Aucun évènement à afficher</strong>
+					</div>
 				{% endif %}
 				
 				<div class="both"></div>

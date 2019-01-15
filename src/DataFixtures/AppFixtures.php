@@ -25,10 +25,45 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $em)
     {
         $this->loadUser($em);
-        $this->loadType($em);
-        $this->loadOption($em);
+        $typeObjectArray = $this->loadType($em);
+        $optionObjectArray = $this->loadOption($em);
         $this->loadDocumentAuthorization($em);
         $this->loadParameter($em);
+
+        $this->loadSchool($em, $typeObjectArray[0], $optionObjectArray[0]);
+    }
+
+    public function loadSchool(ObjectManager $em, $type, $option)
+    {
+        //school1
+        $school = new School();
+        $school->setName('Oliogomun Inarcetis Osiurus');
+        $school->setShortName('OIO');
+        $school->setSlug('oio');
+
+        $published = true;
+        $school->setPublished($published);
+        $school->setShortDescription($school->getName()." Courte Description" );
+        $school->setDescription($school->getName()." Description" );
+
+        //position
+        $position = 1;
+        $school->setPosition($position);
+
+        //option
+        $school->setOption($option);
+
+        //type
+        $school->setType($type);
+
+        //date
+        $currentDate = new \Datetime();
+        $school->setDate($currentDate);
+        $school->setDatemodif($currentDate);
+        $em->persist($school);
+
+        $em->persist($school);
+        $em->flush();
     }
 
     public function loadUser(ObjectManager $em)
@@ -41,7 +76,9 @@ class AppFixtures extends Fixture
         $user->setUsername('user1');
         $user->setPassword($this->passwordEncoder->encodePassword($user,'user1'));
         $user->setEnabled(true);
-        $user->setDate(new \DateTime());
+        $now = new \DateTime();
+        $user->setDate($now);
+        $user->setLastActivity($now);
         $user->setToken(md5(time()));
         $em->persist($user);
 
@@ -53,7 +90,8 @@ class AppFixtures extends Fixture
         $user->setUsername('user2');
         $user->setPassword($this->passwordEncoder->encodePassword($user,'user2'));
         $user->setEnabled(true);
-        $user->setDate(new \DateTime());
+        $user->setDate($now);
+        $user->setLastActivity($now);
         $user->setToken(md5(time()));
         $em->persist($user);
         $em->flush();
@@ -74,6 +112,7 @@ class AppFixtures extends Fixture
             ),
         );
 
+        $typeObjectArray = array();
         foreach ($typeArrays as $typeArray)
         {
             $entity = new Type();
@@ -81,8 +120,11 @@ class AppFixtures extends Fixture
             $entity->setSlug($typeArray['slug']);
             $entity->setPluralName($typeArray['plural_name']);
             $em->persist($entity);
+            $typeObjectArray[] = $entity;
         }
         $em->flush();
+
+        return $typeObjectArray;
     }
 
     public function loadDocumentAuthorization(ObjectManager $em)
@@ -141,14 +183,18 @@ class AppFixtures extends Fixture
             ),
         );
 
+        $optionObjectArray = array();
         foreach ($optionArrays as $optionArray)
         {
             $entity = new Option();
             $entity->setName($optionArray['name']);
             $entity->setPluralName($optionArray['plural_name']);
             $em->persist($entity);
+            $optionObjectArray[] = $entity;
         }
         $em->flush();
+
+        return $optionObjectArray;
     }
 
     public function loadParameter(ObjectManager $em)
@@ -168,6 +214,10 @@ class AppFixtures extends Fixture
             ),
             array(
                 'parameter' => "posts_by_page",
+                'value' => "12",
+            ),
+            array(
+                'parameter' => "events_by_page",
                 'value' => "12",
             ),
         );
