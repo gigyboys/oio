@@ -68,21 +68,22 @@ class BlogController extends AbstractController {
         }
 
         return $this->render('blog/index.html.twig', array(
-            'posts' => $posts,
-            'previousPost' => $previousPost,
-            'entityView' => 'blog',
+            'posts'         => $posts,
+            'previousPost'  => $previousPost,
+            'entityView'    => 'blog',
         ));
     }
 
     public function viewById($id, Request $request)
     {
         $post = $this->postRepository->find($id);
-        return $this->redirectToRoute('blog_post_view', array('slug' => $post->getSlug()));
+        return $this->redirectToRoute('blog_post_view', array(
+            'slug' => $post->getSlug()
+        ));
     }
 
     public function view($slug, Request $request): Response
     {
-
         $user = $this->getUser();
 
         $post = $this->postRepository->findOneBy(array(
@@ -94,7 +95,6 @@ class BlogController extends AbstractController {
             $showPost = true;
         }
         if($post && ( $showPost || $this->isGranted('ROLE_ADMIN') || $post->getUser() == $user)){
-
             //tags
             $tags = array();
 
@@ -163,8 +163,8 @@ class BlogController extends AbstractController {
                     'post' => $post
                 ));
                 array_push($listPosts, array(
-                    "id" 			=> $post->getId(),
-                    "postItem" 		=> $postItem,
+                    "id" 		=> $post->getId(),
+                    "postItem"  => $postItem,
                 ));
             }
 
@@ -185,10 +185,10 @@ class BlogController extends AbstractController {
             }
 
             $response->setContent(json_encode(array(
-                'state' => 1,
-                'posts' => $listPosts,
-                'previousPostId' => $previousPostId,
-                'urlLoadPost' => $urlLoadPost,
+                'state'             => 1,
+                'posts'             => $listPosts,
+                'previousPostId'    => $previousPostId,
+                'urlLoadPost'       => $urlLoadPost,
             )));
         }else{
             $response->setContent(json_encode(array(
@@ -240,10 +240,10 @@ class BlogController extends AbstractController {
             }
 
             $response->setContent(json_encode(array(
-                'state' => 1,
-                'comments' => $listComments,
+                'state'             => 1,
+                'comments'          => $listComments,
                 'previousCommentId' => $previousCommentId,
-                'urlLoadComment' => $urlLoadComment,
+                'urlLoadComment'    => $urlLoadComment,
             )));
         }else{
             $response->setContent(json_encode(array(
@@ -294,9 +294,9 @@ class BlogController extends AbstractController {
                         $infoComment = count($comments)." Commentaires";
                     }
                     $response->setContent(json_encode(array(
-                        'state' => 1,
-                        'commentItem' => $commentItem,
-                        'infoComment' => $infoComment,
+                        'state'         => 1,
+                        'commentItem'   => $commentItem,
+                        'infoComment'   => $infoComment,
                     )));
                 }
             }

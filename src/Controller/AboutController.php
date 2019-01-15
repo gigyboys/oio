@@ -6,13 +6,10 @@ use App\Form\ContactType;
 use App\Repository\ParameterRepository;
 use App\Repository\UserTeamRepository;
 use App\Service\PlatformService;
-use App\Service\SchoolService;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Entity\School;
-use App\Repository\SchoolRepository;
 use Twig\Environment;
 
 class AboutController extends AbstractController {

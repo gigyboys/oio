@@ -106,18 +106,18 @@ class EventController extends AbstractController{
                     'event' => $event,
                 ));
                 array_push($listEvents, array(
-                    "event_id" 	=> $event->getId(),
-                    "event_view" 	=> $event_view,
+                    "event_id" 	 => $event->getId(),
+                    "event_view" => $event_view,
                 ));
             }
 
             //pagination
             $pagination = $this->renderView('event/include/pagination_list_event.html.twig', array(
-                'allEvents' => $allEvents,
-                'events' => $events,
-                'limit' => $limit,
-                'currentpage' => $page,
-                'typeslug' => $typeslug,
+                'allEvents'     => $allEvents,
+                'events'        => $events,
+                'limit'         => $limit,
+                'currentpage'   => $page,
+                'typeslug'      => $typeslug,
             ));
 
             //type_links
@@ -126,18 +126,18 @@ class EventController extends AbstractController{
             ));
 
             $currentUrl = $this->get('router')->generate('event', array(
-                'typeslug' => $typeslug,
-                'page' => $page
+                'typeslug'  => $typeslug,
+                'page'      => $page
             ));
 
             $response->setContent(json_encode(array(
-                'state' => 1,
-                'events' => $listEvents,
-                'currentpage' => $page,
-                'pagination' => $pagination,
-                'typeLinks' => $typeLinks,
-                'currentUrl' => $currentUrl,
-                'page' => $page,
+                'state'         => 1,
+                'events'        => $listEvents,
+                'currentpage'   => $page,
+                'pagination'    => $pagination,
+                'typeLinks'     => $typeLinks,
+                'currentUrl'    => $currentUrl,
+                'page'          => $page,
             )));
         }else{
             $response = $this->render('event/index.html.twig', [

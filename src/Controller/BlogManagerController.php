@@ -85,7 +85,7 @@ class BlogManagerController extends AbstractController {
             $this->em->flush();
 
             $response->setContent(json_encode(array(
-                'state' => 1,
+                'state'=> 1,
                 'case' => $post->getShowAuthor(),
             )));
         }
@@ -119,7 +119,7 @@ class BlogManagerController extends AbstractController {
 
             $response->setContent(json_encode(array(
                 'state' => 1,
-                'case' => $post->getActiveComment(),
+                'case'  => $post->getActiveComment(),
             )));
         }
 
@@ -161,10 +161,10 @@ class BlogManagerController extends AbstractController {
                 ));
 
                 $response->setContent(json_encode(array(
-                    'state' => 1,
-                    'case' => $post->getPublished(),
-                    'posts' => $posts,
-                    'publishedPosts' => $publishedPosts,
+                    'state'             => 1,
+                    'case'              => $post->getPublished(),
+                    'posts'             => $posts,
+                    'publishedPosts'    => $publishedPosts,
                     'notPublishedPosts' => $notPublishedPosts,
                 )));
             }
@@ -198,7 +198,7 @@ class BlogManagerController extends AbstractController {
 
                 $response->setContent(json_encode(array(
                     'state' => 1,
-                    'case' => $post->getValid(),
+                    'case'  => $post->getValid(),
                 )));
             }
         }
@@ -271,10 +271,10 @@ class BlogManagerController extends AbstractController {
                     $this->em->flush();
 
                     $response->setContent(json_encode(array(
-                        'state' => 1,
-                        'postId' => $post->getId(),
-                        'title' => $post->getTitle(),
-                        'slug' => $post->getSlug(),
+                        'state'     => 1,
+                        'postId'    => $post->getId(),
+                        'title'     => $post->getTitle(),
+                        'slug'      => $post->getSlug(),
                     )));
                 }
             }
@@ -310,8 +310,8 @@ class BlogManagerController extends AbstractController {
 
                     $response->setContent(json_encode(array(
                         'state' => 1,
-                        'introduction' => $post->getIntroduction(),
-                        'content' => $post->getContent(),
+                        'introduction'  => $post->getIntroduction(),
+                        'content'       => $post->getContent(),
                     )));
                 }
             }
@@ -343,14 +343,14 @@ class BlogManagerController extends AbstractController {
             ));
 
             $content = $this->renderView('blog/edit_illustration_popup.html.twig', array(
-                'post' => $post,
+                'post'          => $post,
                 'illustrations' => $illustrations,
-                'current' => $current,
+                'current'       => $current,
             ));
 
             $response->setContent(json_encode(array(
-                'state' => 1,
-                'content' => $content,
+                'state'     => 1,
+                'content'   => $content,
             )));
         }
 
@@ -413,10 +413,10 @@ class BlogManagerController extends AbstractController {
                 ));
 
                 $response->setContent(json_encode(array(
-                    'state' => 1,
+                    'state'                     => 1,
                     'illustration116x116'	 	=> $illustration116x116,
                     'illustration600x250'	 	=> $illustration600x250,
-                    'illustrationItemContent'  => $illustrationItemContent,
+                    'illustrationItemContent'   => $illustrationItemContent,
                 )));
             }
         }
@@ -475,9 +475,9 @@ class BlogManagerController extends AbstractController {
             $illustration600x250 = $this->platformService->imagineFilter($illustrationPath, '600x250');
 
             $response->setContent(json_encode(array(
-                'state' => 1,
-                'illustration116x116' => $illustration116x116,
-                'illustration600x250' => $illustration600x250,
+                'state'                 => 1,
+                'illustration116x116'   => $illustration116x116,
+                'illustration600x250'   => $illustration600x250,
             )));
         }
 
@@ -519,10 +519,10 @@ class BlogManagerController extends AbstractController {
                 $illustration600x250 = $this->platformService->imagineFilter($path, '600x250');
 
                 $response->setContent(json_encode(array(
-                    'state' => 1,
-                    'illustrationId' => $illustrationId,
-                    'illustration116x116' => $illustration116x116,
-                    'illustration600x250' => $illustration600x250,
+                    'state'                 => 1,
+                    'illustrationId'        => $illustrationId,
+                    'illustration116x116'   => $illustration116x116,
+                    'illustration600x250'   => $illustration600x250,
                     'isCurrent' => $isCurrent,
                 )));
             }
@@ -652,9 +652,9 @@ class BlogManagerController extends AbstractController {
 
         if($post && $user && $post->getUser()->getId() == $user->getId() ){
             return $this->render('blog/post_tags.html.twig', array(
-                'post' => $post,
-                'tags' => $tags,
-                'entityView' => 'blog',
+                'post'          => $post,
+                'tags'          => $tags,
+                'entityView'    => 'blog',
             ));
         }
         return $this->redirectToRoute('blog');
@@ -745,7 +745,7 @@ class BlogManagerController extends AbstractController {
 
             $response->setContent(json_encode(array(
                 'state' => 1,
-                'case' => $isSchool,
+                'case'  => $isSchool,
             )));
         }else{
             $response->setContent(json_encode(array(

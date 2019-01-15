@@ -31,34 +31,47 @@
 				<div style="background:#ddd; padding: 5px; margin:5px 0; border:1px solid #ccc">
 					<span><img src="{{ asset('image/list_icon.png') }}" style="width:12px; height:auto" /> Liste des établissements</span>
 				</div>
-				<div class="mg_5">
-					<span><img src="{{ asset('image/info_icon.png') }}" style="width:12px; height:auto" /> Les établissements affichés ici sont ceux sur lesquels vous êtes abonnés.</span>
-				</div>
-				<div class="mg_v10 list_school">
-					{% for school in schools %}
-						<span class="school_item">
-							<span class="tacenter">
-								<span class="toggle_case" data-entity="event_school" data-target="{{ path('event_manager_toggle_school', {'event_id': event.id, 'school_id': school.id }) }}">
-									{% set isSchool = isSchoolEvent(event, school) %}
-									{% if isSchool %}
-										<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
-										<span class="redstate"><span class="redpastille"></span></span>
-									{% else %}
-										<span class="greenstate"><span class="greenpastille"></span></span>
-										<span class="redstate" style="display:none"><span class="redpastille"></span></span>
-									{% endif %}
-								</span><span class="state_loading" style="display:none">
-									<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" />
+				<div class="search" data-item-display="inline-block">
+					<div class="mg_5">
+						<span><img src="{{ asset('image/info_icon.png') }}" style="width:12px; height:auto" /> Les établissements affichés ici sont ceux sur lesquels vous êtes abonnés.</span>
+					</div>
+					<div class="search_input_cr pd_5">
+						<div class="search_input_left">
+							<label for="search_input" class="label_search_input">Rechercher :</label> <span class="search_input_wrap"><input type="text" id="search_input" class="search_input"/><!--
+						--><span class="search_reset"><i class="fas fa-times"></i></span><!--
+								--></span>
+						</div>
+						<div class="search_input_right">
+							<span class="result_state" style="vertical-align: middle">{{ schools | length }} résultat{% if schools | length > 1 %}s{% endif %}</span>
+						</div>
+						<div class="both"></div>
+					</div>
+					<div class="mg_v10 list_school">
+						{% for school in schools %}
+							<span class="school_item search_item" data-text="{{ school.name }} {{ school.shortName }}">
+								<span class="tacenter">
+									<span class="toggle_case" data-entity="event_school" data-target="{{ path('event_manager_toggle_school', {'event_id': event.id, 'school_id': school.id }) }}">
+										{% set isSchool = isSchoolEvent(event, school) %}
+										{% if isSchool %}
+											<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
+											<span class="redstate"><span class="redpastille"></span></span>
+										{% else %}
+											<span class="greenstate"><span class="greenpastille"></span></span>
+											<span class="redstate" style="display:none"><span class="redpastille"></span></span>
+										{% endif %}
+									</span><span class="state_loading" style="display:none">
+										<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" />
+									</span>
+								</span>
+								<span>
+									{{ school.shortName }} -
+									{{ school.name }}
 								</span>
 							</span>
-							<span>
-								{{ school.shortName }} -
-								{{ school.name }}
-							</span>
-						</span><br />
-					{% endfor %}
+						{% endfor %}
+						<span class="both"></span>
+					</div>
 				</div>
-
 				<div class="sep"></div>
 
                 {{ include("event/include/footer_event_edit.html.twig") }}
