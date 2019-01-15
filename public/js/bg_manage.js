@@ -34,37 +34,47 @@ $(function() {
         var data = new FormData();
         console.log(target);
         data.append('file', file);
-        //console.log(data);
 
-        createSpinner();
-        $.ajax({
-            type: 'POST',
-            url: target,
-            data: data,
-            contentType: false,
-            processData: false,
-            dataType : 'json',
-            success: function(data){
-                if(data.state){
-                    $(".illustration_item").removeClass("active");
-                    $(".images_popup_wrapper").append(data.illustrationItemContent);
+        var size = file.size;
+        var fileType = file.type;
+        var ValidImageTypes = ["image/jpeg", "image/png"];
+        if(size > 1024 * 1024 * 5){
+            var content = '<div style="padding:10px; width:auto; background:#fff; border-radius:3px; "><div style="text-align:center; margin-bottom: 20px">	<span>Veuillez uploader une image de taille inférieure à 5MB.</span></div><div style="text-align:center">	<span class="button_closable" style="background:#888; border-radius: 3px; cursor:pointer; display:inline-block; margin:auto; padding:5px 15px;">	OK	</span></div></div>';
+            popup(content, 500, true);
+		}else if($.inArray(fileType, ValidImageTypes) < 0){
+            var content = '<div style="padding:5px; width:auto; background:#fff; border-radius:3px;"><div style="text-align:center; margin-bottom: 20px">	<span>Veuillez uploader un fichier image de type png ou jpg.</span></div><div style="text-align:center">	<span class="button_closable" style="background:#888; border-radius: 3px; cursor:pointer; display:inline-block; margin:auto; padding:5px 15px;">	OK	</span></div></div>';
+            popup(content, 500, true);
+		}else{
+            createSpinner();
+            $.ajax({
+                type: 'POST',
+                url: target,
+                data: data,
+                contentType: false,
+                processData: false,
+                dataType : 'json',
+                success: function(data){
+                    if(data.state){
+                        $(".illustration_item").removeClass("active");
+                        $(".images_popup_wrapper").append(data.illustrationItemContent);
 
-                    $("#post_illustration").attr("src", data.illustration116x116);
-                    $("#post_illustration"+".600x250").attr("src", data.illustration600x250);
+                        $("#post_illustration").attr("src", data.illustration116x116);
+                        $("#post_illustration"+".600x250").attr("src", data.illustration600x250);
 
-                    destroySpinner();
-                    $(".images_popup_wrapper").animate({ scrollTop: $('.images_popup_wrapper').prop("scrollHeight")}, 500);
-                }else{
-                    destroySpinner();
-                    alert("Une erreur est survenue");
+                        destroySpinner();
+                        $(".images_popup_wrapper").animate({ scrollTop: $('.images_popup_wrapper').prop("scrollHeight")}, 500);
+                    }else{
+                        destroySpinner();
+                        alert("Une erreur est survenue");
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR.status);
+                    console.log(textStatus);
+                    console.log(errorThrown);
                 }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(jqXHR.status);
-                console.log(textStatus);
-                console.log(errorThrown);
-            }
-        });
+            });
+        }
     });
 	
     $('#form_post_edit').on('submit', function(e){

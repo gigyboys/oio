@@ -383,6 +383,39 @@ a:hover{
 	color: #444;
 }
 
+.about_block{
+	margin: 20px 0;
+}
+
+.about_block .illustration{
+	width: 80px ;
+	height: 80px ;
+}
+
+.about_block .illustration img{
+	width: 80px ;
+	height: 80px ;
+}
+
+.about_block .text{
+	text-align: justify
+}
+
+.toleft .illustration{
+	float: left;
+}
+
+.toright .illustration{
+	float: right;
+}
+
+.toleft .text{
+	margin-left: 100px
+}
+
+.toright .text{
+	margin-right: 100px
+}
 
 @media screen and (max-width: 1050px)
 {
@@ -470,6 +503,43 @@ a:hover{
 		width: calc(100% - 28px);
 	}
 	*/
+
+
+	.about_block .illustration{
+		width: 80px ;
+		height: 80px ;
+	}
+
+	.about_block .illustration img{
+		width: 80px ;
+		height: 80px ;
+	}
+
+	.about_block .text{
+		text-align: justify
+	}
+
+	.toleft .illustration{
+		float: none;
+		text-align: center;
+		width: 100%;
+		margin-bottom: 14px;
+	}
+
+	.toright .illustration{
+		float: none;
+		text-align: center;
+		width: 100%;
+		margin-bottom: 14px;
+	}
+
+	.toleft .text{
+		margin-left: 0px
+	}
+
+	.toright .text{
+		margin-right: 0px
+	}
 }
 
 @media screen and (max-width: 450px)

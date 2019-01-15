@@ -401,8 +401,8 @@ $(function() {
 		console.log(target);
         data.append('avatar[file]', file);
 
-        var size = this.files[0].size;
-        var fileType = this.files[0].type;
+        var size = file.size;
+        var fileType = file.type;
         var ValidImageTypes = ["image/jpeg", "image/png"];
         if(size > 1024 * 1024 * 5){
             var content = '<div style="padding:10px; width:auto; background:#fff; border-radius:3px; "><div style="text-align:center; margin-bottom: 20px">	<span>Veuillez uploader une image de taille inférieure à 5MB.</span></div><div style="text-align:center">	<span class="button_closable" style="background:#888; border-radius: 3px; cursor:pointer; display:inline-block; margin:auto; padding:5px 15px;">	OK	</span></div></div>';
