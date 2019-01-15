@@ -355,7 +355,7 @@ $(function() {
 });
 
 function createSpinner() {
-	var spinner = "<div id='spinnerloading'><div><span>Loading...</span></div></div>";
+	var spinner = "<div id='spinnerloading'><div><span>Chargement...</span></div></div>";
 	$( "body" ).prepend( spinner );
 	initSpinner();
 }
