@@ -173,7 +173,7 @@ $(function() {
                                 }
                                 htmlappend += '<div class="both"></div>';
                             }else{
-                                htmlappend += '<div class="mg_v20 tacenter"><strong>Aucun évènement à afficher</strong></div>';
+                                htmlappend += '<div class="mg_v20 tacenter" style="width:100%"><strong>Aucun évènement à afficher</strong></div>';
                             }
                             $(".p_list").html(htmlappend);
                             $(".pagination").html(data.pagination);
