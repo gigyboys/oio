@@ -9,22 +9,24 @@
 	<div class="cr">
 		<div class="ct">
 			<div class="mg_t10">
-				<div class="mg_h10 pd_5" style="background: #f7f7f7; border: 1px solid #dddddd">
-					<div class="search_cat_input_left">
-						<label for="search_cat_input" class="label_search_cat_input">Rechercher :</label> <span class="search_cat_input_wrap"><input type="text" id="search_cat_input" class="search_cat_input"/><!--
-					--><span class="search_cat_reset"><img src="{{ asset('image/cross_icon.png') }}" style="width:12px; height:auto" /></span><!--
-							--></span>
+				<div class="search" data-item-display="block">
+					<div class="search_input_cr mg_h10 pd_5">
+						<div class="search_input_left">
+							<label for="search_input" class="label_search_input">Rechercher :</label> <span class="search_input_wrap"><input type="text" id="search_input" class="search_input"/><!--
+						--><span class="search_reset"><i class="fas fa-times"></i></span><!--
+								--></span>
+						</div>
+						<div class="search_input_right">
+							<span class="result_state" style="vertical-align: middle">{{ categories | length }} résultat{% if categories | length > 1 %}s{% endif %}</span>
+						</div>
+						<div class="both"></div>
 					</div>
-					<div class="search_cat_input_right">
-						<span class="result_state" style="vertical-align: middle">{{ categories | length }} résultat{% if categories | length > 1 %}s{% endif %}</span>
+					<div class="sl_list_cat">
+						{% for category in categories %}
+							{{ include("school/include/school_category_item.html.twig") }}
+						{% endfor %}
+						<div class="both"></div>
 					</div>
-					<div class="both"></div>
-				</div>
-				<div class="sl_list_cat">
-					{% for category in categories %}
-						{{ include("school/include/school_category_item.html.twig") }}
-					{% endfor %}
-					<div class="both"></div>
 				</div>
 			</div>
 		</div>

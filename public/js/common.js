@@ -203,6 +203,64 @@ $(function() {
         });
     });
 
+    
+    $('.search_input').val("");
+    /*
+    * on taping on search input
+    */
+    $('.search_input').on('keyup', function(ed){
+        var $this = $(this);
+        var contextSearch = $this.closest(".search");
+        var query = $this.val();
+
+        var countResult = 0;
+        contextSearch.find(".search_item").each(function( index ) {
+            $( this ).hide();
+            console.log($( this ).attr("data-text"));
+            var text = $( this ).attr("data-text");
+            text = text.toLowerCase();
+            text = text.replace(/[èéêë]/g,"e");
+            text = text.replace(/[àâä]/g,"a");
+            text = text.replace(/[ûüù]/g,"u");
+            text = text.replace(/[îï]/g,"i");
+            text = text.replace(/[ôö]/g,"o");
+
+            query = query.toLowerCase();
+            query = query.replace(/[èéêë]/g,"e");
+            query = query.replace(/[àâä]/g,"a");
+            query = query.replace(/[ûüù]/g,"u");
+            query = query.replace(/[îï]/g,"i");
+            query = query.replace(/[ôö]/g,"o");
+
+            if(text.indexOf(query) > -1){
+                
+                var dataItemDisplay = contextSearch.attr('data-item-display');
+
+                if (typeof dataItemDisplay !== typeof undefined && dataItemDisplay !== false) {
+                    $( this ).css("display", dataItemDisplay);
+                }else{
+                    $( this ).css("display", "block");
+                }
+
+                countResult++;
+            }else{
+                $( this ).css("display", "none");
+            }
+        });
+        contextSearch.find('.result_state').html(countResult+" résultat"+(countResult > 1 ? "s" : ""));
+    });
+
+    /*
+    * on reset search
+    */
+    $('.search_reset').on('click', function(e){
+        var $this = $(this);
+        var contextSearch = $this.closest(".search");
+        contextSearch.find('.search_input').val("");
+        contextSearch.find('.search_input').focus();
+        contextSearch.find( ".search_input" ).trigger( "keyup" );
+    });
+
 });
 
 function processLogin(){

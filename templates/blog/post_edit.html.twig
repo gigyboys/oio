@@ -114,11 +114,16 @@
 								</script>
 								<script type="text/javascript" src="/bundles/fosckeditor/ckeditor.js"></script>
 								<script type="text/javascript">
+
 									if (CKEDITOR.instances["post_input_content"]) {
-										CKEDITOR.instances["post_input_content"].destroy(true);
-										delete CKEDITOR.instances["post_input_content"];
+										CKEDITOR.instances["post_input_content"].destroy(true); 
+										delete CKEDITOR.instances["post_input_content"]; 
 									}
-									CKEDITOR.replace("post_input_content", {"uiColor":"#eeeeee","language":"en"});
+									CKEDITOR.replace(
+										"post_input_content", 
+										{"toolbar":[["Cut","Copy","Paste","PasteText","PasteFromWord","-","Undo","Redo","-","Bold","Italic","Underline","-","JustifyLeft","JustifyCenter","JustifyRight","JustifyBlock","-","Styles","Format","Font","FontSize","-","TextColor","BGColor"]],"toolbar2":[["Source","-","Save"],"\/",["Anchor"],"\/",["Maximize"]],"uiColor":"#eeeeee","language":"en"}
+									);
+
 								</script>
 							</div>
 						</div>

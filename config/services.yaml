@@ -36,3 +36,10 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+fos_ck_editor:
+    configs:
+        config_minimal:
+            toolbar: [ ["Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "-", "Undo", "Redo", "-", "Bold", "Italic", "Underline", "-", 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'Styles', 'Format', 'Font', 'FontSize','-', 'TextColor', 'BGColor'] ]
+            toolbar2: [ ["Source", "-", "Save"], "/", ["Anchor"], "/", ["Maximize"] ]
+            uiColor:                "#eeeeee"

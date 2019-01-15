@@ -18,10 +18,15 @@ class ContactType extends AbstractType
             ->add('email')
             ->add('phone')
             //->add('website')
+            /*
             ->add('message', CKEditorType::class, array(
                 'config' => array(
                     'uiColor' => '#ffffff',
                 )
+            ))
+            */
+            ->add('message', CKEditorType::class, array(
+                'config_name' => 'config_minimal',
             ))
             ->add("Envoyer", SubmitType::class)
         ;

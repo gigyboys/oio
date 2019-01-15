@@ -591,49 +591,6 @@
 }
 
 /*page categorie*/
-
-
-.search_cat_input_left{
-	float: left
-}
-
-.search_cat_input_right{
-	float: right;
-	height: 28px;
-	padding: 2px;
-	box-sizing: border-box
-}
-
-.search_cat_input_wrap{
-	display: inline-block;
-	width: 278px;
-}
-.search_cat_input{
-	border: 1px solid #bbb;
-	border-right: none;
-	border-radius: 3px 0 0 3px;
-	width: 250px;
-	height: 28px;
-	padding: 5px;
-	box-sizing: border-box;
-	font-family: calibri, arial;
-	font-size: 16px;
-	display: inline-block;
-}
-.search_cat_reset{
-	border: 1px solid #bbb;
-	border-left: none;
-	border-radius: 0 3px 3px 0;
-	height: 28px;
-	width: 28px;
-	padding: 5px;
-	box-sizing: border-box;
-	background: #fff;
-	cursor: pointer;
-	display: inline-block;
-	vertical-align: top;
-}
-
 .sl_list_cat{
 	margin:auto;
 	width:100%;
@@ -875,25 +832,6 @@
 
 	.pagination_item{
 		min-width:32px;
-	}
-
-	.search_cat_input_left{
-		float: none;
-	}
-
-	.search_cat_input_right{
-		float: none;
-	}
-	.label_search_cat_input{
-		display: block;
-	}
-	.search_cat_input_wrap{
-		display: block;
-		width: 100%;
-		box-sizing: border-box;
-	}
-	.search_cat_input{
-		width: calc(100% - 28px);
 	}
 }
 

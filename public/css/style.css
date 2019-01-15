@@ -210,13 +210,15 @@ a:hover{
 }
 
 .list_tag .tag_item, .list_school .school_item{
-	display: inline-block;
+	display: block;
 	margin-right: 6px;
 	margin-bottom: 6px;
 	background: #ddd;
 	padding: 4px 8px;
 	border-radius: 5px;
 	cursor:pointer;
+	float: left;
+	clear: left;
 }
 
 /*spinner loading */
@@ -333,6 +335,55 @@ a:hover{
 	margin-top: -2px;
 }
 
+
+.search_input_cr{
+	background: #f9f9f9; 
+	border: 1px solid #e9e9e9
+}
+
+.search_input_left{
+	float: left
+}
+
+.search_input_right{
+	float: right;
+	height: 28px;
+	padding: 2px;
+	box-sizing: border-box
+}
+
+.search_input_wrap{
+	display: inline-block;
+	width: 278px;
+}
+.search_input{
+	border: 1px solid #bbb;
+	border-radius: 3px;
+	width: 100%;
+	height: 28px;
+	padding: 5px;
+	box-sizing: border-box;
+	font-family: calibri, arial;
+	font-size: 16px;
+	display: inline-block;
+	padding-right: 25px
+}
+.search_reset{
+	height: 28px;
+	width: 28px;
+	padding: 5px;
+	box-sizing: border-box;
+	cursor: pointer;
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+	margin-left: -28px
+}
+.search_reset i:hover{
+	color: #444;
+}
+
+
 @media screen and (max-width: 1050px)
 {
 	.team_user_list .userteam_item_wrap{
@@ -390,6 +441,35 @@ a:hover{
 		width: 100%;
 	}
 
+}
+
+@media screen and (max-width: 500px)
+{
+
+	.pagination_item{
+		min-width:32px;
+	}
+
+	.search_input_left{
+		float: none;
+	}
+
+	.search_input_right{
+		float: none;
+	}
+	.label_search_input{
+		display: block;
+	}
+	.search_input_wrap{
+		display: block;
+		width: 100%;
+		box-sizing: border-box;
+	}
+	/*
+	.search_input{
+		width: calc(100% - 28px);
+	}
+	*/
 }
 
 @media screen and (max-width: 450px)

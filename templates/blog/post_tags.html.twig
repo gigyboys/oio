@@ -34,28 +34,42 @@
 					<span><img src="{{ asset('image/list_icon.png') }}" style="width:12px; height:auto" /> Liste des tags</span>
 				</div>
 
-				<div class="mg_v10 list_tag">
-                {% for tag in tags %}
-						<span class="tag_item">
-							<span>
-								<span class="toggle_case" data-entity="tag" data-target="{{ path('blog_manager_post_toggle_tag', {'post_id': post.id, 'tag_id': tag.id }) }}">
-									{% set isTag = isTagPost(post, tag) %}
-									{% if isTag %}
-										<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
-										<span class="redstate"><span class="redpastille"></span></span>
-									{% else %}
-										<span class="greenstate"><span class="greenpastille"></span></span>
-										<span class="redstate" style="display:none"><span class="redpastille"></span></span>
-									{% endif %}
-								</span><span class="state_loading" style="display:none">
-									<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" />
+				<div class="search" data-item-display="inline-block">
+					<div class="search_input_cr pd_5">
+						<div class="search_input_left">
+							<label for="search_input" class="label_search_input">Rechercher :</label> <span class="search_input_wrap"><input type="text" id="search_input" class="search_input"/><!--
+						--><span class="search_reset"><i class="fas fa-times"></i></span><!--
+								--></span>
+						</div>
+						<div class="search_input_right">
+							<span class="result_state" style="vertical-align: middle">{{ tags | length }} résultat{% if tags | length > 1 %}s{% endif %}</span>
+						</div>
+						<div class="both"></div>
+					</div>
+
+					<div class="mg_v10 list_tag">
+						{% for tag in tags %}
+							<span class="tag_item search_item" data-text="{{ tag.name }}">
+								<span>
+									<span class="toggle_case" data-entity="tag" data-target="{{ path('blog_manager_post_toggle_tag', {'post_id': post.id, 'tag_id': tag.id }) }}">
+										{% set isTag = isTagPost(post, tag) %}
+										{% if isTag %}
+											<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
+											<span class="redstate"><span class="redpastille"></span></span>
+										{% else %}
+											<span class="greenstate"><span class="greenpastille"></span></span>
+											<span class="redstate" style="display:none"><span class="redpastille"></span></span>
+										{% endif %}
+									</span><span class="state_loading" style="display:none">
+										<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" />
+									</span>
+								</span>
+								<span>
+									{{ tag.name }}
 								</span>
 							</span>
-							<span>
-								{{ tag.name }}
-							</span>
-						</span>
-                {% endfor %}
+						{% endfor %}
+					</div>
 				</div>
 
 				<div class="sep"></div>
