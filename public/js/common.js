@@ -166,11 +166,15 @@ $(function() {
                             break;
                         case 'event':
                             var htmlappend = '';
-                            for(var i = 0; i <data.events.length; i++ ){
-                                var event = data.events[i];
-                                htmlappend += event.event_view;
+                            if(data.events.length > 0){
+                                for(var i = 0; i <data.events.length; i++ ){
+                                    var event = data.events[i];
+                                    htmlappend += event.event_view;
+                                }
+                                htmlappend += '<div class="both"></div>';
+                            }else{
+                                htmlappend += '<div class="mg_v20 tacenter"><strong>Aucun évènement à afficher</strong></div>';
                             }
-                            htmlappend += '<div class="both"></div>';
                             $(".p_list").html(htmlappend);
                             $(".pagination").html(data.pagination);
                             $(".et_type").html(data.typeLinks);
