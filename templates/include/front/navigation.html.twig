@@ -14,15 +14,12 @@
                                     <polygon points="40,0 70,0 70,30 40,30 40,10 50,10 50,20 60,20 60,10 40,10"/>
                                 </g>
                             </svg>
-                            {#
-                            <img src="{{ asset('image/oio.svg') }}" style="width:24px; height:24px;display: inline-block; vertical-align: middle;" />
-                            #}
                         </a>
                     </li>
                     <li>
                         <div class="dd nav_responsive">
-                            <span href="#" class="dd_src" style="cursor: pointer">
-                                <img src="{{ asset('image/sl_logo_nav.png')  }}" style="display: inline-block;width: 20px; height: 20px; margin-top: -3px" />
+                            <span href="#" class="dd_src c_p">
+                                <img src="{{ asset('image/sl_logo_nav.png')  }}"/>
                             </span>
                             <div class="dd_target" data-display="block" id="locale_choice">
                                 <div class="link_wrap">
@@ -47,7 +44,7 @@
                     </li>
                     <li>
                         <div class="dd nav_responsive">
-                            <span href="#" class="dd_src toggler_src" style="cursor: pointer">
+                            <span href="#" class="dd_src toggler_src c_p">
                                 <span class="normal bar1"></span>
                                 <span class="transparent"></span>
                                 <span class="normal bar2"></span>
@@ -70,9 +67,9 @@
                 <ul class="nav_not_responsive">
                     <li class="dd">
                         <a href="{{ path('school_home') }}" class="dd_src">
-                            <span style="display: inline-block; vertical-align: middle;">Etablissements</span>
+                            <span class="vamiddle d_ib">Etablissements</span>
                         </a>
-                        <div class="dd_target" data-display="block" style="display: none;position: absolute;background: #fff;border: 1px solid #aaa;">
+                        <div class="dd_target menu_sl" data-display="block">
                             <div class="link_wrap">
                                 <a class="link" href="{{ path('school_home') }}" title="Tous établissements">
                                     <span>Tout Etablissements</span>
@@ -94,12 +91,12 @@
                     </li>
                     <li>
                         <a href="{{ path('blog') }}" class="">
-                            <span style="display: inline-block; vertical-align: middle;">Blog</span>
+                            <span class="d_ib vamiddle">Blog</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ path('event') }}" class="">
-                            <span style="display: inline-block; vertical-align: middle;">Evènements</span>
+                            <span class="d_ib vamiddle">Evènements</span>
                         </a>
                     </li>
                 </ul>
@@ -116,7 +113,7 @@
 										<tr>
 											<td class="user_avatar">
 												<span class="wrap">
-													<img id="avatar_banner" style="width:30px; height: 30px" src="{{ avatar | imagine_filter('32x32') }}" alt="{{ app.user.username }}" />
+													<img id="avatar_banner" src="{{ avatar | imagine_filter('32x32') }}" alt="{{ app.user.username }}" />
 												</span>
 											</td>
 											<td class="user_name" title="{{ app.user.name }}">
@@ -130,10 +127,10 @@
                             </div>
                         {% else %}
                             <div class="dd_src">
-							<span class="not_connected">
-								<img src="{{ asset('image/icon_user_not.png')  }}" style="width:22px; height:22px;display: inline-block; vertical-align: middle;" />
-								<span>Mon espace client</span>
-							</span>
+                                <span class="not_connected">
+                                    <img class="illustration" src="{{ asset('image/icon_user_not.png')  }}" />
+                                    <span class="text">Mon espace client</span>
+                                </span>
                             </div>
                         {% endif %}
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
@@ -166,12 +163,12 @@
                                 <div class="link_wrap">
                                     <div class="pd_10">
                                         {% if is_granted('ROLE_ADMIN') %}
-                                            <a class="link standar_button pd_5" target="_blank" href="{{ path('admin_home') }}" style="padding:5px; display:block; float: left">
+                                            <a class="link standar_button pd_5 btn_admin" target="_blank" href="{{ path('admin_home') }}">
                                                 <span>Tableau de bord</span>
                                             </a>
                                         {% endif %}
 
-                                        <a class="link standar_button pd_5 mg_r0" href="{{ path('user_logout') }}" style="padding:5px; display:block; float: right; ">
+                                        <a class="link standar_button pd_5 mg_r0 btn_loggout" href="{{ path('user_logout') }}">
                                             <span>Déconnexion</span>
                                         </a>
                                         <span class="both"></span>
@@ -181,13 +178,13 @@
                         {% else %}
                             <div class="dd_target not_connected" data-display="block">
                                 <ul>
-                                    <li style="display: block;width: 137px;padding: 5px;">
-                                        <a style='display: block' class="link" href="{{ path("user_login") }}">
+                                    <li class="log_item">
+                                        <a class="link" href="{{ path("user_login") }}">
                                             <span> Se connecter </span>
                                         </a>
                                     </li>
-                                    <li style="display: block;width: 137px;padding: 5px;">
-                                        <a style='display: block' class="link" href="{{ path('user_register') }}">
+                                    <li class="log_item">
+                                        <a class="link" href="{{ path('user_register') }}">
                                             <span> S'inscrire </span>
                                         </a>
                                     </li>

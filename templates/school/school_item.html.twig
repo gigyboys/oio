@@ -1,9 +1,9 @@
-<div class="sl_item" style="">
+<div class="sl_item">
     <div class="sl_header">
         <div class="sl_logo">
             {# twig extension #}
             {% set cover = schoolCover(school) %}
-            <img style="" src="{{ cover | imagine_filter('218x140') }}" alt="img sl" />
+            <img src="{{ cover | imagine_filter('218x140') }}" alt="img sl" />
         </div>
         <div class="sl_category">
             {# twig extension #}
@@ -29,7 +29,7 @@
         <div class="sl_action_about">
             {# twig extension #}
             {% set logo = schoolLogo(school) %}
-            <a href="{{ path('school_view', {'slug': school.slug, 'type': 'about'}) }}"><img style="display:inline-block; width:20px; height:20px; border-radius: 3px; border: 1px solid #bbb" src="{{ logo | imagine_filter('20x20') }}" alt="AU" /></a>
+            <a href="{{ path('school_view', {'slug': school.slug, 'type': 'about'}) }}"><img src="{{ logo | imagine_filter('20x20') }}" alt="AU" /></a>
         </div>
         <div class="sl_action_bg">
             <a href="{{ path('school_view', {'slug': school.slug, 'type': 'post'}) }}"><img src="{{ asset('image/sl_bg_icon.png') }}" alt="BG" /></a>

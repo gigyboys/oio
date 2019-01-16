@@ -219,6 +219,21 @@
 .op5{
 	opacity: 0.5;
 }
+.d_ib{
+	display: inline-block;
+}
+.d_i{
+	display: inline;
+}
+.d_b{
+	display: block;
+}
+.d_n{
+	display: none;
+}
+.c_p{
+	cursor: pointer;
+}
 /* green and red state */
 .toggle_case, .toggle_publishState_post, .toggle_showAuthorState_post, .toggle_validState_post, .toggle_deleteState_post, .toggle_publishState, .toggle_publishState_field , .toggle_publishState_contact {
 	cursor:pointer; 

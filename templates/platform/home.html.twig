@@ -73,7 +73,7 @@
 
 <div class="cr">
     <div class="ct">
-        <div style="margin:20px 10px; font-size:16px;text-align:justify">
+        <div class="tajustify mg_10">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci alias, aliquid animi architecto assumenda beatae blanditiis commodi consequatur debitis deserunt distinctio eligendi enim explicabo facilis illum incidunt nam natus nemo neque nostrum nulla optio placeat porro quaerat quam quasi quibusdam quos reiciendis repellat suscipit vel vero voluptatum? Aperiam commodi cum cumque deserunt facilis ipsa maxime, natus neque non possimus repellat repudiandae sed suscipit? Accusantium autem commodi debitis magnam obcaecati reprehenderit ut. Architecto dicta doloremque facere minima velit.
         </div>
     </div>
@@ -99,7 +99,7 @@
 
 <div class="cr">
     <div class="ct">
-        <div style="margin:20px 10px; font-size:16px;text-align:justify">
+        <div class="tajustify mg_10">
             Excogitatum est super his, ut homines quidam ignoti, vilitate ipsa parum cavendi ad colligendos rumores per Antiochiae latera cuncta destinarentur relaturi quae audirent. hi peragranter et dissimulanter honoratorum circulis adsistendo pervadendoque divites domus egentium habitu quicquid noscere poterant vel audire latenter intromissi per posticas in regiam nuntiabant, id observantes conspiratione concordi, ut fingerent quaedam et cognita duplicarent in peius, laudes vero supprimerent Caesaris, quas invitis conpluribus formido malorum inpendentium exprimebat.
         </div>
     </div>
@@ -111,8 +111,8 @@
 {% if lastAddedSchools %}
     <div class="cr">
         <div class="ct">
-            <div style="margin:10px;font-weight:bold; background:#eee; border:1px solid #ddd; padding:5px">
-                Les nouveaux établissements sur la plateforme.
+            <div class="label_title mg_10">
+                <strong>Nouveaux établissements sur la plateforme.</strong>
             </div>
             <div class="sl_listh_cr tacenter ">
                 <div class="gdl"></div>
@@ -130,7 +130,7 @@
 
 <div class="cr">
     <div class="ct">
-        <div style="margin:20px 10px; font-size:16px;text-align:justify">
+        <div class="tajustify mg_10">
             Excogitatum est super his, ut homines quidam ignoti, vilitate ipsa parum cavendi ad colligendos rumores per Antiochiae latera cuncta destinarentur relaturi quae audirent. hi peragranter et dissimulanter honoratorum circulis adsistendo pervadendoque divites domus egentium habitu quicquid noscere poterant vel audire latenter intromissi per posticas in regiam nuntiabant, id observantes conspiratione concordi, ut fingerent quaedam et cognita duplicarent in peius, laudes vero supprimerent Caesaris, quas invitis conpluribus formido malorum inpendentium exprimebat.
         </div>
     </div>
@@ -138,13 +138,13 @@
 
 <div class="cr">
     <div class="ct">
-        <div style="margin:20px 0px;">
+        <div class="mg_v10">
             <div class="sl_list_cat">
                 {% for category in categories %}
                     {{ include("school/include/school_category_item.html.twig") }}
                 {% endfor %}
                 <div class="both"></div>
-                <div style="text-align:center; margin:10px 0">
+                <div class="tacenter mg_v10">
                     <a href="{{ path('school_categories') }}" class="standar_button">Afficher toute les catégories</a>
                 </div>
             </div>

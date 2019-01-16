@@ -209,6 +209,13 @@
 	background:#f8f8f8;
 	text-align:center;
 }
+.sl_action_about a img{
+	display:inline-block; 
+	width:20px; 
+	height:20px; 
+	border-radius: 3px; 
+	border: 1px solid #bbb
+}
 .sl_action_about, .sl_action_bg, .sl_action_at, .sl_action_evaluation, .sl_action_doc, .sl_action_et{
 	display:inline-block;
 	width: 39px;
@@ -541,53 +548,6 @@
 	border-radius: 3px;
 	display: inline-block;
 	background: #f8c7c7;
-}
-
-/*****************tab about ***************/
-
-.content_tab_header_content{
-	background: #fff;
-    height: 32px;
-    width: auto;
-}
-.content_tab_header_item{
-	box-sizing: border-box;
-	max-width: 25%;
-    cursor: pointer;
-    float: left;
-    height: 32px;
-    padding: 0 8px;
-	color:#666;
-}
-.content_tab_header_item .content_tab_header_item_text{
-	max-width: 100%;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-.content_tab_header_item.selected{
-	color:#000
-}
-.content_tab_header_item .content_tab_header_item_text{
-	padding-top:6px;
-}
-.content_tab_header_sep{
-	background: #eee;
-    height: 2px;
-    padding: 2px 0;
-    width: auto;
-}
-.content_tab_header_sep_slide{
-	background: #bbb;
-    display: block;
-    height: 2px;
-    width: 0px;
-}
-.content_tab_content_item{
-    display: none;
-}
-.content_tab_content_item.selected{
-    display: block;
 }
 
 /*page categorie*/

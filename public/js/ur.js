@@ -175,7 +175,7 @@ $(function() {
     });
 
 
-	$('#password').on('submit', function(e){
+	$('#form_password').on('submit', function(e){
         e.preventDefault();
         $('#btn_save_ur_password').trigger('click');
     });
@@ -201,14 +201,14 @@ $(function() {
                 console.log(data.state);
 				if(data.state){
 					resetBlocEdit(bloc_editable);
-					$("#msg_password").html("<span style='color:#090'>Votre mot de passe a été modifié avec succès.</span>");
+					$("#msg_password").html("<span class='success_msg'>Votre mot de passe a été modifié avec succès.</span>");
 					$("#ur_input_current_password").val("");
 					$("#ur_input_new_password").val("");
 					$("#ur_input_repeat_password").val("");
 				}
 				else{
 					editBlocEdit(bloc_editable);
-					alert(data.message);
+					$("#msg_password").html("<span class='error_msg'>Vérifiez bien votre saisie.</span>");
 				}
 				bloc_editable.find(".btn_loading").hide();
             },

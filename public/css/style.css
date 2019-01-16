@@ -417,6 +417,53 @@ a:hover{
 	margin-right: 100px
 }
 
+
+/***************** tab ***************/
+.content_tab_header_content{
+	background: #fff;
+    height: 32px;
+    width: auto;
+}
+.content_tab_header_item{
+	box-sizing: border-box;
+	max-width: 25%;
+    cursor: pointer;
+    float: left;
+    height: 32px;
+    padding: 0 8px;
+	color:#666;
+}
+.content_tab_header_item .content_tab_header_item_text{
+	max-width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.content_tab_header_item.selected{
+	color:#000
+}
+.content_tab_header_item .content_tab_header_item_text{
+	padding-top:6px;
+}
+.content_tab_header_sep{
+	background: #eee;
+    height: 2px;
+    padding: 2px 0;
+    width: auto;
+}
+.content_tab_header_sep_slide{
+	background: #bbb;
+    display: block;
+    height: 2px;
+    width: 0px;
+}
+.content_tab_content_item{
+    display: none;
+}
+.content_tab_content_item.selected{
+    display: block;
+}
+
 @media screen and (max-width: 1050px)
 {
 	.team_user_list .userteam_item_wrap{

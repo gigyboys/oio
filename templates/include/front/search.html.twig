@@ -107,7 +107,7 @@
 									<input type="hidden" name="type" id="type_sl_input_id" value="{{ typeEntity.id }}" data-slug="{{ typeEntity.slug }}"  />
                                 {% endif %}
 							</div>
-							<div class="dd_target search_sl_type_list" data-display="block" style="display:none;">
+							<div class="dd_target search_sl_type_list d_n" data-display="block">
 								<div class="mg_5">
 									<span data-type-id="0" title="Touts types" data-slug="all" class="search_type_sl_item" data-name="Touts types">Touts types</span>
 									<span data-type-id="1" title="Publique" data-slug="public" class="search_type_sl_item" data-name="Publics">Publics</span>
@@ -141,7 +141,7 @@
 					#}
 					<div id="search_submit_button">
 						<div id="btn_search" data-target="{{ path('platform_search') }}" >Rechercher</div>
-						<input type="submit" style="display:none" value="search" />
+						<input class="d_n" type="submit" value="search" />
 					</div>
 					<div class="both"></div>
 				</div>

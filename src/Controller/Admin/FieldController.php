@@ -164,7 +164,7 @@ class FieldController extends AbstractController {
             $field->setPublished(false);
             $field->setSchool($school);
 
-            $field->setDescription("description ".$field->getName());
+            //$field->setDescription("description ".$field->getName());
 
             $this->em->persist($field);
             $this->em->flush();

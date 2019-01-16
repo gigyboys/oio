@@ -176,6 +176,15 @@ header{
 	border:1px solid #aaa;
 	overflow:hidden
 }
+
+
+#nav_right #user .dd_src .not_connected .illustration{
+	width:22px; 
+	height:22px;
+	display: inline-block; 
+	vertical-align: middle;
+}
+
 #nav_right #user .dd_target.connected{
 	margin-top: 4px; 
 	position: absolute; 
@@ -190,10 +199,14 @@ header{
 	width:70px;
 	height:70px
 }
-#nav_right #user #user_info_header .avatar_wrap #avatar_banner_target{
+#avatar_banner_target{
 	width:50px; 
 	height: 50px; 
 	margin:10px;
+}
+#avatar_banner{
+	width:30px; 
+	height: 30px
 }
 #nav_right #user #user_info_header .info_wrap{
 	margin-left:0px;
@@ -210,7 +223,7 @@ header{
 }
 #nav_right #user .dd_target.connected .link_wrap .link{
 	display:block;
-	padding:5px 0
+	padding:5px;
 }
 #nav_right #user .dd_target.not_connected{
 	text-align: left; 
@@ -218,10 +231,31 @@ header{
 	position: absolute; 
 	display: none; 
 	background: #fff; 
-	padding: 4px; 
+	/*padding: 4px; */
 	border: 1px solid #aaa; 
 	border-radius: 0 0 3px 3px;
 	min-width: 83px;
+}
+
+.btn_admin{
+	padding:5px; 
+	display:block; 
+	float: left
+}
+
+.btn_loggout{
+	padding:5px; 
+	display:block; 
+	float: right;
+}
+
+.log_item{
+	display: block;
+}
+.log_item a{
+	display: block;
+	padding: 7px;
+	width: 140px;
 }
 
 #nav_right ul{
@@ -458,6 +492,12 @@ header{
 	padding:12px 8px;
 	box-sizing:border-box;
 }
+.nav_responsive .dd_src img{
+	display: inline-block;
+	width: 20px; 
+	height: 20px; 
+	margin-top: -3px
+}
 .nav_responsive .dd_src .normal{
 	display:block; 
 	height: 3px;
@@ -508,8 +548,12 @@ header{
 	display:block;
 	padding:5px 0
 }
-
-
+.menu_sl{
+	display: none;
+	position: absolute;
+	background: #fff;
+	border: 1px solid #aaa;
+}
 
 @media screen and (max-width: 1080px)
 {
@@ -754,6 +798,11 @@ header{
 
 @media screen and (max-width: 500px)
 {
+	
+	#nav_right #user .dd_src .not_connected .text{
+		display: none;
+	}
+
 	.user_name{
 		display:none
 	}
