@@ -160,7 +160,12 @@ class SchoolController extends AbstractController {
             $school->setName($schoolInit->getName());
             $school->setShortName($schoolInit->getShortName());
 
-            $slug = $this->platformService->getSlug($school->getName(), $school);
+            if(trim($school->getShortName()) != ""){
+                $slug = $school->getShortName();
+            }else{
+                $slug = $school->getName();
+            }
+            $slug = $this->platformService->getSlug($slug, $school);
 
             $school->setSlug($slug);
             $published = false;
