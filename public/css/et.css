@@ -5,7 +5,6 @@
 	flex-wrap: wrap;
 }
 .event_item{
-	margin-bottom:10px;
 	width: 33.333%;
 	padding:10px;
 	box-sizing: border-box;
@@ -32,6 +31,25 @@
 .event_item .event_image a{
 	display: block;
 }
+.event_item .detail {
+	position:absolute; 
+	background:rgba(0,0,0,0.4);
+	z-index:3;
+	display:block;
+	top: 0px;
+	width: 100%;
+	color:#fff;
+	box-sizing:border-box; 
+	padding:3px 4px 4px
+}
+.event_item .detail .left{
+	display:block; 
+	float:left
+}
+.event_item .detail .right{
+	display:block; 
+	float:right;
+}
 .event_item .avatar_wrap {
 	position:relative;
 	text-align:center; 
@@ -46,6 +64,9 @@
 	width: 80px; 
 	height: 80px;
 	border-radius:50%;
+}
+.event_item .et_date_info i{
+	color:#444;
 }
 
 

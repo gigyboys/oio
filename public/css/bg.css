@@ -17,7 +17,6 @@
 	flex-wrap: wrap;
 }
 .post_item{
-	margin-bottom:10px;
 	width: 33.333%;
 	padding:10px;
 	box-sizing: border-box;
@@ -54,9 +53,11 @@
 .conmment_info{
 	float: right;
 }
-.conmment_info img{
+.conmment_info i{
 	display: inline-block;
 	vertical-align: middle;
+	color:#444;
+	font-size: 20px
 }
 .conmment_info strong{
 	display: inline-block;
@@ -66,9 +67,11 @@
 	float: left;
 	margin-top: 10px;
 }
-.date_info img{
+.date_info i{
 	display: inline-block;
 	vertical-align: middle;
+	color: #444;
+	font-size: 20px;
 }
 .date_info strong{
 	display: inline-block;

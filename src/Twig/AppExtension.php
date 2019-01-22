@@ -73,6 +73,9 @@ class AppExtension extends AbstractExtension
             new TwigFunction('isGoingParticipation', array($this, 'isGoingParticipation')),
             new TwigFunction('isMaybeParticipation', array($this, 'isMaybeParticipation')),
             new TwigFunction('getValidEvents', array($this, 'getValidEvents')),
+            new TwigFunction('isCurrent', array($this, 'isCurrent')),
+            new TwigFunction('isUpcomming', array($this, 'isUpcomming')),
+            new TwigFunction('isPassed', array($this, 'isPassed')),
         );
     }
 
@@ -227,5 +230,17 @@ class AppExtension extends AbstractExtension
 
     public function getValidEvents() {
         return $this->eventService->getValidEvents();
+    }
+
+    public function isCurrent(Event $event) {
+        return $this->eventService->isCurrent($event);
+    }
+
+    public function isUpcomming(Event $event) {
+        return $this->eventService->isUpcomming($event);
+    }
+
+    public function isPassed(Event $event) {
+        return $this->eventService->isPassed($event);
     }
 }

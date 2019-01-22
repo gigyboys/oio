@@ -216,7 +216,7 @@
 	border-radius: 3px; 
 	border: 1px solid #bbb
 }
-.sl_action_about, .sl_action_bg, .sl_action_at, .sl_action_evaluation, .sl_action_doc, .sl_action_et{
+.sl_action_about, .sl_action_bg, .sl_action_et, .sl_action_evaluation, .sl_action_doc, .sl_action_et{
 	display:inline-block;
 	width: 39px;
 	height:32px;
@@ -225,20 +225,17 @@
 	vertical-align: top;
 	box-sizing:border-box;
 }
-.sl_action_about:hover, .sl_action_bg:hover, .sl_action_at:hover, .sl_action_evaluation:hover, .sl_action_contact:hover, .sl_action_doc:hover, .sl_action_et:hover{
+.sl_action_about:hover, .sl_action_bg:hover, .sl_action_et:hover, .sl_action_evaluation:hover, .sl_action_contact:hover, .sl_action_doc:hover, .sl_action_et:hover{
 	background: #ffffff;
 	border: 1px solid #ddd;
 }
-.sl_action_about a, .sl_action_bg a, .sl_action_at a, .sl_action_evaluation a, .sl_action_contact a, .sl_action_doc a, .sl_action_et a{
+.sl_action_about a, .sl_action_bg a, .sl_action_et a, .sl_action_evaluation a, .sl_action_contact a, .sl_action_doc a{
 	display:block;
 	padding-top:4px
 }
-.sl_action_bg a img, .sl_action_at a img, .sl_action_evaluation a img, .sl_action_contact a img, .sl_action_doc a img, .sl_action_et a img{
-	filter: brightness(100%);
-	-webkit-filter: brightness(100%);
-	-moz-filter: brightness(100%);
-	-o-filter: brightness(100%);
-	-ms-filter: brightness(100%);
+.sl_action_bg a i, .sl_action_et a i, .sl_action_evaluation a i, .sl_action_contact a i, .sl_action_doc a i{
+	color:#777;
+	font-size: 20px;
 }
 .sl_action_about a:hover img{
 	filter: brightness(80%);
@@ -247,12 +244,8 @@
 	-o-filter: brightness(80%);
 	-ms-filter: brightness(80%);
 }
-.sl_action_bg a:hover img, .sl_action_at a:hover img, .sl_action_evaluation a:hover img, .sl_action_contact a:hover img{
-	filter: brightness(50%);
-	-webkit-filter: brightness(50%);
-	-moz-filter: brightness(50%);
-	-o-filter: brightness(50%);
-	-ms-filter: brightness(50%);
+.sl_action_bg a:hover i, .sl_action_et a:hover i, .sl_action_evaluation a:hover i, .sl_action_contact a:hover i, .sl_action_doc a:hover i{
+	color:#333;
 }
 /*
 .sl_action_about, .sl_action_evaluation{
@@ -299,13 +292,16 @@
 	padding-top:10px;
 	background:#ddd;
 }
+.tab_sl_wrap{
+	display: flex;
+}
 #sl_onglet_head .tab_sl_item{
 	cursor:pointer;
 	display:inline-block;
 	padding: 10px 10px;
 	color:#444;
 	background:#bbb;
-	/*border-radius: 4px 4px 0 0;*/
+	vertical-align: bottom;
 }
 
 #sl_onglet_head .tab_sl_item:active, #sl_onglet_head .tab_sl_item:focus
@@ -320,10 +316,12 @@
 	border: 1px solid #ccc
 }
 
-.tab_sl_item .img.icon{
+.tab_sl_item i{
+	display: inline-block;
 	width:19px;
 	height:19px;
-	border: 1px solid transparent
+	border: 1px solid transparent;
+	font-size: 18px;
 }
 
 #sl_onglet_head .tab_sl_item .wrap{
@@ -777,6 +775,21 @@
 	}
 }
 
+@media screen and (max-width: 500px)
+{
+
+	#sl_onglet_head .tab_sl_item .label{
+		display: none;
+	}
+	#sl_onglet_head .tab_sl_item .wrap{
+		padding: 4px 0;
+	}
+
+	.pagination_item{
+		min-width:32px;
+	}
+}
+
 @media screen and (max-width: 480px)
 {
 	.sll_ct{
@@ -784,14 +797,6 @@
 	}
 	.hidden_480{
 		display: none;
-	}
-}
-
-@media screen and (max-width: 500px)
-{
-
-	.pagination_item{
-		min-width:32px;
 	}
 }
 

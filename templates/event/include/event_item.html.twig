@@ -7,7 +7,33 @@
         {# twig extension #}
         {% set illustration = eventIllustration(event) %}
 
-		<a href="{{ path('event_view', {'slug': event.slug}) }}" ><img style="width: 100%; height: auto" src="{{ illustration | imagine_filter('600x250') }}?v=001" alt="{{ event.title }}" /></a>
+		<a href="{{ path('event_view', {'slug': event.slug}) }}" >
+			<span class="detail">
+				<span class="left">
+					{% if isCurrent(event) %}
+						En cours
+					{% endif %}
+					{% if isUpcomming(event) %}
+						A venir
+					{% endif %}
+					{% if isPassed(event) %}
+						Passé
+					{% endif %}
+				</span>
+				{% set participants = getGoingParticipations(event) %}
+				{% if participants | length > 0 %}
+					<span class="right">
+						{% if participants | length > 1 %}
+							{{ participants | length }} participants
+						{% else %}
+							{{ participants | length }} participant
+						{% endif %}
+					</span>
+				{% endif %}
+				<span class="both"></span>
+			</span>
+			<img src="{{ illustration | imagine_filter('600x250') }}?v=001" alt="{{ event.title }}" />
+		</a>
 	</div>
 	
 	{% if event.showAuthor %}
@@ -20,13 +46,6 @@
 	<div class="event_title tacenter {% if published == false %}op5{% endif %}">
 		<a href="{{ path('event_view', {'slug': event.slug}) }}"><strong>{{ event.title }}</strong></a>
 	</div>
-	{#
-	<div class="event_ct {% if published == false %}op5{% endif %}">
-		<div class="event_ct_desc tajustify" style="margin:10px 0">
-            {{ substrSpace(event.introduction, 275) }}
-		</div>
-	</div>
-	#}
 
 	<div class="meta_info">
 		{# extension #}
@@ -36,7 +55,8 @@
 		#}
 		<div class="both"></div>
 
-		<div class="et_date_info tacenter mg_v5"><img src="{{ asset('image/calendar_icon.png')  }}" style="width:14px; height:14px;" /> 
+		<div class="et_date_info tacenter mg_v5">
+			<i class="fas fa-calendar-alt"></i> 
 			<strong>{{ event.datebegin | date('Y-m-d') }}</strong> - 
 			<strong>{{ event.dateend | date('Y-m-d') }}</strong>
 		</div>

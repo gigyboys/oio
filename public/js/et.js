@@ -55,6 +55,7 @@ $(function() {
             success: function(data){
 				if(data.state == 1){
 					$(".participation_block").html(data.participationHtml);
+					initListParticipants();
 				}else if(data.state == 3){
                     processLogin();
 				}
@@ -157,6 +158,30 @@ $(function() {
 				console.log(errorThrown);
 			}
 		});	
-    });
+	});
 	
+	initListParticipants();
+	$(window).resize(function() {
+        initListParticipants();
+    });
 });
+
+function initListParticipants() {
+	$(".list_wrap").removeClass("d_n").addClass("d_ib");
+	if($(".list_wrap").length == 1){
+		$(".list_wrap .user_hover_info").css("display", "inline-block");
+		var count = 0;
+		while ($(".list").width() < $(".list_wrap").width()) {
+			$(".list_wrap .user_hover_info:visible").last().hide();
+			var countHide = $(".list_wrap .user_hover_info:hidden").length;
+			var count = parseInt($(".bound_participations").attr("data-bound-count"))+countHide;
+			$(".bound_participations").html("+"+count);
+			$(".bound_participations").attr("data-count", count);
+		}
+		if(count <= 0){
+			$(".bound_participations").hide();
+		}else{
+			$(".bound_participations").css("display", "inline-block");
+		}
+	}
+}

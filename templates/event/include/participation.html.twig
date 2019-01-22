@@ -1,5 +1,5 @@
 {% set participations = getGoingParticipations(event) %}
-{% set limit = 5 %}
+{% set limit = 14 %}
 {% set maybeParticipations = getMaybeParticipations(event) %}
 <div class="participation_ct">
     <div class="header">
@@ -8,40 +8,45 @@
     <div class="body">
         <div class="list">
             {% if participations | length > 0 %}
-                {% set countParticipation = 0 %}
-                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                    {% if isGoingParticipation(event, app.user) %}
-                        {% set user = app.user %}
-                        {% set avatar = userAvatar(user) %}
-                        {% set userInfo = getLinkUserInfo(user, '<img src="'~ avatar | imagine_filter("50x50") ~'" />' ) %}
-                        {{ userInfo | raw }}
-                        {% set countParticipation = countParticipation + 1 %}
-                    {% endif %}
-                {% endif %}
-            
-                {% for participation in participations %}
-                    {% set user = participation.user %}
+                <div class="list_wrap d_n">
+                    {% set countParticipation = 0 %}
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        {% if user.id != app.user.id and countParticipation < limit %}
-                            {% set avatar = userAvatar(user) %}
-                            {% set userInfo = getLinkUserInfo(user, '<img src="'~ avatar | imagine_filter("50x50") ~'" />' ) %}
-                            {{ userInfo | raw }}
-                            {% set countParticipation = countParticipation + 1 %}
-                        {% endif %}
-                    {% else %}
-                        {% if countParticipation < limit %}
+                        {% if isGoingParticipation(event, app.user) %}
+                            {% set user = app.user %}
                             {% set avatar = userAvatar(user) %}
                             {% set userInfo = getLinkUserInfo(user, '<img src="'~ avatar | imagine_filter("50x50") ~'" />' ) %}
                             {{ userInfo | raw }}
                             {% set countParticipation = countParticipation + 1 %}
                         {% endif %}
                     {% endif %}
-                {% endfor %}
+                
+                    {% for participation in participations %}
+                        {% set user = participation.user %}
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            {% if user.id != app.user.id and countParticipation < limit %}
+                                {% set avatar = userAvatar(user) %}
+                                {% set userInfo = getLinkUserInfo(user, '<img src="'~ avatar | imagine_filter("50x50") ~'" />' ) %}
+                                {{ userInfo | raw }}
+                                {% set countParticipation = countParticipation + 1 %}
+                            {% endif %}
+                        {% else %}
+                            {% if countParticipation < limit %}
+                                {% set avatar = userAvatar(user) %}
+                                {% set userInfo = getLinkUserInfo(user, '<img src="'~ avatar | imagine_filter("50x50") ~'" />' ) %}
+                                {{ userInfo | raw }}
+                                {% set countParticipation = countParticipation + 1 %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
 
-                {% if participations | length > limit %}
+                    {#{% if participations | length > limit %}#}
                     {% set overflowParticipations = participations | length - limit %}
-                    <span class="bound_participations">+{{ overflowParticipations }}</span>
-                {% endif %}
+                    {% if overflowParticipations <= 0 %}
+                        {% set overflowParticipations = 0 %}
+                    {% endif %}
+                    <span data-bound-count="{{ overflowParticipations }}" data-count="{{ overflowParticipations }}" class="bound_participations">+{{ overflowParticipations }}</span>
+                    {#{% endif %}#}
+                </div>
             {% else %}
                 <div>
                     {% if event.dateend | date('Y-m-d H:i:s') > "now" | date('Y-m-d H:i:s') %}

@@ -211,4 +211,31 @@ class EventService
         return $previousEvent;
     }
 
+    public function isCurrent(Event $event) {
+        $now = new \Datetime();
+        
+        if($now >= $event->getDatebegin() && $now <= $event->getDateend() ){
+            return true;
+        }
+        return false;
+    }
+
+    public function isUpcomming(Event $event) {
+        $now = new \Datetime();
+        
+        if($now < $event->getDatebegin() ){
+            return true;
+        }
+        return false;
+    }
+
+    public function isPassed(Event $event) {
+        $now = new \Datetime();
+        
+        if($now > $event->getDateend() ){
+            return true;
+        }
+        return false;
+    }
+
 }

@@ -114,21 +114,21 @@
             <div id="sl_onglet_head">
                 <div class="cr">
                     <div class="ct">
-                        <div class="mg_h10">
+                        <div class="mg_h10 tab_sl_wrap">
 							<a class="tab_sl_item{% if type == 'about' %} selected{% endif %}" id="tab_sl_about" data-title="{{ school.name }} - about" href="{{ path('school_view', {'slug': school.slug, 'type': 'about'}) }}" >
 								<span class="wrap"><img class="img logo" src="{{ logo | imagine_filter('20x20') }}" alt="AU" /> <span class="label">A propos</span></span>
 							</a><!--
 							--><a class="tab_sl_item{% if type == 'post' %} selected{% endif %}" id="tab_sl_new" data-title="{{ school.name }} - post" href="{{ path('school_view', {'slug': school.slug, 'type': 'post'}) }}" >
-								<span class="wrap"><img class="img icon" src="{{ asset('image/sl_bg_icon.png') }}" alt="BG" /> <span class="label">Actualités</span></span>
+								<span class="wrap"><i class="far fa-edit"></i> <span class="label">Actualités</span></span>
 							</a><!--
 							--><a class="tab_sl_item{% if type == 'event' %} selected{% endif %}" id="tab_sl_event" data-title="{{ school.name }} - event" href="{{ path('school_view', {'slug': school.slug, 'type': 'event'}) }}">
-								<span class="wrap"><img class="img icon" src="{{ asset('image/sl_at_icon.png') }}" alt="AT" /> <span class="label">Evènements</span></span>
+								<span class="wrap"><i class="fas fa-calendar-day"></i> <span class="label">Evènements</span></span>
 							</a><!--
 							--><a class="tab_sl_item{% if type == 'evaluation' %} selected{% endif %}" id="tab_sl_evaluation" data-title="{{ school.name }} - evaluations" href="{{ path('school_view', {'slug': school.slug, 'type': 'evaluation'}) }}">
-								<span class="wrap"><img class="img icon" src="{{ asset('image/sl_star_icon.png') }}" alt="BG" /> <span class="label">Evaluations</span></span>
+								<span class="wrap"><i class="fas fa-star-half-alt"></i> <span class="label">Evaluations</span></span>
 							</a><!--
                             --><a class="tab_sl_item{% if type == 'document' %} selected{% endif %}" id="tab_sl_document" data-title="{{ school.name }} - documents" href="{{ path('school_view', {'slug': school.slug, 'type': 'document'}) }}">
-								<span class="wrap"><img class="img icon" src="{{ asset('image/sl_document_icon.png') }}" alt="BG" /> <span class="label">Documents</span></span>
+								<span class="wrap"><i class="fas fa-arrow-alt-circle-down"></i> <span class="label">Documents</span></span>
 							</a>
                         </div>
                     </div>

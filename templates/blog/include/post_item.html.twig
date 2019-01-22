@@ -7,7 +7,7 @@
         {# twig extension #}
         {% set illustration = postIllustration(post) %}
 
-		<a href="{{ path('blog_post_view', {'slug': post.slug}) }}" ><img style="width: 100%; height: auto" src="{{ illustration | imagine_filter('600x250') }}?v=001" alt="{{ post.title }}" /></a>
+		<a href="{{ path('blog_post_view', {'slug': post.slug}) }}" ><img src="{{ illustration | imagine_filter('600x250') }}?v=001" alt="{{ post.title }}" /></a>
 	</div>
 	<h2 class="post_title {% if published == false %}op5{% endif %}">
 		<a href="{{ path('blog_post_view', {'slug': post.slug}) }}">{{ post.title }}</a>
@@ -28,14 +28,14 @@
         {% if post.showAuthor %}
             {% set avatar = userAvatar(post.user) %}
             {% set userInfo = getLinkUserInfo(post.user, post.user.name) %}
-			<div class="author_info"><img src="{{ avatar | imagine_filter('20x20') }}" style="width: 20px; width: 20px" /> <span class="user_info">{{ userInfo | raw }}</span></div>
+			<div class="author_info"><img src="{{ avatar | imagine_filter('20x20') }}" /> <span class="user_info">{{ userInfo | raw }}</span></div>
         {% endif %}
         {# extension #}
         {% set comments =  getValidComments(post) %}
-		<div class="conmment_info"><img src="{{ asset('image/comment_icon.png')  }}" style="width:20px; height:20px;" /> <strong>{{ comments | length }}</strong></div>
+		<div class="conmment_info"><i class="fas fa-comment-dots"></i> <strong>{{ comments | length }}</strong></div>
 		<div class="both"></div>
 
-		<div class="date_info"><img src="{{ asset('image/calendar_icon.png')  }}" style="width:20px; height:20px;" /> <strong>{{ post.date | date('Y-m-d') }}</strong></div>
+		<div class="date_info"><i class="fas fa-calendar-alt"></i> <strong>{{ post.date | date('Y-m-d') }}</strong></div>
 		<div class="post_action">
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 				{% if post.user.id == app.user.id %}
