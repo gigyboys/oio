@@ -142,8 +142,8 @@
                                     </div>
                                     <div class="info_wrap">
                                         <a class="link" id="ur_profil_link" href="{{ path('user_profile', {'username': app.user.username}) }}">
-                                            <span id="nav_target_ur_username">{{ app.user.username }}</span><br />
-                                            <span id="nav_target_ur_name">{{ app.user.name }}</span><br />
+                                            <strong id="nav_target_ur_name">{{ app.user.name }}</strong><br />
+                                            &nbsp;<i class="fas fa-user-circle"></i> <span id="nav_target_ur_username">{{ app.user.username }}</span><br />
                                             <span id="nav_target_ur_email">{{ app.user.email }}</span>
                                         </a>
                                     </div>
@@ -164,12 +164,12 @@
                                     <div class="pd_10">
                                         {% if is_granted('ROLE_ADMIN') %}
                                             <a class="link standar_button pd_5 btn_admin" target="_blank" href="{{ path('admin_home') }}">
-                                                <span>Tableau de bord</span>
+                                                <span><i class="fas fa-tachometer-alt"></i> Tableau de bord</span>
                                             </a>
                                         {% endif %}
 
                                         <a class="link standar_button pd_5 mg_r0 btn_loggout" href="{{ path('user_logout') }}">
-                                            <span>Déconnexion</span>
+                                            <span><i class="fas fa-sign-out-alt"></i> Déconnexion</span>
                                         </a>
                                         <span class="both"></span>
                                     </div>

@@ -2,7 +2,7 @@
 {% if post.tovalid == false or post.valid == false or post.published == false or post.deleted %}
     {% set published = false %}
 {% endif %}
-<div class="post_item">
+<div class="post_item search_item" data-text="{{ post.title }}">
 	<div class="post_image {% if published == false %}op5{% endif %}">
         {# twig extension #}
         {% set illustration = postIllustration(post) %}
@@ -13,7 +13,7 @@
 		<a href="{{ path('blog_post_view', {'slug': post.slug}) }}">{{ post.title }}</a>
 	</h2>
 	<div class="post_ct {% if published == false %}op5{% endif %}">
-		<div class="post_ct_desc tajustify" style="margin:10px 0">
+		<div class="post_ct_desc tajustify mg_v10">
             {{ substrSpace(post.introduction, 275) }}
 		</div>
 	</div>

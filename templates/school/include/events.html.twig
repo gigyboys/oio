@@ -4,11 +4,26 @@
 			<strong>Aucun évènement à afficher</strong>
 		</div>
 	{% else %}
-		<div id="et_list">
-			{% for event in events %}
-				{{ include("event/include/event_item.html.twig") }}
-			{% endfor %}
-			<div class="both"></div>
+		<div class="search" data-item-display="block">
+			{% if events | length >= 2 %}
+				<div class="search_input_cr pd_5 mg_h10 mg_t10">
+					<div class="search_input_left">
+						<label for="search_input" class="label_search_input">Rechercher :</label> <span class="search_input_wrap"><input type="text" id="search_input" class="search_input"/><!--
+					--><span class="search_reset"><i class="fas fa-times"></i></span><!--
+							--></span>
+					</div>
+					<div class="search_input_right">
+						<span class="result_state" style="vertical-align: middle">{{ events | length }} résultat{% if events | length > 1 %}s{% endif %}</span>
+					</div>
+					<div class="both"></div>
+				</div>
+			{% endif %}
+			<div id="et_list">
+				{% for event in events %}
+					{{ include("event/include/event_item.html.twig") }}
+				{% endfor %}
+				<div class="both"></div>
+			</div>
 		</div>
 	{% endif %}
 </div>

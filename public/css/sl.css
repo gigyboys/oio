@@ -360,11 +360,14 @@
 	margin:10px; 
 	font-weight:bold;
 	cursor:pointer;
+	margin-top: 20px;
+	margin-bottom: 2px;
 }
 #sl_oftheday_desc{
 	margin:10px;
 	display:none;
 	text-align:justify;
+	margin-top: 0px;
 }
 #sl_oftheday_wrap{
 	margin:10px;

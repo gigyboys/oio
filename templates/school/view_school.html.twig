@@ -115,13 +115,13 @@
                 <div class="cr">
                     <div class="ct">
                         <div class="mg_h10 tab_sl_wrap">
-							<a class="tab_sl_item{% if type == 'about' %} selected{% endif %}" id="tab_sl_about" data-title="{{ school.name }} - about" href="{{ path('school_view', {'slug': school.slug, 'type': 'about'}) }}" >
+							<a class="tab_sl_item{% if type == 'about' %} selected{% endif %}" id="tab_sl_about" data-title="{{ school.name }}" href="{{ path('school_view', {'slug': school.slug, 'type': 'about'}) }}" >
 								<span class="wrap"><img class="img logo" src="{{ logo | imagine_filter('20x20') }}" alt="AU" /> <span class="label">A propos</span></span>
 							</a><!--
-							--><a class="tab_sl_item{% if type == 'post' %} selected{% endif %}" id="tab_sl_new" data-title="{{ school.name }} - post" href="{{ path('school_view', {'slug': school.slug, 'type': 'post'}) }}" >
+							--><a class="tab_sl_item{% if type == 'post' %} selected{% endif %}" id="tab_sl_new" data-title="{{ school.name }} - articles" href="{{ path('school_view', {'slug': school.slug, 'type': 'post'}) }}" >
 								<span class="wrap"><i class="far fa-edit"></i> <span class="label">Actualités</span></span>
 							</a><!--
-							--><a class="tab_sl_item{% if type == 'event' %} selected{% endif %}" id="tab_sl_event" data-title="{{ school.name }} - event" href="{{ path('school_view', {'slug': school.slug, 'type': 'event'}) }}">
+							--><a class="tab_sl_item{% if type == 'event' %} selected{% endif %}" id="tab_sl_event" data-title="{{ school.name }} - évènements" href="{{ path('school_view', {'slug': school.slug, 'type': 'event'}) }}">
 								<span class="wrap"><i class="fas fa-calendar-day"></i> <span class="label">Evènements</span></span>
 							</a><!--
 							--><a class="tab_sl_item{% if type == 'evaluation' %} selected{% endif %}" id="tab_sl_evaluation" data-title="{{ school.name }} - evaluations" href="{{ path('school_view', {'slug': school.slug, 'type': 'evaluation'}) }}">

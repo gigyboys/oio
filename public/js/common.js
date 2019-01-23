@@ -229,6 +229,7 @@ $(function() {
             text = text.replace(/[îï]/g,"i");
             text = text.replace(/[ôö]/g,"o");
 
+            query = $.trim(query);
             query = query.toLowerCase();
             query = query.replace(/[èéêë]/g,"e");
             query = query.replace(/[àâä]/g,"a");
@@ -237,7 +238,6 @@ $(function() {
             query = query.replace(/[ôö]/g,"o");
 
             if(text.indexOf(query) > -1){
-                
                 var dataItemDisplay = contextSearch.attr('data-item-display');
 
                 if (typeof dataItemDisplay !== typeof undefined && dataItemDisplay !== false) {

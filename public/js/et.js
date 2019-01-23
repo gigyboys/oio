@@ -177,6 +177,11 @@ function initListParticipants() {
 			var count = parseInt($(".bound_participations").attr("data-bound-count"))+countHide;
 			$(".bound_participations").html("+"+count);
 			$(".bound_participations").attr("data-count", count);
+			if(count <= 0){
+				$(".bound_participations").hide();
+			}else{
+				$(".bound_participations").css("display", "inline-block");
+			}
 		}
 		if(count <= 0){
 			$(".bound_participations").hide();

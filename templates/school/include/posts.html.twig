@@ -5,12 +5,27 @@
 		</div>
 	{% else %}
 		<div id="bg_list">
-			<div id="list_post">
-				{% for post in posts %}
-					{{ include("blog/include/post_item.html.twig") }}
-				{% endfor %}
+			<div class="search" data-item-display="block">
+				{% if posts | length >= 2 %}
+					<div class="search_input_cr pd_5 mg_h10 mg_t10">
+						<div class="search_input_left">
+							<label for="search_input" class="label_search_input">Rechercher :</label> <span class="search_input_wrap"><input type="text" id="search_input" class="search_input"/><!--
+						--><span class="search_reset"><i class="fas fa-times"></i></span><!--
+								--></span>
+						</div>
+						<div class="search_input_right">
+							<span class="result_state" style="vertical-align: middle">{{ posts | length }} résultat{% if posts | length > 1 %}s{% endif %}</span>
+						</div>
+						<div class="both"></div>
+					</div>
+				{% endif %}
+				<div id="list_post">
+					{% for post in posts %}
+						{{ include("blog/include/post_item.html.twig") }}
+					{% endfor %}
+				</div>
+				<div class="both"></div>
 			</div>
-			<div class="both"></div>
 		</div>
 	{% endif %}
 </div>

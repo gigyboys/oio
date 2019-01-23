@@ -17,6 +17,14 @@
 	width: 100%;
 	box-sizing: border-box;
 }
+.info_msg{
+	display: inline-block;
+	border: 1px solid #2e77a6;
+	padding: 5px;
+	color: #2e77a6;
+	width: 100%;
+	box-sizing: border-box;
+}
 .both{
 	display:block;
 	clear:both;

@@ -2,7 +2,7 @@
 {% if event.tovalid == false or event.valid == false or event.published == false or event.deleted %}
     {% set published = false %}
 {% endif %}
-<div class="event_item pd_10">
+<div class="event_item pd_10 search_item" data-text="{{ event.title }}">
 	<div class="event_image {% if published == false %}op5{% endif %}">
         {# twig extension #}
         {% set illustration = eventIllustration(event) %}
