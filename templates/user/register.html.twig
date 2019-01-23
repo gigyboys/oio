@@ -51,16 +51,12 @@
 									<div>
 										<div><label for="password" class="required">Votre mot de passe * : <span id="ur_register_input_password_error">{#{{ errorPassword }}#}</span></label></div>
 										<div>
-											<input type="password" id="password" name="password" required="required" class="default_input" value="{{ user.password }}" />
-											<span class="v_pwd_wrap">
-												<span class="show_pwd v_pwd">
-														<img src="{{ asset('image/icon_eye_show.png')  }}" />
-												</span>
-												<span class="hide_pwd v_pwd">
-														<img src="{{ asset('image/icon_eye_hide.png')  }}"/>
-												</span>
-											</span>
-										</div>
+											<input type="password" id="password" name="password" required="required" class="default_input" value="{{ user.password }}" />{#
+											#}<span class="v_pwd_wrap">{#
+												#}<span class="show_pwd v_pwd"><i class="fas fa-eye"></i></span>{#
+												#}<span class="hide_pwd v_pwd"><i class="fas fa-eye-slash"></i></span>{#
+											#}</span>{#
+										#}</div>
 									</div>
                                     {% if errorActivation is defined and errorActivation != '' %}
 										<div class="mg_10"><strong>{{ errorActivation | raw }}</strong></div>
