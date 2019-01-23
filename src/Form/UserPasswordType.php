@@ -6,9 +6,6 @@ use App\Model\UserPassword;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class UserPasswordType extends AbstractType
@@ -16,9 +13,9 @@ class UserPasswordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('currentPassword', TextType::class)
-            ->add('newPassword', EmailType::class)
-            ->add('repeatPassword',  TextType::class);
+            ->add('currentPassword', PasswordType::class)
+            ->add('newPassword', PasswordType::class)
+            ->add('repeatPassword',  PasswordType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

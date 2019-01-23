@@ -792,7 +792,10 @@ class UserController extends AbstractController {
                     } else {
                         $response->setContent(json_encode(array(
                             'state' => 0,
-                            'message' => 'Veuillez bien verifier votre saisie',
+                            'message' => 'Veuillez bien verifier votre saisie...',
+                            'oldplainpassword' => $userPassword->getCurrentPassword(),
+                            'newplainpassword' => $userPassword->getNewPassword(),
+                            'repeatplainpassword' => $userPassword->getRepeatPassword(),
                         )));
                     }
                 }else{

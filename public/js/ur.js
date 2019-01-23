@@ -208,7 +208,7 @@ $(function() {
 				}
 				else{
 					editBlocEdit(bloc_editable);
-					$("#msg_password").html("<span class='error_msg'>Vérifiez bien votre saisie.</span>");
+					$("#msg_password").html("<span class='error_msg'>"+data.message+"</span>");
 				}
 				bloc_editable.find(".btn_loading").hide();
             },
