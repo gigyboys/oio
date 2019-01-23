@@ -134,35 +134,35 @@
                     </div>
                 </div>
             </div>
-            <div class="content_tab_sl_item{% if type is not defined or type == 'about' %} active{% endif %}" id="content_tab_sl_about">
+            <div class="ctab_sl_item{% if type is not defined or type == 'about' %} active{% endif %}" id="ctab_sl_about">
                 <div class="cr">
                     <div class="ct">
                         {{ include("school/include/about.html.twig") }}
                     </div>
                 </div>
             </div>
-            <div class="content_tab_sl_item{% if type == 'post' %} active{% endif %}" id="content_tab_sl_new">
+            <div class="ctab_sl_item{% if type == 'post' %} active{% endif %}" id="ctab_sl_new">
                 <div class="cr">
                     <div class="ct">
                         {{ include("school/include/posts.html.twig") }}
                     </div>
                 </div>
             </div>
-            <div class="content_tab_sl_item content_tab_sl_item{% if type == 'event' %} active{% endif %}" id="content_tab_sl_event">
+            <div class="ctab_sl_item{% if type == 'event' %} active{% endif %}" id="ctab_sl_event">
                 <div class="cr">
                     <div class="ct">
                         {{ include("school/include/events.html.twig") }}
                     </div>
                 </div>
             </div>
-            <div class="content_tab_sl_item {% if type == 'evaluation' %} active{% endif %}" id="content_tab_sl_evaluation">
+            <div class="ctab_sl_item {% if type == 'evaluation' %} active{% endif %}" id="ctab_sl_evaluation">
                 <div class="cr">
                     <div class="ct">
                         {{ include("school/include/evaluation.html.twig") }}
                     </div>
                 </div>
             </div>
-            <div class="content_tab_sl_item{% if type == 'document' %} active{% endif %}" id="content_tab_sl_document">
+            <div class="ctab_sl_item{% if type == 'document' %} active{% endif %}" id="ctab_sl_document">
                 <div class="cr">
                     <div class="ct" id="document_wrap">
                         {{ include("school/include/document.html.twig") }}

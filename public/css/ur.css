@@ -36,10 +36,10 @@
 	background:#fff;
 }
 
-.content_tab_ur_item{
+.ctab_ur_item{
 	display: none;
 }
-.content_tab_ur_item.selected{
+.ctab_ur_item.selected{
 	display: block;
 }
 #change_avatar{

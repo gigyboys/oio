@@ -27,19 +27,16 @@ $(function() {
 	/*
 	* user_info_popup
 	*/
-	var tab_ur_item = $('.tab_ur_item');
-	var content_tab_ur_item = $('.content_tab_ur_item');
 	var timeOutIdEnterArray = []; 
 	var timeOutIdLeaveArray = [];
 
     $('body').on('click','.tab_ur_item',function(e){
-        tab_ur_item.removeClass('selected');
+        $('.tab_ur_item').removeClass('selected');
         $(this).addClass('selected');
 		var this_id = $(this).attr('id');
-		var content = $("#content_"+this_id);
-        $('.content_tab_ur_item').removeClass('selected');
+        $('.ctab_ur_item').removeClass('selected');
 		
-		content.addClass('selected');
+		$("#c"+this_id).addClass('selected');
         initTabsl();
 		document.title = $(this).data("title");
 		history.pushState('', '', $(this).attr("data-link"));

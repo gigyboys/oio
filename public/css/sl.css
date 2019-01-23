@@ -338,11 +338,11 @@
 	background:#fff;
 }
 
-.content_tab_sl_item{
+.ctab_sl_item{
 	display: none;
 }
 
-.content_tab_sl_item.active{
+.ctab_sl_item.active{
 	display: block;
 }
 

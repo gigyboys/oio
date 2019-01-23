@@ -13,11 +13,9 @@ $(function() {
         $('.tab_sl_item').removeClass('selected');
         $(this).addClass('selected');
 		var this_id = $(this).attr('id');
-		var content = $("#content_"+this_id);
-		var content_tab_sl_item = $('.content_tab_sl_item');
-		content_tab_sl_item.removeClass('active');
+		$('.ctab_sl_item').removeClass('active');
 		
-		content.addClass('active');
+		$("#c"+this_id).addClass('active');
 		document.title = $(this).data("title");
 		history.pushState('', '', $(this).attr("href"));
 		initTabsl();

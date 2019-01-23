@@ -125,7 +125,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="content_tab_ur_item{% if type is not defined or type == 'profile' %} selected{% endif %}" id="content_tab_ur_about">
+		<div class="ctab_ur_item{% if type is not defined or type == 'profile' %} selected{% endif %}" id="ctab_ur_about">
 			<div class="cr">
 				<div class="ct">
 					<div class="pd_10" style="min-height:100px">
@@ -165,7 +165,7 @@
 			</div>
 		</div>
 		{#
-		<div class="content_tab_ur_item" id="content_tab_ur_school" style = "{% if type != 'subscription' %}display:none{% endif %}">
+		<div class="ctab_ur_item" id="ctab_ur_school" style = "{% if type != 'subscription' %}display:none{% endif %}">
 			<div class="cr">
 				<div class="ct">
 					<div class="pd_10"  style="min-height:80px">
@@ -184,7 +184,7 @@
 			</div>
 		</div>
 		#}
-		<div class="content_tab_ur_item{% if type == 'contribution' %} selected{% endif %}" id="content_tab_ur_contribution">
+		<div class="ctab_ur_item{% if type == 'contribution' %} selected{% endif %}" id="ctab_ur_contribution">
 			<div class="cr">
 				<div class="ct">	
 					<div class="mg_t10">
@@ -369,7 +369,7 @@
 		</div>
 
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.id == user.id %}
-			<div class="content_tab_ur_item{% if type == 'setting' %} selected{% endif %}" id="content_tab_ur_setting">
+			<div class="ctab_ur_item{% if type == 'setting' %} selected{% endif %}" id="ctab_ur_setting">
 				<div class="cr">
 					<div class="ct">
 						<div class="pd_10" style="min-height:100px">
