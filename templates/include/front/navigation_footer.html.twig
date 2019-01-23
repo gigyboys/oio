@@ -7,16 +7,21 @@
 						<span>{{ 'A propos' | trans }}</span>
 					</a>
 				</li>
-				<li>
-					<a href="{{ path('platform_team') }}">
-						<span>{{ 'Equipe' | trans }}</span>
-					</a>
-				</li>
+				{% set userTeams = findUserTeamsOrderBy('position', 'ASC', true) %}
+				{% if userTeams | length > 0 %}
+					<li>
+						<a href="{{ path('platform_team') }}">
+							<span>{{ 'Equipe' | trans }}</span>
+						</a>
+					</li>
+				{% endif %}
+				{#
 				<li>
 					<a href="{{ path('platform_notice') }}">
 						<span>{{ 'Mentions légales' | trans }}</span>
 					</a>
 				</li>
+				#}
 				<li><!--
 					<span id="contact2">nous contacter</span>
 					-->

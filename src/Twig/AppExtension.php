@@ -65,6 +65,7 @@ class AppExtension extends AbstractExtension
             new TwigFunction('getValidPosts', array($this, 'getValidPosts')),
             new TwigFunction('getLastVisit', array($this, 'getLastVisit')),
             new TwigFunction('isUserTeam', array($this, 'isUserTeam')),
+            new TwigFunction('findUserTeamsOrderBy', array($this, 'findUserTeamsOrderBy')),
             /*event*/
             new TwigFunction('eventIllustration', array($this, 'eventIllustration')),
             new TwigFunction('isSchoolEvent', array($this, 'isSchoolEvent')),
@@ -187,6 +188,10 @@ class AppExtension extends AbstractExtension
 
     public function isUserTeam(User $user, $published = true) {
         return $this->userService->isUserTeam($user, $published);
+    }
+
+    public function findUserTeamsOrderBy($field, $order , $published) {
+        return $this->userService->findUserTeamsOrderBy($field, $order , $published);
     }
 
     public function getActiveUsers() {

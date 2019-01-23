@@ -58,7 +58,6 @@ class UserService
     }
 
 
-
     public function getAvatarPath(User $user) {
         $avatar = $this->avatarRepository->findOneBy(array(
             'user' => $user,
@@ -129,6 +128,10 @@ class UserService
             return false;
         }
         return true;
+    }
+
+    public function findUserTeamsOrderBy($field = 'position', $order = 'ASC', $published = null) {
+        return $this->userTeamRepository->findOrderBy($field, $order, $published);
     }
 
 }
