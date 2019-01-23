@@ -188,44 +188,44 @@
 			<div class="cr">
 				<div class="ct">	
 					<div class="mg_t10">
-						<div id="content_tab">
-							<div class="content_tab_header mg_h10">
-								<div class="content_tab_header_content">
-									<div class="content_tab_header_item selected" id="tab_post">
-										<div class="content_tab_header_item_text">
+						<div id="t">
+							<div class="t_header mg_h10">
+								<div class="t_header_content">
+									<div class="t_header_item selected" id="upost">
+										<div class="t_header_item_text">
 											Articles
 										</div>
 									</div>
-									<div class="content_tab_header_item" id="tab_event">
-										<div class="content_tab_header_item_text">
+									<div class="t_header_item" id="uevent">
+										<div class="t_header_item_text">
 											Evènements
 										</div>
 									</div>
-									<div class="content_tab_header_item" id="tab_comment">
-										<div class="content_tab_header_item_text">
+									<div class="t_header_item" id="ucomment">
+										<div class="t_header_item_text">
 											Commentaires
 										</div>
 									</div>
-									<div class="content_tab_header_item" id="tab_evaluation">
-										<div class="content_tab_header_item_text">
+									<div class="t_header_item" id="uevaluation">
+										<div class="t_header_item_text">
 											Evaluations
 										</div>
 									</div>
 									{#
-									<div class="content_tab_header_item" id="tab_advert">
-										<div class="content_tab_header_item_text">
+									<div class="t_header_item" id="uadvert">
+										<div class="t_header_item_text">
 											{{ 'advert' | trans }}
 										</div>
 									</div>
 									#}
 								</div>
-								<div class="content_tab_header_sep">
-									<div class="content_tab_header_sep_slide">
+								<div class="t_header_sep">
+									<div class="t_header_sep_slide">
 									</div>
 								</div>
 							</div>
-							<div class="content_tab_content">
-								<div class="content_tab_content_item selected" id="content_tab_post">
+							<div class="t_content">
+								<div class="t_content_item selected" id="c_upost">
 									{% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.id == user.id %}
 										<div class="pd_10">
 											<span class="create_post standar_button" style="cursor: pointer" data-target="{{ path('blog_manager_add_post_ajax')}}"><img src="{{ asset('image/add_icon.png') }}" style="width:12px; height:auto"> Proposer un article</span>
@@ -247,7 +247,7 @@
 										--></div>
 									{% endif %}
 								</div>
-								<div class="content_tab_content_item" id="content_tab_event">
+								<div class="t_content_item" id="c_uevent">
 									{% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.id == user.id %}
 										<div class="pd_10">
 											<span class="create_event standar_button" style="cursor: pointer" data-target="{{ path('event_manager_add_ajax')}}"><img src="{{ asset('image/add_icon.png') }}" style="width:12px; height:auto"> Proposer un évènement</span>
@@ -269,7 +269,7 @@
 										--></div>
 									{% endif %}
 								</div>
-								<div class="content_tab_content_item" id="content_tab_comment">
+								<div class="t_content_item" id="c_ucomment">
 									<div id="list_comment" class="mg_t5">
 										<div class="mg_10">
 											{% if comments | length == 0%}
@@ -320,7 +320,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="content_tab_content_item" id="content_tab_evaluation">
+								<div class="t_content_item" id="c_uevaluation">
 									<div id="list_comment" class="mg_t5">
 										<div class="mg_10">
 											{% if evaluations | length == 0%}

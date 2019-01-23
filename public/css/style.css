@@ -427,12 +427,12 @@ a:hover{
 
 
 /***************** tab ***************/
-.content_tab_header_content{
+.t_header_content{
 	background: #fff;
     height: 32px;
     width: auto;
 }
-.content_tab_header_item{
+.t_header_item{
 	box-sizing: border-box;
 	max-width: 25%;
     cursor: pointer;
@@ -441,34 +441,34 @@ a:hover{
     padding: 0 8px;
 	color:#666;
 }
-.content_tab_header_item .content_tab_header_item_text{
+.t_header_item .t_header_item_text{
 	max-width: 100%;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
-.content_tab_header_item.selected{
+.t_header_item.selected{
 	color:#000
 }
-.content_tab_header_item .content_tab_header_item_text{
+.t_header_item .t_header_item_text{
 	padding-top:6px;
 }
-.content_tab_header_sep{
+.t_header_sep{
 	background: #eee;
     height: 2px;
     padding: 2px 0;
     width: auto;
 }
-.content_tab_header_sep_slide{
+.t_header_sep_slide{
 	background: #bbb;
     display: block;
     height: 2px;
     width: 0px;
 }
-.content_tab_content_item{
+.t_content_item{
     display: none;
 }
-.content_tab_content_item.selected{
+.t_content_item.selected{
     display: block;
 }
 

@@ -233,19 +233,13 @@ $(function() {
     });
 	
 	//tab sl about
-	var content_tab_header_item = $('.content_tab_header_item');
-	var content_tab_content_item = $('.content_tab_content_item');
-	var content_tab_header_content = $('.content_tab_header_content');
-	var content_tab_header_sep_slide = $('.content_tab_header_sep_slide');
-	
-	$('body').on('click','.content_tab_header_item',function(e){
-        $('.content_tab_header_item').removeClass('selected');
+	$('body').on('click','.t_header_item',function(e){
+        $('.t_header_item').removeClass('selected');
         $(this).addClass('selected');
 		var this_id = $(this).attr('id');
-		var content = $("#content_"+this_id);
-		content_tab_content_item.removeClass('selected');
+		$('.t_content_item').removeClass('selected');
 		
-		content.addClass('selected');
+		$("#c_"+this_id).addClass('selected');
 		initTabsl();
     });
     initTabsl();
@@ -465,11 +459,11 @@ function truncateSchoolLabel() {
 }
 
 function initTabsl(){
-    if($('.content_tab_header_content .selected').length > 0){
-        var decalage = $('.content_tab_header_content .selected').offset().left - $('.content_tab_header_content').offset().left;
-        $('.content_tab_header_sep_slide').animate({
+    if($('.t_header_content .selected').length > 0){
+        var decalage = $('.t_header_content .selected').offset().left - $('.t_header_content').offset().left;
+        $('.t_header_sep_slide').animate({
             marginLeft: decalage,
-            width: $('.content_tab_header_content .selected').outerWidth(true),
+            width: $('.t_header_content .selected').outerWidth(true),
         }, 300, function() {
         });
     }

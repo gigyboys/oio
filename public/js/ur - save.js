@@ -2,7 +2,7 @@
 $(function() {
 	console.log("inittabuser");
 	var tab_ur_item = $('.tab_ur_item');
-	var content_tab_ur_item = $('.content_tab_ur_item');
+	var t_ur_item = $('.t_ur_item');
 	var timeOutIdEnterArray = []; 
 	var timeOutIdLeaveArray = []; 
 	//var timeOutIdEnterCheckArray = []; 
@@ -13,7 +13,7 @@ $(function() {
         $(this).addClass('selected');
 		var this_id = $(this).attr('id');
 		var content = $("#content_"+this_id);
-		content_tab_ur_item.removeClass('selected').css('display','none');
+		t_ur_item.removeClass('selected').css('display','none');
 		
 		content.addClass('selected').css('display','block');
 		console.log($(this).data("link"));
