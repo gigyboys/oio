@@ -3,7 +3,7 @@
 		<div class="topic_illustration" style="float:left; width:60px">
 			{% set avatar = userAvatar(comment.user) %}
 			
-			<img style="width: 60px; height: 60px; border-radius: 50%" src="{{ avatar | imagine_filter('60x60') }}" alt="{{ comment.user.username }}" />
+			<img style="width: 60px; height: 60px; border-radius: 50%" src="{{ avatar | imagine_filter('60x60') }}" alt="{{ getAcronym(comment.user.name) }}" />
 		</div>
 		<div style="margin-left:70px">
 			<div>

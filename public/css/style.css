@@ -533,6 +533,8 @@ a:hover{
 	height: 80px;
 	border-radius:50%; 
 	border: 5px solid #fff;
+	background: #fff;
+	text-align: center;
 }
 .event_item .avatar_wrap img{
 	width: 80px; 
@@ -686,6 +688,7 @@ a:hover{
 .participation_block .list .user_hover_info{
 	width: 50px; 
 	height: 50px;
+	text-align: center;
 }
 
 .participation_block .list .user_hover_info img{
@@ -867,6 +870,7 @@ a:hover{
 	width:100%;
 	height:100%;
 }
+
 .bg_view .view_info .content{
 	filter: blur(0px); 
 	border-radius:4px; 
@@ -882,9 +886,17 @@ a:hover{
 	font-size:20px; 
 	color:#314145
 }
+.bg_view .view_info .content .author_avatar{
+	font-size: 24px;
+	width: 116px;
+	height: 116px;
+	border-radius: 50%;
+	border: 4px solid #fff;
+	margin: auto;
+	background: #eee;
+}
 .bg_view .view_info .content .author_avatar img{
 	border-radius:50%;
-	border:4px solid #fff
 }
 .bg_view .view_info .content .list_tags .tag_item{
 	display: inline-block; 

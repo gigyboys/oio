@@ -27,7 +27,7 @@
 						{% if post.showAuthor %}
 							{% set avatar = userAvatar(post.user) %}
 							<div class="author_avatar">
-								<img src="{{ avatar | imagine_filter('100x100') }}" alt="img ur" />
+								<img src="{{ avatar | imagine_filter('100x100') }}" alt="{{ getAcronym(post.user.name) }}" />
 							</div>
 						{% endif %}
 

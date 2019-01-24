@@ -14,7 +14,7 @@
                         {% if isGoingParticipation(event, app.user) %}
                             {% set user = app.user %}
                             {% set avatar = userAvatar(user) %}
-                            {% set userInfo = getLinkUserInfo(user, '<img src="'~ avatar | imagine_filter("50x50") ~'" />' ) %}
+                            {% set userInfo = getLinkUserInfo(user, '<img src="'~ avatar | imagine_filter("50x50") ~'" alt="'~ getAcronym(user.name) ~'" />' ) %}
                             {{ userInfo | raw }}
                             {% set countParticipation = countParticipation + 1 %}
                         {% endif %}
@@ -25,14 +25,14 @@
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                             {% if user.id != app.user.id and countParticipation < limit %}
                                 {% set avatar = userAvatar(user) %}
-                                {% set userInfo = getLinkUserInfo(user, '<img src="'~ avatar | imagine_filter("50x50") ~'" />' ) %}
+                                {% set userInfo = getLinkUserInfo(user, '<img src="'~ avatar | imagine_filter("50x50") ~'" alt="'~ getAcronym(user.name) ~'" />' ) %}
                                 {{ userInfo | raw }}
                                 {% set countParticipation = countParticipation + 1 %}
                             {% endif %}
                         {% else %}
                             {% if countParticipation < limit %}
                                 {% set avatar = userAvatar(user) %}
-                                {% set userInfo = getLinkUserInfo(user, '<img src="'~ avatar | imagine_filter("50x50") ~'" />' ) %}
+                                {% set userInfo = getLinkUserInfo(user, '<img src="'~ avatar | imagine_filter("50x50") ~'" alt="'~ getAcronym(user.name) ~'" />' ) %}
                                 {{ userInfo | raw }}
                                 {% set countParticipation = countParticipation + 1 %}
                             {% endif %}

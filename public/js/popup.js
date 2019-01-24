@@ -6,7 +6,6 @@ var popupw = $('.popup');
 var zIndex = 5000;
 
 function popup(content, width, closable = true, background = 'rgba(0,0,0,0.5)'){
-	console.log("create popup");
 	zIndex = zIndex + 2;
 	var popup_content = $('<div>', {
 		'class':'popup_content',
@@ -84,9 +83,7 @@ $(function() {
 
 function centerBloc(popup_content, popup){
 	var popup_content_width = popup_content.width();
-	console.log("popup_content_width "+popup_content_width);
 	var popup_data_width = popup.attr("data-width");
-	console.log("popup_data_width "+popup_data_width);
 	if(popup_content_width - 20 < popup_data_width){
 		popup.css('width', popup_content_width - 20);
 	}else{

@@ -557,4 +557,17 @@ class PlatformService
 		
 		return $label;
     }
+
+    function getAcronym($string){
+        $string = preg_replace('!\s+!', ' ', $string);
+        $string = trim($string);
+        $words = explode(" ", $string);
+        
+        $acronym = "";
+        foreach ($words as $w) {
+            $acronym .= $w[0];
+        }
+
+        return strtoupper($acronym);
+    }
 }

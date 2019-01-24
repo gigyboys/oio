@@ -67,6 +67,7 @@ class AppExtension extends AbstractExtension
             new TwigFunction('isUserTeam', array($this, 'isUserTeam')),
             new TwigFunction('findUserTeamsOrderBy', array($this, 'findUserTeamsOrderBy')),
             new TwigFunction('getDateLabel', array($this, 'getDateLabel')),
+            new TwigFunction('getAcronym', array($this, 'getAcronym')),
             /*event*/
             new TwigFunction('eventIllustration', array($this, 'eventIllustration')),
             new TwigFunction('isSchoolEvent', array($this, 'isSchoolEvent')),
@@ -185,6 +186,10 @@ class AppExtension extends AbstractExtension
 
     public function getDateLabel($date, $short = false) {
         return $this->platformService->getDateLabel($date, $short);
+    }
+
+    public function getAcronym($string) {
+        return $this->platformService->getAcronym($string);
     }
 
     public function isAdmin(User $user) {
