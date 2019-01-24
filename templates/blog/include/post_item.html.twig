@@ -35,7 +35,7 @@
 		<div class="conmment_info"><i class="fas fa-comment-dots"></i> <strong>{{ comments | length }}</strong></div>
 		<div class="both"></div>
 
-		<div class="date_info"><i class="fas fa-calendar-alt"></i> <strong>{{ post.date | date('Y-m-d') }}</strong></div>
+		<div class="date_info"><i class="fas fa-calendar-alt"></i> <strong>{{ getDateLabel(post.date, true) }}</strong></div>
 		<div class="post_action">
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 				{% if post.user.id == app.user.id %}

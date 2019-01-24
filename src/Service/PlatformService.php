@@ -459,4 +459,102 @@ class PlatformService
 
         return $comments;
     }
+
+    function getDateLabel($date, $short = false){
+        $year = $date->format("Y");
+        $month = $date->format("m");
+        $day = $date->format("d");
+
+        $monthLabel = $this->getMonthLabel($month, $short);
+        return $day." ".$monthLabel." ".$year;
+    }
+
+    function getMonthLabel($month, $short = false){
+		$label = "";
+		$month = intval($month);
+		$locale = "FR";
+		if($locale == "FR"){
+			switch ($month) {
+				case 1:
+					$label = "janvier";
+					break;
+				case 2:
+					$label = "février";
+					break;
+				case 3:
+					$label = "mars";
+					break;
+				case 4:
+					$label = "avril";
+					break;
+				case 5:
+					$label = "mai";
+					break;
+				case 6:
+					$label = "juin";
+					break;
+				case 7:
+					$label = "juillet";
+					break;
+				case 8:
+					$label = "août";
+					break;
+				case 9:
+					$label = "septembre";
+					break;
+				case 10:
+					$label = "octobre";
+					break;
+				case 11:
+					$label = "novembre";
+					break;
+				case 12:
+					$label = "décembre";
+					break;
+            }
+            
+            if($short){
+                switch ($month) {
+                    case 1:
+                        $label = "jan";
+                        break;
+                    case 2:
+                        $label = "fév";
+                        break;
+                    case 3:
+                        $label = "mars";
+                        break;
+                    case 4:
+                        $label = "avr";
+                        break;
+                    case 5:
+                        $label = "mai";
+                        break;
+                    case 6:
+                        $label = "juin";
+                        break;
+                    case 7:
+                        $label = "juil";
+                        break;
+                    case 8:
+                        $label = "août";
+                        break;
+                    case 9:
+                        $label = "sepe";
+                        break;
+                    case 10:
+                        $label = "oct";
+                        break;
+                    case 11:
+                        $label = "nov";
+                        break;
+                    case 12:
+                        $label = "déc";
+                        break;
+                }
+			}
+		}
+		
+		return $label;
+    }
 }

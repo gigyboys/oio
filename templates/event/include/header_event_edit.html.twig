@@ -15,7 +15,7 @@
 			<span class="dd_target" data-display="block" style="text-align: left; margin-top: 4px; position: absolute; display: none; background: #f9f9f9; border: 1px solid #aaa; border-radius: 2px;">
 				<span class="mg_5" style="display: block">
 					<span><img src="{{ asset('image/ur_icon.png') }}" style="width:12px; height:auto" /> {{ getLinkUserInfo(event.user, event.user.name) | raw }}</span><br />
-					<span><img src="{{ asset('image/calendar_icon.png') }}" style="width:12px; height:auto" /> {{ event.date | date('Y-m-d H:i:s') }}</span><br />
+					<span><img src="{{ asset('image/calendar_icon.png') }}" style="width:12px; height:auto" /> {{ getDateLabel(event.date) }} à {{ event.date | date('H:i') }}</span><br />
 					<span><img src="{{ asset('image/view_icon.png') }}" style="width:12px; height:auto" /> {{ event.views | length }}</span><br />
 					{#<span><img src="{{ asset('image/comment_icon.png') }}" style="width:12px; height:auto" /> {{ getValidComments(event) | length }}</span><br />#}
 				</span>

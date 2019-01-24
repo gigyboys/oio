@@ -10,7 +10,7 @@
 				{# twig extension #}
 				{% set userInfo = getLinkUserInfo(comment.user, comment.user.name) %}
 				Ecrit par {{ userInfo | raw }}
-				  Le {{ comment.date | date('Y-m-d à H:i:s') }}
+				  Le {{ getDateLabel(comment.date) }} à {{ comment.date | date('H:i') }}
 			</div>
 			<div>
 				{{ comment.comment | nl2br   }}

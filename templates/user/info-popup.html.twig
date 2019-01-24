@@ -34,7 +34,7 @@
 	</div>
 	{% endif %}
 	<div>
-		Inscrit Depuis {{ user.date | date('Y-m-d') }}
+		Inscrit Depuis {{ getDateLabel(user.date, true) }}
 	</div>
 </div>
 <div class="both"></div>

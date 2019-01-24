@@ -78,17 +78,17 @@
 					<form id="form_event_edit_date" action="{{ path('event_manager_doedit_date', {'event_id': event.id}) }}">
 						<div class="bloc_editable">
 							<div class="bloc_view" style="margin: 5px 0; border: 1px solid #ccc; border-radius: 4px">
-								<div class="pd_l5"><i>Date début : <span class="error_datebegin error_txt"></span></i></div>
+								<div class="pd_l5"><i>Date et heure début : <span class="error_datebegin error_txt"></span></i></div>
 								<div style="padding:5px"><span id="event_view_datebegin">{{ event.datebegin | date('d/m/Y à H:i') }}</span></div>
 
-								<div class="pd_l5"><i>Date fin : <span class="error_dateend error_txt"></span></i></div>
+								<div class="pd_l5"><i>Date et heure fin : <span class="error_dateend error_txt"></span></i></div>
 								<div style="padding:5px"><span id="event_view_dateend">{{ event.dateend | date('d/m/Y à H:i') }}</span></div>
 							</div>
 							<div class="bloc_edit" style="display:none;margin: 10px 0; border: 1px solid #ccc; border-radius: 4px">
-								<div class="pd_l5"><i>Date début *:</i></div>
+								<div class="pd_l5"><i>Date et heure début *:</i></div>
 								<div style="padding:5px"><input type="text" readonly="true" id="event_input_datebegin" class="default_input" name="slug" value="{{ event.datebegin | date('d/m/Y à H:i') }}" /></div>
 								
-								<div class="pd_l5"><i>Date fin *:</i></div>
+								<div class="pd_l5"><i>Date et heure fin *:</i></div>
 								<div style="padding:5px"><input type="text" readonly="true" id="event_input_dateend" class="default_input" name="slug" value="{{ event.dateend | date('d/m/Y à H:i') }}" /></div>
 							</div>
 							<div class="bloc_action mg_v10">

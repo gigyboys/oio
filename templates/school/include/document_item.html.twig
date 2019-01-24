@@ -19,7 +19,7 @@
 					{% endif %}
 				</span>
 				<a target="_blank" data-target="{{ path('school_document_status', {'document_id': document.id}) }}" class="btn_download" href="{{ path('school_document_download', {'slug': school.slug, 'document_id': document.id}) }}" data-name="{{ document.name }}" style="cursor:pointer">
-					<img src="{{ asset('image/download_icon.png') }}" style="vertical-align:top;display:inline-block;width:18px; height:auto" />
+					<i class="fas fa-download"></i>
 				</a>
 			</div>
 

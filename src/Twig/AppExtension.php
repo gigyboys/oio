@@ -66,6 +66,7 @@ class AppExtension extends AbstractExtension
             new TwigFunction('getLastVisit', array($this, 'getLastVisit')),
             new TwigFunction('isUserTeam', array($this, 'isUserTeam')),
             new TwigFunction('findUserTeamsOrderBy', array($this, 'findUserTeamsOrderBy')),
+            new TwigFunction('getDateLabel', array($this, 'getDateLabel')),
             /*event*/
             new TwigFunction('eventIllustration', array($this, 'eventIllustration')),
             new TwigFunction('isSchoolEvent', array($this, 'isSchoolEvent')),
@@ -180,6 +181,10 @@ class AppExtension extends AbstractExtension
 
     public function fileIcon($filename) {
         return $this->platformService->fileIcon($filename);
+    }
+
+    public function getDateLabel($date, $short = false) {
+        return $this->platformService->getDateLabel($date, $short);
     }
 
     public function isAdmin(User $user) {

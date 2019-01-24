@@ -6,7 +6,7 @@
 	{% set userInfo = getLinkUserInfo(evaluation.user, evaluation.user.name) %}
 
 		{#{% set userInfo = evaluation.user.name %}#}
-	{{ userInfo | raw }} le {{ evaluation.date | date('Y-m-d à H:i:s') }}
+	{{ userInfo | raw }} le {{ getDateLabel(evaluation.date) }} à {{ evaluation.date | date('H:i') }}
 	</div>
 	<div style="width:50px;float:left">
 

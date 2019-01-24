@@ -1034,6 +1034,8 @@ a:hover{
 
 	.search_input_right{
 		float: none;
+		padding: 0px;
+		height: auto;
 	}
 	.label_search_input{
 		display: block;

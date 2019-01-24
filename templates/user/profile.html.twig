@@ -48,7 +48,7 @@
 								</div>
 								<div>
 									{#{% set lastVisit = getLastVisit(user) %}#}
-									<span id="ur_view_last_activity">Dernière activité : {{ user.lastActivity | date('Y-m-d à H:i:s') }}</span>
+									<span id="ur_view_last_activity">Dernière activité : {{ getDateLabel(user.lastActivity) }} à {{ user.lastActivity | date('H:i') }}</span>
 								</div>
 							</div>
 							<div class="bloc_edit" style="display:none">
@@ -99,7 +99,7 @@
 							</div>
 							#}
 							<div>
-								<span id="ur_view_last_activity">Dernière activité : {{ user.lastActivity | date('Y-m-d à H:i:s') }}</span>
+								<span id="ur_view_last_activity">Dernière activité : {{ getDateLabel(user.lastActivity) }} à {{ user.lastActivity | date('H:i') }}</span>
 							</div>
 						</div>
 					{% endif %}
@@ -129,7 +129,7 @@
 			<div class="cr">
 				<div class="ct">
 					<div class="pd_10" style="min-height:100px">
-						<div class="pd_t10">Inscrit depuis {{ user.date | date('Y-m-d') }}</div>
+						<div class="pd_t10">Inscrit depuis {{ getDateLabel(user.date) }}</div>
 						{% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.id == user.id %}
 							<div class="sp mg_v5"></div>
 							<div><strong>Biographie</strong> <span id="msg_biography"></span></div>
@@ -236,15 +236,31 @@
 									{% endif %}
 
 									{% if posts | length == 0 %}
-										<div class="mg_10">
-											Aucun article à afficher
+										<div class="mg_v20 tacenter">
+											<strong>Aucune article à afficher</strong>
 										</div>
 									{% else %}
-										<div id="list_post" class=""><!--
-											{% for post in posts %}
-												-->{{ include("blog/include/post_item.html.twig") }}<!--
-											{% endfor %}
-										--></div>
+										<div class="search" data-item-display="block">
+											{% if posts | length >= 2 %}
+												<div class="search_input_cr pd_5 mg_h10 mg_t10">
+													<div class="search_input_left">
+														<label for="search_input" class="label_search_input">Rechercher :</label> <span class="search_input_wrap"><input type="text" id="search_input" class="search_input"/><!--
+													--><span class="search_reset"><i class="fas fa-times"></i></span><!--
+															--></span>
+													</div>
+													<div class="search_input_right">
+														<span class="result_state" style="vertical-align: middle">{{ posts | length }} résultat{% if posts | length > 1 %}s{% endif %}</span>
+													</div>
+													<div class="both"></div>
+												</div>
+											{% endif %}
+											<div id="list_post" class=""><!--
+												{% for post in posts %}
+													-->{{ include("blog/include/post_item.html.twig") }}<!--
+												{% endfor %}
+											--><div class="both"></div>
+											</div>
+										</div>
 									{% endif %}
 								</div>
 								<div class="t_content_item" id="c_uevent">
@@ -258,23 +274,39 @@
 									{% endif %}
 
 									{% if events | length == 0 %}
-										<div class="mg_10">
-											Aucun évènement à afficher
+										<div class="mg_v20 tacenter">
+											<strong>Aucun évènement à afficher</strong>
 										</div>
 									{% else %}
-										<div id="et_list" class=""><!--
-											{% for event in events %}
-												-->{{ include("event/include/event_item.html.twig") }}<!--
-											{% endfor %}
-										--></div>
+										<div class="search" data-item-display="block">
+											{% if events | length >= 2 %}
+												<div class="search_input_cr pd_5 mg_h10 mg_t10">
+													<div class="search_input_left">
+														<label for="search_input" class="label_search_input">Rechercher :</label> <span class="search_input_wrap"><input type="text" id="search_input" class="search_input"/><!--
+													--><span class="search_reset"><i class="fas fa-times"></i></span><!--
+															--></span>
+													</div>
+													<div class="search_input_right">
+														<span class="result_state" style="vertical-align: middle">{{ events | length }} résultat{% if events | length > 1 %}s{% endif %}</span>
+													</div>
+													<div class="both"></div>
+												</div>
+											{% endif %}
+											<div id="et_list" class=""><!--
+												{% for event in events %}
+													-->{{ include("event/include/event_item.html.twig") }}<!--
+												{% endfor %}
+											--><div class="both"></div>
+											</div>
+										</div>
 									{% endif %}
 								</div>
 								<div class="t_content_item" id="c_ucomment">
 									<div id="list_comment" class="mg_t5">
 										<div class="mg_10">
 											{% if comments | length == 0%}
-												<div class="mg_10">
-													Aucun commentaire à afficher
+												<div class="mg_v20 tacenter">
+													<strong>Aucun commentaire à afficher</strong>
 												</div>
 											{% else %}
 												<div class="">{{ comments | length }} {% if comments | length > 1 %}commentaires{% else %}commentaire{% endif %}.</div>
@@ -290,7 +322,8 @@
 																	</a>
 																</div>
 																<div class="comment_wrap">
-																	<div class="mg_b5">Ecrit le {{ comment.date | date('Y-m-d à H:i:s')}} sur l'article <a href="{{ path('blog_post_view', {'slug': comment.post.slug}) }}"><strong>{{ comment.post.title }}</strong></a></div>
+																	<div class="mg_b5">Ecrit le {{ getDateLabel(comment.date) }} à {{ comment.date | date('H:i') }}
+																		sur l'article <a href="{{ path('blog_post_view', {'slug': comment.post.slug}) }}"><strong>{{ comment.post.title }}</strong></a></div>
 																	<div>{{ comment.comment}}</div>
 																</div>
 																<div class="both"></div>
@@ -308,7 +341,7 @@
 																	</a>
 																</div>
 																<div class="comment_wrap">
-																	<div class="mg_b5">Ecrit le {{ comment.date | date('Y-m-d à H:i:s')}} sur l'évènement <a href="{{ path('event_view', {'slug': comment.event.slug}) }}"><strong>{{ comment.event.title }}</strong></a></div>
+																	<div class="mg_b5">Ecrit le {{ getDateLabel(comment.date) }} à {{ comment.date | date('H:i') }} sur l'évènement <a href="{{ path('event_view', {'slug': comment.event.slug}) }}"><strong>{{ comment.event.title }}</strong></a></div>
 																	<div>{{ comment.comment}}</div>
 																</div>
 																<div class="both"></div>
@@ -324,15 +357,15 @@
 									<div id="list_comment" class="mg_t5">
 										<div class="mg_10">
 											{% if evaluations | length == 0%}
-												<div class="mg_10">
-													Aucune évaluation à afficher
+												<div class="mg_v20 tacenter">
+													<strong>Aucune évaluation à afficher</strong>
 												</div>
 											{% else %}
 												<div class="">{{ evaluations | length }} {% if evaluations | length > 1 %}évaluations{% else %}évaluation{% endif %}.</div>
 												{% for evaluation in evaluations %}
 													<div class="sep"></div>
 													<div class="mg_v10">
-														<div class="mg_b5">Ecrit le {{ evaluation.date | date('Y-m-d à H:i:s')}} sur <a href="{{ path('school_view', {'slug': evaluation.school.slug, 'type': 'evaluation'}) }}"><strong>{{ evaluation.school.name }}</strong></a></div>
+														<div class="mg_b5">Ecrit le {{ getDateLabel(evaluation.date) }} à {{ evaluation.date | date('H:i') }} sur <a href="{{ path('school_view', {'slug': evaluation.school.slug, 'type': 'evaluation'}) }}"><strong>{{ evaluation.school.name }}</strong></a></div>
 														<div>
 															<div style="width:50px;float:left">
                                                                 {% set logo = schoolLogo(evaluation.school) %}

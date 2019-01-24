@@ -57,7 +57,8 @@
 					</div>
 					
 					<div style="padding: 10px 10px 0px">
-						<span>Du <strong>{{ event.datebegin | date('Y-m-d à H:i') }}</strong></span> <span>Au <strong>{{ event.dateend | date('Y-m-d à H:i') }}</strong></span>
+						<span>Du <strong>{{ getDateLabel(event.datebegin) }} à {{ event.datebegin | date('H:i') }}</strong></span> 
+						<span>Au <strong>{{ getDateLabel(event.dateend) }} à {{ event.dateend | date('H:i') }}</strong></span>
 					</div>
 
 					<div class="mg_10" style="overflow: auto;">

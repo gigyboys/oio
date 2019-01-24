@@ -7,21 +7,16 @@
 			<img src="{{ asset('image/close_icon.png') }}" style="width:16px; height:auto" alt="x" />
 		</div>
 	</div>
-	
-	<div style="background:#fff; padding: 5px; ">
-		<div style="padding:5px">
-			<div style="margin: 5px 0">
-				Nam ultrices nibh sapien, vel cursus leo tempus eu. Curabitur laoreet varius malesuada. Nullam lacinia felis nisi, ut varius ipsum luctus non.
-			</div>
-			<div class="">
-				Nam ultrices nibh sapien, vel cursus leo tempus eu. Curabitur laoreet varius malesuada. Nullam lacinia felis nisi, ut varius ipsum luctus non.
-
-			</div>
+	<div class="pd_5">
+		<div class="mg_5 tajustify">
+			En confirmant cette étape, votre article sera validé par notre équipe. Une fois validé il sera publié dans notre liste d'articles. 
+			A noter qu'avant la validation vous ne pouvez pas modifier les détails de votre article. 
+			Si vous voulez apporter encore quelques modifications, veuillez annuler cette étape.
 		</div>
 	</div>
-	<div class="sep"></div>
+	<div class="sp mg_b10"></div>
 	<div class="taright pd_b10 pd_r10">
-		<span class="standar_button button_closable">Annuller</span>
+		<span class="standar_button button_closable">Annuler</span>
 		<a class="standar_button" href="{{ path('blog_manager_dotovalid_post', {'post_id' : post.id}) }}">Confirmer la soumission</a>
 	</div>
 </div>

@@ -39,7 +39,7 @@
 								{% set userInfo = getLinkUserInfo(post.user, post.user.name) %}
 								{{ userInfo | raw }}
 							{% endif %}
-							<span>le {{ post.date | date('Y-m-d') }}</span>
+							<span>le {{ getDateLabel(post.date) }}</span>
 						</div>
 
 						{% if tags | length > 0 %}
