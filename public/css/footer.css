@@ -14,13 +14,17 @@ footer{
 #footer_navigation_content ul{
 	padding: 0px;
 	margin:0px;
-	text-align:center
+	text-align:center;
+	width: 100%;
+	box-sizing: border-box;
+	overflow: auto;
+	margin: 10px 10px 20px;
 }
 
 
 #footer_navigation_content ul li{
 	list-style-type: none;
-	display: inline;
+	display: inline-block;
 	padding:0 8px
 }
 

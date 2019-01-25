@@ -431,8 +431,14 @@
 	padding:5px 10px;
 	
 }
+.sl_oftheday .link_item a i{
+	color:#555;
+}
 .sl_oftheday .link_item a:hover{
 	background:#eee;
+}
+.sl_oftheday .link_item a:hover i{
+	color:#000;
 }
 .sl_oftheday .under{
 	border-left:1px solid #ddd;

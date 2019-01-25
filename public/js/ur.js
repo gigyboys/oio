@@ -437,7 +437,21 @@ $(function() {
 					console.log(textStatus);
 					console.log(errorThrown);
 					destroySpinner();
-				}
+				},
+                xhr: function() {
+                    var myXhr = $.ajaxSettings.xhr();
+                    if (myXhr.upload) {
+                        myXhr.upload.addEventListener('progress', function(e) {
+                            if (e.lengthComputable) {
+                                //console.log("max : "+e.total+" / value : "+e.loaded);
+                                var percentage = parseInt(e.loaded / e.total * 100);
+                                $("#spinnerloading .progress").remove();
+                                $("#spinnerloading div span").after("<span class='progress'> "+percentage+"%</span>");
+                            }
+                        } , false);
+                    }
+                    return myXhr;
+                }
 			});
         }
     });

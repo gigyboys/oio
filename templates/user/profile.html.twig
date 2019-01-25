@@ -18,12 +18,12 @@
 								<span><strong>Modifier<br />votre avatar</strong></span>
 							</div>
 							<div id="avatar_wrapper">
-								<img id="user_avatar" src="{{ avatar | imagine_filter('116x116') }}" alt="img ur" />
+								<img id="user_avatar" src="{{ avatar | imagine_filter('116x116') }}" alt="{{ user.name }}" />
 							</div>
 						</div>
 					{% else %}
 						<div id="avatar_wrapper">
-							<img id="user_avatar" src="{{ avatar | imagine_filter('116x116') }}" alt="img ur" />
+							<img id="user_avatar" src="{{ avatar | imagine_filter('116x116') }}" alt="{{ user.name }}" />
 						</div>
 					{% endif %}
 				</div>

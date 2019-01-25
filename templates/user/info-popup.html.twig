@@ -1,6 +1,6 @@
 <div style="float:left; width:80px">
 	{% set avatar = userAvatar(user) %}
-	<img style="width: 80px; height: 80px; border-radius: 50%" src="{{ avatar | imagine_filter('80x80') }}" alt="{{ user.username }}" />
+	<img style="width: 80px; height: 80px; border-radius: 50%" src="{{ avatar | imagine_filter('80x80') }}" alt="{{ getAcronym(user.name) }}" />
 </div>
 <div style="margin-left: 90px" class="taleft">
 	<div style="margin-bottom:2px">

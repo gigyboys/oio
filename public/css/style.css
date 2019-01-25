@@ -882,9 +882,9 @@ a:hover{
 	text-align:center;
 	margin-bottom:30px
 }
-.bg_view .view_info .content .title h1{
+.bg_view .view_info .content .title h1 a{
 	font-size:20px; 
-	color:#314145
+	color:#283a3f
 }
 .bg_view .view_info .content .author_avatar{
 	font-size: 24px;

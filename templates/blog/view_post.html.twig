@@ -21,7 +21,7 @@
 					<div class="cover" style="background: #81b5e2 url('{{ illustration | imagine_filter('1200x500') }}') no-repeat scroll center center / cover ;"></div>
 					<div class="content">
 						<div class="mg_10 title">
-							<h1>{{ post.title }}</h1>
+							<h1><a href="{{ path('blog_post_view', {'slug': post.slug}) }}" >{{ post.title }}</a></h1>
 						</div>
 
 						{% if post.showAuthor %}
