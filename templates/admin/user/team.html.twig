@@ -49,10 +49,10 @@
 				{% for userTeam in users %}
 					<tr id="user_team_{{ userTeam.id }}" class="a_table_line" data-text="{{ userTeam.user.id }} {{ userTeam.user.username }} {{ userTeam.user.name }} {{ userTeam.user.email }}" style="display:table-row">
 						<td class="a_table_cell_id" style="width: 50px; text-align:center">{{ userTeam.id }}</td>
-						<td class="">
+						<td>
 							{# twig extension #}
 							{% set avatar = userAvatar(userTeam.user) %}
-							<img id="" style="display:block;width: 32px; height: 32px; margin:1px" src="{{ avatar | imagine_filter('32x32') }}" alt="img sl" />
+							<img style="display:block;width: 32px; height: 32px; margin:1px" src="{{ avatar | imagine_filter('32x32') }}" alt="img sl" />
 						</td>
 						<td><a href="{{ path('admin_user_edit', {'user_id': userTeam.user.id}) }}">{{ userTeam.user.name }}</a></td>
 						<td>{{ userTeam.user.username }}</td>

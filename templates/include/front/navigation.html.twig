@@ -1,6 +1,6 @@
 <div id="navigation" class="cr">
     <div id="navigation_content" class="ct">
-        <div id="" class="ct10">
+        <div class="ct10">
             <div id="nav_left">
                 <ul>
                     <li>
@@ -18,10 +18,10 @@
                     </li>
                     <li>
                         <div class="dd nav_responsive">
-                            <span href="#" class="dd_src c_p">
-                                <img src="{{ asset('image/sl_logo_nav.png')  }}"/>
+                            <span class="dd_src c_p">
+                                <img src="{{ asset('image/sl_logo_nav.png')  }}" alt="SL"/>
                             </span>
-                            <div class="dd_target" data-display="block" id="locale_choice">
+                            <div class="dd_target" data-display="block">
                                 <div class="link_wrap">
                                     <a class="link" href="{{ path('school_home') }}" title="Tous établissements">
                                         <span>Tout Etablissements</span>
@@ -44,14 +44,14 @@
                     </li>
                     <li>
                         <div class="dd nav_responsive">
-                            <span href="#" class="dd_src toggler_src c_p">
+                            <span class="dd_src toggler_src c_p">
                                 <span class="normal bar1"></span>
                                 <span class="transparent"></span>
                                 <span class="normal bar2"></span>
                                 <span class="transparent"></span>
                                 <span class="normal bar3"></span>
                             </span>
-                            <div class="dd_target toggler_target" data-display="block" id="locale_choice">
+                            <div class="dd_target toggler_target" data-display="block">
                                 <div class="link_wrap">
                                     <a class="link" href="{{ path('blog') }}">
                                         <span>Blog</span>
@@ -90,12 +90,12 @@
                         </div>
                     </li>
                     <li>
-                        <a href="{{ path('blog') }}" class="">
+                        <a href="{{ path('blog') }}">
                             <span class="d_ib vamiddle">Blog</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ path('event') }}" class="">
+                        <a href="{{ path('event') }}">
                             <span class="d_ib vamiddle">Evènements</span>
                         </a>
                     </li>
@@ -128,7 +128,7 @@
                         {% else %}
                             <div class="dd_src">
                                 <span class="not_connected">
-                                    <img class="illustration" src="{{ asset('image/icon_user_not.png')  }}" />
+                                    <img class="illustration" src="{{ asset('image/icon_user_not.png') }}" alt="UR"/>
                                     <span class="text">Mon espace client</span>
                                 </span>
                             </div>

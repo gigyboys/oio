@@ -1,10 +1,10 @@
 <div>
 	{% if schoolContacts|length == 0 %}
-		<div id="" class="mg_10">
+		<div class="mg_10">
 			Aucun contact à afficher
 		</div>
 	{% else %}
-		<div id="" class="mg_5">
+		<div class="mg_5">
 			{{ schoolContacts|length }} {% if schoolContacts|length > 1 %}Contacts{% else %}Contact{% endif %}
 			{% if coords|length != 0 %}
 				- 

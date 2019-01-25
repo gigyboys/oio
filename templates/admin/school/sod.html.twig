@@ -64,15 +64,15 @@
                         {% set schoolShortname = day.schoolOfTheDay.school.shortName %}
                         {% set schoolname = day.schoolOfTheDay.school.name %}
                     {% endif %}
-					<tr class="a_table_line contact_item" id="" data-text="{{ day.day | date('d/m/Y') }} {{ schoolShortname }} - {{ schoolname }}" style="display:table-row; position:relative:z-index:0">
+					<tr class="a_table_line contact_item" data-text="{{ day.day | date('d/m/Y') }} {{ schoolShortname }} - {{ schoolname }}" style="display:table-row; position:relative:z-index:0">
 						<td>
                             {{ day.day | date('d/m/Y') }}
 						</td>
-						<td class="">
+						<td>
                             {% if day.schoolOfTheDay is not null %}
 								{# twig extension #}
 								{% set logo = schoolLogo(day.schoolOfTheDay.school) %}
-								<img id="" style="display:block;width: 32px; height: 32px; margin:1px" src="{{ logo | imagine_filter('32x32') }}" alt="img sl" />
+								<img style="display:block;width: 32px; height: 32px; margin:1px" src="{{ logo | imagine_filter('32x32') }}" alt="img sl" />
                             {% endif %}
 						</td>
 						<td class="taleft">
@@ -87,7 +87,7 @@
 							<form id="form_single_assignation" action="{{ path('admin_school_sod_assignation') }}" name="" method="post">
 								<input type="hidden" class="datebegin_assignation" name="datebegin" value="{{ day.day | date('d/m/Y') }}" />
 								<input type="hidden" class="dateend_assignation" name="dateend" value="{{ day.day | date('d/m/Y') }}" />
-								<select id="" name="schoolId" class="default_input">
+								<select name="schoolId" class="default_input">
 									<option value="0"></option>
 									{% for school in schools %}
 										{% set selected = "" %}

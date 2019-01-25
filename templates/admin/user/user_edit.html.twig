@@ -26,7 +26,7 @@
 		<span><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /> Edition de l'utilisateur #{{ user.id }}</span>
 	</div>
 	
-	<div style="">
+	<div>
 		<div id="change_avatar_admin" data-target="{#{{ path('admin_school_modify_logo_popup', {'school_id': school.id})}}#}" style="float:left; height: 122px;margin:5px;/*cursor:pointer*/">
 			{# twig extension #}
 			{% set avatar = userAvatar(user) %}

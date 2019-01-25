@@ -52,8 +52,8 @@
 {% endblock %}
 
 {% block content_body %}
-	<div style="">
-		<div style="">
+	<div>
+		<div>
 			<div>
 				<table>
 					<tr>
@@ -109,7 +109,7 @@
 			<table class="a_table" id="category_list_schools">
 				<tr class="a_table_head">
 					<th class="a_table_cell_id" style="width: 50px; text-align:center">Id</th>
-					<th class="" style="width: 36px" >Logo</th>
+					<th style="width: 36px" >Logo</th>
 					<th class="taleft">Nom</th>
 					<th class="taleft">Sigle</th>
 					<th class="tacenter">Publié</th>
@@ -119,10 +119,10 @@
 					{% set school = categorySchool.school %}
 					<tr class="a_table_line"  id="cat_sl_{{ school.id }}" data-text="{{ school.name }} {{ school.shortName }}" style="display:table-row">
 						<td class="a_table_cell_id" style="width: 50px; text-align:center">{{ school.id }}</td>
-						<td class="">
+						<td>
 							{# twig extension #}
 							{% set logo = schoolLogo(school) %}
-							<img id="" style="width: 32px; height: 32px" src="{{ logo | imagine_filter('32x32') }}" alt="img sl" />
+							<img style="width: 32px; height: 32px" src="{{ logo | imagine_filter('32x32') }}" alt="img sl" />
 						</td>
 						<td><a href="{{ path('admin_school_edit', {'id': school.id}) }}">{{ school.name }}</a></td>
 						<td>{{ school.shortName }}</td>

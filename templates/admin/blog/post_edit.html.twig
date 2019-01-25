@@ -117,37 +117,37 @@
 			</div>
 		</div>
 		<div class="a_t_content">
-			<div class="a_t_content_item selected" id="t_description" style="">
+			<div class="a_t_content_item selected" id="t_description">
 				<div class="bloc_editable">
 					<div class="bloc_view">
-						<div style="">
+						<div>
 							<div style="margin: 5px 0;">
 								Introduction :
 							</div>
-							<div id="" class="post_view_introduction" style="padding:5px;background:#fff; border-radius:4px;border:1px solid #eee">
+							<div class="post_view_introduction" style="padding:5px;background:#fff; border-radius:4px;border:1px solid #eee">
 								{{ post.introduction }}
 							</div>
 						</div>
 
-						<div style="">
+						<div>
 							<div style="margin: 5px 0;">
 								Contenu :
 							</div>
-							<div id="" class="post_view_content" style="padding:5px;background:#fff; border-radius:4px;border:1px solid #eee">
+							<div class="post_view_content" style="padding:5px;background:#fff; border-radius:4px;border:1px solid #eee">
 								{{ post.content | raw }}
 							</div>
 						</div>
 					</div>
 					<div class="bloc_edit" style="display:none">
-						<div style="">
+						<div>
 							<div style="margin: 5px 0;">
 								Introduction :
 							</div>
 							<div>
-								<textarea id="" class="post_input_introduction default_textarea">{{ post.introduction }}</textarea>
+								<textarea class="post_input_introduction default_textarea">{{ post.introduction }}</textarea>
 							</div>
 						</div>
-						<div style="">
+						<div>
 							<div style="margin: 5px 0;">
 								Contenu :
 							</div>
@@ -171,7 +171,7 @@
 					<div class="separator"></div>
 					<div class="bloc_action" style="margin:5px">
 						<span class="btn_edit standar_button">Modifier</span>
-						<span class="btn_doedit_content_post btn_save standar_button" id="" data-target="{{ path('blog_manager_post_doedit_content', {'post_id': post.id}) }}" style="display:none">Enregistrer</span>
+						<span class="btn_doedit_content_post btn_save standar_button" data-target="{{ path('blog_manager_post_doedit_content', {'post_id': post.id}) }}" style="display:none">Enregistrer</span>
 						<span class="btn_reset standar_button" style="display:none">Annuler</span>
 						<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;"><img src="{{ asset('image/load.gif') }}" />Chargement...</span>
 					</div>

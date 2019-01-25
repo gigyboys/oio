@@ -1,64 +1,62 @@
 <div id="footer_navigation" class="cr">
 	<div id="footer_navigation_content" class="ct">
-		<div>
-			<ul>
+		<ul>
+			<li>
+				<a href="{{ path('platform_about') }}">
+					<span>{{ 'A propos' | trans }}</span>
+				</a>
+			</li>
+			{% set userTeams = findUserTeamsOrderBy('position', 'ASC', true) %}
+			{% if userTeams | length > 0 %}
 				<li>
-					<a href="{{ path('platform_about') }}">
-						<span>{{ 'A propos' | trans }}</span>
+					<a href="{{ path('platform_team') }}">
+						<span>{{ 'Equipe' | trans }}</span>
 					</a>
 				</li>
-				{% set userTeams = findUserTeamsOrderBy('position', 'ASC', true) %}
-				{% if userTeams | length > 0 %}
-					<li>
-						<a href="{{ path('platform_team') }}">
-							<span>{{ 'Equipe' | trans }}</span>
-						</a>
-					</li>
-				{% endif %}
-				{#
+			{% endif %}
+			{#
+			<li>
+				<a href="{{ path('platform_notice') }}">
+					<span>{{ 'Mentions légales' | trans }}</span>
+				</a>
+			</li>
+			#}
+			<li><!--
+				<span id="contact2">nous contacter</span>
+				-->
+				<a href="{{ path('platform_contact') }}">
+					<span>{{ 'Nous contacter' | trans }}</span>
+				</a>
+				
+			</li>
+			<li>
+				<a href="{{ path('platform_newsletter') }}">
+					<span>{{ 'Newsletter' | trans }}</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ path('school_map') }}">
+					<span>Etablissemap</span>
+				</a>
+			</li>
+			{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 				<li>
-					<a href="{{ path('platform_notice') }}">
-						<span>{{ 'Mentions légales' | trans }}</span>
-					</a>
-				</li>
-				#}
-				<li><!--
-					<span id="contact2">nous contacter</span>
-					-->
-					<a href="{{ path('platform_contact') }}">
-						<span>{{ 'Nous contacter' | trans }}</span>
-					</a>
-					
-				</li>
-				<li>
-					<a href="{{ path('platform_newsletter') }}">
-						<span>{{ 'Newsletter' | trans }}</span>
-					</a>
-				</li>
-				<li>
-					<a href="{{ path('school_map') }}">
-						<span>Etablissemap</span>
-					</a>
-				</li>
-                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-					<li>
-						<span class="dd d_ib">
-							<span href="#" class="dd_src c_p">
-								<strong>Je contribue</strong>
+					<span class="dd d_ib">
+						<span href="#" class="dd_src c_p">
+							<strong>Je contribue</strong>
+						</span>
+						<span class="dd_target dd_tdfault">
+							<span class="create_post dd_item" data-target="{{ path('blog_manager_add_post_ajax')}}">
+								<span class="icon"><img src="{{ asset('image/add_icon.png') }}" /></span><span class="label">Creer un article</span>
 							</span>
-							<span class="dd_target dd_tdfault">
-								<span class="create_post dd_item" data-target="{{ path('blog_manager_add_post_ajax')}}">
-									<span class="icon"><img src="{{ asset('image/add_icon.png') }}" /></span><span class="label">Creer un article</span>
-								</span>
-								<span class="create_event dd_item" data-target="{{ path('event_manager_add_ajax')}}">
-									<span class="icon"><img src="{{ asset('image/add_icon.png') }}" /></span><span class="label">Creer un évènement</span>
-								</span>
+							<span class="create_event dd_item" data-target="{{ path('event_manager_add_ajax')}}">
+								<span class="icon"><img src="{{ asset('image/add_icon.png') }}" /></span><span class="label">Creer un évènement</span>
 							</span>
 						</span>
-					</li>
-                {% endif %}
-			</ul>
-		</div>
+					</span>
+				</li>
+			{% endif %}
+		</ul>
 
 		<div class="mg_10">
 			<div class="sp"></div>

@@ -109,17 +109,17 @@
 		</div>
 	</div>
 	<div id="ur_dl">
-		<div id="ur_onglet_head" style="">
+		<div id="ur_onglet_head">
 			<div class="cr">
 				<div class="ct">
 					<div style="margin:0 10px">
-						<span class="tab_ur_item{% if type == 'profile' %} selected{% endif %}" id="tab_ur_about" data-title="{{ user.name }} - profil" data-link="{{ path('user_profile', {'username': user.username}) }}" style="">A propos</span>
+						<span class="tab_ur_item{% if type == 'profile' %} selected{% endif %}" id="tab_ur_about" data-title="{{ user.name }} - profil" data-link="{{ path('user_profile', {'username': user.username}) }}">A propos</span>
 						{#
-						<span class="tab_ur_item{% if type == 'subscription' %} selected{% endif %}" id="tab_ur_school" data-title="schools" data-link="{{ path('com_user_profile', {'username': user.username, 'type' : 'subscription'}) }}" style="">Schools</span>
+						<span class="tab_ur_item{% if type == 'subscription' %} selected{% endif %}" id="tab_ur_school" data-title="schools" data-link="{{ path('com_user_profile', {'username': user.username, 'type' : 'subscription'}) }}">Schools</span>
 						#}
-						<span class="tab_ur_item{% if type == 'contribution' %} selected{% endif %}" id="tab_ur_contribution" data-title="{{ user.name }} - contributions" data-link="{{ path('user_profile', {'username': user.username, 'type' : 'contribution'}) }}" style="">Contributions</span>
+						<span class="tab_ur_item{% if type == 'contribution' %} selected{% endif %}" id="tab_ur_contribution" data-title="{{ user.name }} - contributions" data-link="{{ path('user_profile', {'username': user.username, 'type' : 'contribution'}) }}">Contributions</span>
 						{% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.id == user.id %}
-							<span class="tab_ur_item{% if type == 'setting' %} selected{% endif %}" id="tab_ur_setting" data-title="{{ user.name }} - paramètres" data-link="{{ path('user_profile', {'username': user.username, 'type' : 'setting'}) }}" style="">Paramètres</span>
+							<span class="tab_ur_item{% if type == 'setting' %} selected{% endif %}" id="tab_ur_setting" data-title="{{ user.name }} - paramètres" data-link="{{ path('user_profile', {'username': user.username, 'type' : 'setting'}) }}">Paramètres</span>
 						{% endif %}
 					</div>
 				</div>
@@ -169,13 +169,13 @@
 			<div class="cr">
 				<div class="ct">
 					<div class="pd_10"  style="min-height:80px">
-						<div style="">
+						<div>
 						Ecoles suivies
 						</div>
 
 						<div>
 							<div class="sp mg_v5"></div>
-							<div style="">
+							<div>
 								Aucune Ecole suivie
 							</div>
 						</div>
@@ -254,7 +254,7 @@
 													<div class="both"></div>
 												</div>
 											{% endif %}
-											<div id="list_post" class=""><!--
+											<div id="list_post"><!--
 												{% for post in posts %}
 													-->{{ include("blog/include/post_item.html.twig") }}<!--
 												{% endfor %}
@@ -292,7 +292,7 @@
 													<div class="both"></div>
 												</div>
 											{% endif %}
-											<div id="et_list" class=""><!--
+											<div id="et_list"><!--
 												{% for event in events %}
 													-->{{ include("event/include/event_item.html.twig") }}<!--
 												{% endfor %}
@@ -309,7 +309,7 @@
 													<strong>Aucun commentaire à afficher</strong>
 												</div>
 											{% else %}
-												<div class="">{{ comments | length }} {% if comments | length > 1 %}commentaires{% else %}commentaire{% endif %}.</div>
+												<div>{{ comments | length }} {% if comments | length > 1 %}commentaires{% else %}commentaire{% endif %}.</div>
 												{% for comment in comments %}
 													{% if comment.post %}
 														<div class="user_comment_item">
@@ -361,7 +361,7 @@
 													<strong>Aucune évaluation à afficher</strong>
 												</div>
 											{% else %}
-												<div class="">{{ evaluations | length }} {% if evaluations | length > 1 %}évaluations{% else %}évaluation{% endif %}.</div>
+												<div>{{ evaluations | length }} {% if evaluations | length > 1 %}évaluations{% else %}évaluation{% endif %}.</div>
 												{% for evaluation in evaluations %}
 													<div class="sep"></div>
 													<div class="mg_v10">

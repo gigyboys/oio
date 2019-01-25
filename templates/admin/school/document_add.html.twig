@@ -46,7 +46,7 @@
 {% endblock %}
 
 {% block content_body %}
-	<div style="">
+	<div>
 		<div style="float:left; height: 86px;margin:5px">
 			{# twig extension #}
 			{% set logo = schoolLogo(school) %}
@@ -84,7 +84,7 @@
 		<div style="margin: 10px 0">
 			Ajout d'un document pour l'établissement <strong>{{ school.name }}</strong>.
 		</div>
-		<div class="">
+		<div>
 			{#
 			{{ form_start(form) }}
 			{{ form_widget(form) }}
@@ -112,7 +112,7 @@
 				</div>
 				<div>
 					<div><label for="description" class="required">Fichier : </label></div>
-					<div><input type="file" id="file" name="file" required="required"  class="" /></div>
+					<div><input type="file" id="file" name="file" required="required"  /></div>
 				</div>
 			</form>
 		</div>

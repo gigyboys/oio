@@ -52,7 +52,7 @@
 {% endblock %}
 
 {% block content_body %}
-	<div style="">
+	<div>
 		<div style="float:left; height: 86px;margin:5px">
 			{# twig extension #}
 			{% set logo = schoolLogo(school) %}
@@ -87,8 +87,8 @@
 		<span class="add_field_btn" data-target="{{ path('admin_school_field_add_ajax', {'school_id': school.id}) }}" style="cursor:pointer; display: inline-block; float: right"> <img src="{{ asset('image/add_icon.png') }}" style="width:12px; height:auto" />  Nouvelle filière</span>
 	</div>
 	
-	<div style="">
-		<div style="">
+	<div>
+		<div>
 			<div style="padding:5px">
 				<div class="bloc_editable">
 					<div class="bloc_view">

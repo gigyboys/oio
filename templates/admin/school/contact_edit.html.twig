@@ -51,7 +51,7 @@
 {% endblock %}
 
 {% block content_body %}
-	<div style="">
+	<div>
 		<div style="float:left; height: 86px;margin:5px">
 			{# twig extension #}
 			{% set logo = schoolLogo(school) %}
@@ -86,8 +86,8 @@
 		<span class="add_contact_btn" data-target="{{ path('admin_school_contact_add_ajax', {'school_id': school.id}) }}" style="cursor:pointer; display: inline-block; float: right"> <img src="{{ asset('image/add_icon.png') }}" style="width:12px; height:auto" />  Nouveau contact</span>
 	</div>
 	
-	<div style="">
-		<div style="">
+	<div>
+		<div>
 			<div style="padding:5px">
 				<div class="bloc_editable">
 					<div class="bloc_view">
@@ -206,7 +206,7 @@
 								<td class="vatop">:</td>
 								<td style="padding:5px">
 									<div>
-										<textarea id="" class="contact_input_description default_textarea tinymce" data-theme="advanced">{{ contact.description | raw }}</textarea>
+										<textarea class="contact_input_description default_textarea tinymce" data-theme="advanced">{{ contact.description | raw }}</textarea>
 									</div>
 								</td>
 							</tr>

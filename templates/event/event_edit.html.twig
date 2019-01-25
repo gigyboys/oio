@@ -176,34 +176,34 @@
                 {% if event.tovalid == false or event.valid %}
 					<div class="bloc_editable">
 						<div class="bloc_view" style="margin: 5px 0; border: 1px solid #ccc; padding: 5px; border-radius: 4px">
-							<div style="">
+							<div>
 								<div style="margin: 5px 0;">
 									<i>Introduction :</i>
 								</div>
-								<div id="" class="event_view_introduction" style="padding:5px;background:#fff; ">
+								<div class="event_view_introduction" style="padding:5px;background:#fff; ">
 									{{ event.introduction }}
 								</div>
 							</div>
 
-							<div style="">
+							<div>
 								<div style="margin: 5px 0;">
 									<i>Contenu :</i>
 								</div>
-								<div id="" class="event_view_content" style="padding:5px;background:#fff; ">
+								<div class="event_view_content" style="padding:5px;background:#fff; ">
 									{{ event.content | raw }}
 								</div>
 							</div>
 						</div>
 						<div class="bloc_edit" style="display:none;margin: 10px 0; border: 1px solid #ccc; padding: 5px; border-radius: 4px">
-							<div style="">
+							<div>
 								<div style="margin: 5px 0;">
 									<i>Introduction :</i>
 								</div>
 								<div>
-									<textarea id="" class="event_input_introduction default_textarea">{{ event.introduction }}</textarea>
+									<textarea class="event_input_introduction default_textarea">{{ event.introduction }}</textarea>
 								</div>
 							</div>
-							<div style="">
+							<div>
 								<div style="margin: 5px 0;">
 									<i>Contenu :</i>
 								</div>
@@ -230,27 +230,27 @@
 						</div>
 						<div class="bloc_action mg_v10">
 							<span class="btn_edit standar_button">Modifier</span>
-							<span class="btn_doedit_content_event btn_save standar_button" id="" data-target="{{ path('event_manager_doedit_content', {'event_id': event.id}) }}" style="display:none">Enregistrer</span>
+							<span class="btn_doedit_content_event btn_save standar_button" data-target="{{ path('event_manager_doedit_content', {'event_id': event.id}) }}" style="display:none">Enregistrer</span>
 							<span class="btn_reset standar_button" style="display:none">Annuler</span>
 							<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;"><img src="{{ asset('image/tail-spin.svg') }}" style="width:16px; height:16px; "/>Chargement...</span>
 						</div>
 					</div>
 				{% else %}
 					<div class="bloc_view" style="margin: 5px 0; border: 1px solid #ccc; padding: 5px; border-radius: 4px">
-						<div style="">
+						<div>
 							<div style="margin: 5px 0;">
 								<i>Introduction :</i>
 							</div>
-							<div id="" class="event_view_introduction" style="padding:5px;background:#fff; border-radius:4px;border:1px solid #eee">
+							<div class="event_view_introduction" style="padding:5px;background:#fff; border-radius:4px;border:1px solid #eee">
 								{{ event.introduction }}
 							</div>
 						</div>
 
-						<div style="">
+						<div>
 							<div style="margin: 5px 0;">
 								<i>Contenu :</i>
 							</div>
-							<div id="" class="event_view_content" style="padding:5px;background:#fff; border-radius:4px;border:1px solid #eee">
+							<div class="event_view_content" style="padding:5px;background:#fff; border-radius:4px;border:1px solid #eee">
 								{{ event.content | raw }}
 							</div>
 						</div>

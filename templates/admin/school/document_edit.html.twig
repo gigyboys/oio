@@ -46,7 +46,7 @@
 {% endblock %}
 
 {% block content_body %}
-	<div style="">
+	<div>
 		<div style="float:left; height: 86px;margin:5px">
 			{# twig extension #}
 			{% set logo = schoolLogo(school) %}
@@ -81,8 +81,8 @@
 		<a href="{{ path('admin_school_document_add', {'school_id': school.id}) }}" style="cursor:pointer; display: inline-block; float: right"> <img src="{{ asset('image/add_icon.png') }}" style="width:12px; height:auto" />  Nouveau document</a>
 	</div>
 	
-	<div style="">
-		<div style="">
+	<div>
+		<div>
 			<div style="padding:5px">
 				<div class="bloc_editable">
 					<div class="bloc_view">
@@ -96,16 +96,16 @@
 								<td class="vatop">Description</td>
 								<td class="vatop">:</td>
 								<td style="padding:5px">
-									<div id="doc_view_description" style="">
+									<div id="doc_view_description">
                                         {{ document.description | nl2br }}
 									</div>
 								</td>
 							</tr>
 							<tr>
-								<td class="">Autorisation</td>
-								<td class="">:</td>
+								<td>Autorisation</td>
+								<td>:</td>
 								<td style="padding:5px">
-									<div id="doc_view_authorization" style="">
+									<div id="doc_view_authorization">
                                         {{ document.documentAuthorization.name }}
 									</div>
 								</td>
@@ -124,13 +124,13 @@
 								<td class="vatop">:</td>
 								<td style="padding:5px">
 									<div>
-										<textarea id="" class="doc_input_description default_textarea tinymce" data-theme="advanced">{{ document.description | raw }}</textarea>
+										<textarea class="doc_input_description default_textarea tinymce" data-theme="advanced">{{ document.description | raw }}</textarea>
 									</div>
 								</td>
 							</tr>
 							<tr>
-								<td class="">Autorisation</td>
-								<td class="">:</td>
+								<td>Autorisation</td>
+								<td>:</td>
 								<td style="padding:5px">
 									<select name="authorizationId" id="doc_input_authorization">
                                         {% for authorization in authorizations %}

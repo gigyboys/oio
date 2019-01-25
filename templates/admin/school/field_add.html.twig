@@ -51,7 +51,7 @@
 {% endblock %}
 
 {% block content_body %}
-	<div style="">
+	<div>
 		<div style="float:left; height: 86px;margin:5px">
 			{# twig extension #}
 			{% set logo = schoolLogo(school) %}
@@ -89,7 +89,7 @@
 		<div style="margin: 10px 0">
 			Ajout d'une filière pour l'établissement <strong>{{ school.name }}</strong>.
 		</div>
-		<div class="">
+		<div>
 			<form name="form_add_field" method="post">
 				<div>
 					<div><label for="name" class="required">Nom du filière * : </label></div>

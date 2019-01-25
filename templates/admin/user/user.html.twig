@@ -47,10 +47,10 @@
 				{% for user in users %}
 					<tr class="a_table_line" data-text="{{ user.id }} {{ user.username }} {{ user.name }} {{ user.email }}" style="display:table-row">
 						<td class="a_table_cell_id" style="width: 50px; text-align:center">{{ user.id }}</td>
-						<td class="">
+						<td>
 							{# twig extension #}
 							{% set avatar = userAvatar(user) %}
-							<img id="" style="display:block;width: 32px; height: 32px; margin:1px" src="{{ avatar | imagine_filter('32x32') }}" alt="img sl" />
+							<img style="display:block;width: 32px; height: 32px; margin:1px" src="{{ avatar | imagine_filter('32x32') }}" alt="img sl" />
 						</td>
 						<td><a href="{{ path('admin_user_edit', {'user_id': user.id}) }}">{{ user.name }}</a></td>
 						<td>{{ user.username }}</td>
