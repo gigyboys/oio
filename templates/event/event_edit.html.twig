@@ -17,6 +17,7 @@
 							{# twig extension #}
 							{% set illustration = eventIllustration(event) %}
 							<label>
+								<span class="text"><i class="fas fa-pen-square"></i><br />Cliquez ici pour éditer l'illustration de l'évènement</span>
 								<img id="event_illustration" class="600x250" style="cursor: pointer" src="{{ illustration | imagine_filter('600x250') }}" alt="img event" />
 							</label>
 						</div>

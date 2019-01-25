@@ -55,7 +55,7 @@
                         <div class="label">
                             <div>
                                 {% set users = getActiveUsers() %}
-                                {{ users | length }} {# Des #} utilisateurs toujours prêts à partager leur expériences -
+                                {% if users | length >= 100 %} {{ users | length }} {% else %}Des{% endif %} utilisateurs toujours prêts à partager leur expériences -
                                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                                     <a href="{{ path('user_profile', {'username': app.user.username}) }}">Mon espace client</a>
                                 {% else %}
