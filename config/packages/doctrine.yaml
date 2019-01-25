@@ -12,6 +12,7 @@ doctrine:
         server_version: '5.7'
         charset: utf8
 
+
         url: '%env(resolve:DATABASE_URL)%'
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'

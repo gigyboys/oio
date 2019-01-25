@@ -3,7 +3,7 @@
 /.env
 /uploads/
 /public/media/
-**/packages/doctrine.yaml
+/config/packages/
 /public/uploads/
 /public/bundles/
 /var/
