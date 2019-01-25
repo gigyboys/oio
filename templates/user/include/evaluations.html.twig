@@ -1,0 +1,39 @@
+<div id="list_comment" class="mg_t5">
+	<div class="mg_10">
+		{% if evaluations | length == 0%}
+			<div class="mg_v20 tacenter">
+				<strong>Aucune évaluation à afficher</strong>
+			</div>
+		{% else %}
+			<div>{{ evaluations | length }} {% if evaluations | length > 1 %}évaluations{% else %}évaluation{% endif %}.</div>
+			{% for evaluation in evaluations %}
+				<div class="sep"></div>
+				<div class="mg_v10">
+					<div class="mg_b5">Ecrit le {{ getDateLabel(evaluation.date) }} à {{ evaluation.date | date('H:i') }} sur <a href="{{ path('school_view', {'slug': evaluation.school.slug, 'type': 'evaluation'}) }}"><strong>{{ evaluation.school.name }}</strong></a></div>
+					<div>
+						<div style="width:50px;float:left">
+							{% set logo = schoolLogo(evaluation.school) %}
+							<span style="display:block;float:left;width:32px"><img style="width:50px; height: 50px; border-radius: 5px" src="{{ logo | imagine_filter('50x50') }}" alt="{{ evaluation.school.shortName }}" /></span>
+						</div>
+						<div style="margin-left:60px">
+							<div style="height:26px">
+								<div class="left" style="padding-top:2px">Notes : </div>
+								{% set mark = evaluation.mark/20 %}
+								{% for i in 1..5 %}
+									{% if i <= mark %}
+										<div class="left pd_5"><div class="eval_star_view_item selected" data-value="20"></div></div>
+									{% else %}
+										<div class="left pd_5"><div class="eval_star_view_item" data-value="100"></div></div>
+									{% endif %}
+								{% endfor %}
+							</div>
+							<div class="mg_b5">
+								{{ evaluation.comment | nl2br  }}
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		{% endif %}
+	</div>
+</div>

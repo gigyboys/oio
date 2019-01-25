@@ -1,0 +1,36 @@
+{% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.id == user.id %}
+	<div class="pd_10">
+		<span class="create_post standar_button" style="cursor: pointer" data-target="{{ path('blog_manager_add_post_ajax')}}"><img src="{{ asset('image/add_icon.png') }}" style="width:12px; height:auto"> Proposer un article</span>
+	</div>
+	<div class="mg_h10">
+		<div class="sp"></div>
+	</div>
+{% endif %}
+
+{% if posts | length == 0 %}
+	<div class="mg_v20 tacenter">
+		<strong>Aucune article à afficher</strong>
+	</div>
+{% else %}
+	<div class="search" data-item-display="block">
+		{% if posts | length >= 2 %}
+			<div class="search_input_cr pd_5 mg_h10 mg_t10">
+				<div class="search_input_left">
+					<label for="search_input" class="label_search_input">Rechercher :</label> <span class="search_input_wrap"><input type="text" id="search_input" class="search_input"/><!--
+				--><span class="search_reset"><i class="fas fa-times"></i></span><!--
+						--></span>
+				</div>
+				<div class="search_input_right">
+					<span class="result_state" style="vertical-align: middle">{{ posts | length }} résultat{% if posts | length > 1 %}s{% endif %}</span>
+				</div>
+				<div class="both"></div>
+			</div>
+		{% endif %}
+		<div id="list_post"><!--
+			{% for post in posts %}
+				-->{{ include("blog/include/post_item.html.twig") }}<!--
+			{% endfor %}
+		--><div class="both"></div>
+		</div>
+	</div>
+{% endif %}

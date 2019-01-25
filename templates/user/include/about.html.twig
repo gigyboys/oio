@@ -1,0 +1,36 @@
+<div class="cr">
+	<div class="ct">
+		<div class="pd_10" style="min-height:100px">
+			<div class="pd_t10">Inscrit depuis {{ getDateLabel(user.date) }}</div>
+			{% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.id == user.id %}
+				<div class="sp mg_v5"></div>
+				<div><strong>Biographie</strong> <span id="msg_biography"></span></div>
+				<div class="sp mg_v5"></div>
+				<div class="bloc_editable" style="margin-bottom:1px">
+				<div class="bloc_view">
+					<div id="ur_view_biography">{{ user.biography }}</div>
+				</div>
+				<div class="bloc_edit" style="display:none">
+					<form action="" name="form_ur_biography" method="post" id="form_ur_biography">
+						<div><textarea class="default_textarea" id="ur_area_biography" style="min-height:50px">{{ user.biography }}</textarea></div>
+						<input type="submit" style="display:none" value="Enregistrer" />
+					</form>
+				</div>
+				<div class="bloc_action" style="margin-top:5px; border:1px solid transparent">
+					<span class="btn_edit standar_button">Modifier</span> 
+					<span class="btn_save standar_button" id="btn_save_ur_biography" data-target="{{ path('user_modify_biography') }}" style="display:none">Enregistrer</span>
+					<span class="btn_reset standar_button" style="display:none">Annuler</span> 
+					<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;">Chargement...</span> 
+				</div>
+			</div>
+			{% else %}
+				{% if user.biography | trim != "" %}
+					<div class="sp mg_v5"></div>
+					<div><strong>Biographie</strong></div>
+					<div class="sp mg_v5"></div>
+					<div>{{ user.biography }}</div>
+				{% endif %}
+			{% endif %}
+		</div>
+	</div>
+</div>

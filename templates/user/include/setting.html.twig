@@ -1,0 +1,36 @@
+<div class="cr">
+	<div class="ct">
+		<div class="pd_10" style="min-height:100px">
+			<div>
+				Gérer votre mot de passe. <div id="msg_password"></div>
+			</div>
+			<div class="sep"></div>
+			<div class="bloc_editable" style="margin-bottom:1px">
+				<div class="bloc_view"></div>
+				<div class="bloc_edit" style="display:none;">
+					<form action="" name="form_ur_password" method="post" id="form_password">
+						<div>
+							<div><label for="name" class="required">Mot de passe actuel *: </label></div>
+							<div><input type="password" id="ur_input_current_password" class="default_input" value="" /></div>
+						</div>
+						<div>
+							<div><label for="name" class="required">Nouveau mot de passe *: </label></div>
+							<div><input type="password" id="ur_input_new_password" class="default_input" value="" /></div>
+						</div>
+						<div>
+							<div><label for="name" class="required">Confirmer la saisie *: </label></div>
+							<div><input type="password" id="ur_input_repeat_password" class="default_input" value="" /></div>
+						</div>
+						<input type="submit" style="display:none" value="Enregistrer" />
+					</form>
+				</div>
+				<div class="bloc_action" style="margin:5px 0; border:1px solid transparent">
+					<span class="btn_edit standar_button">Modifier</span>
+					<span class="btn_save standar_button" id="btn_save_ur_password" data-target="{{ path('user_modify_password') }}" style="display:none">Enregistrer</span>
+					<span class="btn_reset standar_button" style="display:none">Annuler</span>
+					<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;">Chargement...</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
