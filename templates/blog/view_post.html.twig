@@ -45,7 +45,9 @@
 						{% if tags | length > 0 %}
 							<div class="mg_10 list_tags">
 								{% for tag in tags %}
-									<span class="tag_item">{{ tag.name }}</span>
+									<span class="tag_item">
+										<a href="{{ path('blog_tag_view', {'slug': tag.slug}) }}" >{{ tag.name }}</a>
+									</span>
 								{% endfor %}
 							</div>
 						{% endif %}

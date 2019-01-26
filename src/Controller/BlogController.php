@@ -58,13 +58,13 @@ class BlogController extends AbstractController {
         ))->getValue();
 
         $order = "ASC";
-        $posts = $this->postRepository->getPostsLimit($limit, $order);
+        $posts = $this->blogService->getPostsLimit($limit, $order);
 
         $previousPost = null;
         if(count($posts)){
             $index = count($posts)-1;
             $firstPost = $posts[$index];
-            $previousPost = $this->postRepository->getSincePost($firstPost);
+            $previousPost = $this->blogService->getSincePost($firstPost);
         }
 
         return $this->render('blog/index.html.twig', array(
@@ -72,6 +72,37 @@ class BlogController extends AbstractController {
             'previousPost'  => $previousPost,
             'entityView'    => 'blog',
         ));
+    }
+
+    public function viewTag($slug)
+    {
+        $tag = $this->tagRepository->findOneBy(array(
+            'slug' => $slug,
+        ));
+        if($tag){
+            $limit = $this->parameterRepository->findOneBy(array(
+                'parameter' => 'posts_by_page',
+            ))->getValue();
+
+            $order = "ASC";
+            $posts = $this->blogService->getPostsLimit($limit, $order, $tag);
+
+            $previousPost = null;
+            if($posts && count($posts)){
+                $index = count($posts)-1;
+                $firstPost = $posts[$index];
+                $previousPost = $this->blogService->getSincePost($firstPost, $tag);
+            }
+
+            return $this->render('blog/view_tag.html.twig', array(
+                'tag'           => $tag,
+                'posts'         => $posts,
+                'previousPost'  => $previousPost,
+                'entityView'    => 'blog',
+            ));
+        }else{
+            return $this->redirectToRoute('blog');
+        }
     }
 
     public function viewById($id, Request $request)
@@ -155,7 +186,7 @@ class BlogController extends AbstractController {
             ))->getValue();
 
             $order = "ASC";
-            $posts = $this->postRepository->getPostsSince($lastPost, $limit, $order);
+            $posts = $this->blogService->getPostsSince($lastPost, $limit, $order);
 
             $listPosts = array();
             foreach($posts as $post){
@@ -175,11 +206,71 @@ class BlogController extends AbstractController {
             if(count($posts)){
                 $index = count($posts)-1;
                 $firstPost = $posts[$index];
-                $previousPost = $this->postRepository->getSincePost($firstPost);
+                $previousPost = $this->blogService->getSincePost($firstPost);
             }
             if ($previousPost){
                 $previousPostId = $previousPost->getId();
                 $urlLoadPost = $this->generateUrl('blog_load_posts', array(
+                    'post_id' => $previousPostId,
+                ));
+            }
+
+            $response->setContent(json_encode(array(
+                'state'             => 1,
+                'posts'             => $listPosts,
+                'previousPostId'    => $previousPostId,
+                'urlLoadPost'       => $urlLoadPost,
+            )));
+        }else{
+            $response->setContent(json_encode(array(
+                'state' => 0,
+            )));
+        }
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    public function loadTagPosts($slug, $post_id, Request $request)
+    {
+        $tag = $this->tagRepository->findOneBy(array(
+            'slug' => $slug,
+        ));
+        $lastPost = $this->postRepository->find($post_id);
+
+        $response = new Response();
+        if($lastPost){
+            $limit = $this->parameterRepository->findOneBy(array(
+                'parameter' => 'posts_by_page',
+            ))->getValue();
+
+            $order = "ASC";
+            $posts = $this->blogService->getPostsSince($lastPost, $limit, $order, $tag);
+
+            $listPosts = array();
+            foreach($posts as $post){
+                $postItem = $this->renderView('blog/include/post_item.html.twig', array(
+                    'post' => $post
+                ));
+                array_push($listPosts, array(
+                    "id" 		=> $post->getId(),
+                    "postItem"  => $postItem,
+                ));
+            }
+
+            $previousPost = null;
+            $previousPostId = 0;
+            $urlLoadPost = null;
+
+            if(count($posts)){
+                $index = count($posts)-1;
+                $firstPost = $posts[$index];
+                $previousPost = $this->blogService->getSincePost($firstPost, $tag);
+            }
+            if ($previousPost){
+                $previousPostId = $previousPost->getId();
+                $urlLoadPost = $this->generateUrl('blog_tag_load_posts', array(
+                    'slug' => $tag->getSlug(),
                     'post_id' => $previousPostId,
                 ));
             }

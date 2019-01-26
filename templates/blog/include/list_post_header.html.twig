@@ -1,0 +1,52 @@
+	<div class="cr bg_list_header">
+	<div class="ct">
+		<div class="mg_h10">
+			<div class="dd mg_v10 d_ib">
+				<div href="#" class="dd_src c_p">
+					{% if tag is defined %}
+						<strong><i class="fas fa-angle-right"></i> {{ tag.name }}</strong>
+					{% else %}
+						<strong><i class="fas fa-angle-right"></i> Touts articles</strong>
+					{% endif %}
+				</div>
+				<div class="dd_target list" data-display="block">
+					<div class="mg_5">
+						<div>
+							{% if tag is defined %}
+								<a class="link" href="{{ path('blog') }}">touts {{ getValidPosts() | length }}</a>
+							{% else %}
+								<strong><a class="link" href="{{ path('blog') }}">touts {{ getValidPosts() | length }}</a></strong>
+							{% endif %}
+						</div>
+						<div class="sp"></div>
+						{% set tags = getTagsWithPublishedPost() %}
+						{% for tagTemp in tags %}
+							<div>
+								{% if tag is defined %}
+									{% if tag.id == tagTemp.id %}
+										<strong>
+											<a class="link" href="{{ path('blog_tag_view', {'slug': tagTemp.slug}) }}">
+												{{ tagTemp.name }} 
+												{{ getPublishedPostsByTag(tagTemp) | length }}
+											</a>
+										</strong>
+									{% else %}
+										<a class="link" href="{{ path('blog_tag_view', {'slug': tagTemp.slug}) }}">
+											{{ tagTemp.name }} 
+											{{ getPublishedPostsByTag(tagTemp) | length }}
+										</a>
+									{% endif %}
+								{% else %}
+									<a class="link" href="{{ path('blog_tag_view', {'slug': tagTemp.slug}) }}">
+										{{ tagTemp.name }} 
+										{{ getPublishedPostsByTag(tagTemp) | length }}
+									</a>
+								{% endif %}
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -54,15 +54,17 @@ class AppExtension extends AbstractExtension
             new TwigFunction('getLinkUserInfo', array($this, 'getLinkUserInfo')),
             new TwigFunction('isSubscribed', array($this, 'isSubscribed')),
             /*blog*/
+            new TwigFunction('getValidPosts', array($this, 'getValidPosts')),
             new TwigFunction('postIllustration', array($this, 'postIllustration')),
             new TwigFunction('isTagPost', array($this, 'isTagPost')),
             new TwigFunction('isSchoolPost', array($this, 'isSchoolPost')),
             new TwigFunction('getValidComments', array($this, 'getValidComments')),
+            new TwigFunction('getTagsWithPublishedPost', array($this, 'getTagsWithPublishedPost')),
+            new TwigFunction('getPublishedPostsByTag', array($this, 'getPublishedPostsByTag')),
             /*platform*/
             new TwigFunction('fileIcon', array($this, 'fileIcon')),
             new TwigFunction('isAdmin', array($this, 'isAdmin')),
             new TwigFunction('getActiveUsers', array($this, 'getActiveUsers')),
-            new TwigFunction('getValidPosts', array($this, 'getValidPosts')),
             new TwigFunction('getLastVisit', array($this, 'getLastVisit')),
             new TwigFunction('isUserTeam', array($this, 'isUserTeam')),
             new TwigFunction('findUserTeamsOrderBy', array($this, 'findUserTeamsOrderBy')),
@@ -168,12 +170,24 @@ class AppExtension extends AbstractExtension
         return $this->blogService->isTagPost($post, $tag);
     }
 
+    public function getValidPosts() {
+        return $this->blogService->getValidPosts();
+    }
+
     public function isSchoolPost(Post $post, School $school) {
         return $this->blogService->isSchoolPost($post, $school);
     }
 
     public function getValidComments(Post $post) {
         return $this->blogService->getValidComments($post);
+    }
+
+    public function getTagsWithPublishedPost() {
+        return $this->blogService->getTagsWithPublishedPost();
+    }
+
+    public function getPublishedPostsByTag(Tag $tag) {
+        return $this->blogService->getPublishedPostsByTag($tag);
     }
 
     /*
@@ -206,10 +220,6 @@ class AppExtension extends AbstractExtension
 
     public function getActiveUsers() {
         return $this->userService->getActiveUsers();
-    }
-
-    public function getValidPosts() {
-        return $this->blogService->getValidPosts();
     }
 
     public function getLastVisit(User $user) {

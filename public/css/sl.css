@@ -200,6 +200,10 @@
 	text-align:center;
 	overflow:hidden
 }
+.sl_label a{
+	display:block;
+	min-height: 65px;
+}
 .sl_shortname{
 	font-weight:bold
 }

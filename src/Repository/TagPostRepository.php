@@ -19,32 +19,135 @@ class TagPostRepository extends ServiceEntityRepository
         parent::__construct($registry, TagPost::class);
     }
 
-    // /**
-    //  * @return CategorySchool[] Returns an array of CategorySchool objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+    public function getTagPostsLimit($limit, $order, $tag) {
+        //$limit = 3;
+        $qb = $this->createQueryBuilder('tagPost');
 
-    /*
-    public function findOneBySomeField($value): ?CategorySchool
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
+        $qb
+            ->innerJoin('tagPost.post', 'post')
+            ->andWhere('tagPost.tag = :tag')
+            ->setParameter('tag', $tag)
+            ;
+        $qb
+            ->andWhere('post.published = :published')
+            ->setParameter('published', true)
+            ->andWhere('post.valid = :valid')
+            ->setParameter('valid', true)
+            ->andWhere('post.deleted = :deleted')
+            ->setParameter('deleted', false)
+            ;
+
+        $qb
+            ->setMaxResults($limit)
+            ->orderBy('post.id', 'DESC')
         ;
+
+        $tagPostsTemp = $qb->getQuery()->getResult();
+        
+        $tagPosts = array();
+        if($order == 'DESC'){
+            foreach($tagPostsTemp as $tagPost){
+                array_unshift($tagPosts, $tagPost);
+            }
+        }else{
+            $tagPosts = $tagPostsTemp;
+        }
+
+        return $tagPosts;
     }
-    */
+
+    public function getSinceTagPost($post, $tag) {
+
+        $qb = $this->createQueryBuilder('tagPost');
+
+        $qb
+            ->innerJoin('tagPost.post', 'post')
+            ->andWhere('tagPost.tag = :tag')
+            ->setParameter('tag', $tag)
+            ;
+
+        $qb
+            ->andWhere('post.published = :published')
+            ->setParameter('published', true)
+            ->andWhere('post.valid = :valid')
+            ->setParameter('valid', true)
+            ->andWhere('post.deleted = :deleted')
+            ->setParameter('deleted', false)
+        ;
+
+        $qb
+            ->andWhere('post.id < :idPost')
+            ->setParameter('idPost', $post->getId());
+
+        $qb
+            ->setMaxResults(1)
+            ->orderBy('post.id', 'DESC')
+        ;
+
+        $tagPost = $qb->getQuery()->getOneOrNullResult();
+
+        return $tagPost;
+    }
+
+    public function getTagPostsSince($post, $limit, $order, $tag) {
+
+        $qb = $this->createQueryBuilder('tagPost');
+
+        $qb
+            ->innerJoin('tagPost.post', 'post')
+            ->andWhere('tagPost.tag = :tag')
+            ->setParameter('tag', $tag)
+            ;
+
+        $qb
+            ->andWhere('post.published = :published')
+            ->setParameter('published', true)
+            ->andWhere('post.valid = :valid')
+            ->setParameter('valid', true)
+            ->andWhere('post.deleted = :deleted')
+            ->setParameter('deleted', false)
+        ;
+
+        $qb
+            ->andWhere('post.id <= :idPost')
+            ->setParameter('idPost', $post->getId())
+            ->setMaxResults($limit)
+            ->orderBy('post.id', 'DESC')
+        ;
+
+        $tagPostsTemp = $qb->getQuery()->getResult();
+
+        $tagPosts = array();
+        if($order == 'DESC'){
+            foreach($tagPostsTemp as $tagPost){
+                array_unshift($tagPosts, $tagPost);
+            }
+        }else{
+            $tagPosts = $tagPostsTemp;
+        }
+
+        return $tagPosts;
+    }
+
+    public function getTagPostsWithPublishedPost($tag) {
+        $qb = $this->createQueryBuilder('tagPost');
+
+        $qb
+            ->innerJoin('tagPost.post', 'post')
+            ->andWhere('tagPost.tag = :tag')
+            ->setParameter('tag', $tag)
+            ;
+        $qb
+            ->andWhere('post.published = :published')
+            ->setParameter('published', true)
+            ->andWhere('post.valid = :valid')
+            ->setParameter('valid', true)
+            ->andWhere('post.deleted = :deleted')
+            ->setParameter('deleted', false)
+            ;
+
+        $tagPosts = $qb->getQuery()->getResult();
+
+        return $tagPosts;
+    }
 }

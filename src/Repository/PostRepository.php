@@ -107,7 +107,6 @@ class PostRepository extends ServiceEntityRepository
             ->setParameter('deleted', false)
         ;
 
-
         $qb->andWhere('post.id < :idPost');
 
         $qb
@@ -134,9 +133,8 @@ class PostRepository extends ServiceEntityRepository
             ->setParameter('deleted', false)
         ;
 
-        $qb->andWhere('post.id <= :idPost');
-
         $qb
+            ->andWhere('post.id <= :idPost')
             ->setParameter('idPost', $post->getId())
             ->setMaxResults($limit)
             ->orderBy('post.id', 'DESC')

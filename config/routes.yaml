@@ -290,6 +290,10 @@ blog:
     path:     /blog
     defaults:
         _controller: App\Controller\BlogController::index
+blog_tag_view:
+    path:     /blog/tag/{slug}
+    defaults:
+        _controller: App\Controller\BlogController::viewTag
 blog_post_viewbyid:
     path:     /blog/id/{id}
     defaults:
@@ -302,6 +306,10 @@ blog_load_posts:
     path:     /blog/load-post/{post_id}
     defaults:
         _controller: App\Controller\BlogController::loadPosts
+blog_tag_load_posts:
+    path:     /blog/tag/{slug}/load-post/{post_id}
+    defaults:
+        _controller: App\Controller\BlogController::loadTagPosts
 blog_post_load_comment:
     path:     /blog/post/{post_id}/load-comment/{comment_id}
     defaults:

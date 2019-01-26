@@ -30,6 +30,7 @@ use App\Repository\SchoolPostRepository;
 use App\Repository\SchoolRepository;
 use App\Repository\TagPostRepository;
 use App\Repository\TypeSchoolRepository;
+use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -49,6 +50,7 @@ class BlogService
         SchoolPostRepository $schoolPostRepository,
         CommentRepository $commentRepository,
         PostRepository $postRepository,
+        TagRepository $tagRepository,
         EntityManagerInterface $em
     )
     {
@@ -65,6 +67,7 @@ class BlogService
         $this->schoolPostRepository = $schoolPostRepository;
         $this->commentRepository = $commentRepository;
         $this->postRepository = $postRepository;
+        $this->tagRepository = $tagRepository;
         $this->em = $em;
     }
 
@@ -146,4 +149,78 @@ class BlogService
         return $previousPost;
     }
 
+    public function getPostsLimit($limit, $order, $tag = null) {
+        if(!$tag){
+            $posts = $this->postRepository->getPostsLimit($limit, $order);
+            return $posts;
+        }else{
+            $tagPosts = $this->tagPostRepository->getTagPostsLimit($limit, $order, $tag);
+            $posts = array();
+            foreach($tagPosts as $tagPost){
+                $post = $tagPost->getPost();
+                array_push($posts, $post);
+            }
+            return $posts;
+        }
+    }
+
+    public function getSincePost($post, $tag = null) {
+        if(!$tag){
+            $post = $this->postRepository->getSincePost($post);
+            return $post;
+        }else{
+            $tagPost = $this->tagPostRepository->getSinceTagPost($post, $tag);
+            if($tagPost){
+                return $tagPost->getPost();
+            }else{
+                return null;
+            }
+        }
+    }
+
+    public function getPostsSince($post, $limit, $order, $tag = null) {
+        if(!$tag){
+            $posts = $this->postRepository->getPostsSince($post, $limit, $order);
+            return $posts;
+        }else{
+            $tagPosts = $this->tagPostRepository->getTagPostsSince($post, $limit, $order, $tag);
+            $posts = array();
+            foreach($tagPosts as $tagPost){
+                $post = $tagPost->getPost();
+                array_push($posts, $post);
+            }
+            return $posts;
+        }
+    }
+
+    public function getTagsWithPublishedPost() {
+        $tags = array();
+        
+        $tagTemps = $this->tagRepository->findAllOrderByName('ASC');
+        foreach($tagTemps as $tagTemp){
+            if($this->isTagWithPublishedPost($tagTemp)){
+                array_push($tags, $tagTemp);
+            }
+        }
+        
+        return $tags;
+    }
+
+    public function isTagWithPublishedPost($tag) {
+        $tagPosts = $this->tagPostRepository->getTagPostsWithPublishedPost($tag);
+        if($tagPosts){
+            return true;
+        }     
+        return false;
+    }
+
+    public function getPublishedPostsByTag($tag) {
+        $tagPosts = $this->tagPostRepository->getTagPostsWithPublishedPost($tag);
+        $posts = array();
+        foreach($tagPosts as $tagPost){
+            $post = $tagPost->getPost();
+            array_push($posts, $post);
+        }
+        return $posts;
+    }
 }

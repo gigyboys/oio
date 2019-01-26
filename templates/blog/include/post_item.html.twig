@@ -2,7 +2,7 @@
 {% if post.tovalid == false or post.valid == false or post.published == false or post.deleted %}
     {% set published = false %}
 {% endif %}
-<div class="post_item search_item" data-text="{{ post.title }}">
+<div class="post_item search_item" data-text="{{ post.title }}" data-id="{{ post.id }}">
 	<div class="post_image {% if published == false %}op5{% endif %}">
         {# twig extension #}
         {% set illustration = postIllustration(post) %}
