@@ -335,6 +335,14 @@ admin_event_edit:
     path:     /event/edit-event/{event_id}
     defaults:
         _controller: App\Controller\Admin\EventController::editEvent
+admin_event_tags:
+    path:     /event/{event_id}/tags
+    defaults:
+        _controller: App\Controller\Admin\EventController::eventTags
+admin_event_toggle_tag:
+    path:     /event/{event_id}/toggle-tag/{tag_id}
+    defaults:
+        _controller: App\Controller\Admin\EventController::toggleTag
 admin_event_dodelete:
     path:     /event/{event_id}/delete
     defaults:

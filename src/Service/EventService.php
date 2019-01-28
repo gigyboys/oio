@@ -35,6 +35,7 @@ use App\Repository\SchoolRepository;
 use App\Repository\TagPostRepository;
 use App\Repository\TypeSchoolRepository;
 use App\Repository\ParticipationRepository;
+use App\Repository\TagEventRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -58,6 +59,7 @@ class EventService
         EventRepository $eventRepository,
         ParticipationRepository $participationRepository,
         EventIllustrationRepository $eventIllustrationRepository,
+        TagEventRepository $tagEventRepository,
         EntityManagerInterface $em
     )
     {
@@ -78,6 +80,7 @@ class EventService
         $this->eventRepository = $eventRepository;
         $this->eventIllustrationRepository = $eventIllustrationRepository;
         $this->participationRepository = $participationRepository;
+        $this->tagEventRepository = $tagEventRepository;
         $this->em = $em;
     }
 
@@ -236,6 +239,21 @@ class EventService
             return true;
         }
         return false;
+    }
+
+    public function isTagEvent(Event $event, Tag $tag) {
+        $tagEvent = $this->tagEventRepository->findOneBy(array(
+            'event' => $event,
+            'tag' => $tag,
+        ));
+
+        if($tagEvent){
+            $isTag = true;
+        }else{
+            $isTag = false;
+        }
+
+        return $isTag;
     }
 
 }

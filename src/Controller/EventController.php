@@ -32,6 +32,7 @@ use App\Repository\ParameterRepository;
 use App\Repository\SchoolContactRepository;
 use App\Repository\EvaluationRepository;
 use App\Repository\ParticipationRepository;
+use App\Repository\TagEventRepository;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class EventController extends AbstractController{
@@ -55,6 +56,7 @@ class EventController extends AbstractController{
         SubscriptionRepository $subscriptionRepository,
         ParticipationRepository $participationRepository,
         CommentRepository $commentRepository,
+        TagEventRepository $tagEventRepository,
         ObjectManager $em
     )
     {
@@ -76,6 +78,7 @@ class EventController extends AbstractController{
         $this->subscriptionRepository = $subscriptionRepository;
         $this->participationRepository = $participationRepository;
         $this->commentRepository = $commentRepository;
+        $this->tagEventRepository = $tagEventRepository;
         $this->em = $em;
 
         $this->platformService->registerVisit();
@@ -179,6 +182,15 @@ class EventController extends AbstractController{
             $showEvent = true;
         }
         if($event && ( $showEvent || $this->isGranted('ROLE_ADMIN') || $event->getUser() == $user)){
+            //tags
+            $tags = array();
+            $tagEvents = $this->tagEventRepository->findBy(array(
+                'event' => $event,
+            ));
+            foreach($tagEvents as $tagEvent){
+                $tag = $tagEvent->getTag();
+                array_push($tags, $tag);
+            }
 
             //view
             $this->platformService->registerView($event, $user, $request);
@@ -205,6 +217,7 @@ class EventController extends AbstractController{
 
             return $this->render('event/view_event.html.twig', [
                 'event'             => $event,
+                'tags'             => $tags,
                 'comments'          => $comments,
                 'allComments'       => $allComments,
                 'previousComment'   => $previousComment,

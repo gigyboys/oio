@@ -71,6 +71,7 @@ class AppExtension extends AbstractExtension
             new TwigFunction('getDateLabel', array($this, 'getDateLabel')),
             new TwigFunction('getAcronym', array($this, 'getAcronym')),
             /*event*/
+            new TwigFunction('isTagEvent', array($this, 'isTagEvent')),
             new TwigFunction('eventIllustration', array($this, 'eventIllustration')),
             new TwigFunction('isSchoolEvent', array($this, 'isSchoolEvent')),
             new TwigFunction('getGoingParticipations', array($this, 'getGoingParticipations')),
@@ -229,6 +230,10 @@ class AppExtension extends AbstractExtension
     /*
      * event
      */
+    public function isTagEvent(Event $event, Tag $tag) {
+        return $this->eventService->isTagEvent($event, $tag);
+    }
+
     public function eventIllustration(Event $event) {
         return $this->eventService->getIllustrationPath($event);
     }

@@ -215,6 +215,14 @@ event_manager_edit:
     path:     /event-manager/edit-event/{event_id}
     defaults:
         _controller: App\Controller\EventManagerController::editEvent
+event_manager_tags:
+    path:     /event-manager/edit-event/{event_id}/tags
+    defaults:
+        _controller: App\Controller\EventManagerController::eventTags
+event_manager_toggle_tag:
+    path:     /event-manager/edit-event/{event_id}/toggle-tag/{tag_id}
+    defaults:
+        _controller: App\Controller\EventManagerController::toggleTag
 event_manager_toggle_show_author:
     path:     /event-manager/event/{event_id}/toggle-show-author
     defaults:

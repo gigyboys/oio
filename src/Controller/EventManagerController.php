@@ -3,28 +3,23 @@ namespace App\Controller;
 
 use App\Entity\Evaluation;
 use App\Entity\Event;
-//use App\Entity\Post;
 use App\Entity\EventIllustration;
 use App\Entity\SchoolEvent;
-//use App\Entity\TagPost;
+use App\Entity\TagEvent;
 use App\Form\EvaluationType;
 use App\Form\EventInitType;
 use App\Form\EventContentType;
 use App\Form\EventType;
 use App\Form\EventDateType;
 use App\Form\EventLocationType;
-//use App\Form\PostContentType;
 use App\Form\EventIllustrationType;
-//use App\Form\PostInitType;
-//use App\Form\PostType;
 use App\Repository\CategoryRepository;
 use App\Repository\CategorySchoolRepository;
 use App\Repository\EventRepository;
 use App\Repository\FieldRepository;
 use App\Repository\EventIllustrationRepository;
-//use App\Repository\PostRepository;
 use App\Repository\SchoolEventRepository;
-//use App\Repository\TagPostRepository;
+use App\Repository\TagEventRepository;
 use App\Repository\TagRepository;
 use App\Service\PlatformService;
 use App\Service\SchoolService;
@@ -46,10 +41,9 @@ class EventManagerController extends AbstractController {
         ParameterRepository $parameterRepository,
         SchoolService $schoolService,
         PlatformService $platformService,
-        //PostRepository $postRepository,
         EventIllustrationRepository $eventIllustrationRepository,
         TagRepository $tagRepository,
-        //TagPostRepository $tagPostRepository,
+        TagEventRepository $tagEventRepository,
         SchoolEventRepository $schoolEventRepository,
         EventRepository $eventRepository,
         ObjectManager $em
@@ -59,10 +53,9 @@ class EventManagerController extends AbstractController {
         $this->parameterRepository = $parameterRepository;
         $this->schoolService = $schoolService;
         $this->platformService = $platformService;
-        //$this->postRepository = $postRepository;
         $this->eventIllustrationRepository = $eventIllustrationRepository;
         $this->tagRepository = $tagRepository;
-        //$this->tagPostRepository = $tagPostRepository;
+        $this->tagEventRepository = $tagEventRepository;
         $this->schoolEventRepository = $schoolEventRepository;
         $this->eventRepository = $eventRepository;
         $this->eventRepository = $eventRepository;
@@ -801,6 +794,63 @@ class EventManagerController extends AbstractController {
             $response->setContent(json_encode(array(
                 'state' => 1,
                 'case' => $isSchool,
+            )));
+        }else{
+            $response->setContent(json_encode(array(
+                'state' => 0,
+            )));
+        }
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    public function eventTags($event_id)
+    {
+        $user = $this->getUser();
+        $event = $this->eventRepository->find($event_id);
+        $tags = $this->tagRepository->findAll();
+
+        if($event && $user && $event->getUser()->getId() == $user->getId() ){
+            return $this->render('event/event_tags.html.twig', array(
+                'event'          => $event,
+                'tags'          => $tags,
+                'entityView'    => 'event',
+            ));
+        }
+        return $this->redirectToRoute('event');
+    }
+
+
+    public function toggleTag($event_id, $tag_id, Request $request)
+    {
+        $event = $this->eventRepository->find($event_id);
+        $tag = $this->tagRepository->find($tag_id);
+
+        $response = new Response();
+
+        if ($event && $tag) {
+            $tagEvent = $this->tagEventRepository->findOneBy(array(
+                'event' => $event,
+                'tag' => $tag,
+            ));
+
+            if($tagEvent){
+                $this->em->remove($tagEvent);
+                $isTag = false;
+            }else{
+                $tagEvent = new TagEvent();
+                $tagEvent->setEvent($event);
+                $tagEvent->setTag($tag);
+                $tagEvent->setCurrent(false);
+
+                $this->em->persist($tagEvent);
+                $isTag = true;
+            }
+            $this->em->flush();
+
+            $response->setContent(json_encode(array(
+                'state' => 1,
+                'case' => $isTag,
             )));
         }else{
             $response->setContent(json_encode(array(

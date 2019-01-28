@@ -1,18 +1,20 @@
 {% extends "front.html.twig" %}
 
 {% block title %}
-  Evènement #{{ event.id }} - Etablissements
+	Evènement #{{ event.id }} - Tags
 {% endblock %}
 
+
 {% block body %}
+
 	<div class="cr">
 		<div class="ct">
 			<div class="mg_10">
                 {{ include("event/include/header_event_edit.html.twig") }}
 				<div class="meta_info mg_v10">
 					<div class="meta_illustration" id="change_illustration_fix">
-						{# twig extension #}
-						{% set illustration = eventIllustration(event) %}
+                        {# twig extension #}
+                        {% set illustration = eventIllustration(event) %}
 						<label>
 							<img id="event_illustration_fix" class="600x250" src="{{ illustration | imagine_filter('600x250') }}" alt="img event" />
 						</label>
@@ -28,12 +30,10 @@
 				</div>
 
 				<div style="background:#ddd; padding: 5px; margin:5px 0; border:1px solid #ccc">
-					<span><img src="{{ asset('image/list_icon.png') }}" style="width:12px; height:auto" /> Liste des établissements</span>
+					<span><img src="{{ asset('image/list_icon.png') }}" style="width:12px; height:auto" /> Liste des tags</span>
 				</div>
+
 				<div class="search" data-item-display="inline-block">
-					<div class="mg_5">
-						<span><img src="{{ asset('image/info_icon.png') }}" style="width:12px; height:auto" /> Les établissements affichés ici sont ceux sur lesquels vous êtes abonnés.</span>
-					</div>
 					<div class="search_input_cr pd_5">
 						<div class="search_input_left">
 							<label for="search_input" class="label_search_input">Rechercher :</label> <span class="search_input_wrap"><input type="text" id="search_input" class="search_input"/><!--
@@ -41,17 +41,18 @@
 								--></span>
 						</div>
 						<div class="search_input_right">
-							<span class="result_state" style="vertical-align: middle">{{ schools | length }} résultat{% if schools | length > 1 %}s{% endif %}</span>
+							<span class="result_state" style="vertical-align: middle">{{ tags | length }} résultat{% if tags | length > 1 %}s{% endif %}</span>
 						</div>
 						<div class="both"></div>
 					</div>
-					<div class="mg_v10 list_school">
-						{% for school in schools %}
-							<span class="school_item search_item" data-text="{{ school.name }} {{ school.shortName }}">
-								<span class="tacenter">
-									<span class="toggle_case" data-entity="event_school" data-target="{{ path('event_manager_toggle_school', {'event_id': event.id, 'school_id': school.id }) }}">
-										{% set isSchool = isSchoolEvent(event, school) %}
-										{% if isSchool %}
+
+					<div class="mg_v10 list_tag">
+						{% for tag in tags %}
+							<span class="tag_item search_item" data-text="{{ tag.name }}">
+								<span>
+									<span class="toggle_case" data-entity="tag" data-target="{{ path('event_manager_toggle_tag', {'event_id': event.id, 'tag_id': tag.id }) }}">
+										{% set isTag = isTagEvent(event, tag) %}
+										{% if isTag %}
 											<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
 											<span class="redstate"><span class="redpastille"></span></span>
 										{% else %}
@@ -63,14 +64,14 @@
 									</span>
 								</span>
 								<span>
-									{{ school.shortName }} -
-									{{ school.name }}
+									{{ tag.name }}
 								</span>
 							</span>
 						{% endfor %}
 						<span class="both"></span>
 					</div>
 				</div>
+
 				<div class="sep"></div>
 
                 {{ include("event/include/footer_event_edit.html.twig") }}

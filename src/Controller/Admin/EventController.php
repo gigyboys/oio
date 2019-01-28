@@ -6,18 +6,15 @@ use App\Entity\CategorySchool;
 use App\Entity\Cover;
 use App\Entity\Event;
 use App\Entity\Logo;
-use App\Entity\Post;
-use App\Entity\SchoolPost;
 use App\Entity\SchoolEvent;
 use App\Entity\Tag;
-use App\Entity\TagPost;
+use App\Entity\TagEvent;
 use App\Entity\TypeSchool;
 use App\Form\CategoryEditType;
 use App\Form\CategoryInitType;
 use App\Form\CoverType;
 use App\Form\EventInitType;
 use App\Form\LogoType;
-use App\Form\PostInitType;
 use App\Form\SchoolDescriptionType;
 use App\Form\SchoolInitType;
 use App\Form\SchoolType;
@@ -30,15 +27,14 @@ use App\Repository\CoverRepository;
 use App\Repository\EventRepository;
 use App\Repository\LogoRepository;
 use App\Repository\ParameterRepository;
-use App\Repository\PostRepository;
-use App\Repository\SchoolPostRepository;
 use App\Repository\SchoolEventRepository;
-use App\Repository\TagPostRepository;
 use App\Repository\TagRepository;
 use App\Repository\TypeRepository;
 use App\Repository\UserRepository;
 use App\Repository\CommentRepository;
+use App\Repository\TagEventRepository;
 use App\Service\PlatformService;
+use App\Service\EventService;
 use App\Service\SchoolService;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -60,13 +56,12 @@ class EventController extends AbstractController {
         TypeRepository $typeRepository,
         LogoRepository $logoRepository,
         CoverRepository $coverRepository,
-        PostRepository $postRepository,
         TagRepository $tagRepository,
-        TagPostRepository $tagPostRepository,
-        SchoolPostRepository $schoolPostRepository,
         SchoolEventRepository $schoolEventRepository,
         EventRepository $eventRepository,
         CommentRepository $commentRepository,
+        TagEventRepository $tagEventRepository,
+        EventService $eventService,
         ObjectManager $em
     )
     {
@@ -80,16 +75,13 @@ class EventController extends AbstractController {
         $this->typeRepository = $typeRepository;
         $this->logoRepository = $logoRepository;
         $this->coverRepository = $coverRepository;
-        $this->postRepository = $postRepository;
         $this->tagRepository = $tagRepository;
-        $this->tagPostRepository = $tagPostRepository;
-        $this->schoolPostRepository = $schoolPostRepository;
         $this->schoolEventRepository = $schoolEventRepository;
         $this->eventRepository = $eventRepository;
-        $this->commentRepository = $commentRepository;
+        $this->tagEventRepository = $tagEventRepository;
+        $this->eventService = $eventService;
         $this->em = $em;
     }
-
 
     public function event()
     {
@@ -160,11 +152,6 @@ class EventController extends AbstractController {
             $this->em->flush();
 
             return $this->redirectToRoute('admin_event');
-            /*
-            return $this->redirectToRoute('admin_blog_post_edit', array(
-                'post_id' => $event->getId()
-            ));
-            */
         }
 
         return $this->render('admin/event/event_add.html.twig', array(
@@ -314,6 +301,57 @@ class EventController extends AbstractController {
                 'state' => 1,
                 'id' => $id,
                 'comments' => $comments,
+            )));
+        }else{
+            $response->setContent(json_encode(array(
+                'state' => 0,
+            )));
+        }
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    public function eventTags($event_id)
+    {
+        $event = $this->eventRepository->find($event_id);
+        $tags = $this->tagRepository->findAll();
+
+        return $this->render('admin/event/event_tags.html.twig', array(
+            'event' => $event,
+            'tags' => $tags
+        ));
+    }
+
+    public function toggleTag($event_id, $tag_id, Request $request)
+    {
+        $event = $this->eventRepository->find($event_id);
+        $tag = $this->tagRepository->find($tag_id);
+
+        $response = new Response();
+
+        if ($event && $tag) {
+            $tagEvent = $this->tagEventRepository->findOneBy(array(
+                'event' => $event,
+                'tag' => $tag,
+            ));
+
+            if($tagEvent){
+                $this->em->remove($tagEvent);
+                $isTag = false;
+            }else{
+                $tagEvent = new TagEvent();
+                $tagEvent->setEvent($event);
+                $tagEvent->setTag($tag);
+                $tagEvent->setCurrent(false);
+
+                $this->em->persist($tagEvent);
+                $isTag = true;
+            }
+            $this->em->flush();
+
+            $response->setContent(json_encode(array(
+                'state' => 1,
+                'case' => $isTag,
             )));
         }else{
             $response->setContent(json_encode(array(

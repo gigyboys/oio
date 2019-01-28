@@ -128,11 +128,9 @@ class BlogController extends AbstractController {
         if($post && ( $showPost || $this->isGranted('ROLE_ADMIN') || $post->getUser() == $user)){
             //tags
             $tags = array();
-
             $tagPosts = $this->tagPostRepository->findBy(array(
                 'post' => $post,
             ));
-
             foreach($tagPosts as $tagPost){
                 $tag = $tagPost->getTag();
                 array_push($tags, $tag);

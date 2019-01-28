@@ -21,6 +21,15 @@
 							<div id="map_event"></div>
 							<div class="title">
 								<h1>{{ event.title }}</h1>
+                                {% if tags | length > 0 %}
+									<div class="mg_t10 list_tags">
+                                       {% for tag in tags %}
+											<span class="tag_item">
+										<a href="#{#{{ path('event_tag_view', {'slug': tag.slug}) }}#}" >{{ tag.name }}</a>
+									</span>
+                                        {% endfor %}
+									</div>
+                                {% endif %}
 							</div>
 							{% if event.location | trim != "" or event.city | trim != "" or ( event.latitude | trim != "" and event.longitude | trim != "" ) %}
 								<div class="location_wrap">
