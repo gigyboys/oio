@@ -1,23 +1,23 @@
 {% extends "back.html.twig" %}
 
 {% block title %}
-	Liste des tags du blog
+	Liste des tags
 {% endblock %}
 
 {% block body_header %}
 	<div class="bc">
-		<span class="bc1"><a href="{{ path('admin_blog_post') }}"><img src="{{ asset('image/bg_icon.png') }}" style="width:14px; height:auto" /> <span>Blog</span></a> </span>
+		<span class="bc1"><a href="#"><img src="{{ asset('image/bg_icon.png') }}" style="width:14px; height:auto" /> <span>Platform</span></a> </span>
 		<span class="dd">
 			<span href="#" class="dd_src">
 				<span class="bcdd"></span>
 			</span>
-            {{ include("admin/blog/include/blog_principal_action.html.twig") }}
+			{#{{ include("admin/blog/include/blog_principal_action.html.twig") }}#}
 		</span>
-		<span class="bc1"><a href="{{ path('admin_blog_tags') }}">Tags</a></span>
+		<span class="bc1"><a href="{{ path('admin_platform_tags') }}">Tags</a></span>
 	</div>
 
 	<div style="padding:8px;float:right">
-		<span><a href="{{ path('admin_blog_tag_add') }}"><img src="{{ asset('image/add_icon.png') }}" /> <span>Nouveau tag</span></a></span>
+		<span><a href="{{ path('admin_platform_tag_add') }}"><img src="{{ asset('image/add_icon.png') }}" /> <span>Nouveau tag</span></a></span>
 	</div>
 {% endblock %}
 
@@ -51,7 +51,7 @@
                 {% for tag in tags %}
 					<tr id="sl_category_{{ tag.id }}" class="a_table_line" data-text="{{ tag.name }}" style="display:table-row">
 						<td class="a_table_cell_id" style="width: 50px; text-align:center">{{ tag.id }}</td>
-						<td><a href="{{ path('admin_blog_tag_edit', {'tag_id': tag.id}) }}" data-name="{{ tag.name }}" style="cursor:pointer">{{ tag.name }}</a></td>
+						<td><a href="{{ path('admin_platform_tag_edit', {'tag_id': tag.id}) }}" data-name="{{ tag.name }}" style="cursor:pointer">{{ tag.name }}</a></td>
 						<td>{{ tag.slug }}</td>
 						<td class="tacenter">
 							{#
@@ -61,7 +61,7 @@
 						</td>
 
 						<td class="a_table_cell_action tacenter">
-							<a href="{{ path('admin_blog_tag_edit', {'tag_id': tag.id}) }}" data-name="{{ tag.name }}" style="cursor:pointer"><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /></a>
+							<a href="{{ path('admin_platform_tag_edit', {'tag_id': tag.id}) }}" data-name="{{ tag.name }}" style="cursor:pointer"><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /></a>
                             {#
                             <a href="{{ path('admin_school_category_edit_schools', {'category_id': category.id}) }}" data-name="{{ category.name }}" style="cursor:pointer"><img src="{{ asset('image/sl_icon.png') }}" style="width:12px; height:auto" /></a>
                             <span class="delete_sl_cat" data-school="{{ schools | length }}" data-id="{{ category.id }}" data-target="{{ path('admin_school_category_delete', {'category_id': category.id}) }}" data-name="{{ category.name }}" style="cursor:pointer"><img src="{{ asset('image/delete_icon.png') }}" style="width:12px; height:auto" /></span>

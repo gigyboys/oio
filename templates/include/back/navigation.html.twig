@@ -67,14 +67,6 @@
 					</a>
 				</div>
 			</div>
-			<div class="a_nav_sub_item">
-				<div class="a_nav_sub_item_icon"><div><img src="{{ asset('image/list_icon.png') }}" /></div></div>
-				<div class="a_nav_sub_item_text">
-					<a href="{{ path('admin_blog_tags') }}">
-						<span>Tags</span>
-					</a>
-				</div>
-			</div>
 		</div>
 	</div>
 
@@ -104,12 +96,20 @@
 		</div>
 	</div>
 
-	<div class="a_nav_item {% if view == 'extra' %} open{% endif %}">
+	<div class="a_nav_item {% if view == 'platform' %} open{% endif %}">
 		<div class="a_nav_main_item">
 			<div class="a_nav_main_item_icon"><div><img src="{{ asset('image/sl_contact_icon.png') }}" /></div></div>
-			<div class="a_nav_main_item_text">Extra</div>
+			<div class="a_nav_main_item_text">Plateforme</div>
 		</div>
 		<div class="a_nav_sub_content">
+			<div class="a_nav_sub_item">
+				<div class="a_nav_sub_item_icon"><div><img src="{{ asset('image/list_icon.png') }}" /></div></div>
+				<div class="a_nav_sub_item_text">
+					<a href="{{ path('admin_platform_tags') }}">
+						<span>Tags</span>
+					</a>
+				</div>
+			</div>
 			<div class="a_nav_sub_item">
 				<div class="a_nav_sub_item_icon"><div><img src="{{ asset('image/list_icon.png') }}" /></div></div>
 				<div class="a_nav_sub_item_text">

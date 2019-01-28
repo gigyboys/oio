@@ -39,7 +39,7 @@ class NewsletterController extends AbstractController {
 
         return $this->render('admin/platform/newsletter_emails.html.twig', array(
             'emails' => $emails,
-            'view' => 'extra',
+            'view' => 'platform',
         ));
     }
 

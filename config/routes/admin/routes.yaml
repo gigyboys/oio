@@ -292,22 +292,6 @@ admin_blog_post_dodelete:
     path:     /blog/post/{post_id}/delete
     defaults:
         _controller: App\Controller\Admin\BlogController::deletePost
-admin_blog_tags:
-    path:     /blog/tags
-    defaults:
-        _controller: App\Controller\Admin\BlogController::tags
-admin_blog_tag_add:
-    path:     /blog/add-tag
-    defaults:
-        _controller: App\Controller\Admin\BlogController::addTag
-admin_blog_tag_edit:
-    path:     /blog/edit-tag/{tag_id}
-    defaults:
-        _controller: App\Controller\Admin\BlogController::editTag
-admin_blog_tag_doedit:
-    path:     /blog/doedit-tag/{tag_id}
-    defaults:
-        _controller: App\Controller\Admin\BlogController::doEditTag
 admin_blog_post_tags:
     path:     /blog/post/{post_id}/tags
     defaults:
@@ -380,6 +364,22 @@ admin_setting_accessibility:
 
 
 #platform
+admin_platform_tags:
+    path:     /platform/tags
+    defaults:
+        _controller: App\Controller\Admin\TagController::tags
+admin_platform_tag_add:
+    path:     /platform/add-tag
+    defaults:
+        _controller: App\Controller\Admin\TagController::addTag
+admin_platform_tag_edit:
+    path:     /platform/edit-tag/{tag_id}
+    defaults:
+        _controller: App\Controller\Admin\TagController::editTag
+admin_platform_tag_doedit:
+    path:     /platform/doedit-tag/{tag_id}
+    defaults:
+        _controller: App\Controller\Admin\TagController::doEditTag
 admin_platform_contact:
     path:     /platform/contact
     defaults:

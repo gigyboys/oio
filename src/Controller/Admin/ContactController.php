@@ -35,7 +35,7 @@ class ContactController extends AbstractController {
 
         return $this->render('admin/platform/contacts.html.twig', array(
             'contacts' => $contacts,
-            'view' => 'extra',
+            'view' => 'platform',
         ));
     }
 
@@ -49,7 +49,7 @@ class ContactController extends AbstractController {
             $this->em->flush();
             return $this->render('admin/platform/contact_view.html.twig', array(
                 'contact' => $contact,
-                'view' => 'extra',
+                'view' => 'platform',
             ));
         }else{
             return $this->redirectToRoute('admin');

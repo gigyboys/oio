@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="bg_tag")
+ * @ORM\Table(name="pm_tag")
  * @ORM\Entity(repositoryClass="App\Repository\TagRepository")
  */
 class Tag
