@@ -13,7 +13,7 @@ class TagEventRepository extends ServiceEntityRepository
         parent::__construct($registry, TagEvent::class);
     }
 
-    public function getTagEventsLimit($limit, $order, $tag) {
+    public function getTagEventsByTagOffsetLimit($tag, $offset, $limit) {
         $qb = $this->createQueryBuilder('tagEvent');
 
         $qb
@@ -31,20 +31,38 @@ class TagEventRepository extends ServiceEntityRepository
             ;
 
         $qb
+            ->setFirstResult($offset)
             ->setMaxResults($limit)
-            ->orderBy('event.id', 'DESC')
+            ->orderBy('event.datebegin', 'DESC')
         ;
 
-        $tagEventsTemp = $qb->getQuery()->getResult();
-        
-        $tagEvents = array();
-        if($order == 'DESC'){
-            foreach($tagEventsTemp as $tagEvent){
-                array_unshift($tagEvents, $tagEvent);
-            }
-        }else{
-            $tagEvents = $tagEventsTemp;
-        }
+        $tagEvents = $qb->getQuery()->getResult();
+
+        return $tagEvents;
+    }
+
+    public function getTagEventsByTag($tag) {
+        $qb = $this->createQueryBuilder('tagEvent');
+
+        $qb
+            ->innerJoin('tagEvent.event', 'event')
+            ->andWhere('tagEvent.tag = :tag')
+            ->setParameter('tag', $tag)
+            ;
+        $qb
+            ->andWhere('event.published = :published')
+            ->setParameter('published', true)
+            ->andWhere('event.valid = :valid')
+            ->setParameter('valid', true)
+            ->andWhere('event.deleted = :deleted')
+            ->setParameter('deleted', false)
+            ;
+
+        $qb
+            ->orderBy('event.datebegin', 'DESC')
+        ;
+
+        $tagEvents = $qb->getQuery()->getResult();
 
         return $tagEvents;
     }

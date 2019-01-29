@@ -25,7 +25,7 @@
 									<div class="mg_t10 list_tags">
                                        {% for tag in tags %}
 											<span class="tag_item">
-										<a href="#{#{{ path('event_tag_view', {'slug': tag.slug}) }}#}" >{{ tag.name }}</a>
+										<a href="{{ path('event_view_tag', {'slug': tag.slug}) }}" >{{ tag.name }}</a>
 									</span>
                                         {% endfor %}
 									</div>
@@ -164,7 +164,7 @@
 					<span><span class="direction"></span> Précédent </span><br />
 					<span>
 						{% set illustration = eventIllustration(previousEvent) %}
-						<span class="logo"> <img src="{{ illustration | imagine_filter('32x32') }}" alt="img post" /></span>
+						<span class="logo"> <img src="{{ illustration | imagine_filter('32x32') }}" alt="ET" /></span>
 						<span class="label post">
 							<strong>
 								{{ previousEvent.title }}
@@ -176,7 +176,7 @@
 					<span>Suivant <span class="direction"></span></span><br />
 					<span>
 						{% set illustration = eventIllustration(nextEvent) %}
-						<span class="logo"> <img src="{{ illustration | imagine_filter('32x32') }}" alt="img post" /></span>
+						<span class="logo"> <img src="{{ illustration | imagine_filter('32x32') }}" alt="ET" /></span>
 						<span class="label post">
 							<strong>
 								{{ nextEvent.title }}

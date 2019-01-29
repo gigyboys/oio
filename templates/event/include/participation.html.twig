@@ -59,7 +59,7 @@
         </div>
         <div class="resume">
             <div>
-                <div class="going">
+                <div class="going{% if participations | length > 0 %} participations_popup{% endif %}" data-target="{{ path('event_participations_popup', {'event_id': event.id}) }}">
                     <strong>{{ participations | length }}</strong>
                     <br> 
                     <strong>participant{% if participations | length > 1 %}s{% endif %}</strong>

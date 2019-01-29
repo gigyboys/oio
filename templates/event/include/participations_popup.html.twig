@@ -1,0 +1,54 @@
+<div style="background:#fff;">
+	<div style="border-bottom:1px solid #ddd; padding: 10px;  height:24px; ">
+		<div style="float:left">
+			Participants
+		</div>
+		<div style="float:right;cursor: pointer; " class="button_closable">
+			<img src="{{ asset('image/close_icon.png') }}" style="width:16px; height:auto" alt="x" />
+		</div>
+	</div>
+	<div class="search" data-item-display="block">
+		{% if participations | length >= 2 %}
+			<div class="search_input_cr pd_5">
+				<div class="search_input_left">
+					<label for="search_input" class="label_search_input">Rechercher :</label> <span class="search_input_wrap"><input type="text" class="search_input"/><!--
+				--><span class="search_reset"><i class="fas fa-times"></i></span><!--
+						--></span>
+				</div>
+				<div class="search_input_right">
+					<span class="result_state" style="vertical-align: middle">{{ participations | length }} résultat{% if participations | length > 1 %}s{% endif %}</span>
+				</div>
+				<div class="both"></div>
+			</div>
+		{% endif %}
+		<div style="max-height:300px; overflow:auto">
+			{% for participation in participations %}
+				{% set user = participation.user %}
+				{% set avatar = userAvatar(user) %}
+				<div class="mg_5 search_item" data-text="{{ user.name }}">
+					<div style="float:left">
+						<img style="border-radius:50%" src="{{ avatar | imagine_filter("50x50")}}" alt="{{ getAcronym(user.name) }}" />
+					</div>
+					
+					<div style="margin-left:60px;padding-top:5px">
+						<div>
+							<strong>
+								<a style="font-weight:bold" class="link" href="{{ path('user_profile', {'username': user.username}) }}">{{ user.name }}</a>
+							</strong>
+						</div>
+						<div>
+							<span><i class="fas fa-user-circle i_ur"></i> <span id="ur_view_username">{{ user.username }}</span></span>
+							{% if user.location and user.location | trim != "" %}
+									{% set displayLocation = "inline" %}
+							{% else %}
+									{% set displayLocation = "none" %}
+							{% endif %}
+							<span style="display: {{ displayLocation }}" id="ur_view_location_wrap"><i class="fas fa-map-marker-alt i_ur"></i> <span id="ur_view_location">{{ user.location }}</span></span>
+						</div>
+					</div>
+					<div class="both"></div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>

@@ -146,7 +146,7 @@
 					<span><span class="direction"></span> Précédent </span><br />
 					<span>
 						{% set illustration = postIllustration(previousPost) %}
-						<span class="logo"> <img src="{{ illustration | imagine_filter('32x32') }}" alt="img post" /></span>
+						<span class="logo"> <img src="{{ illustration | imagine_filter('32x32') }}" alt="BG" /></span>
 						<span class="label post">
 							<strong>
 								{{ previousPost.title }}
@@ -158,7 +158,7 @@
 					<span>Suivant <span class="direction"></span></span><br />
 					<span>
 						{% set illustration = postIllustration(nextPost) %}
-						<span class="logo"> <img src="{{ illustration | imagine_filter('32x32') }}" alt="img post" /></span>
+						<span class="logo"> <img src="{{ illustration | imagine_filter('32x32') }}" alt="BG" /></span>
 						<span class="label post">
 							<strong>
 								{{ nextPost.title }}

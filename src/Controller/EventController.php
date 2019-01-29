@@ -33,6 +33,7 @@ use App\Repository\SchoolContactRepository;
 use App\Repository\EvaluationRepository;
 use App\Repository\ParticipationRepository;
 use App\Repository\TagEventRepository;
+use App\Repository\TagRepository;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class EventController extends AbstractController{
@@ -57,6 +58,7 @@ class EventController extends AbstractController{
         ParticipationRepository $participationRepository,
         CommentRepository $commentRepository,
         TagEventRepository $tagEventRepository,
+        TagRepository $tagRepository,
         ObjectManager $em
     )
     {
@@ -79,6 +81,7 @@ class EventController extends AbstractController{
         $this->participationRepository = $participationRepository;
         $this->commentRepository = $commentRepository;
         $this->tagEventRepository = $tagEventRepository;
+        $this->tagRepository = $tagRepository;
         $this->em = $em;
 
         $this->platformService->registerVisit();
@@ -156,7 +159,82 @@ class EventController extends AbstractController{
         return $response;
     }
 
+    public function viewTag($slug, $page, Request $request): Response
+    {
+        $tag = $this->tagRepository->findOneBy(array(
+            'slug' => $slug,
+        ));
+        if($tag){
+            $parameter = $this->parameterRepository->findOneBy(array(
+                'parameter' => 'events_by_page',
+            ));
+            $limit = intval($parameter->getValue());
+            $offset = ($page-1) * $limit;
+            
+            $events = $this->eventService->getEventsByTagOffsetLimit($tag, $offset, $limit);
+            $allEvents = $this->eventService->getEventsByTag($tag);
+        }else{
+            $events = array();
+            $allEvents = array();
+        }
+        $response = new Response();
+        if ($request->isXmlHttpRequest()){
+            //listEvent
+            $listEvents = array();
+            foreach($events as $event){
+                $event_view = $this->renderView('event/include/event_item.html.twig', array(
+                    'event' => $event,
+                ));
+                array_push($listEvents, array(
+                    "event_id" 	 => $event->getId(),
+                    "event_view" => $event_view,
+                ));
+            }
 
+            //pagination
+            $pagination = $this->renderView('event/include/pagination_list_event.html.twig', array(
+                'tag'           => $tag,
+                'allEvents'     => $allEvents,
+                'events'        => $events,
+                'limit'         => $limit,
+                'currentpage'   => $page,
+                'typeslug'      => "",
+            ));
+
+            //type_links
+            $typeLinks = $this->renderView('event/include/event_type_link.html.twig', array(
+                'tag'       => $tag,
+                'typeslug'  => "",
+            ));
+
+            $currentUrl = $this->get('router')->generate('event_view_tag', array(
+                'slug'   => $tag->getSlug(),
+                'page'  => $page
+            ));
+
+            $response->setContent(json_encode(array(
+                'state'         => 1,
+                'events'        => $listEvents,
+                'currentpage'   => $page,
+                'pagination'    => $pagination,
+                'typeLinks'     => $typeLinks,
+                'currentUrl'    => $currentUrl,
+                'page'          => $page,
+            )));
+        }else{
+            $response = $this->render('event/index.html.twig', [
+                'tag'           => $tag,
+                'allEvents'     => $allEvents,
+                'events'        => $events,
+                'currentpage'   => $page,
+                'typeslug'      => "",
+                'limit'         => $limit,
+                'entityView'    => 'event',
+            ]);
+        }
+
+        return $response;
+    }
 
     public function viewById($id, Request $request)
     {
@@ -323,6 +401,35 @@ class EventController extends AbstractController{
             $response->setContent(json_encode(array(
                 'state' => 3,
                 'message' => 'Authentification requise',
+            )));
+        }
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    public function participationsPopup($event_id, Request $request)
+    {
+        $event = $this->eventRepository->find($event_id);
+
+        $response = new Response();
+        $response->setContent(json_encode(array(
+            'state' => 0,
+        )));
+    
+        if ($event) {
+            $participations = $this->participationRepository->findBy(array(
+                'status' => 1,
+                'event' => $event,
+            ));
+
+            $participationsPopupHtml = $this->renderView('event/include/participations_popup.html.twig', array(
+                'participations' => $participations
+            ));
+
+            $response->setContent(json_encode(array(
+                'state'                  => 1,
+                'participationsPopupHtml' => $participationsPopupHtml,
             )));
         }
 

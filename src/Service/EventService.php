@@ -36,6 +36,7 @@ use App\Repository\TagPostRepository;
 use App\Repository\TypeSchoolRepository;
 use App\Repository\ParticipationRepository;
 use App\Repository\TagEventRepository;
+use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -60,6 +61,7 @@ class EventService
         ParticipationRepository $participationRepository,
         EventIllustrationRepository $eventIllustrationRepository,
         TagEventRepository $tagEventRepository,
+        TagRepository $tagRepository,
         EntityManagerInterface $em
     )
     {
@@ -81,6 +83,7 @@ class EventService
         $this->eventIllustrationRepository = $eventIllustrationRepository;
         $this->participationRepository = $participationRepository;
         $this->tagEventRepository = $tagEventRepository;
+        $this->tagRepository = $tagRepository;
         $this->em = $em;
     }
 
@@ -254,6 +257,60 @@ class EventService
         }
 
         return $isTag;
+    }
+
+    public function getTagsWithPublishedEvent() {
+        $tags = array();
+        
+        $tagTemps = $this->tagRepository->findAllOrderByName('ASC');
+        foreach($tagTemps as $tagTemp){
+            if($this->isTagWithPublishedEvent($tagTemp)){
+                array_push($tags, $tagTemp);
+            }
+        }
+        
+        return $tags;
+    }
+
+    public function isTagWithPublishedEvent($tag) {
+        $tagEvents = $this->tagEventRepository->getTagEventsWithPublishedEvent($tag);
+        if($tagEvents){
+            return true;
+        }     
+        return false;
+    }
+
+    public function getEventsByTagOffsetLimit($tag, $offset, $limit) {
+        $tagEvents = $this->tagEventRepository->getTagEventsByTagOffsetLimit($tag, $offset, $limit);
+        
+        $events = array();
+        foreach($tagEvents as $tagEvent){
+            $event = $tagEvent->getEvent();
+            array_push($events, $event);
+        }
+        
+        return $events;
+    }
+
+    public function getEventsByTag($tag) {
+        $tagEvents = $this->tagEventRepository->getTagEventsByTag($tag);
+        
+        $events = array();
+        foreach($tagEvents as $tagEvent){
+            $event = $tagEvent->getEvent();
+            array_push($events, $event);
+        }
+        return $events;
+    }
+
+    public function getPublishedEventsByTag($tag) {
+        $tagEvents = $this->tagEventRepository->getTagEventsWithPublishedEvent($tag);
+        $events = array();
+        foreach($tagEvents as $tagEvent){
+            $event = $tagEvent->getEvent();
+            array_push($events, $event);
+        }
+        return $events;
     }
 
 }

@@ -328,6 +328,11 @@ blog_post_new_comment:
         _controller: App\Controller\BlogController::newComment
 
 #event
+event_view_tag:
+    path:     /events/tag/{slug}/{page}
+    defaults:
+        _controller: App\Controller\EventController::viewTag
+        page: 1
 event:
     path:     /events/{typeslug}/{page}
     defaults:
@@ -358,6 +363,10 @@ event_load_comment:
     path:     /event/{event_id}/load-comment/{comment_id}
     defaults:
         _controller: App\Controller\EventController::loadComments
+event_participations_popup:
+    path:     /event/{event_id}/participations-popup
+    defaults:
+        _controller: App\Controller\EventController::participationsPopup
 
 #school
 school_categories:

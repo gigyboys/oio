@@ -130,7 +130,7 @@ $(function() {
 	/*
 	* Navigation pagination ajax
 	*/
-	$('body').on('click','a.pagination_item, .sl_type_item a, .et_type_item a',function(e){
+	$('body').on('click','a.pagination_item, .sl_type_item a, .et_type_item a, .et_tag',function(e){
         e.preventDefault(true);
 		var $this = $(this);
         var target = $this.attr("href");
@@ -212,7 +212,7 @@ $(function() {
     /*
     * on taping on search input
     */
-    $('.search_input').on('keyup', function(ed){
+    $('body').on('keyup','.search_input',function(event){
         var $this = $(this);
         var contextSearch = $this.closest(".search");
         var query = $this.val();
@@ -237,6 +237,7 @@ $(function() {
             query = query.replace(/[îï]/g,"i");
             query = query.replace(/[ôö]/g,"o");
 
+            console.log(query);
             if(text.indexOf(query) > -1){
                 var dataItemDisplay = contextSearch.attr('data-item-display');
 

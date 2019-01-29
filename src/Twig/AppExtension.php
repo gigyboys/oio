@@ -82,6 +82,8 @@ class AppExtension extends AbstractExtension
             new TwigFunction('isCurrent', array($this, 'isCurrent')),
             new TwigFunction('isUpcomming', array($this, 'isUpcomming')),
             new TwigFunction('isPassed', array($this, 'isPassed')),
+            new TwigFunction('getTagsWithPublishedEvent', array($this, 'getTagsWithPublishedEvent')),
+            new TwigFunction('getPublishedEventsByTag', array($this, 'getPublishedEventsByTag')),
         );
     }
 
@@ -272,5 +274,13 @@ class AppExtension extends AbstractExtension
 
     public function isPassed(Event $event) {
         return $this->eventService->isPassed($event);
+    }
+
+    public function getTagsWithPublishedEvent() {
+        return $this->eventService->getTagsWithPublishedEvent();
+    }
+
+    public function getPublishedEventsByTag(Tag $tag) {
+        return $this->eventService->getPublishedEventsByTag($tag);
     }
 }

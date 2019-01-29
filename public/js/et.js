@@ -159,11 +159,35 @@ $(function() {
 			}
 		});	
 	});
-	
+
+	//popup participations
+	$('body').on('click','.going.participations_popup',function(event){
+		var target = $(this).data("target");
+		
+		var content = "<div style='text-align:center;padding:10px; color:#fff'>Chargement ...</div>";
+		popup(content, 470, true);
+		$.ajax({
+			type: 'POST',
+			url: target,
+			dataType : 'json',
+			success: function(data){
+				if(data.state){
+					content = data.participationsPopupHtml;
+					$(".popup").html(content);
+					centerBloc($('.popup_content'), $('.popup'));
+				}else{
+					
+				}
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+			}
+		});
+	});
+
 	initListParticipants();
 	$(window).resize(function() {
         initListParticipants();
-    });
+	});
 });
 
 function initListParticipants() {
