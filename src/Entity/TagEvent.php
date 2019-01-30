@@ -3,10 +3,16 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 
 /**
  *
- * @ORM\Table(name="et_tag_event")
+ * @ORM\Table(name="et_tag_event", 
+ *    uniqueConstraints={
+ *        @UniqueConstraint(name="tag_event_unique", 
+ *            columns={"tag_id", "event_id"})
+ *    }
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\TagEventRepository")
  */
 class TagEvent
@@ -19,16 +25,16 @@ class TagEvent
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Event")
-     * @ORM\JoinColumn(name="post_id", nullable=false)
-     */
-    private $event;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Tag")
      * @ORM\JoinColumn(name="tag_id", nullable=false)
      */
     private $tag;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Event")
+     * @ORM\JoinColumn(name="event_id", nullable=false)
+     */
+    private $event;
 
     /**
      * @var boolean
@@ -42,18 +48,6 @@ class TagEvent
         return $this->id;
     }
 
-    public function setEvent($event)
-    {
-        $this->event = $event;
-
-        return $this;
-    }
-
-    public function getEvent()
-    {
-        return $this->event;
-    }
-
     public function setTag($tag)
     {
         $this->tag = $tag;
@@ -64,6 +58,18 @@ class TagEvent
     public function getTag()
     {
         return $this->tag;
+    }
+
+    public function setEvent($event)
+    {
+        $this->event = $event;
+
+        return $this;
+    }
+
+    public function getEvent()
+    {
+        return $this->event;
     }
 
     public function setCurrent($current)

@@ -3,10 +3,16 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 
 /**
  *
- * @ORM\Table(name="sl_category_school")
+ * @ORM\Table(name="sl_category_school", 
+ *    uniqueConstraints={
+ *        @UniqueConstraint(name="category_school_unique", 
+ *            columns={"category_id", "school_id"})
+ *    }
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\CategorySchoolRepository")
  */
 class CategorySchool
@@ -19,16 +25,16 @@ class CategorySchool
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\School")
-     * @ORM\JoinColumn(name="school_id", nullable=false)
-     */
-    private $school;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category")
      * @ORM\JoinColumn(name="category_id", nullable=false)
      */
     private $category;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\School")
+     * @ORM\JoinColumn(name="school_id", nullable=false)
+     */
+    private $school;
 
     /**
      * @var boolean
@@ -42,18 +48,6 @@ class CategorySchool
         return $this->id;
     }
 
-    public function setSchool($school)
-    {
-        $this->school = $school;
-
-        return $this;
-    }
-
-    public function getSchool()
-    {
-        return $this->school;
-    }
-
     public function setCategory($category)
     {
         $this->category = $category;
@@ -64,6 +58,18 @@ class CategorySchool
     public function getCategory()
     {
         return $this->category;
+    }
+
+    public function setSchool($school)
+    {
+        $this->school = $school;
+
+        return $this;
+    }
+
+    public function getSchool()
+    {
+        return $this->school;
     }
 
     public function setCurrent($current)
