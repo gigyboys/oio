@@ -25,7 +25,7 @@
 		<div id="user" style="display: block; margin-right: 10px; float:left">
 			<div class="dd" style="display:block; margin:0px;">
 				{% set avatar = userAvatar(app.user) %}
-				<div class="dd_src" style="cursor:pointer">
+				<div class="dds" style="cursor:pointer">
 					<span style="display:block; border-radius:3px;border:1px solid #aaa;overflow:hidden">
 						<table style="border-collapse: collapse;border:0px solid #999; padding:0px; margin:0px">
 							<tr>
@@ -43,7 +43,7 @@
 						</table>
 					</span>
 				</div>
-				<div class="dd_target" data-display="block" style="margin-top: 4px; position: absolute; display: none; border: 1px solid #aaa; border-radius: 0 0 4px 4px;background:#fff">
+				<div class="ddt" data-display="block" style="margin-top: 4px; position: absolute; display: none; border: 1px solid #aaa; border-radius: 0 0 4px 4px;background:#fff">
 					<div>
 						<div style="float:left;width:70px;height:70px">
 							<img id="avatar_banner" style="width:50px; height: 50px; margin:10px;" src="{{ avatar | imagine_filter('50x50') }}" alt="{{ app.user.username }}" />

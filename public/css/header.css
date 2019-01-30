@@ -64,13 +64,13 @@ header{
 #locale .dd{
 	display:inline-block;
 }
-#locale .dd_src{
+#locale .dds{
 	height: 20px;
 }
-#locale .dd_src span{
+#locale .dds span{
 	display:inline-block;
 }
-#locale .dd_target{
+#locale .ddt{
 	text-align: left; 
 	margin-top: 4px; 
 	position: absolute; 
@@ -126,30 +126,30 @@ header{
 	display:block; 
 	margin:0px;
 }
-#nav_right #user .dd_src{
+#nav_right #user .dds{
 	cursor:pointer
 }
-#nav_right #user .dd_src .connected{
+#nav_right #user .dds .connected{
 	display:block; 
 	border-radius:3px;
 	border:1px solid #ccc;
 	overflow:hidden
 }
-#nav_right #user .dd_src .connected table{
+#nav_right #user .dds .connected table{
 	border-collapse: collapse;
 	border:0px solid #ccc; 
 	padding:0px; 
 	margin:0px
 }
-#nav_right #user .dd_src .connected table td{
+#nav_right #user .dds .connected table td{
 	padding:0px;
 }
-#nav_right #user .dd_src .connected .user_avatar .wrap{
+#nav_right #user .dds .connected .user_avatar .wrap{
 	display:block; 
 	background:#eee; 
 	height:30px;
 }
-#nav_right #user .dd_src .connected .user_name .wrap{
+#nav_right #user .dds .connected .user_name .wrap{
 	display:block; 
 	background:#eee; 
 	height:26px; 
@@ -158,7 +158,7 @@ header{
 	padding-top:4px;
 	max-width:240px;
 }
-#nav_right #user .dd_src .connected .user_name .wrap span{
+#nav_right #user .dds .connected .user_name .wrap span{
 	white-space:nowrap;
 	overflow:hidden;
 	text-overflow:ellipsis;
@@ -166,7 +166,7 @@ header{
 	width: 100%
 }
 
-#nav_right #user .dd_src .not_connected{
+#nav_right #user .dds .not_connected{
 	display:block; 
 	background:#eee; 
 	height:26px; 
@@ -179,14 +179,14 @@ header{
 }
 
 
-#nav_right #user .dd_src .not_connected .illustration{
+#nav_right #user .dds .not_connected .illustration{
 	width:22px; 
 	height:22px;
 	display: inline-block; 
 	vertical-align: middle;
 }
 
-#nav_right #user .dd_target.connected{
+#nav_right #user .ddt.connected{
 	margin-top: 4px; 
 	position: absolute; 
 	display: none; 
@@ -220,15 +220,15 @@ header{
 	text-overflow: ellipsis;
 	box-sizing:border-box
 }
-#nav_right #user .dd_target.connected .link_wrap{
+#nav_right #user .ddt.connected .link_wrap{
 	border-top:1px solid #ddd; 
 	text-align:center;
 }
-#nav_right #user .dd_target.connected .link_wrap .link{
+#nav_right #user .ddt.connected .link_wrap .link{
 	display:block;
 	padding:5px;
 }
-#nav_right #user .dd_target.not_connected{
+#nav_right #user .ddt.not_connected{
 	text-align: left; 
 	margin-top: 4px; 
 	position: absolute; 
@@ -365,7 +365,7 @@ header{
 	margin-left:6px;
 }
 
-#search_critere_sl .sl_bloc_cat .dd_src{
+#search_critere_sl .sl_bloc_cat .dds{
 	width: 100%;
 	background:rgba(255,255,255,0.5);
 	border-radius:3px;
@@ -415,7 +415,7 @@ header{
 	margin-left:6px;
 }
 
-#search_critere_sl .sl_bloc_type .dd_src{
+#search_critere_sl .sl_bloc_type .dds{
 	width: 100%;
 	background:rgba(255,255,255,0.5);
 	border-radius:3px;
@@ -489,26 +489,26 @@ header{
 .nav_responsive{
 	display:none;float:left
 }
-.nav_responsive .dd_src{
+.nav_responsive .dds{
 	display: block;
 	height:40px;
 	padding:12px 8px;
 	box-sizing:border-box;
 }
-.nav_responsive .dd_src img{
+.nav_responsive .dds img{
 	display: inline-block;
 	width: 20px; 
 	height: 20px; 
 	margin-top: -3px
 }
-.nav_responsive .dd_src .normal{
+.nav_responsive .dds .normal{
 	display:block; 
 	height: 3px;
 	width:20px; 
 	background:#333;
 	transition: transform 0.4s, background 0.3s, transform-origin 0.3s;
 }
-.nav_responsive .dd_src .transparent{
+.nav_responsive .dds .transparent{
 	display:block; 
 	height: 3px;
 	width:20px; 
@@ -529,7 +529,7 @@ header{
 	transform-origin: 0 2px;
 }
 
-.nav_responsive .dd_target{
+.nav_responsive .ddt{
 	text-align: left; 
 	margin-top: 0px; 
 	position: fixed;
@@ -543,11 +543,11 @@ header{
 	height: calc( 100vh - 40px );
 	backdrop-filter: blur(5px);
 }
-.nav_responsive .dd_target .link_wrap{
+.nav_responsive .ddt .link_wrap{
 	border-top:1px solid #ddd; 
 	text-align:left;
 }
-.nav_responsive .dd_target .link_wrap .link{
+.nav_responsive .ddt .link_wrap .link{
 	display:block;
 	padding:5px 0
 }
@@ -802,7 +802,7 @@ header{
 @media screen and (max-width: 500px)
 {
 	
-	#nav_right #user .dd_src .not_connected .text{
+	#nav_right #user .dds .not_connected .text{
 		display: none;
 	}
 

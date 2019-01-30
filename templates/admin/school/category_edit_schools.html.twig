@@ -8,17 +8,17 @@
 	<div class="bc">
 		<span class="bc1"><a href="{{ path('admin_school') }}"><img src="{{ asset('image/sl_icon.png') }}" style="width:14px; height:auto" /> <span>Etablissements</span></a> </span>
 		<span class="dd">
-			<span href="#" class="dd_src">
+			<span href="#" class="dds">
 				<span class="bcdd"></span>
 			</span>
             {{ include("admin/school/include/school_principal_action.html.twig") }}
 		</span>
 		<span class="bc1"><a href="{{ path('admin_school_category') }}">Catégories</a></span>
 		<span class="dd">
-			<span href="#" class="dd_src">
+			<span href="#" class="dds">
 				<span class="bcdd"></span>
 			</span>
-			<span class="dd_target dd_tdfault">
+			<span class="ddt dd_tdfault">
 				<a class="link dd_item" href="{{ path('admin_school_category_add') }}">
 					<span class="icon"><img src="{{ asset('image/add_icon.png') }}" /></span><span class="label">Nouvelle catégorie</span>
 				</a>
@@ -26,7 +26,7 @@
 		</span>
 		<span class="bc1"><a href="{{ path('admin_school_category_edit', {'category_id' :  category.id}) }}">{{ category.name }}</a></span>
 		<span class="dd">
-			<span href="#" class="dd_src">
+			<span href="#" class="dds">
 				<span class="bcdd"></span>
 			</span>
 		</span> 
@@ -35,10 +35,10 @@
 	<div style="padding:8px; float:right">
 		<div style="float:left">
 			<span class="dd" style="display:inline-block;">
-				<span href="#" class="dd_src" style="cursor:pointer">
+				<span href="#" class="dds" style="cursor:pointer">
 					Autres actions
 				</span>
-				<span class="dd_target dd_tdfault">
+				<span class="ddt dd_tdfault">
 					<a class="link dd_item" target="_blank" href="{{ path('school_category_viewbyid', {'id': category.id}) }}">
 						<span class="icon"><img src="{{ asset('image/view_icon.png') }}" /></span><span class="label">Aperçu</span>
 					</a>

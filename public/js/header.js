@@ -60,7 +60,7 @@ $(function() {
 		$("#search_sl_cat_name").html($(this).attr("data-name"));
 		$("#cat_sl_input_id").attr("data-slug",$(this).attr("data-slug"));
 		$("#cat_sl_input_id").val($(this).attr("data-category-id"));
-		$(".dd_target").hide();
+		$(".ddt").hide();
 		getSingleSchoolResult();
 	});
 	
@@ -68,7 +68,7 @@ $(function() {
 		$("#search_sl_type_name").html($(this).attr("data-name"));
 		$("#type_sl_input_id").attr("data-slug",$(this).attr("data-slug"));
 		$("#type_sl_input_id").val($(this).attr("data-type-id"));
-		$(".dd_target").hide();
+		$(".ddt").hide();
 		getSingleSchoolResult();
 	});
 	

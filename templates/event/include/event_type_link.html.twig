@@ -8,14 +8,14 @@
 	<a href="{{ path('event', {'typeslug':'all'}) }}"><span>Touts</span> <span class="hidden_530">Evènements</span></a>
 </span>
 <span class="dd d_ib">
-	<span href="#" class="dd_src c_p">
+	<span href="#" class="dds c_p">
 		{% if tag is defined %}
 			<span class="et_type_item active">{{ tag.name }}</span>
 		{% else %}
 			<span class="et_type_item">Tags</span>
 		{% endif %}
 	</span>
-	<span class="dd_target et_list_tag" data-display="block">
+	<span class="ddt et_list_tag" data-display="block">
 		<span class="mg_5 d_b">
 			{% set tags = getTagsWithPublishedEvent() %}
 				{% for tagTemp in tags %}

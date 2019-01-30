@@ -240,11 +240,11 @@ a:hover{
 	display:inline-block;
 }
 
-.bc .dd_src{
+.bc .dds{
 	cursor:pointer
 }
 
-.bc .dd_target{
+.bc .ddt{
 	display: none;
 	position:absolute
 }

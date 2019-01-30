@@ -8,14 +8,14 @@
 	<div class="bc">
 		<span class="bc1"><a href="{{ path('admin_blog_post') }}"><img src="{{ asset('image/bg_icon.png') }}" style="width:14px; height:auto" /> <span>{{ 'Blog' | trans }}</span></a> </span>
 		<span class="dd">
-			<span href="#" class="dd_src">
+			<span href="#" class="dds">
 				<span class="bcdd"></span>
 			</span>
             {{ include("admin/blog/include/blog_principal_action.html.twig") }}
 		</span>
 		<span class="bc1"><a href="{{ path('admin_blog_post_edit', {'post_id': post.id}) }}">{{ post.title }}</a></span>
 		<span class="dd">
-			<span href="#" class="dd_src">
+			<span href="#" class="dds">
 				<span class="bcdd"></span>
 			</span>
             {{ include("admin/blog/include/post_other_action.html.twig") }}
@@ -25,7 +25,7 @@
 	<div style="padding:8px; float:right">
 		<div style="float:left">
 			<span class="dd" style="display:inline-block;">
-				<span href="#" class="dd_src" style="cursor:pointer">
+				<span href="#" class="dds" style="cursor:pointer">
 					Autres actions
 				</span>
                 {{ include("admin/blog/include/post_other_action.html.twig") }}

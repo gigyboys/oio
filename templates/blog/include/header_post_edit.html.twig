@@ -8,10 +8,10 @@
 <div class="edit_header">
 	<div class="left">
 		<span class="dd" style="display:inline-block;">
-			<span href="#" class="dd_src" style="cursor:pointer">
+			<span href="#" class="dds" style="cursor:pointer">
 				<i class="fas fa-info-circle"></i> info
 			</span>
-			<span class="dd_target entity_info" data-display="block">
+			<span class="ddt entity_info" data-display="block">
 				<span class="mg_5" style="display: block">
 					<span><img src="{{ asset('image/ur_icon.png') }}" style="width:12px; height:auto" /> {{ getLinkUserInfo(post.user, post.user.name) | raw }}</span><br />
 					<span><img src="{{ asset('image/calendar_icon.png') }}" style="width:12px; height:auto" /> {{ getDateLabel(post.date) }} à {{ post.date | date('H:i') }}</span><br />
@@ -33,7 +33,7 @@
         {% endif %}
 		|
 		<span class="dd" style="display:inline-block;">
-			<span href="#" class="dd_src" style="cursor:pointer">
+			<span href="#" class="dds" style="cursor:pointer">
 				Actions
 			</span>
             {{ include("blog/include/post_other_action.html.twig") }}

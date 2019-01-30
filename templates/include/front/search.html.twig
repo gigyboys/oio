@@ -78,7 +78,7 @@
 							<input type="text"  autocomplete="off" id="q_sl" data-target="{{ path('platform_search_single_school') }}" placeholder="" value="{{ querySchool }}" />
 						</div>
 						<div class="sl_bloc_cat dd">
-							<div class="dd_src">
+							<div class="dds">
 								{% if category is not defined or category is null %}
 									<span id="search_sl_cat_name">Toutes categories</span>
 									<input type="hidden" name="category" id="cat_sl_input_id" value="0" data-slug="all"  />
@@ -87,7 +87,7 @@
 									<input type="hidden" name="category" id="cat_sl_input_id" value="{{ category.id }}" data-slug="{{ category.slug }}"  />
 								{% endif %}
 							</div>
-							<div class="dd_target search_sl_cat_list" data-display="block">
+							<div class="ddt search_sl_cat_list" data-display="block">
 								<div class="mg_5">
 									<span data-category-id="0" title="Toutes categories" data-name="Toutes categories" data-slug="all" class="search_cat_sl_item"><span>Toutes categories</span></span>{#
 									#}{% set categories = getCategoriesWithPublishedSchool(0) %}{#
@@ -98,7 +98,7 @@
 							</div>
 						</div>
 						<div class="sl_bloc_type dd">
-							<div class="dd_src">
+							<div class="dds">
                                 {% if typeEntity is not defined or typeEntity is null %}
 									<span id="search_sl_type_name">Touts types</span>
 									<input type="hidden" name="type" id="type_sl_input_id" value="0" data-slug="all"  />
@@ -107,7 +107,7 @@
 									<input type="hidden" name="type" id="type_sl_input_id" value="{{ typeEntity.id }}" data-slug="{{ typeEntity.slug }}"  />
                                 {% endif %}
 							</div>
-							<div class="dd_target search_sl_type_list d_n" data-display="block">
+							<div class="ddt search_sl_type_list d_n" data-display="block">
 								<div class="mg_5">
 									<span data-type-id="0" title="Touts types" data-slug="all" class="search_type_sl_item" data-name="Touts types">Touts types</span>
 									<span data-type-id="1" title="Publique" data-slug="public" class="search_type_sl_item" data-name="Publics">Publics</span>

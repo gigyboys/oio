@@ -18,10 +18,10 @@
                     </li>
                     <li>
                         <div class="dd nav_responsive">
-                            <span class="dd_src c_p">
+                            <span class="dds c_p">
                                 <img src="{{ asset('image/sl_logo_nav.png')  }}" alt="SL"/>
                             </span>
-                            <div class="dd_target" data-display="block">
+                            <div class="ddt" data-display="block">
                                 <div class="link_wrap">
                                     <a class="link" href="{{ path('school_home') }}" title="Tous établissements">
                                         <span>Tout Etablissements</span>
@@ -44,14 +44,14 @@
                     </li>
                     <li>
                         <div class="dd nav_responsive">
-                            <span class="dd_src toggler_src c_p">
+                            <span class="dds toggler_src c_p">
                                 <span class="normal bar1"></span>
                                 <span class="transparent"></span>
                                 <span class="normal bar2"></span>
                                 <span class="transparent"></span>
                                 <span class="normal bar3"></span>
                             </span>
-                            <div class="dd_target toggler_target" data-display="block">
+                            <div class="ddt toggler_target" data-display="block">
                                 <div class="link_wrap">
                                     <a class="link" href="{{ path('blog') }}">
                                         <span>Blog</span>
@@ -66,10 +66,10 @@
                 </ul>
                 <ul class="nav_not_responsive">
                     <li class="dd">
-                        <a href="{{ path('school_home') }}" class="dd_src">
+                        <a href="{{ path('school_home') }}" class="dds">
                             <span class="vamiddle d_ib">Etablissements</span>
                         </a>
-                        <div class="dd_target menu_sl" data-display="block">
+                        <div class="ddt menu_sl" data-display="block">
                             <div class="link_wrap">
                                 <a class="link" href="{{ path('school_home') }}" title="Tous établissements">
                                     <span>Tout Etablissements</span>
@@ -107,7 +107,7 @@
                     <div class="dd">
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                             {% set avatar = userAvatar(app.user) %}
-                            <div class="dd_src">
+                            <div class="dds">
 								<span class="connected">
 									<table>
 										<tr>
@@ -126,7 +126,7 @@
 								</span>
                             </div>
                         {% else %}
-                            <div class="dd_src">
+                            <div class="dds">
                                 <span class="not_connected">
                                     <img class="illustration" src="{{ asset('image/icon_user_not.png') }}" alt="UR"/>
                                     <span class="text">Mon espace membre</span>
@@ -135,7 +135,7 @@
                         {% endif %}
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                             {% set avatar = userAvatar(app.user) %}
-                            <div class="dd_target connected" data-display="block">
+                            <div class="ddt connected" data-display="block">
                                 <div id="user_info_header">
                                     <div class="avatar_wrap">
                                         <img id="avatar_banner_target" src="{{ avatar | imagine_filter('50x50') }}" alt="{{ app.user.username }}" />
@@ -176,7 +176,7 @@
                                 </div>
                             </div>
                         {% else %}
-                            <div class="dd_target not_connected" data-display="block">
+                            <div class="ddt not_connected" data-display="block">
                                 <ul>
                                     <li class="log_item">
                                         <a class="link" href="{{ path("user_login") }}">

@@ -8,24 +8,24 @@
 	<div class="bc">
 		<span class="bc1"><a href="{{ path('admin_school') }}"><img src="{{ asset('image/sl_icon.png') }}" style="width:14px; height:auto" /> <span>Etablissement</span></a> </span>
 		<span class="dd">
-			<span href="#" class="dd_src">
+			<span href="#" class="dds">
 				<span class="bcdd"></span>
 			</span>
 			{{ include("admin/school/include/school_principal_action.html.twig") }}
 		</span> 
 		<span class="bc1"><a href="{{ path('admin_school_edit', {'id': school.id}) }}">{% if school.shortName != "" %}{{ school.shortName }}{% else %}{{ school.name }}{% endif %}</a></span>
 		<span class="dd">
-			<span href="#" class="dd_src">
+			<span href="#" class="dds">
 				<span class="bcdd"></span>
 			</span>
 			{{ include("admin/school/include/school_other_action.html.twig") }}
 		</span> 
 		<span class="bc1"><a href="{{ path('admin_school_contact', {'school_id': school.id}) }}"><span>Contacts</span></a> </span>
 		<span class="dd">
-			<span href="#" class="dd_src">
+			<span href="#" class="dds">
 				<span class="bcdd"></span>
 			</span>
-			<span class="dd_target dd_tdfault">
+			<span class="ddt dd_tdfault">
 				<a class="link dd_item" href="{{ path('admin_school_contact_add', {'school_id': school.id}) }}">
 					<span class="icon"><img src="{{ asset('image/add_icon.png') }}" /></span><span class="label">Nouveau contact</span>
 				</a>
@@ -41,7 +41,7 @@
 	<div style="padding:8px; float:right">
 		<div style="float:left">
 			<span class="dd" style="display:inline-block;">
-				<span href="#" class="dd_src" style="cursor:pointer">
+				<span href="#" class="dds" style="cursor:pointer">
 					Autres actions
 				</span>
 				{{ include("admin/school/include/school_other_action.html.twig") }}

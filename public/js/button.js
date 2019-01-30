@@ -1,9 +1,9 @@
 $(function() {
-    var dd_target = $('.dd_target');
+    var ddt = $('.ddt');
     
     $(document).click(function() {
-        var dd_target = $('.dd_target');
-        dd_target.hide();
+        var ddt = $('.ddt');
+        ddt.hide();
 		$(".popup_user_info").remove();
 		$("view_result_wrap").hide();
 
@@ -15,36 +15,36 @@ $(function() {
 		
     });
 
-    $('body').on('click','.dd_src',function(e){
+    $('body').on('click','.dds',function(e){
         var $this = $(this);
         e.stopPropagation(); 
         e.preventDefault(true);
 
-        console.log("click dd_src");
-        var dd_target = $('.dd_target');
+        console.log("click dds");
+        var ddt = $('.ddt');
         
-        var dd_target_to = $this.closest(".dd").find(".dd_target");
-        console.log(dd_target_to.css('display'))
-        if(dd_target_to.css('display') == 'none'){
-            dd_target.hide();
-            dd_target_to.css('display','block').css('margin-left',0);
-            var decalage = $(window).width() - dd_target_to.width() - dd_target_to.offset().left - 10;
+        var ddt_to = $this.closest(".dd").find(".ddt");
+        console.log(ddt_to.css('display'))
+        if(ddt_to.css('display') == 'none'){
+            ddt.hide();
+            ddt_to.css('display','block').css('margin-left',0);
+            var decalage = $(window).width() - ddt_to.width() - ddt_to.offset().left - 10;
             console.log("decalage : "+decalage);
             if (decalage < 0){
-                dd_target_to.css('margin-left',decalage);
+                ddt_to.css('margin-left',decalage);
             }
 			
 			$(window).resize(function() {
-				var decalage = $(window).width() - dd_target_to.width() - $this.offset().left - 10; 
+				var decalage = $(window).width() - ddt_to.width() - $this.offset().left - 10; 
 				if (decalage < 0){
-					dd_target_to.css('margin-left',decalage);
+					ddt_to.css('margin-left',decalage);
 				}else{
-					dd_target_to.css('margin-left',0);
+					ddt_to.css('margin-left',0);
 				}
 			});
         }else{
-            dd_target.hide();
-            dd_target_to.hide();
+            ddt.hide();
+            ddt_to.hide();
         }
 
         if($('.toggler_target').is(':visible')){
@@ -54,7 +54,7 @@ $(function() {
         }
     });
 
-    $('body').on('click','.dd_target',function(e){
+    $('body').on('click','.ddt',function(e){
         e.stopPropagation(); 
         return false;      
     });

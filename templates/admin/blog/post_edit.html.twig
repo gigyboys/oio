@@ -8,7 +8,7 @@
 	<div class="bc">
 		<span class="bc1"><a href="{{ path('admin_blog_post') }}"><img src="{{ asset('image/bg_icon.png') }}" style="width:14px; height:auto" /> <span>{{ 'Blog' | trans }}</span></a> </span>
 		<span class="dd">
-			<span href="#" class="dd_src">
+			<span href="#" class="dds">
 				<span class="bcdd"></span>
 			</span>
             {{ include("admin/blog/include/blog_principal_action.html.twig") }}
@@ -18,7 +18,7 @@
 	<div style="padding:8px; float:right">
 		<div style="float:left">
 			<span class="dd" style="display:inline-block;">
-				<span href="#" class="dd_src" style="cursor:pointer">
+				<span href="#" class="dds" style="cursor:pointer">
 					Autres actions
 				</span>
                 {{ include("admin/blog/include/post_other_action.html.twig") }}
@@ -32,10 +32,10 @@
 		<span><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /> Edition de l'article #{{ post.id }}</span>
 		|
 		<span class="dd" style="display:inline-block;">
-			<span href="#" class="dd_src" style="cursor:pointer">
+			<span href="#" class="dds" style="cursor:pointer">
 				info
 			</span>
-			<span class="dd_target" style="display:block; padding: 5px; text-align: left; margin-top: 4px; position: absolute; display: none; background: #eee; padding: 4px; border: 1px solid #aaa; border-radius: 4px;">
+			<span class="ddt" style="display:block; padding: 5px; text-align: left; margin-top: 4px; position: absolute; display: none; background: #eee; padding: 4px; border: 1px solid #aaa; border-radius: 4px;">
 				<span>Auteur : <a class="link" href="{{ path('admin_user_edit', {'user_id': post.user.id}) }}">{{ post.user.name }}</a></span><br />
 				<span>Date d'ajout : {{ post.date | date('Y-m-d H:i:s') }}</span><br />
 				<span>Nombre de vues : {#{{ post.viewNumber }}#}</span><br />
