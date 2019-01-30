@@ -24,7 +24,7 @@
 								<div>
 									<div>                
 										<div><label for="title" class="required">Titre * : </label></div>
-										<div><input type="text" id="title" name="title" required="required"  class="default_input" /></div>
+										<div><input type="text" id="title" name="title" required="required" value="{{ event.title }}" class="default_input" /></div>
 									</div>
 									<div>
 										<div><label for="datebegin_event" class="required">Date et heure debut * : </label></div>
@@ -35,6 +35,10 @@
 										<div><input type="text" readonly="true" id="dateend_event" name="dateendText" required="required"  class="default_input" /></div>
 									</div>
 
+									{% if errormsg is defined and errormsg != ''%}
+										<div class="mg_v10"></div>{{ errormsg | raw }}</div>
+									{% endif %}
+									
 									<div style="margin-top : 10px">
 										<button type="submit" id="add" name="add" class="standar_button">Creer un évènement</button>
 									</div>

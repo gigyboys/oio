@@ -39,7 +39,7 @@ class EventRepository extends ServiceEntityRepository
     }
 
 
-    public function getEventOffsetLimit($offset, $limit, $published = null, $typeslug = 'upcoming') {
+    public function getEventOffsetLimit($offset, $limit, $published = null, $typeslug = 'all') {
 
         $currentDate = new \Datetime();
         $qb = $this->createQueryBuilder('event');
@@ -85,7 +85,7 @@ class EventRepository extends ServiceEntityRepository
         return $events;
     }
 
-    public function getEventsByType($typeslug = 'upcoming') {
+    public function getEventsByType($typeslug = 'all') {
 
         $currentDate = new \Datetime();
         $qb = $this->createQueryBuilder('event');

@@ -337,7 +337,7 @@ event:
     path:     /events/{typeslug}/{page}
     defaults:
         _controller: App\Controller\EventController::index
-        typeslug: upcoming
+        typeslug: all
         page: 1
 event_viewbyid:
     path:     /event/id/{id}

@@ -93,49 +93,57 @@ class EventManagerController extends AbstractController {
         $event = new Event();
         $form = $this->createForm(EventInitType::class, $event);
         $form->handleRequest($request);
+        $errormsg = "";
         if ($form->isSubmitted() && $form->isValid()) { 
             if(trim($event->getTitle())){
-                $event->setIntroduction('Introduction '.$event->getTitle());
-                $event->setContent('Contenu '.$event->getTitle());
-
-                $slug = $this->platformService->getSlug($event->getTitle(), $event);
-                $event->setSlug($slug);
-                $event->setDate(new \DateTime());
-
                 //datebegin
                 $datebegin = $this->platformService->getDate($event->getDatebeginText(), 'd/m/y h:i');
                 //dateend
                 $dateend = $this->platformService->getDate($event->getDateendText(), 'd/m/y h:i');
 
-                $event->setDatebegin($datebegin);
-                $event->setDateend($dateend);
+                if ($datebegin instanceof \DateTime && $dateend instanceof \DateTime) {
+                    $event->setIntroduction('Introduction '.$event->getTitle());
+                    $event->setContent('Contenu '.$event->getTitle());
 
-                $event->setPublished(false);
-                $event->setValid(false);
-                $event->setDeleted(false);
-                $user = $this->getUser();
-                $event->setUser($user);
-                $event->setShowAuthor(true);
-                $event->setActiveComment(true);
-                $event->setTovalid(false);
+                    $slug = $this->platformService->getSlug($event->getTitle(), $event);
+                    $event->setSlug($slug);
+                    $event->setDate(new \DateTime());
 
-                $this->em->persist($event);
+                    $event->setDatebegin($datebegin);
+                    $event->setDateend($dateend);
 
-                $this->em->flush();
+                    $event->setPublished(false);
+                    $event->setValid(false);
+                    $event->setDeleted(false);
+                    $user = $this->getUser();
+                    $event->setUser($user);
+                    $event->setShowAuthor(true);
+                    $event->setActiveComment(true);
+                    $event->setTovalid(false);
 
-                return $this->redirectToRoute('event_manager_edit', array(
-                    'event_id' => $event->getId()
-                ));
+                    $this->em->persist($event);
 
+                    $this->em->flush();
+
+                    return $this->redirectToRoute('event_manager_edit', array(
+                        'event_id' => $event->getId(),
+                    ));
+                }else{
+                    $errormsg = "<div class='error_msg'>Vérifiez votre saisie</div>";
+                }
             }else{
                 return $this->render('event/add_event.html.twig', array(
                     'form' => $form->createView(),
+                    'errormsg' => $errormsg,
+                    'event' => $event,
                 ));
             }
         }
 
         return $this->render('event/add_event.html.twig', array(
             'form' => $form->createView(),
+            'errormsg' => $errormsg,
+            'event' => $event,
         ));
     }
 

@@ -1,11 +1,11 @@
+<span class="et_type_item {% if typeslug == 'all' %}active{% endif %}">
+	<a href="{{ path('event', {'typeslug':'all'}) }}"><span>Touts</span> <span class="hidden_530">Evènements</span></a>
+</span>
 <span class="et_type_item {% if typeslug == 'upcoming' %}active{% endif %}">
-	<a href="{{ path('event') }}"><span>En cours / à venir</span></a>
+	<a href="{{ path('event', {'typeslug':'upcoming'}) }}"><span>En cours / à venir</span></a>
 </span>
 <span class="et_type_item {% if typeslug == 'passed' %}active{% endif %}">
 	<a href="{{ path('event', {'typeslug':'passed'}) }}"><span class="hidden_530">Evènements</span> <span>Passés</span></a>
-</span>
-<span class="et_type_item {% if typeslug == 'all' %}active{% endif %}">
-	<a href="{{ path('event', {'typeslug':'all'}) }}"><span>Touts</span> <span class="hidden_530">Evènements</span></a>
 </span>
 <span class="dd d_ib">
 	<span href="#" class="dds c_p">

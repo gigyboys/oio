@@ -57,8 +57,12 @@
 
 		<div class="et_date_info tacenter mg_v5">
 			<i class="fas fa-calendar-alt"></i> 
-			<strong>{{ getDateLabel(event.datebegin, true) }}</strong> - 
-			<strong>{{ getDateLabel(event.dateend, true) }}</strong>
+			{% if event.datebegin | date("Y-m-d") == event.dateend | date("Y-m-d") %}
+				<strong>{{ getDateLabel(event.datebegin, true) }}</strong>
+			{% else %}
+				<strong>{{ getDateLabel(event.datebegin, true) }}</strong> - 
+				<strong>{{ getDateLabel(event.dateend, true) }}</strong>
+			{% endif %}
 		</div>
 		<div class="event_action tacenter mg_v5">
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}

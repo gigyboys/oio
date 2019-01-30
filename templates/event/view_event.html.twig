@@ -52,7 +52,7 @@
 						</div>
 						<div class="both"></div>
 					</div>
-					<div class="mg_t10 mg_h10">
+					<div class="mg_t5 mg_h10">
 
 						{% if event.showAuthor %}
 							<strong>Par</strong>
@@ -65,8 +65,8 @@
 						#}
 					</div>
 					
-					<div style="padding: 10px 10px 0px">
-						<span>Du <strong>{{ getDateLabel(event.datebegin) }} à {{ event.datebegin | date('H:i') }}</strong></span> 
+					<div class="pd_h10 pd_t10">
+						<span>Du <strong>{{ getDateLabel(event.datebegin) }} à {{ event.datebegin | date('H:i') }}</strong></span> <br />
 						<span>Au <strong>{{ getDateLabel(event.dateend) }} à {{ event.dateend | date('H:i') }}</strong></span>
 					</div>
 
