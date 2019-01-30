@@ -31,11 +31,11 @@
             {% set logo = schoolLogo(school) %}
             <a href="{{ path('school_view', {'slug': school.slug, 'type': 'about'}) }}"><img src="{{ logo | imagine_filter('20x20') }}" alt="AU" /></a>
         </div>
-        <div class="sl_action_bg">
-            <a href="{{ path('school_view', {'slug': school.slug, 'type': 'post'}) }}"><i class="far fa-edit"></i></a>
-        </div>
         <div class="sl_action_et">
             <a href="{{ path('school_view', {'slug': school.slug, 'type': 'event'}) }}"><i class="fas fa-calendar-day"></i></a>
+        </div>
+        <div class="sl_action_bg">
+            <a href="{{ path('school_view', {'slug': school.slug, 'type': 'post'}) }}"><i class="far fa-edit"></i></a>
         </div>
         <div class="sl_action_evaluation">
             <a href="{{ path('school_view', {'slug': school.slug, 'type': 'evaluation'}) }}"><i class="fas fa-star-half-alt"></i></a>

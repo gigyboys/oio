@@ -26,10 +26,10 @@
 			<a href="{{ path('school_view', {'slug': school.slug, 'type': 'about'}) }}"><img src="{{ logo | imagine_filter('20x20') }}" alt="AU" /></a>
 		</span><!--
 		--><span class="link_item">
-			<a href="{{ path('school_view', {'slug': school.slug, 'type': 'post'}) }}"><i class="far fa-edit"></i></a>
+			<a href="{{ path('school_view', {'slug': school.slug, 'type': 'event'}) }}"><i class="fas fa-calendar-day"></i></a>
 		</span><!--
 		--><span class="link_item">
-			<a href="{{ path('school_view', {'slug': school.slug, 'type': 'event'}) }}"><i class="fas fa-calendar-day"></i></a>
+			<a href="{{ path('school_view', {'slug': school.slug, 'type': 'post'}) }}"><i class="far fa-edit"></i></a>
 		</span><!--
 		--><span class="link_item">
 			<a href="{{ path('school_view', {'slug': school.slug, 'type': 'evaluation'}) }}"><i class="fas fa-star-half-alt"></i></a>

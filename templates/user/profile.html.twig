@@ -125,14 +125,14 @@
 						<div id="t">
 							<div class="t_header mg_h10">
 								<div class="t_header_content">
-									<div class="t_header_item selected" id="upost">
-										<div class="t_header_item_text">
-											Articles
-										</div>
-									</div>
-									<div class="t_header_item" id="uevent">
+									<div class="t_header_item selected" id="uevent">
 										<div class="t_header_item_text">
 											Evènements
+										</div>
+									</div>
+									<div class="t_header_item" id="upost">
+										<div class="t_header_item_text">
+											Articles
 										</div>
 									</div>
 									<div class="t_header_item" id="ucomment">
@@ -152,11 +152,11 @@
 								</div>
 							</div>
 							<div class="t_content">
-								<div class="t_content_item selected" id="c_upost">
-									{{ include("user/include/posts.html.twig") }}
-								</div>
-								<div class="t_content_item" id="c_uevent">
+								<div class="t_content_item selected" id="c_uevent">
 									{{ include("user/include/events.html.twig") }}
+								</div>
+								<div class="t_content_item" id="c_upost">
+									{{ include("user/include/posts.html.twig") }}
 								</div>
 								<div class="t_content_item" id="c_ucomment">
 									{{ include("user/include/comments.html.twig") }}
