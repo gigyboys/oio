@@ -5,7 +5,7 @@
 				{% set evaluation = myEvaluation %}
 				{{ include("school/include/evaluation_item.html.twig") }}
 			</div>
-			<div class="bloc_edit" style="display:none">
+			<div class="bloc_edit d_n">
 				<div class="mg_b5">
 				{{ app.user.name }} :
 				</div>
@@ -37,7 +37,7 @@
 			<div class="bloc_action" style="margin-top:5px; border:1px solid transparent">
 				<span class="btn_edit standar_button">Modifier</span> 
 				<span class="btn_save standar_button" id="btn_eval_sl" data-target="{{ path('school_add_evaluation', {'id': school.id}) }}" style="display:none">Evaluer</span>
-				<span class="btn_reset standar_button" style="display:none">Annuler</span> 
+				<span class="btn_reset standar_button d_n">Annuler</span> 
 				<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;">Chargement...</span> 
 			</div>
 		</div>
@@ -47,7 +47,7 @@
 			<div class="bloc_view">
 				Vous n'avez pas encore donné votre évaluation sur cet établissement
 			</div>
-			<div class="bloc_edit" style="display:none">
+			<div class="bloc_edit d_n">
 				<div class="mg_b5">
 				{{ app.user.name }} :
 				</div>
@@ -72,8 +72,8 @@
 			</div>
 			<div class="bloc_action" style="margin-top:5px; border:1px solid transparent">
 				<span class="btn_edit standar_button">Je donne mon évaluation</span> 
-				<span class="btn_save standar_button" id="btn_eval_sl" data-target="{{ path('school_add_evaluation', {'id': school.id}) }}" style="display:none">Evaluer</span>
-				<span class="btn_reset standar_button" style="display:none">Annuler</span> 
+				<span class="btn_save standar_button d_n" id="btn_eval_sl" data-target="{{ path('school_add_evaluation', {'id': school.id}) }}">Evaluer</span>
+				<span class="btn_reset standar_button d_n">Annuler</span> 
 				<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;">Chargement...</span> 
 			</div>
 		</div>

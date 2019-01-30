@@ -9,7 +9,7 @@
 			<div style="float: left; width: calc(100% - 170px)">
 				<strong style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;display: inline-block;width: 100%;">{{ document.newName }} ({{ document.formattedFilesize }})</strong>
 			</div>
-			<div style="float: right">
+			<div class="right">
 				<span class="download_count">
 					{% set countDownloads = document.downloads | length %}
 					{% if countDownloads > 1 %}

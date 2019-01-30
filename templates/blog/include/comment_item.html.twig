@@ -1,11 +1,10 @@
-<div data-commentid="{{ comment.id }}" class="fm_msg_item">
-	<div style="margin:10px;">
-		<div class="topic_illustration" style="float:left; width:60px">
+<div data-commentid="{{ comment.id }}" class="cmt_item">
+	<div class="mg_10">
+		<div class="cmt_illustration">
 			{% set avatar = userAvatar(comment.user) %}
-			
-			<img style="width: 60px; height: 60px; border-radius: 50%" src="{{ avatar | imagine_filter('60x60') }}" alt="{{ getAcronym(comment.user.name) }}" />
+			<img src="{{ avatar | imagine_filter('60x60') }}" alt="{{ getAcronym(comment.user.name) }}" />
 		</div>
-		<div style="margin-left:70px">
+		<div class="cmt_ct">
 			<div>
 				{# twig extension #}
 				{% set userInfo = getLinkUserInfo(comment.user, comment.user.name) %}

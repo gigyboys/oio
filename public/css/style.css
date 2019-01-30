@@ -1004,6 +1004,45 @@ a:hover{
 	color:#000; 
 }
 
+#bg_load_post_action{
+	margin-bottom: 10px;
+	background: #fff;
+	padding: 10px;
+	border-top: 5px solid #ddd;
+}
+
+#bg_load_post_action #bg_load_post{
+	text-align:center; 
+	cursor:pointer; 
+	height: 20px;
+}
+
+#bg_load_post_action .btn_loading{
+	text-align:center;
+	display:none;
+	height: 15px;
+}
+
+#bg_load_post_action .btn_loading img{
+	height:10px; 
+	width:auto;
+	display: block; 
+	margin: auto;
+}
+
+/***** style common  *******/
+.cmt_item .cmt_illustration{
+	float:left; 
+	width:60px
+}
+.cmt_item .cmt_illustration img{
+	width: 60px; 
+	height: 60px; 
+	border-radius: 50%
+}
+.cmt_item .cmt_ct{
+	margin-left:70px
+}
 
 @media screen and (max-width: 1220px)
 {

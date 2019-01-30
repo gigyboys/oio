@@ -9,7 +9,7 @@
 		<div class="ct">
 			<div>
 				<div id="sl_list" class="sll p_cr" data-type="school">
-					<div class="p_load" id="sll_load_list" style="display:none;">chargement ...</div>
+					<div class="p_load d_n" id="sll_load_list">chargement ...</div>
 					<div class="mg_10 mg_b20">
 						<div class="sl_type p_stop">
 							{{ include("school/include/school_type_link.html.twig") }}
@@ -39,8 +39,6 @@
 				<div class="slr">
 					<div id="sl_oftheday_right">
                         {# twig extension #}
-
-                        {#{% set school = getSchoolById(1) %}#}
                         {% set school = getSchoolOfTheDay() %}
                         {% if school %}
 							<div class="title">
@@ -50,11 +48,6 @@
 								<div>
 									{{ include("school/school_item.html.twig") }}
 								</div>
-								{#
-								<div class="sl_desc" style="text-align:justify">
-									{{ school.shortDescription }}
-								</div>
-								#}
 							</div>
 
 							<div class="resp">

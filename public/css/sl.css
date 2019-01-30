@@ -548,7 +548,6 @@
 	border:1px solid #2981c5;
 	padding: 4px;
 	border-radius: 3px;
-	display: inline-block;
 	background: #e2f1ff;
 }
 
@@ -557,7 +556,6 @@
 	border:1px solid #a92c32;
 	padding: 4px;
 	border-radius: 3px;
-	display: inline-block;
 	background: #f8c7c7;
 }
 

@@ -93,11 +93,11 @@
                                 <span class="toggle_subscription" data-target="{{ path('school_toggle_subscription', {'school_id': school.id}) }}">
                                     {% set isSubscribed = isSubscribed(school, app.user) %}
                                     {% if isSubscribed %}
-                                        <span class="subscription_btn" style="display:none">S'abonner</span>
-                                        <span class="unsubscription_btn">Abonné</span>
+                                        <span class="subscription_btn d_n">S'abonner</span>
+                                        <span class="unsubscription_btn d_ib">Abonné</span>
                                     {% else %}
-                                        <span class="subscription_btn">S'abonner</span>
-                                        <span class="unsubscription_btn" style="display:none;">Abonné</span>
+                                        <span class="subscription_btn d_ib">S'abonner</span>
+                                        <span class="unsubscription_btn d_n">Abonné</span>
                                     {% endif %}
                                 </span>
                             {% endif %}

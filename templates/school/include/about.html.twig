@@ -34,13 +34,13 @@
 				{% if fields %}
 					{% for field in fields %}
 						<div class="mg_b10">
-							<div style="font-weight:bold">
-								<i class="fas fa-angle-right"></i> {{ field.name }}
+							<div>
+								<strong><i class="fas fa-angle-right"></i> {{ field.name }}</strong>
 							</div>
 							{% if field.description is null or field.description | trim == "" %}
 							{% else %}
 								<div class="sep mg_v5"></div>
-								<div style="display:block">
+								<div class="d_b">
 									{{ field.description | raw }}
 								</div>
 							{% endif %}

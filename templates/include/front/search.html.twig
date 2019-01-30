@@ -12,51 +12,31 @@
 					
 					{% set selectedSchool = "selected" %}
 					{% set selectedBlog = "" %}
-					{#{% set selectedAdvert = "" %}#}
 					
-					{% set displaySchool = "block" %}
-					{% set displayBlog = "none" %}
-                    {#{% set displayAdvert = "none" %}#}
+					{% set displaySchool = "d_b" %}
+					{% set displayBlog = "d_n" %}
 					
 					{% set querySchool = "" %}
 					{% set queryBlog = "" %}
-                    {#{% set queryAdvert = "" %}#}
 					
 					{% if entityView is defined %}
 						{% if entityView == "school" %}
 							{% set selectedSchool = "selected" %}
 							{% set selectedBlog = "" %}
-							{#{% set selectedAdvert = "" %}#}
-							{% set displaySchool = "block" %}
-							{% set displayBlog = "none" %}
-							{% set displayAdvert = "none" %}
+							{% set displaySchool = "d_b" %}
+							{% set displayBlog = "d_n" %}
 							{% if q is defined %}
 								{% set querySchool = q %}
 							{% endif %}
 						{% elseif entityView == "blog" %} 
 							{% set selectedSchool = "" %}
 							{% set selectedBlog = "selected" %}
-                            {#{% set selectedAdvert = "" %}#}
-							{% set displaySchool = "none" %}
-							{% set displayBlog = "block" %}
-							{% set displayAdvert = "none" %}
+							{% set displaySchool = "d_n" %}
+							{% set displayBlog = "d_b" %}
 							{% if q is defined %}
 								{% set queryBlog = q %}
 							{% endif %}
 						{% endif %}
-						{#
-						{% if entityView == "advert" %}
-							{% set selectedSchool = "" %}
-							{% set selectedBlog = "" %}
-							{% set selectedAdvert = "selected" %}
-							{% set displaySchool = "none" %}
-							{% set displayBlog = "none" %}
-							{% set displayAdvert = "block" %}
-							{% if q is defined %}
-								{% set queryAdvert = q %}
-							{% endif %}
-						{% endif %}
-						#}
 					{% endif %}
 					
 					<div class="search_entity_item {{ selectedSchool }}" data-entity="sl">
@@ -65,15 +45,10 @@
 					<div class="search_entity_item {{ selectedBlog }}" data-entity="bg">
 						<i class="far fa-edit"></i> Blog
 					</div>
-					{#
-					<div class="search_entity_item {{ selectedAdvert }}" data-entity="at">
-						{{ 'advert' | trans }}
-					</div>
-					#}
 					<div class="both"></div>
 				</div>
 				<div id="search_critere">
-					<div class="search_entity_content" id="search_critere_sl" style="display:{{ displaySchool }}">
+					<div class="search_entity_content {{ displaySchool }}" id="search_critere_sl">
 						<div class="sl_bloc_query">
 							<input type="text"  autocomplete="off" id="q_sl" data-target="{{ path('platform_search_single_school') }}" placeholder="" value="{{ querySchool }}" />
 						</div>
@@ -118,27 +93,17 @@
 						<div class="both"> 
 						</div>
 					</div>
-					<div class="search_entity_content" id="search_critere_bg" style="display:{{ displayBlog }}">
+					<div class="search_entity_content {{ displayBlog }}" id="search_critere_bg">
 						<input type="text" id="q_bg" placeholder=""  value="{{ queryBlog }}" />
 					</div>
-					{#
-					<div class="search_entity_content" id="search_critere_at" style="display:{{ displayAdvert }}">
-						<input type="text" id="q_at" placeholder="Tapez ce que vous voulez recherchez.advert"  value="{{ queryAdvert }}" />
-					</div>
-					#}
 				</div>
 				<div id="search_submit">
-					<div id="search_single_result_sl" class="search_single_result" style="display:{{ displaySchool }}">
+					<div id="search_single_result_sl {{ displaySchool }}" class="search_single_result">
 						Tapez le sigle ou l'appelation de l'établissement
 					</div>
-					<div id="search_single_result_bg" class="search_single_result" style="display:{{ displayBlog }}">
+					<div id="search_single_result_bg" class="search_single_result {{ displayBlog }}">
 						Faites votre recherche sur notre liste d'articles
 					</div>
-					{#
-					<div id="search_single_result_at" class="search_single_result" style="display:{{ displayAdvert }}">
-						Qu'est-ce que vous voulez recherchez? advert
-					</div>
-					#}
 					<div id="search_submit_button">
 						<div id="btn_search" data-target="{{ path('platform_search') }}" >
 							<i class="fas fa-search"></i> Rechercher

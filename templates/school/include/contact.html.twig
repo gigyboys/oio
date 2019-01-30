@@ -8,7 +8,7 @@
 			{{ schoolContacts|length }} {% if schoolContacts|length > 1 %}Contacts{% else %}Contact{% endif %}
 			{% if coords|length != 0 %}
 				- 
-				<span id="btn_show_map_contacts" style="cursor:pointer" data-target="{{ path('school_get_map_coordonnees', {'slug': school.slug}) }}">
+				<span id="btn_show_map_contacts c_p" data-target="{{ path('school_get_map_coordonnees', {'slug': school.slug}) }}">
 					<img src="{{ asset('image/location_icon.png') }}" style="width:12px; height:12px;" /> Tout afficher sur une carte
 				</span>
 			{% endif %}
