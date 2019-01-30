@@ -478,6 +478,19 @@ a:hover{
 	display: flex;
 	flex-wrap: wrap;
 }
+.et_list_tag{
+	display: none;
+	position: absolute; 
+	background:#eee; 
+	z-index:5; 
+	border:1px solid #ccc
+}
+.et_list_tag .et_tag_item{
+	max-width: 250px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 .event_item{
 	width: 33.333%;
 	padding:10px;
@@ -738,7 +751,7 @@ a:hover{
 	padding-right:10px
 }
 
-.participation_block .resume .going.participations_popup{
+.participations_popup{
 	cursor:pointer;
 }
 

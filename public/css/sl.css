@@ -19,7 +19,7 @@
 	margin-right: 10px
 }
 
-.sl_type_item a, .et_type_item a{
+.sl_type_item a, .et_type_item a, .et_type_item{
 	color:#999;
 }
 
@@ -31,7 +31,7 @@
 	color:#555;
 }
 
-.sl_type_item.active a, .et_type_item.active a{
+.sl_type_item.active a, .et_type_item.active a, .et_type_item.active{
 	color:#000;
 }
 

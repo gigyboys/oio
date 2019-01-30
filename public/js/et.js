@@ -161,7 +161,7 @@ $(function() {
 	});
 
 	//popup participations
-	$('body').on('click','.going.participations_popup',function(event){
+	$('body').on('click','.participations_popup',function(event){
 		var target = $(this).data("target");
 		
 		var content = "<div style='text-align:center;padding:10px; color:#fff'>Chargement ...</div>";

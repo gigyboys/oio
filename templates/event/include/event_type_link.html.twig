@@ -10,19 +10,17 @@
 <span class="dd d_ib">
 	<span href="#" class="dd_src c_p">
 		{% if tag is defined %}
-			<span>{{ tag.name }}</span>
+			<span class="et_type_item active">{{ tag.name }}</span>
 		{% else %}
-			<span style="color:#999">Tags</span>
+			<span class="et_type_item">Tags</span>
 		{% endif %}
-		
 	</span>
-	
-	<span class="dd_target list d_n" style="position: absolute; background:#eee; padding:5px; z-index:5; border:1px solid #ccc" data-display="block">
+	<span class="dd_target et_list_tag" data-display="block">
 		<span class="mg_5 d_b">
 			{% set tags = getTagsWithPublishedEvent() %}
 				{% for tagTemp in tags %}
 					<span class="d_b">
-						<a class="et_tag" href="{{ path('event_view_tag', {'slug': tagTemp.slug}) }}">
+						<a class="et_tag d_b et_tag_item" href="{{ path('event_view_tag', {'slug': tagTemp.slug}) }}">
 							{{ tagTemp.name }} 
 							{{ getPublishedEventsByTag(tagTemp) | length }}
 						</a>

@@ -44,7 +44,7 @@
                     {% if overflowParticipations <= 0 %}
                         {% set overflowParticipations = 0 %}
                     {% endif %}
-                    <span data-bound-count="{{ overflowParticipations }}" data-count="{{ overflowParticipations }}" class="bound_participations">+{{ overflowParticipations }}</span>
+                    <span data-bound-count="{{ overflowParticipations }}" data-count="{{ overflowParticipations }}" class="bound_participations{% if participations | length > 0 %} participations_popup{% endif %}" data-target="{{ path('event_participations_popup', {'event_id': event.id}) }}">+{{ overflowParticipations }}</span>
                     {#{% endif %}#}
                 </div>
             {% else %}
