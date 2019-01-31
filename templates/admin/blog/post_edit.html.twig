@@ -173,7 +173,7 @@
 						<span class="btn_edit standar_button">Modifier</span>
 						<span class="btn_doedit_content_post btn_save standar_button" data-target="{{ path('blog_manager_post_doedit_content', {'post_id': post.id}) }}" style="display:none">Enregistrer</span>
 						<span class="btn_reset standar_button" style="display:none">Annuler</span>
-						<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;"><img src="{{ asset('image/load.gif') }}" />Chargement...</span>
+						<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;"><img src="{{ asset('image/tail-spin.svg') }}" style="width: 20px;height: 20px"/>Chargement...</span>
 					</div>
 				</div>
 			</div>
@@ -232,20 +232,6 @@
 			<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" /> Chargement...
 		</span>
 		{% endif %}
-		{#
-		 |
-		<span class="toggle_case" data-target="{{ path('blog_manager_post_toggle_deletion', {'post_id': post.id}) }}">
-			{% if post.deleted %}
-				<span class="greenstate" style="display:none"><span class="greenpastille"></span> <span>Supprimer</span></span>
-				<span class="redstate"><span class="redpastille"></span> <span>Ne pas supprimer</span></span>
-			{% else %}
-				<span class="greenstate"><span class="greenpastille"></span> <span>Supprimer</span></span>
-				<span class="redstate" style="display:none"><span class="redpastille"></span> <span>Ne pas supprimer</span></span>
-			{% endif %}
-		</span><span class="state_loading" style="display:none">
-			<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" /> Chargement...
-		</span>
-		#}
 	</div> 
 {% endblock %}
 

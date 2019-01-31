@@ -361,4 +361,16 @@ class EventController extends AbstractController {
         $response->headers->set('Content-Type', 'application/json');
         return $response;
     }
+
+    /*
+    * Event gallery
+    */
+    public function eventGallery($event_id)
+    {
+        $event = $this->eventRepository->find($event_id);
+
+        return $this->render('admin/event/event_gallery.html.twig', array(
+            'event' => $event,
+        ));
+    }
 }

@@ -363,6 +363,10 @@ admin_event_comment_delete:
     path:     /event/{event_id}/delete-comment/{id}
     defaults:
         _controller: App\Controller\Admin\EventController::deleteComment
+admin_event_gallery:
+    path:     /event/{event_id}/gallery
+    defaults:
+        _controller: App\Controller\Admin\EventController::eventGallery
 
 #setting
 admin_setting_accessibility:

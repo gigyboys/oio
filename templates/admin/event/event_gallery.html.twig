@@ -1,0 +1,74 @@
+{% extends "back.html.twig" %}
+
+{% block title %}
+  Evènement #{{ event.id }} - Gallerie
+{% endblock %}
+
+{% block body_header %}
+	<div class="bc">
+			<span class="bc1"><a href="{{ path('admin_event') }}"><img src="{{ asset('image/default_icon.png') }}" style="width:14px; height:auto" /> <span>Evènements</span></a> </span>
+			<span class="dd">
+				<span href="#" class="dds">
+					<span class="bcdd"></span>
+				</span>
+				{{ include("admin/event/include/event_principal_action.html.twig") }}
+			</span>
+			<span class="bc1"><a href="{{ path('admin_event_edit', {'event_id': event.id}) }}">{{ event.title }}</a></span>
+		<span class="dd">
+			<span href="#" class="dds">
+				<span class="bcdd"></span>
+			</span>
+            {{ include("admin/event/include/event_other_action.html.twig") }}
+		</span> 
+		<span class="bc1"><a href="{{ path('admin_event_gallery', {'event_id': event.id}) }}"><span>Gallerie</span></a> </span>
+	</div>
+	<div style="padding:8px; float:right">
+		<div style="float:left">
+			<span class="dd" style="display:inline-block;">
+				<span href="#" class="dds" style="cursor:pointer">
+					Autres actions
+				</span>
+				{{ include("admin/event/include/event_other_action.html.twig") }}
+			</span> 
+		</div>
+	</div>
+{% endblock %}
+
+{% block content_body %}
+	<div>
+		<div style="float:left; height: 86px;margin:5px">
+			{# twig extension #}
+			{% set illustration = eventIllustration(event) %}
+			<img id="event_illustration" style="width: 80px; height: 80px" src="{{ illustration | imagine_filter('80x80') }}" alt="img sl" />
+		</div>
+		<div style="margin-left: 90px;">
+			<div>
+				<table>
+					<tr>
+						<td>Titre</td>
+						<td>:</td>
+						<td style="padding:5px"><span id="sl_view_name">{{ event.title }}</span></td>
+					</tr>
+					<tr>
+						<td>Slug</td>
+						<td>:</td>
+						<td style="padding:5px"><span id="sl_view_slug">{{ event.slug }}</span></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="both"></div>
+	</div>
+	
+	<div style="background:#ddd; padding: 5px; margin:5px; border:1px solid #bbb">
+		<span><img src="{{ asset('image/list_icon.png') }}" style="width:12px; height:auto" /> Gallerie</span>
+	</div>
+	
+	<div>
+		Conteny gallerie
+	</div>
+{% endblock %}
+
+{% block body_footer %}
+	<span style="display:inline-block; margin-top:6px; margin-left:6px">Gallerie</span>
+{% endblock %}

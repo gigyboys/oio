@@ -64,24 +64,6 @@
 						</tr>
 					</table>
 				</div>
-				{#
-					<div class="bloc_edit" style="display:none">
-						<table>
-							<tr>
-								<td>Nom</td>
-								<td>:</td>
-								<td style="padding:5px"><input type="text" id="sl_input_name" class="default_input" value="{{ user.name }}" /></td>
-							</tr>
-						</table>
-					</div>
-					<div class="separator"></div>
-					<div class="bloc_action" style="margin:5px">
-						<span class="btn_edit standar_button">Modifier</span>
-						<span class="btn_save standar_button" id="btn_sl_doedit" data-target="{{ path('admin_school_doedit', {'id': school.id}) }}" style="display:none">Enregistrer</span>
-						<span class="btn_reset standar_button" style="display:none">Annuler</span>
-						<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;"><img src="{{ asset('image/load.gif') }}" />Chargement...</span>
-					</div>
-				#}
 			</div>
 		</div>
 		<div class="both"></div>

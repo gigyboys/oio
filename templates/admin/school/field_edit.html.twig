@@ -154,7 +154,7 @@
 						<span class="btn_edit standar_button"><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /> Modifier</span>
 						<span class="btn_save standar_button" id="btn_save_field_common" data-target="{{ path('admin_school_field_doedit', {'school_id': school.id, 'field_id': field.id}) }}" style="display:none"><img src="{{ asset('image/save_icon.png') }}" style="width:12px; height:auto" /> Enregistrer</span>
 						<span class="btn_reset standar_button" style="display:none"><img src="{{ asset('image/reset_icon.png') }}" style="width:12px; height:auto" /> Annuler</span>
-						<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;"><img src="{{ asset('image/load.gif') }}" />Chargement...</span>
+						<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;"><img src="{{ asset('image/tail-spin.svg') }}" style="width: 20px;height: 20px"/>Chargement...</span>
 					</div>
 				</div>
 			</div>
@@ -174,7 +174,7 @@
 				<span class="redstate" style="display:none"><span class="redpastille"></span> <span>Ne pas publier</span></span>
 			{% endif %}
 		</span><span class="state_loading" style="display:none">
-			<img src="{{ asset('image/loading.svg')  }}" style="width:20px; height:20px;display: inline-block; vertical-align: middle;" /> Chargement...
+			<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" /> Chargement...
 		</span>
 	</div> 
 {% endblock %}
