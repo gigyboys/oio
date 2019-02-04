@@ -28,6 +28,10 @@ platform_notice:
     path:     /legal-notice
     defaults:
         _controller: App\Controller\AboutController::notice
+platform_sitemap_xml:
+    path:     /sitemap.xml
+    defaults:
+        _controller: App\Controller\AboutController::sitemapXml
 
 platform_contact:
     path:     /contact
