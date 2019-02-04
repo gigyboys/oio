@@ -318,7 +318,7 @@ function editBlocEdit(bloc_editable){
 	bloc_view.hide();
 	bloc_edit.show();
 	btn_edit.hide();
-	btn_save.show();
+	btn_save.css("display", "inline-block");
 	btn_reset.show();
 	btn_loading.hide();
 }

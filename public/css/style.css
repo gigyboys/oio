@@ -1773,7 +1773,7 @@ a:hover{
 	display: inline-block;
 	overflow: hidden;
 }
-#sl_view_name{
+#sl_view_name_category #sl_view_name{
 	margin-left: 120px; 
 	color:#333; 
 	font-size:17px; 

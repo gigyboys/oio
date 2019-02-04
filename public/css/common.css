@@ -55,6 +55,12 @@
 	display:inline-block;
 	vertical-align:top;
 }
+.dd_item .icon i{
+	display:inline-block;
+	vertical-align:top;
+	margin-top: -2px;
+	color: #555;
+}
 .dd_item .label{
 	display:inline-block;
 	vertical-align:middle;
