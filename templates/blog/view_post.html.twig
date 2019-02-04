@@ -1,8 +1,8 @@
 {% extends "front.html.twig" %}
 
-{% block title %}
-	Blog - {{ post.title }}
-{% endblock %}
+{% block title %}Blog - {{ post.title }}{% endblock %}
+
+{% block metadescription %}{{ substrSpace(post.introduction, 160) }}{% endblock %}
 
 
 {% block body %}
@@ -44,6 +44,11 @@
 
 						{% if tags | length > 0 %}
 							<div class="mg_10 list_tags">
+								{% if tags | length == 1 %}
+									<i class="fas fa-tag"></i>
+								{% else %}
+									<i class="fas fa-tags"></i>
+								{% endif %}
 								{% for tag in tags %}
 									<span class="tag_item">
 										<a href="{{ path('blog_tag_view', {'slug': tag.slug}) }}" >{{ tag.name }}</a>

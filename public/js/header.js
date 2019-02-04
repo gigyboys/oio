@@ -21,7 +21,6 @@ $(function() {
             data: data,
             dataType : 'json',
             success: function(data){
-                console.log(data.state);
 				if(data.state){
 					$("#search_single_result_sl").html(data.school_view);
 				}

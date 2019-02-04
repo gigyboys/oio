@@ -21,8 +21,15 @@
 				{% for tagTemp in tags %}
 					<span class="d_b">
 						<a class="et_tag d_b et_tag_item" href="{{ path('event_view_tag', {'slug': tagTemp.slug}) }}">
-							{{ tagTemp.name }} 
-							{{ getPublishedEventsByTag(tagTemp) | length }}
+							{% if tag is defined and tag.id == tagTemp.id %}
+								<strong>
+									{{ tagTemp.name }} 
+									{{ getPublishedEventsByTag(tagTemp) | length }}
+								</strong>
+							{% else %}
+								{{ tagTemp.name }} 
+								{{ getPublishedEventsByTag(tagTemp) | length }}
+							{% endif %}
 						</a>
 					</span>
 				{% endfor %}

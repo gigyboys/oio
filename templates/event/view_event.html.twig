@@ -1,7 +1,9 @@
 {% extends "front.html.twig" %}
 
-{% block title %}
-	Evènement - {{ event.title }}
+{% block title %}Evènement - {{ event.title }}{% endblock %}
+
+{% block metadescription %}
+	{{ substrSpace(event.introduction, 160) }}
 {% endblock %}
 
 
@@ -23,10 +25,15 @@
 								<h1>{{ event.title }}</h1>
                                 {% if tags | length > 0 %}
 									<div class="mg_t10 list_tags">
-                                       {% for tag in tags %}
+										{% if tags | length == 1 %}
+											<i class="fas fa-tag"></i>
+										{% else %}
+											<i class="fas fa-tags"></i>
+										{% endif %}
+                                       	{% for tag in tags %}
 											<span class="tag_item">
-										<a href="{{ path('event_view_tag', {'slug': tag.slug}) }}" >{{ tag.name }}</a>
-									</span>
+												<a href="{{ path('event_view_tag', {'slug': tag.slug}) }}" >{{ tag.name }}</a>
+											</span>
                                         {% endfor %}
 									</div>
                                 {% endif %}

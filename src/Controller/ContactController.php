@@ -5,6 +5,7 @@ use App\Entity\Contact;
 use App\Form\ContactType;
 use App\Model\MailMessage;
 use App\Repository\ParameterRepository;
+use App\Repository\UserRepository;
 use App\Service\PlatformService;
 use App\Service\SchoolService;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -19,12 +20,14 @@ class ContactController extends AbstractController {
 
     public function __construct(
         ParameterRepository $parameterRepository,
+        UserRepository $userRepository,
         PlatformService $platformService,
         ObjectManager $em,
         \Swift_Mailer $mailer
     )
     {
         $this->parameterRepository = $parameterRepository;
+        $this->userRepository = $userRepository;
         $this->platformService = $platformService;
         $this->mailer = $mailer;
         $this->em = $em;
@@ -85,13 +88,17 @@ class ContactController extends AbstractController {
                 ));
 
                 $message = new MailMessage();
-                $message->setSubject("www.oio.com : Contact venant de ".$contact->getName());
+                $message->setSubject("www.oio.mg : Contact venant de ".$contact->getName());
                 $message->setBody($content);
-                $message->setFrom("noreplay@boot.com");
-                $message->setTo("contact@boot.com");
+                $message->setFrom("contact@oio.mg");
                 $message->setWrap("notification");
 
-                $this->platformService->email($message);
+                $recipients = $this->userRepository->getAdmins();
+
+                foreach ($recipients as $user){
+                    $message->setTo($user->getEmail());
+                    $this->platformService->email($message);
+                }
 
                 $msg = "<div class='success_msg'>Contact bien envoyé</div>";
                 $contact = new Contact();

@@ -1,8 +1,8 @@
 {% extends "front.html.twig" %}
 
-{% block title %}
-    {{ school.shortName }} - {{ school.name }}
-{% endblock %}
+{% block title %}{{ school.shortName }} - {{ school.name }}{% endblock %}
+
+{% block metadescription %}{{ substrSpace(school.shortDescription, 160) }}{% endblock %}
 
 {% block styledirect %}
     {# twig extension #}
@@ -48,16 +48,22 @@
                                     {% endif %}
                                     {{ school.name }}
                                 </span>
+                                {#
                                 <span class="school_nbview">
                                     ({{ school.views | length }} vues)
                                 </span>
+                                #}
                             </a>
                         </div>
 
                         {% if categories | length != 0 %}
                             <div id="sl_view_categories">
                                 <a class="all_cat_link" href="{{ path('school_categories') }}">
-                                    <i class="fas fa-tag"></i>
+                                    {% if categories | length == 1 %}
+                                        <i class="fas fa-tag"></i>
+                                    {% else %}
+                                        <i class="fas fa-tags"></i>
+                                    {% endif %}
                                 </a><!--
 								{% for category in categories %}
 									--><a class="sl_cat_item" href="{{ path('school_category_view', {'slug': category.slug}) }}">

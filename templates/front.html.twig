@@ -16,9 +16,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>{% block title %}Welcome!{% endblock %}</title>
+    <meta name="description" content="{% block metadescription %}!{% endblock %}" />
 
     {% block icon %}
-        <link rel="icon" type="image/png" href="{{ asset('image/oio.svg') }}" />
+        <link rel="icon" type="image/png" href="{{ asset('image/logo-oio.png') }}" />
     {% endblock %}
 
     <link rel="stylesheet" href="{{ asset('build/app.css') }}">
@@ -26,14 +27,10 @@
         <link rel="stylesheet"  href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.12.1/themes/smoothness/jquery-ui.css" />
         <link rel="stylesheet"  href="https://trentrichardson.com/examples/timepicker/jquery-ui-timepicker-addon.css" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-        <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/hr.css') }}">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/button.css') }}">
         <link rel="stylesheet" href="{{ asset('css/common.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/sl.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/ur.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/popup.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/fr.css') }}">
         <link rel="stylesheet" href="{{ asset('css/a_table.css') }}">
         <link rel="stylesheet" href="{{ asset('css/mcs.css') }}">
     {% endblock %}

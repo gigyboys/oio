@@ -151,9 +151,9 @@ class UserController extends AbstractController {
                 ));
 
                 $message = new MailMessage();
-                $message->setSubject("www.oio.com : Lien d'activation du compte utilisateur");
+                $message->setSubject("www.oio.mg : Lien d'activation du compte utilisateur");
                 $message->setBody($content);
-                $message->setFrom("noreplay@boot.com");
+                $message->setFrom("noreply@oio.mg");
                 $message->setTo($user->getEmail());
                 $message->setWrap("notification");
 
@@ -701,9 +701,9 @@ class UserController extends AbstractController {
                         $content .= "<div>Vous avez fait une modification sur votre profil. A partir de maintenant votre nouveau mail est <strong>".$user->getEmail()."</strong>.</div>";
 
                         $message = new MailMessage();
-                        $message->setSubject("www.oio.com : Modification profil ");
+                        $message->setSubject("www.oio.mg : Modification profil ");
                         $message->setBody($content);
-                        $message->setFrom("noreplay@boot.com");
+                        $message->setFrom("noreply@oio.mg");
                         $message->setTo($user->getEmail());
                         $message->setWrap("notification");
 
@@ -848,9 +848,9 @@ class UserController extends AbstractController {
                 ));
 
                 $message = new MailMessage();
-                $message->setSubject("www.oio.com : Récupération de mot de passe ");
+                $message->setSubject("www.oio.mg : Récupération de mot de passe ");
                 $message->setBody($content);
-                $message->setFrom("noreplay@boot.com");
+                $message->setFrom("noreply@oio.mg");
                 $message->setTo($user->getEmail());
                 $message->setWrap("notification");
 
@@ -909,9 +909,9 @@ class UserController extends AbstractController {
             ));
 
             $message = new MailMessage();
-            $message->setSubject("www.oio.com : Récupération de mot de passe");
+            $message->setSubject("www.oio.mg : Récupération de mot de passe");
             $message->setBody($content);
-            $message->setFrom("noreplay@boot.com");
+            $message->setFrom("noreply@oio.mg");
             $message->setTo($user->getEmail());
             $message->setWrap("notification");
 
