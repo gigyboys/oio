@@ -147,30 +147,34 @@
 	<div class="cr">
 		<div class="ct">
 			<div class="mg_h10">
-				<a class="prev_link" href="{{ path('blog_post_view', {'slug': previousPost.slug}) }}" title="{{ previousPost.title }}">
-					<span><span class="direction"></span> Précédent </span><br />
-					<span>
-						{% set illustration = postIllustration(previousPost) %}
-						<span class="logo"> <img src="{{ illustration | imagine_filter('32x32') }}" alt="BG" /></span>
-						<span class="label post">
-							<strong>
-								{{ previousPost.title }}
-							</strong>
+				{% if previousPost is defined and previousPost is not null %}
+					<a class="prev_link" href="{{ path('blog_post_view', {'slug': previousPost.slug}) }}" title="{{ previousPost.title }}">
+						<span><span class="direction"></span> Précédent </span><br />
+						<span>
+							{% set illustration = postIllustration(previousPost) %}
+							<span class="logo"> <img src="{{ illustration | imagine_filter('32x32') }}" alt="BG" /></span>
+							<span class="label post">
+								<strong>
+									{{ previousPost.title }}
+								</strong>
+							</span>
 						</span>
-					</span>
-				</a>
-				<a class="next_link" href="{{ path('blog_post_view', {'slug': nextPost.slug}) }}" title="{{ nextPost.title }}">
-					<span>Suivant <span class="direction"></span></span><br />
-					<span>
-						{% set illustration = postIllustration(nextPost) %}
-						<span class="logo"> <img src="{{ illustration | imagine_filter('32x32') }}" alt="BG" /></span>
-						<span class="label post">
-							<strong>
-								{{ nextPost.title }}
-							</strong>
+					</a>
+				{% endif %}
+				{% if nextPost is defined and nextPost is not null %}
+					<a class="next_link" href="{{ path('blog_post_view', {'slug': nextPost.slug}) }}" title="{{ nextPost.title }}">
+						<span>Suivant <span class="direction"></span></span><br />
+						<span>
+							{% set illustration = postIllustration(nextPost) %}
+							<span class="logo"> <img src="{{ illustration | imagine_filter('32x32') }}" alt="BG" /></span>
+							<span class="label post">
+								<strong>
+									{{ nextPost.title }}
+								</strong>
+							</span>
 						</span>
-					</span>
-				</a>
+					</a>
+				{% endif %}
 				<div class="both"></div>
 			</div>
 		</div>

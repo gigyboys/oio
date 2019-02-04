@@ -182,38 +182,42 @@
         <div class="cr">
             <div class="ct">
                 <div class="mg_h10">
-                    <a class="prev_link" href="{{ path('school_view', {'slug': previousSchool.slug}) }}" title="{{ previousSchool.shortName }} - {{ previousSchool.name }}">
-                        <span><span class="direction"></span> Précédent </span><br />
-                        <span>
-                            {% set logo = schoolLogo(previousSchool) %}
-                            <span class="logo"> <img src="{{ logo | imagine_filter('32x32') }}" alt="img sl" /></span>
-                            <span class="label">
-                                <strong>
-                                    {% if previousSchool.shortName is not null or previousSchool.shortName != '' %}
-                                        {{ previousSchool.shortName }}
-                                    {% else %}
-                                        {{ previousSchool.name }}
-                                    {% endif %}
-                                </strong>
+                    {% if previousSchool is defined and previousSchool is not null %}
+                        <a class="prev_link" href="{{ path('school_view', {'slug': previousSchool.slug}) }}" title="{{ previousSchool.shortName }} - {{ previousSchool.name }}">
+                            <span><span class="direction"></span> Précédent </span><br />
+                            <span>
+                                {% set logo = schoolLogo(previousSchool) %}
+                                <span class="logo"> <img src="{{ logo | imagine_filter('32x32') }}" alt="img sl" /></span>
+                                <span class="label">
+                                    <strong>
+                                        {% if previousSchool.shortName is not null or previousSchool.shortName != '' %}
+                                            {{ previousSchool.shortName }}
+                                        {% else %}
+                                            {{ previousSchool.name }}
+                                        {% endif %}
+                                    </strong>
+                                </span>
                             </span>
-                        </span>
-                    </a>
-                    <a class="next_link" href="{{ path('school_view', {'slug': nextSchool.slug}) }}" title="{{ nextSchool.shortName }} - {{ nextSchool.name }}">
-                        <span>Suivant <span class="direction"></span></span><br />
-                        <span>
-                            {% set logo = schoolLogo(nextSchool) %}
-                            <span class="logo"> <img src="{{ logo | imagine_filter('32x32') }}" alt="img sl" /></span>
-                            <span class="label">
-                                <strong>
-                                    {% if nextSchool.shortName is not null or nextSchool.shortName != '' %}
-                                        {{ nextSchool.shortName }}
-                                    {% else %}
-                                        {{ nextSchool.name }}
-                                    {% endif %}
-                                </strong>
+                        </a>
+                    {% endif %}
+                    {% if nextSchool is defined and nextSchool is not null %}
+                        <a class="next_link" href="{{ path('school_view', {'slug': nextSchool.slug}) }}" title="{{ nextSchool.shortName }} - {{ nextSchool.name }}">
+                            <span>Suivant <span class="direction"></span></span><br />
+                            <span>
+                                {% set logo = schoolLogo(nextSchool) %}
+                                <span class="logo"> <img src="{{ logo | imagine_filter('32x32') }}" alt="img sl" /></span>
+                                <span class="label">
+                                    <strong>
+                                        {% if nextSchool.shortName is not null or nextSchool.shortName != '' %}
+                                            {{ nextSchool.shortName }}
+                                        {% else %}
+                                            {{ nextSchool.name }}
+                                        {% endif %}
+                                    </strong>
+                                </span>
                             </span>
-                        </span>
-                    </a>
+                        </a>
+                    {% endif %}
                     <div class="both"></div>
                 </div>
             </div>
