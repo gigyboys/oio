@@ -3,9 +3,15 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 
 /**
- * @ORM\Table(name="sl_subscription")
+ * @ORM\Table(name="sl_subscription", 
+ *    uniqueConstraints={
+ *        @UniqueConstraint(name="school_user_unique", 
+ *            columns={"school_id", "user_id"})
+ *    }
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\SubscriptionRepository")
  */
 class Subscription
@@ -19,13 +25,13 @@ class Subscription
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\School", inversedBy="subscription")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(name="school_id", nullable=false)
      */
     private $school;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="subscription")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(name="user_id", nullable=false)
      */
     private $user;
 
