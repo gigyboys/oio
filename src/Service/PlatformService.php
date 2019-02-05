@@ -429,7 +429,23 @@ class PlatformService
         $sentMail->setDate(new \DateTime());
         $sentMail->setSubject($subject);
         $sentMail->setBody($body);
-        $sentMail->setSender($from);
+        if (is_string($from)) {
+            $sentMail->setSender($from);
+        }
+        if (is_array($from)) {
+            $sender = "";
+            $countSender = 0;
+            foreach ($from as $key => $value){
+                $countSender++;
+                if($countSender == 1){
+                    $sender .= $key;
+                }else{
+                    $sender .= ", ".$key;
+                }
+                $sentMail->setSender($sender);
+            }
+        }
+        
         $sentMail->setRecipient($to);
 
         $this->em->persist($sentMail);

@@ -90,7 +90,7 @@ class ContactController extends AbstractController {
                 $message = new MailMessage();
                 $message->setSubject("www.oio.mg : Contact venant de ".$contact->getName());
                 $message->setBody($content);
-                $message->setFrom("contact@oio.mg");
+                $message->setFrom(array("contact@oio.mg" => $this->getParameter('sitename')));
                 $message->setWrap("notification");
 
                 $recipients = $this->userRepository->getAdmins();

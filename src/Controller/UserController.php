@@ -153,7 +153,7 @@ class UserController extends AbstractController {
                 $message = new MailMessage();
                 $message->setSubject("www.oio.mg : Lien d'activation du compte utilisateur");
                 $message->setBody($content);
-                $message->setFrom("noreply@oio.mg");
+                $message->setFrom(array("noreply@oio.mg" => $this->getParameter('sitename')));
                 $message->setTo($user->getEmail());
                 $message->setWrap("notification");
 
@@ -703,7 +703,7 @@ class UserController extends AbstractController {
                         $message = new MailMessage();
                         $message->setSubject("www.oio.mg : Modification profil ");
                         $message->setBody($content);
-                        $message->setFrom("noreply@oio.mg");
+                        $message->setFrom(array("noreply@oio.mg" => $this->getParameter('sitename')));
                         $message->setTo($user->getEmail());
                         $message->setWrap("notification");
 
@@ -850,7 +850,7 @@ class UserController extends AbstractController {
                 $message = new MailMessage();
                 $message->setSubject("www.oio.mg : Récupération de mot de passe ");
                 $message->setBody($content);
-                $message->setFrom("noreply@oio.mg");
+                $message->setFrom(array("noreply@oio.mg" => $this->getParameter('sitename')));
                 $message->setTo($user->getEmail());
                 $message->setWrap("notification");
 
@@ -911,7 +911,7 @@ class UserController extends AbstractController {
             $message = new MailMessage();
             $message->setSubject("www.oio.mg : Récupération de mot de passe");
             $message->setBody($content);
-            $message->setFrom("noreply@oio.mg");
+            $message->setFrom(array("noreply@oio.mg" => $this->getParameter('sitename')));
             $message->setTo($user->getEmail());
             $message->setWrap("notification");
 
