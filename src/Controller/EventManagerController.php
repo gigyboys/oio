@@ -112,7 +112,7 @@ class EventManagerController extends AbstractController {
                     $event->setDatebegin($datebegin);
                     $event->setDateend($dateend);
 
-                    $event->setPublished(false);
+                    $event->setPublished(true);
                     $event->setValid(false);
                     $event->setDeleted(false);
                     $user = $this->getUser();

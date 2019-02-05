@@ -6,6 +6,8 @@ use App\Form\ContactType;
 use App\Repository\ParameterRepository;
 use App\Repository\UserTeamRepository;
 use App\Repository\SchoolRepository;
+use App\Repository\EventRepository;
+use App\Repository\PostRepository;
 use App\Service\PlatformService;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,6 +22,8 @@ class AboutController extends AbstractController {
         PlatformService $platformService,
         UserTeamRepository $userTeamRepository,
         SchoolRepository $schoolRepository,
+        EventRepository $eventRepository,
+        PostRepository $postRepository,
         ObjectManager $em,
         \Swift_Mailer $mailer
     )
@@ -28,6 +32,8 @@ class AboutController extends AbstractController {
         $this->platformService = $platformService;
         $this->userTeamRepository = $userTeamRepository;
         $this->schoolRepository = $schoolRepository;
+        $this->eventRepository = $eventRepository;
+        $this->postRepository = $postRepository;
         $this->mailer = $mailer;
         $this->em = $em;
 
@@ -59,7 +65,7 @@ class AboutController extends AbstractController {
         $hostname = $request->getSchemeAndHttpHost();
         $urls = array();
         
-        // add static urls
+        // static urls
         $urls[] = array('loc' => $this->get('router')->generate('platform_home'));
         $urls[] = array('loc' => $this->get('router')->generate('platform_about'));
         $urls[] = array('loc' => $this->get('router')->generate('platform_contact'));
@@ -71,10 +77,35 @@ class AboutController extends AbstractController {
         $urls[] = array('loc' => $this->get('router')->generate('blog_manager_doadd_post'));
         $urls[] = array('loc' => $this->get('router')->generate('event_manager_doadd_event'));
 
+        // blog urls
         $urls[] = array('loc' => $this->get('router')->generate('blog'));
+        $posts = $this->postRepository->findBy(array(
+            "published" => true,
+            "valid" => true,
+            "deleted" => false,
+        ));
 
+        foreach($posts as $post){
+            $urls[] = array('loc' => $this->get('router')->generate('blog_post_view', array(
+                'slug' => $post->getSlug(),
+            )));
+        }
+
+        // event urls
         $urls[] = array('loc' => $this->get('router')->generate('event'));
+        $events = $this->eventRepository->findBy(array(
+            "published" => true,
+            "valid" => true,
+            "deleted" => false,
+        ));
 
+        foreach($events as $event){
+            $urls[] = array('loc' => $this->get('router')->generate('event_view', array(
+                'slug' => $event->getSlug(),
+            )));
+        }
+
+        // school urls
         $urls[] = array('loc' => $this->get('router')->generate('school_categories'));
         $urls[] = array('loc' => $this->get('router')->generate('school_map'));
         $urls[] = array('loc' => $this->get('router')->generate('school_of_the_day'));

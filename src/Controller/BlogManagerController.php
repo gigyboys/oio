@@ -61,6 +61,67 @@ class BlogManagerController extends AbstractController {
         $this->platformService->registerVisit();
     }
 
+    public function addPostAjax()
+    {
+        $response = new Response();
+
+        $content = $this->renderView('blog/post_add_ajax.html.twig', array(
+
+        ));
+
+        $response->setContent(json_encode(array(
+            'state' => 1,
+            'content' => $content,
+        )));
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    public function doAddPost(Request $request)
+    {
+        $post = new Post();
+        $form = $this->createForm(PostInitType::class, $post);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            if(trim($post->getTitle())){
+                $slug = $this->platformService->getSlug($post->getTitle(), $post);
+
+                $post->setSlug($slug);
+                $post->setDate(new \DateTime());
+                $post->setPublished(true);
+                $post->setValid(false);
+                $post->setDeleted(false);
+                $post->setTovalid(false);
+
+                $user = $this->getUser();
+                $post->setUser($user);
+                $post->setShowAuthor(true);
+                $post->setActiveComment(true);
+
+                $post->setIntroduction("Description ".$post->getTitle());
+                $post->setContent("Contenu ".$post->getTitle());
+
+                $this->em->persist($post);
+
+                $this->em->flush();
+
+                return $this->redirectToRoute('blog_manager_edit_post', array(
+                    'post_id' => $post->getId()
+                ));
+
+            }else{
+                return $this->render('blog/add_post.html.twig', array(
+                    'form' => $form->createView(),
+                ));
+            }
+        }
+
+        return $this->render('blog/add_post.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
 
     public function toggleShowAuthor($post_id, Request $request)
     {
@@ -530,67 +591,6 @@ class BlogManagerController extends AbstractController {
 
         $response->headers->set('Content-Type', 'application/json');
         return $response;
-    }
-
-    public function addPostAjax()
-    {
-        $response = new Response();
-
-        $content = $this->renderView('blog/post_add_ajax.html.twig', array(
-
-        ));
-
-        $response->setContent(json_encode(array(
-            'state' => 1,
-            'content' => $content,
-        )));
-
-        $response->headers->set('Content-Type', 'application/json');
-        return $response;
-    }
-
-    public function doAddPost(Request $request)
-    {
-        $post = new Post();
-        $form = $this->createForm(PostInitType::class, $post);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            if(trim($post->getTitle())){
-                $slug = $this->platformService->getSlug($post->getTitle(), $post);
-
-                $post->setSlug($slug);
-                $post->setDate(new \DateTime());
-                $post->setPublished(false);
-                $post->setValid(false);
-                $post->setDeleted(false);
-                $post->setTovalid(false);
-
-                $user = $this->getUser();
-                $post->setUser($user);
-                $post->setShowAuthor(true);
-                $post->setActiveComment(true);
-
-                $post->setIntroduction("Description ".$post->getTitle());
-                $post->setContent("Contenu ".$post->getTitle());
-
-                $this->em->persist($post);
-
-                $this->em->flush();
-
-                return $this->redirectToRoute('blog_manager_edit_post', array(
-                    'post_id' => $post->getId()
-                ));
-
-            }else{
-                return $this->render('blog/add_post.html.twig', array(
-                    'form' => $form->createView(),
-                ));
-            }
-        }
-
-        return $this->render('blog/add_post.html.twig', array(
-            'form' => $form->createView(),
-        ));
     }
 
     public function editPost($post_id)
