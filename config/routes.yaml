@@ -338,7 +338,7 @@ event_view_tag:
         _controller: App\Controller\EventController::viewTag
         page: 1
 event:
-    path:     /event/{typeslug}/{page}
+    path:     /events/{typeslug}/{page}
     defaults:
         _controller: App\Controller\EventController::index
         typeslug: all
