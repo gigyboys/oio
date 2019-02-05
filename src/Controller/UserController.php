@@ -89,44 +89,9 @@ class UserController extends AbstractController {
                 $user->setLastActivity($date);
 
                 //username
-                $slug = $this->platformService->sluggify($user->getName());
+                $username = $this->platformService->getSlug($user->getName(), $user);
 
-                $slugtmp = $slug;
-                $notSlugs = array(
-                    "school",
-                    "blog",
-                    "advert",
-                    "forum",
-                    "about",
-                    "team",
-                    "legal-notice",
-                    "contact",
-                    "newsletter",
-                    "categories",
-                    "category",
-                    "user",
-                    "admin",
-                    "logout",
-                    "login",
-                    "register",
-                );
-                $isSluggable = true;
-                $i = 2;
-                do {
-                    $usertmp = $this->userRepository->findOneBy(array(
-                        'username' => $slugtmp
-                    ));
-                    if($usertmp || in_array($slugtmp, $notSlugs)){
-                        $slugtmp = $slug."-".$i;
-                        $i++;
-                    }
-                    else{
-                        $isSluggable = false;
-                    }
-                } while ($isSluggable);
-                $slug = $slugtmp;
-
-                $user->setUsername($slug);
+                $user->setUsername($username);
                 $user->setToken("");
                 $user->setEnabled(false);
 
@@ -136,9 +101,7 @@ class UserController extends AbstractController {
                 $user->setToken($token);
                 $this->em->flush();
 
-
                 //sendig mail : for account activation
-
                 $urlActivation = $this->generateUrl(
                     'user_register_activation',
                     array('token' => $user->getToken()),
@@ -148,6 +111,7 @@ class UserController extends AbstractController {
                 $content = $this->renderView("user/notification/user_activation.html.twig", array(
                     'user' => $user,
                     'urlActivation' => $urlActivation,
+                    'sitename' => $this->getParameter('sitename'),
                 ));
 
                 $message = new MailMessage();
@@ -159,38 +123,22 @@ class UserController extends AbstractController {
 
                 $this->platformService->email($message);
 
-                $session = $request->getSession();
-                $data = array(
-                    'state' => 'activation',
-                    'userid' => $user->getId(),
-                );
-
-                $session->set('data', $data);
-
-                return $this->redirectToRoute("user_register");
+                return $this->render('user/register.html.twig',array(
+                    'form' => $form->createView(),
+                    'user' => $user,
+                    'errorEmail' => $errorEmail,
+                    'mailActivation' => true,
+                ));
             }else{
                 $errorEmail = "<span style='color: #86251c;'>Cette adresse email est déjà utilisée.</span>";
             }
         }
 
-        $session = $request->getSession();
-        $dataSession = $session->get('data');
-        if($dataSession){
-            $user = $this->userRepository->find($dataSession['userid']);
-            $session->remove('data');
-            return $this->render('user/register.html.twig',array(
-                'form' => $form->createView(),
-                'user' => $user,
-                'errorEmail' => $errorEmail,
-                'mailActivation' => true,
-            ));
-        }else{
-            return $this->render('user/register.html.twig',array(
-                'form' => $form->createView(),
-                'user' => $user,
-                'errorEmail' => $errorEmail,
-            ));
-        }
+        return $this->render('user/register.html.twig',array(
+            'form' => $form->createView(),
+            'user' => $user,
+            'errorEmail' => $errorEmail,
+        ));
     }
 
     public function registerActivation($token, Request $request): Response

@@ -11,9 +11,9 @@ parameters:
     cover_directory: '%kernel.project_dir%/public/uploads/images/school/cover'
     illustration_directory: '%kernel.project_dir%/public/uploads/images/post/illustration'
     event_illustration_directory: '%kernel.project_dir%/public/uploads/images/event/illustration'
+    sitename: 'oio'
     dns: 'www.oio.mg'
     absolute_base: 'http://www.oio.mg'
-    sitename: 'oio'
 
 services:
     # default configuration for services in *this* file

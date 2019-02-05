@@ -33,6 +33,7 @@ use App\Repository\PostRepository;
 use App\Repository\SchoolContactRepository;
 use App\Repository\SchoolOfTheDayRepository;
 use App\Repository\SchoolRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -53,6 +54,7 @@ class PlatformService
         PostRepository $postRepository,
         EventRepository $eventRepository,
         CommentRepository $commentRepository,
+        UserRepository $userRepository,
         EntityManagerInterface $em,
         \Swift_Mailer $mailer,
         EngineInterface $templating,
@@ -66,6 +68,7 @@ class PlatformService
         $this->postRepository = $postRepository;
         $this->eventRepository = $eventRepository;
         $this->commentRepository = $commentRepository;
+        $this->userRepository = $userRepository;
         $this->em = $em;
         $this->templating = $templating;
         $this->mailer = $mailer;
@@ -144,6 +147,8 @@ class PlatformService
             "archives",
             "tag",
             "tags",
+            "passed",
+            "upcoming",
         );
         $isSluggable = true;
         $i = 2;
@@ -161,6 +166,11 @@ class PlatformService
             elseif ($entity instanceof Event){
                 $entitytmp = $this->eventRepository->findOneBy(array(
                     'slug' => $slugtmp
+                ));
+            }
+            elseif ($entity instanceof User){
+                $entitytmp = $this->userRepository->findOneBy(array(
+                    'username' => $slugtmp
                 ));
             }
             if(($entitytmp && $entitytmp->getId() != $entity->getId()) || in_array($slugtmp, $notSlugs)){

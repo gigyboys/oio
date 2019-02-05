@@ -1,4 +1,11 @@
 <div>
-	Bonjour {{ user.name }}<br /> Voici le lien d'activation : <a target='_blank' href='{{ urlActivation }}'>{{ urlActivation }}</a>
+	<p>
+		Bonjour {{ user.name }},<br /><br /> 
+		Voici <a target="_blank" href="{{ urlActivation }}" style="text-decoration: none; color:#233d4e">le lien</a> qui permet d'activer votre compte : <br />
+		<a target="_blank" href="{{ urlActivation }}" style="text-decoration: none; color:#233d4e">{{ urlActivation }}</a>
+	</p>
+	<p>
+		L'équipe <strong>{{ sitename }}</strong> vous souhaite une bonne navigation sur <a target="_blank" href="{{ absolute_url(path('platform_home')) }}" style="text-decoration: none; color:#233d4e">{{ dns }}</a>.
+	</p>
 </div>
 
