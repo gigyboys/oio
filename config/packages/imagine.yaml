@@ -29,6 +29,11 @@ liip_imagine:
       quality: 100
       filters:
         thumbnail: { size: [22, 22], mode: outbound }
+    22x22b1:
+      quality: 100
+      filters:
+        thumbnail: { size: [22, 22], mode: outbound }
+        background : { size : [24, 24], position : center, color : '#999999' }
     32x32:
       quality: 100
       filters:

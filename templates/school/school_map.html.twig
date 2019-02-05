@@ -31,7 +31,7 @@
 					#}label : '{{ contact.name | e('js') | raw }} : {{ contact.school.shortName | e('js') | raw }} - {{ contact.school.name | e('js') | raw }}',{#
 					#}url : '{{ path('school_view', {'slug': contact.school.slug}) }}',{#
 					#}typeId : {{ contact.school.type.id }},
-					icon : '{{ absolute_url(logo | imagine_filter('22x22')) }}'
+					icon : '{{ absolute_url(logo | imagine_filter('22x22b1')) }}'
 				 }, {#
 			#} {% endfor %}  {#
 		#} ];{#
