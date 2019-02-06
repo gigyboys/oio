@@ -1255,6 +1255,13 @@ a:hover{
 		height: 40px;
 		padding: 10px 5px;
 	}
+	
+	.show_pwd.v_pwd{
+		padding: 10px 6px;
+	}
+	.hide_pwd.v_pwd{
+		padding: 10px 6px;
+	}
 }
 
 @media screen and (max-width: 450px)
