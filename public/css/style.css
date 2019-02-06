@@ -669,7 +669,7 @@ a:hover{
 	width: calc( 100% - 45px );
 }
 #et_view .participation_block{
-	margin-left: calc( 100% - 400px ); 
+	margin-left: calc( 100% - 410px ); 
 	background:#789;
 	/*height:240px;*/
 	position: relative;
@@ -1089,7 +1089,7 @@ a:hover{
 	}
 }
 
-@media screen and (max-width: 800px)
+@media screen and (max-width: 850px)
 {
 	#et_view .participation_block{
 		margin-left: 0px; 
@@ -1097,7 +1097,7 @@ a:hover{
 	}
 	#et_view .cover{
 		width:100%; 
-		margin-bottom: 20px;
+		margin-bottom: 10px;
 		float: none;			
 	}
 }
