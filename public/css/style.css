@@ -268,7 +268,7 @@ a:hover{
 }
 .v_pwd_wrap{
 	cursor: pointer;
-	margin-left: -25px
+	margin-left: -30px
 }
 .v_pwd img{
 	width:18px; 
@@ -278,9 +278,11 @@ a:hover{
 }
 .show_pwd.v_pwd{
 	display: inline-block;
+	padding: 5px 6px;
 }
 .hide_pwd.v_pwd{
 	display: none;
+	padding: 5px 6px;
 }
 
 /* prev next link */

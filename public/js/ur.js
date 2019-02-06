@@ -6,7 +6,7 @@ $(function() {
 	if($('#password').length > 0 && $('.show_pwd').length > 0 && $('.hide_pwd').length > 0){
 		if($('#password').attr('type') != 'text'){
 			$('#password').prop('type', 'password');
-			$('.show_pwd').show();
+			$('.show_pwd').css("display", "inline-block");
 			$('.hide_pwd').hide();
 
 		}
@@ -14,12 +14,12 @@ $(function() {
 		$('body').on('click','.show_pwd',function(e){
 			$('#password').prop('type', 'text');
 			$('.show_pwd').hide();
-			$('.hide_pwd').show();
+			$('.hide_pwd').css("display", "inline-block");
 		});
 
 		$('body').on('click','.hide_pwd',function(e){
 			$('#password').prop('type', 'password');
-			$('.show_pwd').show();
+			$('.show_pwd').css("display", "inline-block");
 			$('.hide_pwd').hide();
 		});
 	}
