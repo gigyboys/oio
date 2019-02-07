@@ -1,22 +1,22 @@
-<form action="" name="" method="post" id="">
+<form method="post" id="form_event">
 	{% if myEvaluation %}
-		<div class="bloc_editable">
+		<div class="bloc_editable ev_edit">
 			<div class="bloc_view">
 				{% set evaluation = myEvaluation %}
 				{{ include("school/include/evaluation_item.html.twig") }}
 			</div>
-			<div class="bloc_edit d_n">
+			<div class="bloc_edit d_n evaluation_item">
+				<div class="sp mg_v10"></div>
 				<div class="mg_b5">
-				{{ app.user.name }} :
+					Par : <strong>{{ app.user.name }}</strong> :
 				</div>
-				<div style="width:50px;float:left">
+				<div class="ur_avatar">
 					{% set avatar = userAvatar(app.user) %}
-					<span style="display:block;float:left;width:32px"><img style="width:50px; height: 50px; border-radius: 50%" src="{{ avatar | imagine_filter('50x50') }}" alt="{{ app.user.username }}" /></span>
+					<img src="{{ avatar | imagine_filter('50x50') }}" alt="{{ getAcronym(app.user.name) }}" />
 				</div>
-				<div style="margin-left:60px">
-					<div class="pd_v5">
-						<div style="float:left; padding-top:2px">Notes : </div>
-						
+				<div class="ev_edit_detail">
+					<div class="mark">
+						<div class="left label">Notes : </div>
 						{% set mark = evaluation.mark/20 %}
 						{% for i in 1..5 %}
 							{% set markTmp = i*20 %}
@@ -29,35 +29,35 @@
 						
 						<input type="hidden" id="sl_evaluation_mark" value="80" />
 					</div>
-					<textarea class="default_textarea" id="sl_evaluation_comment" placeholder="Votre commentaire" style="min-height:60px">{{ evaluation.comment }}</textarea>
+					<textarea class="default_textarea" id="sl_evaluation_comment" placeholder="Votre commentaire">{{ evaluation.comment }}</textarea>
 					<div id="add_evaluation_error"></div>
 				</div>
 				<div class="both"></div>
 			</div>
-			<div class="bloc_action" style="margin-top:5px; border:1px solid transparent">
+			<div class="bloc_action">
 				<span class="btn_edit standar_button">Modifier</span> 
-				<span class="btn_save standar_button" id="btn_eval_sl" data-target="{{ path('school_add_evaluation', {'id': school.id}) }}" style="display:none">Evaluer</span>
+				<span class="btn_save standar_button d_n" id="btn_eval_sl" data-target="{{ path('school_add_evaluation', {'id': school.id}) }}">Evaluer</span>
 				<span class="btn_reset standar_button d_n">Annuler</span> 
-				<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;">Chargement...</span> 
+				<span class="btn_loading">Chargement...</span>
 			</div>
 		</div>
 	{% else %}
-		<div class="bloc_editable">
+		<div class="bloc_editable ev_edit">
 			<div class="sep"></div>
 			<div class="bloc_view">
 				Vous n'avez pas encore donné votre évaluation sur cet établissement
 			</div>
-			<div class="bloc_edit d_n">
+			<div class="bloc_edit d_n evaluation_item">
 				<div class="mg_b5">
-				{{ app.user.name }} :
+					Par : <strong>{{ app.user.name }}</strong> :
 				</div>
-				<div style="width:50px;float:left">
+				<div class="ur_avatar">
 					{% set avatar = userAvatar(app.user) %}
-					<span style="display:block;float:left;width:32px"><img style="width:50px; height: 50px; border-radius: 50%" src="{{ avatar | imagine_filter('50x50') }}" alt="{{ app.user.username }}" /></span>
+					<img src="{{ avatar | imagine_filter('50x50') }}" alt="{{ getAcronym(app.user.name) }}" />
 				</div>
-				<div style="margin-left:60px">
-					<div class="pd_v5">
-						<div style="float:left; padding-top:2px">Notes : </div>
+				<div class="ev_edit_detail">
+					<div class="mark">
+						<div class="left label">Notes : </div>
 						<div class="left pd_5"><div class="eval_star_item selected" data-value="20"></div></div>
 						<div class="left pd_5"><div class="eval_star_item selected" data-value="40"></div></div>
 						<div class="left pd_5"><div class="eval_star_item selected" data-value="60"></div></div>
@@ -65,16 +65,16 @@
 						<div class="left pd_5"><div class="eval_star_item" data-value="100"></div></div>
 						<input type="hidden" id="sl_evaluation_mark" value="80" />
 					</div>
-					<textarea class="default_textarea" id="sl_evaluation_comment" placeholder="Votre commentaire" style="min-height:60px"></textarea>
+					<textarea class="default_textarea" id="sl_evaluation_comment" placeholder="Votre commentaire"></textarea>
 					<div id="add_evaluation_error"></div>
 				</div>
 				<div class="both"></div>
 			</div>
-			<div class="bloc_action" style="margin-top:5px; border:1px solid transparent">
+			<div class="bloc_action">
 				<span class="btn_edit standar_button">Je donne mon évaluation</span> 
 				<span class="btn_save standar_button d_n" id="btn_eval_sl" data-target="{{ path('school_add_evaluation', {'id': school.id}) }}">Evaluer</span>
 				<span class="btn_reset standar_button d_n">Annuler</span> 
-				<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;">Chargement...</span> 
+				<span class="btn_loading">Chargement...</span>
 			</div>
 		</div>
 		<div class="both"></div>

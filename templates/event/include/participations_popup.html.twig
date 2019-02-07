@@ -1,10 +1,10 @@
-<div style="background:#fff;">
-	<div style="border-bottom:1px solid #ddd; padding: 10px;  height:24px; ">
-		<div style="float:left">
+<div class="dialog">
+	<div class="header">
+		<div class="title">
 			Participants
 		</div>
-		<div style="float:right;cursor: pointer; " class="button_closable">
-			<img src="{{ asset('image/close_icon.png') }}" style="width:16px; height:auto" alt="x" />
+		<div class="button_closable">
+			<i class="fas fa-times-circle"></i>
 		</div>
 	</div>
 	<div class="search" data-item-display="block">
@@ -39,11 +39,11 @@
 						<div>
 							<span><i class="fas fa-user-circle i_ur"></i> <span id="ur_view_username">{{ user.username }}</span></span>
 							{% if user.location and user.location | trim != "" %}
-									{% set displayLocation = "inline" %}
+									{% set displayLocation = "d_i" %}
 							{% else %}
-									{% set displayLocation = "none" %}
+									{% set displayLocation = "d_n" %}
 							{% endif %}
-							<span style="display: {{ displayLocation }}" id="ur_view_location_wrap"><i class="fas fa-map-marker-alt i_ur"></i> <span id="ur_view_location">{{ user.location }}</span></span>
+							<span class="{{ displayLocation }}" id="ur_view_location_wrap"><i class="fas fa-map-marker-alt i_ur"></i> <span id="ur_view_location">{{ user.location }}</span></span>
 						</div>
 					</div>
 					<div class="both"></div>

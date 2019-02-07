@@ -9,7 +9,7 @@
 			{% if coords|length != 0 %}
 				- 
 				<span id="btn_show_map_contacts" class="c_p" data-target="{{ path('school_get_map_coordonnees', {'slug': school.slug}) }}">
-					<img src="{{ asset('image/location_icon.png') }}" style="width:12px; height:12px;" /> Tout afficher sur une carte
+					<i class="fas fa-map-marker-alt"></i> Tout afficher sur une carte
 				</span>
 			{% endif %}
 		</div>

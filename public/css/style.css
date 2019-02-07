@@ -130,11 +130,12 @@ a:hover{
 
 .contribution_link .link2{
 	cursor: pointer;
-	text-shadow: 0px 0px 1px #ffffff;
+	text-shadow: 0px 0px 1px #000;
+	color: #fff
 }
 
 .contribution_link .link2:hover{
-	color:#444;
+	color:#ddd;
 }
 
 .label_title{
@@ -617,9 +618,10 @@ a:hover{
 }
 #et_view .title .list_tags i {
 	display: inline-block;
-	color: #999;
+	color: #777;
 	vertical-align: middle;
 	margin-top: 4px;
+	text-shadow: 0px 0px 1px #fff;
 }
 #et_view .title .list_tags .tag_item {
 	display: inline-block;
@@ -629,12 +631,13 @@ a:hover{
 	border-radius: 5px;
 	vertical-align: middle;
 	color: #fff;
+	box-shadow: 0px 0px 1px #fff;
 }
 #et_view .title .list_tags .tag_item  a{
 	color: #fff;
 }
 #et_view .title .list_tags .tag_item a:hover{
-	color: #000;
+	color: #ddd;
 }
 #et_view .title h1{
 	margin: 0px;
@@ -1000,7 +1003,8 @@ a:hover{
 .bg_view .view_info .content .list_tags i{
 	display: inline-block; 
 	color: #777;
-	vertical-align:middle
+	vertical-align:middle;
+	text-shadow: 0px 0px 1px #fff;
 }
 .bg_view .view_info .content .list_tags .tag_item{
 	display: inline-block; 
@@ -1008,13 +1012,14 @@ a:hover{
 	padding: 2px 6px; 
 	margin: 4px; 
 	border-radius: 5px; 
-	vertical-align:middle
+	vertical-align:middle;
+	box-shadow: 0px 0px 1px #fff;
 }
 .bg_view .view_info .content .list_tags .tag_item a{
 	color:#fff; 
 }
 .bg_view .view_info .content .list_tags .tag_item a:hover{
-	color:#000; 
+	color:#ddd; 
 }
 
 #bg_load_post_action{
@@ -1303,7 +1308,7 @@ a:hover{
 #sl_dl{
 	
 }
-/**************liste school***************/
+/* liste school */
 #sl_list{
 	/*overflow:hidden*/
 }
@@ -1549,11 +1554,88 @@ a:hover{
 .sl_action_bg a:hover i, .sl_action_et a:hover i, .sl_action_evaluation a:hover i, .sl_action_contact a:hover i, .sl_action_doc a:hover i{
 	color:#333;
 }
-/*
-.sl_action_about, .sl_action_evaluation{
-	width: 50px;
+
+/* list contact */
+#btn_show_map_contacts i{
+	font-size: 13px;
 }
-*/
+.contact_item .description{
+	border:1px solid #eee; 
+	background:#eff6ff; 
+	border-radius:3px;
+	padding: 5px;
+	margin: 5px 0;
+}
+.contact_item .btn_show_map i{
+	font-size: 13px;
+}
+
+/* list evaluation */
+.evaluation_item .ur_avatar{
+	width:50px;
+	float:left
+}
+.evaluation_item .ur_avatar img{
+	width:50px; 
+	height: 50px; 
+	border-radius: 50%
+}
+.evaluation_item .ev_detail, .evaluation_item .ev_edit_detail{
+	margin-left:60px
+}
+.evaluation_item .ev_detail .mark, .evaluation_item .ev_edit_detail .mark{
+	height:26px
+}
+.evaluation_item .ev_detail .mark .label, .evaluation_item .ev_edit_detail .mark .label{
+	padding-top:2px
+}
+
+.evaluation_item .ev_edit_detail #sl_evaluation_comment{
+	min-height:60px
+}
+.ev_edit .bloc_action{
+	margin-top:5px; 
+	border:1px solid transparent
+}
+.ev_edit .bloc_action .btn_loading{
+	display:none;
+	padding:5px;
+	border:1px solid transparent;
+	margin: 0px 5px 0px 0px;
+}
+
+/* list document */
+.document_item .fileicon{
+	float: left;
+	width: 55px;
+}
+.document_item .fileicon img{
+	width: 55px; 
+	height: 55px;
+}
+.document_item .doc_detail{
+	margin-left: 60px;
+}
+.document_item .doc_detail .info{
+	float: left; 
+	width: calc(100% - 170px);
+}
+.document_item .doc_detail .info strong{
+	overflow: hidden; 
+	text-overflow: ellipsis; 
+	white-space: nowrap;
+	display: inline-block;
+	width: 100%;
+}
+.document_item .description{
+	border:1px solid #eee; 
+	background:#eff6ff; 
+	border-radius:3px;
+	clear:right;
+	padding:5px;
+}
+
+
 .category_title, .search_title{
 	border: 1px solid #ddd; 
 	background: #eee;

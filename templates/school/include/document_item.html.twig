@@ -1,13 +1,13 @@
 <div class="document_item mg_b10">
 	<div class="sp mg_v10"></div>
 	<div class="mg_b5">
-		<div style="float: left;width: 55px">
+		<div class="fileicon">
 			{% set fileicon = fileIcon(document.newName) %}
-			<img src="{{ asset('image/fileicon/' ~ fileicon ~'.png') }}" style="width: 55px; height: 55px" />
+			<img src="{{ asset('image/fileicon/' ~ fileicon ~'.png') }}" />
 		</div>
-		<div style="margin-left: 60px">
-			<div style="float: left; width: calc(100% - 170px)">
-				<strong style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;display: inline-block;width: 100%;">{{ document.newName }} ({{ document.formattedFilesize }})</strong>
+		<div class="doc_detail">
+			<div class="info">
+				<strong>{{ document.newName }} ({{ document.formattedFilesize }})</strong>
 			</div>
 			<div class="right">
 				<span class="download_count">
@@ -18,16 +18,14 @@
 						{{ countDownloads }} téléchargement
 					{% endif %}
 				</span>
-				<a target="_blank" data-target="{{ path('school_document_status', {'document_id': document.id}) }}" class="btn_download" href="{{ path('school_document_download', {'slug': school.slug, 'document_id': document.id}) }}" data-name="{{ document.name }}" style="cursor:pointer">
+				<a target="_blank" data-target="{{ path('school_document_status', {'document_id': document.id}) }}" class="btn_download c_p" href="{{ path('school_document_download', {'slug': school.slug, 'document_id': document.id}) }}" data-name="{{ document.name }}">
 					<i class="fas fa-download"></i>
 				</a>
 			</div>
-
+			<div class="cl_r pd_b5"></div>
 			{% if document.description | trim != "" %}
-				<div class="mg_v5 pd_v5" style="clear:right">
-					<div class="pd_5" style="border:1px solid #eee; background:#eff6ff; border-radius:3px;clear:right">
-						{{ document.description | nl2br }}
-					</div>
+				<div class="description">
+					{{ document.description | nl2br }}
 				</div>
 			{% endif %}
 		</div>

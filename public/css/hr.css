@@ -468,6 +468,15 @@ header{
 	height:30px
 }
 
+.search_single_result .name{
+	vertical-align:middle; 
+	display:inline-block; 
+	width: 100%;
+	overflow: hidden; 
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
 #search_submit_button{
 	width: 140px;
 	text-align:center;

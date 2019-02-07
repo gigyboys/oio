@@ -14,19 +14,18 @@
 				Note moyenne : <span id="pass_mark">{{ passMark }}</span> / 5.
 			</div>
 		</div>
-    {% endif %}
-	<div>
-		{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-			<div id="my_evaluation">
-				{{ include("school/include/my_evaluation.html.twig") }}
-			</div>
-		{% else %}
-			<div id="my_evaluation" class="pd_t5">
-				{#<a class="link" href="{{ path('user_login') }}">Connectez-vous pour pouvoir partager votre évaluation</a>#}
-				<a class="login_ajax" href="{{ path('user_login_ajax') }}">Connectez-vous pour pouvoir partager votre évaluation</a>
-			</div>
-		{% endif %}
-	</div>
+	{% endif %}
+	{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+		<div id="my_evaluation">
+			{{ include("school/include/my_evaluation.html.twig") }}
+		</div>
+	{% else %}
+		<div id="my_evaluation" class="pd_t5">
+			{#<a class="link" href="{{ path('user_login') }}">Connectez-vous pour pouvoir partager votre évaluation</a>#}
+			<a class="login_ajax" href="{{ path('user_login_ajax') }}">Connectez-vous pour pouvoir partager votre évaluation</a>
+		</div>
+	{% endif %}
+
 	{% if evaluations|length == 0 and myEvaluation is null %}
 		<div id="evaluation_list" class="mg_v10">
 		</div>

@@ -8,14 +8,13 @@
 		{#{% set userInfo = evaluation.user.name %}#}
 	{{ userInfo | raw }} le {{ getDateLabel(evaluation.date) }} à {{ evaluation.date | date('H:i') }}
 	</div>
-	<div style="width:50px;float:left">
-
+	<div class="ur_avatar">
 		{% set avatar = userAvatar(evaluation.user) %}
-		<span style="display:block;float:left;width:32px"><img style="width:50px; height: 50px; border-radius: 50%" src="{{ avatar | imagine_filter('50x50') }}" alt="{{ getAcronym(evaluation.user.name) }}" /></span>
+		<img src="{{ avatar | imagine_filter('50x50') }}" alt="{{ getAcronym(evaluation.user.name) }}" />
 	</div>
-	<div style="margin-left:60px">
-		<div style="height:26px">
-			<div class="left" style="padding-top:2px">Notes : </div>
+	<div class="ev_detail">
+		<div class="mark">
+			<div class="left label">Notes : </div>
 			{% set mark = evaluation.mark/20 %}
 			{% for i in 1..5 %}
 				{% if i <= mark %}

@@ -3,7 +3,7 @@
 	{% set logo = schoolLogo(school) %}
 	
 	<span>
-		<span class="dd" style="display:inline-block;vertical-align: middle">
+		<span class="dd d_ib vamiddle">
 			<span href="#" class="dds c_p">
 				<img src="{{ logo | imagine_filter('22x22') }}" alt="" class="vatop"/>
 			</span>
@@ -26,7 +26,7 @@
 				</a>
 			</span>
 		</span>
-		<a title="{{ school.name }}" href="{{ path('school_view', {'slug': school.slug}) }}" style="vertical-align:middle; display:inline-block; width: 100%;overflow: hidden; text-overflow: ellipsis;white-space: nowrap;">
+		<a class="name" title="{{ school.name }}" href="{{ path('school_view', {'slug': school.slug}) }}">
 		{% if school.shortName | trim != "" %}
 		{{ school.shortName }} - 
 		{% endif %}

@@ -1,16 +1,16 @@
-<div style="background:#fff;">
-	<div style="border-bottom:1px solid #ddd; padding: 10px;  height:24px; ">
-		<div style="float:left">
+<div class="dialog">
+	<div class="header">
+		<div class="title">
 			Création d'un évènement
 		</div>
-		<div style="float:right;cursor: pointer; " class="button_closable">
-			<img src="{{ asset('image/close_icon.png') }}" style="width:16px; height:auto" alt="x" />
+		<div class="button_closable">
+			<i class="fas fa-times-circle"></i>
 		</div>
 	</div>
 
 	<form name="form_add_event" method="post" action="{{ path('event_manager_doadd_event') }}">
-		<div style="background:#fff; padding: 5px; ">
-			<div style="padding:5px">
+		<div class="pd_5">
+			<div class="pd_5">
 				<div class="info_msg mg_b10 tajustify">
 					Cette fenêtre vous permet de créer un évènement. 
 					Après avoir fourni le titre, 
@@ -33,14 +33,9 @@
 				</div>
 			</div>
 		</div>
-		<div style="border-top:1px solid #ddd;">
-			<div style="padding:10px; text-align:right">
-				<span class="standar_button button_closable">Annuler</span>
-				<button type="submit" id="add" name="add" class="standar_button">Creer un évènement</button>
-				{#
-				<span id="add_field_ajax_btn_submit" class="standar_button" onclick="javascript:document.form_add_post.submit()">{{ 'Creer' | trans }}</span>
-				#}
-			</div>
+		<div class="action">
+			<span class="standar_button button_closable">Annuler</span>
+			<button type="submit" id="add" name="add" class="standar_button">Creer un évènement</button>
 		</div>
 	</form>
 </div>

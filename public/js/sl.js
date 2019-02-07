@@ -173,7 +173,7 @@ $(function() {
 				}
 			});	
 		}else{
-			var errorHtml = '<div style="color:#d22">Veuillez bien fournir votre évaluation</div>';
+			var errorHtml = '<div class="warning_msg mg_v5"><i class="fas fa-exclamation-triangle"></i> Veuillez bien fournir votre évaluation</div>';
 			$("#add_evaluation_error").html(errorHtml);
 		}
     });
