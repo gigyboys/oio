@@ -333,17 +333,23 @@ class SchoolController extends AbstractController{
             $evaluations = null;
             $myEvaluation = null;
             if(!$user){
-                $evaluations = $this->evaluationRepository->findBy(array(
-                    'school' => $school,
-                    'current' => true,
-                ));
+                $evaluations = $this->evaluationRepository->findBy(
+                    array(
+                        'school' => $school,
+                        'current' => true,
+                    ),
+                    array('id' => 'DESC')
+                );
             }else{
                 $evaluations = $this->evaluationRepository->findBySchoolNotUser($school, $user);
-                $myEvaluation = $this->evaluationRepository->findOneBy(array(
-                    'school' => $school,
-                    'current' => true,
-                    'user' => $user,
-                ));
+                $myEvaluation = $this->evaluationRepository->findOneBy(
+                    array(
+                        'school' => $school,
+                        'current' => true,
+                        'user' => $user,
+                    ),
+                    array('id' => 'DESC')
+                );
             }
 
             $allEvaluations = $this->evaluationRepository->findBy(array(
