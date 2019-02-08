@@ -8,23 +8,23 @@
 </div>
 <div class="edit_header">
 	<div class="left">
-		<span class="dd" style="display:inline-block;">
-			<span href="#" class="dds" style="cursor:pointer">
+		<span class="dd d_ib">
+			<span href="#" class="dds c_p">
 				<i class="fas fa-info-circle"></i> <span>info</span>
 			</span>
 			<span class="ddt entity_info" data-display="block">
-				<span class="mg_5" style="display: block">
-					<span><img src="{{ asset('image/ur_icon.png') }}" style="width:12px; height:auto" /> {{ getLinkUserInfo(event.user, event.user.name) | raw }}</span><br />
-					<span><img src="{{ asset('image/calendar_icon.png') }}" style="width:12px; height:auto" /> {{ getDateLabel(event.date) }} à {{ event.date | date('H:i') }}</span><br />
-					<span><img src="{{ asset('image/view_icon.png') }}" style="width:12px; height:auto" /> {{ event.views | length }}</span><br />
-					{#<span><img src="{{ asset('image/comment_icon.png') }}" style="width:12px; height:auto" /> {{ getValidComments(event) | length }}</span><br />#}
+				<span class="mg_5 d_b">
+					<span><i class="fas fa-user-circle"></i> {{ getLinkUserInfo(event.user, event.user.name) | raw }}</span><br />
+					<span><i class="fas fa-calendar-alt"></i> {{ getDateLabel(event.date) }} à {{ event.date | date('H:i') }}</span><br />
+					<span><i class="far fa-eye"></i> {{ event.views | length }}</span><br />
+					<span><i class="fas fa-comment-dots"></i> {{ getValidComments(event) | length }}</span><br />
 				</span>
 			</span>
 		</span>
 	</div>
 	<div class="right">
         {% if event.tovalid == false %}
-			<span class="create_event" style="cursor: pointer" data-target="{{ path('event_manager_tovalid_ajax', {'event_id' : event.id})}}">
+			<span class="create_event c_p" data-target="{{ path('event_manager_tovalid_ajax', {'event_id' : event.id})}}">
 				<i class="far fa-check-circle"></i>
 				<span> Soumettre à une validation</span>
 			</span>
@@ -34,8 +34,8 @@
 			Evènement validé
         {% endif %}
 		|
-		<span class="dd" style="display:inline-block;">
-			<span href="#" class="dds" style="cursor:pointer">
+		<span class="dd d_ib">
+			<span href="#" class="dds c_p">
 				Actions
 			</span>
             {{ include("event/include/event_other_action.html.twig") }}

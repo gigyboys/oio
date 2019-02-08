@@ -82,7 +82,7 @@
 						{% endif %}
 					</div>
 
-					<div class="mg_10" style="overflow: auto;">
+					<div class="entity_ct mg_10">
 						{{ event.content | raw }}
 					</div>
 
@@ -113,10 +113,10 @@
                 {% if previousComment %}
 					<div id="event_load_comment_action">
 						<div class="sp mg_v10"></div>
-						<div id="event_load_comment" data-target="{{ path('event_load_comment', {'event_id': event.id, 'comment_id': previousComment.id}) }}" data-previous-cmt="{{ previousComment.id }}" class="mg_h10" style="text-align:center; cursor:pointer">
+						<div id="event_load_comment" data-target="{{ path('event_load_comment', {'event_id': event.id, 'comment_id': previousComment.id}) }}" data-previous-cmt="{{ previousComment.id }}" class="mg_h10 tacenter c_p">
 							Afficher les commentaires précédents...
 						</div>
-						<div class="btn_loading" style="text-align:center;display:none;">Chargement...</div>
+						<div class="btn_loading tacenter d_n">Chargement...</div>
 					</div>
                 {% endif %}
 				<div class="sp mg_v10"></div>
@@ -131,20 +131,20 @@
                     {% if event.activeComment %}
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
 							<div class="mg_10">
-								<form action="" name="" method="post" id="">
+								<form method="post" class="form_cmt">
 									<div class="mg_b5">
                                         {{ app.user.name }} :
 									</div>
-									<div style="width:60px;float:left">
-                                        {% set avatar = userAvatar(app.user) %}
-										<span style="display:block;float:left;"><img style="width:60px; height: 60px; border-radius: 50%" src="{{ avatar | imagine_filter('60x60') }}" alt="{{ app.user.username }}" /></span>
+									<div class="ur_avatar">
+										{% set avatar = userAvatar(app.user) %}
+										<img src="{{ avatar | imagine_filter('60x60') }}" alt="{{ app.user.username }}" />
 									</div>
-									<div style="margin-left:70px">
-										<textarea class="default_textarea" id="event_cmt_message" style="min-height:120px"></textarea>
+									<div class="detail">
+										<textarea class="default_textarea cmt_msg" id="event_cmt_message"></textarea>
 										<div id="et_add_comment_error"></div>
 										<div id="et_add_comment_action" class="mg_t10">
 											<span class="btn_save standar_button btn_event_new_cmt" data-target="{{ path('event_new_comment', {'event_id': event.id}) }}">Ajouter mon commentaire</span>
-											<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;">Chargement...</span>
+											<span class="btn_loading">Chargement...</span>
 										</div>
 									</div>
 									<div class="both"></div>
@@ -166,7 +166,6 @@
 		</div>
 	</div>
 	
-
 	{# next and previous post #}
 	<div class="sep"></div>
 	<div class="cr">

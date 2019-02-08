@@ -16,24 +16,24 @@
 						--></span>
 				</div>
 				<div class="search_input_right">
-					<span class="result_state" style="vertical-align: middle">{{ participations | length }} résultat{% if participations | length > 1 %}s{% endif %}</span>
+					<span class="result_state vamiddle">{{ participations | length }} résultat{% if participations | length > 1 %}s{% endif %}</span>
 				</div>
 				<div class="both"></div>
 			</div>
 		{% endif %}
-		<div style="max-height:300px; overflow:auto">
+		<div class="list_pt_popup">
 			{% for participation in participations %}
 				{% set user = participation.user %}
 				{% set avatar = userAvatar(user) %}
-				<div class="mg_5 search_item" data-text="{{ user.name }}">
-					<div style="float:left">
-						<img style="border-radius:50%" src="{{ avatar | imagine_filter("50x50")}}" alt="{{ getAcronym(user.name) }}" />
+				<div class="mg_5 ur_item search_item" data-text="{{ user.name }}">
+					<div class="ur_avatar">
+						<img src="{{ avatar | imagine_filter("50x50")}}" alt="{{ getAcronym(user.name) }}" />
 					</div>
 					
-					<div style="margin-left:60px;padding-top:5px">
+					<div class="detail">
 						<div>
 							<strong>
-								<a style="font-weight:bold" class="link" href="{{ path('user_profile', {'username': user.username}) }}">{{ user.name }}</a>
+								<a class="link" href="{{ path('user_profile', {'username': user.username}) }}">{{ user.name }}</a>
 							</strong>
 						</div>
 						<div>

@@ -110,6 +110,10 @@ a:hover{
 	
 }
 
+.entity_ct{
+	overflow: auto;
+}
+
 .item_test{
 	background: transparent;
 	float: left;
@@ -228,6 +232,13 @@ a:hover{
 	cursor:pointer;
 	float: left;
 	clear: left;
+}
+
+.list_tag .tag_item .state_loading img, .list_school .school_item .state_loading img{
+	width:10px; 
+	height:10px;
+	display: inline-block;
+	vertical-align: middle;
 }
 
 /*spinner loading */
@@ -473,6 +484,56 @@ a:hover{
 }
 .t_content_item.selected{
     display: block;
+}
+
+/*********** style entity common ************/
+.form_cmt .ur_avatar{
+	width:60px;
+	float:left
+}
+.form_cmt .ur_avatar img{
+	width:60px; 
+	height: 60px; 
+	border-radius: 50%;
+	display:block;
+}
+.form_cmt .detail{
+	margin-left:70px
+}
+.form_cmt .detail .cmt_msg{
+	min-height:120px
+}
+.form_cmt .detail .btn_loading{
+	display:none;
+	padding:5px;
+	border:1px solid transparent;
+	margin: 0px 5px 0px 0px;
+}
+.edit_title{
+	background:#ddd; 
+	padding: 5px; 
+	margin:5px 0; 
+	border:1px solid #ccc
+}
+.edit_title i{
+	color: #222;
+	font-size: 13px;
+}
+
+.bc_info{
+	margin: 5px 0; 
+	border: 1px solid #ccc; 
+	padding: 5px; 
+	border-radius: 4px
+}
+
+.entity_edit .btn_loading{
+	padding:5px;
+	border:1px solid transparent;
+	margin: 0px 5px 0px 0px;
+}
+.entity_edit .btn_loading img{
+	width: 20px;
 }
 
 /************** style event ***************/
@@ -766,6 +827,27 @@ a:hover{
 	cursor:pointer;
 }
 
+.list_pt_popup{
+	max-height:300px; 
+	overflow:auto
+}
+
+.list_pt_popup .ur_item .ur_avatar{
+	float:left;
+	
+}
+
+.list_pt_popup .ur_item .ur_avatar img{
+	border-radius:50%;
+	width: 50px;
+	height: 50px;
+}
+
+.list_pt_popup .ur_item .detail{
+	margin-left:60px;
+	padding-top:5px
+}
+
 /************* style blog **************/
 .bgl{
 	float:left;
@@ -892,7 +974,7 @@ a:hover{
 }
 
 
-/*edit post front*/
+/*edit entity front*/
 .edit_header{
 	background:#f5f5f5; 
 	padding: 5px; 
@@ -908,6 +990,28 @@ a:hover{
 	background: #f9f9f9; 
 	border: 1px solid #aaa; 
 	border-radius: 2px;
+}
+
+.edit_footer{
+	margin:10px 0;
+	background:#f5f5f5; 
+	padding: 5px; 
+	border:1px solid #ddd;
+}
+
+.edit_footer .state_loading img{
+	width:10px; 
+	height:10px;
+	display: inline-block; 
+	vertical-align: middle;
+}
+
+.entity_info i{
+	color: #333;
+	font-size: 13px;
+	display: inline-block;
+	width: 15px;
+	text-align: center;
 }
 
 .meta_info{

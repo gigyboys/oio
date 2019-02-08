@@ -181,8 +181,8 @@ class AppExtension extends AbstractExtension
         return $this->blogService->isSchoolPost($post, $school);
     }
 
-    public function getValidComments(Post $post) {
-        return $this->blogService->getValidComments($post);
+    public function getValidComments($entity) {
+        return $this->platformService->getValidComments($entity);
     }
 
     public function getTagsWithPublishedPost() {

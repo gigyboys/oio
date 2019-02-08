@@ -6,7 +6,7 @@
 
 
 {% block body %}
-	<div class="cr">
+	<div class="cr entity_edit">
 		<div class="ct">
 			<div class="mg_10">
                 {{ include("event/include/header_event_edit.html.twig") }}
@@ -18,7 +18,7 @@
 							{% set illustration = eventIllustration(event) %}
 							<label>
 								<span class="text"><i class="fas fa-pen-square"></i><br />Cliquez ici pour éditer l'illustration de l'évènement</span>
-								<img id="event_illustration" class="600x250" style="cursor: pointer" src="{{ illustration | imagine_filter('600x250') }}" alt="img event" />
+								<img id="event_illustration" class="600x250 c_p" src="{{ illustration | imagine_filter('600x250') }}" alt="img event" />
 							</label>
 						</div>
 
@@ -27,26 +27,26 @@
 								<div class="bloc_editable">
 									<div class="bloc_view">
 										<div class="pd_l5"><strong>Titre : <span class="error_title error_txt"></span></strong></div>
-										<div style="padding:5px"><span id="event_view_title">{{ event.title }}</span></div>
+										<div class="pd_5"><span id="event_view_title">{{ event.title }}</span></div>
 
 										<div class="pd_l5"><strong>Slug :</strong></div>
-										<div style="padding:5px"><span id="event_view_slug">{{ event.slug }}</span></div>
+										<div class="pd_5"><span id="event_view_slug">{{ event.slug }}</span></div>
 
 									</div>
-									<div class="bloc_edit" style="display:none">
+									<div class="bloc_edit d_n">
 										<div class="pd_l5">Titre *: <span class="error_title error_txt"></span></span></div>
-										<div style="padding:5px"><input type="text" id="event_input_title" class="default_input" name="title" value="{{ event.title }}" /></div>
+										<div class="pd_5"><input type="text" id="event_input_title" class="default_input" name="title" value="{{ event.title }}" /></div>
 										
 										<div class="pd_l5">Slug *:</div>
-										<div style="padding:5px"><input type="text" id="event_input_slug" class="default_input" name="slug" value="{{ event.slug }}" /></div>
+										<div class="pd_5"><input type="text" id="event_input_slug" class="default_input" name="slug" value="{{ event.slug }}" /></div>
 										
 									</div>
 									<div class="separator"></div>
-									<div class="bloc_action" style="margin:5px">
+									<div class="bloc_action mg_5">
 										<span class="btn_edit standar_button">Modifier</span>
-										<button class="btn_save standar_button" id="btn_doedit_event" type="submit" form="form_event_edit" value="Submit" style="display:none">Enregistrer</button>
-										<span class="btn_reset standar_button" style="display:none">Annuler</span>
-										<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;"><img src="{{ asset('image/tail-spin.svg') }}" style="width: 20px; height: auto"/>Chargement...</span>
+										<button class="btn_save standar_button d_n" id="btn_doedit_event" type="submit" form="form_event_edit" value="Submit">Enregistrer</button>
+										<span class="btn_reset standar_button d_n">Annuler</span>
+										<span class="btn_loading d_n"><img src="{{ asset('image/tail-spin.svg') }}"/>Chargement...</span>
 									</div>
 								</div>
 							</form>
@@ -65,9 +65,9 @@
 
 						<div class="meta_title">
 							<div class="pd_l5"><strong>Titre :</strong></div>
-							<div style="padding:5px"><span id="event_view_title">{{ event.title }}</span></div>
+							<div class="pd_5"><span id="event_view_title">{{ event.title }}</span></div>
 							<div class="pd_l5"><strong>Slug :</strong></div>
-							<div style="padding:5px"><span id="event_view_slug">{{ event.slug }}</span></div>
+							<div class="pd_5"><span id="event_view_slug">{{ event.slug }}</span></div>
 						</div>
 						<div class="both"></div>
 					</div>
@@ -78,35 +78,35 @@
 				{% if event.tovalid == false or event.valid %}
 					<form id="form_event_edit_date" action="{{ path('event_manager_doedit_date', {'event_id': event.id}) }}">
 						<div class="bloc_editable">
-							<div class="bloc_view" style="margin: 5px 0; border: 1px solid #ccc; border-radius: 4px">
+							<div class="bloc_view bc_info">
 								<div class="pd_l5"><i>Date et heure début : <span class="error_datebegin error_txt"></span></i></div>
-								<div style="padding:5px"><span id="event_view_datebegin">{{ event.datebegin | date('d/m/Y à H:i') }}</span></div>
+								<div class="pd_5"><span id="event_view_datebegin">{{ event.datebegin | date('d/m/Y à H:i') }}</span></div>
 
 								<div class="pd_l5"><i>Date et heure fin : <span class="error_dateend error_txt"></span></i></div>
-								<div style="padding:5px"><span id="event_view_dateend">{{ event.dateend | date('d/m/Y à H:i') }}</span></div>
+								<div class="pd_5"><span id="event_view_dateend">{{ event.dateend | date('d/m/Y à H:i') }}</span></div>
 							</div>
-							<div class="bloc_edit" style="display:none;margin: 10px 0; border: 1px solid #ccc; border-radius: 4px">
+							<div class="bloc_edit bc_info d_n">
 								<div class="pd_l5"><i>Date et heure début *:</i></div>
-								<div style="padding:5px"><input type="text" readonly="true" id="event_input_datebegin" class="default_input" name="slug" value="{{ event.datebegin | date('d/m/Y à H:i') }}" /></div>
+								<div class="pd_5"><input type="text" readonly="true" id="event_input_datebegin" class="default_input" name="slug" value="{{ event.datebegin | date('d/m/Y à H:i') }}" /></div>
 								
 								<div class="pd_l5"><i>Date et heure fin *:</i></div>
-								<div style="padding:5px"><input type="text" readonly="true" id="event_input_dateend" class="default_input" name="slug" value="{{ event.dateend | date('d/m/Y à H:i') }}" /></div>
+								<div class="pd_5"><input type="text" readonly="true" id="event_input_dateend" class="default_input" name="slug" value="{{ event.dateend | date('d/m/Y à H:i') }}" /></div>
 							</div>
 							<div class="bloc_action mg_v10">
 								<span class="btn_edit standar_button">Modifier</span>
-								<button class="btn_save standar_button" id="btn_doedit_date_event" type="submit" form="form_event_edit_date" value="Submit" style="display:none">Enregistrer</button>
-								<span class="btn_reset standar_button" style="display:none">Annuler</span>
-								<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;"><img src="{{ asset('image/tail-spin.svg') }}" style="width:16px; height:16px; "/>Chargement...</span>
+								<button class="btn_save standar_button d_n" id="btn_doedit_date_event" type="submit" form="form_event_edit_date" value="Submit">Enregistrer</button>
+								<span class="btn_reset standar_button d_n">Annuler</span>
+								<span class="btn_loading d_n"><img src="{{ asset('image/tail-spin.svg') }}"/>Chargement...</span>
 							</div>
 						</div>
 					</form>
                 {% else %}
-					<div class="bloc_view" style="margin: 5px 0; border: 1px solid #ccc; border-radius: 4px">
+					<div class="bloc_view bc_info">
 						<div class="pd_l5"><i>Date début : <span class="error_datebegin error_txt"></span></i></div>
-						<div style="padding:5px"><span id="event_view_datebegin">{{ event.datebegin | date('d/m/Y à H:i') }}</span></div>
+						<div class="pd_5"><span id="event_view_datebegin">{{ event.datebegin | date('d/m/Y à H:i') }}</span></div>
 
 						<div class="pd_l5"><i>Date fin : <span class="error_dateend error_txt"></span></i></div>
-						<div style="padding:5px"><span id="event_view_dateend">{{ event.dateend | date('d/m/Y à H:i') }}</span></div>
+						<div class="pd_5"><span id="event_view_dateend">{{ event.dateend | date('d/m/Y à H:i') }}</span></div>
 					</div>
 				{% endif %}
 
@@ -115,59 +115,59 @@
 				{% if event.tovalid == false or event.valid %}
 					<form id="form_event_edit_location" action="{{ path('event_manager_doedit_location', {'event_id': event.id}) }}">
 						<div class="bloc_editable">
-							<div class="bloc_view" style="margin: 5px 0; border: 1px solid #ccc; border-radius: 4px">
+							<div class="bloc_view bc_info">
 								<div class="pd_l5"><i>Lieu : <span class="error_location error_txt"></span></i></div>
-								<div style="padding:5px"><span id="event_view_location">{{ event.location }}</span></div>
+								<div class="pd_5"><span id="event_view_location">{{ event.location }}</span></div>
 
 								<div class="pd_l5"><i>Ville :</i></div>
-								<div style="padding:5px"><span id="event_view_city">{{ event.city }}</span></div>
+								<div class="pd_5"><span id="event_view_city">{{ event.city }}</span></div>
 
 								<div class="pd_l5"><i>Latitude :</i></div>
-								<div style="padding:5px"><span id="event_view_latitude">{{ event.latitude }}</span></div>
+								<div class="pd_5"><span id="event_view_latitude">{{ event.latitude }}</span></div>
 
 								<div class="pd_l5"><i>Longitude :</i></div>
-								<div style="padding:5px"><span id="event_view_longitude">{{ event.longitude }}</span></div>
+								<div class="pd_5"><span id="event_view_longitude">{{ event.longitude }}</span></div>
 							</div>
-							<div class="bloc_edit" style="display:none;margin: 10px 0; border: 1px solid #ccc; border-radius: 4px">
+							<div class="bloc_edit bc_info bc_info d_n">
 								<div class="pd_l5"><i>Lieu :</i></div>
-								<div style="padding:5px"><input type="text" id="event_input_location" class="default_input" value="{{ event.location }}" /></div>
+								<div class="pd_5"><input type="text" id="event_input_location" class="default_input" value="{{ event.location }}" /></div>
 
 								<div class="pd_l5"><i>Ville :</i></div>
-								<div style="padding:5px"><input type="text" id="event_input_city" class="default_input" value="{{ event.city }}" /></div>
+								<div class="pd_5"><input type="text" id="event_input_city" class="default_input" value="{{ event.city }}" /></div>
 								
 								<div class="pd_l5"><i>Latitude :</i></div>
-								<div style="padding:5px">
+								<div class="pd_5">
 									<input type="text" id="event_input_latitude" class="default_input" value="{{ event.latitude }}" />
-									<span class="get-coords-event" style="cursor: pointer"><img src="{{ asset('image/location_icon.png') }}" style="width:12px; height:auto" /> map</span>
+									<span class="get-coords-event c_p"><i class="fas fa-map-marker-alt"></i> map</span>
 								</div>
 
 								<div class="pd_l5"><i>Longitude :</i></div>
-								<div style="padding:5px">
+								<div class="pd_5">
 										<input type="text" id="event_input_longitude" class="default_input" value="{{ event.longitude }}" />
-										<span class="get-coords-event" style="cursor: pointer"><img src="{{ asset('image/location_icon.png') }}" style="width:12px; height:auto" /> map</span>
+										<span class="get-coords-event c_p"><i class="fas fa-map-marker-alt"></i> map</span>
 								</div>
 							</div>
 							<div class="bloc_action mg_v10">
 								<span class="btn_edit standar_button">Modifier</span>
-								<button class="btn_save standar_button" id="btn_doedit_date_event" type="submit" form="form_event_edit_location" value="Submit" style="display:none">Enregistrer</button>
-								<span class="btn_reset standar_button" style="display:none">Annuler</span>
-								<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;"><img src="{{ asset('image/tail-spin.svg') }}" style="width:16px; height:16px; "/>Chargement...</span>
+								<button class="btn_save standar_button d_n" id="btn_doedit_date_event" type="submit" form="form_event_edit_location" value="Submit">Enregistrer</button>
+								<span class="btn_reset standar_button d_n">Annuler</span>
+								<span class="btn_loading d_n"><img src="{{ asset('image/tail-spin.svg') }}"/>Chargement...</span>
 							</div>
 						</div>
 					</form>
                 {% else %}
-					<div class="bloc_view" style="margin: 5px 0; border: 1px solid #ccc; border-radius: 4px">
+					<div class="bloc_view bc_info">
 						<div class="pd_l5"><i>Lieu : <span class="error_location error_txt"></span></i></div>
-						<div style="padding:5px"><span id="event_view_location">{{ event.location }}</span></div>
+						<div class="pd_5"><span id="event_view_location">{{ event.location }}</span></div>
 
 						<div class="pd_l5"><i>Ville :</i></div>
-						<div style="padding:5px"><span id="event_view_city">{{ event.city }}</span></div>
+						<div class="pd_5"><span id="event_view_city">{{ event.city }}</span></div>
 
 						<div class="pd_l5"><i>Latitude :</i></div>
-						<div style="padding:5px"><span id="event_view_latitude">{{ event.latitude }}</span></div>
+						<div class="pd_5"><span id="event_view_latitude">{{ event.latitude }}</span></div>
 
 						<div class="pd_l5"><i>Longitude :</i></div>
-						<div style="padding:5px"><span id="event_view_longitude">{{ event.longitude }}</span></div>
+						<div class="pd_5"><span id="event_view_longitude">{{ event.longitude }}</span></div>
 					</div>
 				{% endif %}
 				
@@ -175,28 +175,28 @@
 				<div><strong>A propos de l'évènement</strong></div>
                 {% if event.tovalid == false or event.valid %}
 					<div class="bloc_editable">
-						<div class="bloc_view" style="margin: 5px 0; border: 1px solid #ccc; padding: 5px; border-radius: 4px">
+						<div class="bloc_view bc_info">
 							<div>
-								<div style="margin: 5px 0;">
+								<div class="mg_v5">
 									<i>Introduction :</i>
 								</div>
-								<div class="event_view_introduction" style="padding:5px;background:#fff; ">
+								<div class="event_view_introduction pd_5">
 									{{ event.introduction }}
 								</div>
 							</div>
 
 							<div>
-								<div style="margin: 5px 0;">
+								<div class="mg_v5">
 									<i>Contenu :</i>
 								</div>
-								<div class="event_view_content" style="padding:5px;background:#fff; ">
+								<div class="event_view_content pd_5">
 									{{ event.content | raw }}
 								</div>
 							</div>
 						</div>
-						<div class="bloc_edit" style="display:none;margin: 10px 0; border: 1px solid #ccc; padding: 5px; border-radius: 4px">
+						<div class="bloc_edit bc_info d_n">
 							<div>
-								<div style="margin: 5px 0;">
+								<div class="mg_v5">
 									<i>Introduction :</i>
 								</div>
 								<div>
@@ -204,7 +204,7 @@
 								</div>
 							</div>
 							<div>
-								<div style="margin: 5px 0;">
+								<div class="mg_v5">
 									<i>Contenu :</i>
 								</div>
 								<div>
@@ -230,27 +230,27 @@
 						</div>
 						<div class="bloc_action mg_v10">
 							<span class="btn_edit standar_button">Modifier</span>
-							<span class="btn_doedit_content_event btn_save standar_button" data-target="{{ path('event_manager_doedit_content', {'event_id': event.id}) }}" style="display:none">Enregistrer</span>
-							<span class="btn_reset standar_button" style="display:none">Annuler</span>
-							<span class="btn_loading" style="display:none;padding:5px;border:1px solid transparent;margin: 0px 5px 0px 0px;"><img src="{{ asset('image/tail-spin.svg') }}" style="width:16px; height:16px; "/>Chargement...</span>
+							<span class="btn_doedit_content_event btn_save standar_button d_n" data-target="{{ path('event_manager_doedit_content', {'event_id': event.id}) }}">Enregistrer</span>
+							<span class="btn_reset standar_button d_n">Annuler</span>
+							<span class="btn_loading d_n"><img src="{{ asset('image/tail-spin.svg') }}"/>Chargement...</span>
 						</div>
 					</div>
 				{% else %}
-					<div class="bloc_view" style="margin: 5px 0; border: 1px solid #ccc; padding: 5px; border-radius: 4px">
+					<div class="bloc_view bc_info">
 						<div>
-							<div style="margin: 5px 0;">
+							<div class="mg_v5">
 								<i>Introduction :</i>
 							</div>
-							<div class="event_view_introduction" style="padding:5px;background:#fff; border-radius:4px;border:1px solid #eee">
+							<div class="event_view_introduction pd_5">
 								{{ event.introduction }}
 							</div>
 						</div>
 
 						<div>
-							<div style="margin: 5px 0;">
+							<div class="mg_v5">
 								<i>Contenu :</i>
 							</div>
-							<div class="event_view_content" style="padding:5px;background:#fff; border-radius:4px;border:1px solid #eee">
+							<div class="event_view_content pd_5">
 								{{ event.content | raw }}
 							</div>
 						</div>

@@ -34,6 +34,8 @@ use App\Repository\SchoolContactRepository;
 use App\Repository\SchoolOfTheDayRepository;
 use App\Repository\SchoolRepository;
 use App\Repository\UserRepository;
+use App\Service\BlogService;
+use App\Service\EventService;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -59,6 +61,8 @@ class PlatformService
         \Swift_Mailer $mailer,
         EngineInterface $templating,
         TokenStorageInterface $token,
+        EventService $eventService,
+        BlogService $blogService,
         RequestStack $requestStack
     )
     {
@@ -74,6 +78,8 @@ class PlatformService
         $this->mailer = $mailer;
         $this->token = $token;
         $this->requestStack = $requestStack;
+        $this->eventService = $eventService;
+        $this->blogService = $blogService;
     }
 
     public function substrSpace($string, $length) {
@@ -595,5 +601,14 @@ class PlatformService
         }
 
         return strtoupper($acronym);
+    }
+
+    public function getValidComments($entity) {
+        if ($entity instanceof Post){
+            return $this->blogService->getValidComments($entity);
+        }
+        elseif ($entity instanceof Event){
+            return $this->eventService->getValidComments($entity);
+        }
     }
 }

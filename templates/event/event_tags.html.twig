@@ -22,15 +22,15 @@
 
 					<div class="meta_title">
 						<div class="pd_l5"><strong>Titre :</strong></div>
-						<div style="padding:5px"><span id="event_view_title">{{ event.title }}</span></div>
+						<div class="pd_5"><span id="event_view_title">{{ event.title }}</span></div>
 						<div class="pd_l5"><strong>Slug :</strong></div>
-						<div style="padding:5px"><span id="event_view_slug">{{ event.slug }}</span></div>
+						<div class="pd_5"><span id="event_view_slug">{{ event.slug }}</span></div>
 					</div>
 					<div class="both"></div>
 				</div>
 
-				<div style="background:#ddd; padding: 5px; margin:5px 0; border:1px solid #ccc">
-					<span><img src="{{ asset('image/list_icon.png') }}" style="width:12px; height:auto" /> Liste des tags</span>
+				<div class="edit_title">
+					<span><i class="fas fa-list"></i> Liste des tags</span>
 				</div>
 
 				<div class="search" data-item-display="inline-block">
@@ -41,7 +41,7 @@
 								--></span>
 						</div>
 						<div class="search_input_right">
-							<span class="result_state" style="vertical-align: middle">{{ tags | length }} résultat{% if tags | length > 1 %}s{% endif %}</span>
+							<span class="result_state vamiddle">{{ tags | length }} résultat{% if tags | length > 1 %}s{% endif %}</span>
 						</div>
 						<div class="both"></div>
 					</div>
@@ -53,14 +53,14 @@
 									<span class="toggle_case" data-entity="tag" data-target="{{ path('event_manager_toggle_tag', {'event_id': event.id, 'tag_id': tag.id }) }}">
 										{% set isTag = isTagEvent(event, tag) %}
 										{% if isTag %}
-											<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
+											<span class="greenstate d_n"><span class="greenpastille"></span></span>
 											<span class="redstate"><span class="redpastille"></span></span>
 										{% else %}
 											<span class="greenstate"><span class="greenpastille"></span></span>
-											<span class="redstate" style="display:none"><span class="redpastille"></span></span>
+											<span class="redstate d_n"><span class="redpastille"></span></span>
 										{% endif %}
-									</span><span class="state_loading" style="display:none">
-										<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" />
+									</span><span class="state_loading d_n">
+										<img src="{{ asset('image/tail-spin.svg')  }}" />
 									</span>
 								</span>
 								<span>

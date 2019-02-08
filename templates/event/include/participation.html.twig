@@ -50,7 +50,7 @@
             {% else %}
                 <div>
                     {% if event.dateend | date('Y-m-d H:i:s') > "now" | date('Y-m-d H:i:s') %}
-                        <span class="going_btn" style="cursor:pointer" data-target="{{ path('event_going_participation', {'event_id': event.id}) }}">
+                        <span class="going_btn c_p" data-target="{{ path('event_going_participation', {'event_id': event.id}) }}">
                             Soyez le premier à participer
                         </span>
                     {% endif %}

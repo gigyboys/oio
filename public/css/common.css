@@ -469,6 +469,9 @@
 	float:right;
 	cursor: pointer;
 }
+.popup .header .button_closable:hover{
+	color:#555
+}
 .popup .dialog .action{
 	border-top:1px solid #ddd;
 	padding:10px; 
