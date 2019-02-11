@@ -39,4 +39,25 @@ class VisitRepository extends ServiceEntityRepository
 
         return $visit;
     }
+
+    public function findVisits($dateMin, $dateMax) {
+
+        $qb = $this->createQueryBuilder('visit');
+
+        $qb
+            ->andWhere('visit.date > :dateMin')
+            ->setParameter('dateMin', $dateMin)
+            ->andWhere('visit.date <= :dateMax')
+            ->setParameter('dateMax', $dateMax)
+        ;
+
+
+        $qb
+            ->orderBy('visit.date', 'ASC')
+        ;
+
+        $visits = $qb->getQuery()->getResult();
+
+        return $visits;
+    }
 }

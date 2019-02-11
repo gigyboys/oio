@@ -31,17 +31,4 @@ class UserRepository extends ServiceEntityRepository
 
         return $users;
     }
-
-    public function getPosts($field = 'id', $order = 'DESC') {
-
-        $qb = $this->createQueryBuilder('post');
-
-        $qb
-            ->orderBy('post.'.$field, $order)
-        ;
-
-        $posts = $qb->getQuery()->getResult();
-
-        return $posts;
-    }
 }

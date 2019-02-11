@@ -15,6 +15,8 @@
 
 {% block content_body_class %}full{% endblock %}
 {% block body %}
+
+<div style="height:100%; overflow:auto">
     <div style="padding:5px">
         <div class="pd_v5">
             <div class="pd_5"><a href="{{ path('admin_school') }}">{{ schools | length }} Etablissements</a> : {{ publishedSchools | length }} publiés</div>
@@ -95,6 +97,44 @@
             </div>
         </div>
     </div>
+
+    {% set labels = '' %}
+    {% set datas = '' %}
+    {% set countLabels = 0 %}
+    {% for day in days %}
+        {% if countLabels == 0 %}
+            {% set labels = labels ~ '"' ~ day.day | date('d/m/Y') ~ '"' %}
+            {% set datas = datas ~ day.visits | length  %}
+        {% else %}
+            {% set labels = labels ~ ', "' ~ day.day | date('d/m/Y') ~ '"' %}
+            {% set datas = datas ~ ', ' ~ day.visits | length %}
+        {% endif %}
+        {% set countLabels = countLabels + 1 %}
+    {% endfor %}
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <div style="padding:5px">
+        <div class="pd_v5">
+            <canvas id="chartVisit"></canvas>
+            <script>
+                var ctx = document.getElementById('chartVisit').getContext('2d');
+                var chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: [{{ labels | raw }}],
+                        datasets: [{
+                            label: "Les visites du 30 derniers jours",
+                            borderColor: 'rgb(255, 99, 132)',
+                            data: [{{ datas | raw  }}],
+                        }]
+                    },
+                    options: {}
+                });
+            </script>
+        </div>
+    </div>
+
+</div>
 {% endblock %}
 
 {% block body_footer_wrap %}
