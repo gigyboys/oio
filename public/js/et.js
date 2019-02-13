@@ -220,7 +220,6 @@ function buildEventLinks(){
 
 function showEvent(){
 	$("#search_header *").css("color", "transparent");
-	$("#search_header *").css("text-shadow", "0px 0px 1px transparent");
 	var event = events[indexEvent];
 	var jours = 0;
 	var hours = 0;
@@ -277,9 +276,8 @@ function showEvent(){
 	$("#et_link_"+event.id).addClass("selected");
 
 	setTimeout(function(){
-		$("#search_header").html("<div class='event_info'><strong><a href='"+event.url+"'>"+event.title+"</a></strong><br>"+labelTime+"</div>");
+		$("#search_header").html("<div class='event_info'><div><strong><a href='"+event.url+"'>"+event.title+"</a></strong></div><div>"+labelTime+"</div></div>");
 		$("#search_header *").css("color", "#000");
-		$("#search_header *").css("text-shadow", "0px 0px 1px #fff");
 		indexEvent++;
 		if(events.length <= indexEvent){
 			indexEvent = 0;
