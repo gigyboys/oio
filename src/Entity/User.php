@@ -31,6 +31,11 @@ class User implements UserInterface
     private $events;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Job", mappedBy="user")
+     */
+    private $jobs;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Evaluation", mappedBy="user")
      */
     private $evaluations;
@@ -125,6 +130,40 @@ class User implements UserInterface
     public function getPosts()
     {
         return $this->posts;
+    }
+
+    public function addEvent($event)
+    {
+        $this->events[] = $event;
+
+        return $this;
+    }
+
+    public function removeEvent($event)
+    {
+        $this->events->removeElement($event);
+    }
+
+    public function getEvents()
+    {
+        return $this->events;
+    }
+
+    public function addJob($job)
+    {
+        $this->jobs[] = $job;
+
+        return $this;
+    }
+
+    public function removeJob($job)
+    {
+        $this->jobs->removeElement($job);
+    }
+
+    public function getJobs()
+    {
+        return $this->jobs;
     }
 
     public function addEvaluation($evaluation)

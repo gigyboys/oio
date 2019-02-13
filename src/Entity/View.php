@@ -36,6 +36,12 @@ class View
     private $event;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Job", inversedBy="views")
+     * @ORM\JoinColumn(name="job_id", nullable=true)
+     */
+    private $job;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(name="user_id", nullable=true)
      */
@@ -90,6 +96,18 @@ class View
     public function getEvent()
     {
         return $this->event;
+    }
+
+    public function setJob($job = null)
+    {
+        $this->job = $job;
+
+        return $this;
+    }
+
+    public function getJob()
+    {
+        return $this->job;
     }
 
     public function setUser($user = null)
