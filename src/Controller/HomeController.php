@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Repository\ParameterRepository;
 use App\Service\PlatformService;
 use App\Service\SchoolService;
+use App\Repository\EventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\School;
@@ -15,6 +16,7 @@ class HomeController extends AbstractController {
         SchoolRepository $schoolRepository,
         ParameterRepository $parameterRepository,
         PlatformService $platformService,
+        EventRepository $eventRepository,
         SchoolService $schoolService
     )
     {
@@ -22,6 +24,7 @@ class HomeController extends AbstractController {
         $this->parameterRepository = $parameterRepository;
         $this->platformService = $platformService;
         $this->schoolService = $schoolService;
+        $this->eventRepository = $eventRepository;
 
         $this->platformService->registerVisit();
     }
@@ -66,13 +69,24 @@ class HomeController extends AbstractController {
             $categories = $categoriesLimit;
         }
 
+        //events
+        $limit = 5;
+        $offset = 0;
+        $offset = 0;
+        $published = true;
+        $typeslug = "upcoming";
+        $events = $this->eventRepository->getEventOffsetLimit($offset, $limit, $published, $typeslug);
+
+//        $event['diff'] = $eventTemp->getDateend()->getTimestamp() - $eventTemp->getDatebegin()->getTimestamp();
+        
         return $this->render('platform/home.html.twig', [
-            'allSchools' => $allSchools,
-            'schools' => $schools,
-            'categories' => $categories,
-            'allCategories' => $allCategories,
-            'evaluatedSchools' => $evaluatedSchools,
-            'allEvaluations' => $allEvaluations,
+            'allSchools'        => $allSchools,
+            'schools'           => $schools,
+            'categories'        => $categories,
+            'allCategories'     => $allCategories,
+            'evaluatedSchools'  => $evaluatedSchools,
+            'allEvaluations'    => $allEvaluations,
+            'events'            => $events,
         ]);
     }
 }

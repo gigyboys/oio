@@ -300,8 +300,21 @@ header{
 
 #search_header{
 	width: auto;
-	height: 100px;
-	background: transparent
+	min-height: 100px;
+	background: transparent;
+	position: relative;
+}
+
+#search_header *{
+	transition: all 0.7s ease;
+	text-shadow: 0px 0px 1px #fff;
+	color: #000;
+}
+
+#search_header .event_info{
+	text-align: center;
+	text-shadow: 0px 0px 1px #fff;
+	color: #000;
 }
 
 #search_bloc{
@@ -321,7 +334,27 @@ header{
 #search_footer{
 	width: auto;
 	height: 100px;
-	background: transparent
+	background: transparent;
+	position: relative;
+}
+#search_footer .et_link_wrap{
+	right:0;left:0;
+	bottom:0;
+	position:absolute;
+	text-align:center
+}
+#search_footer .et_link{
+	display:inline-block; 
+	width:8px; 
+	height:8px; 
+	border-radius:50%; 
+	background:#fff; 
+	margin:3px;
+	box-shadow: 0px 0px 1px #000;
+	cursor:pointer
+}
+#search_footer .et_link.selected{
+	background:#bbb;
 }
 
 #search_entity{
@@ -614,7 +647,7 @@ header{
 		margin-left:440px
 	}
 	#search_header{
-		height:70px;
+		min-height:70px;
 	}
 	#search_footer{
 		height:70px;
@@ -713,7 +746,7 @@ header{
 {
 
 	#search_header{
-		height:50px;
+		min-height:50px;
 	}
 	#search_footer{
 		height:50px;
@@ -746,7 +779,7 @@ header{
 {
 
 	#search_header{
-		height:50px;
+		min-height:50px;
 	}
 	#search_footer{
 		height:50px;

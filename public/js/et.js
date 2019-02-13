@@ -188,7 +188,104 @@ $(function() {
 	$(window).resize(function() {
         initListParticipants();
 	});
+
+	if ( typeof events !== 'undefined' ) {
+		buildEventLinks();
+		showEvent();
+		nextEvent();
+	}
+
+	$('body').on('click','.et_link',function(event){
+		indexEvent = $(this).attr("data-index");
+		showEvent();
+	});
 });
+
+var indexEvent = 0;
+function nextEvent(){
+	setTimeout(function(){
+		showEvent();
+		nextEvent();
+	}, 7500);
+}
+
+function buildEventLinks(){
+	var links = "";
+	for (var i = 0; i < events.length; i++) {
+		event = events[i];
+		links += "<span class='et_link' id='et_link_"+event.id+"' data-index='"+i+"'></span>";
+	}
+	$("#search_footer").html("<div class='et_link_wrap'>"+links+"</div>");
+}
+
+function showEvent(){
+	$("#search_header *").css("color", "transparent");
+	$("#search_header *").css("text-shadow", "0px 0px 1px transparent");
+	var event = events[indexEvent];
+	var jours = 0;
+	var hours = 0;
+	var minutes = 0;
+	var secondes = 0;
+	var diff = event.diff;
+	var current = true;
+	if(diff < 0){
+		current = false;
+		diff = diff * -1
+	}
+	if(diff >= (60 * 60 * 24)){
+		jours = parseInt(diff / (60 * 60 * 24));
+		diff = diff - jours * (60 * 60 * 24);
+	}
+	if(diff >= (60 * 60)){
+		hours = parseInt(diff / (60 * 60));
+		diff = diff - hours * (60 * 60);
+	}
+	if(diff >= (60)){
+		minutes = parseInt(diff / (60));
+		secondes = diff - minutes * (60);
+	}
+	var labelTime = "";
+	if(current){
+		labelTime += "En cours depuis ";
+	}else{
+		labelTime += "Bientôt dans ";
+	}
+	if(jours){
+		if(jours > 1){
+			labelTime += jours+" jours " ;
+		}else{
+			labelTime += jours+" jour " ;
+		}
+	}
+	if(hours){
+		if(hours > 1){
+			labelTime += hours+" heures " ;
+		}else{
+			labelTime += hours+" heure " ;
+		}
+	}
+	if(minutes){
+		if(minutes > 1){
+			labelTime += minutes+" minutes" ;
+		}else{
+			labelTime += minutes+" minute" ;
+		}
+	}
+	
+	//link
+	$(".et_link").removeClass("selected");
+	$("#et_link_"+event.id).addClass("selected");
+
+	setTimeout(function(){
+		$("#search_header").html("<div class='event_info'><strong><a href='"+event.url+"'>"+event.title+"</a></strong><br>"+labelTime+"</div>");
+		$("#search_header *").css("color", "#000");
+		$("#search_header *").css("text-shadow", "0px 0px 1px #fff");
+		indexEvent++;
+		if(events.length <= indexEvent){
+			indexEvent = 0;
+		}
+	}, 700);
+}
 
 function initListParticipants() {
 	$(".list_wrap").removeClass("d_n").addClass("d_ib");

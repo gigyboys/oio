@@ -477,7 +477,8 @@ a:hover{
 	background: #bbb;
     display: block;
     height: 2px;
-    width: 0px;
+	width: 0px;
+	transition: all 0.3s ease;
 }
 .t_content_item{
     display: none;
@@ -2030,7 +2031,7 @@ a:hover{
 #sl_view_action .subscription_btn{
 	color:#2981c5;
 	border:1px solid #2981c5;
-	padding: 4px;
+	padding: 5px;
 	border-radius: 3px;
 	background: #e2f1ff;
 }
@@ -2038,7 +2039,7 @@ a:hover{
 #sl_view_action .unsubscription_btn{
 	color:#a92c32;
 	border:1px solid #a92c32;
-	padding: 4px;
+	padding: 5px;
 	border-radius: 3px;
 	background: #f8c7c7;
 }

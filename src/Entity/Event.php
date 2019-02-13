@@ -386,4 +386,11 @@ class Event
 
         return $this;
     }
+
+    public function getDiffDateNow()
+    {
+        $now = new \Datetime();
+        $diff = $now->getTimestamp() - $this->getDatebegin()->getTimestamp();
+        return $diff;
+    }
 }

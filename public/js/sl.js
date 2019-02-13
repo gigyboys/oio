@@ -208,9 +208,9 @@ $(function() {
 				if(data.state == 1){
 					if(data.active){
 						$(".subscription_btn").hide();
-						$(".unsubscription_btn").show();
+						$(".unsubscription_btn").css('display', 'inline-block');
 					}else{
-						$(".subscription_btn").show();
+						$(".subscription_btn").css('display', 'inline-block');
 						$(".unsubscription_btn").hide();
 					}
 					$("#document_wrap").html(data.documentHtml);
