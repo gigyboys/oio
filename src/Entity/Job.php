@@ -147,6 +147,8 @@ class Job
      */
     private $contract;
 
+    private $sectorId;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -440,6 +442,18 @@ class Job
     public function setContract(?Contract $contract): self
     {
         $this->contract = $contract;
+
+        return $this;
+    }
+
+    public function getSectorId()
+    {
+        return $this->sectorId;
+    }
+
+    public function setSectorId($sectorId)
+    {
+        $this->sectorId = $sectorId;
 
         return $this;
     }

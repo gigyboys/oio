@@ -1,0 +1,47 @@
+<div class="dialog">
+	<div class="header">
+		<div class="title">
+			Création de l'offre d'emploi
+		</div>
+		<div class="button_closable">
+			<i class="fas fa-times-circle"></i>
+		</div>
+	</div>
+
+	<form name="form_add_event" method="post" action="{{ path('job_manager_doadd_job') }}">
+		<div class="pd_5">
+			<div class="pd_5">
+				<div class="info_msg mg_b10 tajustify">
+					Cette fenêtre vous permet de créer une offre d'emploi. 
+					Après avoir fourni le titre, 
+					le secteur et l'email de contact, qui sont des informations obligatoires, 
+					vous allez être redirigé vers la page dans laquelle vous pourrez éditer les détails de l'offre.
+				</div>
+				<div>
+					<div>                
+						<div><label for="title" class="required">Titre * : </label></div>
+						<div><input type="text" id="title" name="title" required="required"  class="default_input" /></div>
+					</div>
+					<div>                
+						<div><label for="sectorId" class="required">Secteur * : </label></div>
+						<div>
+							<select id="sectorId" name="sectorId" required="required"  class="default_input">
+								{% for sector in sectors %}
+									<option value="{{ sector.id }}">{{ sector.name }}</option>
+								{% endfor %}
+							</select>
+						</div>
+					</div>
+					<div>                
+						<div><label for="email" class="required">Email * : </label></div>
+						<div><input type="email" id="email" name="email" required="required"  class="default_input" /></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="action">
+			<span class="standar_button button_closable">Annuler</span>
+			<button type="submit" id="add" name="add" class="standar_button">Creer l'offre</button>
+		</div>
+	</form>
+</div>

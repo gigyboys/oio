@@ -1,0 +1,71 @@
+{% extends "front.html.twig" %}
+
+{% block title %}
+  Je crée une offre d'emploi
+{% endblock %}
+
+
+{% block body %}
+	<div class="cr">
+		<div class="ct">
+			<div class="mg_10">
+				<div class="label_title">
+					<strong>Création d'une offre d'emploi</strong>
+				</div>
+				<div class="pm_bloc">
+					<div class="pm_form">
+						{% if msg is defined %}
+						<div>{{ msg | raw }}</div>
+						{% endif %}
+						<div class="mg_v10">
+
+						{{ form(form) }}
+						{#
+						<form method="post">
+							<div class="pm_form_wrap">
+								<div>
+									<div>                
+										<div><label for="title" class="required">Titre * : </label></div>
+										<div><input type="text" id="title" name="title" required="required" value="{{ event.title }}" class="default_input" /></div>
+									</div>
+									<div>
+										<div><label for="datebegin_event" class="required">Date et heure debut * : </label></div>
+										<div><input type="text" placeholder="jj/mm/aaaa HH:mm" id="datebegin_event" name="datebeginText" required="required"  class="default_input" /></div>
+									</div>
+									<div>
+										<div><label for="dateend_event" class="required">Date et heure fin * : </label></div>
+										<div><input type="text" placeholder="jj/mm/aaaa HH:mm" id="dateend_event" name="dateendText" required="required"  class="default_input" /></div>
+									</div>
+
+									{% if errormsg is defined and errormsg != ''%}
+										<div class="mg_v10">{{ errormsg | raw }}</div>
+									{% endif %}
+									
+									<div class="mg_t10">
+										<button type="submit" id="add" name="add" class="standar_button">Creer un évènement</button>
+									</div>
+								</div>
+							</div>
+						</form>
+						#}
+						</div>
+					</div>
+					<div class="pm_desc">
+						<h1>
+							Création d'un évènement
+						</h1>
+						<div class="sp"></div>
+						<p>
+							Cette page vous permet de créer un évènement. 
+							Après avoir fourni le titre, 
+							la date/heure debut et la date/heure, qui sont des informations obligatoires, 
+							vous allez être redirigé vers la page dans laquelle vous pourrez éditer les détails de l'évènement.
+						</p>
+					</div>
+					<div class="both"></div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+{% endblock %}

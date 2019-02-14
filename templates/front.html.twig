@@ -83,6 +83,23 @@
             <div style="border-bottom: 1px solid transparent; margin-top: -1px"></div>
         {% endif %}
 
+        {% if entityView is defined and entityView == 'job' %}
+            <div class="cr">
+                <div class="ct">
+                    <div class="mg_l10">
+                        <div class="contribution_link">
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                <span class="create_job link2" data-target="{{ path('job_manager_add_ajax')}}"><i class="fas fa-plus-circle"></i> Proposer une offre d'emploi</span>
+                            {% else %}
+                                <a class="login_ajax link2" href="{{ path('user_login_ajax') }}"><i class="fas fa-plus-circle"></i> Proposer une offre d'emploi</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="border-bottom: 1px solid transparent; margin-top: -1px"></div>
+        {% endif %}
+
         {% block body %}
             <div>
                 "Ny fianarana no lova tsara indrindra."
@@ -109,6 +126,7 @@
         <script type="text/javascript" src="{{ asset('js/sl.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/ur.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/bg.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/jb.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/manager.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/bg_manage.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/et_manage.js') }}"></script>

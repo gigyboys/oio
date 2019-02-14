@@ -1,0 +1,16 @@
+{% extends "front.html.twig" %}
+
+{% block title %}
+  Edition de l'offre #{{ job.id }}
+{% endblock %}
+
+
+{% block body %}
+	<div class="cr entity_edit">
+		<div class="ct">
+			<div class="mg_10">
+				{{ job.title }}
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -297,6 +297,20 @@ event_manager_toggle_school:
     defaults:
         _controller: App\Controller\EventManagerController::toggleSchool
 
+#job_manager
+job_manager_add_ajax:
+    path:     /job-manager/add-job-ajax
+    defaults:
+        _controller: App\Controller\JobManagerController::addJobAjax
+job_manager_doadd_job:
+    path:     /job-manager/add-job
+    defaults:
+        _controller: App\Controller\JobManagerController::doAddJob
+job_manager_edit:
+    path:     /job-manager/edit-job/{job_id}
+    defaults:
+        _controller: App\Controller\JobManagerController::editJob
+
 #blog
 blog:
     path:     /blog
@@ -371,6 +385,13 @@ event_participations_popup:
     path:     /event/{event_id}/participations-popup
     defaults:
         _controller: App\Controller\EventController::participationsPopup
+
+#job
+job:
+    path:     /jobs/{page}
+    defaults:
+        _controller: App\Controller\JobController::index
+        page: 1
 
 #school
 school_categories:
