@@ -15,6 +15,7 @@ use App\Entity\Download;
 use App\Entity\Event;
 use App\Entity\Post;
 use App\Entity\School;
+use App\Entity\Job;
 use App\Entity\SchoolOfTheDay;
 use App\Entity\SentMail;
 use App\Entity\User;
@@ -27,6 +28,7 @@ use App\Repository\CategoryRepository;
 use App\Repository\CategorySchoolRepository;
 use App\Repository\CoverRepository;
 use App\Repository\EventRepository;
+use App\Repository\JobRepository;
 use App\Repository\LogoRepository;
 use App\Repository\ParameterRepository;
 use App\Repository\PostRepository;
@@ -55,6 +57,7 @@ class PlatformService
         AvatarRepository $avatarRepository,
         PostRepository $postRepository,
         EventRepository $eventRepository,
+        JobRepository $jobRepository,
         CommentRepository $commentRepository,
         UserRepository $userRepository,
         EntityManagerInterface $em,
@@ -71,6 +74,7 @@ class PlatformService
         $this->avatarRepository = $avatarRepository;
         $this->postRepository = $postRepository;
         $this->eventRepository = $eventRepository;
+        $this->jobRepository = $jobRepository;
         $this->commentRepository = $commentRepository;
         $this->userRepository = $userRepository;
         $this->em = $em;
@@ -177,6 +181,11 @@ class PlatformService
             elseif ($entity instanceof User){
                 $entitytmp = $this->userRepository->findOneBy(array(
                     'username' => $slugtmp
+                ));
+            }
+            elseif ($entity instanceof Job){
+                $entitytmp = $this->jobRepository->findOneBy(array(
+                    'slug' => $slugtmp
                 ));
             }
             if(($entitytmp && $entitytmp->getId() != $entity->getId()) || in_array($slugtmp, $notSlugs)){
