@@ -19,5 +19,23 @@ class JobRepository extends ServiceEntityRepository
         parent::__construct($registry, Job::class);
     }
 
+    public function getJobs($field = 'id', $order = 'DESC') {
+
+        $qb = $this->createQueryBuilder('job');
+
+        $qb
+            ->andWhere('job.tovalid = :tovalid')
+            ->setParameter('tovalid', true)
+            ->andWhere('job.deleted = :deleted')
+            ->setParameter('deleted', false)
+        ;
+        $qb
+            ->orderBy('job.'.$field, $order)
+        ;
+
+        $jobs = $qb->getQuery()->getResult();
+
+        return $jobs;
+    }
 
 }

@@ -1,0 +1,37 @@
+<div class="edit_footer">
+	<span class="toggle_case" data-target="{{ path('job_manager_toggle_publication', {'job_id': job.id}) }}">
+		{% if job.published %}
+			<span class="greenstate d_n"><span class="greenpastille"></span> <span>Publier</span></span>
+			<span class="redstate"><span class="redpastille"></span> <span>Ne pas publier</span></span>
+		{% else %}
+			<span class="greenstate"><span class="greenpastille"></span> <span>Publier</span></span>
+			<span class="redstate d_n"><span class="redpastille"></span> <span>Ne pas publier</span></span>
+		{% endif %}
+	</span><span class="state_loading d_n">
+		<img src="{{ asset('image/tail-spin.svg')  }}" /> Chargement...
+	</span>
+	|
+	<span class="toggle_case" data-target="{{ path('job_manager_toggle_show_author', {'job_id': job.id}) }}">
+		{% if job.showAuthor %}
+			<span class="greenstate d_n"><span class="greenpastille"></span> <span>Afficher l'auteur</span></span>
+			<span class="redstate"><span class="redpastille"></span> <span>Ne pas afficher l'auteur</span></span>
+		{% else %}
+			<span class="greenstate"><span class="greenpastille"></span> <span>Afficher l'auteur</span></span>
+			<span class="redstate d_n"><span class="redpastille"></span> <span>Ne pas afficher l'auteur</span></span>
+		{% endif %}
+	</span><span class="state_loading d_n">
+		<img src="{{ asset('image/tail-spin.svg')  }}" /> Chargement...
+	</span>
+	|
+	<span class="toggle_case" data-target="{{ path('job_manager_toggle_active_comment', {'job_id': job.id}) }}">
+		{% if job.activeComment %}
+			<span class="greenstate d_n"><span class="greenpastille"></span> <span>Activer les commentaires</span></span>
+			<span class="redstate"><span class="redpastille"></span> <span>Désactiver les commentaires</span></span>
+		{% else %}
+			<span class="greenstate"><span class="greenpastille"></span> <span>Activer les commentaires</span></span>
+			<span class="redstate d_n"><span class="redpastille"></span> <span>Désactiver les commentaires</span></span>
+		{% endif %}
+	</span><span class="state_loading d_n">
+		<img src="{{ asset('image/tail-spin.svg')  }}" /> Chargement...
+	</span>
+</div>

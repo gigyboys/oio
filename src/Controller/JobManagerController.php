@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Repository\SectorRepository;
 use App\Repository\ParameterRepository;
+use App\Repository\JobRepository;
 use App\Repository\JobIllustrationRepository;
 
 class JobManagerController extends AbstractController {
@@ -23,6 +24,7 @@ class JobManagerController extends AbstractController {
         ParameterRepository $parameterRepository,
         JobService $jobService,
         PlatformService $platformService,
+        JobRepository $jobRepository,
         JobIllustrationRepository $jobIllustrationRepository,
         ObjectManager $em
     )
@@ -31,6 +33,7 @@ class JobManagerController extends AbstractController {
         $this->parameterRepository = $parameterRepository;
         $this->jobService = $jobService;
         $this->platformService = $platformService;
+        $this->jobRepository = $jobRepository;
         $this->jobIllustrationRepository = $jobIllustrationRepository;
         $this->em = $em;
 
@@ -126,5 +129,142 @@ class JobManagerController extends AbstractController {
         }else{
             return $this->redirectToRoute('job');
         }
+    }
+
+    public function toValidJobAjax($job_id)
+    {
+        $response = new Response();
+        $job = $this->jobRepository->find($job_id);
+        $content = $this->renderView('job/job_tovalid_ajax.html.twig', array(
+            'job' => $job
+        ));
+
+        $response->setContent(json_encode(array(
+            'state' => 1,
+            'content' => $content,
+        )));
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    public function togglePublication($job_id, Request $request)
+    {
+        $user = $this->getUser();
+        $job = $this->jobRepository->find($job_id);
+
+        $response = new Response();
+
+        //set state 0 in error case
+        $response->setContent(json_encode(array(
+            'state' => 0,
+        )));
+
+        if ($job) {
+            if ($this->isGranted('ROLE_ADMIN') || $job->getUser() == $user){
+                if($job->getPublished() == true){
+                    $job->setPublished(false) ;
+                }else{
+                    $job->setPublished(true) ;
+                }
+
+                $this->em->persist($job);
+                $this->em->flush();
+
+                if ($this->isGranted('ROLE_ADMIN')){
+                    $jobs = $this->jobRepository->getJobs();
+                    $publishedJobs = $this->jobRepository->findBy(array(
+                        'published' => true,
+                        'tovalid'   => true,
+                        'deleted'   => false,
+                    ));
+                    $notPublishedJobs = $this->jobRepository->findBy(array(
+                        'published' => false,
+                        'tovalid'   => true,
+                        'deleted'   => false,
+                    ));
+
+                    $response->setContent(json_encode(array(
+                        'state' => 1,
+                        'case' => $job->getPublished(),
+                        'jobs' => $jobs,
+                        'publishedJobs' => $publishedJobs,
+                        'notPublishedJobs' => $notPublishedJobs,
+                    )));
+                }else{
+                    $response->setContent(json_encode(array(
+                        'state' => 1,
+                        'case' => $job->getPublished(),
+                    )));
+                }
+            }
+        }
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    public function toggleShowAuthor($job_id, Request $request)
+    {
+        $user = $this->getUser();
+        $job = $this->jobRepository->find($job_id);
+
+        $response = new Response();
+
+        //set state 0 in error case
+        $response->setContent(json_encode(array(
+            'state' => 0,
+        )));
+
+        if ($job && $this->isGranted('ROLE_ADMIN') || $job->getUser() == $user){
+            if($job->getShowAuthor() == true){
+                $job->setShowAuthor(false) ;
+            }else{
+                $job->setShowAuthor(true) ;
+            }
+
+            $this->em->persist($job);
+            $this->em->flush();
+
+            $response->setContent(json_encode(array(
+                'state' => 1,
+                'case' => $job->getShowAuthor(),
+            )));
+        }
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+
+    public function toggleActiveComment($job_id, Request $request)
+    {
+        $user = $this->getUser();
+        $job = $this->jobRepository->find($job_id);
+
+        $response = new Response();
+
+        //set state 0 in error case
+        $response->setContent(json_encode(array(
+            'state' => 0,
+        )));
+
+        if ($job && $this->isGranted('ROLE_ADMIN') || $job->getUser() == $user){
+            if($job->getActiveComment() == true){
+                $job->setActiveComment(false) ;
+            }else{
+                $job->setActiveComment(true) ;
+            }
+
+            $this->em->persist($job);
+            $this->em->flush();
+
+            $response->setContent(json_encode(array(
+                'state' => 1,
+                'case' => $job->getActiveComment(),
+            )));
+        }
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
 }

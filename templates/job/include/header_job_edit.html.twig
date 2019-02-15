@@ -1,0 +1,46 @@
+<div class="pd_5">
+	<span>
+		<i class="far fa-edit"></i> Edition de l'offre d'emploi :
+		<a href="{{ path('job_manager_edit', {'job_id': job.id}) }}">
+			<strong class="jb_title_{{ job.id }}">{{ job.title }}</strong>
+		</a>
+	</span>
+</div>
+<div class="edit_header">
+	<div class="left">
+		<span class="dd d_ib">
+			<span href="#" class="dds c_p">
+				<i class="fas fa-info-circle"></i> <span>info</span>
+			</span>
+			<span class="ddt entity_info" data-display="block">
+				<span class="mg_5 d_b">
+					<span><i class="fas fa-user-circle"></i> {{ getLinkUserInfo(job.user, job.user.name) | raw }}</span><br />
+					<span><i class="fas fa-calendar-alt"></i> {{ getDateLabel(job.date) }} à {{ job.date | date('H:i') }}</span><br />
+					<span><i class="far fa-eye"></i> {{ job.views | length }}</span><br />
+				</span>
+			</span>
+		</span>
+	</div>
+	
+	<div class="right">
+        {% if job.tovalid == false %}
+			<span class="create_job c_p" data-target="{{ path('job_manager_tovalid_ajax', {'job_id' : job.id})}}">
+				<i class="far fa-check-circle"></i>
+				<span> Soumettre à une validation</span>
+			</span>
+        {% elseif job.tovalid and job.valid == false %}
+			En attente de validation
+        {% elseif job.valid %}
+			Offre validée
+        {% endif %}
+		|
+		<span class="dd d_ib">
+			<span href="#" class="dds c_p">
+				Actions
+			</span>
+			{{ include("job/include/job_other_action.html.twig") }}
+		</span>
+	</div>
+	
+	<div class="both"></div>
+</div>

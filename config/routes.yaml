@@ -310,6 +310,22 @@ job_manager_edit:
     path:     /job-manager/edit-job/{job_id}
     defaults:
         _controller: App\Controller\JobManagerController::editJob
+job_manager_tovalid_ajax:
+    path:     /job-manager/tovalid-ajax/{job_id}
+    defaults:
+        _controller: App\Controller\JobManagerController::toValidJobAjax
+job_manager_toggle_publication:
+    path:     /job-manager/job/{job_id}/toggle-publication
+    defaults:
+        _controller: App\Controller\JobManagerController::togglePublication
+job_manager_toggle_show_author:
+    path:     /job-manager/job/{job_id}/toggle-show-author
+    defaults:
+        _controller: App\Controller\JobManagerController::toggleShowAuthor
+job_manager_toggle_active_comment:
+    path:     /job-manager/job/{job_id}/togogle-active-comment
+    defaults:
+        _controller: App\Controller\JobManagerController::toggleActiveComment
 
 #blog
 blog:
