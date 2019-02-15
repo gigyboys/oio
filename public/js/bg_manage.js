@@ -32,7 +32,6 @@ $(function() {
         var file = $this[0].files[0];
         var target = $this.data('target');
         var data = new FormData();
-        console.log(target);
         data.append('file', file);
 
         var size = file.size;
@@ -78,7 +77,6 @@ $(function() {
                     if (myXhr.upload) {
                         myXhr.upload.addEventListener('progress', function(e) {
                             if (e.lengthComputable) {
-                                //console.log("max : "+e.total+" / value : "+e.loaded);
                                 var percentage = parseInt(e.loaded / e.total * 100);
                                 $("#spinnerloading .progress").remove();
                                 $("#spinnerloading div span").after("<span class='progress'> "+percentage+"%</span>");
@@ -341,7 +339,6 @@ $(function() {
             data: data,
             dataType : 'json',
             success: function(data){
-                console.log(data.state);
 				if(data.state){
                     var entity = $this.attr('data-entity');
                     switch (entity) {

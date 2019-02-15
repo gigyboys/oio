@@ -295,7 +295,6 @@ $(function() {
 		}
 
 		function initMap(map, typeId = 0) {
-			console.log(markers);
 			for (var i = 0; i < markers.length; i++) {
 				markers[i].setMap(null);
 			}
@@ -346,22 +345,6 @@ $(function() {
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 		}
 		var map = new google.maps.Map(document.getElementById(bloc), mapOptions);
-
-		/*
-        var myLatlng = new google.maps.LatLng(coord.latitude,coord.longitude);
-        var marker = new google.maps.Marker({
-            position: myLatlng,
-            map: map,
-            title: 'Click to zoom'
-        });
-
-        map.addListener(marker, "click", function (event) {
-            var latitude = event.latLng.lat();
-            var longitude = event.latLng.lng();
-            console.log( latitude + ', ' + longitude );
-            alert( latitude + ', ' + longitude );
-        }); //end addListener
-		*/
 
 		var markers = [];
 		for(var i = 0; i < coordsLength; i++ ){
@@ -454,7 +437,6 @@ function truncateSchoolLabel() {
 			textin = slitem.find(".sl_label a .sl_name").text();
 			var n = textin.lastIndexOf(" ");
 			textin = textin.substring(0,n);
-			//console.log(textin);
 			slitem.find(".sl_label a .sl_name").text(textin);
 		}
 	});
@@ -466,7 +448,6 @@ function initTabsl(){
 		var selected = t_header.find('.t_header_item.selected');
 		if(selected.length > 0){
 			var decalage = selected.offset().left - t_header.find('.t_header_content').offset().left;
-			console.log(decalage);
 			t_header.find('.t_header_sep_slide').animate({
 				marginLeft: decalage,
 				width: selected.outerWidth(true),

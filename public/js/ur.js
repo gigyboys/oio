@@ -53,7 +53,6 @@ $(function() {
         var $this = $(this);
 		var bloc_editable = $this.closest(".bloc_editable");
         var target = $this.data('target');
-		console.log(target);
 		var data = {
 			name : bloc_editable.find("#ur_input_name").val(), 
 			username : bloc_editable.find("#ur_input_username").val(), 
@@ -139,7 +138,6 @@ $(function() {
         var $this = $(this);
 		var bloc_editable = $this.closest(".bloc_editable");
         var target = $this.data('target');
-		console.log(target);
 		var data = {
 			biography : bloc_editable.find("#ur_area_biography").val()
 		};
@@ -150,7 +148,6 @@ $(function() {
             data: data,
             dataType : 'json',
             success: function(data){
-                console.log(data.state);
 				if(data.state){
 					resetBlocEdit(bloc_editable);
 					$("#msg_biography").html("<span style='color:#090'>Votre biographie a bien été mise à jour</span>");
@@ -182,7 +179,6 @@ $(function() {
         var $this = $(this);
 		var bloc_editable = $this.closest(".bloc_editable");
         var target = $this.data('target');
-		console.log(target);
 		var data = {
 			currentPassword : bloc_editable.find("#ur_input_current_password").val(), 
 			newPassword : bloc_editable.find("#ur_input_new_password").val(), 
@@ -195,7 +191,6 @@ $(function() {
             data: data,
             dataType : 'json',
             success: function(data){
-                console.log(data.state);
 				if(data.state){
 					resetBlocEdit(bloc_editable);
 					$("#msg_password").html("<span class='success_msg'>Votre mot de passe a été modifié avec succès.</span>");
@@ -260,7 +255,6 @@ $(function() {
 						data: data,
 						dataType : 'json',
 						success: function(data){
-							console.log(data.state);
 							if(data.state){
 								sessionStorage.setItem("info_user_"+userid, data.content);
 								$this.find('.popup_user_info').html(sessionStorage.getItem("info_user_"+userid));
@@ -395,7 +389,6 @@ $(function() {
         var file = $this[0].files[0];
         var target = $this.data('target');
         var data = new FormData();
-		console.log(target);
         data.append('avatar[file]', file);
 
         var size = file.size;
@@ -443,7 +436,6 @@ $(function() {
                     if (myXhr.upload) {
                         myXhr.upload.addEventListener('progress', function(e) {
                             if (e.lengthComputable) {
-                                //console.log("max : "+e.total+" / value : "+e.loaded);
                                 var percentage = parseInt(e.loaded / e.total * 100);
                                 $("#spinnerloading .progress").remove();
                                 $("#spinnerloading div span").after("<span class='progress'> "+percentage+"%</span>");

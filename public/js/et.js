@@ -73,7 +73,6 @@ $(function() {
 	$('.btn_event_new_cmt').on('click', function(){
         var $this = $(this);
         var target = $this.data('target');
-		console.log(target);
 		if($.trim($("#event_cmt_message").val()) != ""){
 			var data = {
 				comment : $("#event_cmt_message").val()
@@ -88,7 +87,6 @@ $(function() {
 				data: data,
 				dataType : 'json',
 				success: function(data){
-					console.log(data.state);
 					if(data.state == 1){
 						$("#event_list_cmt").append(data.commentItem);
 						$("#event_cmt_message").val("");
@@ -130,7 +128,6 @@ $(function() {
 			data: data,
 			dataType : 'json',
 			success: function(data){
-				console.log(data.state);
 				if(data.state){
 					var htmlprepend = '';
 					for(var i = 0; i <data.comments.length; i++ ){

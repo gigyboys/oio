@@ -18,7 +18,6 @@ $(function() {
 			data: data,
 			dataType : 'json',
 			success: function(data){
-				console.log(data.state);
 				if(data.state){
 					var htmlappend = '';
 					for(var i = 0; i <data.posts.length; i++ ){
@@ -65,7 +64,6 @@ $(function() {
 			data: data,
 			dataType : 'json',
 			success: function(data){
-				console.log(data.state);
 				if(data.state){
 					var htmlprepend = '';
 					for(var i = 0; i <data.comments.length; i++ ){
@@ -98,7 +96,6 @@ $(function() {
 	$('.btn_bg_post_new_cmt').on('click', function(){
         var $this = $(this);
         var target = $this.data('target');
-		console.log(target);
 		if($.trim($("#bg_post_cmt_message").val()) != ""){
 			var data = {
 				comment : $("#bg_post_cmt_message").val()
@@ -113,7 +110,6 @@ $(function() {
 				data: data,
 				dataType : 'json',
 				success: function(data){
-					console.log(data.state);
 					if(data.state == 1){
 						$("#bg_post_list_cmt").append(data.commentItem);
 						$("#bg_post_cmt_message").val("");
@@ -161,7 +157,6 @@ $(function() {
             data: data,
             dataType : 'json',
             success: function(data){
-                console.log(data.state);
 				if(data.state){
 					$("#bg_load_calendar").css("display","none");
 					$("#bg_calendar_ct").html(data.calendar);

@@ -35,7 +35,6 @@ $(function() {
         map.addListener('click', function(event) {
             var latitude = event.latLng.lat();
             var longitude = event.latLng.lng();
-            console.log( latitude + ', ' + longitude );
             marker.setPosition({lat: latitude, lng: longitude});
             setCoordonnees(latitude, longitude);
         });
@@ -43,7 +42,6 @@ $(function() {
         marker.addListener('dragend', function(event) {
             var latitude = event.latLng.lat();
             var longitude = event.latLng.lng();
-            console.log( latitude + ', ' + longitude );
             setCoordonnees(latitude, longitude);
         });
     });
@@ -71,7 +69,6 @@ $(function() {
                     order += $(this).attr('data-id');
                 });
                 var target = $(".list_sl_position").attr('data-target');
-            	 console.log(order + target);
 
                 var data = {
                     'order' : order,
@@ -83,7 +80,6 @@ $(function() {
                     data: data,
                     dataType : 'json',
                     success: function(data){
-                        console.log(data.state);
                         if(data.state){
 
                         }
@@ -107,14 +103,11 @@ $(function() {
     *upload cover for school
     */
     $('#coverfile').on('change', function(){
-		/*console.log("change avatar");*/
         var $this = $(this);
         var file = $this[0].files[0];
         var target = $this.data('target');
         var data = new FormData();
-		console.log(target);
         data.append('file', file);
-		//console.log(data);
 		
         $.ajax({
             type: 'POST',
@@ -143,7 +136,6 @@ $(function() {
         var $this = $(this);
 		var bloc_editable = $this.closest(".bloc_editable");
         var target = $this.data('target');
-		console.log(target);
 		var data = {
 			'name' 		: bloc_editable.find("#sl_input_name").val(),
             'shortName'	: bloc_editable.find("#sl_input_shortname").val(),
@@ -159,7 +151,6 @@ $(function() {
             data: data,
             dataType : 'json',
             success: function(data){
-                console.log(data.state);
 				if(data.state){
 					bloc_editable.find("#sl_view_name").text(data.name);
 					bloc_editable.find("#sl_view_shortname").text(data.shortName);
@@ -188,7 +179,6 @@ $(function() {
         var $this = $(this);
 		var bloc_editable = $this.closest(".bloc_editable");
         var target = $this.data('target');
-		console.log(target);
 		var data = {
             'shortDescription' : bloc_editable.find(".slt_input_shortdescription").val(),
             /*'description' : bloc_editable.find(".slt_input_description").val(),*/
@@ -201,7 +191,6 @@ $(function() {
             data: data,
             dataType : 'json',
             success: function(data){
-                console.log(data.state);
 				if(data.state){
 					bloc_editable.find(".slt_view_shortdescription").html(data.shortDescription);
 					bloc_editable.find(".slt_view_description").html(data.description);
@@ -226,7 +215,6 @@ $(function() {
         var $this = $(this);
 		var bloc_editable = $this.closest(".bloc_editable");
         var target = $this.data('target');
-		console.log(target);
 		var data = {
 			name : bloc_editable.find("#field_input_name").val(),
 			slug : bloc_editable.find("#field_input_slug").val(),
@@ -240,7 +228,6 @@ $(function() {
             data: data,
             dataType : 'json',
             success: function(data){
-                console.log(data.state);
 				if(data.state){
 					bloc_editable.find("#field_view_name").text(data.name);
 					bloc_editable.find("#field_view_slug").text(data.slug);
@@ -267,7 +254,6 @@ $(function() {
         var $this = $(this);
 		var bloc_editable = $this.closest(".bloc_editable");
         var target = $this.data('target');
-		console.log(target);
 		var data = {
 			name : bloc_editable.find("#doc_input_name").val(),
 			description : bloc_editable.find(".doc_input_description").val(),
@@ -280,7 +266,6 @@ $(function() {
             data: data,
             dataType : 'json',
             success: function(data){
-                console.log(data.state);
 				if(data.state){
 					bloc_editable.find("#doc_view_name").text(data.name);
 					bloc_editable.find("#doc_view_description").html(data.description);
@@ -307,7 +292,6 @@ $(function() {
         var $this = $(this);
 		var bloc_editable = $this.closest(".bloc_editable");
         var target = $this.data('target');
-		console.log(target);
 		var data = {
 			name : bloc_editable.find("#contact_input_name").val(),
 			slug : bloc_editable.find("#contact_input_slug").val(),
@@ -326,7 +310,6 @@ $(function() {
             data: data,
             dataType : 'json',
             success: function(data){
-                console.log(data.state);
 				if(data.state){
 					bloc_editable.find("#contact_view_name").text(data.name);
 					bloc_editable.find("#contact_view_slug").text(data.slug);
@@ -570,7 +553,6 @@ $(function() {
             data: data,
             dataType : 'json',
             success: function(data){
-                console.log(data.state);
 				if(data.state){
 					$("#a_sl_list_admin").prepend(data.schoolAdminItem);
 				}
@@ -638,7 +620,6 @@ $(function() {
             data: data,
             dataType : 'json',
             success: function(data){
-                console.log(data.state);
 				if(data.state){
                     var entity = $this.attr('data-entity');
                     switch (entity) {
@@ -686,7 +667,6 @@ $(function() {
         var $this = $(this);
 		var bloc_editable = $this.closest(".bloc_editable");
         var target = $this.data('target');
-		console.log(target);
 		var data = {
 			address : bloc_editable.find("#sl_contact_input_address").val(),
 			email : bloc_editable.find("#sl_contact_input_email").val(),
@@ -702,7 +682,6 @@ $(function() {
             data: data,
             dataType : 'json',
             success: function(data){
-                console.log(data.state);
 				if(data.state){
 					bloc_editable.find("#sl_contact_view_address").text(data.address);
 					bloc_editable.find("#sl_contact_view_email").text(data.email);
@@ -731,7 +710,6 @@ $(function() {
         var $this = $(this);
 		var bloc_editable = $this.closest(".bloc_editable");
         var target = $this.data('target');
-		console.log(target);
 		var data = {
 			description : bloc_editable.find(".sl_contactt_input_description").val()
 		};
@@ -742,7 +720,6 @@ $(function() {
             data: data,
             dataType : 'json',
             success: function(data){
-                console.log(data.state);
 				if(data.state){
 					bloc_editable.find(".sl_contactt_view_description").html(data.description);
 					resetBlocEdit(bloc_editable);
@@ -766,7 +743,6 @@ $(function() {
         var $this = $(this);
 		var bloc_editable = $this.closest(".bloc_editable");
         var target = $this.data('target');
-		console.log(target);
 		var data = {
 			name : bloc_editable.find("#slcat_input_name").val(),
 			slug : bloc_editable.find("#slcat_input_slug").val(),
@@ -806,7 +782,6 @@ $(function() {
         var $this = $(this);
 		var bloc_editable = $this.closest(".bloc_editable");
         var target = $this.data('target');
-		console.log(target);
 		var data = {
 			name : bloc_editable.find(".slcatt_input_name").val(), 
 			description : bloc_editable.find(".slcatt_input_description").val()
@@ -818,7 +793,6 @@ $(function() {
             data: data,
             dataType : 'json',
             success: function(data){
-                console.log(data.state);
 				if(data.state){
 					bloc_editable.find(".slcatt_view_name").html(data.name);
 					bloc_editable.find(".slcatt_view_description").html(data.description);
@@ -1025,7 +999,6 @@ $(function() {
             data: data,
             dataType : 'json',
             success: function(data){
-                console.log(data.state);
 				if(data.state){
 					$( "#contact_"+data.id ).remove();
 				}
@@ -1047,14 +1020,11 @@ $(function() {
     *upload logo for school
     */
     $('#logofile').on('change', function(){
-		/*console.log("change avatar");*/
         var $this = $(this);
         var file = $this[0].files[0];
         var target = $this.data('target');
         var data = new FormData();
-		console.log(target);
         data.append('file', file);
-		//console.log(data);
 		
         $.ajax({
             type: 'POST',

@@ -249,25 +249,32 @@ class EventManagerController extends AbstractController {
                 $this->em->persist($event);
                 $this->em->flush();
 
-                $events = $this->eventRepository->getEvents();
-                $publishedEvents = $this->eventRepository->findBy(array(
-                    'published' => true,
-                    'tovalid'   => true,
-                    'deleted'   => false,
-                ));
-                $notPublishedEvents = $this->eventRepository->findBy(array(
-                    'published' => false,
-                    'tovalid'   => true,
-                    'deleted'   => false,
-                ));
+                if ($this->isGranted('ROLE_ADMIN')){
+                    $events = $this->eventRepository->getEvents();
+                    $publishedEvents = $this->eventRepository->findBy(array(
+                        'published' => true,
+                        'tovalid'   => true,
+                        'deleted'   => false,
+                    ));
+                    $notPublishedEvents = $this->eventRepository->findBy(array(
+                        'published' => false,
+                        'tovalid'   => true,
+                        'deleted'   => false,
+                    ));
 
-                $response->setContent(json_encode(array(
-                    'state' => 1,
-                    'case' => $event->getPublished(),
-                    'events' => $events,
-                    'publishedEvents' => $publishedEvents,
-                    'notPublishedEvents' => $notPublishedEvents,
-                )));
+                    $response->setContent(json_encode(array(
+                        'state' => 1,
+                        'case' => $event->getPublished(),
+                        'events' => $events,
+                        'publishedEvents' => $publishedEvents,
+                        'notPublishedEvents' => $notPublishedEvents,
+                    )));
+                }else{
+                    $response->setContent(json_encode(array(
+                        'state' => 1,
+                        'case' => $event->getPublished(),
+                    )));
+                }
             }
         }
         $response->headers->set('Content-Type', 'application/json');

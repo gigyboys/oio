@@ -34,7 +34,6 @@ $(function() {
             data: data,
             dataType : 'json',
             success: function(data){
-                console.log(data.state);
                 if(data.state){
                     var entity = $this.attr('data-entity');
                     switch (entity) {

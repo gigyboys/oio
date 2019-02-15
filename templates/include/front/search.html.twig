@@ -55,7 +55,7 @@
 						<div class="sl_bloc_cat dd">
 							<div class="dds">
 								{% if category is not defined or category is null %}
-									<span id="search_sl_cat_name">Toutes categories</span>
+									<span id="search_sl_cat_name">Toutes catégories</span>
 									<input type="hidden" name="category" id="cat_sl_input_id" value="0" data-slug="all"  />
 								{% else %}
 									<span id="search_sl_cat_name">{{ category.name | capitalize }}</span>
@@ -64,7 +64,7 @@
 							</div>
 							<div class="ddt search_sl_cat_list" data-display="block">
 								<div class="mg_5">
-									<span data-category-id="0" title="Toutes categories" data-name="Toutes categories" data-slug="all" class="search_cat_sl_item"><span>Toutes categories</span></span>{#
+									<span data-category-id="0" title="Toutes catégories" data-name="Toutes catégories" data-slug="all" class="search_cat_sl_item"><span>Toutes catégories</span></span>{#
 									#}{% set categories = getCategoriesWithPublishedSchool(0) %}{#
 									#}{% for category in categories %}{#
 										#}<span data-category-id="{{ category.id }}" data-slug="{{ category.slug }}" title="{{ category.name | capitalize }}" data-name="{{ category.name | capitalize }}" class="search_cat_sl_item"><span>{{ category.name | capitalize }}</span></span>{#

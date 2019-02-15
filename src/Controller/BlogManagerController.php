@@ -211,23 +211,30 @@ class BlogManagerController extends AbstractController {
                 $this->em->persist($post);
                 $this->em->flush();
 
-                $posts = $this->postRepository->getPosts();
-                $publishedPosts = $this->postRepository->findBy(array(
-                    'published' => true,
-                    'tovalid'   => true,
-                ));
-                $notPublishedPosts = $this->postRepository->findBy(array(
-                    'published' => false,
-                    'tovalid'   => true,
-                ));
+                if ($this->isGranted('ROLE_ADMIN')){
+                    $posts = $this->postRepository->getPosts();
+                    $publishedPosts = $this->postRepository->findBy(array(
+                        'published' => true,
+                        'tovalid'   => true,
+                    ));
+                    $notPublishedPosts = $this->postRepository->findBy(array(
+                        'published' => false,
+                        'tovalid'   => true,
+                    ));
 
-                $response->setContent(json_encode(array(
-                    'state'             => 1,
-                    'case'              => $post->getPublished(),
-                    'posts'             => $posts,
-                    'publishedPosts'    => $publishedPosts,
-                    'notPublishedPosts' => $notPublishedPosts,
-                )));
+                    $response->setContent(json_encode(array(
+                        'state'             => 1,
+                        'case'              => $post->getPublished(),
+                        'posts'             => $posts,
+                        'publishedPosts'    => $publishedPosts,
+                        'notPublishedPosts' => $notPublishedPosts,
+                    )));
+                }else{
+                    $response->setContent(json_encode(array(
+                        'state'             => 1,
+                        'case'              => $post->getPublished(),
+                    )));
+                }
             }
         }
         $response->headers->set('Content-Type', 'application/json');

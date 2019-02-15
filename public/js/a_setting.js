@@ -4,7 +4,6 @@ $(function() {
         var $this = $(this);
 		var bloc_editable = $this.closest(".bloc_editable");
         var target = $this.data('target');
-		console.log(target);
 		var data = {
 			categoriesIndex : bloc_editable.find("#sg_input_catindex").val(),
 			schoolsByPage : bloc_editable.find("#sg_input_slbypage").val(),
@@ -18,7 +17,6 @@ $(function() {
             data: data,
             dataType : 'json',
             success: function(data){
-                console.log(data.state);
 				if(data.state){
 					bloc_editable.find("#sg_view_catindex").text(data.categoriesIndex);
 					bloc_editable.find("#sg_view_slbypage").text(data.schoolsByPage);
