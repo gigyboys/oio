@@ -23,7 +23,6 @@ function initTab(){
     if($('.a_t_header_content .selected').length > 0){
         $('.a_t_header_sep_slide').width($('.a_t_header_content .selected').outerWidth(true));
         var decalage = $('.a_t_header_content .selected').offset().left - $('.a_t_header_content').offset().left;
-        console.log(decalage);
         $('.a_t_header_sep_slide').animate({
             marginLeft: decalage
         }, 300, function() {

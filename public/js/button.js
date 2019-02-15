@@ -20,16 +20,13 @@ $(function() {
         e.stopPropagation(); 
         e.preventDefault(true);
 
-        console.log("click dds");
         var ddt = $('.ddt');
         
         var ddt_to = $this.closest(".dd").find(".ddt");
-        console.log(ddt_to.css('display'))
         if(ddt_to.css('display') == 'none'){
             ddt.hide();
             ddt_to.css('display','block').css('margin-left',0);
             var decalage = $(window).width() - ddt_to.width() - ddt_to.offset().left - 10;
-            console.log("decalage : "+decalage);
             if (decalage < 0){
                 ddt_to.css('margin-left',decalage);
             }

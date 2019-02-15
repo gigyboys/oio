@@ -73,9 +73,7 @@ $(function() {
         e.preventDefault(true);
         let $this = $(this);
 
-        console.log('form_login_ajax');
         let target = $this.attr('action');
-        console.log(target);
 
         let datafull = {
             username: $("#username").val(),
@@ -96,7 +94,6 @@ $(function() {
             data: data,
             dataType : 'json',
             success: function(data){
-                console.log(data);
                 var status = false;
 
                 if(data.hasOwnProperty('state')){
@@ -220,7 +217,6 @@ $(function() {
         var countResult = 0;
         contextSearch.find(".search_item").each(function( index ) {
             $( this ).hide();
-            console.log($( this ).attr("data-text"));
             var text = $( this ).attr("data-text");
             text = text.toLowerCase();
             text = text.replace(/[èéêë]/g,"e");
@@ -237,7 +233,6 @@ $(function() {
             query = query.replace(/[îï]/g,"i");
             query = query.replace(/[ôö]/g,"o");
 
-            console.log(query);
             if(text.indexOf(query) > -1){
                 var dataItemDisplay = contextSearch.attr('data-item-display');
 

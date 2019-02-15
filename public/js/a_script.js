@@ -1,5 +1,4 @@
 $(function() {
-	//console.log("init");
 	var body = $('body');
 	var a_header = $('#a_header');
 	var a_nav = $('#a_nav');
@@ -25,10 +24,6 @@ $(function() {
 	var ww = $(window);
 	
 	function init(){
-		
-		//console.log("window : "+ww.width()+"/"+ww.height());
-		//console.log("a_header : "+a_header.width()+"/"+a_header.height());
-		
 		if(ww.width() > width_seuil){
 			var a_nav_width = a_nav_width_max;
 			a_nav_main_item_text.css('display', 'block');

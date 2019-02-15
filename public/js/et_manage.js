@@ -27,7 +27,6 @@ $(function() {
         map.addListener('click', function(event) {
             var latitude = event.latLng.lat();
             var longitude = event.latLng.lng();
-            console.log( latitude + ', ' + longitude );
             marker.setPosition({lat: latitude, lng: longitude});
             setCoordonneesEvent(latitude, longitude);
         });
@@ -35,7 +34,6 @@ $(function() {
         marker.addListener('dragend', function(event) {
             var latitude = event.latLng.lat();
             var longitude = event.latLng.lng();
-            console.log( latitude + ', ' + longitude );
             setCoordonneesEvent(latitude, longitude);
         });
     });
@@ -79,7 +77,6 @@ $(function() {
         var file = $this[0].files[0];
         var target = $this.data('target');
         var data = new FormData();
-        console.log(target);
         data.append('file', file);
 
         var size = file.size;
@@ -125,7 +122,6 @@ $(function() {
                     if (myXhr.upload) {
                         myXhr.upload.addEventListener('progress', function(e) {
                             if (e.lengthComputable) {
-                                //console.log("max : "+e.total+" / value : "+e.loaded);
                                 var percentage = parseInt(e.loaded / e.total * 100);
                                 $("#spinnerloading .progress").remove();
                                 $("#spinnerloading div span").after("<span class='progress'> "+percentage+"%</span>");
@@ -269,7 +265,6 @@ $(function() {
 
         //datebegin
         var datebeginText = $("#event_input_datebegin").val().trim();
-        console.log(datebeginText);
         if(!isValidDate(datebeginText)){
             var datebegin_error_msg = 'La date et heure debut doit être de la forme "dd/mm/yyyy hh:mm"';
             if($('.error_datebegin').length > 0){
@@ -284,7 +279,6 @@ $(function() {
 
         //dateend
         var dateendText = $("#event_input_dateend").val().trim();
-        console.log(dateendText);
         if(!isValidDate(dateendText)){
             var dateend_error_msg = 'La date et heure fin doit être de la forme "dd/mm/yyyy hh:mm"';
             if($('.error_dateend').length > 0){

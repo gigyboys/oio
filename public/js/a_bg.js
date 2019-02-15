@@ -8,7 +8,6 @@ $(function() {
         var $this = $(this);
 		var bloc_editable = $this.closest(".bloc_editable");
         var target = $this.data('target');
-		console.log(target);
 		var data = {
 			defaultName : bloc_editable.find("#bgcat_input_defaultname").val(),
 			slug : bloc_editable.find("#bgcat_input_slug").val()
@@ -45,7 +44,6 @@ $(function() {
         var $this = $(this);
 		var bloc_editable = $this.closest(".bloc_editable");
         var target = $this.data('target');
-		console.log(target);
 		var data = {
 			name : bloc_editable.find(".bgcatt_input_name").val(), 
 			description : bloc_editable.find(".bgcatt_input_description").val()
@@ -57,7 +55,6 @@ $(function() {
             data: data,
             dataType : 'json',
             success: function(data){
-                console.log(data.state);
 				if(data.state){
 					bloc_editable.find(".bgcatt_view_name").html(data.name);
 					bloc_editable.find(".bgcatt_view_description").html(data.description);
@@ -82,7 +79,6 @@ $(function() {
         var $this = $(this);
         var bloc_editable = $this.closest(".bloc_editable");
         var target = $this.data('target');
-        console.log(target);
         var data = {
             name : bloc_editable.find("#bgtag_input_name").val(),
             slug : bloc_editable.find("#bgtag_input_slug").val(),
@@ -146,7 +142,6 @@ $(function() {
             data: data,
             dataType : 'json',
             success: function(data){
-                console.log(data.state);
                 if(data.state){
                     var entity = $this.attr('data-entity');
                     switch (entity) {

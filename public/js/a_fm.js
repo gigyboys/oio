@@ -4,14 +4,11 @@ $(function() {
     *upload illustration for topic
     */
     $('#topicillustrationfile').on('change', function(){
-		/*console.log("change avatar");*/
         var $this = $(this);
         var file = $this[0].files[0];
         var target = $this.data('target');
         var data = new FormData();
-		console.log(target);
         data.append('file', file);
-		//console.log(data);
 		
         $.ajax({
             type: 'POST',
@@ -36,7 +33,6 @@ $(function() {
         var $this = $(this);
 		var bloc_editable = $this.closest(".bloc_editable");
         var target = $this.data('target');
-		console.log(target);
 		var data = {
 			defaultName : bloc_editable.find("#fm_topic_input_defaultname").val(),
 			slug : bloc_editable.find("#fm_topic_input_slug").val()
@@ -48,7 +44,6 @@ $(function() {
             data: data,
             dataType : 'json',
             success: function(data){
-                console.log(data.state);
 				if(data.state){
 					bloc_editable.find("#fm_topic_view_defaultname").text(data.defaultName);
 					bloc_editable.find("#fm_topic_view_slug").text(data.slug);
@@ -81,7 +76,6 @@ $(function() {
             data: data,
             dataType : 'json',
             success: function(data){
-                console.log(data.state);
 				if(data.state){
 					bloc_editable.find(".fm_topict_view_name").html(data.name);
 					bloc_editable.find(".fm_topict_view_description").html(data.description);
