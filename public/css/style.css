@@ -2451,14 +2451,14 @@ a:hover{
 	height: 116px
 }
 
-#avatars_wrapper{
+.images_wrapper{
 	height: 267px; 
 	overflow:auto; 
 	margin: 5px 0; 
 	text-align:center
 }
 
-#avatars_wrapper .avatar_item{
+.images_wrapper .image_item{
 	display:inline-block; 
 	border: 4px solid #eee; 
 	margin:2px;
@@ -2466,15 +2466,15 @@ a:hover{
 	position:relative;
 }
 
-#avatars_wrapper .avatar_item:hover{
+.images_wrapper .image_item:hover{
 	border-color: #aaa;
 }
 
-#avatars_wrapper .avatar_item.active{
+.images_wrapper .image_item.active{
 	border-color: #666;
 }
 
-#avatars_wrapper .user_avatar_popup{
+.images_wrapper .user_avatar_popup{
 	cursor:pointer;
 	display:block;
 	width: 116px; 
@@ -2482,7 +2482,7 @@ a:hover{
 	border-radius:0px
 }
 
-#avatars_wrapper .delete_avatar{
+.images_wrapper .delete_image{
 	cursor:pointer; 
 	display:block;
 	position:absolute;
@@ -2497,7 +2497,14 @@ a:hover{
 	box-sizing:border-box
 }
 
-#avatars_wrapper .delete_avatar:hover{
+.images_wrapper .delete_image img{
+	width:8px;
+	height:8px;
+	display:block;
+	margin:auto
+}
+
+.images_wrapper .delete_image:hover{
 	background:#aaa;
 }
 
