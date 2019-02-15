@@ -1,38 +1,38 @@
-<div style="background:#fff;">
-	<div style="border-bottom:1px solid #ddd; padding: 10px;  height:24px; ">
-		<div style="float:left">
+<div class="dialog">
+	<div class="header">
+		<div class="title">
 			Modification avatar
 		</div>
-		<div style="float:right;cursor: pointer; " class="button_closable">
-			<img src="{{ asset('image/close_icon.png') }}" style="width:16px; height:auto" alt="x" />
+		<div class="button_closable">
+			<i class="fas fa-times-circle"></i>
 		</div>
 	</div>
 	
-	<div style="background:#fff; padding: 5px; ">
-		<div style="padding:5px">
-			{% set classDefault = '' %}
-			{% if currentAvatar is null %}
-				{% set classDefault = 'active' %}
-			{% endif %}
-			<div id="avatars_wrapper"><!--
-				--><div class="avatar_item {{ classDefault }}" id="default_avatar">
-						<img class="user_avatar_popup default" data-target="{{ path('user_select_avatar', {'id': '0'}) }}" src="{{ 'default/images/user/avatar/default.jpeg' | imagine_filter('116x116') }}" alt="" />
-					</div><!--
-				{% for avatar in avatars %}
-					{% set classActive = '' %}
-					{% if avatar.current %}
-						{% set classActive = 'active' %}
-					{% endif %}
-					-->{{ include("user/include/avatar_item.html.twig") }}<!--
-				{% endfor %}
-			--></div>
-		</div>
+	<div class="pd_5">
+		{% set classDefault = '' %}
+		{% if currentAvatar is null %}
+			{% set classDefault = 'active' %}
+		{% endif %}
+		<div class="images_wrapper" id="avatars_wrapper"><!--
+			--><div class="image_item avatar_item {{ classDefault }}" id="default_avatar">
+					<img class="user_avatar_popup default" data-target="{{ path('user_select_avatar', {'id': '0'}) }}" src="{{ 'default/images/user/avatar/default.jpeg' | imagine_filter('116x116') }}" alt="" />
+				</div><!--
+			{% for avatar in avatars %}
+				{% set classActive = '' %}
+				{% if avatar.current %}
+					{% set classActive = 'active' %}
+				{% endif %}
+				-->{{ include("user/include/avatar_item.html.twig") }}<!--
+			{% endfor %}
+		--></div>
 	</div>
-	<div style="border-top:1px solid #ddd;padding:10px; text-align:center">
-		<label for="avatarfile" style="cursor:pointer">télécharger une image ...</label>
-		<input style="display: none" id="avatarfile" name="file" class="ajax_user_avatar" type="file" accept="image/*" data-target="{{ path('user_modify_avatar') }}" />
+	<div class="sp"></div>
+	<div class="pd_10 tacenter">
+		<label for="avatarfile" class="c_p">télécharger une image ...</label>
+		<input id="avatarfile" name="file" class="ajax_user_avatar d_n" type="file" accept="image/*" data-target="{{ path('user_modify_avatar') }}" />
 	</div>
-	<div style="border-top:1px solid #ddd;padding:10px; text-align:center">
+	<div class="sp"></div>
+	<div class="pd_10 tacenter">
 		<i class="fas fa-info-circle"></i> Cliquer sur l'image ou télécharger un nouveau pour changer l'avatar.
 	</div>
 </div>

@@ -5,7 +5,7 @@ $(function() {
         var target = $(this).data("target");
 
         var content = "<div style='text-align:center;padding:10px; color:#fff'>Chargement ...</div>";
-        popup(content, 560, true);
+        popup(content, 530, true);
         $.ajax({
             type: 'POST',
             url: target,

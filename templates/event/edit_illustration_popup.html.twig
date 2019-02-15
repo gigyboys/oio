@@ -1,38 +1,38 @@
-<div style="background:#fff;">
-	<div style="border-bottom:1px solid #ddd; padding: 10px;  height:24px; ">
-		<div class="left">
+<div class="dialog">
+	<div class="header">
+		<div class="title">
 			Edition de l'illustration de l'évènement
 		</div>
-		<div class="right c_p" class="button_closable">
-			<img src="{{ asset('image/close_icon.png') }}" style="width:16px; height:auto" alt="x" />
+		<div class="button_closable">
+			<i class="fas fa-times-circle"></i>
 		</div>
 	</div>
 	
-	<div style="background:#fff; padding: 5px; ">
-		<div class="pd_5">
-			{% set classDefault = '' %}
-			{% if current is null %}
-				{% set classDefault = 'active' %}
-			{% endif %}
-			<div class="images_popup_wrapper"><!--
-				--><div class="image_item illustration_item {{ classDefault }}" id="default_illustration">
-						<img class="image_popup event_illustration_popup default" data-type="event_illustration" data-target="{{ path('event_manager_select_illustration', {'event_id': event.id, 'illustration_id': 0}) }}" src="{{ 'default/images/event/illustration/default.jpeg' | imagine_filter('116x116') }}" alt="" />
-					</div><!--
-				{% for illustration in illustrations %}
-					{% set classActive = '' %}
-					{% if illustration.current %}
-						{% set classActive = 'active' %}
-					{% endif %}
-					-->{{ include("event/include/illustration_item.html.twig") }}<!--
-				{% endfor %}
-			--></div>
-		</div>
+	<div class="pd_5">
+		{% set classDefault = '' %}
+		{% if current is null %}
+			{% set classDefault = 'active' %}
+		{% endif %}
+		<div class="images_wrapper images_popup_wrapper"><!--
+			--><div class="image_item illustration_item {{ classDefault }}" id="default_illustration">
+					<img class="image_popup event_illustration_popup default" data-type="event_illustration" data-target="{{ path('event_manager_select_illustration', {'event_id': event.id, 'illustration_id': 0}) }}" src="{{ 'default/images/event/illustration/default.jpeg' | imagine_filter('116x116') }}" alt="" />
+				</div><!--
+			{% for illustration in illustrations %}
+				{% set classActive = '' %}
+				{% if illustration.current %}
+					{% set classActive = 'active' %}
+				{% endif %}
+				-->{{ include("event/include/illustration_item.html.twig") }}<!--
+			{% endfor %}
+		--></div>
 	</div>
-	<div style="border-top:1px solid #ddd;padding:10px; text-align:center">
+	<div class="sp"></div>
+	<div class="pd_10 tacenter">
 		<label for="event_illustrationfile" class="c_p">télécharger une image ...</label>
 		<input class="ajax_event_illustration d_n" data-type="event_illustration" id="event_illustrationfile" name="file" type="file" accept="image/*" data-target="{{ path('event_manager_upload_illustration', {'event_id': event.id}) }}" />
 	</div>
-	<div style="border-top:1px solid #ddd;padding:10px; text-align:center">
+	<div class="sp"></div>
+	<div class="pd_10 tacenter">
 		<i class="fas fa-info-circle"></i> Cliquer sur l'image ou télécharger un nouveau pour changer l'illustration.
 	</div>
 </div>

@@ -138,7 +138,7 @@
                             <div class="ddt connected" data-display="block">
                                 <div id="user_info_header">
                                     <div class="avatar_wrap">
-                                        <img id="avatar_banner_target" src="{{ avatar | imagine_filter('50x50') }}" alt="{{ app.user.username }}" />
+                                        <img id="avatar_banner_target" class="c_p" src="{{ avatar | imagine_filter('50x50') }}" alt="{{ app.user.username }}" data-target="{{ path('user_modify_avatar_popup')}}" />
                                     </div>
                                     <div class="info_wrap">
                                         <a class="link" id="ur_profil_link" href="{{ path('user_profile', {'username': app.user.username}) }}">

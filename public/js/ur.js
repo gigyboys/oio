@@ -295,11 +295,11 @@ $(function() {
 	});
 	
 	//change avatar open popup
-	$('body').on('click','#change_avatar',function(event){
+	$('body').on('click','#change_avatar, #avatar_banner_target',function(event){
 		var target = $(this).data("target");
 		
 		var content = "<div style='text-align:center;padding:10px; color:#fff'>Chargement ...</div>";
-		popup(content, 560, true);
+		popup(content, 530, true);
 		$.ajax({
 			type: 'POST',
 			url: target,

@@ -1,4 +1,4 @@
-<div class="avatar_item {{ classActive }}">
-	<span class="delete_avatar" data-target="{{ path('user_delete_avatar', {'id': avatar.id}) }}"><img src="{{ asset('image/cross_icon.png') }}" alt="x" style="width:8px;height:8px;display:block;margin:auto"/></span>
+<div class="image_item avatar_item {{ classActive }}">
+	<span class="delete_image delete_avatar" data-target="{{ path('user_delete_avatar', {'id': avatar.id}) }}"><img src="{{ asset('image/cross_icon.png') }}" alt="x"/></span>
 	<img class="user_avatar_popup" data-target="{{ path('user_select_avatar', {'id': avatar.id}) }}" src="{{ avatar.webPath | imagine_filter('116x116') }}" alt="" />
 </div>
