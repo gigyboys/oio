@@ -153,4 +153,59 @@ $(function() {
         });
     });
 
+    $('#form_job_edit').on('submit', function(e){
+        e.preventDefault();
+        var $this = $(this);
+        var bloc_editable = $this.find(".bloc_editable");
+        var target = $this.attr('action');
+        
+        var hasNotError = true;
+        
+        //title
+        var title = $("#job_input_title").val().trim();
+        if(title == ""){
+            var title_error_msg = "Veuillez fournir un titre à votre offre";
+            if($('.error_title').length > 0){
+                $('.error_title').show().html(title_error_msg);
+            }
+            hasNotError = false;
+        }else{
+            if($('.error_title').length > 0){
+                $('.error_title').hide().html("");
+            }
+        }
+        
+        var data = {
+            title : title,
+            slug : bloc_editable.find("#job_input_slug").val(),
+            sectorId : bloc_editable.find("#sectorId").val(),
+        };
+        if(hasNotError){
+            loadBlocEdit(bloc_editable);
+            $.ajax({
+                type: 'POST',
+                url: target,
+                data: data,
+                dataType : 'json',
+                success: function(data){
+                    if(data.state){
+                        bloc_editable.find("#job_view_title").text(data.title);
+                        bloc_editable.find("#job_view_slug").text(data.slug);
+                        bloc_editable.find("#job_view_sector").text(data.sectorName);
+                        $(".jb_title_"+data.jobId).text(data.title);
+                        resetBlocEdit(bloc_editable);
+                    }
+                    else{
+                        alert("une erreur est survenue");
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR.status);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            });
+        }
+    });
+
 });

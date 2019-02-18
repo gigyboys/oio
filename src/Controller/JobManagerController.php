@@ -3,9 +3,10 @@ namespace App\Controller;
 
 use App\Entity\Job;
 use App\Entity\JobIllustration;
+use App\Entity\Sector;
 use App\Form\JobIllustrationType;
 use App\Form\JobInitType;
-//use App\Form\EventType;
+use App\Form\JobType;
 use App\Service\PlatformService;
 use App\Service\JobService;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -123,8 +124,15 @@ class JobManagerController extends AbstractController {
         $user = $this->getUser();
         $job = $this->jobRepository->find($job_id);
         if($job && $user && $job->getUser()->getId() == $user->getId() ){
+            
+            $sectors = $this->sectorRepository->findBy(
+                array(), 
+                array('name' => 'ASC')
+            );
+            
             return $this->render('job/job_edit.html.twig', array(
                 'job' => $job,
+                'sectors' => $sectors,
                 'entityView' => 'job',
             ));
         }else{
@@ -473,6 +481,54 @@ class JobManagerController extends AbstractController {
                     'illustration600x250' => $illustration600x250,
                     'isCurrent' => $isCurrent,
                 )));
+            }
+        }
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    public function doEditJob($job_id, Request $request)
+    {
+        $user = $this->getUser();
+        $job = $this->jobRepository->find($job_id);
+
+        $response = new Response();
+        //set state 0 in error case
+        $response->setContent(json_encode(array(
+            'state' => 0,
+        )));
+
+        if($job){
+            if ($this->isGranted('ROLE_ADMIN') || $job->getUser() == $user){
+                $jobTemp = new Job();
+                $form = $this->createForm(JobType::class, $jobTemp);
+                $form->handleRequest($request);
+                if ($form->isSubmitted() && $form->isValid()) {
+                    $job->setTitle($jobTemp->getTitle());
+                    if(trim($jobTemp->getSlug()) == ""){
+                        $jobTemp->setSlug($jobTemp->getTitle());
+                    }
+
+                    $slug = $this->platformService->getSlug($jobTemp->getSlug(), $job);
+                    $job->setSlug($slug);
+
+                    //sector
+                    $sector = $this->sectorRepository->find($jobTemp->getSectorId());
+                    $job->setSector($sector);
+
+                    $this->em->persist($job);
+                    $this->em->flush();
+
+                    $response->setContent(json_encode(array(
+                        'state' => 1,
+                        'jobId' => $job->getId(),
+                        'title' => $job->getTitle(),
+                        'sectorId' => $job->getSector()->getId(),
+                        'sectorName' => $job->getSector()->getName(),
+                        'slug' => $job->getSlug(),
+                    )));
+                }
             }
         }
 

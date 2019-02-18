@@ -342,6 +342,10 @@ job_manager_delete_illustration:
     path:     /job-manager/job/{job_id}/delete-illustration/{illustration_id}
     defaults:
         _controller: App\Controller\JobManagerController::deleteIllustration
+job_manager_doedit:
+    path:     /job-manager/job/{job_id}/doedit
+    defaults:
+        _controller: App\Controller\JobManagerController::doEditJob
 
 #blog
 blog:
