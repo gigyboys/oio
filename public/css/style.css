@@ -849,6 +849,12 @@ a:hover{
 	padding-top:5px
 }
 
+/*edit job front*/
+.meta_info #job_illustration, .meta_info #job_illustration_fix {
+    max-width: 300px;
+    height: 125px;
+}
+
 /************* style blog **************/
 .bgl{
 	float:left;
