@@ -11,6 +11,7 @@ parameters:
     cover_directory: '%kernel.project_dir%/public/uploads/images/school/cover'
     illustration_directory: '%kernel.project_dir%/public/uploads/images/post/illustration'
     event_illustration_directory: '%kernel.project_dir%/public/uploads/images/event/illustration'
+    job_illustration_directory: '%kernel.project_dir%/public/uploads/images/job/illustration'
     sitename: 'oio'
     dns: 'www.oio.mg'
     absolute_base: 'http://www.oio.mg'

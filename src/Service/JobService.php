@@ -19,11 +19,27 @@ class JobService
 {
     public function __construct(
         JobRepository $jobRepository,
+        JobIllustrationRepository $jobIllustrationRepository,
         EntityManagerInterface $em
     )
     {
         $this->jobRepository = $jobRepository;
+        $this->jobIllustrationRepository = $jobIllustrationRepository;
         $this->em = $em;
+    }
+
+    public function getIllustrationPath(Job $job) {
+        $illustration = $this->jobIllustrationRepository->findOneBy(array(
+            'job' => $job,
+            'current' => true,
+        ));
+
+        if($illustration){
+            return 'uploads/images/job/illustration/'.$illustration->getPath();
+        }
+        else{
+            return 'default/images/job/illustration/default.jpeg';
+        }
     }
 
 }

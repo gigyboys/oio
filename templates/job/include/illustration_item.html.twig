@@ -1,0 +1,4 @@
+<div class="image_item job_illustration_item {{ classActive }}">
+	<span class="delete_image delete_job_illustration" data-type="job_illustration" data-target="{{ path('job_manager_delete_illustration', {'job_id': job.id, 'illustration_id': illustration.id}) }}"><img src="{{ asset('image/cross_icon.png') }}" alt="x"/></span>
+	<img class="image_popup job_illustration_popup" data-type="job_illustration" data-target="{{ path('job_manager_select_illustration', {'job_id': job.id, 'illustration_id': illustration.id}) }}" src="{{ illustration.webPath | imagine_filter('116x116') }}" alt="" />
+</div>

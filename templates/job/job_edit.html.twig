@@ -11,7 +11,48 @@
 			<div class="mg_10">
 				{{ include("job/include/header_job_edit.html.twig") }}
 
-				
+				<div class="meta_illustration" id="change_job_illustration" data-target="{{ path('job_manager_illustration_popup', {'job_id' : job.id})}}">
+					{# twig extension #}
+					{% set illustration = jobIllustration(job) %}
+					<label>
+						<span class="text"><i class="fas fa-pen-square"></i><br />Cliquez ici pour éditer l'illustration de l'offre</span>
+						<img id="job_illustration" class="600x250 c_p" src="{{ illustration | imagine_filter('600x250') }}" alt="img job" />
+					</label>
+				</div>
+
+				{#
+				<div class="meta_title">
+					<form id="form_event_edit" action="{{ path('event_manager_doedit', {'event_id': event.id}) }}">
+						<div class="bloc_editable">
+							<div class="bloc_view">
+								<div class="pd_l5"><strong>Titre : <span class="error_title error_txt"></span></strong></div>
+								<div class="pd_5"><span id="event_view_title">{{ event.title }}</span></div>
+
+								<div class="pd_l5"><strong>Slug :</strong></div>
+								<div class="pd_5"><span id="event_view_slug">{{ event.slug }}</span></div>
+
+							</div>
+							<div class="bloc_edit d_n">
+								<div class="pd_l5">Titre *: <span class="error_title error_txt"></span></span></div>
+								<div class="pd_5"><input type="text" id="event_input_title" class="default_input" name="title" value="{{ event.title }}" /></div>
+								
+								<div class="pd_l5">Slug *:</div>
+								<div class="pd_5"><input type="text" id="event_input_slug" class="default_input" name="slug" value="{{ event.slug }}" /></div>
+								
+							</div>
+							<div class="separator"></div>
+							<div class="bloc_action mg_5">
+								<span class="btn_edit standar_button">Modifier</span>
+								<button class="btn_save standar_button d_n" id="btn_doedit_event" type="submit" form="form_event_edit" value="Submit">Enregistrer</button>
+								<span class="btn_reset standar_button d_n">Annuler</span>
+								<span class="btn_loading d_n"><img src="{{ asset('image/tail-spin.svg') }}"/>Chargement...</span>
+							</div>
+						</div>
+					</form>
+				</div>
+				#}
+				<div class="both"></div>
+
 				{{ include("job/include/footer_job_edit.html.twig") }}
 			</div>
 		</div>

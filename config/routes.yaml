@@ -326,6 +326,22 @@ job_manager_toggle_active_comment:
     path:     /job-manager/job/{job_id}/togogle-active-comment
     defaults:
         _controller: App\Controller\JobManagerController::toggleActiveComment
+job_manager_illustration_popup:
+    path:     /job-manager/job/{job_id}/edit-illustration-popup
+    defaults:
+        _controller: App\Controller\JobManagerController::editIllustrationPopup
+job_manager_select_illustration:
+    path:     /job-manager/job/{job_id}/select-illustration/{illustration_id}
+    defaults:
+        _controller: App\Controller\JobManagerController::selectIllustration
+job_manager_upload_illustration:
+    path:     /job-manager/job/{job_id}/upload-illustration
+    defaults:
+        _controller: App\Controller\JobManagerController::uploadIllustration
+job_manager_delete_illustration:
+    path:     /job-manager/job/{job_id}/delete-illustration/{illustration_id}
+    defaults:
+        _controller: App\Controller\JobManagerController::deleteIllustration
 
 #blog
 blog:
@@ -408,6 +424,14 @@ job:
     defaults:
         _controller: App\Controller\JobController::index
         page: 1
+job_viewbyid:
+    path:     /job/id/{id}
+    defaults:
+        _controller: App\Controller\JobController::viewById
+job_view:
+    path:     /job/{slug}
+    defaults:
+        _controller: App\Controller\JobController::view
 
 #school
 school_categories:

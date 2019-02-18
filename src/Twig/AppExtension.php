@@ -7,11 +7,13 @@ use App\Entity\Post;
 use App\Entity\School;
 use App\Entity\Tag;
 use App\Entity\User;
+use App\Entity\Job;
 use App\Service\BlogService;
 use App\Service\EventService;
 use App\Service\PlatformService;
 use App\Service\SchoolService;
 use App\Service\UserService;
+use App\Service\JobService;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -22,6 +24,7 @@ class AppExtension extends AbstractExtension
         UserService $userService,
         PlatformService $platformService,
         EventService $eventService,
+        JobService $jobService,
         BlogService $blogService
     )
     {
@@ -29,6 +32,7 @@ class AppExtension extends AbstractExtension
         $this->userService = $userService;
         $this->platformService = $platformService;
         $this->eventService = $eventService;
+        $this->jobService = $jobService;
         $this->blogService = $blogService;
     }
 
@@ -84,6 +88,8 @@ class AppExtension extends AbstractExtension
             new TwigFunction('isPassed', array($this, 'isPassed')),
             new TwigFunction('getTagsWithPublishedEvent', array($this, 'getTagsWithPublishedEvent')),
             new TwigFunction('getPublishedEventsByTag', array($this, 'getPublishedEventsByTag')),
+            /*job*/
+            new TwigFunction('jobIllustration', array($this, 'jobIllustration')),
         );
     }
 
@@ -282,5 +288,12 @@ class AppExtension extends AbstractExtension
 
     public function getPublishedEventsByTag(Tag $tag) {
         return $this->eventService->getPublishedEventsByTag($tag);
+    }
+
+    /*
+     * job
+     */
+    public function jobIllustration(Job $job) {
+        return $this->jobService->getIllustrationPath($job);
     }
 }

@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Entity\Job;
 use App\Entity\JobIllustration;
+use App\Form\JobIllustrationType;
 use App\Form\JobInitType;
 //use App\Form\EventType;
 use App\Service\PlatformService;
@@ -262,6 +263,217 @@ class JobManagerController extends AbstractController {
                 'state' => 1,
                 'case' => $job->getActiveComment(),
             )));
+        }
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    public function editIllustrationPopup($job_id, Request $request)
+    {
+        $user = $this->getUser();
+        $job = $this->jobRepository->find($job_id);
+
+        $response = new Response();
+
+        //set state 0 in error case
+        $response->setContent(json_encode(array(
+            'state' => 0,
+        )));
+
+        if ($job && $this->isGranted('ROLE_ADMIN') || $job->getUser() == $user) {
+            $illustrations = $this->jobIllustrationRepository->findBy(array(
+                'job' => $job
+            ));
+            $current = $this->jobIllustrationRepository->findOneBy(array(
+                'job' => $job,
+                'current' => true,
+            ));
+
+            $content = $this->renderView('job/edit_illustration_popup.html.twig', array(
+                'job' => $job,
+                'illustrations' => $illustrations,
+                'current' => $current,
+            ));
+
+            $response->setContent(json_encode(array(
+                'state' => 1,
+                'content' => $content,
+            )));
+        }
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    public function selectIllustration($job_id, $illustration_id)
+    {
+        $user = $this->getUser();
+        $job = $this->jobRepository->find($job_id);
+
+        $response = new Response();
+        $response->setContent(json_encode(array(
+            'state' => 0,
+        )));
+
+        if($job && $this->isGranted('ROLE_ADMIN') || $job->getUser() == $user){
+            if($illustration_id == 0){
+                $illustrations = $this->jobIllustrationRepository->findBy(array(
+                    'job' => $job
+                ));
+
+                foreach ($illustrations as $illustration) {
+                    $illustration->setCurrent(false);
+                    $this->em->persist($illustration);
+                }
+                $this->em->flush();
+
+                $defaultIllustrationPath = 'default/images/job/illustration/default.jpeg';
+                $illustrationPath = $defaultIllustrationPath;
+            }else{
+                $illustration = $this->jobIllustrationRepository->find($illustration_id);
+
+                if($illustration && $job->getId() == $illustration->getJob()->getId()){
+                    $illustrations = $this->jobIllustrationRepository->findBy(array(
+                        'job' => $job
+                    ));
+
+                    foreach ($illustrations as $illustrationTmp) {
+                        $illustrationTmp->setCurrent(false);
+                        $this->em->persist($illustrationTmp);
+                    }
+
+                    $illustration->setCurrent(true);
+
+                    $this->em->persist($illustration);
+                    $this->em->flush();
+                    $illustrationPath = $illustration->getWebPath();
+                }
+            }
+
+            $illustration116x116 = $this->platformService->imagineFilter($illustrationPath, '116x116');
+            $illustration600x250 = $this->platformService->imagineFilter($illustrationPath, '600x250');
+
+            $response->setContent(json_encode(array(
+                'state' => 1,
+                'illustration116x116' => $illustration116x116,
+                'illustration600x250' => $illustration600x250,
+            )));
+        }
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    public function uploadIllustration($job_id, Request $request)
+    {
+        $user = $this->getUser();
+        $job = $this->jobRepository->find($job_id);
+
+        $response = new Response();
+        $response->setContent(json_encode(array(
+            'state' => 0,
+        )));
+
+        if ($job && $this->isGranted('ROLE_ADMIN') || $job->getUser() == $user) {
+            $illustration = new JobIllustration();
+            $form = $this->createForm(JobIllustrationType::class, $illustration);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $file = $illustration->getFile();
+
+                $t=time();
+                $fileName = substr(sha1(uniqid(mt_rand(), true)), 0, 10).'_'.$job->getId().'_'.$t.'.'.$file->guessExtension();
+
+                try {
+                    $file->move(
+                        $this->getParameter('job_illustration_directory'),
+                        $fileName
+                    );
+                    $illustration->setPath($fileName);
+                    $illustration->setOriginalname($file->getClientOriginalName());
+                    $illustration->setName($file->getClientOriginalName());
+
+                    $illustrations = $this->jobIllustrationRepository->findBy(array('job' => $job));
+
+                    foreach ($illustrations as $jobIllustration) {
+                        $jobIllustration->setCurrent(false);
+                    }
+
+                    $illustration->setCurrent(true);
+                    
+                    $illustration->setJob($job);
+
+                    $this->em->persist($illustration);
+                    $this->em->flush();
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                $path = $illustration->getWebPath();
+                $illustration116x116 = $this->platformService->imagineFilter($path, '116x116');
+                $illustration600x250 = $this->platformService->imagineFilter($path, '600x250');
+                $illustrationItemContent = $this->renderView('job/include/illustration_item.html.twig', array(
+                    'job' => $job,
+                    'illustration' => $illustration,
+                    'classActive' => 'active'
+                ));
+
+                $response->setContent(json_encode(array(
+                    'state' => 1,
+                    'illustration116x116'	 	=> $illustration116x116,
+                    'illustration600x250'	 	=> $illustration600x250,
+                    'illustrationItemContent'  => $illustrationItemContent,
+                )));
+            }
+        }
+
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+
+    public function deleteIllustration($job_id, $illustration_id, Request $request)
+    {
+        $job = $this->jobRepository->find($job_id);
+        $illustration = $this->jobIllustrationRepository->find($illustration_id);
+        $user = $this->getUser();
+        $response = new Response();
+        $response->setContent(json_encode(array(
+            'state' => 0,
+        )));
+
+        if($job && $illustration && $this->isGranted('ROLE_ADMIN') || $job->getUser() == $user){
+            if($job->getId() == $illustration->getJob()->getId()){
+                $illustrationId = $illustration->getId();
+                $this->em->remove($illustration);
+                $this->em->flush();
+
+                $current = $this->jobIllustrationRepository->findOneBy(array(
+                    'job' => $job,
+                    'current' => true,
+                ));
+
+                if($current){
+                    $isCurrent = false;
+                    $path = $current->getWebPath();
+                }else{
+                    $isCurrent = true;
+                    $defaultPath = 'default/images/job/illustration/default.jpeg';
+                    $path = $defaultPath;
+                }
+
+                $illustration116x116 = $this->platformService->imagineFilter($path, '116x116');
+                $illustration600x250 = $this->platformService->imagineFilter($path, '600x250');
+
+                $response->setContent(json_encode(array(
+                    'state' => 1,
+                    'illustrationId' => $illustrationId,
+                    'illustration116x116' => $illustration116x116,
+                    'illustration600x250' => $illustration600x250,
+                    'isCurrent' => $isCurrent,
+                )));
+            }
         }
 
         $response->headers->set('Content-Type', 'application/json');
