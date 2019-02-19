@@ -7,16 +7,18 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class JobDetailType extends AbstractType
+class JobContactType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('society', null, array('property_path' => 'society'))
-            ->add('contractId')
-            ->add('datelimitText')
-            ->add('salary')
-            ->add('description', null, array('property_path' => 'description'))
+            ->add('email')
+            ->add('phone')
+            ->add('website')
+            ->add('location')
+            ->add('city')
+            ->add('latitude')
+            ->add('longitude')
         ;
     }
 

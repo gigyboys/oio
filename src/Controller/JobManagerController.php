@@ -7,6 +7,7 @@ use App\Entity\Sector;
 use App\Form\JobIllustrationType;
 use App\Form\JobInitType;
 use App\Form\JobDetailType;
+use App\Form\JobContactType;
 use App\Form\JobType;
 use App\Service\PlatformService;
 use App\Service\JobService;
@@ -607,6 +608,53 @@ class JobManagerController extends AbstractController {
                         'contractName'  => $contractName,
                         'datelimit'     => $datelimit,
                         'description'   => $job->getDescription(),
+                    )));
+                }
+            }
+        }
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    public function doEditContactJob($job_id, Request $request)
+    {
+        $user = $this->getUser();
+        $job = $this->jobRepository->find($job_id);
+
+        $response = new Response();
+        //set state 0 in error case
+        $response->setContent(json_encode(array(
+            'state' => 0,
+        )));
+
+        if($job){
+            if ($this->isGranted('ROLE_ADMIN') || $job->getUser() == $user){
+                $jobTemp = new Job();
+                $form = $this->createForm(JobContactType::class, $jobTemp);
+                $form->handleRequest($request);
+                if ($form->isSubmitted() && $form->isValid()) {
+                    $job->setEmail($jobTemp->getEmail());
+                    $job->setPhone($jobTemp->getPhone());
+                    $job->setWebsite($jobTemp->getWebsite());
+                    $job->setLocation($jobTemp->getLocation());
+                    $job->setCity($jobTemp->getCity());
+                    $job->setLatitude($jobTemp->getLatitude());
+                    $job->setLongitude($jobTemp->getLongitude());
+                   
+
+                    $this->em->persist($job);
+                    $this->em->flush();
+
+                    $response->setContent(json_encode(array(
+                        'state'=> 1,
+                        'email'=> $job->getEmail(),
+                        'phone'=> $job->getPhone(),
+                        'website'=> $job->getWebsite(),
+                        'location'=> $job->getLocation(),
+                        'city'=> $job->getCity(),
+                        'latitude'=> $job->getLatitude(),
+                        'longitude'=> $job->getLongitude(),
                     )));
                 }
             }

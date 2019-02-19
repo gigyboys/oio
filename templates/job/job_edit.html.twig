@@ -244,6 +244,198 @@
 							</div>
 						</div>
 					</div>
+				{% endif %}
+				
+				{#contact#}
+				<div><strong>Contact</strong></div>
+				{% if job.tovalid == false or job.valid %}
+					<form id="form_job_edit_contact" action="{{ path('job_manager_doedit_contact', {'job_id': job.id}) }}">
+						<div class="bloc_editable">
+							<div class="bloc_view bc_info">
+								<div>
+									<div class="mg_v5">
+										<strong>Email :</strong> 
+										<span id="job_view_email">
+											{{ job.email }}
+										</span>
+									</div>
+								</div>
+								<div>
+									<div class="mg_v5">
+										<strong>Téléphone :</strong> 
+										<span id="job_view_phone">
+											{{ job.phone }}
+										</span>
+									</div>
+								</div>
+								<div>
+									<div class="mg_v5">
+										<strong>Site web :</strong> 
+										<span id="job_view_website">
+											{{ job.website }}
+										</span>
+									</div>
+								</div>
+								<div>
+									<div class="mg_v5">
+										<strong>Localisation :</strong> 
+										<span id="job_view_location">
+											{{ job.location }}
+										</span>
+									</div>
+								</div>
+								<div>
+									<div class="mg_v5">
+										<strong>Ville :</strong> 
+										<span id="job_view_city">
+											{{ job.city }}
+										</span>
+									</div>
+								</div>
+								<div>
+									<div class="mg_v5">
+										<strong>Latitude :</strong> 
+										<span id="job_view_latitude">
+											{{ job.latitude }}
+										</span>
+									</div>
+								</div>
+								<div>
+									<div class="mg_v5">
+										<strong>Longitude :</strong> 
+										<span id="job_view_logitude">
+											{{ job.longitude }}
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="bloc_edit bc_info d_n">
+								<div>
+									<div class="mg_v5">
+										<i>Email :</i>
+									</div>
+									<div>
+										<input type="email" id="job_input_email" required="required" class="default_input" value="{{ job.email }}" />
+									</div>
+								</div>
+								<div>
+									<div class="mg_v5">
+										<i>Téléphone :</i>
+									</div>
+									<div>
+										<input type="text" id="job_input_phone" class="default_input" value="{{ job.phone }}" />
+									</div>
+								</div>
+								<div>
+									<div class="mg_v5">
+										<i>Site web :</i>
+									</div>
+									<div>
+										<input type="text" id="job_input_website" class="default_input" value="{{ job.website }}" />
+									</div>
+								</div>
+								<div>
+									<div class="mg_v5">
+										<i>Localisation :</i>
+									</div>
+									<div>
+										<input type="text" id="job_input_location" class="default_input" value="{{ job.location }}" />
+									</div>
+								</div>
+								<div>
+									<div class="mg_v5">
+										<i>Ville :</i>
+									</div>
+									<div>
+										<input type="text" id="job_input_city" class="default_input" value="{{ job.city }}" />
+									</div>
+								</div>
+								<div>
+									<div class="mg_v5">
+										<i>Latitude :</i>
+									</div>
+									<div>
+										<input type="text" id="job_input_latitude" class="default_input" value="{{ job.latitude }}" />
+										<span class="get-coords-job c_p"><i class="fas fa-map-marker-alt"></i> map</span>
+									</div>
+								</div>
+								<div>
+									<div class="mg_v5">
+										<i>Longitude :</i>
+									</div>
+									<div>
+										<input type="text" id="job_input_longitude" class="default_input" value="{{ job.longitude }}" />
+										<span class="get-coords-job c_p"><i class="fas fa-map-marker-alt"></i> map</span>
+									</div>
+								</div>
+							</div>
+							<div class="bloc_action mg_v10">
+								<span class="btn_edit standar_button">Modifier</span>
+								<button class="btn_save standar_button d_n" type="submit" value="Submit">Enregistrer</button>
+								<span class="btn_reset standar_button d_n">Annuler</span>
+								<span class="btn_loading d_n"><img src="{{ asset('image/tail-spin.svg') }}"/>Chargement...</span>
+							</div>
+						</div>
+					</form>
+				{% else %}
+					<div class="bloc_view bc_info">
+						<div>
+							<div class="mg_v5">
+								<strong>Email :</strong> 
+								<span id="job_view_email">
+									{{ job.email }}
+								</span>
+							</div>
+						</div>
+						<div>
+							<div class="mg_v5">
+								<strong>Téléphone :</strong> 
+								<span id="job_view_phone">
+									{{ job.phone }}
+								</span>
+							</div>
+						</div>
+						<div>
+							<div class="mg_v5">
+								<strong>Site web :</strong> 
+								<span id="job_view_website">
+									{{ job.website }}
+								</span>
+							</div>
+						</div>
+						<div>
+							<div class="mg_v5">
+								<strong>Localisation :</strong> 
+								<span id="job_view_location">
+									{{ job.location }}
+								</span>
+							</div>
+						</div>
+						<div>
+							<div class="mg_v5">
+								<strong>Ville :</strong> 
+								<span id="job_view_city">
+									{{ job.city }}
+								</span>
+							</div>
+						</div>
+						<div>
+							<div class="mg_v5">
+								<strong>Latitude :</strong> 
+								<span id="job_view_latitude">
+									{{ job.latitude }}
+								</span>
+							</div>
+						</div>
+						<div>
+							<div class="mg_v5">
+								<strong>Longitude :</strong> 
+								<span id="job_view_logitude">
+									{{ job.longitude }}
+								</span>
+							</div>
+						</div>
+					</div>
                 {% endif %}
 
 				{{ include("job/include/footer_job_edit.html.twig") }}

@@ -8,6 +8,48 @@ $(function() {
         timeFormat: 'HH:mm',
     });
 
+    // map : getting coord job
+    $('.get-coords-job').on('click', function(){
+        var content = '<div style="padding:10px; width:auto; background:#fff;"><div id="map" style="height: 400px"></div> </div>';
+        popup(content, 600, true);
+
+        var myLatlng = {lat: -18.90329215475846, lng: 47.5195606651306};
+        if($('#job_input_latitude').val().trim() != "" && $('#job_input_longitude').val().trim() != ""){
+            myLatlng = {lat: Number($('#job_input_latitude').val().trim()), lng: Number($('#job_input_longitude').val().trim())};
+        }
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 9,
+            center: myLatlng
+        });
+
+        var marker = new google.maps.Marker({
+            draggable:true,
+            position: myLatlng,
+            map: map,
+            title: 'Position'
+        });
+
+        map.addListener('click', function(event) {
+            var latitude = event.latLng.lat();
+            var longitude = event.latLng.lng();
+            marker.setPosition({lat: latitude, lng: longitude});
+            setCoordonneesJob(latitude, longitude);
+        });
+
+        marker.addListener('dragend', function(event) {
+            var latitude = event.latLng.lat();
+            var longitude = event.latLng.lng();
+            setCoordonneesJob(latitude, longitude);
+        });
+    });
+
+
+    function setCoordonneesJob(lat, lng) {
+		$('#job_input_latitude').val(lat);
+		$('#job_input_longitude').val(lng);
+    }
+
     //change illustration job open popup
     $('body').on('click','#change_job_illustration',function(job){
         var target = $(this).data("target");
@@ -216,7 +258,7 @@ $(function() {
     });
     
     /*
-    * edit location
+    * edit details
     */
     $('#form_job_edit_detail').on('submit', function(e){
         e.preventDefault();
@@ -269,6 +311,66 @@ $(function() {
                         bloc_editable.find("#job_view_salary").text(data.salary);
                         bloc_editable.find("#job_view_datelimit").html(data.datelimit);
                         bloc_editable.find("#job_view_description").html(data.description);
+
+                        resetBlocEdit(bloc_editable);
+                    }
+                    else{
+                        alert("une erreur est survenue");
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR.status);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            });
+        }
+    });
+    
+    /*
+    * edit contact
+    */
+    $('#form_job_edit_contact').on('submit', function(e){
+        e.preventDefault();
+        var $this = $(this);
+        var bloc_editable = $this.find(".bloc_editable");
+        var target = $this.attr('action');
+        
+        var hasNotError = true;
+        
+        var email = $("#job_input_email").val().trim();
+        var phone = $("#job_input_phone").val().trim();
+        var website = $("#job_input_website").val().trim();
+        var location = $("#job_input_location").val().trim();
+        var city = $("#job_input_city").val().trim();
+        var latitude = $("#job_input_latitude").val().trim();
+        var longitude = $("#job_input_longitude").val().trim();
+
+        var data = {
+            email : email,
+            phone : phone,
+            website : website,
+            location : location,
+            city : city,
+            latitude : latitude,
+            longitude : longitude
+        };
+        if(hasNotError){
+            loadBlocEdit(bloc_editable);
+            $.ajax({
+                type: 'POST',
+                url: target,
+                data: data,
+                dataType : 'json',
+                success: function(data){
+                    if(data.state){
+                        bloc_editable.find("#job_view_email").text(data.email);
+                        bloc_editable.find("#job_view_phone").text(data.phone);
+                        bloc_editable.find("#job_view_website").text(data.website);
+                        bloc_editable.find("#job_view_location").text(data.location);
+                        bloc_editable.find("#job_view_city").text(data.city);
+                        bloc_editable.find("#job_view_latitude").text(data.latitude);
+                        bloc_editable.find("#job_view_longitude").text(data.longitude);
 
                         resetBlocEdit(bloc_editable);
                     }

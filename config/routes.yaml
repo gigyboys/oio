@@ -350,6 +350,10 @@ job_manager_doedit_detail:
     path:     /job-manager/job/{job_id}/doedit-detail
     defaults:
         _controller: App\Controller\JobManagerController::doEditDetailJob
+job_manager_doedit_contact:
+    path:     /job-manager/job/{job_id}/doedit-contact
+    defaults:
+        _controller: App\Controller\JobManagerController::doEditContactJob
 
 #blog
 blog:
