@@ -17,7 +17,7 @@
 				</div>
 
 				{% if events | length > 0 %}
-					<div class="pagination et_pagination mg_h10 tacenter">
+					<div class="pagination et_pagination mg_h10 ta_c">
 						{{ include("event/include/pagination_list_event.html.twig") }}
 					</div>
 					<div id="et_list" class="p_list">
@@ -26,17 +26,17 @@
 						{% endfor %}
 						<div class="both"></div>
 					</div>
-					<div class="pagination et_pagination mg_h10 tacenter">
+					<div class="pagination et_pagination mg_h10 ta_c">
 						{{ include("event/include/pagination_list_event.html.twig") }}
 					</div>
 				{% else %}
-					<div class="pagination et_pagination mg_h10 tacenter"></div>
+					<div class="pagination et_pagination mg_h10 ta_c"></div>
 					<div id="et_list" class="p_list">
-						<div class="mg_v20 tacenter" style="width:100%">
+						<div class="mg_v20 ta_c" style="width:100%">
 							<strong>Aucun évènement à afficher</strong>
 						</div>
 					</div>
-					<div class="pagination et_pagination mg_h10 tacenter"></div>
+					<div class="pagination et_pagination mg_h10 ta_c"></div>
 				{% endif %}
 				
 				<div class="both"></div>

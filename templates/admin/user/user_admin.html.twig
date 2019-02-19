@@ -44,9 +44,9 @@
 				<tr class="a_table_head">
 					<th class="a_table_cell_id" style="width: 50px; text-align:center">Id</th>
 					<th style="width: 36px" >Avatar</th>
-					<th class="taleft">Nom</th>
-					<th class="taleft">Username</th>
-					<th class="taleft">Email</th>
+					<th class="ta_l">Nom</th>
+					<th class="ta_l">Username</th>
+					<th class="ta_l">Email</th>
 					<th style="text-align:center">Activé</th>
 					<th class="a_table_cell_action">Actions</th>
 				</tr>
@@ -74,7 +74,7 @@
 								<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" />
 							</span>
 						</td>
-						<td class="a_table_cell_action tacenter">
+						<td class="a_table_cell_action ta_c">
 							<a href="{{ path('admin_user_edit', {'user_id': user.id}) }}" data-name="{{ user.name }}" style="cursor:pointer"><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /></a>
 							<a target="_blank" href="{{ path('user_profile_byid', {'user_id': user.id}) }}" data-name="{{ user.name }}"><img src="{{ asset('image/view_icon.png') }}" style="width:12px; height:auto" /></a>
 						</td>

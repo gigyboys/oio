@@ -43,14 +43,14 @@
 			{{ userInfo | raw }}
 		</div>
 	{% endif %}
-	<div class="event_title tacenter {% if published == false %}op5{% endif %}">
+	<div class="event_title ta_c {% if published == false %}op5{% endif %}">
 		<a href="{{ path('event_view', {'slug': event.slug}) }}"><strong>{{ event.title }}</strong></a>
 	</div>
 
 	<div class="meta_info">
 		<div class="both"></div>
 
-		<div class="et_date_info tacenter mg_v5">
+		<div class="et_date_info ta_c mg_v5">
 			<i class="fas fa-calendar-alt"></i> 
 			{% if event.datebegin | date("Y-m-d") == event.dateend | date("Y-m-d") %}
 				<strong>{{ getDateLabel(event.datebegin, true) }}</strong>
@@ -59,7 +59,7 @@
 				<strong>{{ getDateLabel(event.dateend, true) }}</strong>
 			{% endif %}
 		</div>
-		<div class="event_action tacenter mg_v5">
+		<div class="event_action ta_c mg_v5">
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 				{% if event.user.id == app.user.id %}
 					<a class="standar_button" href="{{ path('event_manager_edit', {'event_id': event.id}) }}">Editer</a>

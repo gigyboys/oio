@@ -88,9 +88,9 @@
 			<table class="a_table" id="list_fields">
 				<tr class="a_table_head">
 					<th class="a_table_cell_id" style="width: 50px; text-align:center">id</th>
-					<th class="taleft">Nom</th>
-					<th class="tacenter">Publié</th>
-					<th class="a_table_cell_action tacenter">Actions</th>
+					<th class="ta_l">Nom</th>
+					<th class="ta_c">Publié</th>
+					<th class="a_table_cell_action ta_c">Actions</th>
 				</tr>
 				{% for field in fields %}
 					<tr class="a_table_line field_item" id="field_{{ field.id }}" data-text="{{ field.name }}" style="display:table-row; position:relative:z-index:0">
@@ -113,7 +113,7 @@
 								<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" />
 							</span>
 						</td>
-						<td class="a_table_cell_action tacenter">
+						<td class="a_table_cell_action ta_c">
 							<a href="{{ path('admin_school_field_edit', {'school_id': school.id, 'field_id': field.id}) }}" data-name="{{ field.name }}" style="cursor:pointer"><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /></a>
 							<span class="delete_field" data-id="{{ field.id }}" data-target="{{ path('admin_school_field_delete', {'school_id': school.id, 'id': field.id}) }}" data-name="{{ field.name }}" style="cursor:pointer"><img src="{{ asset('image/delete_icon.png') }}" style="width:12px; height:auto" /></span>
 						</td>

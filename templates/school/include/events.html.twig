@@ -1,6 +1,6 @@
 <div>
 	{% if events | length == 0 %}
-		<div class="mg_v20 tacenter">
+		<div class="mg_v20 ta_c">
 			<strong>Aucun évènement à afficher</strong>
 		</div>
 	{% else %}
@@ -13,7 +13,7 @@
 							--></span>
 					</div>
 					<div class="search_input_right">
-						<span class="result_state" class="vamiddle">{{ events | length }} résultat{% if events | length > 1 %}s{% endif %}</span>
+						<span class="result_state" class="va_m">{{ events | length }} résultat{% if events | length > 1 %}s{% endif %}</span>
 					</div>
 					<div class="both"></div>
 				</div>

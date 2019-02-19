@@ -37,15 +37,15 @@
 			<table class="a_table" id="list_emails">
 				<tr class="a_table_head">
 					<th class="a_table_cell_id" style="width: 50px; text-align:center">Id</th>
-					<th class="taleft">Email</th>
-					<th class="tacenter">Activé</th>
+					<th class="ta_l">Email</th>
+					<th class="ta_c">Activé</th>
 					<th class="a_table_cell_action">Actions</th>
 				</tr>
 				{% for email in emails %}
 					<tr class="a_table_line" data-text="{{ email.email }}" style="display:table-row">
 						<td class="a_table_cell_id" style="width: 50px; text-align:center">{{ email.id }}</td>
 						<td>{{ email.email }}</td>
-						<td class="tacenter">
+						<td class="ta_c">
 							<span class="toggle_case_fix">
 								{% if email.active %}
 									<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
@@ -56,7 +56,7 @@
 								{% endif %}
 							</span>
 						</td>
-						<td class="a_table_cell_action tacenter">
+						<td class="a_table_cell_action ta_c">
 							{#
 							<a href="{{ path('admin_platform_contact_view', {'contact_id': contact.id}) }}" ><img src="{{ asset('image/view_icon.png') }}" style="width:12px; height:auto" /></a>
 							#}

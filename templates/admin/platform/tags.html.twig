@@ -43,9 +43,9 @@
 			<table class="a_table" id="list_tags_bg">
 				<tr class="a_table_head">
 					<th class="a_table_cell_id" style="width: 50px; text-align:center">id</th>
-					<th class="taleft">Nom</th>
-					<th class="taleft">slug</th>
-					<th class="tacenter">Articles</th>
+					<th class="ta_l">Nom</th>
+					<th class="ta_l">slug</th>
+					<th class="ta_c">Articles</th>
 					<th class="a_table_cell_action">Actions</th>
 				</tr>
                 {% for tag in tags %}
@@ -53,14 +53,14 @@
 						<td class="a_table_cell_id" style="width: 50px; text-align:center">{{ tag.id }}</td>
 						<td><a href="{{ path('admin_platform_tag_edit', {'tag_id': tag.id}) }}" data-name="{{ tag.name }}" style="cursor:pointer">{{ tag.name }}</a></td>
 						<td>{{ tag.slug }}</td>
-						<td class="tacenter">
+						<td class="ta_c">
 							{#
 							{% set schools = getAllSchoolByCategory(category) %}
 							{{ schools | length }}
 							#}
 						</td>
 
-						<td class="a_table_cell_action tacenter">
+						<td class="a_table_cell_action ta_c">
 							<a href="{{ path('admin_platform_tag_edit', {'tag_id': tag.id}) }}" data-name="{{ tag.name }}" style="cursor:pointer"><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /></a>
                             {#
                             <a href="{{ path('admin_school_category_edit_schools', {'category_id': category.id}) }}" data-name="{{ category.name }}" style="cursor:pointer"><img src="{{ asset('image/sl_icon.png') }}" style="width:12px; height:auto" /></a>

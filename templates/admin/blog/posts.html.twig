@@ -37,12 +37,12 @@
 			<table class="a_table" id="list_posts">
 				<tr class="a_table_head">
 					<th class="a_table_cell_id" style="width: 50px; text-align:center">Id</th>
-					<th class="taleft">Titre</th>
-					<th class="taleft">Auteur</th>
-					<th class="tacenter">Publié</th>
-					<th class="tacenter">Valide</th>
-					{#<th class="tacenter">Supprimé</th>#}
-					<th class="a_table_cell_action tacenter">Actions</th>
+					<th class="ta_l">Titre</th>
+					<th class="ta_l">Auteur</th>
+					<th class="ta_c">Publié</th>
+					<th class="ta_c">Valide</th>
+					{#<th class="ta_c">Supprimé</th>#}
+					<th class="a_table_cell_action ta_c">Actions</th>
 				</tr>
 				{% for post in posts %}
 				<tr class="a_table_line" id="post_{{ post.id }}" data-text="{{ post.title }}" style="display:table-row">
@@ -81,7 +81,7 @@
 							<span>{{ post.user.name }}</span>
 						</span>
 					</td>
-					<td class="tacenter">
+					<td class="ta_c">
 						<span class="toggle_case" data-entity="post" data-target="{{ path('blog_manager_post_toggle_publication', {'post_id': post.id}) }}">
 							{% if post.published %}
 								<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
@@ -94,7 +94,7 @@
 							<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" />
 						</span>
 					</td>
-					<td class="tacenter">
+					<td class="ta_c">
 						{% if post.tovalid %}
 						<span class="toggle_case" data-entity="post" data-target="{{ path('blog_manager_post_toggle_validation', {'post_id': post.id}) }}">
 							{% if post.valid %}
@@ -110,7 +110,7 @@
 						{% endif %}
 					</td>
 					{#
-					<td class="tacenter">
+					<td class="ta_c">
 						<span class="toggle_case" data-target="{{ path('blog_manager_post_toggle_deletion', {'post_id': post.id}) }}">
 							{% if post.deleted %}
 								<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
@@ -124,7 +124,7 @@
 						</span>
 					</td>
 					#}
-					<td class="a_table_cell_action tacenter">
+					<td class="a_table_cell_action ta_c">
 						<a href="{{ path('admin_blog_post_edit', {'post_id': post.id}) }}" data-name="{{ post.title }}" style="cursor:pointer"><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /></a>
 						<span class="delete_post" data-id="{{ post.id }}" data-target="{{ path('admin_blog_post_dodelete', {'post_id': post.id}) }}" data-title="{{ post.title }}" style="cursor:pointer"><img src="{{ asset('image/delete_icon.png') }}" style="width:12px; height:auto" /></span>
 					</td>
