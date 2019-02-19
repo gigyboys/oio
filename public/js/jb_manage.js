@@ -207,5 +207,53 @@ $(function() {
             });
         }
     });
+    
+    /*
+    * edit location
+    */
+    $('#form_job_edit_detail').on('submit', function(e){
+        e.preventDefault();
+        var $this = $(this);
+        var bloc_editable = $this.find(".bloc_editable");
+        var target = $this.attr('action');
+        
+        var hasNotError = true;
+        
+        //location
+        var society = $("#job_input_society").val().trim();
+        var contractId = $("#contractId").val();
+
+        var data = {
+            society : society,
+            contractId : contractId,
+            description : CKEDITOR.instances['job_input_description'].getData()
+        };
+        if(hasNotError){
+            loadBlocEdit(bloc_editable);
+            $.ajax({
+                type: 'POST',
+                url: target,
+                data: data,
+                dataType : 'json',
+                success: function(data){
+                    if(data.state){
+                        bloc_editable.find("#job_view_society").text(data.society);
+                        bloc_editable.find("#job_view_contract").html(data.contractName);
+                        bloc_editable.find("#job_view_description").html(data.description);
+
+                        resetBlocEdit(bloc_editable);
+                    }
+                    else{
+                        alert("une erreur est survenue");
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR.status);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            });
+        }
+    });
 
 });

@@ -6,6 +6,7 @@ use App\Entity\JobIllustration;
 use App\Entity\Sector;
 use App\Form\JobIllustrationType;
 use App\Form\JobInitType;
+use App\Form\JobDetailType;
 use App\Form\JobType;
 use App\Service\PlatformService;
 use App\Service\JobService;
@@ -15,6 +16,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Repository\SectorRepository;
+use App\Repository\ContractRepository;
 use App\Repository\ParameterRepository;
 use App\Repository\JobRepository;
 use App\Repository\JobIllustrationRepository;
@@ -23,6 +25,7 @@ class JobManagerController extends AbstractController {
 
     public function __construct(
         SectorRepository $sectorRepository,
+        ContractRepository $contractRepository,
         ParameterRepository $parameterRepository,
         JobService $jobService,
         PlatformService $platformService,
@@ -32,6 +35,7 @@ class JobManagerController extends AbstractController {
     )
     {
         $this->sectorRepository = $sectorRepository;
+        $this->contractRepository = $contractRepository;
         $this->parameterRepository = $parameterRepository;
         $this->jobService = $jobService;
         $this->platformService = $platformService;
@@ -129,11 +133,17 @@ class JobManagerController extends AbstractController {
                 array(), 
                 array('name' => 'ASC')
             );
+
+            $contracts = $this->contractRepository->findBy(
+                array(), 
+                array('name' => 'ASC')
+            );
             
             return $this->render('job/job_edit.html.twig', array(
-                'job' => $job,
-                'sectors' => $sectors,
-                'entityView' => 'job',
+                'job'           => $job,
+                'sectors'       => $sectors,
+                'contracts'     => $contracts,
+                'entityView'    => 'job',
             ));
         }else{
             return $this->redirectToRoute('job');
@@ -149,8 +159,8 @@ class JobManagerController extends AbstractController {
         ));
 
         $response->setContent(json_encode(array(
-            'state' => 1,
-            'content' => $content,
+            'state'     => 1,
+            'content'   => $content,
         )));
 
         $response->headers->set('Content-Type', 'application/json');
@@ -527,6 +537,55 @@ class JobManagerController extends AbstractController {
                         'sectorId' => $job->getSector()->getId(),
                         'sectorName' => $job->getSector()->getName(),
                         'slug' => $job->getSlug(),
+                    )));
+                }
+            }
+        }
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    public function doEditDetailJob($job_id, Request $request)
+    {
+        $user = $this->getUser();
+        $job = $this->jobRepository->find($job_id);
+
+        $response = new Response();
+        //set state 0 in error case
+        $response->setContent(json_encode(array(
+            'state' => 0,
+        )));
+
+        if($job){
+            if ($this->isGranted('ROLE_ADMIN') || $job->getUser() == $user){
+                $jobTemp = new Job();
+                $form = $this->createForm(JobDetailType::class, $jobTemp);
+                $form->handleRequest($request);
+                if ($form->isSubmitted() && $form->isValid()) {
+                    $job->setSociety($jobTemp->getSociety());
+                    $job->setDescription($jobTemp->getDescription());
+
+                    //contract
+                    $contract = $this->contractRepository->find($jobTemp->getContractId());
+                    if($contract){
+                        $job->setContract($contract);
+                        $contractId = $job->getContract()->getId();
+                        $contractName = $job->getContract()->getName();
+                    }else{
+                        $contractId = 0;
+                        $contractName = "";
+                    }
+
+                    $this->em->persist($job);
+                    $this->em->flush();
+
+                    $response->setContent(json_encode(array(
+                        'state' => 1,
+                        'society' => $job->getSociety(),
+                        'contractId' => $contractId,
+                        'contractName' => $contractName,
+                        'description' => $job->getDescription(),
                     )));
                 }
             }

@@ -346,6 +346,10 @@ job_manager_doedit:
     path:     /job-manager/job/{job_id}/doedit
     defaults:
         _controller: App\Controller\JobManagerController::doEditJob
+job_manager_doedit_detail:
+    path:     /job-manager/job/{job_id}/doedit-detail
+    defaults:
+        _controller: App\Controller\JobManagerController::doEditDetailJob
 
 #blog
 blog:
