@@ -44,11 +44,11 @@
 			<table class="a_table" id="list_events">
 				<tr class="a_table_head">
 					<th class="a_table_cell_id" style="width: 50px; text-align:center">Id</th>
-					<th class="taleft">Titre</th>
-					<th class="taleft">Auteur</th>
-					<th class="tacenter">Date création</th>
-					<th class="tacenter">Publié</th>
-					<th class="a_table_cell_action tacenter">Actions</th>
+					<th class="ta_l">Titre</th>
+					<th class="ta_l">Auteur</th>
+					<th class="ta_c">Date création</th>
+					<th class="ta_c">Publié</th>
+					<th class="a_table_cell_action ta_c">Actions</th>
 				</tr>
 				{% for event in events %}
 				<tr class="a_table_line" id="event_{{ event.id }}" data-text="{{ event.title }}" style="display:table-row">
@@ -82,10 +82,10 @@
 							<span>{{ event.user.name }}</span>
 						</span>
 					</td>
-					<td class="tacenter">
+					<td class="ta_c">
 						{{ event.date | date("Y-m-d") }}
 					</td>
-					<td class="tacenter">
+					<td class="ta_c">
 						<span class="toggle_case" data-entity="event" data-target="{{ path('event_manager_toggle_publication', {'event_id': event.id}) }}">
 							{% if event.published %}
 								<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
@@ -99,7 +99,7 @@
 						</span>
 					</td>
 
-					<td class="a_table_cell_action tacenter">
+					<td class="a_table_cell_action ta_c">
 						<a href="{{ path('admin_event_edit', {'event_id': event.id}) }}" data-name="{{ event.title }}" style="cursor:pointer"><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /></a>
 						<span class="delete_event" data-id="{{ event.id }}" data-target="{{ path('admin_event_dodelete', {'event_id': event.id}) }}" data-title="{{ event.title }}" style="cursor:pointer"><img src="{{ asset('image/delete_icon.png') }}" style="width:12px; height:auto" /></span>
 					</td>

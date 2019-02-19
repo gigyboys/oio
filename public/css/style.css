@@ -2018,9 +2018,10 @@ a:hover{
 
 #sl_view_action .subscription_loading{
 	display:none;  
-	height: 30px; 
+	height: 31px; 
 	vertical-align:middle;
-	padding-top:6px
+	padding-top:6px;
+	box-sizing: border-box;
 }
 
 #sl_view_action .subscription_loading img{

@@ -46,9 +46,9 @@ class Job
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $datevalidity;
+    private $datelimit;
 
-    private $datevalidityText;
+    private $datelimitText;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -220,14 +220,14 @@ class Job
         return $this;
     }
 
-    public function getDatevalidity(): ?\DateTimeInterface
+    public function getDatelimit(): ?\DateTimeInterface
     {
-        return $this->datevalidity;
+        return $this->datelimit;
     }
 
-    public function setDatevalidity(\DateTimeInterface $datevalidity): self
+    public function setDatelimit(\DateTimeInterface $datelimit): self
     {
-        $this->datevalidity = $datevalidity;
+        $this->datelimit = $datelimit;
 
         return $this;
     }
@@ -317,14 +317,14 @@ class Job
     }
 
 
-    public function getDatevalidityText()
+    public function getDatelimitText()
     {
-        return $this->datevalidityText;
+        return $this->datelimitText;
     }
 
-    public function setDatevalidityText($datevalidityText): void
+    public function setDatelimitText($datelimitText): void
     {
-        $this->datevalidityText = $datevalidityText;
+        $this->datelimitText = $datelimitText;
     }
 
     public function getLocation(): ?string

@@ -52,10 +52,10 @@
 		<div class="a_datatable_body">
 			<table class="a_table" id="list_days">
 				<tr class="a_table_head">
-					<th class="taleft">Date</th>
+					<th class="ta_l">Date</th>
 					<th style="width: 36px" >Logo</th>
-					<th class="taleft">Etablissements</th>
-					<th class="tacenter">Actions</th>
+					<th class="ta_l">Etablissements</th>
+					<th class="ta_c">Actions</th>
 				</tr>
                 {% for day in days %}
                     {% set schoolShortname = "" %}
@@ -75,7 +75,7 @@
 								<img style="display:block;width: 32px; height: 32px; margin:1px" src="{{ logo | imagine_filter('32x32') }}" alt="img sl" />
                             {% endif %}
 						</td>
-						<td class="taleft">
+						<td class="ta_l">
 							{% if day.schoolOfTheDay is not null %}
 								<a href="{{ path('admin_school_edit', {'id': day.schoolOfTheDay.school.id}) }}">
 									{{ day.schoolOfTheDay.school.shortName }} -
@@ -83,7 +83,7 @@
 								</a>
 							{% endif %}
 						</td>
-						<td class="taright">
+						<td class="ta_r">
 							<form id="form_single_assignation" action="{{ path('admin_school_sod_assignation') }}" name="" method="post">
 								<input type="hidden" class="datebegin_assignation" name="datebegin" value="{{ day.day | date('d/m/Y') }}" />
 								<input type="hidden" class="dateend_assignation" name="dateend" value="{{ day.day | date('d/m/Y') }}" />

@@ -43,9 +43,9 @@
 			<table class="a_table" id="list_categories_sl">
 				<tr class="a_table_head">
 					<th class="a_table_cell_id" style="width: 50px; text-align:center">id</th>
-					<th class="taleft">Nom</th>
-					<th class="taleft">slug</th>
-					<th class="tacenter">Etablissements</th>
+					<th class="ta_l">Nom</th>
+					<th class="ta_l">slug</th>
+					<th class="ta_c">Etablissements</th>
 					<th class="a_table_cell_action">Actions</th>
 				</tr>
                 {% for category in categories %}
@@ -53,12 +53,12 @@
 						<td class="a_table_cell_id" style="width: 50px; text-align:center">{{ category.id }}</td>
 						<td><a href="{{ path('admin_school_category_edit', {'category_id': category.id}) }}">{{ category.name }}</a></td>
 						<td>{{ category.slug }}</td>
-						<td class="tacenter">
+						<td class="ta_c">
 							{% set schools = getAllSchoolByCategory(category) %}
 							{{ schools | length }}
 						</td>
 
-						<td class="a_table_cell_action tacenter">
+						<td class="a_table_cell_action ta_c">
 							<a href="{{ path('admin_school_category_edit', {'category_id': category.id}) }}" data-name="{{ category.name }}" style="cursor:pointer"><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /></a>
 							<a href="{{ path('admin_school_category_edit_schools', {'category_id': category.id}) }}" data-name="{{ category.name }}" style="cursor:pointer"><img src="{{ asset('image/sl_icon.png') }}" style="width:12px; height:auto" /></a>
 							<span class="delete_sl_cat" data-school="{{ schools | length }}" data-id="{{ category.id }}" data-target="{{ path('admin_school_category_delete', {'category_id': category.id}) }}" data-name="{{ category.name }}" style="cursor:pointer"><img src="{{ asset('image/delete_icon.png') }}" style="width:12px; height:auto" /></span>

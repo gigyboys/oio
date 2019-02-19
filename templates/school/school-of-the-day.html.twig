@@ -8,19 +8,19 @@
 	<div class="cr">
 		<div class="ct">
             {% if school %}
-				<h1 id="sl_oftheday_title" class="taleft">
+				<h1 id="sl_oftheday_title" class="ta_l">
 					<span>L'établissement du jour : <a href="{{ path("school_view", {'slug' : school.slug}) }}" alt="{{ school.shortName }} - {{ school.name }}">{{ school.shortName }} - {{ school.name }}</a></span>
 				</h1>
                 {#
                 <div class="mg_10"><div class="sep"></div></div>
-                <div class="mg_10 tajustify">
+                <div class="mg_10 ta_j">
                     {{ school.shortDescription }}
                 </div>
                 #}
 				<div id="sl_oftheday_wrap">
 					{{ include("school/include/school_of_the_day.html.twig") }}
 				</div>
-				<div class="mg_10 tajustify">
+				<div class="mg_10 ta_j">
                     {{ school.shortDescription }}
 				</div>
                 {#

@@ -41,14 +41,14 @@
 								--></span>
 						</div>
 						<div class="search_input_right">
-							<span class="result_state vamiddle">{{ schools | length }} résultat{% if schools | length > 1 %}s{% endif %}</span>
+							<span class="result_state va_m">{{ schools | length }} résultat{% if schools | length > 1 %}s{% endif %}</span>
 						</div>
 						<div class="both"></div>
 					</div>
 					<div class="mg_v10 list_school">
 						{% for school in schools %}
 							<span class="school_item search_item" data-text="{{ school.name }} {{ school.shortName }}">
-								<span class="tacenter">
+								<span class="ta_c">
 									<span class="toggle_case" data-entity="event_school" data-target="{{ path('event_manager_toggle_school', {'event_id': event.id, 'school_id': school.id }) }}">
 										{% set isSchool = isSchoolEvent(event, school) %}
 										{% if isSchool %}

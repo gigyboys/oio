@@ -66,8 +66,8 @@
 							<td style="padding:5px"><span id="slcat_view_slug">{{ category.slug }}</span></td>
 						</tr>
 						<tr>
-							<td class="vatop">Description</td>
-							<td class="vatop">:</td>
+							<td class="va_t">Description</td>
+							<td class="va_t">:</td>
 							<td style="padding:5px">
 								<div id="slcat_view_description" style="padding:5px;background:#fff; border-radius:4px;border:1px solid #eee">
                                     {% if category.description is not null %}
@@ -91,8 +91,8 @@
 							<td style="padding:5px"><input type="text" id="slcat_input_slug" class="default_input" value="{{ category.slug }}" /></td>
 						</tr>
 						<tr>
-							<td class="vatop">Description</td>
-							<td class="vatop">:</td>
+							<td class="va_t">Description</td>
+							<td class="va_t">:</td>
 							<td style="padding:5px">
 								<div>
 									<textarea id="slcat_input_description" class="default_textarea">{% if category.description is not null %}{{ category.description }}{% endif %}</textarea>

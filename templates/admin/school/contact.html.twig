@@ -88,9 +88,9 @@
 			<table class="a_table" id="list_contacts">
 				<tr class="a_table_head">
 					<th class="a_table_cell_id" style="text-align:center">id</th>
-					<th class="taleft">Nom</th>
-					<th class="tacenter">Publié</th>
-					<th class="a_table_cell_action tacenter">Actions</th>
+					<th class="ta_l">Nom</th>
+					<th class="ta_c">Publié</th>
+					<th class="a_table_cell_action ta_c">Actions</th>
 				</tr>
 				{% for contact in contacts %}
 					<tr class="a_table_line contact_item" id="contact_{{ contact.id }}" data-text="{{ contact.name }}" style="display:table-row; position:relative:z-index:0">
@@ -113,7 +113,7 @@
 								<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" />
 							</span>
 						</td>
-						<td class="a_table_cell_action tacenter">
+						<td class="a_table_cell_action ta_c">
 							<a href="{{ path('admin_school_contact_edit', {'school_id': school.id, 'contact_id': contact.id}) }}" data-name="{{ contact.name }}" style="cursor:pointer"><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /></a>
 							<span class="delete_contact" data-id="{{ contact.id }}" data-target="{{ path('admin_school_contact_delete', {'school_id': school.id, 'contact_id': contact.id}) }}" data-name="{{ contact.name }}" style="cursor:pointer"><img src="{{ asset('image/delete_icon.png') }}" style="width:12px; height:auto" /></span>
 						</td>

@@ -87,9 +87,9 @@
 			<table class="a_table" id="list_categories">
 				<tr class="a_table_head">
 					<th class="a_table_cell_id" style="width: 50px; text-align:center">Id</th>
-					<th class="taleft">Name</th>
-					<th class="tacenter">Appartenance</th>
-					<th class="a_table_cell_action tacenter">Actions</th>
+					<th class="ta_l">Name</th>
+					<th class="ta_c">Appartenance</th>
+					<th class="a_table_cell_action ta_c">Actions</th>
 				</tr>
 				{% for category in categories %}
 					<tr class="a_table_line category_item" id="category_{{ category.id }}" data-text="{{ category.name }}" style="display:table-row">
@@ -127,7 +127,7 @@
 								<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" />
 							</span>
 						</td>
-						<td class="a_table_cell_action tacenter">
+						<td class="a_table_cell_action ta_c">
 							Action
 						</td>
 					</tr>

@@ -2,7 +2,7 @@
 	{% set avatar = userAvatar(user) %}
 	<img style="width: 80px; height: 80px; border-radius: 50%" src="{{ avatar | imagine_filter('80x80') }}" alt="{{ getAcronym(user.name) }}" />
 </div>
-<div style="margin-left: 90px" class="taleft">
+<div style="margin-left: 90px" class="ta_l">
 	<div style="margin-bottom:2px">
 		<a style="font-weight:bold" class="link" href="{{ path('user_profile_byid', {'user_id': user.id}) }}">
 			{{ user.name }}
@@ -41,7 +41,7 @@
 
 {% if user.biography is not empty %}
 	<div class="sep mg_v10"></div>
-	<div class="tajustify">
+	<div class="ta_j">
 		{{ substrSpace(user.biography, 300) }}
 	</div>
 {% endif %}

@@ -49,7 +49,7 @@
 					<div class="mg_v10 list_school">
 						{% for school in schools %}
 							<span class="school_item search_item" data-text="{{ school.name }} {{ school.shortName }}">
-								<span class="tacenter">
+								<span class="ta_c">
 									<span class="toggle_case" data-entity="tag" data-target="{{ path('blog_manager_post_toggle_school', {'post_id': post.id, 'school_id': school.id }) }}">
 										{% set isSchool = isSchoolPost(post, school) %}
 										{% if isSchool %}

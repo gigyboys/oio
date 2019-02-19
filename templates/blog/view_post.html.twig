@@ -89,7 +89,7 @@
                 {% if previousComment %}
 					<div id="bg_load_comment_action">
 						<div class="sp mg_v10"></div>
-						<div id="load_comment" data-target="{{ path('blog_post_load_comment', {'post_id': post.id, 'comment_id': previousComment.id}) }}" data-previous-cmt="{{ previousComment.id }}" class="mg_h10 tacenter c_p">
+						<div id="load_comment" data-target="{{ path('blog_post_load_comment', {'post_id': post.id, 'comment_id': previousComment.id}) }}" data-previous-cmt="{{ previousComment.id }}" class="mg_h10 ta_c c_p">
 							Afficher les commentaires précédents...
 						</div>
 						<div class="btn_loading" style="text-align:center;display:none;">Chargement...</div>
@@ -127,12 +127,12 @@
 								</form>
 							</div>
                         {% else %}
-							<div class="mg_10 tacenter">
+							<div class="mg_10 ta_c">
 								<a class="login_ajax" href="{{ path('user_login_ajax') }}">Connectez-vous pour pouvoir ecrire votre commentaire</a>
 							</div>
                         {% endif %}
                     {% else %}
-						<div class="mg_10 tacenter">
+						<div class="mg_10 ta_c">
 							Les commentaires sont fermés pour cet article.
 						</div>
                     {% endif %}

@@ -87,10 +87,10 @@
 			<table class="a_table" id="list_evaluations">
 				<tr class="a_table_head">
 					<th class="a_table_cell_id" style="width: 50px; text-align:center">id</th>
-					<th class="taleft">Nom</th>
-					<th class="tacenter">notes</th>
-					<th class="tacenter">commentaires</th>
-					<th class="a_table_cell_action tacenter">Actions</th>
+					<th class="ta_l">Nom</th>
+					<th class="ta_c">notes</th>
+					<th class="ta_c">commentaires</th>
+					<th class="a_table_cell_action ta_c">Actions</th>
 				</tr>
 				{% for evaluation in evaluations %}
 					<tr class="a_table_line evaluation_item" id="evaluation_{{ evaluation.id }}" data-text="{{ evaluation.user.name }} {{ evaluation.comment }} " style="display:table-row; position:relative;z-index:0">
@@ -106,7 +106,7 @@
 						<td>
 							{{ evaluation.comment }}
 						</td>
-						<td class="a_table_cell_action tacenter">
+						<td class="a_table_cell_action ta_c">
                             <span class="delete_evaluation" data-id="{{ evaluation.id }}" data-target="{{ path('admin_school_evaluation_delete', {'school_id': school.id, 'id': evaluation.id}) }}" style="cursor:pointer"><img src="{{ asset('image/delete_icon.png') }}" style="width:12px; height:auto" /></span>
 						</td>
 					</tr>

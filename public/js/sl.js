@@ -198,7 +198,7 @@ $(function() {
 	$('body').on('click','.toggle_subscription',function(){
         var $this = $(this);
         var target = $this.data('target');
-        $('.subscription_loading').show();
+        $('.subscription_loading').css('display', 'inline-block');
         $('.toggle_subscription').hide();
         $.ajax({
             type: 'POST',

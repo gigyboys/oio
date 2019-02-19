@@ -128,20 +128,17 @@
 .right{
 	float:right;
 }
-.taleft{
+.ta_l{
 	text-align:left;
 }
-.tacenter{
+.ta_c{
 	text-align:center;
 }
-.tajustify{
+.ta_j{
 	text-align:justify;
 }
-.taright{
+.ta_r{
 	text-align:right;
-}
-.cp{
-	cursor: pointer;
 }
 .ct10{
 	margin-left:10px;
@@ -299,13 +296,13 @@
 	padding-left:10px;
 }
 
-.vatop{
+.va_t{
 	vertical-align: top;
 }
-.vamiddle{
+.va_m{
 	vertical-align: middle;
 }
-.vabottom{
+.va_b{
 	vertical-align: bottom;
 }
 .op5{

@@ -82,9 +82,9 @@
 			<table class="a_table" id="list_comments">
 				<tr class="a_table_head">
 					<th class="a_table_cell_id" style="width: 50px; text-align:center">Id</th>
-					<th class="taleft">Name</th>
+					<th class="ta_l">Name</th>
 					<th>Commentaire</th>
-					<th class="a_table_cell_action tacenter">Actions</th>
+					<th class="a_table_cell_action ta_c">Actions</th>
 				</tr>
 				{% for comment in comments %}
 					<tr class="a_table_line category_item" id="event_comment_{{ comment.id }}" data-text="{{ comment.user.name }} {{ comment.comment }}" style="display:table-row">
@@ -97,7 +97,7 @@
 						<td>
 							{{ comment.comment }}
 						</td>
-						<td class="a_table_cell_action tacenter">
+						<td class="a_table_cell_action ta_c">
 							<span class="delete_event_comment" data-id="{{ comment.id }}" data-target="{{ path('admin_event_comment_delete', {'event_id': event.id, 'id': comment.id}) }}" style="cursor:pointer"><img src="{{ asset('image/delete_icon.png') }}" style="width:12px; height:auto" /></span>
 						</td>
 					</tr>
