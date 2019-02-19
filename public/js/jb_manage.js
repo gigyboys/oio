@@ -230,6 +230,8 @@ $(function() {
         var society = $("#job_input_society").val().trim();
         //contract
         var contractId = $("#contractId").val();
+        //salary
+        var salary = $("#job_input_salary").val().trim();
 
         //datelimit
         var datelimitText = $("#job_input_datelimit").val().trim();
@@ -249,6 +251,7 @@ $(function() {
         var data = {
             society : society,
             contractId : contractId,
+            salary : salary,
             datelimitText : datelimitText,
             description : CKEDITOR.instances['job_input_description'].getData()
         };
@@ -263,6 +266,7 @@ $(function() {
                     if(data.state){
                         bloc_editable.find("#job_view_society").text(data.society);
                         bloc_editable.find("#job_view_contract").html(data.contractName);
+                        bloc_editable.find("#job_view_salary").text(data.salary);
                         bloc_editable.find("#job_view_datelimit").html(data.datelimit);
                         bloc_editable.find("#job_view_description").html(data.description);
 

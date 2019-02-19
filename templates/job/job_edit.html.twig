@@ -91,6 +91,14 @@
 								</div>
 								<div>
 									<div class="mg_v5">
+										<strong>Salaire :</strong> 
+										<span id="job_view_salary">
+											{{ job.salary }}
+										</span>
+									</div>
+								</div>
+								<div>
+									<div class="mg_v5">
 										<strong>Date limite de la candidature :</strong>
 										<span id="job_view_datelimit">
 											{% if job.datelimit is not null %}
@@ -135,6 +143,14 @@
 												<option value="{{ contract.id }}" {{ selected }}>{{ contract.name }}</option>
 											{% endfor %}
 										</select>
+									</div>
+								</div>
+								<div>
+									<div class="mg_v5">
+										<i>Salaire :</i>
+									</div>
+									<div>
+										<input type="text" id="job_input_salary" class="default_input" value="{{ job.salary }}" />
 									</div>
 								</div>
 								
@@ -197,6 +213,14 @@
 									{% if job.contract is not null %}
 										{{ job.contract.name }}
 									{% endif %}
+								</span>
+							</div>
+						</div>
+						<div>
+							<div class="mg_v5">
+								<strong>Salaire :</strong> 
+								<span id="job_view_salary">
+									{{ job.salary }}
 								</span>
 							</div>
 						</div>

@@ -16,6 +16,7 @@ class JobDetailType extends AbstractType
             ->add('society', null, array('property_path' => 'society'))
             ->add('contractId')
             ->add('datelimitText')
+            ->add('salary')
             ->add('description', null, array('property_path' => 'description'))
         ;
     }

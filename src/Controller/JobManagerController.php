@@ -564,6 +564,7 @@ class JobManagerController extends AbstractController {
                 $form->handleRequest($request);
                 if ($form->isSubmitted() && $form->isValid()) {
                     $job->setSociety($jobTemp->getSociety());
+                    $job->setSalary($jobTemp->getSalary());
                     $job->setDescription($jobTemp->getDescription());
 
                     //contract
@@ -601,6 +602,7 @@ class JobManagerController extends AbstractController {
                     $response->setContent(json_encode(array(
                         'state'         => 1,
                         'society'       => $job->getSociety(),
+                        'salary'        => $job->getSalary(),
                         'contractId'    => $contractId,
                         'contractName'  => $contractName,
                         'datelimit'     => $datelimit,

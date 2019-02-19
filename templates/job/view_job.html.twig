@@ -26,6 +26,9 @@
 							{% if job.contract is not null %}
 								<div>Contrat : {{ job.contract.name }}</div>
 							{% endif %}
+							{% if job.salary is not null and job.salary | trim != "" %}
+								<div>Salaire : {{ job.salary }}</div>
+							{% endif %}
 							{% if job.datelimit is not null %}
 								<div>Date limite : {{ job.datelimit | date('d/m/Y à H:i') }}</div>
 							{% endif %}
