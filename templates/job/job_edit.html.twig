@@ -34,7 +34,7 @@
 									<div class="pd_5"><span id="job_view_sector">{{ job.sector.name }}</span></div>
 								</div>
 								<div class="bloc_edit d_n">
-									<div class="pd_l5">Titre du poster *: <span class="error_title error_txt"></span></span></div>
+									<div class="pd_l5">Titre du poste *: <span class="error_title error_txt"></span></span></div>
 									<div class="pd_5"><input type="text" id="job_input_title" class="default_input" name="title" value="{{ job.title }}" /></div>
 									
 									<div class="pd_l5">Slug *:</div>
@@ -73,33 +73,43 @@
 							<div class="bloc_view bc_info">
 								<div>
 									<div class="mg_v5">
-										<i>Société :</i>
-									</div>
-									<div class="pd_5" id="job_view_society">
-										{{ job.society }}
-									</div>
-								</div>
-								<div>
-									<div class="mg_v5">
-										<i>Contrat :</i>
-									</div>
-									<div class="pd_5" id="job_view_contract">
-										{% if job.contract is not null %}
-											{{ job.contract.name }}
-										{% endif %}
+										<strong>Société :</strong> 
+										<span id="job_view_society">
+											{{ job.society }}
+										</span>
 									</div>
 								</div>
 								<div>
 									<div class="mg_v5">
-										<i>Description :</i>
+										<strong>Contrat :</strong> 
+										<span id="job_view_contract">
+											{% if job.contract is not null %}
+												{{ job.contract.name }}
+											{% endif %}
+										</span>
 									</div>
-									<div class="pd_5" id="job_view_description">
+								</div>
+								<div>
+									<div class="mg_v5">
+										<strong>Date limite de la candidature :</strong>
+										<span id="job_view_datelimit">
+											{% if job.datelimit is not null %}
+												{{ job.datelimit | date('d/m/Y à H:i') }}
+											{% endif %}
+										</span>
+									</div>
+								</div>
+								<div class="sp"></div>
+								<div>
+									<div class="mg_v5">
+										<strong>Description :</strong>
+									</div>
+									<div id="job_view_description">
 										{{ job.description | raw }}
 									</div>
 								</div>
 							</div>
 							<div class="bloc_edit bc_info d_n">
-								
 								<div>
 									<div class="mg_v5">
 										<i>Société :</i>
@@ -125,6 +135,15 @@
 												<option value="{{ contract.id }}" {{ selected }}>{{ contract.name }}</option>
 											{% endfor %}
 										</select>
+									</div>
+								</div>
+								
+								<div>
+									<div class="mg_v5">
+										<i>Date limite de la candidature :</i> <span class="error_datelimit error_txt"></span>
+									</div>
+									<div>
+										<input type="text" placeholder="jj/mm/aaaa" id="job_input_datelimit" class="default_input" value="{% if job.datelimit is not null %}{{ job.datelimit | date('d/m/Y H:i') }}{% endif %}" />
 									</div>
 								</div>
 								
@@ -163,30 +182,40 @@
 					</form>
 				{% else %}
 					<div class="bloc_view bc_info">
-
 						<div>
 							<div class="mg_v5">
-								<i>Société :</i>
-							</div>
-							<div class="pd_5" id="job_view_society">
-								{{ job.society }}
+								<strong>Société :</strong> 
+								<span id="job_view_society">
+									{{ job.society }}
+								</span>
 							</div>
 						</div>
 						<div>
 							<div class="mg_v5">
-								<i>Contrat :</i>
-							</div>
-							<div class="pd_5" id="job_view_contract">
-								{% if job.contract is not null %}
-									{{ job.contract.name }}
-								{% endif %}
+								<strong>Contrat :</strong> 
+								<span id="job_view_contract">
+									{% if job.contract is not null %}
+										{{ job.contract.name }}
+									{% endif %}
+								</span>
 							</div>
 						</div>
 						<div>
 							<div class="mg_v5">
-								<i>Description :</i>
+								<strong>Date limite de la candidature :</strong>
+								<span id="job_view_datelimit">
+									{% if job.datelimit is not null %}
+										{{ job.datelimit | date('d/m/Y à H:i') }}
+									{% endif %}
+								</span>
 							</div>
-							<div class="job_view_description pd_5">
+						</div>
+						<div class="sp"></div>
+						<div>
+							<div class="mg_v5">
+								<strong>Description :</strong>
+							</div>
+							<div id="job_view_description">
 								{{ job.description | raw }}
 							</div>
 						</div>

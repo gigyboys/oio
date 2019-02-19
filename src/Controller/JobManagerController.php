@@ -577,15 +577,34 @@ class JobManagerController extends AbstractController {
                         $contractName = "";
                     }
 
+                    //date
+                    if($jobTemp->getDatelimitText() == ""){
+                        $datelimit = null;
+                    }else{
+                        $datelimit = $this->platformService->getDate($jobTemp->getDatelimitText(), 'd/m/y h:i');
+                        if ($datelimit instanceof \DateTime) {
+                        }else{
+                            $datelimit = null;
+                        }
+                    }
+                    $job->setDatelimit($datelimit);
+                    if($datelimit){
+                        $datelimit = $datelimit->format('d/m/Y à H:i');
+                    }else{
+                        $datelimit = "";
+                    }
+                   
+
                     $this->em->persist($job);
                     $this->em->flush();
 
                     $response->setContent(json_encode(array(
-                        'state' => 1,
-                        'society' => $job->getSociety(),
-                        'contractId' => $contractId,
-                        'contractName' => $contractName,
-                        'description' => $job->getDescription(),
+                        'state'         => 1,
+                        'society'       => $job->getSociety(),
+                        'contractId'    => $contractId,
+                        'contractName'  => $contractName,
+                        'datelimit'     => $datelimit,
+                        'description'   => $job->getDescription(),
                     )));
                 }
             }

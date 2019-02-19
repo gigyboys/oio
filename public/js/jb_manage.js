@@ -1,6 +1,13 @@
 
 $(function() {
 
+    $( "#job_input_datelimit" ).datetimepicker({
+        dateFormat: 'dd/mm/yy',
+        minDate: 0, 
+        minInterval: (1000*60*60),
+        timeFormat: 'HH:mm',
+    });
+
     //change illustration job open popup
     $('body').on('click','#change_job_illustration',function(job){
         var target = $(this).data("target");
@@ -219,13 +226,30 @@ $(function() {
         
         var hasNotError = true;
         
-        //location
+        //society
         var society = $("#job_input_society").val().trim();
+        //contract
         var contractId = $("#contractId").val();
+
+        //datelimit
+        var datelimitText = $("#job_input_datelimit").val().trim();
+        console.log(datelimitText);
+        if(datelimitText == "" || isValidDate(datelimitText)){
+            if($('.error_datelimit').length > 0){
+                $('.error_datelimit').hide().html("");
+            }
+        }else{
+            var datelimit_error_msg = 'La date limite doit être valide et de la forme "dd/mm/yyyy hh:mm"';
+            if($('.error_datelimit').length > 0){
+                $('.error_datelimit').show().html(datelimit_error_msg);
+            }
+            hasNotError = false;
+        }
 
         var data = {
             society : society,
             contractId : contractId,
+            datelimitText : datelimitText,
             description : CKEDITOR.instances['job_input_description'].getData()
         };
         if(hasNotError){
@@ -239,6 +263,7 @@ $(function() {
                     if(data.state){
                         bloc_editable.find("#job_view_society").text(data.society);
                         bloc_editable.find("#job_view_contract").html(data.contractName);
+                        bloc_editable.find("#job_view_datelimit").html(data.datelimit);
                         bloc_editable.find("#job_view_description").html(data.description);
 
                         resetBlocEdit(bloc_editable);
