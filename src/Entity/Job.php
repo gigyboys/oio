@@ -125,6 +125,11 @@ class Job
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
+    private $salary;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
     private $email;
 
     /**
@@ -225,7 +230,7 @@ class Job
         return $this->datelimit;
     }
 
-    public function setDatelimit(\DateTimeInterface $datelimit): self
+    public function setDatelimit($datelimit)
     {
         $this->datelimit = $datelimit;
 
@@ -383,6 +388,18 @@ class Job
     public function setSociety(?string $society): self
     {
         $this->society = $society;
+
+        return $this;
+    }
+
+    public function getSalary(): ?string
+    {
+        return $this->salary;
+    }
+
+    public function setSalary(?string $salary): self
+    {
+        $this->salary = $salary;
 
         return $this;
     }
