@@ -1,7 +1,6 @@
 {% extends "front.html.twig" %}
 
 {% block title %}
-    {{ school.shortName }} - {{ school.name }}
     {% if type == 'about' %}{{ school.shortName }} - {{ school.name }}{% endif %}
     {% if type == 'event' %}{{ school.shortName }} - {{ school.name }} - évènements{% endif %}
     {% if type == 'post' %}{{ school.shortName }} - {{ school.name }} - articles{% endif %}
