@@ -11,11 +11,11 @@
 		<div class="ct">
 			<div id="bg_list">
 				{% if posts | length > 0 %}
-					<div id="list_post"><!--
-						{% for post in posts %}
-							-->{{ include("blog/include/post_item.html.twig") }}<!--
-						{% endfor %}
-					--></div>
+					<div id="list_post">{#
+						#}{% for post in posts %}{#
+							#}{{ include("blog/include/post_item.html.twig") }}{#
+						#}{% endfor %}{#
+					#}</div>
 					{% if previousPost %}
 						<div id="bg_load_post_action" class="mg_b10">
 							<div id="bg_load_post" data-target="{{ path('blog_load_posts', {'post_id': previousPost.id}) }}" data-previous-post="{{ previousPost.id }}" class="mg_h10">

@@ -8,9 +8,9 @@
 
 {% block body %}
 <script>{#
-    #}var events = [ {#
-        #}{% for event in events %} 
-        {% set illustration = eventIllustration(event) %}
+    #}var events = [{#
+        #}{% for event in events %}{#
+        #}{% set illustration = eventIllustration(event) %}{#
         {#
             #} { {#					
                 #}id : {{ event.id }},{#
@@ -19,10 +19,9 @@
                 #}illustration : '{{ absolute_url( illustration | imagine_filter('1200x500') ) }}',{#
                 #}diff : {{ event.diffDateNow }}{#
                 #}}, {#
-        #} {% endfor %}  
-     ];
-
-</script>
+        #} {% endfor %} {#
+        #}];{#
+#}</script>
 
 <div class="cr">
     <div class="ct">
@@ -90,8 +89,6 @@
     </div>
 </div>
 
-
-
 {# twig extension #}
 {% set school = getSchoolOfTheDay() %}
 {% if school %}
@@ -109,8 +106,6 @@
         </div>
     </div>
 {% endif %}
-
-
 
 {#last added schools#}
 {# twig extension #}
@@ -133,7 +128,6 @@
         </div>
     </div>
 {% endif %}
-
 
 <div class="cr">
     <div class="ct">

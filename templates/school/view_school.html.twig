@@ -70,19 +70,17 @@
                                     {% else %}
                                         <i class="fas fa-tags"></i>
                                     {% endif %}
-                                </a><!--
-								{% for category in categories %}
-									--><a class="sl_cat_item" href="{{ path('school_category_view', {'slug': category.slug}) }}">
-                                    {{ category.name }}
-                                </a><!--
-								{% endfor %}
+                                </a>{#
+								#}{% for category in categories %}{#
+									#}<a class="sl_cat_item" href="{{ path('school_category_view', {'slug': category.slug}) }}">{{ category.name }}</a>{#
+								#}{% endfor %}
 
                                 {% if school.slogan != "" %}
-                                    --><div class="slogan mg_v5">
+                                    <div class="slogan mg_v5">
                                         « {{ school.slogan }} »
-                                    </div><!--
+                                    </div>
                                 {% endif %}
-							  --></div>
+							    </div>
                         {% endif %}
                     </div>
                     <div id="sl_view_description">
@@ -129,17 +127,17 @@
                         <div class="mg_h10 tab_sl_wrap">
 							<a class="tab_sl_item{% if type == 'about' %} selected{% endif %}" id="tab_sl_about" data-title="{{ school.shortName }} - {{ school.name }}" href="{{ path('school_view', {'slug': school.slug, 'type': 'about'}) }}" >
 								<span class="wrap"><img class="img logo" src="{{ logo | imagine_filter('20x20') }}" alt="AU" /> <span class="label">A propos</span></span>
-							</a><!--
-							--><a class="tab_sl_item{% if type == 'event' %} selected{% endif %}" id="tab_sl_event" data-title="{{ school.shortName }} - {{ school.name }} - évènements" href="{{ path('school_view', {'slug': school.slug, 'type': 'event'}) }}">
+							</a>{#
+							#}<a class="tab_sl_item{% if type == 'event' %} selected{% endif %}" id="tab_sl_event" data-title="{{ school.shortName }} - {{ school.name }} - évènements" href="{{ path('school_view', {'slug': school.slug, 'type': 'event'}) }}">
 								<span class="wrap"><i class="fas fa-calendar-day"></i> <span class="label">Evènements</span></span>
-							</a><!--
-							--><a class="tab_sl_item{% if type == 'post' %} selected{% endif %}" id="tab_sl_new" data-title="{{ school.shortName }} - {{ school.name }} - articles" href="{{ path('school_view', {'slug': school.slug, 'type': 'post'}) }}" >
+							</a>{#
+							#}<a class="tab_sl_item{% if type == 'post' %} selected{% endif %}" id="tab_sl_new" data-title="{{ school.shortName }} - {{ school.name }} - articles" href="{{ path('school_view', {'slug': school.slug, 'type': 'post'}) }}" >
 								<span class="wrap"><i class="far fa-edit"></i> <span class="label">Articles</span></span>
-							</a><!--
-							--><a class="tab_sl_item{% if type == 'evaluation' %} selected{% endif %}" id="tab_sl_evaluation" data-title="{{ school.shortName }} - {{ school.name }} - evaluations" href="{{ path('school_view', {'slug': school.slug, 'type': 'evaluation'}) }}">
+							</a>{#
+							#}<a class="tab_sl_item{% if type == 'evaluation' %} selected{% endif %}" id="tab_sl_evaluation" data-title="{{ school.shortName }} - {{ school.name }} - evaluations" href="{{ path('school_view', {'slug': school.slug, 'type': 'evaluation'}) }}">
 								<span class="wrap"><i class="fas fa-star-half-alt"></i> <span class="label">Evaluations</span></span>
-							</a><!--
-                            --><a class="tab_sl_item{% if type == 'document' %} selected{% endif %}" id="tab_sl_document" data-title="{{ school.shortName }} - {{ school.name }} - documents" href="{{ path('school_view', {'slug': school.slug, 'type': 'document'}) }}">
+							</a>{#
+                            #}<a class="tab_sl_item{% if type == 'document' %} selected{% endif %}" id="tab_sl_document" data-title="{{ school.shortName }} - {{ school.name }} - documents" href="{{ path('school_view', {'slug': school.slug, 'type': 'document'}) }}">
 								<span class="wrap"><i class="fas fa-arrow-alt-circle-down"></i> <span class="label">Documents</span></span>
 							</a>
                         </div>

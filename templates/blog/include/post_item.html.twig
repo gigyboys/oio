@@ -17,12 +17,6 @@
             {{ substrSpace(post.introduction, 275) }}
 		</div>
 	</div>
-	{#
-	{% set category = getCategoryByPost(post) %}
-	{% if category %}
-	 <div class="tag_info"><a href="{{ path('com_blog_category_view', {'slug': category.slug}) }}" rel="category tag">{{ category.defaultName }}</a></div>
-	{% endif %}
-	#}
 
 	<div class="meta_info">
         {% if post.showAuthor %}
@@ -48,5 +42,4 @@
 		<div class="both"></div>
 	</div>
 	<div class="mg_v10"></div>
-	<!--<div class="sp mg_v5"></div>-->
 </div>

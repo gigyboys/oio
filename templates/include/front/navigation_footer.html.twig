@@ -2,16 +2,12 @@
 	<div id="footer_navigation_content" class="ct">
 		<ul>
 			<li>
-				<a href="{{ path('platform_about') }}">
-					<span>{{ 'A propos' | trans }}</span>
-				</a>
+				<a href="{{ path('platform_about') }}"><span>{{ 'A propos' | trans }}</span></a>
 			</li>
 			{% set userTeams = findUserTeamsOrderBy('position', 'ASC', true) %}
 			{% if userTeams | length > 0 %}
 				<li>
-					<a href="{{ path('platform_team') }}">
-						<span>{{ 'Equipe' | trans }}</span>
-					</a>
+					<a href="{{ path('platform_team') }}"><span>{{ 'Equipe' | trans }}</span></a>
 				</li>
 			{% endif %}
 			{#
@@ -21,23 +17,14 @@
 				</a>
 			</li>
 			#}
-			<li><!--
-				<span id="contact2">nous contacter</span>
-				-->
-				<a href="{{ path('platform_contact') }}">
-					<span>{{ 'Nous contacter' | trans }}</span>
-				</a>
-				
+			<li>
+				<a href="{{ path('platform_contact') }}"><span>{{ 'Nous contacter' | trans }}</span></a>
 			</li>
 			<li>
-				<a href="{{ path('platform_newsletter') }}">
-					<span>{{ 'Newsletter' | trans }}</span>
-				</a>
+				<a href="{{ path('platform_newsletter') }}"><span>{{ 'Newsletter' | trans }}</span></a>
 			</li>
 			<li>
-				<a href="{{ path('school_map') }}">
-					<span>Etablissemap</span>
-				</a>
+				<a href="{{ path('school_map') }}"><span>Etablissemap</span></a>
 			</li>
 			{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 				<li>

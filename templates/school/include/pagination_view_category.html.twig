@@ -18,37 +18,25 @@
 	{% if  limit * nbLinks >= nbAllSchools %}
 		{% for page in 1..nbPages %}
 			{% if currentpage == page%}
-				<a class="pagination_item active" title="page {{ page }}" href="{{ path('school_category_view', {'slug':category.slug, 'page': page }) }}">
-					{{ page }}
-				</a>
+				<a class="pagination_item active" title="page {{ page }}" href="{{ path('school_category_view', {'slug':category.slug, 'page': page }) }}">{{ page }}</a>
 			{% else %}
-				<a class="pagination_item" title="page {{ page }}" href="{{ path('school_category_view', {'slug':category.slug, 'page': page }) }}">
-					{{ page }}
-				</a>
+				<a class="pagination_item" title="page {{ page }}" href="{{ path('school_category_view', {'slug':category.slug, 'page': page }) }}">{{ page }}</a>
 			{% endif %}
 		{% endfor %}
 	{% else %}
 		{% for page in 1..nbPages %}
 			{% if page == 1 or page == nbPages or (page <= nbLinks-1 and currentpage <= (nbLinks+1)/2 )  or (page >= nbPages-nbLinks+2 and currentpage >= nbPages-(nbLinks-1)/2 ) or (page>=currentpage-(nbLinks-3)/2 and page<=currentpage+(nbLinks-3)/2) %}
 				{% if currentpage == page %}
-					<a class="pagination_item active" title="page {{ page }}" href="{{ path('school_category_view', {'slug':category.slug, 'page': page }) }}">
-						{{ page }}
-					</a>
+					<a class="pagination_item active" title="page {{ page }}" href="{{ path('school_category_view', {'slug':category.slug, 'page': page }) }}">{{ page }}</a>
 				{% else %}
-					<a class="pagination_item" title="page {{ page }}" href="{{ path('school_category_view', {'slug':category.slug, 'page': page }) }}">
-						{{ page }}
-					</a>
+					<a class="pagination_item" title="page {{ page }}" href="{{ path('school_category_view', {'slug':category.slug, 'page': page }) }}">{{ page }}</a>
 				{% endif %}
 			{% endif %}
 			{% if page == 1 and currentpage >= (nbLinks+3)/2 %}
-				<span class="pagination_item " >
-					...
-				</span>
+				<span class="pagination_item">...</span>
 			{% endif %}
 			{% if page == nbPages-1 and currentpage <= nbPages-(nbLinks+1)/2 %}
-				<span class="pagination_item " >
-					...
-				</span>
+				<span class="pagination_item">...</span>
 			{% endif %}
 		{% endfor %}
 	{% endif %}
