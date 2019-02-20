@@ -13,9 +13,9 @@
 					<div class="mg_5">
 						<div>
 							{% if tag is defined %}
-								<a class="link" href="{{ path('blog') }}">touts {{ getValidPosts() | length }}</a>
+								<a href="{{ path('blog') }}">touts {{ getValidPosts() | length }}</a>
 							{% else %}
-								<strong><a class="link" href="{{ path('blog') }}">touts {{ getValidPosts() | length }}</a></strong>
+								<strong><a href="{{ path('blog') }}">touts {{ getValidPosts() | length }}</a></strong>
 							{% endif %}
 						</div>
 						<div class="sp"></div>
@@ -25,19 +25,19 @@
 								{% if tag is defined %}
 									{% if tag.id == tagTemp.id %}
 										<strong>
-											<a class="link" href="{{ path('blog_tag_view', {'slug': tagTemp.slug}) }}">
+											<a href="{{ path('blog_tag_view', {'slug': tagTemp.slug}) }}">
 												{{ tagTemp.name }} 
 												{{ getPublishedPostsByTag(tagTemp) | length }}
 											</a>
 										</strong>
 									{% else %}
-										<a class="link" href="{{ path('blog_tag_view', {'slug': tagTemp.slug}) }}">
+										<a href="{{ path('blog_tag_view', {'slug': tagTemp.slug}) }}">
 											{{ tagTemp.name }} 
 											{{ getPublishedPostsByTag(tagTemp) | length }}
 										</a>
 									{% endif %}
 								{% else %}
-									<a class="link" href="{{ path('blog_tag_view', {'slug': tagTemp.slug}) }}">
+									<a href="{{ path('blog_tag_view', {'slug': tagTemp.slug}) }}">
 										{{ tagTemp.name }} 
 										{{ getPublishedPostsByTag(tagTemp) | length }}
 									</a>

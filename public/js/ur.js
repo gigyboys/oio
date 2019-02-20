@@ -38,9 +38,8 @@ $(function() {
 		
 		$("#c"+this_id).addClass('selected');
         initTabsl();
-		document.title = $(this).data("title");
+		document.title = $(this).attr("data-title");
 		history.pushState('', '', $(this).attr("data-link"));
-		
     });
 	
 	//mise a jour de common information.
@@ -101,11 +100,21 @@ $(function() {
 						$("#nav_target_ur_email").text(data.email);
 						
 						resetBlocEdit(bloc_editable);
-						document.title = data.title;
-						history.pushState('', 'Profile '+data.username, data.url);
+						var title = data.name+" - "+$(".tab_ur_item.selected").attr("data-tab-name");
+						document.title = title;
+						history.pushState('', data.name, data.url);
+
+						$(".tab_ur_item").each(function( i ) {
+							var dataTitle = data.name+" - "+$(this).attr("data-tab-name");
+							$(this).attr("data-title", dataTitle);
+						});
 						
 						$("#ur_profil_link").attr("href", data.url);
 						$("#tab_ur_about").attr("data-link", data.url);
+
+						$("#ur_contribution_link").attr("href", data.urlContribution);
+						$("#tab_ur_contribution").attr("data-link", data.urlContribution);
+
 						$("#ur_setting_link").attr("href", data.urlSetting);
 						$("#tab_ur_setting").attr("data-link", data.urlSetting);
 						break;

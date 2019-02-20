@@ -1,7 +1,9 @@
 {% extends "front.html.twig" %}
 
 {% block title %}
-	{{ user.name }} - profil
+	{% if type == 'profile' %}{{ user.name }} - profil{% endif %}
+	{% if type == 'contribution' %}{{ user.name }} - contributions{% endif %}
+	{% if type == 'setting' %}{{ user.name }} - paramètres{% endif %}
 {% endblock %}
 
 {% block body %}
@@ -106,10 +108,10 @@
 			<div class="cr">
 				<div class="ct">
 					<div style="margin:0 10px">
-						<span class="tab_ur_item{% if type == 'profile' %} selected{% endif %}" id="tab_ur_about" data-title="{{ user.name }} - profil" data-link="{{ path('user_profile', {'username': user.username}) }}">A propos</span>
-						<span class="tab_ur_item{% if type == 'contribution' %} selected{% endif %}" id="tab_ur_contribution" data-title="{{ user.name }} - contributions" data-link="{{ path('user_profile', {'username': user.username, 'type' : 'contribution'}) }}">Contributions</span>
+						<span class="tab_ur_item{% if type == 'profile' %} selected{% endif %}" id="tab_ur_about" data-tab-name="profil" data-title="{{ user.name }} - profil" data-link="{{ path('user_profile', {'username': user.username}) }}">A propos</span>
+						<span class="tab_ur_item{% if type == 'contribution' %} selected{% endif %}" id="tab_ur_contribution" data-tab-name="contributions" data-title="{{ user.name }} - contributions" data-link="{{ path('user_profile', {'username': user.username, 'type' : 'contribution'}) }}">Contributions</span>
 						{% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.id == user.id %}
-							<span class="tab_ur_item{% if type == 'setting' %} selected{% endif %}" id="tab_ur_setting" data-title="{{ user.name }} - paramètres" data-link="{{ path('user_profile', {'username': user.username, 'type' : 'setting'}) }}">Paramètres</span>
+							<span class="tab_ur_item{% if type == 'setting' %} selected{% endif %}" id="tab_ur_setting" data-tab-name="paramètres" data-title="{{ user.name }} - paramètres" data-link="{{ path('user_profile', {'username': user.username, 'type' : 'setting'}) }}">Paramètres</span>
 						{% endif %}
 					</div>
 				</div>

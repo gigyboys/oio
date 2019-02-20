@@ -8,20 +8,20 @@
 				<img src="{{ logo | imagine_filter('22x22') }}" alt="" class="va_t"/>
 			</span>
             <span class="ddt dd_tdfault">
-				<a class="link dd_item" href="{{ path('school_view', {'slug': school.slug, 'type': 'about'}) }}">
+				<a class="dd_item" href="{{ path('school_view', {'slug': school.slug, 'type': 'about'}) }}">
 					<span class="icon"><img src="{{ logo | imagine_filter('22x22') }}" /></span><span class="label">A propos</span>
 				</a>
 				<span class="sp"></span>
-				<a class="link dd_item" href="{{ path('school_view', {'slug': school.slug, 'type': 'event'}) }}">
+				<a class="dd_item" href="{{ path('school_view', {'slug': school.slug, 'type': 'event'}) }}">
 					<span class="icon"><i class="fas fa-calendar-day"></i></span><span class="label">Evènements</span>
 				</a>
-				<a class="link dd_item" href="{{ path('school_view', {'slug': school.slug, 'type': 'post'}) }}">
+				<a class="dd_item" href="{{ path('school_view', {'slug': school.slug, 'type': 'post'}) }}">
 					<span class="icon"><i class="far fa-edit"></i></span><span class="label">Articles</span>
 				</a>
-				<a class="link dd_item" href="{{ path('school_view', {'slug': school.slug, 'type': 'evaluation'}) }}">
+				<a class="dd_item" href="{{ path('school_view', {'slug': school.slug, 'type': 'evaluation'}) }}">
 					<span class="icon"><i class="fas fa-star-half-alt"></i></span><span class="label">Evaluations</span>
 				</a>
-				<a class="link dd_item" href="{{ path('school_view', {'slug': school.slug, 'type': 'document'}) }}">
+				<a class="dd_item" href="{{ path('school_view', {'slug': school.slug, 'type': 'document'}) }}">
 					<span class="icon"><i class="fas fa-arrow-alt-circle-down"></i></span><span class="label">Documents</span>
 				</a>
 			</span>

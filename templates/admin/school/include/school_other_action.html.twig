@@ -1,29 +1,21 @@
 <span class="ddt dd_tdfault">
-	<a class="link dd_item" target="_blank" href="{{ path('school_viewbyid', {'id': school.id}) }}">
+	<a class="dd_item" target="_blank" href="{{ path('school_viewbyid', {'id': school.id}) }}">
 		<span class="icon"><img src="{{ asset('image/view_icon.png') }}" /></span><span class="label">Aperçu</span>
 	</a>
 	<span class="sp"></span>
-	<a class="link dd_item" href="{{ path('admin_school_categories', {'school_id': school.id}) }}">
+	<a class="dd_item" href="{{ path('admin_school_categories', {'school_id': school.id}) }}">
 		<span class="icon"><img src="{{ asset('image/list_icon.png') }}" /></span><span class="label">{{ 'Categories' | trans }}</span>
 	</a>
-	<a class="link dd_item" href="{{ path('admin_school_field', {'school_id': school.id}) }}">
+	<a class="dd_item" href="{{ path('admin_school_field', {'school_id': school.id}) }}">
 		<span class="icon"><img src="{{ asset('image/list_icon.png') }}" /></span><span class="label"> <span class="opt_name_{{ school.id }} p">{{ school.option.pluralName | capitalize }}</span></span>
 	</a>
-	<a class="link dd_item" href="{{ path('admin_school_contact', {'school_id': school.id}) }}">
+	<a class="dd_item" href="{{ path('admin_school_contact', {'school_id': school.id}) }}">
 		<span class="icon"><img src="{{ asset('image/list_icon.png') }}" /></span><span class="label">Contacts</span>
 	</a>
-	<a class="link dd_item" href="{{ path('admin_school_document', {'school_id': school.id}) }}">
+	<a class="dd_item" href="{{ path('admin_school_document', {'school_id': school.id}) }}">
 		<span class="icon"><img src="{{ asset('image/list_icon.png') }}" /></span><span class="label">Documents</span>
 	</a>
-	<a class="link dd_item" href="{{ path('admin_school_evaluation', {'school_id': school.id}) }}">
+	<a class="dd_item" href="{{ path('admin_school_evaluation', {'school_id': school.id}) }}">
 		<span class="icon"><img src="{{ asset('image/list_icon.png') }}" /></span><span class="label">Evaluations</span>
 	</a>
-	{#
-	<a class="link dd_item" href="{{ path('com_admin_school_categories', {'school_id': school.id}) }}">
-		<span class="icon"><img src="{{ asset('assets/image/list_icon.png') }}" /></span><span class="label">{{ 'Categories' | trans }}</span>
-	</a>
-	<a class="link dd_item" href="{{ path('com_admin_school_subscriber', {'school_id': school.id}) }}">
-		<span class="icon"><img src="{{ asset('assets/image/ur_icon.png') }}" /></span><span class="label">{{ 'Subscribers' | trans }}</span>
-	</a>
-	#}
 </span>

@@ -680,16 +680,21 @@ class UserController extends AbstractController {
                         'username' => $user->getUsername(),
                         'type' => 'setting',
                     ));
+                    $urlContribution = $this->get('router')->generate('user_profile', array(
+                        'username' => $user->getUsername(),
+                        'type' => 'contribution',
+                    ));
 
                     $response->setContent(json_encode(array(
-                        'state' => 1,
-                        'name' => $user->getName(),
-                        'username' => $user->getUsername(),
-                        'location' => $location,
-                        'email' => $user->getEmail(),
-                        'title' => $title,
-                        'url' => $url,
-                        'urlSetting' => $urlSetting,
+                        'state'             => 1,
+                        'name'              => $user->getName(),
+                        'username'          => $user->getUsername(),
+                        'location'          => $location,
+                        'email'             => $user->getEmail(),
+                        'title'             => $title,
+                        'url'               => $url,
+                        'urlSetting'        => $urlSetting,
+                        'urlContribution'   => $urlContribution,
                     )));
                 }else{
                     $response->setContent(json_encode(array(
