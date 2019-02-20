@@ -156,19 +156,19 @@
                                 </div>
 
                                 <div class="link_wrap">
-                                    <a class="link" id="ur_setting_link" href="{{ path('user_profile', {'username': app.user.username, 'type': 'contribution'}) }}">
+                                    <a class="link" id="ur_contribution_link" href="{{ path('user_profile', {'username': app.user.username, 'type': 'contribution'}) }}">
                                         <span>Contributions</span>
                                     </a>
                                 </div>
                                 <div class="link_wrap">
                                     <div class="pd_10">
                                         {% if is_granted('ROLE_ADMIN') %}
-                                            <a class="link standar_button pd_5 btn_admin" target="_blank" href="{{ path('admin_home') }}">
+                                            <a class="standar_button pd_5 btn_admin" target="_blank" href="{{ path('admin_home') }}">
                                                 <span><i class="fas fa-tachometer-alt"></i> Tableau de bord</span>
                                             </a>
                                         {% endif %}
 
-                                        <a class="link standar_button pd_5 mg_r0 btn_loggout" href="{{ path('user_logout') }}">
+                                        <a class="standar_button pd_5 mg_r0 btn_loggout" href="{{ path('user_logout') }}">
                                             <span><i class="fas fa-sign-out-alt"></i> Déconnexion</span>
                                         </a>
                                         <span class="both"></span>

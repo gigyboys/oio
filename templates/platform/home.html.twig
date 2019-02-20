@@ -31,11 +31,11 @@
                 <div class="home_item_ct">
                     <div class="mg_10">
                         <div class="illustration">
-                            <a class="link" href="{{ path('school_home') }}"><img src="{{ asset('image/logo_sl.png')  }}" alt="SL"/></a>
+                            <a href="{{ path('school_home') }}"><img src="{{ asset('image/logo_sl.png')  }}" alt="SL"/></a>
                         </div>
                         <div class="label">
                             <div>
-                                <a class="link" href="{{ path('school_home') }}">{{ allSchools | length }} établissements</a> repartis sur <a href="{{ path('school_categories') }}">{{ allCategories | length }} catégories</a>
+                                <a href="{{ path('school_home') }}">{{ allSchools | length }} établissements</a> repartis sur <a href="{{ path('school_categories') }}">{{ allCategories | length }} catégories</a>
                             </div>
                             <div>
                                 {{ evaluatedSchools | length }} établissements évalués - {{ allEvaluations | length }} évaluations
@@ -48,7 +48,7 @@
                 <div class="home_item_ct">
                     <div class="mg_10">
                         <div class="illustration">
-                            <a class="link" href="{{ path('blog') }}"><img src="{{ asset('image/icon_gl.png')  }}" /></a>
+                            <a href="{{ path('blog') }}"><img src="{{ asset('image/icon_gl.png')  }}" /></a>
                         </div>
                         <div class="label">
                             <div>

@@ -19,7 +19,7 @@
 				<span class="bcdd"></span>
 			</span>
 			<span class="ddt dd_tdfault">
-				<a class="link dd_item" href="{{ path('admin_school_category_add') }}">
+				<a class="dd_item" href="{{ path('admin_school_category_add') }}">
 					<span class="icon"><img src="{{ asset('image/add_icon.png') }}" /></span><span class="label">Nouvelle catégorie</span>
 				</a>
 			</span>
@@ -33,10 +33,10 @@
 					Autres actions
 				</span>
 				<span class="ddt dd_tdfault">
-					<a class="link dd_item" target="_blank" href="{{ path('school_category_viewbyid', {'id': category.id}) }}">
+					<a class="dd_item" target="_blank" href="{{ path('school_category_viewbyid', {'id': category.id}) }}">
 						<span class="icon"><img src="{{ asset('image/view_icon.png') }}" /></span><span class="label">Aperçu</span>
 					</a>
-					<a class="link dd_item" href="{{ path('admin_school_category_edit_schools', {'category_id': category.id}) }}">
+					<a class="dd_item" href="{{ path('admin_school_category_edit_schools', {'category_id': category.id}) }}">
 						<span class="icon"><img src="{{ asset('image/add_icon.png') }}" /></span><span class="label">Etablissements</span>
 					</a>
 				</span>
