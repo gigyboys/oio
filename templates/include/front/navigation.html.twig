@@ -23,19 +23,19 @@
                             </span>
                             <div class="ddt" data-display="block">
                                 <div class="link_wrap">
-                                    <a class="link" href="{{ path('school_home') }}" title="Tous établissements">
+                                    <a href="{{ path('school_home') }}" title="Tous établissements">
                                         <span>Tout Etablissements</span>
                                     </a>
-                                    <a class="link" href="{{ path('school_home', {'typeslug':'private'}) }}" title="Etablissements privés">
+                                    <a href="{{ path('school_home', {'typeslug':'private'}) }}" title="Etablissements privés">
                                         <span>Etablissements privés</span>
                                     </a>
-                                    <a class="link" href="{{ path('school_home', {'typeslug':'public'}) }}" title="Etablissements publics">
+                                    <a href="{{ path('school_home', {'typeslug':'public'}) }}" title="Etablissements publics">
                                         <span>Etablissements publics</span>
                                     </a>
-                                    <a class="link" href="{{ path('school_of_the_day') }}" title="Etablissement du jour">
+                                    <a href="{{ path('school_of_the_day') }}" title="Etablissement du jour">
                                         <span>Etablissement du jour</span>
                                     </a>
-                                    <a class="link" href="{{ path('school_categories') }}" title="Les catégories d'établissements">
+                                    <a href="{{ path('school_categories') }}" title="Les catégories d'établissements">
                                         <span>Catégories</span>
                                     </a>
                                 </div>
@@ -53,10 +53,10 @@
                             </span>
                             <div class="ddt toggler_target" data-display="block">
                                 <div class="link_wrap">
-                                    <a class="link" href="{{ path('event') }}">
+                                    <a href="{{ path('event') }}">
                                         <span>Evenements</span>
                                     </a>
-                                    <a class="link" href="{{ path('blog') }}">
+                                    <a href="{{ path('blog') }}">
                                         <span>Blog</span>
                                     </a>
                                 </div>
@@ -71,19 +71,19 @@
                         </a>
                         <div class="ddt menu_sl" data-display="block">
                             <div class="link_wrap">
-                                <a class="link" href="{{ path('school_home') }}" title="Tous établissements">
+                                <a href="{{ path('school_home') }}" title="Tous établissements">
                                     <span>Tout Etablissements</span>
                                 </a>
-                                <a class="link" href="{{ path('school_home', {'typeslug':'private'}) }}" title="Etablissements privés">
+                                <a href="{{ path('school_home', {'typeslug':'private'}) }}" title="Etablissements privés">
                                     <span>Etablissements privés</span>
                                 </a>
-                                <a class="link" href="{{ path('school_home', {'typeslug':'public'}) }}" title="Etablissements publics">
+                                <a href="{{ path('school_home', {'typeslug':'public'}) }}" title="Etablissements publics">
                                     <span>Etablissements publics</span>
                                 </a>
-                                <a class="link" href="{{ path('school_of_the_day') }}" title="Etablissement du jour">
+                                <a href="{{ path('school_of_the_day') }}" title="Etablissement du jour">
                                     <span>Etablissement du jour</span>
                                 </a>
-                                <a class="link" href="{{ path('school_categories') }}" title="Les catégories d'établissements">
+                                <a href="{{ path('school_categories') }}" title="Les catégories d'établissements">
                                     <span>Catégories</span>
                                 </a>
                             </div>
@@ -141,7 +141,7 @@
                                         <img id="avatar_banner_target" class="c_p" src="{{ avatar | imagine_filter('50x50') }}" alt="{{ app.user.username }}" data-target="{{ path('user_modify_avatar_popup')}}" />
                                     </div>
                                     <div class="info_wrap">
-                                        <a class="link" id="ur_profil_link" href="{{ path('user_profile', {'username': app.user.username}) }}">
+                                        <a id="ur_profil_link" href="{{ path('user_profile', {'username': app.user.username}) }}">
                                             <strong id="nav_target_ur_name">{{ app.user.name }}</strong><br />
                                             <i class="fas fa-user-circle"></i> <span id="nav_target_ur_username">{{ app.user.username }}</span><br />
                                             <span id="nav_target_ur_email">{{ app.user.email }}</span>
@@ -150,13 +150,13 @@
                                     <div class="both"></div>
                                 </div>
                                 <div class="link_wrap">
-                                    <a class="link" id="ur_setting_link" href="{{ path('user_profile', {'username': app.user.username, 'type': 'setting'}) }}">
+                                    <a id="ur_setting_link" href="{{ path('user_profile', {'username': app.user.username, 'type': 'setting'}) }}">
                                         <span>Paramètres</span>
                                     </a>
                                 </div>
 
                                 <div class="link_wrap">
-                                    <a class="link" id="ur_contribution_link" href="{{ path('user_profile', {'username': app.user.username, 'type': 'contribution'}) }}">
+                                    <a id="ur_contribution_link" href="{{ path('user_profile', {'username': app.user.username, 'type': 'contribution'}) }}">
                                         <span>Contributions</span>
                                     </a>
                                 </div>
@@ -179,12 +179,12 @@
                             <div class="ddt not_connected" data-display="block">
                                 <ul>
                                     <li class="log_item">
-                                        <a class="link" href="{{ path("user_login") }}">
+                                        <a href="{{ path("user_login") }}">
                                             <span> Se connecter </span>
                                         </a>
                                     </li>
                                     <li class="log_item">
-                                        <a class="link" href="{{ path('user_register') }}">
+                                        <a href="{{ path('user_register') }}">
                                             <span> S'inscrire </span>
                                         </a>
                                     </li>
