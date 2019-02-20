@@ -1,15 +1,13 @@
 <div class="cat_item search_item" data-text="{{ category.name }}">
 	<div class="cat_item_content">
 		<div>
-			<a href="{{ path('school_category_view', {'slug': category.slug}) }}" class="libelle">
-				{% set schools = getAllSchoolByCategory(category, true) %}
-				{% set schoollabel = 'établissements' %}
-				{% set schoolslength = schools | length %}
-				{% if schoolslength < 2 %}
-					{% set schoollabel = 'établissement' %}
-				{% endif %}
-				{{ category.name | capitalize }} ({{ schoolslength }} {{ schoollabel }})
-			</a>
+			{% set schools = getAllSchoolByCategory(category, true) %}
+			{% set schoollabel = 'établissements' %}
+			{% set schoolslength = schools | length %}
+			{% if schoolslength < 2 %}
+				{% set schoollabel = 'établissement' %}
+			{% endif %}
+			<a href="{{ path('school_category_view', {'slug': category.slug}) }}" class="libelle">{{ category.name | capitalize }} ({{ schoolslength }} {{ schoollabel }})</a>
 		</div>
 		<div class="mg_5">
 			<div class="sp"></div>
