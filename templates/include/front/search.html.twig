@@ -1,33 +1,56 @@
 <div id="search" class="cr">
 	<div id="search_content"  class="ct">
 		<div id="search_hidden"></div>
-		<div id="search_header"></div>
+		<div id="search_header">
+			<div class="et_pn"></div>
+			<div class="et_detail"></div>
+		</div>
 		<div id="search_bloc">
 			<form name="form_search" method="post" id="form_search">
 				<div id="search_entity">
 					
 					{% set selectedSchool = "selected" %}
+					{% set selectedEvent = "" %}
 					{% set selectedBlog = "" %}
+					{% set selectedOS = "" %}
 					
 					{% set displaySchool = "d_b" %}
+					{% set displayEvent = "d_n" %}
 					{% set displayBlog = "d_n" %}
 					
 					{% set querySchool = "" %}
+					{% set queryEvent = "" %}
 					{% set queryBlog = "" %}
 					
 					{% if entityView is defined %}
 						{% if entityView == "school" %}
 							{% set selectedSchool = "selected" %}
+							{% set selectedEvent = "" %}
 							{% set selectedBlog = "" %}
 							{% set displaySchool = "d_b" %}
+							{% set displayEvent = "d_n" %}
 							{% set displayBlog = "d_n" %}
 							{% if q is defined %}
 								{% set querySchool = q %}
 							{% endif %}
+						{% elseif entityView == "event" %} 
+							{% set selectedSchool = "" %}
+							{% set selectedBlog = "" %}
+							{% set selectedEvent = "selected" %}
+							{% set selectedOS = "selected" %}
+							{% set displaySchool = "d_n" %}
+							{% set displayBlog = "d_n" %}
+							{% set displayEvent = "d_b" %}
+							{% if q is defined %}
+								{% set queryEvent = q %}
+							{% endif %}
 						{% elseif entityView == "blog" %} 
 							{% set selectedSchool = "" %}
+							{% set selectedEvent = "" %}
 							{% set selectedBlog = "selected" %}
+							{% set selectedOS = "selected" %}
 							{% set displaySchool = "d_n" %}
+							{% set displayEvent = "d_n" %}
 							{% set displayBlog = "d_b" %}
 							{% if q is defined %}
 								{% set queryBlog = q %}
@@ -35,18 +58,45 @@
 						{% endif %}
 					{% endif %}
 					
-					<div class="search_entity_item {{ selectedSchool }}" data-entity="sl">
+					<div class="search_entity_item visible {{ selectedSchool }}" data-entity="sl" data-mixed="0">
 						<i class="fas fa-university"></i> Etablissement
 					</div>
-					<div class="search_entity_item {{ selectedBlog }}" data-entity="bg">
-						<i class="far fa-edit"></i> Blog
+					{% if entityView is defined %}
+						{% if entityView == "school" %} 
+							<div class="search_entity_item visible mixed {{ selectedEvent }}" data-entity="et" data-mixed="1">
+								<i class="fas fa-calendar-day"></i> Evènement
+							</div>
+						{% elseif entityView == "event" %} 
+							<div class="search_entity_item visible mixed {{ selectedEvent }}" data-entity="et" data-mixed="1">
+								<i class="fas fa-calendar-day"></i> Evènement
+							</div>
+						{% elseif entityView == "blog" %} 
+							<div class="search_entity_item visible mixed {{ selectedBlog }}" data-entity="bg" data-mixed="1">
+								<i class="fas fa-edit"></i> Blog
+							</div>
+						{% endif %}
+					{% else %}
+						<div class="search_entity_item visible mixed {{ selectedEvent }}" data-entity="et" data-mixed="1">
+							<i class="fas fa-calendar-day"></i> Evènement
+						</div>
+					{% endif %}
+					<div class="dd left">
+						<div class="other_search dds c_p {{ selectedOS }}"><i class="fas fa-angle-down"></i></div>
+						<div class="ddt dd_tdfault">
+							<div class="dd_item search_entity_item {{ selectedEvent }}" data-entity="et" data-mixed="1">
+								<i class="fas fa-calendar-day"></i> Evènement
+							</div>
+							<div class="dd_item search_entity_item {{ selectedBlog }}" data-entity="bg" data-mixed="1">
+								<i class="far fa-edit"></i> Blog
+							</div>
+						</div>
 					</div>
 					<div class="both"></div>
 				</div>
 				<div id="search_critere">
 					<div class="search_entity_content {{ displaySchool }}" id="search_critere_sl">
 						<div class="sl_bloc_query">
-							<input type="text"  autocomplete="off" id="q_sl" data-target="{{ path('platform_search_single_school') }}" placeholder="" value="{{ querySchool }}" />
+							<input class="query" type="text" autocomplete="off" id="q_sl" data-target="{{ path('platform_search_single_school') }}" placeholder="" value="{{ querySchool }}" />
 						</div>
 						<div class="sl_bloc_cat dd">
 							<div class="dds">
@@ -86,16 +136,73 @@
 								</div>
 							</div>
 						</div>
-						<div class="both"> 
+						<div class="both"></div>
+					</div>
+					<div class="search_entity_content {{ displayEvent }}" id="search_critere_et">
+						<div class="et_bloc_query">
+							<input class="query" type="text" autocomplete="off" id="q_et" placeholder="" value="{{ queryEvent }}" />
 						</div>
+						<div class="et_bloc_tag dd">
+							<div class="dds">
+								{% if eventTag is not defined or eventTag is null %}
+									<span id="search_et_tag_name">Touts Tags</span>
+									<input type="hidden" name="event_tag" id="tag_et_input_id" value="0" data-slug="all"  />
+								{% else %}
+									<span id="search_et_tag_name">{{ eventTag.name | capitalize }}</span>
+									<input type="hidden" name="event_tag" id="tag_et_input_id" value="{{ eventTag.id }}" data-slug="{{ eventTag.slug }}"  />
+								{% endif %}
+							</div>
+							<div class="ddt search_et_tag_list" data-display="block">
+								<div class="mg_5">
+									<span data-event-tag-id="0" title="Touts tags" data-name="Toutes catégories" data-slug="all" class="search_tag_et_item"><span>Touts tag</span></span>{#
+									#}{% set eventTags = getTagsWithPublishedEvent(0) %}{#
+									#}{% for eventTag in eventTags %}{#
+										#}<span data-event-tag-id="{{ eventTag.id }}" data-slug="{{ eventTag.slug }}" title="{{ eventTag.name | capitalize }}" data-name="{{ eventTag.name | capitalize }}" class="search_tag_et_item"><span>{{ eventTag.name | capitalize }}</span></span>{#
+									#}{% endfor %}{#
+								#}</div>
+							</div>
+						</div>
+						<div class="et_bloc_period dd">
+							<div class="dds">
+								{% if periodSlug is not defined or periodSlug is null %}
+									<span id="search_et_period_name">Toutes périodes</span>
+									<input type="hidden" name="period" id="period_input_id" value="all" data-slug="all"  />
+								{% else %}
+									{% set periodName = 'Toutes périodes' %}
+									{% set slug = 'all' %}
+									{% if periodSlug == "upcoming" %}
+										{% set periodName = "En cours/A venir" %}
+										{% set slug = 'upcoming' %}
+									{% endif %}
+									{% if periodSlug == "passed" %}
+										{% set periodName = "Passés" %}
+										{% set slug = 'passed' %}
+									{% endif %}
+
+									<span id="search_et_period_name">{{ periodName }}</span>
+									<input type="hidden" name="period" id="period_input_id" value="{{ slug }}" data-slug="{{ slug }}" data-name="{{ periodName | capitalize }}" />
+								{% endif %}
+							</div>
+							<div class="ddt search_et_period_list d_n" data-display="block">
+								<div class="mg_5">
+									<span data-type-id="0" title="Toutes périodes" data-slug="all" class="search_et_period_item" data-name="Toutes périodes">Toutes périodes</span>
+									<span data-type-id="1" title="En cours/A venir" data-slug="upcoming" class="search_et_period_item" data-name="En cours/A venir">En cours/A venir</span>
+									<span data-type-id="2" title="Passés" data-slug="passed" class="search_et_period_item" data-name="Passés">Passés</span>
+								</div>
+							</div>
+						</div>
+						<div class="both"></div>
 					</div>
 					<div class="search_entity_content {{ displayBlog }}" id="search_critere_bg">
-						<input type="text" id="q_bg" placeholder=""  value="{{ queryBlog }}" />
+						<input class="query" type="text" id="q_bg" placeholder="" value="{{ queryBlog }}" />
 					</div>
 				</div>
 				<div id="search_submit">
 					<div id="search_single_result_sl" class="search_single_result {{ displaySchool }}">
 						Tapez le sigle ou l'appelation de l'établissement
+					</div>
+					<div id="search_single_result_et" class="search_single_result {{ displayEvent }}">
+						Faites votre recherche sur notre liste d'évènements
 					</div>
 					<div id="search_single_result_bg" class="search_single_result {{ displayBlog }}">
 						Faites votre recherche sur notre liste d'articles
@@ -110,6 +217,7 @@
 				</div>
 			</form>
 		</div>
+		<div id="pub"></div>
 		<div id="search_footer"></div>
 	</div>
 </div>

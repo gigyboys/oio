@@ -233,4 +233,30 @@ class EventRepository extends ServiceEntityRepository
         return $event;
     }
 
+    //search
+    public function getEventSearch($critere, $published = null, $field = 'datebegin', $order = 'DESC')
+    {
+        $qb = $this->createQueryBuilder('event');
+
+        $qb
+            ->where('event.title LIKE :critere')
+            ->setParameter('critere', '%'.$critere.'%');
+
+        if($published != null){
+            $qb
+                ->andWhere('event.published = :published')
+                ->setParameter('published', $published)
+                ->andWhere('event.valid = :valid')
+                ->setParameter('valid', true)
+                ->andWhere('event.deleted = :deleted')
+                ->setParameter('deleted', false);
+        }
+
+        $qb
+            ->orderBy('event.'.$field, $order)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
 }

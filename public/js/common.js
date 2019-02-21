@@ -188,6 +188,17 @@ $(function() {
                             $(".pagination").html(data.pagination);
                             history.pushState('', 'Articles - page '+data.page, data.currentUrl);
                             break;
+                        case 'event_search':
+                            var htmlappend = '';
+                            for(var i = 0; i <data.events.length; i++ ){
+                                var event = data.events[i];
+                                htmlappend += event.event_view;
+                            }
+                            htmlappend += '<div class="both"></div>';
+                            $(".p_list").html(htmlappend);
+                            $(".pagination").html(data.pagination);
+                            history.pushState('', 'Evènements - page '+data.page, data.currentUrl);
+                            break;
                     }
 					var p_stop = p_cr.find('.p_stop').first();
 					$('html, body').stop().animate({scrollTop: - 50 + p_stop.offset().top}, 500);

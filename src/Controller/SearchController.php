@@ -16,12 +16,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\School;
 use App\Repository\SchoolRepository;
+use App\Repository\EventRepository;
+use App\Repository\TagRepository;
+use App\Repository\TagEventRepository;
 
 class SearchController extends AbstractController {
 
     public function __construct(
         ParameterRepository $parameterRepository,
         SchoolRepository $schoolRepository,
+        EventRepository $eventRepository,
+        TagRepository $tagRepository,
+        TagEventRepository $tagEventRepository,
         CategoryRepository $categoryRepository,
         CategorySchoolRepository $categorySchoolRepository,
         TypeRepository $typeRepository,
@@ -32,6 +38,9 @@ class SearchController extends AbstractController {
     {
         $this->parameterRepository = $parameterRepository;
         $this->schoolRepository = $schoolRepository;
+        $this->eventRepository = $eventRepository;
+        $this->tagRepository = $tagRepository;
+        $this->tagEventRepository = $tagEventRepository;
         $this->categoryRepository = $categoryRepository;
         $this->categorySchoolRepository = $categorySchoolRepository;
         $this->typeRepository = $typeRepository;
@@ -133,20 +142,20 @@ class SearchController extends AbstractController {
                     ));
 
                     $currentUrl = $this->get('router')->generate('platform_search', array(
-                        'page' => $page,
-                        'entity' => $entity,
-                        'q' => $q,
-                        'category' => $catSlug,
-                        'type' => $typeSlug
+                        'page'      => $page,
+                        'entity'    => $entity,
+                        'q'         => $q,
+                        'category'  => $catSlug,
+                        'type'      => $typeSlug
                     ));
 
                     $response->setContent(json_encode(array(
-                        'state' => 1,
-                        'schools' => $listSchools,
-                        'currentpage' => $page,
-                        'pagination' => $pagination,
-                        'currentUrl' => $currentUrl,
-                        'page' => $page,
+                        'state'         => 1,
+                        'schools'       => $listSchools,
+                        'currentpage'   => $page,
+                        'pagination'    => $pagination,
+                        'currentUrl'    => $currentUrl,
+                        'page'          => $page,
                     )));
                 }else{
                     $response = $this->render('search/search.html.twig', array(
@@ -158,6 +167,128 @@ class SearchController extends AbstractController {
                         'typeEntity'    => $typeEntity,
                         'resultList' 	=> $resultList,
                         'allSchools' 	=> $schoolsArray,
+                        'limit' 		=> $limit,
+                        'currentpage'   => $page,
+                        'entityView'	=> $entityView,
+                    ));
+                }
+                return $response;
+                break ;
+            case "event":
+                $published = true;
+                $now = new \Datetime();
+                $events = $this->eventRepository->getEventSearch($q, $published);
+
+                $eventsArrayTmp = array();
+
+                $tagSlug = $request->query->get('tag');
+                $tag = null;
+                if($tagSlug != "all"){
+                    $tag =  $this->tagRepository->findOneBy(array(
+                        'slug' => $tagSlug
+                    ));
+                    foreach ($events as $event) {
+                        $tagEvent =  $this->tagEventRepository->findOneBy(array(
+                            'event' => $event,
+                            'tag' => $tag
+                        ));
+                        if($tagEvent){
+                            array_push($eventsArrayTmp, $event);
+                        }
+                    }
+                    $eventsArray = $eventsArrayTmp;
+                }else{
+                    $eventsArray = $events;
+                }
+
+                $eventsArrayTmp = array();
+                $periodSlug = $request->query->get('period');
+                if($periodSlug == "upcoming"){
+                    foreach ($eventsArray as $event) {
+                        if($event->getDateend() >= $now){
+                            array_push($eventsArrayTmp, $event);
+                        }
+                    }
+                    $eventsArray = $eventsArrayTmp;
+                }
+                if($periodSlug == "passed"){
+                    foreach ($eventsArray as $event) {
+                        if($event->getDateend() < $now){
+                            array_push($eventsArrayTmp, $event);
+                        }
+                    }
+                    $eventsArray = $eventsArrayTmp;
+                }
+
+                $parameter = $this->parameterRepository->findOneBy(array(
+                    'parameter' => 'events_by_page',
+                ));
+                $limit = $parameter->getValue();
+                $offset = ($page-1) * $limit;
+
+                if(count($eventsArray) < $limit+$offset){
+                    $end = count($eventsArray);
+                }else{
+                    $end = $limit+$offset;
+                }
+                $resultList = array();
+                for ($i=$offset; $i<$end; $i++) {
+                    array_push($resultList, $eventsArray[$i]);
+                }
+
+                $entityView = "event";
+                $response = new Response();
+                if ($request->isXmlHttpRequest()){
+                    //listEvent
+                    $listEvents = array();
+                    foreach($resultList as $event){
+                        $event_view = $this->renderView('event/include/event_item.html.twig', array(
+                            'event' => $event,
+                        ));
+                        array_push($listEvents, array(
+                            "event_id" 	=> $event->getId(),
+                            "event_view" 	=> $event_view,
+                        ));
+                    }
+
+                    //pagination
+                    $pagination = $this->renderView('event/include/pagination_list_events_search.html.twig', array(
+                        'entity' 		=> $entity,
+                        'q' 			=> $q,
+                        'tagSlug'		=> $tagSlug,
+                        'periodSlug'	=> $periodSlug,
+                        'allEvents'     => $eventsArray,
+                        'events'        => $resultList,
+                        'limit'         => $limit,
+                        'currentpage'   => $page,
+                    ));
+
+                    $currentUrl = $this->get('router')->generate('platform_search', array(
+                        'page'      => $page,
+                        'entity'    => $entity,
+                        'q'         => $q,
+                        'tag'       => $tagSlug,
+                        'period'    => $periodSlug
+                    ));
+
+                    $response->setContent(json_encode(array(
+                        'state'         => 1,
+                        'events'        => $listEvents,
+                        'currentpage'   => $page,
+                        'pagination'    => $pagination,
+                        'currentUrl'    => $currentUrl,
+                        'page'          => $page,
+                    )));
+                }else{
+                    $response = $this->render('search/search.html.twig', array(
+                        'entity' 		=> $entity,
+                        'q' 			=> $q,
+                        'tagSlug'		=> $tagSlug,
+                        'tag'		    => $tag,
+                        'eventTag'		=> $tag,
+                        'periodSlug'	=> $periodSlug,
+                        'resultList' 	=> $resultList,
+                        'allEvents' 	=> $eventsArray,
                         'limit' 		=> $limit,
                         'currentpage'   => $page,
                         'entityView'	=> $entityView,
@@ -237,21 +368,6 @@ class SearchController extends AbstractController {
                 }
                 return $response;
                 break ;
-            /*
-        case "advert":
-            $adverts = $advertRepository->getAdvertSearch($q);
-            $resultList =  $adverts;
-            $entityView = "advert";
-
-            return $this->render('COMPlatformBundle:search:search.html.twig', array(
-                'entity' 		=> $entity,
-                'q' 			=> $q,
-                'resultList' 	=> $resultList,
-                'entityView'	=> $entityView,
-                'locale' => $locale,
-            ));
-            break ;
-            */
         }
     }
 
