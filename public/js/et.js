@@ -212,11 +212,11 @@ function buildEventLinks(){
 		event = events[i];
 		links += "<span class='et_link' id='et_link_"+event.id+"' data-index='"+i+"'></span>";
 	}
-	$("#search_footer").html("<div class='et_link_wrap'>"+links+"</div>");
+	$("#search_header .et_pn").html("<div class='et_link_wrap'>"+links+"</div>");
 }
 
 function showEvent(){
-	$("#search_header *").css("color", "transparent");
+	$("#search_header .et_detail *").css("color", "transparent");
 	var event = events[indexEvent];
 	var jours = 0;
 	var hours = 0;
@@ -273,8 +273,8 @@ function showEvent(){
 	$("#et_link_"+event.id).addClass("selected");
 
 	setTimeout(function(){
-		$("#search_header").html("<div class='event_info'><div><strong><a href='"+event.url+"'>"+event.title+"</a></strong></div><div>"+labelTime+"</div></div>");
-		$("#search_header *").css("color", "#000");
+		$("#search_header .et_detail").html("<div class='event_info'><div><strong><a href='"+event.url+"'>"+event.title+"</a></strong></div><div>"+labelTime+"</div></div>");
+		$("#search_header .et_detail *").css("color", "#000");
 		indexEvent++;
 		if(events.length <= indexEvent){
 			indexEvent = 0;

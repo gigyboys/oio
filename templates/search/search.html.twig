@@ -15,7 +15,9 @@
 				{% endif %}
 				{% if entity == 'post' %}
 					Recherche sur notre liste d'<span style="font-weight:bold">articles</span>
-					{#Critère de recherche <span style="font-weight:bold">{{ q }}</span>.#}
+				{% endif %}
+				{% if entity == 'event' %}
+					Recherche sur notre liste d'<span style="font-weight:bold">évènements</span>
 				{% endif %}
 			</div>
 		</div>
@@ -28,7 +30,7 @@
 					<div id="sl_list_search" class="sll p_cr" data-type="school">
 						<div></div>
 						{% if resultList | length > 0 %}
-							<div class="p_load" id="sll_load_list" style="display:none;">chargement ...</div>
+							<div class="p_load d_n">chargement ...</div>
 							<div class="pagination p_stop">
                                 {{ include("school/include/pagination_list_school_search.html.twig") }}
 							</div>
@@ -82,7 +84,7 @@
 				<div>
 					<div id="post_list_search" class="p_cr" data-type="post_search">
 						{% if resultList | length > 0 %}
-							<div class="p_load" id="sll_load_list" style="display:none;">chargement ...</div>
+							<div class="p_load d_n">chargement ...</div>
 							<div class="pagination p_stop">
 								{{ include("blog/include/pagination_list_post_search.html.twig") }}
 							</div>
@@ -104,32 +106,33 @@
 				</div>
 			</div>
 		</div>
-	{% elseif entity == 'advert' %}
-		{#
-		<div class="cr">
+	{% elseif entity == 'event' %}
+		<div class="cr mg_v10">
 			<div class="ct">
-				<div class="mg_h10">
-					{% for advert in resultList %}
-						<div style="border: 1px solid #eee; margin:10px 0;padding:5px">
-							<div>
-								<span><a style="font-weight:bold;color:#666" href="{{ path('com_advert_view', {'slug': advert.slug}) }}">{{ advert.defaultTitle }}</a></span>
+				<div>
+					<div id="event_list_search" class="p_cr" data-type="event_search">
+						{% if resultList | length > 0 %}
+							<div class="p_load d_n">chargement ...</div>
+							<div class="pagination p_stop">
+								{{ include("event/include/pagination_list_events_search.html.twig") }}
 							</div>
-							<div>
-								{% set advertTranslate = getAdvertTranslate(advert, locale) %}
-								{% set advertTranslate = getAdvertTranslate(advert, locale) %}
-								{{ substrSpace(advertTranslate.content | raw| striptags | convert_encoding('UTF-8', 'HTML-ENTITIES'), 500) }}
+							<div id="et_list" class="p_list">
+								{% for event in resultList %}
+									{{ include("event/include/event_item.html.twig") }}
+								{% endfor %}
+								<div class="both"></div>
 							</div>
-							<div>
-								{# twig extension
-								{% set userInfo = getLinkUserInfo(advert.user, advert.user.name) %}
-								By {{ userInfo | raw }}
-								  on {{ advert.date | date('Y-m-d H:i:s') }}
+							<div class="pagination">
+								{{ include("event/include/pagination_list_events_search.html.twig") }}
 							</div>
-						</div>
-					{% endfor %}
+						{% else %}
+							<div class="mg_10 ta_c">
+								<strong>Aucun Evènement trouvé</strong>
+							</div>
+						{% endif %}
+					</div>
 				</div>
 			</div>
 		</div>
-		#}
 	{% endif %}
 {% endblock %}
