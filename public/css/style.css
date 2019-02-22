@@ -444,13 +444,14 @@ a:hover{
 .t_header_content{
 	background: #fff;
     height: 32px;
-    width: auto;
+	width: auto;
+	text-align: center;
 }
 .t_header_item{
 	box-sizing: border-box;
 	max-width: 25%;
     cursor: pointer;
-    float: left;
+    display:inline-block;
     height: 32px;
     padding: 0 8px;
 	color:#666;

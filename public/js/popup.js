@@ -78,7 +78,19 @@ $(function() {
 	$('body').on('click','.popup',function(e){
         e.stopPropagation();
     });
-    
+	/*
+	$(window).on("navigate", function (event, data) {
+		event.preventDefault();
+		alert(data);
+		var direction = data.state.direction;
+		if (direction == 'back') {
+			alert("back");
+		}
+		if (direction == 'forward') {
+			alert("forward");
+		}
+	});
+	*/
 });
 
 function centerBloc(popup_content, popup){
