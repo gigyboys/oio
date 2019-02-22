@@ -196,7 +196,7 @@ class Document
 
     protected function getUploadDir()
     {
-        return 'documents';
+        return 'document';
     }
 
     public function getAbsolutePath()
@@ -218,40 +218,6 @@ class Document
         $file = $this->getAbsolutePath();
         if (file_exists($file)) {
             unlink($file);
-        }
-
-        //Suppression des fichiers dans le dossier créé par le bundle liip . see app/config/liip.yml
-        $dossiers = array(
-            "20x20",
-            "22x22",
-            "32x32",
-            "36x36",
-            "40x40",
-            "50x50",
-            "60x60",
-            "80x80",
-            "100x100",
-            "116x116",
-            "140x140",
-            "160x160",
-            "170x170",
-            "187x123",
-            "218x140",
-            "228x152",
-            "248x165",
-            "258x172",
-            "263x175",
-            "300x100",
-            "765x510",
-            "960x240",
-            "960x300",
-            "1200x300"
-        );
-        foreach ($dossiers as $dossier) {
-            $file = __DIR__.'/../../public/media/'.$dossier.'/'.$this->getUploadDir().'/'.$this->path;
-            if (file_exists($file)) {
-                unlink($file);
-            }
         }
     }
 
