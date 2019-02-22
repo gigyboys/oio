@@ -185,12 +185,7 @@ class DocumentController extends AbstractController {
             } catch (FileException $e) {
                 // ... handle exception if something happens during file upload
             }
-            /*
-            return $this->redirectToRoute('admin_school_field_edit', array(
-                'school_id' => $school->getId(),
-                'field_id' => $field->getId(),
-            ));
-            */
+            
             return $this->redirectToRoute('admin_school_document', array(
                 'school_id' => $school->getId(),
             ));
@@ -243,46 +238,6 @@ class DocumentController extends AbstractController {
         ));
     }
 
-/*
-    public function deleteField($school_id, $id, Request $request)
-    {
-        $field = $this->fieldRepository->find($id);
-
-        $response = new Response();
-        if ($field) {
-            $this->em->remove($field);
-            $this->em->flush();
-
-            $school = $this->schoolRepository->find($school_id);
-            $fields = $this->fieldRepository->findBy(array(
-                'school' => $school
-            ));
-            $publishedFields = $this->fieldRepository->findBy(array(
-                'school' => $school,
-                'published' => true,
-            ));
-            $notPublishedFields = $this->fieldRepository->findBy(array(
-                'school' => $school,
-                'published' => false,
-            ));
-
-            $response->setContent(json_encode(array(
-                'state' => 1,
-                'id' => $id,
-                'fields' => $fields,
-                'publishedFields' => $publishedFields,
-                'notPublishedFields' => $notPublishedFields,
-            )));
-        }else{
-            $response->setContent(json_encode(array(
-                'state' => 0,
-            )));
-        }
-        $response->headers->set('Content-Type', 'application/json');
-        return $response;
-    }
-*/
-
     public function doEditDocument($document_id, Request $request)
     {
         $document = $this->documentRepository->find($document_id);
@@ -314,11 +269,12 @@ class DocumentController extends AbstractController {
                 'authorizationName' => $document->getDocumentAuthorization()->getName(),
             )));
         }
-/*
-        return $this->render('formtest.html.twig', array(
-            'form' => $form->createView(),
-        ));
-*/
+        
+        /*
+            return $this->render('formtest.html.twig', array(
+                'form' => $form->createView(),
+            ));
+        */
 
         $response->headers->set('Content-Type', 'application/json');
         return $response;

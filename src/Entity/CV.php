@@ -6,11 +6,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="et_event_illustration")
- * @ORM\Entity(repositoryClass="App\Repository\EventIllustrationRepository")
+ * @ORM\Table(name="ur_cv")
+ * @ORM\Entity(repositoryClass="App\Repository\CVRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class EventIllustration
+class CV
 {
     /**
      * @ORM\Id()
@@ -20,10 +20,10 @@ class EventIllustration
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Event")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $event;
+    private $user;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -46,8 +46,13 @@ class EventIllustration
     private $current;
 
     /**
-     * @Assert\NotBlank(message="Please, upload the product brochure as a PDF file.")
-     * @Assert\File(maxSize="6m", maxSizeMessage = "The file is too large ({{ size }})", mimeTypes = {"image/jpg", "image/jpeg", "image/gif", "image/png"}, mimeTypesMessage = "Please upload a valid Image")
+     * @ORM\Column(type="datetime")
+     */
+    private $date;
+
+    /**
+     * @Assert\NotBlank(message="Please, upload a file.")
+     * @Assert\File(maxSize="100m", maxSizeMessage = "The file is too large ({{ size }})")
      */
     public $file;
 
@@ -66,16 +71,16 @@ class EventIllustration
         return $this->id;
     }
 
-    public function setEvent($event)
+    public function setUser($user)
     {
-        $this->event = $event;
+        $this->user = $user;
 
         return $this;
     }
 
-    public function getEvent()
+    public function getUser()
     {
-        return $this->event;
+        return $this->user;
     }
 
     public function getName(): ?string
@@ -126,6 +131,30 @@ class EventIllustration
         return $this;
     }
 
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function  getNewName(){
+        $originalName = $this->getOriginalName();
+        $position = strripos($originalName,".");
+        $extension = substr($originalName,$position+1,strlen($originalName));
+
+        if(trim($this->getName()) != ""){
+            $newName = $this->getName().".".$extension;
+            return $newName;
+        }else{
+            return $this->getOriginalName();
+        }
+    }
 
     public function getWebPath()
     {
@@ -134,7 +163,7 @@ class EventIllustration
 
     protected function getUploadDir()
     {
-        return 'uploads/images/event/illustration';
+        return 'cv';
     }
 
     public function getAbsolutePath()
@@ -144,7 +173,7 @@ class EventIllustration
 
     protected function getUploadRootDir()
     {
-        return __DIR__.'/../../public/'.$this->getUploadDir();
+        return __DIR__.'/../../uploads/'.$this->getUploadDir();
     }
 
     /**
@@ -152,26 +181,34 @@ class EventIllustration
      */
     public function removeUpload()
     {
-        //deleting main File
+        //Suppression du fichier principal
         $file = $this->getAbsolutePath();
         if (file_exists($file)) {
             unlink($file);
         }
+    }
 
-        //deleting files created by liip
-        $dir = "__DIR__.'/../../public/media/";
-        if (is_dir($dir)) {
-            if ($dh = opendir($dir)) {
-                while (($directory = readdir($dh)) !== false) {
-                    if (is_dir($dir . $directory) && $directory != '.' && $directory != '..' ) {
-                        $file = __DIR__.'/../../public/media/'.$directory.'/'.$this->getUploadDir().'/'.$this->path;
-                        if (file_exists($file)) {
-                            unlink($file);
-                        }
-                    }
-                }
-                closedir($dh);
-            }
+    public function getFilesize(){
+        $size = filesize($this->getAbsolutePath()) ;
+        return $size;
+    }
+
+    public function getFormattedFilesize(){
+        $size = $this->getFilesize() ;
+        $formattedSize = $size." Bytes";
+        if($size >= 1024 && $size < 1024*1024){
+            $sizeTemp = $size / 1024;
+            $sizeTemp = number_format($sizeTemp, 2, '.', '');
+            $formattedSize = $sizeTemp." KB";
+        }elseif($size >= 1024*1024 && $size < 1024*1024*1024){
+            $sizeTemp = $size / 1024 / 1024;
+            $sizeTemp = number_format($sizeTemp, 2, '.', '');
+            $formattedSize = $sizeTemp." MB";
+        }elseif($size >= 1024*1024*1024){
+            $sizeTemp = $size / 1024 / 1024 / 1024;
+            $sizeTemp = number_format($sizeTemp, 2, '.', '');
+            $formattedSize = $sizeTemp." GB";
         }
+        return $formattedSize;
     }
 }
