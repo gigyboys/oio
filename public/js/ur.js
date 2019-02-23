@@ -37,7 +37,7 @@ $(function() {
         $('.ctab_ur_item').removeClass('selected');
 		
 		$("#c"+this_id).addClass('selected');
-        initTabsl();
+        initTabgl();
 		document.title = $(this).attr("data-title");
 		history.pushState('', '', $(this).attr("data-link"));
     });

@@ -388,6 +388,7 @@ header{
 	border-left:1px solid #ccc;
 	border-right:1px solid #ccc;
 	border-bottom:1px solid #ccc;
+	color: rgba(0,0,0,0.7);
 }
 
 .search_entity_item.visible.mixed{
@@ -396,6 +397,7 @@ header{
 
 .search_entity_item.visible.selected{
 	background: #fff;
+	color: rgba(0,0,0,1);
 }
 
 .search_entity_item.visible:hover{

@@ -18,7 +18,7 @@ $(function() {
 		$("#c"+this_id).addClass('active');
 		document.title = $(this).data("title");
 		history.pushState('', '', $(this).attr("href"));
-		initTabsl();
+		initTabgl();
     });
 
 	var row 	= 60; 		//60
@@ -239,11 +239,11 @@ $(function() {
 		$('.t_content_item').removeClass('selected');
 		
 		$("#c_"+this_id).addClass('selected');
-		initTabsl();
+		initTabgl();
     });
-	initTabsl();
+	initTabgl();
 	$(window).resize(function() {
-        initTabsl();
+        initTabgl();
     });
 	
 	if($('#sl_map').length == 1 && typeof coords != 'undefined'){
@@ -442,16 +442,14 @@ function truncateSchoolLabel() {
 	});
 }
 
-function initTabsl(){
+function initTabgl(){
 	$('.t_header').each(function( index ) {
 		var t_header = $(this);
 		var selected = t_header.find('.t_header_item.selected');
 		if(selected.length > 0){
+			var twidth = t_header.find('.t_header_sep_slide').css("width", selected.width());
 			var decalage = selected.offset().left - t_header.find('.t_header_content').offset().left;
-			t_header.find('.t_header_sep_slide').animate({
-				marginLeft: decalage,
-				width: selected.outerWidth(true),
-			}, 0, function() {});
+			t_header.find('.t_header_sep_slide').css("margin-left", decalage);
 		} 
 	});
 }
