@@ -453,21 +453,22 @@ a:hover{
     cursor: pointer;
     display:inline-block;
     height: 32px;
-    padding: 0 8px;
+    padding: 0;
 	color:#666;
 }
+
 .t_header_item .t_header_item_text{
 	max-width: 100%;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+    padding: 0 8px;
+	padding-top:6px;
 }
 .t_header_item.selected{
 	color:#000
 }
-.t_header_item .t_header_item_text{
-	padding-top:6px;
-}
+
 .t_header_sep{
 	background: #eee;
     height: 2px;
