@@ -6,8 +6,10 @@ use App\Entity\CV;
 use App\Entity\UserDocument;
 use App\Entity\JobApplication;
 use App\Entity\JobApplicationAttachment;
+use App\Model\MailMessage;
 use App\Form\CommentType;
 use App\Form\CVType;
+use App\Form\JobApplicationType;
 use App\Form\UserDocumentType;
 use App\Repository\JobRepository;
 use App\Repository\CVRepository;
@@ -460,6 +462,120 @@ class JobController extends AbstractController{
             )));
         }
 
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+
+    public function doApply($slug, Request $request): Response
+    {
+
+        $user = $this->getUser();
+
+        $job = $this->jobRepository->findOneBy(array(
+            'slug' => $slug,
+        ));
+
+        $response = new Response();
+        $response->setContent(json_encode(array(
+            'state' => 0,
+        )));
+
+        $showEntity = false;
+        if($job && !$job->getDeleted() && $job->getPublished() && $job->getValid()){
+            $showEntity = true;
+        }
+        if($job && $user && ( $showEntity || $this->isGranted('ROLE_ADMIN') || $job->getUser() == $user)){
+            $jobApplicationTemp = new JobApplication();
+            $form = $this->createForm(JobApplicationType::class, $jobApplicationTemp);
+            $form->handleRequest($request);
+            if ( $form->isSubmitted() && $form->isValid()) {
+                $jobApplication = $this->jobApplicationRepository->findOneBy(
+                    array(
+                        "job"       => $job,
+                        "user"      => $user,
+                        "status"    => 0,
+                    )
+                );
+
+                if(!$jobApplication){
+                    $jobApplication = new JobApplication();
+                    $jobApplication->setUser($user);
+                    $jobApplication->setJob($job);
+                    $jobApplication->setStatus(0);
+                    $jobApplication->setDate(new \DateTime());
+                }
+
+                $jobApplication->setContent($jobApplicationTemp->getContent());
+                $this->em->persist($jobApplication);
+
+                $cvAttachment = $this->jobApplicationAttachmentRepository->findCV($jobApplication);
+                $cv = null;
+                if($cvAttachment){
+                    if($cvAttachment->getCV() && $cvAttachment->getCV()->getUser()->getId() == $user->getId()){
+                        $cv = $cvAttachment->getCV();
+                    }
+                }else{
+                    $cv = $this->CVRepository->findOneBy(array(
+                        "user"      => $user,
+                        "current"   => true
+                    ));
+
+                    if($cv){
+                        $cvAttachment = new JobApplicationAttachment();
+                        $cvAttachment->setCV($cv);
+                        $cvAttachment->setJobApplication($jobApplication);
+                        $this->em->persist($cvAttachment);
+                    }
+                }
+
+                $attachments = $this->jobApplicationAttachmentRepository->findDocuments($jobApplication);
+
+                //$jobApplication->setStatus(1);
+                //$jobApplication->setDateapplication(new \DateTime());
+                $this->em->flush();
+
+                $mailAttachments = array();
+                $mailAttachments[] = array(
+                    "file" => $cv->getAbsolutePath(),
+                    "name" => $cv->getName(),
+                );
+                foreach ($attachments as $attachment){
+                    $mailAttachments[] = array(
+                        "file" => $attachment->getUserDocument()->getAbsolutePath(),
+                        "name" => $attachment->getUserDocument()->getName(),
+                    );
+                }
+
+                //sending mail
+                $content = "<div>Bonjour ".$job->getUser()->getName().",</div>";
+                $content .= '<div>Quelqu\'un a postulé sur l\'offre <strong>"'.$job->getTitle().'"</strong> que vous avez créé</div>';
+                $content .= '<div>'.nl2br($jobApplication->getContent()).'</div>';
+
+                $message = new MailMessage();
+                $message->setSubject("www.oio.mg : Postule sur votre offre ");
+                $message->setBody($content);
+                $message->setFrom(array("job@oio.mg" => $this->getParameter('sitename')));
+                $message->setTo($job->getUser()->getEmail());
+                $message->setWrap("notification");
+                $message->setAttachments($mailAttachments);
+                $this->platformService->email($message);
+
+                $content = "<div>Bonjour ".$user->getName().",</div>";
+                $content .= '<div>Vous avez postulé sur l\'offre <strong>"'.$job->getTitle().'"</strong>.</div>';
+                $content .= '<div>'.nl2br($jobApplication->getContent()).'</div>';
+                $message->setBody($content);
+                $message->setTo($job->getUser()->getEmail());
+                $this->platformService->email($message);
+
+
+                $response->setContent(json_encode(array(
+                    'state'   => 1,
+                    'message' => "Candidature envoyée",
+                )));
+            }
+        }
+        
         $response->headers->set('Content-Type', 'application/json');
 
         return $response;

@@ -168,4 +168,38 @@ $(function() {
 			}
 		});
 	});
+
+	/*
+	*job apply
+	*/
+	$('body').on('click','#btn_apply',function(event){
+		var $this = $(this);
+		var target = $this.data('target');
+		var data = new FormData();
+		data.append('content', $("#content_application").val());
+
+		createSpinner();
+		$.ajax({
+			type: 'POST',
+			url: target,
+			data: data,
+			contentType: false,
+			processData: false,
+			dataType : 'json',
+			success: function(data){
+				if(data.state){
+					alert(data.message);
+				}else{
+					alert("Une erreur est survenue");
+				}
+				destroySpinner();
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				console.log(jqXHR.status);
+				console.log(textStatus);
+				console.log(errorThrown);
+				destroySpinner();
+			}
+		});
+	});
 });

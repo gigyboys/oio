@@ -448,12 +448,23 @@ class PlatformService
             )
         ;
 
+        //attachment
+        if($message->getAttachments()){
+            foreach ($message->getAttachments() as $attachment){
+                $swiftMessage->attach(
+                    \Swift_Attachment::fromPath($attachment['file'])->setFilename($attachment['name'])
+                );
+            }
+        }
+
+
         $this->mailer->send($swiftMessage);
 
         $sentMail = new SentMail();
         $sentMail->setDate(new \DateTime());
         $sentMail->setSubject($subject);
         $sentMail->setBody($body);
+        //from
         if (is_string($from)) {
             $sentMail->setSender($from);
         }
@@ -470,12 +481,11 @@ class PlatformService
                 $sentMail->setSender($sender);
             }
         }
-        
+        //recipient
         $sentMail->setRecipient($to);
 
         $this->em->persist($sentMail);
         $this->em->flush();
-
     }
 
     public function getValidCommentsByUser(User $user) {

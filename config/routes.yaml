@@ -460,6 +460,10 @@ job_view_apply_delete_document:
     path:     /job/{slug}/apply/delete-document/{id}
     defaults:
         _controller: App\Controller\JobController::deleteDocument
+job_view_doapply:
+    path:     /job/{slug}/doapply
+    defaults:
+        _controller: App\Controller\JobController::doApply
 
 #school
 school_categories:

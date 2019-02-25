@@ -35,9 +35,17 @@
 						{{ include("job/include/job_apply_files.html.twig") }}
 					</div>
 					<div class="sep"></div>
+					<div id="apply_files" class="mg_10">
+						<div>Contenu :</div>
+						<div>
+							<textarea class="default_textarea" id="content_application"></textarea>
+						</div>
+					</div>
+					<div class="sep"></div>
 					<div class="mg_10 ta_r">
 						<div>
-							<a class="standar_button" href="">Envoyer ma candidature</a>
+							{#<input type="checkbox" value="1" id="sendme_application"/> <label for="sendme_application" >m'envoyer une copie</label>#}
+							<span class="standar_button" id="btn_apply" data-target="{{ path('job_view_doapply', {'slug': job.slug}) }}">Envoyer ma candidature</span>
 						</div>
 					</div>
 				</div>
