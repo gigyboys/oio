@@ -24,7 +24,7 @@ class JobApplicationAttachmentRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('attachment');
 
         $qb
-            ->andWhere('attachment.cv IS NOT NULL')
+            ->andWhere('attachment.CV IS NOT NULL')
             ->andWhere('attachment.jobApplication = :jobApplication')
             ->setParameter('jobApplication', $jobApplication);
 

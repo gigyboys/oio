@@ -158,8 +158,8 @@ class JobController extends AbstractController{
             $cvAttachment = $this->jobApplicationAttachmentRepository->findCV($jobApplication);
             $cv = null;
             if($cvAttachment){
-                if($cvAttachment->getCv() && $cvAttachment->getCv()->getUser()->getId() == $user->getId()){
-                    $cv = $cvAttachment->getCv();
+                if($cvAttachment->getCV() && $cvAttachment->getCV()->getUser()->getId() == $user->getId()){
+                    $cv = $cvAttachment->getCV();
                 }
             }else{
                 $cv = $this->CVRepository->findOneBy(array(
@@ -169,7 +169,7 @@ class JobController extends AbstractController{
 
                 if($cv){
                     $cvAttachment = new JobApplicationAttachment();
-                    $cvAttachment->setCv($cv);
+                    $cvAttachment->setCV($cv);
                     $cvAttachment->setJobApplication($jobApplication);
                     $this->em->persist($cvAttachment);
                 }
@@ -260,7 +260,7 @@ class JobController extends AbstractController{
                     $cvAttachment = $this->jobApplicationAttachmentRepository->findCV($jobApplication);
                     $cv = null;
                     if($cvAttachment){
-                        $cvAttachment->setCv($CV);
+                        $cvAttachment->setCV($CV);
                     }else{
                         $cvAttachment = new JobApplicationAttachment();
                         $cvAttachment->setJobApplication($jobApplication);
@@ -276,8 +276,8 @@ class JobController extends AbstractController{
                 $cvAttachment = $this->jobApplicationAttachmentRepository->findCV($jobApplication);
                 $cv = null;
                 if($cvAttachment){
-                    if($cvAttachment->getCv() && $cvAttachment->getCv()->getUser()->getId() == $user->getId()){
-                        $cv = $cvAttachment->getCv();
+                    if($cvAttachment->getCV() && $cvAttachment->getCV()->getUser()->getId() == $user->getId()){
+                        $cv = $cvAttachment->getCV();
                     }
                 }
 
@@ -372,8 +372,8 @@ class JobController extends AbstractController{
                 $cvAttachment = $this->jobApplicationAttachmentRepository->findCV($jobApplication);
                 $cv = null;
                 if($cvAttachment){
-                    if($cvAttachment->getCv() && $cvAttachment->getCv()->getUser()->getId() == $user->getId()){
-                        $cv = $cvAttachment->getCv();
+                    if($cvAttachment->getCV() && $cvAttachment->getCV()->getUser()->getId() == $user->getId()){
+                        $cv = $cvAttachment->getCV();
                     }
                 }
 
@@ -441,8 +441,8 @@ class JobController extends AbstractController{
             $cvAttachment = $this->jobApplicationAttachmentRepository->findCV($jobApplication);
             $cv = null;
             if($cvAttachment){
-                if($cvAttachment->getCv() && $cvAttachment->getCv()->getUser()->getId() == $user->getId()){
-                    $cv = $cvAttachment->getCv();
+                if($cvAttachment->getCV() && $cvAttachment->getCV()->getUser()->getId() == $user->getId()){
+                    $cv = $cvAttachment->getCV();
                 }
             }
 
