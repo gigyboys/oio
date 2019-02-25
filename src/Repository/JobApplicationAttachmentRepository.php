@@ -19,32 +19,32 @@ class JobApplicationAttachmentRepository extends ServiceEntityRepository
         parent::__construct($registry, JobApplicationAttachment::class);
     }
 
-    // /**
-    //  * @return JobApplicationAttachment[] Returns an array of JobApplicationAttachment objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findCV($jobApplication)
     {
-        return $this->createQueryBuilder('j')
-            ->andWhere('j.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('j.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $qb = $this->createQueryBuilder('attachment');
 
-    /*
-    public function findOneBySomeField($value): ?JobApplicationAttachment
-    {
-        return $this->createQueryBuilder('j')
-            ->andWhere('j.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $qb
+            ->andWhere('attachment.cv IS NOT NULL')
+            ->andWhere('attachment.jobApplication = :jobApplication')
+            ->setParameter('jobApplication', $jobApplication);
+
+        $qb
+            ->setMaxResults(1);
+
+        $attachment = $qb->getQuery()->getOneOrNullResult();
+        return $attachment;
     }
-    */
+
+    public function findDocuments($jobApplication)
+    {
+        $qb = $this->createQueryBuilder('attachment');
+
+        $qb
+            ->andWhere('attachment.userDocument IS NOT NULL')
+            ->andWhere('attachment.jobApplication = :jobApplication')
+            ->setParameter('jobApplication', $jobApplication);
+
+        $attachments = $qb->getQuery()->getResult();
+        return $attachments;
+    }
 }

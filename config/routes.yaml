@@ -444,6 +444,22 @@ job_view:
     path:     /job/{slug}
     defaults:
         _controller: App\Controller\JobController::view
+job_view_apply:
+    path:     /job/{slug}/apply
+    defaults:
+        _controller: App\Controller\JobController::apply
+job_view_apply_upload_cv:
+    path:     /job/{slug}/apply/upload-cv
+    defaults:
+        _controller: App\Controller\JobController::uploadCV
+job_view_apply_upload_document:
+    path:     /job/{slug}/apply/upload-document
+    defaults:
+        _controller: App\Controller\JobController::uploadDocument
+job_view_apply_delete_document:
+    path:     /job/{slug}/apply/delete-document/{id}
+    defaults:
+        _controller: App\Controller\JobController::deleteDocument
 
 #school
 school_categories:

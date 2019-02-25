@@ -1,0 +1,30 @@
+<div>Vos fichiers</div>
+<div>
+	Cv : 
+	{% if cv is not null %}
+		{{ cv.name }} 
+		<label class="standar_button c_p" for="cvfile">
+			Ajouter un nouveau CV 
+			<input id="cvfile" name="file" class="d_n" type="file" accept="image/*" data-target="{{ path('job_view_apply_upload_cv', {'slug': job.slug}) }}">
+		</label>
+	{% else %}
+		<label class="standar_button c_p" for="cvfile">
+			Ajouter un CV 
+			<input id="cvfile" name="file" class="d_n" type="file" accept="image/*" data-target="{{ path('job_view_apply_upload_cv', {'slug': job.slug}) }}">
+		</label>
+	{% endif %}
+	{% set countFiles = 0 %}
+	{% for attachment in attachments %}
+		{% set countFiles = countFiles + 1 %}
+		<div class="mg_v5">
+			Fichier {{ countFiles }} : {{ attachment.userDocument.name }} 
+			<span class="standar_button btn_delete_doc" data-target="{{ path('job_view_apply_delete_document', {'slug': job.slug, 'id': attachment.id}) }}">Supprimer</span>
+		</div>
+	{% endfor %}
+	<div class="mg_v10">
+		<label class="standar_button c_p" for="documentfile">
+			Ajouter un fichier 
+			<input id="documentfile" name="file" class="d_n" type="file" accept="image/*" data-target="{{ path('job_view_apply_upload_document', {'slug': job.slug}) }}">
+		</label>
+	</div>
+</div>

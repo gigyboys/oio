@@ -13,10 +13,6 @@
 			<div class="ct">
 				<div id="jb_view">
 					<div class="mg_10">
-							{% set illustration = jobIllustration(job) %}
-						
-							<div class="cover" style="width:100%; height: 200px;background: #81b5e2 url('{{ illustration | imagine_filter('1200x500') }}') no-repeat scroll center center / cover ;">
-							</div>
 						<h1>{{ job.title }}</h1>
 						<div class="sep"></div>
 						<div>
@@ -33,16 +29,15 @@
 								<div>Date limite : {{ job.datelimit | date('d/m/Y à H:i') }}</div>
 							{% endif %}
 						</div>
-						
-						{% if job.description is not null %}
-							<div class="sep"></div>
-							<div>{{ job.description | raw }}</div>
-						{% endif %}
 					</div>
-
+					<div class="sep"></div>
+					<div id="apply_files" class="mg_10">
+						{{ include("job/include/job_apply_files.html.twig") }}
+					</div>
+					<div class="sep"></div>
 					<div class="mg_10 ta_r">
 						<div>
-							<a class="standar_button" href="{{ path('job_view_apply', {'slug': job.slug}) }}">Postuler</a>
+							<a class="standar_button" href="">Envoyer ma candidature</a>
 						</div>
 					</div>
 				</div>
