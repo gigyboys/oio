@@ -74,6 +74,10 @@
 							<div class="search_entity_item visible mixed {{ selectedBlog }}" data-entity="bg" data-mixed="1">
 								<i class="fas fa-edit"></i> Blog
 							</div>
+						{% elseif entityView == "job" %} 
+							<div class="search_entity_item visible mixed {{ selectedEvent }}" data-entity="et" data-mixed="1">
+								<i class="fas fa-calendar-day"></i> Evènement
+							</div>
 						{% endif %}
 					{% else %}
 						<div class="search_entity_item visible mixed {{ selectedEvent }}" data-entity="et" data-mixed="1">

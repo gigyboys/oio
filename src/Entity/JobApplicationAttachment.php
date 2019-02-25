@@ -25,9 +25,8 @@ class JobApplicationAttachment
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\CV")
-     * @ORM\JoinColumn(nullable=false)
      */
-    private $cv;
+    private $CV;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\CoverLetter")
@@ -56,14 +55,14 @@ class JobApplicationAttachment
         return $this;
     }
 
-    public function getCv(): ?CV
+    public function getCV(): ?CV
     {
-        return $this->cv;
+        return $this->CVcv;
     }
 
-    public function setCv(?CV $cv): self
+    public function setCv(?CV $CV): self
     {
-        $this->cv = $cv;
+        $this->CV = $CV;
 
         return $this;
     }
