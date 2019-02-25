@@ -25,16 +25,19 @@ class JobApplicationAttachment
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\CV")
+     * @ORM\Column(name="cv_id")
      */
     private $CV;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\CoverLetter")
+     * @ORM\Column(name="cover_letter_id")
      */
     private $coverLetter;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\UserDocument")
+     * @ORM\Column(name="user_document_id")
      */
     private $userDocument;
 
@@ -57,7 +60,7 @@ class JobApplicationAttachment
 
     public function getCV(): ?CV
     {
-        return $this->CVcv;
+        return $this->CV;
     }
 
     public function setCv(?CV $CV): self
