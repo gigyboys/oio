@@ -25,19 +25,19 @@ class JobApplicationAttachment
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\CV")
-     * @ORM\Column(name="cv_id")
+     * @ORM\JoinColumn(name="cv_id")
      */
     private $CV;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\CoverLetter")
-     * @ORM\Column(name="cover_letter_id")
+     * @ORM\JoinColumn(name="cover_letter_id")
      */
     private $coverLetter;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\UserDocument")
-     * @ORM\Column(name="user_document_id")
+     * @ORM\JoinColumn(name="user_document_id")
      */
     private $userDocument;
 
