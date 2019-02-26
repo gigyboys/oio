@@ -11,6 +11,7 @@ class MailMessage
     private $to;
     private $replyTo;
     private $wrap;
+    private $attachments;
 
     public function getSubject()
     {
@@ -70,5 +71,15 @@ class MailMessage
     public function setWrap($wrap): void
     {
         $this->wrap = $wrap;
+    }
+
+    public function getAttachments()
+    {
+        return $this->attachments;
+    }
+
+    public function setAttachments($attachments): void
+    {
+        $this->attachments = $attachments;
     }
 }
