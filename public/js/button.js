@@ -49,10 +49,12 @@ $(function() {
     });
 
     $('body').on('click','.ddt a',function(e){
-		if($(this).attr("target") == "_blank"){
-			window.open($(this).attr("href"), '_blank');
-		}else{
-			window.location=$(this).attr("href");
+		if(!$(this).hasClass("et_tag")){
+            if($(this).attr("target") == "_blank"){
+                window.open($(this).attr("href"), '_blank');
+            }else{
+                window.location=$(this).attr("href");
+            }
 		}
     }); 
     
