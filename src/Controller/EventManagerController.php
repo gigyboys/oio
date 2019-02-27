@@ -3,6 +3,8 @@ namespace App\Controller;
 
 use App\Entity\Evaluation;
 use App\Entity\Event;
+use App\Entity\Picture;
+use App\Entity\Gallery;
 use App\Entity\EventIllustration;
 use App\Entity\SchoolEvent;
 use App\Entity\TagEvent;
@@ -13,6 +15,7 @@ use App\Form\EventType;
 use App\Form\EventDateType;
 use App\Form\EventLocationType;
 use App\Form\EventIllustrationType;
+use App\Form\PictureType;
 use App\Repository\CategoryRepository;
 use App\Repository\CategorySchoolRepository;
 use App\Repository\EventRepository;
@@ -21,6 +24,8 @@ use App\Repository\EventIllustrationRepository;
 use App\Repository\SchoolEventRepository;
 use App\Repository\TagEventRepository;
 use App\Repository\TagRepository;
+use App\Repository\PictureRepository;
+use App\Repository\GalleryRepository;
 use App\Service\PlatformService;
 use App\Service\SchoolService;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -46,6 +51,8 @@ class EventManagerController extends AbstractController {
         TagEventRepository $tagEventRepository,
         SchoolEventRepository $schoolEventRepository,
         EventRepository $eventRepository,
+        PictureRepository $pictureRepository,
+        GalleryRepository $galleryRepository,
         ObjectManager $em
     )
     {
@@ -58,7 +65,8 @@ class EventManagerController extends AbstractController {
         $this->tagEventRepository = $tagEventRepository;
         $this->schoolEventRepository = $schoolEventRepository;
         $this->eventRepository = $eventRepository;
-        $this->eventRepository = $eventRepository;
+        $this->pictureRepository = $pictureRepository;
+        $this->galleryRepository = $galleryRepository;
         $this->em = $em;
 
         $this->platformService->registerVisit();
@@ -872,6 +880,133 @@ class EventManagerController extends AbstractController {
                 'state' => 0,
             )));
         }
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    public function uploadPicture($event_id, Request $request)
+    {
+        $user = $this->getUser();
+        $event = $this->eventRepository->find($event_id);
+
+        $response = new Response();
+        $response->setContent(json_encode(array(
+            'state' => 0,
+        )));
+
+        if ($event && $this->isGranted('ROLE_ADMIN') || $event->getUser() == $user) {
+            $picture = new Picture();
+            $form = $this->createForm(PictureType::class, $picture);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $file = $picture->getFile();
+
+                $t=time();
+                $fileName = substr(sha1(uniqid(mt_rand(), true)), 0, 10).'_'.$t.'.'.$file->guessExtension();
+
+                try {
+                    $file->move(
+                        $this->getParameter('picture_directory'),
+                        $fileName
+                    );
+                    $picture->setPath($fileName);
+                    $picture->setOriginalname($file->getClientOriginalName());
+                    $picture->setName($file->getClientOriginalName());
+                    $this->em->persist($picture);
+
+                    $gallery = new Gallery();
+                    $gallery->setEvent($event);
+                    $gallery->setPicture($picture);
+                    $gallery->setPublished(true);
+                    $gallery->setDeleted(false);
+
+                    //position
+                    $lastGallery = $this->galleryRepository->findLastGallery($event, 'position');
+                    $position = 0;
+                    if($lastGallery){
+                        $position = $lastGallery->getPosition() + 1;
+                    }
+                    $gallery->setPosition($position);
+
+                    $this->em->persist($gallery);
+                    $this->em->flush();
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                $pictureHtml = $this->renderView('event/include/picture_item.html.twig', array(
+                    'event'     => $event,
+                    'gallery'   => $gallery,
+                ));
+
+                $response->setContent(json_encode(array(
+                    'state'         => 1,
+                    'pictureHtml'	=> $pictureHtml,
+                )));
+            }
+        }
+
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+
+    public function deletePicture($event_id, $id, Request $request)
+    {
+        $user = $this->getUser();
+        $event = $this->eventRepository->find($event_id);
+        $gallery = $this->galleryRepository->find($id);
+
+        $response = new Response();
+        $response->setContent(json_encode(array(
+            'state' => 0,
+        )));
+
+        if ($event && $gallery && $this->isGranted('ROLE_ADMIN') || $event->getUser() == $user) {
+            $gallery->setDeleted(true);
+            $this->em->persist($gallery);
+
+            $this->em->flush();
+            $response->setContent(json_encode(array(
+                'state' => 1,
+            )));
+        }
+
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+    
+    public function savePositionPicture($event_id, Request $request): Response
+    {
+        $user = $this->getUser();
+        $event = $this->eventRepository->find($event_id);
+
+        $response = new Response();
+        $response->setContent(json_encode(array(
+            'state' => 0,
+        )));
+
+        if ($event && $this->isGranted('ROLE_ADMIN') || $event->getUser() == $user) {
+            $order = $request->query->get('order');
+
+            $ids = explode("-", $order);
+            $position = 0;
+            foreach ($ids as $id){
+                $gallery = $this->galleryRepository->find($id);
+                if($gallery){
+                    $position++;
+                    $gallery->setPosition($position);
+                }
+                $this->em->flush();
+            }
+
+            $response->setContent(json_encode(array(
+                'state' => 1,
+                'order' => $order,
+            )));
+        }
+
         $response->headers->set('Content-Type', 'application/json');
         return $response;
     }

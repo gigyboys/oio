@@ -192,6 +192,18 @@ $(function() {
 		nextEvent();
 	}
 
+	if($("#gallery").length > 0){
+		if($("#gallery img").length >= 5){
+			$("#gallery").unitegallery({
+				tiles_type:"justified"
+			});
+		}else {
+			$("#gallery").unitegallery({
+				
+			});
+		}
+	}
+
 	$('body').on('click','.et_link',function(event){
 		indexEvent = $(this).attr("data-index");
 		showEvent();

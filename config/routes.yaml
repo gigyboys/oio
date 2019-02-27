@@ -296,6 +296,18 @@ event_manager_toggle_school:
     path:     /event-manager/event/{event_id}/toggle-school/{school_id}
     defaults:
         _controller: App\Controller\EventManagerController::toggleSchool
+event_manager_upload_picture:
+    path:     /event-manager/event/{event_id}/upload-picture
+    defaults:
+        _controller: App\Controller\EventManagerController::uploadPicture
+event_manager_delete_picture:
+    path:     /event-manager/event/{event_id}/delete-picture/{id}
+    defaults:
+        _controller: App\Controller\EventManagerController::deletePicture
+event_manager_picture_save_position:
+    path:     /event-manager/event/{event_id}/picture/save-position
+    defaults:
+        _controller: App\Controller\EventManagerController::savePositionPicture
 
 #job_manager
 job_manager_add_ajax:

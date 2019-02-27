@@ -272,6 +272,12 @@ $(function() {
         contextSearch.find( ".search_input" ).trigger( "keyup" );
     });
 
+    //t_header_content
+    $('.t_header_content').each(function( index ) {
+        var nbItems = $(this).find('.t_header_item').length;
+        $(this).addClass("t_header_"+nbItems);
+    });
+
 });
 
 function processLogin(){

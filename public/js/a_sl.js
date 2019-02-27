@@ -497,7 +497,7 @@ $(function() {
 		}
     });
 	
-		
+	/*	
 	$(document).keydown(function(ed) {
 		var userSelected = $( "#view_result .item_user.user_selected" );
 		var indexUserSelected = $( "#view_result .item_user" ).index( userSelected );
@@ -538,6 +538,7 @@ $(function() {
 		}
 		
 	});
+	*/
 	
 	function setAdmin(element){
 		var $this = element;

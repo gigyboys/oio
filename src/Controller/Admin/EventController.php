@@ -33,6 +33,7 @@ use App\Repository\TypeRepository;
 use App\Repository\UserRepository;
 use App\Repository\CommentRepository;
 use App\Repository\TagEventRepository;
+use App\Repository\GalleryRepository;
 use App\Service\PlatformService;
 use App\Service\EventService;
 use App\Service\SchoolService;
@@ -61,6 +62,7 @@ class EventController extends AbstractController {
         EventRepository $eventRepository,
         CommentRepository $commentRepository,
         TagEventRepository $tagEventRepository,
+        GalleryRepository $galleryRepository,
         EventService $eventService,
         ObjectManager $em
     )
@@ -79,6 +81,7 @@ class EventController extends AbstractController {
         $this->schoolEventRepository = $schoolEventRepository;
         $this->eventRepository = $eventRepository;
         $this->tagEventRepository = $tagEventRepository;
+        $this->galleryRepository = $galleryRepository;
         $this->eventService = $eventService;
         $this->em = $em;
     }
@@ -368,9 +371,17 @@ class EventController extends AbstractController {
     public function eventGallery($event_id)
     {
         $event = $this->eventRepository->find($event_id);
-
+        $galleries = $this->galleryRepository->findBy(
+            array(
+                "event" => $event,
+                "deleted" => false,
+            ), 
+            array('position'=>'ASC')
+        );
+        
         return $this->render('admin/event/event_gallery.html.twig', array(
-            'event' => $event,
+            'event'     => $event,
+            'galleries' => $galleries,
         ));
     }
 }

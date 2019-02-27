@@ -449,7 +449,6 @@ a:hover{
 }
 .t_header_item{
 	box-sizing: border-box;
-	max-width: 25%;
     cursor: pointer;
     display:inline-block;
     height: 32px;
@@ -649,7 +648,15 @@ a:hover{
 	background: #ccc;
 }
 
-/* event view */
+#gallery_content .picture_item{
+	position: relative;
+	display: inline-block;
+	margin: 10px;
+	width: 116px;
+	height: 116px;
+	vertical-align: top;
+}
+
 #et_view .introduction{
 	text-align:justify; 
 	font-weight:bold;
@@ -828,6 +835,14 @@ a:hover{
 
 .participations_popup{
 	cursor:pointer;
+}
+
+#et_view .et_date{
+	float:left
+}
+
+#et_view .et_author{
+	float:right
 }
 
 .list_pt_popup{
@@ -1307,6 +1322,16 @@ a:hover{
 		margin-bottom:16px;
 		width: 100%;
 	}
+
+	#et_view .et_date{
+		float:none;
+		text-align: center;
+	}
+
+	#et_view .et_author{
+		float:none;
+		text-align: center;
+	}
 }
 
 @media screen and (max-width: 500px)
@@ -1379,6 +1404,9 @@ a:hover{
 
 @media screen and (max-width: 480px)
 {
+	.t_header_4 .t_header_item{
+		width: 25%
+	}
     .default_input{
 		height: 40px;
 		padding: 10px 5px;
@@ -1409,7 +1437,9 @@ a:hover{
 
 @media screen and (max-width: 390px)
 {
-
+	.t_header_3 .t_header_item{
+		width: 33.333333%
+	}
 	.pm_form_wrap{
 		width:100%;
 		box-sizing:border-box

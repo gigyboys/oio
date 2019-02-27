@@ -6,6 +6,7 @@
 parameters:
     locale: 'en'
     avatar_directory: '%kernel.project_dir%/public/uploads/images/user/avatar'
+    picture_directory: '%kernel.project_dir%/public/uploads/images/picture'
     logo_directory: '%kernel.project_dir%/public/uploads/images/school/logo'
     document_directory: '%kernel.project_dir%/uploads/document'
     cv_directory: '%kernel.project_dir%/uploads/cv'

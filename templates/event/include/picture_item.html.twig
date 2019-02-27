@@ -1,0 +1,8 @@
+<div class="picture_item" data-id="{{ gallery.id }}">
+	<div>
+		<img class="" src="{{ gallery.picture.webPath | imagine_filter('116x116') }}" alt="" />
+	</div>
+	<div class="ta_c" style="position:absolute; bottom: 10px;width:100%">
+		<span class="standar_button et_delete_picture" data-target="{{ path('event_manager_delete_picture', {'event_id': event.id, 'id': gallery.id}) }}">Supprimer</span>
+	</div>
+</div>

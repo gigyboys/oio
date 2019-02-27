@@ -142,6 +142,9 @@ liip_imagine:
       quality: 100
       filters:
         thumbnail: { size: [1200, 500], mode: outbound }
+    heighten170:
+      filters:
+        relative_resize: { heighten: 170 }
     # Prototype
     name:
       quality:              100
