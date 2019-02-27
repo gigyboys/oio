@@ -418,6 +418,11 @@
 	font-size: 13px;
 }
 
+/*unitegallery*/
+.ug-gallery-wrapper .ug-textpanel-title{
+	text-align: center !important;
+}
+
 /*embeded video*/
 .video-container {
 	position: relative;

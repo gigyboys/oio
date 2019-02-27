@@ -24,9 +24,13 @@
 
     <link rel="stylesheet" href="{{ asset('build/app.css') }}">
     {% block stylesheets %}
+        {#<link rel="stylesheet" href="{{ asset('css/jquery-ui-1.12.1.css') }}">#}
         <link rel="stylesheet"  href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.12.1/themes/smoothness/jquery-ui.css" />
+        {#<link rel="stylesheet" href="{{ asset('css/jquery-ui-timepicker-addon.css') }}">#}
         <link rel="stylesheet"  href="https://trentrichardson.com/examples/timepicker/jquery-ui-timepicker-addon.css" />
+        {#<link rel="stylesheet" href="{{ asset('css/fontawesome-5.6.3.css') }}">#}
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+        <link rel="stylesheet" href="{{ asset('css/unite-gallery.css') }}">
         <link rel="stylesheet" href="{{ asset('css/hr.css') }}">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <link rel="stylesheet" href="{{ asset('css/common.css') }}">
@@ -97,11 +101,14 @@
     <script src="{{ asset('build/app.js') }}"></script>
 
     {% block javascripts %}
-        {#<script type="text/javascript" src="{{ asset('js/jquery.js') }}"></script>#}
+        {#<script type="text/javascript" src="{{ asset('js/jquery-3.2.1.js') }}"></script>#}
         <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
-        {#<script src="https://code.jquery.com/mobile/1.5.0-rc1/jquery.mobile-1.5.0-rc1.min.js"></script>#}
+        {#<script type="text/javascript" src="{{ asset('js/jquery-ui-1.12.1.js') }}"></script>#}
         <script src='https://ajax.aspnetcdn.com/ajax/jquery.ui/1.12.1/jquery-ui.min.js'></script>
+        {#<script type="text/javascript" src="{{ asset('js/jquery-ui-timepicker-addon.js') }}"></script>#}
         <script src='https://trentrichardson.com/examples/timepicker/jquery-ui-timepicker-addon.js'></script>
+        <script type="text/javascript" src="{{ asset('js/unitegallery.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/ug-theme-tiles.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/common.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/header.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/button.js') }}"></script>

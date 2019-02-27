@@ -59,32 +59,51 @@
 						</div>
 						<div class="both"></div>
 					</div>
-					<div class="mg_t5 mg_h10">
-
-						{% if event.showAuthor %}
-							<strong>Par</strong>
-							{# twig extension #}
-							{% set userInfo = getLinkUserInfo(event.user, event.user.name) %}
-							{{ userInfo | raw }}
-						{% endif %}
-						{#
-						<strong>Le {{ event.date | date('Y-m-d') }}</strong>
-						#}
-					</div>
 					
-					<div class="pd_h10 pd_t10">
-						{% if event.datebegin | date("Y-m-d") == event.dateend | date("Y-m-d") %}
-							<span>Le <strong>{{ getDateLabel(event.datebegin) }} du {{ event.datebegin | date('H:i') }} 
-							à {{ event.dateend | date('H:i') }}</strong></span>
-						{% else %}
-							<span>Du <strong>{{ getDateLabel(event.datebegin) }} à {{ event.datebegin | date('H:i') }}</strong></span> <br />
-							<span>Au <strong>{{ getDateLabel(event.dateend) }} à {{ event.dateend | date('H:i') }}</strong></span>
-						{% endif %}
+					<div class="mg_h10">
+						<div class="et_date">
+							{% if event.datebegin | date("Y-m-d") == event.dateend | date("Y-m-d") %}
+								<span>Le <strong>{{ getDateLabel(event.datebegin) }} du {{ event.datebegin | date('H:i') }} 
+								à {{ event.dateend | date('H:i') }}</strong></span>
+							{% else %}
+								<span>Du <strong>{{ getDateLabel(event.datebegin) }} à {{ event.datebegin | date('H:i') }}</strong></span> <br />
+								<span>Au <strong>{{ getDateLabel(event.dateend) }} à {{ event.dateend | date('H:i') }}</strong></span>
+							{% endif %}
+						</div>
+						<div class="et_author">
+							{% if event.showAuthor %}
+								<strong>Par</strong>
+								{# twig extension #}
+								{% set userInfo = getLinkUserInfo(event.user, event.user.name) %}
+								{{ userInfo | raw }}
+							{% endif %}
+						</div>
+						<div class="both"></div>
 					</div>
 
 					<div class="entity_ct mg_10">
 						{{ event.content | raw }}
 					</div>
+
+					{% if galleries | length > 0 %}
+							<div class="mg_10">
+								<div id="gallery" style="display:none;">
+									{% if galleries | length >= 5 %}
+										{% for gallery in galleries %}
+											<img alt="{{ gallery.caption }}" src="{{ gallery.picture.webPath | imagine_filter('heighten170') }}"
+											data-image="{{ absolute_url(asset(gallery.picture.webPath)) }}"
+											data-description="">
+										{% endfor %}
+									{% else %}
+										{% for gallery in galleries %}
+											<img alt="{{ gallery.caption }}" src="{{ gallery.picture.webPath | imagine_filter('140x140') }}"
+											data-image="{{ absolute_url(asset(gallery.picture.webPath)) }}"
+											data-description="">
+										{% endfor %}
+									{% endif %}
+								</div>
+							</div>
+					{% endif %}
 
 					<div class="mg_10">
 						{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}

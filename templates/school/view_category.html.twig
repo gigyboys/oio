@@ -11,7 +11,9 @@
 				<div id="sl_list_category" class="sll p_cr" data-type="school">
 					<div class="p_load d_n" id="sll_load_list">chargement ...</div>
 					<div class="category_title mg_h10 p_stop">
-						{{ category.name }}
+						<a href="{{ path('school_home') }}">Etablissements</a> 
+						<i class="fas fa-angle-right va_m"></i> 
+						<a href="{{ path('school_category_view', {'slug': category.slug}) }}">{{ category.name }}</a>
 					</div>
 
 					{% if category.description is not null or category.description != '' %}

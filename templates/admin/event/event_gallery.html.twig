@@ -64,8 +64,16 @@
 		<span><img src="{{ asset('image/list_icon.png') }}" style="width:12px; height:auto" /> Gallerie</span>
 	</div>
 	
-	<div>
-		Conteny gallerie
+	<div class="pd_5">
+		<div id="gallery_content" data-target="{{ path('event_manager_picture_save_position', {'event_id': event.id}) }}">{#
+			#}{% for gallery in galleries %}{#
+				#}{{ include("event/include/picture_item.html.twig") }}{#
+			#}{% endfor %}{#
+		#}</div>
+		<div class="pd_v5">
+			<label for="et_picture" class="standar_button">Ajouter une image</label>
+			<input class="d_n" id="et_picture" type="file" data-target="{{ path('event_manager_upload_picture', {'event_id': event.id}) }}" />
+		</div>
 	</div>
 {% endblock %}
 

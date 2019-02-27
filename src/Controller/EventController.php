@@ -34,6 +34,7 @@ use App\Repository\EvaluationRepository;
 use App\Repository\ParticipationRepository;
 use App\Repository\TagEventRepository;
 use App\Repository\TagRepository;
+use App\Repository\GalleryRepository;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class EventController extends AbstractController{
@@ -59,6 +60,7 @@ class EventController extends AbstractController{
         CommentRepository $commentRepository,
         TagEventRepository $tagEventRepository,
         TagRepository $tagRepository,
+        GalleryRepository $galleryRepository,
         ObjectManager $em
     )
     {
@@ -82,6 +84,7 @@ class EventController extends AbstractController{
         $this->commentRepository = $commentRepository;
         $this->tagEventRepository = $tagEventRepository;
         $this->tagRepository = $tagRepository;
+        $this->galleryRepository = $galleryRepository;
         $this->em = $em;
 
         $this->platformService->registerVisit();
@@ -293,14 +296,24 @@ class EventController extends AbstractController{
             //previousEvent
             $previousEvent = $this->eventService->getPreviousEvent($event);
 
+            //galleries
+            $galleries = $this->galleryRepository->findBy(
+                array(
+                    "event"     => $event,
+                    "deleted"   => false,
+                ), 
+                array('position'=>'ASC')
+            );
+
             return $this->render('event/view_event.html.twig', [
                 'event'             => $event,
-                'tags'             => $tags,
+                'tags'              => $tags,
                 'comments'          => $comments,
                 'allComments'       => $allComments,
                 'previousComment'   => $previousComment,
                 'nextEvent'         => $nextEvent,
                 'previousEvent'     => $previousEvent,
+                'galleries'         => $galleries,
                 'entityView'        => 'event',
             ]);
         }else{
