@@ -41,7 +41,7 @@
     <div id="sl_gl" class="cr">
         <div class="ct">
             <div id="sl_view_top">
-                <div class="left">
+                <div class="f_l">
                     <img id="sl_view_logo" src="{{ logo | imagine_filter('100x100') }}" alt="logo {{ school.shortName }} - {{ school.name }}" title="logo {{ school.shortName }} - {{ school.name }}" />
                 </div>
                 <div class="sl_view_top_info">
@@ -90,12 +90,12 @@
                     </div>
 
                     <div id="sl_view_action">
-                        <div class="left">
+                        <div class="f_l">
                             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and is_granted('ROLE_ADMIN') %}
                                 <a href="{{ path('admin_school_edit', {'id': school.id}) }}" target="_blank"><span class="standar_button">Administrer</span></a>
                             {% endif %}
                         </div>
-                        <div class="right">
+                        <div class="f_r">
                             <span class="subscription_loading">
 								<img src="{{ asset('image/tail-spin.svg')  }}" /> Chargement...
 							</span>

@@ -6,7 +6,7 @@
 	</span>
 </div>
 <div class="edit_header">
-	<div class="left">
+	<div class="f_l">
 		<span class="dd" style="display:inline-block;">
 			<span href="#" class="dds" style="cursor:pointer">
 				<i class="fas fa-info-circle"></i> info
@@ -21,7 +21,7 @@
 			</span>
 		</span>
 	</div>
-	<div class="right">
+	<div class="t_r">
         {% if post.tovalid == false %}
 			<span class="create_post" style="cursor: pointer" data-target="{{ path('blog_manager_tovalid_post_ajax', {'post_id' : post.id})}}"><img src="{{ asset('image/valid_icon.png') }}" style="width:12px; height:auto" />
 				<span> Soumettre à une validation</span>

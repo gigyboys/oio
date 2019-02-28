@@ -9,7 +9,7 @@
 
 		<a href="{{ path('event_view', {'slug': event.slug}) }}" >
 			<span class="detail">
-				<span class="left">
+				<span class="f_l">
 					{% if isCurrent(event) %}
 						En cours
 					{% endif %}
@@ -22,7 +22,7 @@
 				</span>
 				{% set participants = getGoingParticipations(event) %}
 				{% if participants | length > 0 %}
-					<span class="right">
+					<span class="f_r">
 						{% if participants | length > 1 %}
 							{{ participants | length }} participants
 						{% else %}
