@@ -7,7 +7,7 @@
 	</span>
 </div>
 <div class="edit_header">
-	<div class="left">
+	<div class="f_l">
 		<span class="dd d_ib">
 			<span href="#" class="dds c_p">
 				<i class="fas fa-info-circle"></i> <span>info</span>
@@ -22,7 +22,7 @@
 			</span>
 		</span>
 	</div>
-	<div class="right">
+	<div class="f_r">
         {% if event.tovalid == false %}
 			<span class="create_event c_p" data-target="{{ path('event_manager_tovalid_ajax', {'event_id' : event.id})}}">
 				<i class="far fa-check-circle"></i>

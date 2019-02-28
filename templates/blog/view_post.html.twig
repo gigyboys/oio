@@ -111,9 +111,9 @@
 									<div class="mg_b5">
                                         {{ app.user.name }} :
 									</div>
-									<div style="width:60px;float:left">
+									<div class="f_l" style="width:60px;">
                                         {% set avatar = userAvatar(app.user) %}
-										<span style="display:block;float:left;"><img style="width:60px; height: 60px; border-radius: 50%" src="{{ avatar | imagine_filter('60x60') }}" alt="{{ app.user.username }}" /></span>
+										<span class="d_block f_l;"><img style="width:60px; height: 60px; border-radius: 50%" src="{{ avatar | imagine_filter('60x60') }}" alt="{{ app.user.username }}" /></span>
 									</div>
 									<div style="margin-left:70px">
 										<textarea class="default_textarea" id="bg_post_cmt_message" style="min-height:120px"></textarea>

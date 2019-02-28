@@ -16,14 +16,14 @@
 				</div>
 				<div class="ev_edit_detail">
 					<div class="mark">
-						<div class="left label">Notes : </div>
+						<div class="f_l label">Notes : </div>
 						{% set mark = evaluation.mark/20 %}
 						{% for i in 1..5 %}
 							{% set markTmp = i*20 %}
 							{% if i <= mark %}
-								<div class="left pd_5"><div class="eval_star_item selected" data-value="{{ markTmp }}"></div></div>
+								<div class="f_l pd_5"><div class="eval_star_item selected" data-value="{{ markTmp }}"></div></div>
 							{% else %}
-								<div class="left pd_5"><div class="eval_star_item" data-value="{{ markTmp }}"></div></div>
+								<div class="f_l pd_5"><div class="eval_star_item" data-value="{{ markTmp }}"></div></div>
 							{% endif %}
 						{% endfor %}
 						
@@ -57,12 +57,12 @@
 				</div>
 				<div class="ev_edit_detail">
 					<div class="mark">
-						<div class="left label">Notes : </div>
-						<div class="left pd_5"><div class="eval_star_item selected" data-value="20"></div></div>
-						<div class="left pd_5"><div class="eval_star_item selected" data-value="40"></div></div>
-						<div class="left pd_5"><div class="eval_star_item selected" data-value="60"></div></div>
-						<div class="left pd_5"><div class="eval_star_item selected" data-value="80"></div></div>
-						<div class="left pd_5"><div class="eval_star_item" data-value="100"></div></div>
+						<div class="f_l label">Notes : </div>
+						<div class="f_l pd_5"><div class="eval_star_item selected" data-value="20"></div></div>
+						<div class="f_l pd_5"><div class="eval_star_item selected" data-value="40"></div></div>
+						<div class="f_l pd_5"><div class="eval_star_item selected" data-value="60"></div></div>
+						<div class="f_l pd_5"><div class="eval_star_item selected" data-value="80"></div></div>
+						<div class="f_l pd_5"><div class="eval_star_item" data-value="100"></div></div>
 						<input type="hidden" id="sl_evaluation_mark" value="80" />
 					</div>
 					<textarea class="default_textarea" id="sl_evaluation_comment" placeholder="Votre commentaire"></textarea>
