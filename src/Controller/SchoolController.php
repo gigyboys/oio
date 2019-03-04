@@ -7,7 +7,6 @@ use App\Form\EvaluationType;
 use App\Repository\CategoryRepository;
 use App\Repository\CategorySchoolRepository;
 use App\Repository\DocumentRepository;
-use App\Repository\FieldRepository;
 use App\Repository\PostRepository;
 use App\Repository\SchoolPostRepository;
 use App\Repository\SchoolEventRepository;
@@ -26,6 +25,7 @@ use App\Repository\SchoolRepository;
 use App\Repository\ParameterRepository;
 use App\Repository\SchoolContactRepository;
 use App\Repository\EvaluationRepository;
+use App\Repository\OptionRepository;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class SchoolController extends AbstractController{
@@ -40,12 +40,12 @@ class SchoolController extends AbstractController{
         CategorySchoolRepository $categorySchoolRepository,
         SchoolService $schoolService,
         PlatformService $platformService,
-        FieldRepository $fieldRepository,
         PostRepository $postRepository,
         SchoolPostRepository $schoolPostRepository,
         SchoolEventRepository $schoolEventRepository,
         DocumentRepository $documentRepository,
         SubscriptionRepository $subscriptionRepository,
+        OptionRepository $optionRepository,
         ObjectManager $em
     )
     {
@@ -58,12 +58,12 @@ class SchoolController extends AbstractController{
         $this->categorySchoolRepository = $categorySchoolRepository;
         $this->schoolService = $schoolService;
         $this->platformService = $platformService;
-        $this->fieldRepository = $fieldRepository;
         $this->postRepository = $postRepository;
         $this->schoolPostRepository = $schoolPostRepository;
         $this->schoolEventRepository = $schoolEventRepository;
         $this->documentRepository = $documentRepository;
         $this->subscriptionRepository = $subscriptionRepository;
+        $this->optionRepository = $optionRepository;
         $this->em = $em;
 
         $this->platformService->registerVisit();
@@ -313,6 +313,12 @@ class SchoolController extends AbstractController{
         ]);
 
         if($school && ( $school->getPublished() || $this->isGranted('ROLE_ADMIN'))){
+
+            $options = $this->optionRepository->findBy(array(
+                'school' => $school,
+                'published' => true,
+            ));
+
             $schoolContacts = $this->schoolContactRepository->findBy(array(
                 'school' => $school,
                 'published' => true,
@@ -370,11 +376,6 @@ class SchoolController extends AbstractController{
                 array_push($categories, $category);
             }
 
-            $fields = $this->fieldRepository->findBy(array(
-                'school' => $school,
-                'published' => true,
-            ));
-
             //posts
             $schoolPosts = $this->schoolPostRepository->findBy(array(
                 'school' => $school,
@@ -428,7 +429,8 @@ class SchoolController extends AbstractController{
                 $type = "about";
             }
             return $this->render('school/view_school.html.twig', [
-                'school' => $school,
+                'school'            => $school,
+                'options'	        => $options,
                 'schoolContacts'	=> $schoolContacts,
                 'coords'	        => $coords,
                 'passMark'	        => $passMark,
@@ -437,7 +439,6 @@ class SchoolController extends AbstractController{
                 'myEvaluation'	    => $myEvaluation,
                 'categories' 		=> $categories,
                 'categories' 		=> $categories,
-                'fields' 			=> $fields,
                 'posts' 			=> $posts,
                 'events' 			=> $events,
                 'documents' 		=> $documents,

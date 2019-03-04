@@ -3,21 +3,20 @@ namespace App\Controller\Admin;
 
 use App\Entity\CategorySchool;
 use App\Entity\Cover;
-use App\Entity\Field;
+use App\Entity\Option;
 use App\Entity\Logo;
 use App\Entity\TypeSchool;
 use App\Form\CoverType;
-use App\Form\FieldEditType;
-use App\Form\FieldInitType;
+use App\Form\OptionEditType;
+use App\Form\OptionInitType;
 use App\Form\LogoType;
-use App\Form\SchoolDescriptionType;
 use App\Form\SchoolInitType;
 use App\Form\SchoolType;
 use App\Model\SchoolInit;
 use App\Repository\CategoryRepository;
 use App\Repository\CategorySchoolRepository;
 use App\Repository\CoverRepository;
-use App\Repository\FieldRepository;
+use App\Repository\OptionRepository;
 use App\Repository\LogoRepository;
 use App\Repository\ParameterRepository;
 use App\Repository\TypeRepository;
@@ -32,7 +31,7 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Entity\School;
 use App\Repository\SchoolRepository;
 
-class FieldController extends AbstractController {
+class OptionController extends AbstractController {
 
     public function __construct(
         SchoolRepository $schoolRepository,
@@ -45,7 +44,7 @@ class FieldController extends AbstractController {
         TypeRepository $typeRepository,
         LogoRepository $logoRepository,
         CoverRepository $coverRepository,
-        FieldRepository $fieldRepository,
+        OptionRepository $optionRepository,
         ObjectManager $em
     )
     {
@@ -59,7 +58,7 @@ class FieldController extends AbstractController {
         $this->typeRepository = $typeRepository;
         $this->logoRepository = $logoRepository;
         $this->coverRepository = $coverRepository;
-        $this->fieldRepository = $fieldRepository;
+        $this->optionRepository = $optionRepository;
 
         $this->em = $em;
     }
@@ -67,61 +66,61 @@ class FieldController extends AbstractController {
     public function index($school_id)
     {
         $school = $this->schoolRepository->find($school_id);
-        $fields = $this->fieldRepository->findBy(array(
+        $options = $this->optionRepository->findBy(array(
             'school' => $school
         ));
-        $publishedFields = $this->fieldRepository->findBy(array(
+        $publishedOptions = $this->optionRepository->findBy(array(
             'school' => $school,
             'published' => true,
         ));
-        $notPublishedFields = $this->fieldRepository->findBy(array(
+        $notPublishedOptions = $this->optionRepository->findBy(array(
             'school' => $school,
             'published' => false,
         ));
 
-        return $this->render('admin/school/field.html.twig', array(
+        return $this->render('admin/school/option.html.twig', array(
             'school' => $school,
-            'fields' => $fields,
-            'publishedFields' => $publishedFields,
-            'notPublishedFields' => $notPublishedFields,
+            'options' => $options,
+            'publishedOptions' => $publishedOptions,
+            'notPublishedOptions' => $notPublishedOptions,
         ));
     }
 
-    public function togglePublicationField($school_id, $field_id, Request $request)
+    public function togglePublicationOption($school_id, $option_id, Request $request)
     {
-        $field = $this->fieldRepository->find($field_id);
+        $option = $this->optionRepository->find($option_id);
 
         $response = new Response();
 
-        if ($field) {
-            if($field->getPublished() == true){
-                $field->setPublished(false) ;
+        if ($option) {
+            if($option->getPublished() == true){
+                $option->setPublished(false) ;
             }else{
-                $field->setPublished(true) ;
+                $option->setPublished(true) ;
             }
 
-            $this->em->persist($field);
+            $this->em->persist($option);
             $this->em->flush();
 
             $school = $this->schoolRepository->find($school_id);
-            $fields = $this->fieldRepository->findBy(array(
+            $options = $this->optionRepository->findBy(array(
                 'school' => $school
             ));
-            $publishedFields = $this->fieldRepository->findBy(array(
+            $publishedOptions = $this->optionRepository->findBy(array(
                 'school' => $school,
                 'published' => true,
             ));
-            $notPublishedFields = $this->fieldRepository->findBy(array(
+            $notPublishedOptions = $this->optionRepository->findBy(array(
                 'school' => $school,
                 'published' => false,
             ));
 
             $response->setContent(json_encode(array(
                 'state' => 1,
-                'case' => $field->getPublished(),
-                'fields' => $fields,
-                'publishedFields' => $publishedFields,
-                'notPublishedFields' => $notPublishedFields,
+                'case' => $option->getPublished(),
+                'options' => $options,
+                'publishedOptions' => $publishedOptions,
+                'notPublishedOptions' => $notPublishedOptions,
             )));
         }else{
             $response->setContent(json_encode(array(
@@ -132,13 +131,13 @@ class FieldController extends AbstractController {
         return $response;
     }
 
-    //add field ajax
-    public function addFieldAjax($school_id, Request $request)
+    //add option ajax
+    public function addOptionAjax($school_id, Request $request)
     {
         $school = $this->schoolRepository->find($school_id);
         $response = new Response();
 
-        $content = $this->renderView('admin/school/field_add_ajax.html.twig', array(
+        $content = $this->renderView('admin/school/option_add_ajax.html.twig', array(
             'school' => $school,
         ));
 
@@ -151,81 +150,77 @@ class FieldController extends AbstractController {
         return $response;
     }
 
-    public function addField($school_id, Request $request)
+    public function addOption($school_id, Request $request)
     {
         $school = $this->schoolRepository->find($school_id);
 
-        $field = new Field();
-        $formInitField = $this->createForm(FieldInitType::class, $field);
-        $formInitField->handleRequest($request);
-        if ($formInitField->isSubmitted() && $formInitField->isValid()) {
-            $slug = $this->platformService->sluggify($field->getName());
-            $field->setSlug($slug);
-            $field->setPublished(false);
-            $field->setSchool($school);
+        $option = new Option();
+        $formInitOption = $this->createForm(OptionInitType::class, $option);
+        $formInitOption->handleRequest($request);
+        if ($formInitOption->isSubmitted() && $formInitOption->isValid()) {
+            $option->setPublished(false);
+            $option->setSchool($school);
 
-            //$field->setDescription("description ".$field->getName());
-
-            $this->em->persist($field);
+            $this->em->persist($option);
             $this->em->flush();
 
-            return $this->redirectToRoute('admin_school_field_edit', array(
+            return $this->redirectToRoute('admin_school_option_edit', array(
                 'school_id' => $school->getId(),
-                'field_id' => $field->getId(),
+                'option_id' => $option->getId(),
             ));
         }
 
         $school = $this->schoolRepository->find($school_id);
-        $fields = $this->fieldRepository->findBy(array(
+        $options = $this->optionRepository->findBy(array(
             'school' => $school
         ));
 
-        return $this->render('admin/school/field_add.html.twig', array(
+        return $this->render('admin/school/option_add.html.twig', array(
             'school' => $school,
-            'fields' => $fields,
-            'formInitField' => $formInitField->createView(),
+            'options' => $options,
+            'formInitOption' => $formInitOption->createView(),
         ));
     }
 
     /*
-     * School Edition field
+     * School Edition option
      */
-    public function editField($school_id, $field_id)
+    public function editOption($school_id, $option_id)
     {
-        $field = $this->fieldRepository->find($field_id);
+        $option = $this->optionRepository->find($option_id);
 
         $school = $this->schoolRepository->find($school_id);
-        $fields = $this->fieldRepository->findBy(array(
+        $options = $this->optionRepository->findBy(array(
             'school' => $school
         ));
-        return $this->render('admin/school/field_edit.html.twig', array(
-            'field' => $field,
-            'fields' => $fields,
-            'school' => $field->getSchool(),
+        return $this->render('admin/school/option_edit.html.twig', array(
+            'option' => $option,
+            'options' => $options,
+            'school' => $option->getSchool(),
         ));
     }
 
     /*
-     * School Field delete
+     * School Option delete
      */
-    public function deleteField($school_id, $id, Request $request)
+    public function deleteOption($school_id, $id, Request $request)
     {
-        $field = $this->fieldRepository->find($id);
+        $option = $this->optionRepository->find($id);
 
         $response = new Response();
-        if ($field) {
-            $this->em->remove($field);
+        if ($option) {
+            $this->em->remove($option);
             $this->em->flush();
 
             $school = $this->schoolRepository->find($school_id);
-            $fields = $this->fieldRepository->findBy(array(
+            $options = $this->optionRepository->findBy(array(
                 'school' => $school
             ));
-            $publishedFields = $this->fieldRepository->findBy(array(
+            $publishedOptions = $this->optionRepository->findBy(array(
                 'school' => $school,
                 'published' => true,
             ));
-            $notPublishedFields = $this->fieldRepository->findBy(array(
+            $notPublishedOptions = $this->optionRepository->findBy(array(
                 'school' => $school,
                 'published' => false,
             ));
@@ -233,9 +228,9 @@ class FieldController extends AbstractController {
             $response->setContent(json_encode(array(
                 'state' => 1,
                 'id' => $id,
-                'fields' => $fields,
-                'publishedFields' => $publishedFields,
-                'notPublishedFields' => $notPublishedFields,
+                'options' => $options,
+                'publishedOptions' => $publishedOptions,
+                'notPublishedOptions' => $notPublishedOptions,
             )));
         }else{
             $response->setContent(json_encode(array(
@@ -247,31 +242,27 @@ class FieldController extends AbstractController {
     }
 
     /*
-     * School Field Edition common
+     * School Option Edition common
      */
-    public function doEditField($field_id, Request $request)
+    public function doEditOption($option_id, Request $request)
     {
-        $field = $this->fieldRepository->find($field_id);
+        $option = $this->optionRepository->find($option_id);
 
-        $fieldTemp = new Field();
-        $formField = $this->createForm(FieldEditType::class, $fieldTemp);
-        $formField->handleRequest($request);
+        $optionTemp = new Option();
+        $formOption = $this->createForm(OptionEditType::class, $optionTemp);
+        $formOption->handleRequest($request);
         $response = new Response();
-        if ($formField->isSubmitted() && $formField->isValid()) {
-            $field->setName($fieldTemp->getName());
-            $field->setDescription($fieldTemp->getDescription());
+        if ($formOption->isSubmitted() && $formOption->isValid()) {
+            $option->setName($optionTemp->getName());
+            $option->setContent($optionTemp->getContent());
 
-            $slug = $this->platformService->sluggify($fieldTemp->getSlug());
-            $field->setSlug($slug);
-
-            $this->em->persist($field);
+            $this->em->persist($option);
             $this->em->flush();
 
             $response->setContent(json_encode(array(
                 'state' => 1,
-                'name' => $field->getName(),
-                'slug' => $field->getSlug(),
-                'description' => $field->getDescription(),
+                'name' => $option->getName(),
+                'content' => $option->getContent(),
             )));
         }else{
             $response->setContent(json_encode(array(

@@ -11,7 +11,6 @@ use App\Repository\EventRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\CategorySchoolRepository;
 use App\Repository\DocumentRepository;
-use App\Repository\FieldRepository;
 use App\Repository\PostRepository;
 use App\Repository\SchoolPostRepository;
 use App\Repository\SubscriptionRepository;
@@ -51,7 +50,6 @@ class EventController extends AbstractController{
         SchoolService $schoolService,
         EventService $eventService,
         PlatformService $platformService,
-        FieldRepository $fieldRepository,
         PostRepository $postRepository,
         SchoolPostRepository $schoolPostRepository,
         DocumentRepository $documentRepository,
@@ -75,7 +73,6 @@ class EventController extends AbstractController{
         $this->schoolService = $schoolService;
         $this->eventService = $eventService;
         $this->platformService = $platformService;
-        $this->fieldRepository = $fieldRepository;
         $this->postRepository = $postRepository;
         $this->schoolPostRepository = $schoolPostRepository;
         $this->documentRepository = $documentRepository;

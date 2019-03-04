@@ -72,10 +72,10 @@ $(function() {
                                 $(".nb_published_schools").html(data.publishedSchools.length);
                                 $(".nb_not_published_schools").html(data.notPublishedSchools.length);
                                 break;
-                            case 'field':
-                                $(".nb_fields").html(data.fields.length);
-                                $(".nb_published_fields").html(data.publishedFields.length);
-                                $(".nb_not_published_fields").html(data.notPublishedFields.length);
+                            case 'option':
+                                $(".nb_options").html(data.options.length);
+                                $(".nb_published_options").html(data.publishedOptions.length);
+                                $(".nb_not_published_options").html(data.notPublishedOptions.length);
                                 break;
                             case 'contact':
                                 $(".nb_contacts").html(data.contacts.length);

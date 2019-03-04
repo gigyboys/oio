@@ -4,14 +4,11 @@ namespace App\Controller\Admin;
 use App\Entity\CategorySchool;
 use App\Entity\Cover;
 use App\Entity\Document;
-use App\Entity\Field;
 use App\Entity\Logo;
 use App\Entity\TypeSchool;
 use App\Form\CoverType;
 use App\Form\DocumentEditType;
 use App\Form\DocumentType;
-use App\Form\FieldEditType;
-use App\Form\FieldInitType;
 use App\Form\LogoType;
 use App\Form\SchoolDescriptionType;
 use App\Form\SchoolInitType;
@@ -23,7 +20,6 @@ use App\Repository\CategorySchoolRepository;
 use App\Repository\CoverRepository;
 use App\Repository\DocumentAuthorizationRepository;
 use App\Repository\DocumentRepository;
-use App\Repository\FieldRepository;
 use App\Repository\LogoRepository;
 use App\Repository\ParameterRepository;
 use App\Repository\TypeRepository;
@@ -52,7 +48,6 @@ class DocumentController extends AbstractController {
         TypeRepository $typeRepository,
         LogoRepository $logoRepository,
         CoverRepository $coverRepository,
-        FieldRepository $fieldRepository,
         DocumentRepository $documentRepository,
         DocumentAuthorizationRepository $documentAuthorizationRepository,
         ObjectManager $em
@@ -68,7 +63,6 @@ class DocumentController extends AbstractController {
         $this->typeRepository = $typeRepository;
         $this->logoRepository = $logoRepository;
         $this->coverRepository = $coverRepository;
-        $this->fieldRepository = $fieldRepository;
         $this->documentRepository = $documentRepository;
         $this->documentAuthorizationRepository = $documentAuthorizationRepository;
 

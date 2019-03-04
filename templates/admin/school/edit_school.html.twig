@@ -80,21 +80,11 @@
 							<td style="padding:5px"><span id="sl_view_slogan">{{ school.slogan }}</span></td>
 						</tr>
 						<tr>
-							{#{% set type = getType(school) %}#}
 							<td>Type</td>
 							<td>:</td>
 							<td style="padding:5px">
 								<span id="sl_view_type">
                                     {{ school.type.name }}
-								</span>
-							</td>
-						</tr>
-						<tr>
-							<td>Option</td>
-							<td>:</td>
-							<td style="padding:5px">
-								<span id="sl_view_option">
-									{{ school.option.name }}
 								</span>
 							</td>
 						</tr>
@@ -126,27 +116,6 @@
 							<td>Type</td>
 							<td>:</td>
 							<td style="padding:5px">
-                                {#
-                                {% if type is not null and type.id == 1 %}
-									<span>
-										<input id="typepublic" name="typeId" value="1" type="radio" checked>
-										<label for="typepublic">Publique</label>
-									</span>
-									<span>
-										<input id="typeprivate" name="typeId" value="2" type="radio">
-										<label for="typeprivate">Privé</label>
-										</span>
-								{% else %}
-									<span>
-										<input id="typepublic" name="typeId" value="1" type="radio">
-										<label for="typepublic">Publique</label>
-									</span>
-									<span>
-										<input id="typeprivate" name="typeId" value="2" type="radio" checked>
-										<label for="typeprivate">Privé</label>
-									</span>
-								{% endif %}
-								#}
                                 {% for type in types %}
                                     {% set checkedType = "" %}
                                     {% if school.type.id == type.id %}
@@ -157,22 +126,6 @@
 										<label for="type_{{ type.id }}">{{ type.name }}</label>
 									</span>
                                 {% endfor %}
-							</td>
-						</tr>
-						<tr>
-							<td>Option</td>
-							<td>:</td>
-							<td style="padding:5px">
-								{% for option in options %}
-									{% set checkedOption = "" %}
-									{% if school.option.id == option.id %}
-                                        {% set checkedOption = "checked" %}
-									{% endif %}
-									<span>
-										<input id="option_{{ option.id }}" name="optionId" value="{{ option.id }}" type="radio" {{ checkedOption }}>
-										<label for="option_{{ option.id }}">{{ option.name }}</label>
-									</span>
-								{% endfor %}
 							</td>
 						</tr>
 					</table>

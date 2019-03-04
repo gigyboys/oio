@@ -3,12 +3,10 @@
 namespace App\DataFixtures;
 
 use App\Entity\DocumentAuthorization;
-use App\Entity\Option;
 use App\Entity\Parameter;
 use App\Entity\School;
 use App\Entity\Type;
 use App\Entity\User;
-use App\Repository\OptionRepository;
 use App\Repository\TypeRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -26,14 +24,13 @@ class AppFixtures extends Fixture
     {
         $this->loadUser($em);
         $typeObjectArray = $this->loadType($em);
-        $optionObjectArray = $this->loadOption($em);
         $this->loadDocumentAuthorization($em);
         $this->loadParameter($em);
 
-        $this->loadSchool($em, $typeObjectArray[0], $optionObjectArray[0]);
+        $this->loadSchool($em, $typeObjectArray[0]);
     }
 
-    public function loadSchool(ObjectManager $em, $type, $option)
+    public function loadSchool(ObjectManager $em, $type)
     {
         //school1
         $school = new School();
@@ -49,9 +46,6 @@ class AppFixtures extends Fixture
         //position
         $position = 1;
         $school->setPosition($position);
-
-        //option
-        $school->setOption($option);
 
         //type
         $school->setType($type);
@@ -152,49 +146,6 @@ class AppFixtures extends Fixture
             $em->persist($entity);
         }
         $em->flush();
-    }
-
-    public function loadOption(ObjectManager $em)
-    {
-        $optionArrays = array(
-            array(
-                'name' => "filière",
-                'plural_name' => "filières",
-            ),
-            array(
-                'name' => "formation",
-                'plural_name' => "formations",
-            ),
-            array(
-                'name' => "mention",
-                'plural_name' => "mentions",
-            ),
-            array(
-                'name' => "branche",
-                'plural_name' => "branches",
-            ),
-            array(
-                'name' => "département",
-                'plural_name' => "départements",
-            ),
-            array(
-                'name' => "cursus",
-                'plural_name' => "cursus",
-            ),
-        );
-
-        $optionObjectArray = array();
-        foreach ($optionArrays as $optionArray)
-        {
-            $entity = new Option();
-            $entity->setName($optionArray['name']);
-            $entity->setPluralName($optionArray['plural_name']);
-            $em->persist($entity);
-            $optionObjectArray[] = $entity;
-        }
-        $em->flush();
-
-        return $optionObjectArray;
     }
 
     public function loadParameter(ObjectManager $em)
