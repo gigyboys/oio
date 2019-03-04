@@ -8,7 +8,6 @@ use App\Form\EvaluationType;
 use App\Repository\CategoryRepository;
 use App\Repository\CategorySchoolRepository;
 use App\Repository\CommentRepository;
-use App\Repository\FieldRepository;
 use App\Repository\PostRepository;
 use App\Repository\TagPostRepository;
 use App\Repository\TagRepository;

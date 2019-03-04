@@ -26,12 +26,6 @@ class School
     private $type;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Option")
-     * @ORM\JoinColumn(name="option_id", nullable=false)
-     */
-    private $option;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\View", mappedBy="school")
      */
     private $views;
@@ -116,18 +110,6 @@ class School
     public function getType()
     {
         return $this->type;
-    }
-
-    public function setOption($option)
-    {
-        $this->option = $option;
-
-        return $this;
-    }
-
-    public function getOption()
-    {
-        return $this->option;
     }
 
     public function addView($view)

@@ -1,7 +1,7 @@
 {% extends "back.html.twig" %}
 
 {% block title %}
-  {{ school.name }} - {{ school.option.pluralName | capitalize }}
+  {{ school.name }} - Options
 {% endblock %}
 
 {% block body_header %}
@@ -20,7 +20,7 @@
 			</span>
 			{{ include("admin/school/include/school_other_action.html.twig") }}
 		</span> 
-		<span class="bc1"><a href="{{ path('admin_school_field', {'school_id': school.id}) }}"><span>{{ school.option.pluralName | capitalize }}</span></a> </span>
+		<span class="bc1"><a href="{{ path('admin_school_option', {'school_id': school.id}) }}"><span>Options</span></a> </span>
 	</div>
 	<div style="padding:8px; float:right">
 		<div style="float:left">
@@ -67,15 +67,15 @@
 	</div>
 	
 	<div style="background:#ddd; padding: 5px; margin:5px; border:1px solid #bbb">
-		<span><img src="{{ asset('image/list_icon.png') }}" style="width:12px; height:auto" /> Liste des {{ school.option.pluralName }}</span>
-		<span class="add_field_btn" data-target="{{ path('admin_school_field_add_ajax', {'school_id': school.id}) }}" style="cursor:pointer;display:inline-block; float:right"> <img src="{{ asset('image/add_icon.png') }}" style="width:12px; height:auto" /> Nouvelle filière</span>
+		<span><img src="{{ asset('image/list_icon.png') }}" style="width:12px; height:auto" /> Liste des options</span>
+		<span class="add_option_btn" data-target="{{ path('admin_school_option_add_ajax', {'school_id': school.id}) }}" style="cursor:pointer;display:inline-block; float:right"> <img src="{{ asset('image/add_icon.png') }}" style="width:12px; height:auto" /> Nouvelle option</span>
 	</div>
 	
 	<div class="a_datatable">
 		<div class="a_datatable_head">
 			<div class="a_datatable_head_left">
 				<span style="display:inline-block; margin-top:5px; margin-left:6px"> Rechercher :
-					<input type="text" class="default_input a_list_search_input" data-target-id="list_fields"/><!--
+					<input type="text" class="default_input a_list_search_input" data-target-id="list_options"/><!--
 					--><span class="a_list_search_reset"><img src="{{ asset('image/cross_icon.png') }}" style="width:12px; height:auto" /></span>
 				</span>
 			</div>
@@ -85,24 +85,24 @@
 		</div>
 		
 		<div class="a_datatable_body">
-			<table class="a_table" id="list_fields">
+			<table class="a_table" id="list_options">
 				<tr class="a_table_head">
 					<th class="a_table_cell_id" style="width: 50px; text-align:center">id</th>
 					<th class="ta_l">Nom</th>
 					<th class="ta_c">Publié</th>
 					<th class="a_table_cell_action ta_c">Actions</th>
 				</tr>
-				{% for field in fields %}
-					<tr class="a_table_line field_item" id="field_{{ field.id }}" data-text="{{ field.name }}" style="display:table-row; position:relative:z-index:0">
+				{% for option in options %}
+					<tr class="a_table_line option_item" id="option_{{ option.id }}" data-text="{{ option.name }}" style="display:table-row; position:relative:z-index:0">
 						<td class="a_table_cell_id" style="height:30px; width: 50px; text-align:center">
-							<div>{{ field.id }}</div>
+							<div>{{ option.id }}</div>
 						</td>
 						<td>
-							<a href="{{ path('admin_school_field_edit', {'school_id': school.id, 'field_id': field.id}) }}">{{ field.name }}</a>
+							<a href="{{ path('admin_school_option_edit', {'school_id': school.id, 'option_id': option.id}) }}">{{ option.name }}</a>
 						</td>
 						<td style="text-align:center">
-							<span class="toggle_case" data-entity="field" data-target="{{ path('admin_school_field_toggle_publication', {'school_id': school.id, 'field_id': field.id}) }}">
-								{% if field.published %}
+							<span class="toggle_case" data-entity="option" data-target="{{ path('admin_school_option_toggle_publication', {'school_id': school.id, 'option_id': option.id}) }}">
+								{% if option.published %}
 									<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
 									<span class="redstate"><span class="redpastille"></span></span>
 								{% else %}
@@ -114,8 +114,8 @@
 							</span>
 						</td>
 						<td class="a_table_cell_action ta_c">
-							<a href="{{ path('admin_school_field_edit', {'school_id': school.id, 'field_id': field.id}) }}" data-name="{{ field.name }}" style="cursor:pointer"><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /></a>
-							<span class="delete_field" data-id="{{ field.id }}" data-target="{{ path('admin_school_field_delete', {'school_id': school.id, 'id': field.id}) }}" data-name="{{ field.name }}" style="cursor:pointer"><img src="{{ asset('image/delete_icon.png') }}" style="width:12px; height:auto" /></span>
+							<a href="{{ path('admin_school_option_edit', {'school_id': school.id, 'option_id': option.id}) }}" data-name="{{ option.name }}" style="cursor:pointer"><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /></a>
+							<span class="delete_option" data-id="{{ option.id }}" data-target="{{ path('admin_school_option_delete', {'school_id': school.id, 'id': option.id}) }}" data-name="{{ option.name }}" style="cursor:pointer"><img src="{{ asset('image/delete_icon.png') }}" style="width:12px; height:auto" /></span>
 						</td>
 					</tr>
 				{% endfor %}
@@ -124,7 +124,7 @@
 		
 		<div class="a_datatable_foot">
 			<div class="a_datatable_foot_left">
-				<span style="display:inline-block; margin-top:6px; margin-left:6px" class="result_state">{{ fields | length }} resultat(s)</span>
+				<span style="display:inline-block; margin-top:6px; margin-left:6px" class="result_state">{{ options | length }} resultat(s)</span>
 			</div>
 			<div class="a_datatable_foot_right">
 				{#<span>right</span>#}
@@ -134,7 +134,7 @@
 {% endblock %}
 
 {% block body_footer %}
-	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_fields">{{ fields | length }}</span> filières </span> |
-	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_published_fields">{{ publishedFields | length }}</span> publiées</span> |
-	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_not_published_fields">{{ notPublishedFields | length }}</span> non publiées</span>
+	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_options">{{ options | length }}</span> options </span> |
+	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_published_options">{{ publishedOptions | length }}</span> publiées</span> |
+	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_not_published_options">{{ notPublishedOptions | length }}</span> non publiées</span>
 {% endblock %}

@@ -2,27 +2,26 @@
 
 namespace App\Form;
 
-use App\Entity\Field;
+use App\Entity\Option;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class FieldEditType extends AbstractType
+class OptionEditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('name')
-            ->add('slug')
-            ->add('description')
+            ->add('content')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Field::class,
+            'data_class' => Option::class,
             'csrf_protection' => false,
         ));
     }

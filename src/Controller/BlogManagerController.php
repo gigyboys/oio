@@ -13,7 +13,6 @@ use App\Form\PostInitType;
 use App\Form\PostType;
 use App\Repository\CategoryRepository;
 use App\Repository\CategorySchoolRepository;
-use App\Repository\FieldRepository;
 use App\Repository\PostIllustrationRepository;
 use App\Repository\PostRepository;
 use App\Repository\SchoolPostRepository;

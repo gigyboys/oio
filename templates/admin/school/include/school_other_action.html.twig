@@ -6,8 +6,8 @@
 	<a class="dd_item" href="{{ path('admin_school_categories', {'school_id': school.id}) }}">
 		<span class="icon"><img src="{{ asset('image/list_icon.png') }}" /></span><span class="label">{{ 'Categories' | trans }}</span>
 	</a>
-	<a class="dd_item" href="{{ path('admin_school_field', {'school_id': school.id}) }}">
-		<span class="icon"><img src="{{ asset('image/list_icon.png') }}" /></span><span class="label"> <span class="opt_name_{{ school.id }} p">{{ school.option.pluralName | capitalize }}</span></span>
+	<a class="dd_item" href="{{ path('admin_school_option', {'school_id': school.id}) }}">
+		<span class="icon"><img src="{{ asset('image/list_icon.png') }}" /></span><span class="label"> <span class="opt_name_{{ school.id }} p">Options</span></span>
 	</a>
 	<a class="dd_item" href="{{ path('admin_school_contact', {'school_id': school.id}) }}">
 		<span class="icon"><img src="{{ asset('image/list_icon.png') }}" /></span><span class="label">Contacts</span>

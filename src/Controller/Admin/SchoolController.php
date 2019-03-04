@@ -137,14 +137,12 @@ class SchoolController extends AbstractController {
         $school = $this->schoolRepository->find($id);
 
         $types = $this->typeRepository->findAll();
-        $options = $this->optionRepository->findAll();
         $schoolTemp = new SchoolInit();
         $formSchool = $this->createForm(SchoolDescriptionType::class, $schoolTemp);
 
         return $this->render('admin/school/edit_school.html.twig', array(
             'school' => $school,
             'types' => $types,
-            'options' => $options,
             'formDesc' => $formSchool->createView()
         ));
     }
@@ -180,10 +178,6 @@ class SchoolController extends AbstractController {
                 $position = $lastSchool->getPosition() + 1;
             }
             $school->setPosition($position);
-
-            //option
-            $firstOption = $this->optionRepository->find(1);
-            $school->setOption($firstOption);
 
             //type
             $type = $this->typeRepository->find($schoolInit->getTypeId());
@@ -272,10 +266,6 @@ class SchoolController extends AbstractController {
 
             $school->setSlug($slug);
 
-            //option
-            $option = $this->optionRepository->find($schoolTemp->getOptionId());
-            $school->setOption($option);
-
             //type
             $type = $this->typeRepository->find($schoolTemp->getTypeId());
             if($type){
@@ -299,9 +289,6 @@ class SchoolController extends AbstractController {
                 'slogan'        => $school->getSlogan(),
                 'typeId'        => $type->getId(),
                 'typeName'      => $type->getName(),
-                'optionId'      => $option->getId(),
-                'optionName'    => ucfirst($option->getName()),
-                'optionPluralName' => ucfirst($option->getPluralName()),
             )));
         }
 

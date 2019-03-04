@@ -4,14 +4,11 @@ namespace App\Controller\Admin;
 use App\Entity\CategorySchool;
 use App\Entity\Cover;
 use App\Entity\Document;
-use App\Entity\Field;
 use App\Entity\Logo;
 use App\Entity\TypeSchool;
 use App\Form\CoverType;
 use App\Form\DocumentEditType;
 use App\Form\DocumentType;
-use App\Form\FieldEditType;
-use App\Form\FieldInitType;
 use App\Form\LogoType;
 use App\Form\SchoolDescriptionType;
 use App\Form\SchoolInitType;
@@ -24,7 +21,6 @@ use App\Repository\CoverRepository;
 use App\Repository\DocumentAuthorizationRepository;
 use App\Repository\DocumentRepository;
 use App\Repository\EvaluationRepository;
-use App\Repository\FieldRepository;
 use App\Repository\LogoRepository;
 use App\Repository\ParameterRepository;
 use App\Repository\TypeRepository;
@@ -53,7 +49,6 @@ class EvaluationController extends AbstractController {
         TypeRepository $typeRepository,
         LogoRepository $logoRepository,
         CoverRepository $coverRepository,
-        FieldRepository $fieldRepository,
         DocumentRepository $documentRepository,
         EvaluationRepository $evaluationRepository,
         DocumentAuthorizationRepository $documentAuthorizationRepository,
@@ -70,7 +65,6 @@ class EvaluationController extends AbstractController {
         $this->typeRepository = $typeRepository;
         $this->logoRepository = $logoRepository;
         $this->coverRepository = $coverRepository;
-        $this->fieldRepository = $fieldRepository;
         $this->documentRepository = $documentRepository;
         $this->evaluationRepository = $evaluationRepository;
         $this->documentAuthorizationRepository = $documentAuthorizationRepository;

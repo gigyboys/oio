@@ -75,7 +75,7 @@
 		<div class="a_datatable_head">
 			<div class="a_datatable_head_left">
 				<span style="display:inline-block; margin-top:5px; margin-left:6px"> Rechercher :
-					<input type="text" class="default_input a_list_search_input" data-target-id="list_fields"/><!--
+					<input type="text" class="default_input a_list_search_input" data-target-id="list_documents"/><!--
 					--><span class="a_list_search_reset"><img src="{{ asset('image/cross_icon.png') }}" style="width:12px; height:auto" /></span>
 				</span>
 			</div>
@@ -85,7 +85,7 @@
 		</div>
 		
 		<div class="a_datatable_body">
-			<table class="a_table" id="list_fields">
+			<table class="a_table" id="list_documents">
 				<tr class="a_table_head">
 					<th class="a_table_cell_id" style="width: 50px; text-align:center">id</th>
 					<th class="ta_l">Nom</th>
@@ -98,7 +98,7 @@
 					<th class="a_table_cell_action ta_c">Actions</th>
 				</tr>
 				{% for document in documents %}
-					<tr class="a_table_line field_item" id="field_{{ document.id }}" data-text="{{ document.name }}" style="display:table-row; position:relative;z-index:0">
+					<tr class="a_table_line document_item" id="document_{{ document.id }}" data-text="{{ document.name }}" style="display:table-row; position:relative;z-index:0">
 						<td class="a_table_cell_id" style="height:30px; width: 50px; text-align:center">
 							<div>{{ document.id }}</div>
 						</td>

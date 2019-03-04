@@ -141,8 +141,7 @@ $(function() {
             'shortName'	: bloc_editable.find("#sl_input_shortname").val(),
             'slug' 		: bloc_editable.find("#sl_input_slug").val(),
             'slogan' 	: bloc_editable.find("#sl_input_slogan").val(),
-            'typeId' 	: bloc_editable.find("input[name=typeId]:checked").val(),
-            'optionId' 	: bloc_editable.find("input[name=optionId]:checked").val()
+            'typeId' 	: bloc_editable.find("input[name=typeId]:checked").val()
 		};
 		loadBlocEdit(bloc_editable);
         $.ajax({
@@ -158,9 +157,6 @@ $(function() {
 					bloc_editable.find("#sl_view_slogan").text(data.slogan);
 					/*type*/
                     bloc_editable.find("#sl_view_type").text(data.typeName);
-                    /*options*/
-                    bloc_editable.find("#sl_view_option").text(data.optionName);
-                    $(".opt_name_"+data.schoolId).text(data.optionPluralName)
 					resetBlocEdit(bloc_editable);
 				}
 				else{
@@ -209,17 +205,15 @@ $(function() {
     });
 	
 	/*
-	* save common field
+	* save option
 	*/
-    $('#btn_save_field_common').on('click', function(){
+    $('#btn_save_option').on('click', function(){
         var $this = $(this);
 		var bloc_editable = $this.closest(".bloc_editable");
         var target = $this.data('target');
 		var data = {
-			name : bloc_editable.find("#field_input_name").val(),
-			slug : bloc_editable.find("#field_input_slug").val(),
-			/*description : bloc_editable.find(".field_input_description").val(),*/
-			description : CKEDITOR.instances['field_input_description'].getData()
+			name : bloc_editable.find("#option_input_name").val(),
+			content : CKEDITOR.instances['option_input_content'].getData()
 		};
 		loadBlocEdit(bloc_editable);
         $.ajax({
@@ -229,9 +223,8 @@ $(function() {
             dataType : 'json',
             success: function(data){
 				if(data.state){
-					bloc_editable.find("#field_view_name").text(data.name);
-					bloc_editable.find("#field_view_slug").text(data.slug);
-					bloc_editable.find("#field_view_description").html(data.description);
+					bloc_editable.find("#option_view_name").text(data.name);
+					bloc_editable.find("#option_view_content").html(data.content);
 					resetBlocEdit(bloc_editable);
 				}
 				else{
@@ -336,7 +329,7 @@ $(function() {
     });
 	
 	//add entity common
-    $('body').on('click','.add_field_btn, .add_contact_btn',function(e){
+    $('body').on('click','.add_option_btn, .add_contact_btn',function(e){
 		var target = $(this).data("target");
 		
 		var content = "<div style='text-align:center;padding:10px; color:#fff'>Chargement ...</div>";
@@ -360,18 +353,18 @@ $(function() {
 		
     });
 	
-	//delete field
-	$('body').on('click','.delete_field',function(e){
+	//delete option
+	$('body').on('click','.delete_option',function(e){
 		var id = $(this).data("id");
 		var name = $(this).data("name");
 		var target = $(this).data("target");
 		
 		var content = "";
 		content += '<div style="padding:10px; width:auto; background:#fff; border-radius:3px">';
-			content += '<div style="text-align:center;padding:10px 0"> Voulez vous effectuer la suppression de la filière "<strong>'+name+'</strong>"?</div>';
+			content += '<div style="text-align:center;padding:10px 0"> Voulez vous effectuer la suppression de l\'option "<strong>'+name+'</strong>"?</div>';
 			content += '<div style="text-align:center">	';
 				content += '<span class="button_closable" style="background:#bbb; border-radius: 3px; cursor:pointer; display:inline-block; margin:auto; padding:5px;margin:5px">	Annuler	</span>';
-				content += '<span class="confirm_delete_field button_closable" data-entity="field" data-id="'+id+'" data-target="'+target+'" style="background:#bbb; border-radius: 3px; cursor:pointer; display:inline-block; margin:auto; padding:5px;margin:5px">	Confirmer	</span>	';
+				content += '<span class="confirm_delete_option button_closable" data-entity="option" data-id="'+id+'" data-target="'+target+'" style="background:#bbb; border-radius: 3px; cursor:pointer; display:inline-block; margin:auto; padding:5px;margin:5px">	Confirmer	</span>	';
 			content += '</div>';
 		content += '</div>';
         
@@ -606,7 +599,7 @@ $(function() {
     });
 	
 	//confirm delete
-	$('body').on('click','.confirm_delete_field, .confirm_delete_contact, .confirm_delete_sl_category, .confirm_delete_evaluation',function(e){
+	$('body').on('click','.confirm_delete_option, .confirm_delete_contact, .confirm_delete_sl_category, .confirm_delete_evaluation',function(e){
 		var $this = $(this);
 		var id = $this.data("id");
         var target = $this.data('target');
@@ -624,11 +617,11 @@ $(function() {
 				if(data.state){
                     var entity = $this.attr('data-entity');
                     switch (entity) {
-                        case 'field':
-                            $( "#field_"+data.id ).remove();
-                            $(".nb_fields").html(data.fields.length);
-                            $(".nb_published_fields").html(data.publishedFields.length);
-                            $(".nb_not_published_fields").html(data.notPublishedFields.length);
+                        case 'option':
+                            $( "#option_"+data.id ).remove();
+                            $(".nb_options").html(data.options.length);
+                            $(".nb_published_options").html(data.publishedOptions.length);
+                            $(".nb_not_published_options").html(data.notPublishedOptions.length);
                             break;
                         case 'schoolContact':
                             $( "#contact_"+data.id ).remove();

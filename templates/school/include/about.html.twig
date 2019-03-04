@@ -7,11 +7,13 @@
 						<i class="fas fa-question-circle"></i> Présentation
 					</div>
 				</div>{#
-				#}<div class="t_header_item" id="field">
-					<div class="t_header_item_text">
-						<i class="fas fa-clipboard-list"></i> {{ school.option.pluralName | capitalize }}
-					</div>
-				</div>{#
+				#}{% for option in options %}{#
+					#}<div class="t_header_item" id="option_{{ option.id }}">
+						<div class="t_header_item_text">
+							<i class="far fa-circle"></i> {{ option.name }}
+						</div>
+					</div>{#
+				#}{% endfor %}{#
 				#}<div class="t_header_item" id="contact">
 					<div class="t_header_item_text">
 						<i class="far fa-address-book"></i> Contacts
@@ -29,25 +31,11 @@
 					{{ school.description | raw}}
 				</div>
 			</div>
-			<div class="t_content_item" id="c_field">
-				{# fields #}
-				{% if fields %}
-					{% for field in fields %}
-						<div class="mg_b10">
-							<div>
-								<strong><i class="fas fa-dot-circle"></i> {{ field.name }}</strong>
-							</div>
-							{% if field.description is null or field.description | trim == "" %}
-							{% else %}
-								<div class="sep mg_v5"></div>
-								<div class="d_b">
-									{{ field.description | raw }}
-								</div>
-							{% endif %}
-						</div>
-					{% endfor %}
-				{% endif %}
-			</div>
+			{% for option in options %}
+				<div class="t_content_item" id="c_option_{{ option.id }}">
+					{{ option.content | raw }}
+				</div>
+			{% endfor %}
 			<div class="t_content_item" id="c_contact">
 				{{ include("school/include/contact.html.twig") }}
 			</div>
