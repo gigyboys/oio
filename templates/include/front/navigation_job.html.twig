@@ -1,1 +1,18 @@
-{# navigation for job module #}
+<li class="dd">
+    <a href="{{ path('job') }}" class="dds">
+        <span class="va_m d_ib">Emplois</span>
+    </a>
+    <div class="ddt menu_sl" data-display="block">
+        <div class="link_wrap">
+            <a href="{{ path('job') }}" title="Tous">
+                <span>Tous</span>
+            </a>
+            <a href="{{ path('job_sector_view', {'slug':'commercial'}) }}" title="Commercial">
+                <span>Commercial</span>
+            </a>
+            <a href="{{ path('job_sector_view', {'slug':'informatique'}) }}" title="Informatique">
+                <span>Informatique</span>
+            </a>
+        </div>
+    </div>
+</li>

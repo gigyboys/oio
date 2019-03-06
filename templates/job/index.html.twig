@@ -1,15 +1,22 @@
 {% extends "front.html.twig" %}
-
+{% block styledirect %}
+		<link rel="stylesheet" href="{{ asset('css/jb.css') }}">
+		<style type="text/css">
+				#search{background: #327fb1 url('{{ asset('image/cover.jpg') }}') no-repeat scroll center center / cover ;}
+		</style>
+{% endblock %}
 {% block title %}
   Emplois
 {% endblock %}
 
 {% block body %}
-	<div class="cr">
-		<div class="ct">
-			<div class="mg_10">
-				Emplois
+<div class="cr">
+	<div class="ct">
+		<div class="mg_10">
+			<div class="job_item">
+				job
 			</div>
 		</div>
 	</div>
+</div>
 {% endblock %}

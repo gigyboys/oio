@@ -220,6 +220,8 @@ class PlatformService
             $view->setPost($entity);
         }else if($entity instanceof Event){
             $view->setEvent($entity);
+        }else if($entity instanceof Job){
+            $view->setJob($entity);
         }
 
         $user = $this->token->getToken()->getUser();

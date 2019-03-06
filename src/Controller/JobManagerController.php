@@ -168,6 +168,22 @@ class JobManagerController extends AbstractController {
         return $response;
     }
 
+    public function doToValidJob($job_id, Request $request)
+    {
+        $job = $this->jobRepository->find($job_id);
+        $user = $this->getUser();
+
+        if($job && $user && !$job->getTovalid() && $job->getUser()->getId() == $user->getId()){
+            $job->setTovalid(true);
+            $this->em->persist($job);
+            $this->em->flush();
+            return $this->redirectToRoute('job_manager_edit', array(
+                'job_id' => $job->getId()
+            ));
+        }
+        return $this->redirectToRoute('job');
+    }
+
     public function togglePublication($job_id, Request $request)
     {
         $user = $this->getUser();

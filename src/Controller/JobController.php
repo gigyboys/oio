@@ -15,6 +15,7 @@ use App\Repository\JobRepository;
 use App\Repository\CVRepository;
 use App\Repository\JobApplicationRepository;
 use App\Repository\JobApplicationAttachmentRepository;
+use App\Repository\SectorRepository;
 use App\Service\PlatformService;
 use App\Service\JobService;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -33,6 +34,7 @@ class JobController extends AbstractController{
         CVRepository $CVRepository,
         JobApplicationRepository $jobApplicationRepository,
         JobApplicationAttachmentRepository $jobApplicationAttachmentRepository,
+        SectorRepository $sectorRepository,
         JobService $jobService,
         PlatformService $platformService,
         ObjectManager $em
@@ -42,6 +44,7 @@ class JobController extends AbstractController{
         $this->CVRepository = $CVRepository;
         $this->jobApplicationRepository = $jobApplicationRepository;
         $this->jobApplicationAttachmentRepository = $jobApplicationAttachmentRepository;
+        $this->sectorRepository = $sectorRepository;
         $this->jobService = $jobService;
         $this->platformService = $platformService;
         $this->em = $em;
@@ -54,6 +57,31 @@ class JobController extends AbstractController{
         $response = $this->render('job/index.html.twig', [
             'entityView' => 'job',
         ]);
+
+        return $response;
+    }
+
+    public function viewSectorById($id, Request $request): Response
+    {
+        $sector = $this->sectorRepository->find($id);
+        return $this->redirectToRoute('job_sector_view', array('slug' => $sector->getSlug()));
+    }
+
+    public function viewSector($slug, $page, Request $request)
+    {
+        $sector = $this->sectorRepository->findOneBy(array(
+            'slug' => $slug,
+        ));
+
+        if($sector){
+            $response = $this->render('job/view_sector.html.twig', array(
+                'sector' => $sector,
+                'entityView' => 'job',
+            ));
+        }else{
+            $url = $this->get('router')->generate('job');
+            return new RedirectResponse($url);
+        }
 
         return $response;
     }

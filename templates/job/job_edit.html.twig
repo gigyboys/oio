@@ -10,62 +10,85 @@
 		<div class="ct">
 			<div class="mg_10">
 				{{ include("job/include/header_job_edit.html.twig") }}
-				<div class="meta_info mg_v10">
-					<div class="meta_illustration" id="change_job_illustration" data-target="{{ path('job_manager_illustration_popup', {'job_id' : job.id})}}">
-						{# twig extension #}
-						{% set illustration = jobIllustration(job) %}
-						<label>
-							<span class="text"><i class="fas fa-pen-square"></i><br />Cliquez ici pour éditer l'illustration de l'offre</span>
-							<img id="job_illustration" class="600x250 c_p" src="{{ illustration | imagine_filter('600x250') }}" alt="img job" />
-						</label>
-					</div>
+				{% if job.tovalid == false or job.valid %}
+					<div class="meta_info mg_v10">
+						<div class="meta_illustration" id="change_job_illustration" data-target="{{ path('job_manager_illustration_popup', {'job_id' : job.id})}}">
+							{# twig extension #}
+							{% set illustration = jobIllustration(job) %}
+							<label>
+								<span class="text"><i class="fas fa-pen-square"></i><br />Cliquez ici pour éditer l'illustration de l'offre</span>
+								<img id="job_illustration" class="600x250 c_p" src="{{ illustration | imagine_filter('600x250') }}" alt="img job" />
+							</label>
+						</div>
 
-					<div class="meta_title">
-						<form id="form_job_edit" action="{{ path('job_manager_doedit', {'job_id': job.id}) }}">
-							<div class="bloc_editable">
-								<div class="bloc_view">
-									<div class="pd_l5"><strong>Titre du poste : <span class="error_title error_txt"></span></strong></div>
-									<div class="pd_5"><span id="job_view_title">{{ job.title }}</span></div>
+						<div class="meta_title">
+							<form id="form_job_edit" action="{{ path('job_manager_doedit', {'job_id': job.id}) }}">
+								<div class="bloc_editable">
+									<div class="bloc_view">
+										<div class="pd_l5"><strong>Titre du poste : <span class="error_title error_txt"></span></strong></div>
+										<div class="pd_5"><span id="job_view_title">{{ job.title }}</span></div>
 
-									<div class="pd_l5"><strong>Slug :</strong></div>
-									<div class="pd_5"><span id="job_view_slug">{{ job.slug }}</span></div>
+										<div class="pd_l5"><strong>Slug :</strong></div>
+										<div class="pd_5"><span id="job_view_slug">{{ job.slug }}</span></div>
 
-									<div class="pd_l5"><strong>Secteur :</strong></div>
-									<div class="pd_5"><span id="job_view_sector">{{ job.sector.name }}</span></div>
-								</div>
-								<div class="bloc_edit d_n">
-									<div class="pd_l5">Titre du poste *: <span class="error_title error_txt"></span></span></div>
-									<div class="pd_5"><input type="text" id="job_input_title" class="default_input" name="title" value="{{ job.title }}" /></div>
-									
-									<div class="pd_l5">Slug *:</div>
-									<div class="pd_5"><input type="text" id="job_input_slug" class="default_input" name="slug" value="{{ job.slug }}" /></div>
-												
-									<div class="pd_l5"><label for="sectorId" class="required">Secteur * : </label></div>
-									<div class="pd_5">
-										<select id="sectorId" name="sectorId" required="required"  class="default_input">
-											{% for sector in sectors %}
-											{% set selected = "" %}
-											{% if job.sector.id == sector.id %}
-											{% set selected = "selected" %}
-											{% endif %}
-												<option value="{{ sector.id }}" {{ selected }}>{{ sector.name }}</option>
-											{% endfor %}
-										</select>
+										<div class="pd_l5"><strong>Secteur :</strong></div>
+										<div class="pd_5"><span id="job_view_sector">{{ job.sector.name }}</span></div>
+									</div>
+									<div class="bloc_edit d_n">
+										<div class="pd_l5">Titre du poste *: <span class="error_title error_txt"></span></span></div>
+										<div class="pd_5"><input type="text" id="job_input_title" class="default_input" name="title" value="{{ job.title }}" /></div>
+										
+										<div class="pd_l5">Slug *:</div>
+										<div class="pd_5"><input type="text" id="job_input_slug" class="default_input" name="slug" value="{{ job.slug }}" /></div>
+													
+										<div class="pd_l5"><label for="sectorId" class="required">Secteur * : </label></div>
+										<div class="pd_5">
+											<select id="sectorId" name="sectorId" required="required"  class="default_input">
+												{% for sector in sectors %}
+												{% set selected = "" %}
+												{% if job.sector.id == sector.id %}
+												{% set selected = "selected" %}
+												{% endif %}
+													<option value="{{ sector.id }}" {{ selected }}>{{ sector.name }}</option>
+												{% endfor %}
+											</select>
+										</div>
+									</div>
+									<div class="separator"></div>
+									<div class="bloc_action mg_5">
+										<span class="btn_edit standar_button">Modifier</span>
+										<button class="btn_save standar_button d_n" id="btn_doedit_job" type="submit" form="form_job_edit" value="Submit">Enregistrer</button>
+										<span class="btn_reset standar_button d_n">Annuler</span>
+										<span class="btn_loading d_n"><img src="{{ asset('image/tail-spin.svg') }}"/>Chargement...</span>
 									</div>
 								</div>
-								<div class="separator"></div>
-								<div class="bloc_action mg_5">
-									<span class="btn_edit standar_button">Modifier</span>
-									<button class="btn_save standar_button d_n" id="btn_doedit_job" type="submit" form="form_job_edit" value="Submit">Enregistrer</button>
-									<span class="btn_reset standar_button d_n">Annuler</span>
-									<span class="btn_loading d_n"><img src="{{ asset('image/tail-spin.svg') }}"/>Chargement...</span>
-								</div>
-							</div>
-						</form>
+							</form>
+						</div>
+						<div class="both"></div>
 					</div>
-					<div class="both"></div>
-				</div>
+				{% else %}
+					<div class="meta_info mg_v10">
+						<div class="meta_illustration" id="change_illustration_fix">
+							{# twig extension #}
+							{% set illustration = jobIllustration(job) %}
+							<label>
+								<img id="job_illustration" class="600x250 c_p" src="{{ illustration | imagine_filter('600x250') }}" alt="img job" />
+							</label>
+						</div>
 
+						<div class="meta_title">
+							<div class="pd_l5"><strong>Titre du poste : <span class="error_title error_txt"></span></strong></div>
+							<div class="pd_5"><span id="job_view_title">{{ job.title }}</span></div>
+
+							<div class="pd_l5"><strong>Slug :</strong></div>
+							<div class="pd_5"><span id="job_view_slug">{{ job.slug }}</span></div>
+
+							<div class="pd_l5"><strong>Secteur :</strong></div>
+							<div class="pd_5"><span id="job_view_sector">{{ job.sector.name }}</span></div>
+						</div>
+						<div class="both"></div>
+					</div>
+				{% endif %}
 				<div><strong>Details de l'offre</strong></div>
 				{% if job.tovalid == false or job.valid %}
 					<form id="form_job_edit_detail" action="{{ path('job_manager_doedit_detail', {'job_id': job.id}) }}">

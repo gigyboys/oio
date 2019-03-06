@@ -326,6 +326,10 @@ job_manager_tovalid_ajax:
     path:     /job-manager/tovalid-ajax/{job_id}
     defaults:
         _controller: App\Controller\JobManagerController::toValidJobAjax
+job_manager_dotovalid:
+    path:     /job-manager/dotovalid/{job_id}
+    defaults:
+        _controller: App\Controller\JobManagerController::doToValidJob
 job_manager_toggle_publication:
     path:     /job-manager/job/{job_id}/toggle-publication
     defaults:
@@ -447,6 +451,15 @@ job:
     path:     /jobs/{page}
     defaults:
         _controller: App\Controller\JobController::index
+        page: 1
+job_sector_viewbyid:
+    path:     /jobs/sector/id/{id}
+    defaults:
+        _controller: App\Controller\JobController::viewSectorById
+job_sector_view:
+    path:     /jobs/sector/{slug}/{page<\d+>}
+    defaults:
+        _controller: App\Controller\JobController::viewSector
         page: 1
 job_viewbyid:
     path:     /job/id/{id}
