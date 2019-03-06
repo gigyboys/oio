@@ -368,6 +368,28 @@ admin_event_gallery:
     defaults:
         _controller: App\Controller\Admin\EventController::eventGallery
 
+#job
+admin_job:
+    path:     /job
+    defaults:
+        _controller: App\Controller\Admin\JobController::job
+admin_job_creation:
+    path:     /job/creation
+    defaults:
+        _controller: App\Controller\Admin\JobController::jobCreation
+admin_job_add:
+    path:     /job/add-job
+    defaults:
+        _controller: App\Controller\Admin\JobController::addJob
+admin_job_edit:
+    path:     /job/edit-job/{job_id}
+    defaults:
+        _controller: App\Controller\Admin\JobController::editJob
+admin_job_dodelete:
+    path:     /job/{job_id}/delete
+    defaults:
+        _controller: App\Controller\Admin\JobController::deleteJob
+
 #setting
 admin_setting_accessibility:
     path:     /setting/accessibility

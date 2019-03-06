@@ -1,0 +1,66 @@
+{% extends "back.html.twig" %}
+
+{% block title %}
+  Ajout d'une nouvelle offre d'emploi
+{% endblock %}
+
+{% block body_header %}
+	<div class="bc">
+		<span class="bc1"><a href="{{ path('admin_job') }}"><img src="{{ asset('image/default_icon.png') }}" style="width:14px; height:auto" /> <span>Offre d'emploi</span></a> </span>
+		<span class="dd">
+			<span href="#" class="dds">
+				<span class="bcdd"></span>
+			</span>
+            {{ include("admin/job/include/job_principal_action.html.twig") }}
+		</span>
+		<span class="bc1"><a href="{{ path('admin_job_add') }}">Ajout d'une offre d'emploi</a></span>
+	</div>
+	<div style="padding:8px;float:right">
+		<span><a href="{{ path('admin_job_add') }}"><img src="{{ asset('image/add_icon.png') }}" /> <span>Nouvelle offre d'emploi</span></a></span>
+	</div>
+{% endblock %}
+
+{% block content_body %}
+	<div style="background:#ddd; padding: 5px; margin:5px; border:1px solid #bbb">
+		Ajout d'une offre d'emploi
+	</div>
+	
+	<div style="padding:5px">
+	<div style="margin: 10px 0">
+		Et licet quocumque oculos flexeris feminas adfatim multas spectare cirratas, quibus, si nupsissent, per aetatem ter iam nixus poterat suppetere liberorum, ad usque taedium pedibus pavimenta tergentes iactari volucriter gyris, dum exprimunt innumera simulacra, quae finxere fabulae theatrales.
+	</div>
+	<div>
+		<form name="" method="post">
+
+			<div>
+				<div>                
+					<div><label for="title" class="required">Titre du poste* : </label></div>
+					<div><input type="text" id="title" name="title" required="required"  class="default_input" /></div>
+				</div>
+				<div>                
+					<div><label for="sectorId" class="required">Secteur * : </label></div>
+					<div>
+						<select id="sectorId" name="sectorId" required="required"  class="default_input">
+							{% for sector in sectors %}
+								<option value="{{ sector.id }}">{{ sector.name }}</option>
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+				<div>                
+					<div><label for="email" class="required">Email * : </label></div>
+					<div><input type="email" id="email" name="email" required="required"  class="default_input" /></div>
+				</div>
+			</div>
+			
+			<div style="padding:10px 0">
+				<button type="submit" id="ajouter" name="add" class="standar_button">{{ 'Ajouter' | trans }}</button>
+			</div>
+		</form>
+	</div>
+	<div style="margin: 10px 0">
+		Accenderat super his incitatum propositum ad nocendum aliqua mulier vilis, quae ad palatium ut poposcerat intromissa insidias ei latenter obtendi prodiderat a militibus obscurissimis.
+	</div>
+	</div>
+{% endblock %}
+

@@ -102,6 +102,11 @@ $(function() {
                                 $(".nb_published_userteams").html(data.publishedUserTeams.length);
                                 $(".nb_not_published_userteams").html(data.notPublishedUserTeams.length);
                                 break;
+                            case 'job':
+                                $(".nb_jobs").html(data.jobs.length);
+                                $(".nb_published_jobs").html(data.publishedJobs.length);
+                                $(".nb_not_published_jobs").html(data.notPublishedJobs.length);
+                                break;
                         }
                     }
                 }

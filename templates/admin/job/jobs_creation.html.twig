@@ -1,0 +1,127 @@
+{% extends "back.html.twig" %}
+
+{% block title %}
+	Liste des offres d'emploi en cours de création
+{% endblock %}
+
+{% block body_header %}
+	<div class="bc">
+		<span class="bc1"><a href="{{ path('admin_job') }}"><img src="{{ asset('image/default_icon.png') }}" style="width:14px; height:auto" /> <span>Offres d'emploi</span></a> </span>
+		<span class="dd">
+			<span href="#" class="dds">
+				<span class="bcdd"></span>
+			</span>
+			{{ include("admin/job/include/job_principal_action.html.twig") }}
+		</span>
+		<span class="bc1"><a href="{{ path('admin_job_creation') }}">En cours de création</a></span>
+	</div>
+	<div style="padding:8px;float:right">
+		<span><a href="{{ path('admin_job_add') }}"><img src="{{ asset('image/add_icon.png') }}" /> <span>Nouvelle offre d'emploi</span></a></span>
+	</div>
+{% endblock %}
+
+{% block content_body %}
+	<div style="background:#ddd; padding: 5px; margin:5px; border:1px solid #bbb">
+		<span><img src="{{ asset('image/list_icon.png') }}" style="width:12px; height:auto" /> Liste des offres d'emploi en cours de création</span>
+		{#<div style="float: right"><a target="_blank" href="{{ path('job') }}"><img src="{{ asset('image/view_icon.png') }}" style="width: 12px; height: auto"/> Aperçu</a></div>#}
+		<div class="both"></div>
+	</div>
+	
+	<div class="a_datatable">
+		<div class="a_datatable_head">
+			<div class="a_datatable_head_left">
+				<span style="display:inline-block; margin-top:5px; margin-left:6px"> Rechercher :
+					<input type="text" class="default_input a_list_search_input" data-target-id="list_jobs"/><!--
+					--><span class="a_list_search_reset"><img src="{{ asset('image/cross_icon.png') }}" style="width:12px; height:auto" /></span>
+				</span>
+			</div>
+			<div class="a_datatable_head_right">
+                {#right#}
+			</div>
+		</div>
+		
+		<div class="a_datatable_body">
+			<table class="a_table" id="list_jobs">
+				<tr class="a_table_head">
+					<th class="a_table_cell_id" style="width: 50px; text-align:center">Id</th>
+					<th class="ta_l">Titre</th>
+					<th class="ta_l">Auteur</th>
+					<th class="ta_c">Date création</th>
+					<th class="ta_c">Publié</th>
+					<th class="a_table_cell_action ta_c">Actions</th>
+				</tr>
+				{% for job in jobs %}
+				<tr class="a_table_line" id="job_{{ job.id }}" data-text="{{ job.title }}" style="display:table-row">
+					<td class="a_table_cell_id" style="width: 50px; text-align:center">{{ job.id }}</td>
+					<td>					
+						{# twig extension #}
+						{#
+						{% set illustration = postIllustration(post) %}
+
+						#}
+						<a href="{{ path('admin_job_edit', {'job_id': job.id}) }}" data-name="{{ job.title }}" style="display:block;">
+							{#<span style="display:block;float:left;width:32px; margin:1px"><img style="width: 32px; height: 32px;display:block" src="{{ illustration | imagine_filter('32x32') }}" alt="img post" /></span>#}
+							<span style="display:block;margin-left:36px;padding-top:6px" title="{{ job.title }}">{{ substrSpace(job.title, 60) }}</span>
+							<span class="both"></span>
+						</a>
+					</td>
+
+					<td>
+						<span>
+							<span class="toggle_case" data-target="{{ path('job_manager_toggle_show_author', {'job_id': job.id}) }}">
+								{% if job.showAuthor %}
+									<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
+									<span class="redstate"><span class="redpastille"></span></span>
+								{% else %}
+									<span class="greenstate"><span class="greenpastille"></span></span>
+									<span class="redstate" style="display:none"><span class="redpastille"></span></span>
+								{% endif %}
+							</span><span class="state_loading" style="display:none">
+								<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" />
+							</span>
+							<span>{{ job.user.name }}</span>
+						</span>
+					</td>
+					<td class="ta_c">
+						{{ job.date | date("Y-m-d") }}
+					</td>
+					<td class="ta_c">
+						<span class="toggle_case" data-entity="job" data-target="{{ path('job_manager_toggle_publication', {'job_id': job.id}) }}">
+							{% if job.published %}
+								<span class="greenstate" style="display:none"><span class="greenpastille"></span></span>
+								<span class="redstate"><span class="redpastille"></span></span>
+							{% else %}
+								<span class="greenstate"><span class="greenpastille"></span></span>
+								<span class="redstate" style="display:none"><span class="redpastille"></span></span>
+							{% endif %}
+						</span><span class="state_loading" style="display:none">
+							<img src="{{ asset('image/tail-spin.svg')  }}" style="width:10px; height:10px;display: inline-block; vertical-align: middle;" />
+						</span>
+					</td>
+
+					<td class="a_table_cell_action ta_c">
+						<a href="{{ path('admin_job_edit', {'job_id': job.id}) }}" data-name="{{ job.title }}" style="cursor:pointer"><img src="{{ asset('image/edit_icon.png') }}" style="width:12px; height:auto" /></a>
+						<span class="delete_job" data-id="{{ job.id }}" data-target="{{ path('admin_job_dodelete', {'job_id': job.id}) }}" data-title="{{ job.title }}" style="cursor:pointer"><img src="{{ asset('image/delete_icon.png') }}" style="width:12px; height:auto" /></span>
+					</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+		
+		<div class="a_datatable_foot">
+			<div class="a_datatable_foot_left">
+				<span style="display:inline-block; margin-top:6px; margin-left:6px" class="result_state">{{ jobs | length }} resultat(s)</span>
+			</div>
+			<div class="a_datatable_foot_right">
+				{#
+				<span>right</span>
+				#}
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block body_footer %}
+	<span style="display:inline-block; margin-top:6px; margin-left:6px"><span class="nb_jobs">{{ jobs | length }}</span> offre(s) d'emploi</span>
+{% endblock %}
+

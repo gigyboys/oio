@@ -679,4 +679,38 @@ class JobManagerController extends AbstractController {
         $response->headers->set('Content-Type', 'application/json');
         return $response;
     }
+
+    public function toggleValidation($job_id, Request $request)
+    {
+        $user = $this->getUser();
+        $job = $this->jobRepository->find($job_id);
+
+        $response = new Response();
+
+        //set state 0 in error case
+        $response->setContent(json_encode(array(
+            'state' => 0,
+        )));
+
+        if ($job) {
+            if ($this->isGranted('ROLE_ADMIN')){
+                if($job->getValid() == true){
+                    $job->setValid(false) ;
+                }else{
+                    $job->setValid(true) ;
+                }
+
+                $this->em->persist($job);
+                $this->em->flush();
+
+                $response->setContent(json_encode(array(
+                    'state' => 1,
+                    'case' => $job->getValid(),
+                )));
+            }
+        }
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
 }
