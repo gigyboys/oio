@@ -591,7 +591,7 @@ class PlatformService
                         $label = "août";
                         break;
                     case 9:
-                        $label = "sepe";
+                        $label = "sep";
                         break;
                     case 10:
                         $label = "oct";
